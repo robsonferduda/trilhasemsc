@@ -844,7 +844,7 @@ button#btn-search-category:hover, .newsletter-content button:hover, .button-one:
     width: 100%;
 }
 .fun-factor-area::after {
-    background: rgba(0, 0, 0, 0) url("img/banner/transparent.png") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("../img/banner/transparent.png") no-repeat scroll center top / cover ;
     bottom: -26px;
     content: "";
     height: 91px;
@@ -1651,7 +1651,7 @@ header.header-three {top: 10px}
     position: relative;
 }
 .about-area.about-area-three::after {
-    background: rgba(0, 0, 0, 0) url("img/banner/transparent-3.png") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("../img/banner/transparent-3.png") no-repeat scroll center top / cover ;
     content: "";
     height: 46px;
     left: 0;
@@ -1668,13 +1668,13 @@ header.header-three {top: 10px}
     width: 100%;
 }
 .section-title.title-three .title-border::after {
-    background: rgba(0, 0, 0, 0) url("img/icon/title3-icon-1.png") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img/icon/title3-icon-1.png") no-repeat scroll 0 0;
     bottom: 17px;
     margin-left: -20px;
     width: 40px;
 }
 .about-area .section-title.title-three .title-border::after {
-    background: rgba(0, 0, 0, 0) url("img/icon/title3-icon-1.png") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img/icon/title3-icon-1.png") no-repeat scroll 0 0;
     bottom: -1px;
 }
 .about-area .section-title.title-three  {margin-bottom: 82px}
@@ -1693,7 +1693,7 @@ header.header-three {top: 10px}
 /*----------------------------------------*/
 .fun-factor-area.fun-factor-three::before {background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0}
 .fun-factor-area.fun-factor-three::after {
-    background: rgba(0, 0, 0, 0) url("img/banner/transparent-3.png") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("../img/banner/transparent-3.png") no-repeat scroll center top / cover ;
 }
 .fun-factor-three .section-title.title-three .title-border::after, .partner-three-area .section-title.title-three .title-border::after {
     bottom: 0;
@@ -1757,7 +1757,7 @@ header.header-three {top: 10px}
 }
 .newsletter-area.newsletter-three::before {background: rgba(0, 0, 0, 0) none repeat scroll 0 0;}
 .newsletter-area.newsletter-three::after {
-    background: rgba(0, 0, 0, 0) url("img/banner/transparent-3-gray.png") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("../img/banner/transparent-3-gray.png") no-repeat scroll center top / cover ;
     height: 47px;
 }
 .newsletter-three .newsletter-content input {
@@ -1810,7 +1810,7 @@ header.header-three {top: 10px}
 }
 .footer-widget-area.footer-widget-three::before {background: rgba(33, 34, 39, 0.8) none repeat scroll 0 0;}
 .footer-widget-area.footer-widget-three::after {
-    background: rgba(0, 0, 0, 0) url("img/banner/transparent-3.png") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("../img/banner/transparent-3.png") no-repeat scroll center top / cover ;
     height: 45px;
 }
 /*----------------------------------------*/
@@ -1832,7 +1832,7 @@ header.header-three {top: 10px}
     width: 100%;
 }
 .banner-area::after {
-    background: rgba(0, 0, 0, 0) url("img/banner/transparent-bottom.png") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("../img/banner/transparent-bottom.png") no-repeat scroll center top / cover ;
     bottom: 0;
     content: "";
     height: 84px;
@@ -1909,7 +1909,7 @@ header.header-three {top: 10px}
     width: auto;
 }
 .adventures-grid .adventure-cat, .blog-archive {
-    background: rgba(0, 0, 0, 0) url("img/icon/select-bg-three.png") no-repeat scroll right 1px;
+    background: rgba(0, 0, 0, 0) url("../img/icon/select-bg-three.png") no-repeat scroll right 1px;
     border: 1px solid #bcbcbc;
     height: 44px;
     position: relative;
@@ -1929,7 +1929,7 @@ header.header-three {top: 10px}
 .adventure-tab {float: right}
 .grid-two-tab .adventure-cat {float: right}
 .adventure-tab .nav > li > a.list-view, .adventure-tab .nav > li > a.grid-view {
-    background: rgba(0, 0, 0, 0) url("img/icon/list.png") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img/icon/list.png") no-repeat scroll 0 0;
     border-color: rgba(0, 0, 0, 0) !important;
     float: left;
     font-size: 0;
@@ -1940,16 +1940,16 @@ header.header-three {top: 10px}
     width: 47px;
     margin-right: 0
 }
-.adventure-tab a.grid-view {background: url(img/icon/grid.png) no-repeat scroll 0 0 !important}
+.adventure-tab a.grid-view {background: url(../img/icon/grid.png) no-repeat scroll 0 0 !important}
 
 .adventure-view a.active.list-view, .adventure-view a.list-view:hover {
-    background: rgba(0, 0, 0, 0) url("img/icon/list-hover.png") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img/icon/list-hover.png") no-repeat scroll 0 0;
 }
 .adventure-view a.active.grid-view, .adventure-view a.grid-view:hover {
-    background: url(img/icon/grid-hover.png) no-repeat scroll 0 0;
+    background: url(../img/icon/grid-hover.png) no-repeat scroll 0 0;
 }
 .adventure-tab li a.grid-view:hover:after, .adventure-tab li.active a.grid-view:after, .adventure-tab li a.list-view:hover:after, .adventure-tab li.active a.list-view:after {
-    background: url(img/icon/grid-hover.png) no-repeat scroll 0 0  !important;
+    background: url(../img/icon/grid-hover.png) no-repeat scroll 0 0  !important;
     height: 46px;
     width: 46px;
     position: absolute;
@@ -1958,7 +1958,7 @@ header.header-three {top: 10px}
     left: 0; 
 }
 .adventure-tab li a.list-view:hover:after, .adventure-tab li.active a.list-view:after {
-    background: url(img/icon/list-hover.png) no-repeat scroll 0 0 !important;
+    background: url(../img/icon/list-hover.png) no-repeat scroll 0 0 !important;
     height: 46px;
     width: 46px;
     position: absolute;
@@ -2080,7 +2080,7 @@ header.header-three {top: 10px}
 }
 .banner-area.grid-two::before, .banner-area.list:before {display: none}
 .banner-area.grid-two::after {
-    background: rgba(0, 0, 0, 0) url("img/banner/transparent-2.png") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("../img/banner/transparent-2.png") no-repeat scroll center top / cover ;
     height: 76px;
 }
 .adventures-grid.grid-two-tab .adventure-cat.box-small {
@@ -2371,7 +2371,7 @@ header.header-three {top: 10px}
     padding-top: 244px;
 }
 .banner-area.list::after {
-    background: rgba(0, 0, 0, 0) url("img/banner/transparent-3.png") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("../img/banner/transparent-3.png") no-repeat scroll center top / cover ;
     height: 45px;
     transform: rotate(180deg);
 }
@@ -2410,10 +2410,10 @@ header.header-three {top: 10px}
 .single-list-item {margin-bottom: 75px}
 .list .shop-item-filter {margin-bottom: 56px}
 .list .adventure-tab li a.grid-view:hover:after, .list .adventure-tab li.active a.grid-view:after, .list .adventure-tab li a.list-view:hover:after, .list .adventure-tab li.active a.list-view:after {
-    background: url(img/icon/grid-three-hover.png) no-repeat scroll 0 0  !important;
+    background: url(../img/icon/grid-three-hover.png) no-repeat scroll 0 0  !important;
 }
 .list .adventure-tab li a.list-view:hover:after, .list .adventure-tab li.active a.list-view:after {
-    background: url(img/icon/list-three-hover.png) no-repeat scroll 0 0 !important;
+    background: url(../img/icon/list-three-hover.png) no-repeat scroll 0 0 !important;
 }
 .adventure-img {
     border-left: 3px solid #f0f0f0;
@@ -2868,7 +2868,7 @@ header.fixed .header-logo-menu {
 /*  22. Blog Page
 /*----------------------------------------*/
 .banner-area.blog-one {
-    background: rgba(0, 0, 0, 0) url("img/banner/20.jpg") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("../img/banner/15.jpg") no-repeat scroll center top / cover ;
     padding-top: 297px;
 }
 .blog-one .breadcrumb, .blog-two .breadcrumb {margin: 50px auto 0}

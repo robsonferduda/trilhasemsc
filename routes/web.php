@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/{cidade}/{trilha}', function () {
-    return view('home');
+Route::get('{cidade}/{categoria}/{trilha}', function () {
+    return view('trilhas/detalhes');
 });

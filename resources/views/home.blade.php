@@ -2,7 +2,7 @@
 
 @section('content')
  <!--Service Area Start-->
-        <div class="skills-area section-bottom-padding hidden-xs">
+        <div class="skills-area section-bottom-padding">
             <div class="container"> 
                 <div class="row">
                     <div class="col-md-12">
@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row hidden-xs">
                     <div class="col-md-4 col-sm-6">
                         <div class="single-skill-item">
                             <div class="single-skill-icon">
@@ -97,9 +97,9 @@
                                     </div>
                                     <div class="col-md-6 col-sm-6 margin-left">
                                         <div class="blog-text">
-                                            <h4><a href="{{ url('florianopolis/trilha-do-gravata') }}">Trilha do Gravatá </a></h4>
+                                            <h4><a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}">Trilha do Gravatá </a></h4>
                                             <p>Essa trilha encontra-se em Florianópolis no morro que separa a Lagoa da Conceição da Praia Mole, ela dá acesso a pequena praia do Gravatá. A trilha é uma das queridinhas dos iniciantes, pois tem um nível de dificuldade leve.</p>
-                                            <a href="{{ url('florianopolis/trilha-do-gravata') }}" class="button-one">Leia Mais</a>
+                                            <a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}" class="button-one">Leia Mais</a>
                                         </div>
                                     </div>
                                 </div>
