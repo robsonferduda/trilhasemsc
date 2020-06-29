@@ -84,7 +84,7 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <div class="blog-image box-hover">
-                                            <a href="blog-details.html"><img src="img/blog/trilha_do_gravata_florianopolis.jpeg" alt=""></a>
+                                            <a href="blog-details.html"><img src="{{ asset('img/blog/trilha_do_gravata_florianopolis.jpeg') }} " alt=""></a>
                                             <div class="date-time">
                                                 <span class="date">20</span>
                                                 <span class="month">JUN</span>
@@ -110,7 +110,7 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <div class="blog-image box-hover">
-                                            <a href="blog-details.html"><img src="img/blog/trilha_do_funil_bom_jardim_da_serra.jpeg" alt=""></a>
+                                            <a href="blog-details.html"><img src="{{ asset('img/blog/trilha_do_funil_bom_jardim_da_serra.jpeg') }}" alt=""></a>
                                             <div class="date-time">
                                                 <span class="date">20</span>
                                                 <span class="month">JUN</span>
@@ -231,7 +231,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 hidden-sm">
-                        <img src="img/sell/trilha_dolmen_da_oracao_destaque.jpeg" alt="">
+                        <img src="{{ asset('img/sell/trilha_dolmen_da_oracao_destaque.jpeg') }}" alt="">
                     </div>
                 </div>
             </div>
