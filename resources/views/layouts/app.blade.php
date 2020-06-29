@@ -73,18 +73,18 @@
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12">
                                         <div class="logo">
-                                            <a href=""><img src="img/logo/logo.png" alt="Trilhas em SC"></a>
+                                            <a href=""><img src="{{ asset('img/logo/logo.png') }}" alt="Trilhas em SC"></a>
                                         </div>
                                     </div>
                                     <div class="col-md-8 hidden-sm hidden-xs">
                                         <div class="mainmenu">
                                             <nav>
                                                 <ul id="nav">
-                                                    <li class="drop-down"><a href="index.html">HOME</a></li>
-                                                    <li><a href="shop-grid-no-sidebar.html">TRILHAS</a></li>
-                                                    <li><a href="shop-grid-no-sidebar.html">CAMPING</a></li>
-                                                    <li class="drop-down"><a href="index.html">ANIMAIS NA TRILHA</a>
-                                                    </li><li><a href="contact.html">CONTATO</a></li>
+                                                    <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
+                                                    <li><a href="{{ url('trilhas/buscar') }}">TRILHAS</a></li>
+                                                    <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
+                                                    <li><a href="{{ url('trilhas/buscar') }}">ANIMAIS NA TRILHA</a>
+                                                    </li><li><a href="{{ url('contato') }}">CONTATO</a></li>
                                                 </ul>
                                             </nav>
                                         </div> 
@@ -147,8 +147,8 @@
         <div class="slider-area">
             <div class="preview-2">
                 <div id="nivoslider" class="slides">    
-                    <a href="#"><img src="img/slider/slider-1.jpg" alt="" title="#slider-1-caption1"/></a>
-                    <a href="#"><img src="img/slider/slider-2.jpg" alt="" title="#slider-1-caption1"/></a>
+                    <a href="#"><img src="{{ asset('img/slider/slider-1.jpg') }}" alt="" title="#slider-1-caption1"/></a>
+                    <a href="#"><img src="{{ asset('img/slider/slider-2.jpg') }}" alt="" title="#slider-1-caption1"/></a>
                 </div> 
                 <div id="slider-1-caption1" class="nivo-html-caption nivo-caption">
                     <div class="banner-content slider-1">

@@ -19,8 +19,8 @@
                             <div class="single-skill-icon">
                                 <div class="skill-bg"></div>
                                 <div class="skill-border-left"></div>
-                                <img alt="" src="img/icon/skill-1.png" class="primary-img">
-                                <img alt="" src="img/icon/skill-1-hover.png" class="secondary-img">
+                                <img alt="" src="{{ asset('img/icon/skill-1.png') }}" class="primary-img">
+                                <img alt="" src="{{ asset('img/icon/skill-1-hover.png') }}" class="secondary-img">
                                 <div class="skill-border-right"></div>
                             </div>
                             <div class="single-skill-text">
@@ -34,8 +34,8 @@
                             <div class="single-skill-icon">
                                 <div class="skill-bg"></div>
                                 <div class="skill-border-left"></div>
-                                <img alt="" src="img/icon/skill-2.png" class="primary-img">
-                                <img alt="" src="img/icon/skill-2-hover.png" class="secondary-img">
+                                <img alt="" src="{{ asset('img/icon/skill-2.png') }}" class="primary-img">
+                                <img alt="" src="{{ asset('img/icon/skill-2-hover.png') }}" class="secondary-img">
                                 <div class="skill-border-right"></div>
                             </div>
                             <div class="single-skill-text">
@@ -49,8 +49,8 @@
                             <div class="single-skill-icon">
                                 <div class="skill-bg"></div>
                                 <div class="skill-border-left"></div>
-                                <img alt="" src="img/icon/skill-3.png" class="primary-img">
-                                <img alt="" src="img/icon/skill-3-hover.png" class="secondary-img">
+                                <img alt="" src="{{ asset('img/icon/skill-3.png') }}" class="primary-img">
+                                <img alt="" src="{{ asset('img/icon/skill-3-hover.png') }}" class="secondary-img">
                                 <div class="skill-border-right"></div>
                             </div>
                             <div class="single-skill-text">
@@ -97,9 +97,9 @@
                                     </div>
                                     <div class="col-md-6 col-sm-6 margin-left">
                                         <div class="blog-text">
-                                            <h4><a href="blog-details.html">Trilha do Gravatá </a></h4>
+                                            <h4><a href="{{ url('florianopolis/trilha-do-gravata') }}">Trilha do Gravatá </a></h4>
                                             <p>Essa trilha encontra-se em Florianópolis no morro que separa a Lagoa da Conceição da Praia Mole, ela dá acesso a pequena praia do Gravatá. A trilha é uma das queridinhas dos iniciantes, pois tem um nível de dificuldade leve.</p>
-                                            <a href="blog-details.html" class="button-one">Leia Mais</a>
+                                            <a href="{{ url('florianopolis/trilha-do-gravata') }}" class="button-one">Leia Mais</a>
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                     <div class="hover-effect">
                                         <div class="box-hover">
                                             <a href="#">
-                                                <img src="img/sell/trilha_galheta.jpg" alt="">
+                                                <img src="{{ asset('img/sell/trilha_galheta.jpg') }}" alt="">
                                                 <span>Galheta</span>
                                             </a>
                                         </div>
@@ -203,7 +203,7 @@
                                     <div class="hover-effect">
                                         <div class="box-hover">
                                             <a href="#" class="no-margin">
-                                                <img src="img/sell/trilha_tatu.jpg" alt="">
+                                                <img src="{{ asset('img/sell/trilha_tatu.jpg') }}" alt="">
                                                 <span>Cambirela</span>
                                             </a>
                                         </div>
@@ -213,7 +213,7 @@
                                     <div class="hover-effect">
                                         <div class="box-hover">
                                             <a href="#">
-                                                <img src="img/sell/trilha_pedra_branca.jpg" alt="">
+                                                <img src="{{ asset('img/sell/trilha_pedra_branca.jpg') }}" alt="">
                                                 <span>Palhoça</span>
                                             </a>
                                         </div>
@@ -221,7 +221,7 @@
                                     <div class="hover-effect">
                                         <div class="box-hover">
                                             <a href="#" class="no-margin">
-                                                <img src="img/sell/trilha_cafe.jpg" alt="">
+                                                <img src="{{ asset('img/sell/trilha_cafe.jpg') }}" alt="">
                                                 <span>Lagoinha</span>
                                             </a>
                                         </div>
