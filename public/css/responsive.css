@@ -71,9 +71,9 @@
 .container {width:970px}
     .mainmenu {margin-left: 10px}
     .mainmenu ul#nav li {margin: 0 12px}
-    .slider-area .text-content {margin-top: 23.2%}
+    .slider-area .text-content {margin-top: 20%}
     .banner-content h1 {
-        font-size: 80px;
+        font-size: 70px;
         line-height: 70px;
     }
     .banner-content h2 {font-size: 30px}
@@ -318,14 +318,15 @@
         position: absolute;
         right: 0;
     }
-    .banner-content h1 {font-size: 80px}
+    .banner-content h1 {font-size: 70px}
+    .banner-content h2 {font-size: 30px}
     form#banner-searchbox {
         margin: 30px auto 0;
-        width: 673px;
+        width: 475px;
     }
-    .single-service {
-        height: 152px;
-        width: 158px;
+
+    form#banner-searchbox #btn-search-category{
+        margin-left: 198px; 
     }
     .single-icon {margin-top: 22px}
     .about-area {background-size: 100% 100%}
