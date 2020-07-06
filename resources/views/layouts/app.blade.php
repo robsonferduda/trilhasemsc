@@ -71,19 +71,20 @@
                         <div class="col-md-12">
                             <div class="logo-menu-bg">
                                 <div class="row">
-                                    <div class="col-md-4 col-sm-12">
+                                    <div class="col-md-3 col-sm-12">
                                         <div class="logo">
-                                            <a href=""><img src="{{ asset('img/logo/logo.png') }}" alt="Trilhas em SC"></a>
+                                            <a href=""><img src="{{ asset('img/logo/logo_trilhas.png') }}" alt="Trilhas em SC"></a>
                                         </div>
                                     </div>
-                                    <div class="col-md-8 hidden-sm hidden-xs">
+                                    <div class="col-md-9 hidden-sm hidden-xs">
                                         <div class="mainmenu">
                                             <nav>
                                                 <ul id="nav">
                                                     <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
                                                     <li><a href="{{ url('trilhas/buscar') }}">TRILHAS</a></li>
                                                     <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
-                                                    <li><a href="{{ url('trilhas/buscar') }}">ANIMAIS NA TRILHA</a>
+                                                    <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
+                                                    <li><a href="{{ url('trilhas/fauna-e-flora') }}">FAUNA E FLORA</a>
                                                     </li><li><a href="{{ url('contato') }}">CONTATO</a></li>
                                                 </ul>
                                             </nav>
@@ -104,35 +105,12 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul>
-                                        <li><a href="index.html">HOME</a>
-                                            <ul>
-                                                <li><a href="index-2.html">Home 2</a></li>
-                                                <li><a href="index-3.html">Home 3</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Shop</a>
-                                            <ul>
-                                                <li><a href="shop-grid-no-sidebar.html">Shop No Sidebar</a></li>
-                                                <li><a href="shop-grid-with-sidebar.html">Shop with Sidebar</a></li>
-                                                <li><a href="shop-list.html">Shop List</a></li>
-                                                <li><a href="product-details.html">Product Details 1</a></li>
-                                                <li><a href="product-details-2.html">Product Details 2</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="blog-1.html">Blog</a>
-                                            <ul>
-                                                <li><a href="blog-2.html">Blog Page 2</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="about.html">ABOUT</a>
-                                        <li><a href="#">PAGES</a>
-                                            <ul>
-                                                <li><a href="signin.html">Sign in</a></li>
-                                                <li><a href="404.html">404 error</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">CONTACT</a></li>
+                                        <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
+                                        <li><a href="{{ url('trilhas/buscar') }}">TRILHAS</a></li>
+                                        <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
+                                        <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
+                                        <li><a href="{{ url('trilhas/fauna-e-flora') }}">FAUNA E FLORA</a>
+                                        </li><li><a href="{{ url('contato') }}">CONTATO</a></li>
                                     </ul>
                                 </nav>
                             </div>                  

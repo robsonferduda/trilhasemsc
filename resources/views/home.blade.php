@@ -13,7 +13,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="row hidden-xs">
+
+                <div class="row hidden-md hidden-lg">
+                    <h2>Acompanhe nossas aventuras pelas trilhas, campings e praias por todo estado de Santa Catarina</h2>
+                </div>
+
+                <div class="row hidden-xs hidden-sm">
                     <div class="col-md-4 col-sm-6">
                         <div class="single-skill-item">
                             <div class="single-skill-icon">
