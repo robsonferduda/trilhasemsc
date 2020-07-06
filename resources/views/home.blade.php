@@ -30,7 +30,7 @@
                             </div>
                             <div class="single-skill-text">
                                 <h4>TRILHAS</h4>
-                                <h3><span class="counter">7</span></h3>
+                                <h3><span class="counter">{{ $totais['trilha'] }}</span></h3>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="single-skill-text">
                                 <h4>GALERIAS</h4>
-                                <h3><span class="counter">8</span></h3>
+                                <h3><span class="counter">{{ $totais['galeria'] }}</span></h3>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="single-skill-text">
                                 <h4>CAMPING</h4>
-                                <h3><span class="counter">3</span></h3>
+                                <h3><span class="counter">{{ $totais['camping'] }}</span></h3>
                             </div>
                         </div>
                     </div>
