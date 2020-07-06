@@ -15,4 +15,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+//Route::get('/', 'HomeController@index')->name('index');
+
 Route::get('{cidade}/{categoria}/{trilha}', 'TrilhaController@show')->name('detalhes');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
