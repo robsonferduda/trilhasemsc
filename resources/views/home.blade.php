@@ -84,58 +84,34 @@
                 </div>
                 <div class="row">
                     <div class="blog-carousel">
-                        <div class="col-md-6">
-                            <div class="single-blog hover-effect">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="blog-image box-hover">
-                                            <a href="blog-details.html"><img src="{{ asset('img/blog/trilha_do_gravata_florianopolis.jpeg') }} " alt=""></a>
-                                            <div class="date-time">
-                                                <span class="date">20</span>
-                                                <span class="month">JUN</span>
+                        @foreach($ultimas as $trilha)
+                            <div class="col-md-6">
+                                <div class="single-blog hover-effect">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="blog-image box-hover">
+                                                <a href="blog-details.html"><img src="{{ asset('img/blog/trilha_do_gravata_florianopolis.jpeg') }} " alt=""></a>
+                                                <div class="date-time">
+                                                    <span class="date">30</span>
+                                                    <span class="month">SET</span>
+                                                </div>
+                                            </div>
+                                            <div class="blog-link">
+                                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                                <a href="#"><i class="fa fa-twitter"></i></a>
                                             </div>
                                         </div>
-                                        <div class="blog-link">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 margin-left">
-                                        <div class="blog-text">
-                                            <h4><a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}">Trilha do Gravatá </a></h4>
-                                            <p>Essa trilha encontra-se em Florianópolis no morro que separa a Lagoa da Conceição da Praia Mole, ela dá acesso a pequena praia do Gravatá. A trilha é uma das queridinhas dos iniciantes, pois tem um nível de dificuldade leve.</p>
-                                            <a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}" class="button-one">Leia Mais</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-                        <div class="col-md-6">
-                            <div class="single-blog hover-effect no-margin">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="blog-image box-hover">
-                                            <a href="blog-details.html"><img src="{{ asset('img/blog/trilha_do_funil_bom_jardim_da_serra.jpeg') }}" alt=""></a>
-                                            <div class="date-time">
-                                                <span class="date">20</span>
-                                                <span class="month">JUN</span>
+                                        <div class="col-md-6 col-sm-6 margin-left">
+                                            <div class="blog-text">
+                                                <h4><a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}">{{ $trilha->nm_trilha_tri }}</a></h4>
+                                                <p>{{ \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') }}</p>
+                                                <a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}" class="button-one">Leia Mais</a>
                                             </div>
                                         </div>
-                                        <div class="blog-link">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                        </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-6 margin-left">
-                                        <div class="blog-text">
-                                            <h4><a href="blog-details.html">Trilha do Cânion do Funil</a></h4>
-                                            <p>Sabe aquelas paisagens de tirar o fôlego? Esse é o caso do Cânion do Funil. E não estou falando pela distância da trilha, são quase 15 km de ida e volta, mas sim pelo visual que parece de cinema!</p>
-                                            <a href="blog-details.html" class="button-one">Leia Mais</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
+                                </div>    
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

@@ -18,4 +18,9 @@ class Trilha extends Model
     					  ];
 
     public $timestamps = true;
+
+    public function foto()
+    {
+        return $this->hasMany('App\Foto','id_trilha_tri','id_trilha_tri');
+    }
 }
