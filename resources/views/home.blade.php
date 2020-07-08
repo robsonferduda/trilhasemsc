@@ -85,12 +85,17 @@
                 <div class="row">
                     <div class="blog-carousel">
                         @foreach($ultimas as $trilha)
+                        
+                            @php 
+                                $img = ($trilha->foto->where('id_tipo_foto_tfo',4)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',4)->first()->nm_path_fot : 'padrao.jpg';
+                            @endphp
+
                             <div class="col-md-6">
                                 <div class="single-blog hover-effect">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="blog-image box-hover">
-                                                <a href="blog-details.html"><img src="{{ asset('img/blog/trilha_do_gravata_florianopolis.jpeg') }} " alt=""></a>
+                                                <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/recentes/'.$img) }} " alt=""></a>
                                                 <div class="date-time">
                                                     <span class="date">{{ \Carbon\Carbon::parse($trilha->created_at)->format('d') }}</span>
                                                     <span class="month">{{ strtoupper(\Carbon\Carbon::parse($trilha->created_at)->format('M')) }}</span>
@@ -103,7 +108,7 @@
                                         </div>
                                         <div class="col-md-6 col-sm-6 margin-left">
                                             <div class="blog-text">
-                                                <h4><a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}">{{ $trilha->nm_trilha_tri }}</a></h4>
+                                                <h4><a href="{{ url($trilha->ds_url_tri) }}">{{ $trilha->nm_trilha_tri }}</a></h4>
                                                 <p>{{ \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') }}</p>
                                                 <a href="{{ url($trilha->ds_url_tri) }}" class="button-one">Leia Mais</a>
                                             </div>

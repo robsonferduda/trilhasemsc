@@ -19,8 +19,7 @@ class HomeController extends Controller
                         'camping' => Trilha::where('id_categoria_cat',2)->count(),
                         'galeria' => null );
 
-        $ultimas = Trilha::orderBy('created_at','DESC')->take(2)->get();
-
+        $ultimas = Trilha::with('foto')->orderBy('created_at','DESC')->take(2)->get();
 
         return view('home',['totais' => $totais, 'ultimas' => $ultimas, 'teste' => 'teste']);
     }
