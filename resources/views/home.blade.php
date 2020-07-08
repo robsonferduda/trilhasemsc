@@ -85,7 +85,7 @@
                 <div class="row">
                     <div class="blog-carousel">
                         @foreach($ultimas as $trilha)
-                        
+
                             @php 
                                 $img = ($trilha->foto->where('id_tipo_foto_tfo',4)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',4)->first()->nm_path_fot : 'padrao.jpg';
                             @endphp
@@ -95,7 +95,7 @@
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="blog-image box-hover">
-                                                <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/recentes/'.$img) }} " alt=""></a>
+                                                <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/trilhas/recentes/'.$img) }} " alt=""></a>
                                                 <div class="date-time">
                                                     <span class="date">{{ \Carbon\Carbon::parse($trilha->created_at)->format('d') }}</span>
                                                     <span class="month">{{ strtoupper(\Carbon\Carbon::parse($trilha->created_at)->format('M')) }}</span>
