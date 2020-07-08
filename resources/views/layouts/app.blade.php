@@ -81,7 +81,7 @@
                                         <a href="{{ route('login') }}"><i class="fa fa-lock"></i>Acesse</a>
                                     </div>
                                     <ul class="header-r-cart">
-                                        <li><a href="#" class="cart"><span>Olá Visitante!</span></a>
+                                        <li><a href="#" class="cart"><span>Olá Visitante! {{ $teste }}</span></a>
                                             
                                         </li>
                                     </ul>

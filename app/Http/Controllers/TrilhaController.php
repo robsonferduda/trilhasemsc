@@ -15,7 +15,7 @@ class TrilhaController extends Controller
 
     public function show($cidade, $categoria, $url)
     {
-    	$trilha = Trilha::where('ds_url_tri', $url)->first();
+    	$trilha = Trilha::where('ds_url_tri', 'like', '%'.$url)->first();
     	return view('trilhas/detalhes',['trilha' => $trilha]);
     }
 }

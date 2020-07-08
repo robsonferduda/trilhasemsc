@@ -21,6 +21,7 @@ class HomeController extends Controller
 
         $ultimas = Trilha::orderBy('created_at','DESC')->take(2)->get();
 
-        return view('home',['totais' => $totais, 'ultimas' => $ultimas]);
+
+        return view('home',['totais' => $totais, 'ultimas' => $ultimas, 'teste' => 'teste']);
     }
 }
