@@ -1,6 +1,9 @@
+@extends('layouts.blog')
+
+@section('content')
 
 <!--Adventures Grid Start-->
-<div class="adventures-grid section-padding list">
+<div id="lista" class="adventures-grid section-padding list">
     <div class="container">
         <div class="shop-item-filter">
             <form action="#" id="banner-searchbox">
@@ -57,7 +60,8 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-12">
+            @foreach($trilhas as $trilha)
+                <div class="col-md-12">
                 <div class="single-list-item">
                     <div class="row">
                         <div class="col-md-4 col-sm-5">
@@ -68,7 +72,12 @@
                         <div class="col-md-8 col-sm-7 margin-left-list">
                             <div class="adventure-list-container">
                                 <div class="adventure-list-text">
-                                    <h1><a href="#">Beach Trip in Miami  / 7 Days Trip</a></h1>
+                                    <h1><a href="#">{{$trilha->nm_trilha_tri}}</a></h1>
+
+                                    @php
+
+                                        dd($trilha);
+                                    @endphp
                                     <h2>$659<span class="light">/</span><span class="persons">per person</span></h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius tortor at placerat rutrum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum vel condimentum tortor. </p>
                                     <div class="list-buttons">
@@ -107,262 +116,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <div class="single-list-item">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-5">
-                            <div class="adventure-img">
-                                <a href="#"><img src="img/adventure-list/23.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-md-8 col-sm-7 margin-left-list">
-                            <div class="adventure-list-container">
-                                <div class="adventure-list-text">
-                                    <h1><a href="#">Beach Trip in Miami  / 7 Days Trip</a></h1>
-                                    <h2>$659<span class="light">/</span><span class="persons">per person</span></h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius tortor at placerat rutrum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum vel condimentum tortor. </p>
-                                    <div class="list-buttons">
-                                        <a href="#" class="button-one button-blue">Learn More</a>
-                                        <div class="list-rating">
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <div class="adventure-list-link">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                            <a href="#"><i class="fa fa-rss"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="adventure-list-image">
-                                    <div class="image-top">
-                                        <img src="img/icon/level.png" alt="">
-                                    </div>
-                                    <h2>Easy level</h2>
-                                    <ul class="image-bottom">
-                                        <li><img src="img/icon/35.png" alt=""></li>
-                                        <li><img src="img/icon/36.png" alt=""></li>
-                                        <li><img src="img/icon/37.png" alt=""></li>
-                                        <li><img src="img/icon/38.png" alt=""></li>
-                                        <li><img src="img/icon/39.png" alt=""></li>
-                                        <li><img src="img/icon/40.png" alt=""></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <div class="single-list-item">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-5">
-                            <div class="adventure-img">
-                                <a href="#"><img src="img/adventure-list/24.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-md-8 col-sm-7 margin-left-list">
-                            <div class="adventure-list-container">
-                                <div class="adventure-list-text">
-                                    <h1><a href="#">Beach Trip in Miami  / 7 Days Trip</a></h1>
-                                    <h2>$659<span class="light">/</span><span class="persons">per person</span></h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius tortor at placerat rutrum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum vel condimentum tortor. </p>
-                                    <div class="list-buttons">
-                                        <a href="#" class="button-one button-blue">Learn More</a>
-                                        <div class="list-rating">
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <div class="adventure-list-link">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                            <a href="#"><i class="fa fa-rss"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="adventure-list-image">
-                                    <div class="image-top">
-                                        <img src="img/icon/level.png" alt="">
-                                    </div>
-                                    <h2>Easy level</h2>
-                                    <ul class="image-bottom">
-                                        <li><img src="img/icon/35.png" alt=""></li>
-                                        <li><img src="img/icon/36.png" alt=""></li>
-                                        <li><img src="img/icon/37.png" alt=""></li>
-                                        <li><img src="img/icon/38.png" alt=""></li>
-                                        <li><img src="img/icon/39.png" alt=""></li>
-                                        <li><img src="img/icon/40.png" alt=""></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="single-list-item">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-5">
-                            <div class="adventure-img">
-                                <a href="#"><img src="img/adventure-list/25.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-md-8 col-sm-7 margin-left-list">
-                            <div class="adventure-list-container">
-                                <div class="adventure-list-text">
-                                    <h1><a href="#">Beach Trip in Miami  / 7 Days Trip</a></h1>
-                                    <h2>$659<span class="light">/</span><span class="persons">per person</span></h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius tortor at placerat rutrum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum vel condimentum tortor. </p>
-                                    <div class="list-buttons">
-                                        <a href="#" class="button-one button-blue">Learn More</a>
-                                        <div class="list-rating">
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <div class="adventure-list-link">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                            <a href="#"><i class="fa fa-rss"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="adventure-list-image">
-                                    <div class="image-top">
-                                        <img src="img/icon/level.png" alt="">
-                                    </div>
-                                    <h2>Easy level</h2>
-                                    <ul class="image-bottom">
-                                        <li><img src="img/icon/35.png" alt=""></li>
-                                        <li><img src="img/icon/36.png" alt=""></li>
-                                        <li><img src="img/icon/37.png" alt=""></li>
-                                        <li><img src="img/icon/38.png" alt=""></li>
-                                        <li><img src="img/icon/39.png" alt=""></li>
-                                        <li><img src="img/icon/40.png" alt=""></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="single-list-item">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-5">
-                            <div class="adventure-img">
-                                <a href="#"><img src="img/adventure-list/22.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-md-8 col-sm-7 margin-left-list">
-                            <div class="adventure-list-container">
-                                <div class="adventure-list-text">
-                                    <h1><a href="#">Beach Trip in Miami  / 7 Days Trip</a></h1>
-                                    <h2>$659<span class="light">/</span><span class="persons">per person</span></h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius tortor at placerat rutrum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum vel condimentum tortor. </p>
-                                    <div class="list-buttons">
-                                        <a href="#" class="button-one button-blue">Learn More</a>
-                                        <div class="list-rating">
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <div class="adventure-list-link">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                            <a href="#"><i class="fa fa-rss"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="adventure-list-image">
-                                    <div class="image-top">
-                                        <img src="img/icon/level.png" alt="">
-                                    </div>
-                                    <h2>Easy level</h2>
-                                    <ul class="image-bottom">
-                                        <li><img src="img/icon/35.png" alt=""></li>
-                                        <li><img src="img/icon/36.png" alt=""></li>
-                                        <li><img src="img/icon/37.png" alt=""></li>
-                                        <li><img src="img/icon/38.png" alt=""></li>
-                                        <li><img src="img/icon/39.png" alt=""></li>
-                                        <li><img src="img/icon/40.png" alt=""></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="single-list-item no-margin">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-5">
-                            <div class="adventure-img">
-                                <a href="#"><img src="img/adventure-list/23.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-md-8 col-sm-7 margin-left-list">
-                            <div class="adventure-list-container">
-                                <div class="adventure-list-text">
-                                    <h1><a href="#">Beach Trip in Miami  / 7 Days Trip</a></h1>
-                                    <h2>$659<span class="light">/</span><span class="persons">per person</span></h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius tortor at placerat rutrum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum vel condimentum tortor. </p>
-                                    <div class="list-buttons">
-                                        <a href="#" class="button-one button-blue">Learn More</a>
-                                        <div class="list-rating">
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <div class="adventure-list-link">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                            <a href="#"><i class="fa fa-rss"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="adventure-list-image">
-                                    <div class="image-top">
-                                        <img src="img/icon/level.png" alt="">
-                                    </div>
-                                    <h2>Easy level</h2>
-                                    <ul class="image-bottom">
-                                        <li><img src="img/icon/35.png" alt=""></li>
-                                        <li><img src="img/icon/36.png" alt=""></li>
-                                        <li><img src="img/icon/37.png" alt=""></li>
-                                        <li><img src="img/icon/38.png" alt=""></li>
-                                        <li><img src="img/icon/39.png" alt=""></li>
-                                        <li><img src="img/icon/40.png" alt=""></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="pagination-content">
             <div class="pagination-button">
@@ -458,4 +213,5 @@
     </div>
 </div>
 <!--End of Blog Area-->
+@endsection
 

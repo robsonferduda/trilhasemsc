@@ -81,7 +81,7 @@
                                         <a href="{{ route('login') }}"><i class="fa fa-lock"></i>Acesse</a>
                                     </div>
                                     <ul class="header-r-cart">
-                                        <li><a href="#" class="cart"><span>Olá Visitante!</span></a>
+                                        <li><a href="#" class="cart"><span>Olá Visitante! {{ $teste }}</span></a>
                                             
                                         </li>
                                     </ul>
@@ -179,7 +179,7 @@
                                         <h1 class="title1">GUIA DE TRILHAS</h1>
                                         <h2 class="sub-title">AS MELHORES TRILHAS DE SANTA CATARINA</h2>
                                         <h2 class="sub-title">VOCÊ ENCONTRA <span>AQUI</span></h2>
-                                        <form action="{{url('trilhas')}}" method="GET" id="banner-searchbox" class="hidden-xs">
+                                        <form action="{{url('trilhas/#lista')}}" method="GET" id="banner-searchbox" class="hidden-xs">
                                             <div class="adventure-cat">
                                                 <select name="category" class="search-adventure">
                                                     @foreach($cidades as $cidade)

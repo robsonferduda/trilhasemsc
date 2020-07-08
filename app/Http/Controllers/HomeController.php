@@ -24,6 +24,6 @@ class HomeController extends Controller
 
         $cidades = Cidade::whereIn('cd_cidade_cde',Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde','nm_cidade_cde')->get();
 
-        return view('home',['totais' => $totais, 'ultimas' => $ultimas, 'cidades' => $cidades]);
+        return view('home',['totais' => $totais, 'ultimas' => $ultimas,'teste' => 'teste' ,'cidades' => $cidades]);
     }
 }

@@ -129,7 +129,7 @@
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <h1>{{ $trilha->nm_trilha_tri }}</h1>
+                                <h1>{{ !empty($trilha) ? $trilha->nm_trilha_tri : '' }}</h1>
                             </div>    
                             <p class="text-white">Um pedacinho do paraíso em Florianópolis</p>
                         </div>
