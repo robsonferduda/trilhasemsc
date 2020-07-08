@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Trilha;
+use App\Cidade;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,6 +22,8 @@ class HomeController extends Controller
 
         $ultimas = Trilha::orderBy('created_at','DESC')->take(2)->get();
 
-        return view('home',['totais' => $totais, 'ultimas' => $ultimas]);
+        $cidades = Cidade::whereIn('cd_cidade_cde',Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde','nm_cidade_cde')->get();
+
+        return view('home',['totais' => $totais, 'ultimas' => $ultimas, 'cidades' => $cidades]);
     }
 }

@@ -18,4 +18,15 @@ class TrilhaController extends Controller
     	$trilha = Trilha::where('ds_url_tri', $url)->first();
     	return view('trilhas/detalhes',['trilha' => $trilha]);
     }
+
+    public function search(Request $request){
+
+    	dd($request);
+
+    	$trilhas = Trilha::get();
+
+    	dd($trilhas);
+
+    	return view('trilhas/lista');
+    }
 }

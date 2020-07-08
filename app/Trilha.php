@@ -23,4 +23,9 @@ class Trilha extends Model
     {
         return $this->hasMany('App\Foto','id_trilha_tri','id_trilha_tri');
     }
+
+    public function getCreatedAtAttribute($data)
+    {
+        return date($data);
+    }
 }
