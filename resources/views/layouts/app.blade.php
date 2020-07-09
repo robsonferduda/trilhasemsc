@@ -181,15 +181,19 @@
                                         <h2 class="sub-title">VOCÊ ENCONTRA <span>AQUI</span></h2>
                                         <form action="{{url('trilhas/#lista')}}" method="GET" id="banner-searchbox" class="hidden-xs">
                                             <div class="adventure-cat">
-                                                <select name="category" class="search-adventure">
+                                                <select name="cidade" class="search-adventure">
+                                                    <option selected value="">Selecione a Cidade</option>
                                                     @foreach($cidades as $cidade)
-                                                    <option value="{{$cidade->cd_cidade_cde}}">{{$cidade->nm_cidade_cde}}</option>
+                                                    <option {{ old('cidade') == $cidade->cd_cidade_cde ? 'selected': ''}} value="{{$cidade->cd_cidade_cde}}">{{$cidade->nm_cidade_cde}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="adventure-cat destination">
-                                                <select name="destination" class="search-adventure">
-                                                    <option>Selecione o nível</option>
+                                                <select name="nivel" class="search-adventure">
+                                                    <option selected value="">Selecione o Nível</option>
+                                                    @foreach($niveis as $nivel)
+                                                    <option {{ old('nivel') == $nivel->id_nivel_niv ? 'selected': ''}} value="{{$nivel->id_nivel_niv}}">{{$nivel->dc_nivel_niv}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="clearfix"></div>

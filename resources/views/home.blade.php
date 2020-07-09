@@ -78,7 +78,7 @@
                             <div class="title-border">
                                 <h1>Últimas <span>TRILHAS</span></h1>
                             </div>
-                            
+                            <p>Acompanha nossas últimas trilhas por Santa Catarina</p>
                         </div>
                     </div>
                 </div>
@@ -92,8 +92,8 @@
                                             <div class="blog-image box-hover">
                                                 <a href="blog-details.html"><img src="{{ asset('img/blog/trilha_do_gravata_florianopolis.jpeg') }} " alt=""></a>
                                                 <div class="date-time">
-                                                    <span class="date">{{ \Carbon\Carbon::parse($trilha->created_at)->format('d') }}</span>
-                                                    <span class="month">{{ strtoupper(\Carbon\Carbon::parse($trilha->created_at)->format('M')) }}</span>
+                                                    <span class="date">30</span>
+                                                    <span class="month">SET</span>
                                                 </div>
                                             </div>
                                             <div class="blog-link">
@@ -105,7 +105,7 @@
                                             <div class="blog-text">
                                                 <h4><a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}">{{ $trilha->nm_trilha_tri }}</a></h4>
                                                 <p>{{ \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') }}</p>
-                                                <a href="{{ url($trilha->ds_url_tri) }}" class="button-one">Leia Mais</a>
+                                                <a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}" class="button-one">Leia Mais</a>
                                             </div>
                                         </div>
                                     </div>
@@ -117,9 +117,38 @@
             </div>
         </div>
         <!--End of Blog Area-->
+       
+        <!--Newsletter Area Start-->
+        <div class="newsletter-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-4 col-sm-12">
+                        <div class="section-title text-center">
+                            <div class="title-border">
+                                <h1 class="text-white">INSCREVA-SE PARA <span>NOVIDADES</span></h1>
+                            </div>    
+                            <p class="text-white">Buscamos sempre as melhores trilhas e dicas para você,<br> acompanhe nossas aventuras</p>
+                        </div>
+                        <form action="#" method="post" id="newsletter">
+                            <div class="newsletter-content">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <input type="text" name="email" placeholder="Informe seu email">
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <button type="submit" class="button"><span>VAMOS NESSA</span></button>
+                                    </div>
+                                </div>  
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of Newsletter Area-->
 
          <!--Best Sell Area Start-->
-        <div class="best-sell-area section-padding">
+        <div class="best-sell-area section-padding" style="background: #edecec;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Trilha;
 use App\Cidade;
+use App\Nivel;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -20,10 +22,12 @@ class HomeController extends Controller
                         'camping' => Trilha::where('id_categoria_cat',2)->count(),
                         'galeria' => null );
 
-        $ultimas = Trilha::orderBy('created_at','DESC')->take(2)->get();
-
         $cidades = Cidade::whereIn('cd_cidade_cde',Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde','nm_cidade_cde')->get();
 
-        return view('home',['totais' => $totais, 'ultimas' => $ultimas,'teste' => 'teste' ,'cidades' => $cidades]);
+        $niveis = Nivel::get();
+
+        $ultimas = Trilha::with('foto')->orderBy('created_at','DESC')->take(2)->get();
+
+        return view('home',['totais' => $totais, 'ultimas' => $ultimas,'teste' => 'teste' ,'cidades' => $cidades, 'niveis' => $niveis]);
     }
 }

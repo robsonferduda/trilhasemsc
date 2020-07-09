@@ -620,12 +620,12 @@ form#banner-searchbox {margin-top: 52px; width: 673px}
     line-height: 46px;
     padding: 0;
     text-transform: capitalize;
-    width: 172px;
+    width: 220px;
 }
 .adventure-cat.destination {
     background: rgba(0, 0, 0, 0) url("../img/icon/select-bg-two.png") no-repeat scroll 0 0;
     margin-left: 30px;
-    width: 269px;
+    width: 221px;
 }
 .search-adventure, .blog-archive .archive {
     -moz-appearance: none;

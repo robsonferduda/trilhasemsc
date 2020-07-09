@@ -1,4 +1,4 @@
-@extends('layouts.blog')
+﻿@extends('layouts.blog')
 
 @section('content')
 
@@ -61,27 +61,33 @@
         <div class="clearfix"></div>
         <div class="row">
             @foreach($trilhas as $trilha)
+
+                @php 
+
+                    $foto = $trilha->foto->where('id_tipo_foto_tfo',7)->first();
+                    $img = !empty($foto->nm_path_fot) ? $foto->nm_path_fot : 'padrao.jpg';
+                    $alt = !empty($foto->dc_alt_fot) ? $foto->dc_alt_fot : 'Foto';
+                    
+                @endphp
+
                 <div class="col-md-12">
                 <div class="single-list-item">
                     <div class="row">
                         <div class="col-md-4 col-sm-5">
                             <div class="adventure-img">
-                                <a href="#"><img src="img/adventure-list/22.jpg" alt=""></a>
+                                <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/trilhas/busca/'.$img) }} " alt="{{$alt}}"></a>
+                                
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-7 margin-left-list">
                             <div class="adventure-list-container">
                                 <div class="adventure-list-text">
                                     <h1><a href="#">{{$trilha->nm_trilha_tri}}</a></h1>
-
-                                    @php
-
-                                        dd($trilha);
-                                    @endphp
-                                    <h2>$659<span class="light">/</span><span class="persons">per person</span></h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius tortor at placerat rutrum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum vel condimentum tortor. </p>
+                                    <p>
+                                        {{ \Illuminate\Support\Str::limit(utf8_encode($trilha->ds_trilha_tri), 200, $end='...') }}
+                                    </p>
                                     <div class="list-buttons">
-                                        <a href="#" class="button-one button-blue">Learn More</a>
+                                        <a href="{{ url($trilha->ds_url_tri) }}" class="button-one button-blue">LER MAIS</a>
                                         <div class="list-rating">
                                             <i class="fa fa-star color"></i>
                                             <i class="fa fa-star color"></i>
