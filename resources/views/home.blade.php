@@ -67,9 +67,7 @@
                 </div>
             </div>
         </div>
-        <!--End of Service Area-->
-
-        <!--Blog Area Start-->
+      
         <div class="blog-area section-padding">
             <div class="container">              
                 <div class="row">
@@ -77,8 +75,7 @@
                         <div class="section-title text-center">
                             <div class="title-border">
                                 <h1>Últimas <span>TRILHAS</span></h1>
-                            </div>
-                            
+                            </div>                            
                         </div>
                     </div>
                 </div>
@@ -122,23 +119,22 @@
                 </div>
             </div>
         </div>
-        <!--End of Blog Area-->
-
-         <!--Best Sell Area Start-->
+        
         <div class="best-sell-area section-padding">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <h1>PRINCIPAIS <span>AVENTURAS</span></h1>
+                                <h1>AVENTURAS <span>FAVORITAS</span></h1>
                             </div>    
-                            <p>As melhores trilhas na opinião dos nossos aventureiros. <br/> Escolha a sua preferida você também!</p>
+                            <p>As trilhas favoritas na opinião dos nossos aventureiros. <br/> Escolha sua preferida você também!</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+
                         <div class="sell-text-container">
                             <div class="title-container">
                                 <h3>PATROCINADO</h3>
@@ -147,57 +143,44 @@
                                 </div>
                             </div>                            
                         </div>
+
                         <div class="row">
                             <div class="best-sell-slider carousel-style-one">
-                                <div class="col-md-3">
-                                    <div class="hover-effect">
-                                        <div class="box-hover">
-                                            <a href="#">
-                                                <img src="{{ asset('img/sell/trilha_galheta.jpg') }}" alt="">
-                                                <span>Galheta</span>
-                                            </a>
+
+                                @foreach($preferidas as $key => $trilha)
+
+                                    @if($key%2 == 0)
+                                        <div class="col-md-3">
+                                    @endif
+
+                                        <div class="hover-effect">
+                                            <div class="box-hover">
+                                                <a href="#">
+                                                    <img src="{{ asset('img/sell/trilha_galheta.jpg') }}" alt="">
+                                                    <span>Galheta</span>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="hover-effect">
-                                        <div class="box-hover">
-                                            <a href="#" class="no-margin">
-                                                <img src="{{ asset('img/sell/trilha_tatu.jpg') }}" alt="">
-                                                <span>Cambirela</span>
-                                            </a>
+
+                                    @if($key%2 == 1)
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="hover-effect">
-                                        <div class="box-hover">
-                                            <a href="#">
-                                                <img src="{{ asset('img/sell/trilha_pedra_branca.jpg') }}" alt="">
-                                                <span>Palhoça</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="hover-effect">
-                                        <div class="box-hover">
-                                            <a href="#" class="no-margin">
-                                                <img src="{{ asset('img/sell/trilha_cafe.jpg') }}" alt="">
-                                                <span>Lagoinha</span>
-                                            </a>
-                                        </div>
-                                    </div>        
-                                </div>
+                                    @endif
+
+                                @endforeach
+                                
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-6 hidden-sm">
-                        <img src="{{ asset('img/sell/trilha_dolmen_da_oracao_destaque.jpeg') }}" alt="">
+                        <a href="#">
+                            <img src="{{ asset('img/sell/trilha_dolmen_da_oracao_destaque.jpeg') }}" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <!--End of Best Sell Area-->
-        
-        
-        <!--Partner Area Start-->
+    
         <div class="partner-area section-bottom-padding">
             <div class="container">          
                 <div class="row">
@@ -230,5 +213,4 @@
                 </div>
             </div>
         </div>
-        <!--End of Partner Area-->
 @endsection

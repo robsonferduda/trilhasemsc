@@ -20,7 +20,8 @@ class HomeController extends Controller
                         'galeria' => null );
 
         $ultimas = Trilha::with('foto')->orderBy('created_at','DESC')->take(2)->get();
+        $preferidas = Trilha::with('foto')->orderBy('total_votos_tri','ASC')->take(4)->get();
 
-        return view('home',['totais' => $totais, 'ultimas' => $ultimas, 'teste' => 'teste']);
+        return view('home',['totais' => $totais, 'ultimas' => $ultimas, 'preferidas' => $preferidas, 'teste' => 'teste']);
     }
 }
