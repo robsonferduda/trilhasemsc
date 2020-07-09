@@ -29,4 +29,8 @@ class Trilha extends Model
         return $this->hasMany('App\Foto','id_trilha_tri','id_trilha_tri');
     }
 
+    public function nivel(){
+        return $this->hasOne('App\Nivel','id_nivel_niv','id_nivel_niv');
+    }
+
 }

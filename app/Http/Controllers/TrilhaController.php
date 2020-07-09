@@ -29,6 +29,7 @@ class TrilhaController extends Controller
         $cidade = $request->cidade;
 
         $trilhas = Trilha::with('foto')
+                          ->with('nivel')
                           ->when($request->nivel, function($query) use ($nivel){
                                 $query->where('id_nivel_niv',$nivel);
                           })

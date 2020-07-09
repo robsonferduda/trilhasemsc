@@ -3656,3 +3656,11 @@ textarea.yourmessage {
 #scrollUp:hover {
     background-color: #000;
 }
+
+.btn-busca-aventura-list{
+    height: 100%;
+}
+
+.box-busca-aventura-list{
+    height: 44px;
+}
