@@ -93,10 +93,12 @@
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="blog-image box-hover">
+
                                                 <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/trilhas/recentes/'.$img) }} " alt="{{ $alt }}"></a>
+
                                                 <div class="date-time">
-                                                    <span class="date">{{ \Carbon\Carbon::parse($trilha->created_at)->format('d') }}</span>
-                                                    <span class="month">{{ strtoupper(\Carbon\Carbon::parse($trilha->created_at)->format('M')) }}</span>
+                                                    <span class="date">30</span>
+                                                    <span class="month">SET</span>
                                                 </div>
                                             </div>
                                             <div class="blog-link">
@@ -106,9 +108,9 @@
                                         </div>
                                         <div class="col-md-6 col-sm-6 margin-left">
                                             <div class="blog-text">
-                                                <h4><a href="{{ url($trilha->ds_url_tri) }}">{{ $trilha->nm_trilha_tri }}</a></h4>
+                                                <h4><a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}">{{ $trilha->nm_trilha_tri }}</a></h4>
                                                 <p>{{ \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') }}</p>
-                                                <a href="{{ url($trilha->ds_url_tri) }}" class="button-one">Leia Mais</a>
+                                                <a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}" class="button-one">Leia Mais</a>
                                             </div>
                                         </div>
                                     </div>
@@ -120,7 +122,8 @@
             </div>
         </div>
         
-        <div class="best-sell-area section-padding">
+         <!--Best Sell Area Start-->
+        <div class="best-sell-area section-padding" style="background: #edecec;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">

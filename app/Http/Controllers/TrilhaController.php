@@ -17,6 +17,26 @@ class TrilhaController extends Controller
     {
     	$trilha = Trilha::with('foto')->where('ds_url_tri', 'like', '%'.$url)->first();
 
-    	return view('trilhas/detalhes',['trilha' => $trilha]);
+        $titulo = $trilha->nm_trilha_tri;
+        $subtitulo = "Um pedacinho do paraíso em Florianópolis";
+
+    	return view('trilhas/detalhes',['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo]);
+    }
+
+    public function search(Request $request){
+
+        $nivel  = $request->nivel;
+        $cidade = $request->cidade;
+
+        $trilhas = Trilha::with('foto')
+                          ->when($request->nivel, function($query) use ($nivel){
+                                $query->where('id_nivel_niv',$nivel);
+                          })
+                          ->when($request->cidade, function($query) use ($cidade){
+                                $query->where('cd_cidade_cde',$cidade);
+                          })     
+        ->get();
+
+    	return view('trilhas/lista', ['trilhas' => $trilhas]);
     }
 }
