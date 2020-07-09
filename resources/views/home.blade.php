@@ -85,12 +85,20 @@
                 <div class="row">
                     <div class="blog-carousel">
                         @foreach($ultimas as $trilha)
+
+                            @php 
+                                $img = ($trilha->foto->where('id_tipo_foto_tfo',4)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',4)->first()->nm_path_fot : 'padrao.jpg';
+                                $alt = ($trilha->foto->where('id_tipo_foto_tfo',4)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',4)->first()->dc_alt_fot : 'Foto da Trilha';
+                            @endphp
+
                             <div class="col-md-6">
                                 <div class="single-blog hover-effect">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="blog-image box-hover">
-                                                <a href="blog-details.html"><img src="{{ asset('img/blog/trilha_do_gravata_florianopolis.jpeg') }} " alt=""></a>
+
+                                                <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/trilhas/recentes/'.$img) }} " alt="{{ $alt }}"></a>
+
                                                 <div class="date-time">
                                                     <span class="date">30</span>
                                                     <span class="month">SET</span>
