@@ -8,10 +8,10 @@
         <div class="shop-item-filter">
             <form action="#" id="banner-searchbox">
                 <div class="row" style="padding-top: 5px;">
-                    <div class="col-lg-4 hidden-md col-sm-12">
+                    <div class="col-lg-2 col-md-2 col-sm-12">
                         <p>Mostrando {{ $trilhas->count() }} Trilha(s)</p>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="adventure-cat box-small">
                             <select name="type" class="search-adventure">
                                 <option>Selecione a Cidade</option>
@@ -24,7 +24,7 @@
                             </select>
                         </div>
                     </div>    
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="adventure-cat box-small">
                             <select name="level" class="search-adventure">
                                 <option>Selecione o Nível</option>
@@ -36,8 +36,10 @@
                         </div>
                     </div>  
               
-                    <div class="col-md-2 col-sm-3">
-                        <button style="margin-top: 0px;" type="submit" id="btn-search-category" class="button-yellow btn-busca-aventura-list">Buscar</button>
+                    <div class="col-lg-2 col-md-2 col-sm-6">
+                        <div class="adventure-tab clearfix">
+                            <button style="margin-top: 0px;" type="submit" id="btn-search-category" class="button-yellow btn-busca-aventura-list">Buscar</button>
+                        </div>
                     </div>  
                     
                 </div>        
