@@ -97,8 +97,8 @@
                                                 <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/trilhas/recentes/'.$img) }} " alt="{{ $alt }}"></a>
 
                                                 <div class="date-time">
-                                                    <span class="date">30</span>
-                                                    <span class="month">SET</span>
+                                                    <span class="date">{{ \Carbon\Carbon::parse($trilha->created_at)->format('d') }}</span>
+                                                    <span class="month">{{ strtoupper(\Carbon\Carbon::parse($trilha->created_at)->format('M')) }}</span>
                                                 </div>
                                             </div>
                                             <div class="blog-link">
@@ -108,9 +108,9 @@
                                         </div>
                                         <div class="col-md-6 col-sm-6 margin-left">
                                             <div class="blog-text">
-                                                <h4><a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}">{{ $trilha->nm_trilha_tri }}</a></h4>
+                                                <h4><a href="{{ url($trilha->ds_url_tri) }}">{{ $trilha->nm_trilha_tri }}</a></h4>
                                                 <p>{{ \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') }}</p>
-                                                <a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}" class="button-one">Leia Mais</a>
+                                                <a href="{{ url($trilha->ds_url_tri) }}" class="button-one">Leia Mais</a>
                                             </div>
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@
         </div>
         
          <!--Best Sell Area Start-->
-        <div class="best-sell-area section-padding" style="background: #edecec;">
+        <div class="best-sell-area section-padding" style="background: #ffffff;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -152,15 +152,20 @@
 
                                 @foreach($preferidas as $key => $trilha)
 
+                                     @php 
+                                        $img = ($trilha->foto->where('id_tipo_foto_tfo',1)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot : 'padrao.jpg';
+                                        $alt = ($trilha->foto->where('id_tipo_foto_tfo',1)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',1)->first()->dc_alt_fot : 'Miniatura da Trilha';
+                                    @endphp
+
                                     @if($key%2 == 0)
                                         <div class="col-md-3">
                                     @endif
 
                                         <div class="hover-effect">
                                             <div class="box-hover">
-                                                <a href="#">
-                                                    <img src="{{ asset('img/sell/trilha_galheta.jpg') }}" alt="">
-                                                    <span>Galheta</span>
+                                                <a href="{{ url($trilha->ds_url_tri) }}">
+                                                    <img src="{{ asset('img/trilhas/destaque-pequena/'.$img) }}" alt="">
+                                                    <span>{{ $trilha->nm_trilha_tri }}</span>
                                                 </a>
                                             </div>
                                         </div>
@@ -177,7 +182,7 @@
 
                     <div class="col-md-6 hidden-sm">
                         <a href="#">
-                            <img src="{{ asset('img/sell/trilha_dolmen_da_oracao_destaque.jpeg') }}" alt="">
+                            <img src="{{ asset('img/trilhas/destaque-principal/padrao.jpg') }}" alt="">
                         </a>
                     </div>
                 </div>
