@@ -68,7 +68,7 @@
             </div>
         </div>
       
-        <div class="blog-area section-padding">
+        <div class="blog-two-area section-padding" style="background: #edecec !important;">
             <div class="container">              
                 <div class="row">
                     <div class="col-md-12">
@@ -110,7 +110,7 @@
                                             <div class="blog-text">
                                                 <h4><a href="{{ url($trilha->ds_url_tri) }}">{{ $trilha->nm_trilha_tri }}</a></h4>
                                                 <p>{{ \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') }}</p>
-                                                <a href="{{ url($trilha->ds_url_tri) }}" class="button-one">Leia Mais</a>
+                                                <a href="{{ url($trilha->ds_url_tri) }}" class="button-one button-yellow">Leia Mais</a>
                                             </div>
                                         </div>
                                     </div>
