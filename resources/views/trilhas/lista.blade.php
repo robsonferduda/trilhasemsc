@@ -15,11 +15,9 @@
                         <div class="adventure-cat box-small">
                             <select name="type" class="search-adventure">
                                 <option>Selecione a Cidade</option>
-                                 <option>Price</option>
-                                <option>$100-$300</option>
-                                <option>$400-$600</option>
-                                <option>$700-$800</option>
-                                <option>$900-$1000</option>
+                                @foreach($cidades as $cidade)
+                                <option {{ $cidade_p == $cidade->cd_cidade_cde || old('cidade') == $cidade->cd_cidade_cde ? 'selected': ''}} value="{{$cidade->cd_cidade_cde}}">{{$cidade->nm_cidade_cde}}</option>
+                                @endforeach
                                
                             </select>
                         </div>
@@ -28,6 +26,9 @@
                         <div class="adventure-cat box-small">
                             <select name="level" class="search-adventure">
                                 <option>Selecione o Nível</option>
+                                @foreach($niveis as $nivel)
+                                <option {{ $nivel_p == $nivel->id_nivel_niv || old('nivel') == $nivel->id_nivel_niv ? 'selected': ''}} value="{{$nivel->id_nivel_niv}}">{{$nivel->dc_nivel_niv}}</option>
+                                @endforeach
                                
                             </select>
                         </div>
@@ -35,7 +36,7 @@
                     <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">    
 
                         <div class="box-busca-aventura-list">
-                            <button type="button" class="btn btn-light btn-busca-aventura-list">Buscar Aventura</button>
+                            <button type="submit" class="btn btn-light btn-busca-aventura-list">Buscar Aventura</button>
                         </div>
                     </div> 
 
