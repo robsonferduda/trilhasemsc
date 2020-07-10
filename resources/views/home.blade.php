@@ -97,7 +97,7 @@
                                                 <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/trilhas/recentes/'.$img) }} " alt="{{ $alt }}"></a>
 
                                                 <div class="date-time">
-                                                    <span class="date">{{ \Carbon\Carbon::parse($trilha->created_at)->format('d') }}</span>
+                                                    <span class="date" style="padding-left: 8px">{{ \Carbon\Carbon::parse($trilha->created_at)->format('d') }}</span>
                                                     <span class="month">{{ strtoupper(\Carbon\Carbon::parse($trilha->created_at)->format('M')) }}</span>
                                                 </div>
                                             </div>
