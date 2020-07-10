@@ -84,21 +84,7 @@
                                         {{ \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') }}
                                     </p>
                                     <div class="list-buttons">
-                                        <a href="{{ url($trilha->ds_url_tri) }}" class="button-one button-blue">LER MAIS</a>
-                                        <div class="list-rating">
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <div class="adventure-list-link">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                            <a href="#"><i class="fa fa-rss"></i></a>
-                                        </div>
+                                        <a href="{{ url($trilha->ds_url_tri) }}" class="button-one button-blue">LER MAIS</a>                                        
                                     </div>
                                 </div>
                                 <div class="adventure-list-image">
@@ -106,14 +92,10 @@
                                         <img src="img/icon/level.png" alt="">
                                     </div>
                                     <h2>{{ $trilha->nivel->dc_nivel_niv }}</h2>
-                                    <ul class="image-bottom">
-                                        <li><img src="img/icon/35.png" alt=""></li>
-                                        <li><img src="img/icon/36.png" alt=""></li>
-                                        <li><img src="img/icon/37.png" alt=""></li>
-                                        <li><img src="img/icon/38.png" alt=""></li>
-                                        <li><img src="img/icon/39.png" alt=""></li>
-                                        <li><img src="img/icon/40.png" alt=""></li>
-                                    </ul>
+                                    <div style="height: 162px; width: 300px; display: inline-block;">
+                                        
+                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -122,19 +104,6 @@
                 </div>
             @endforeach
         </div>
-    {{--    <div class="pagination-content">
-            <div class="pagination-button">
-                <ul class="pagination">
-                    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                    <li class="current"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                </ul>
-            </div>
-        </div>  --}}
     </div>
 </div>
 <!--End of Adventures Grid-->
@@ -145,20 +114,26 @@
             <div class="col-md-12">
                 <div class="section-title title-three text-center">
                     <div class="title-border">
-                        <h1>Latest <span>Blog Posts</span></h1>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis, pulvinar varius dui<br> id, convallis iaculis eros. Praesent porta lacinia elementum.</p>
+                        <h1>ÚLTIMAS <span>TRILHAS</span></h1>
+                    </div>                    
                 </div>
             </div>
         </div>
         <div class="row">
+            @foreach($ultimas as $trilha)
+
+            @php 
+                $img = ($trilha->foto->where('id_tipo_foto_tfo',4)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',4)->first()->nm_path_fot : 'padrao.jpg';
+                $alt = ($trilha->foto->where('id_tipo_foto_tfo',4)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',4)->first()->dc_alt_fot : 'Foto da Trilha';
+            @endphp
+
             <div class="blog-carousel">
                 <div class="col-md-6">
                     <div class="single-blog hover-effect">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <div class="blog-image box-hover">
-                                    <a href="blog-details.html"><img src="img/blog/1.jpg" alt=""></a>
+                                    <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/trilhas/recentes/'.$img) }} " alt="{{ $alt }}"></a>
                                     <div class="date-time">
                                         <span class="date">10</span>
                                         <span class="month">AUG</span>
@@ -166,53 +141,18 @@
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 margin-left">
-                                <div class="blog-text">
-                                    <h4><a href="blog-details.html">What is travel? We answer the big, burning question.....</a></h4>
-                                    <p>The question of What Travel Is is interesting, but more for what it tells you about the people doing the asking. The question of What Travel Is is interesting, but more for what it tells you about the people doing the asking.</p>
-                                    <a href="blog-details.html" class="button-one">Learn More</a>
-                                    <div class="blog-link">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-rss"></i></a>
-                                    </div>
+                                <div class="blog-text">                                    
+                                    <h4><a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}">{{ $trilha->nm_trilha_tri }}</a></h4>
+                                    <p>{{ \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') }}</p>
+                                    <a href="{{ url('florianopolis/trilhas/trilha-do-gravata') }}" class="button-one">Leia Mais</a>                                    
                                 </div>
                             </div>
                         </div>
                     </div>    
-                </div>
-                <div class="col-md-6">
-                    <div class="single-blog hover-effect">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="blog-image box-hover">
-                                    <a href="blog-details.html"><img src="img/blog/2.jpg" alt=""></a>
-                                    <div class="date-time">
-                                        <span class="date">10</span>
-                                        <span class="month">AUG</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6 margin-left">
-                                <div class="blog-text">
-                                    <h4><a href="blog-details.html">What is travel? We answer the big, burning question.....</a></h4>
-                                    <p>The question of What Travel Is is interesting, but more for what it tells you about the people doing the asking. The question of What Travel Is is interesting, but more for what it tells you about the people doing the asking.</p>
-                                    <a href="blog-details.html" class="button-one">Learn More</a>
-                                    <div class="blog-link">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-rss"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>    
-                </div>
+                </div>              
             </div>
-        </div>
+            @endforeach
+        </div>        
     </div>
 </div>
 <!--End of Blog Area-->

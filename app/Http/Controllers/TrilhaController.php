@@ -45,6 +45,8 @@ class TrilhaController extends Controller
 
         $niveis = Nivel::get();
 
-    	return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel]);
+        $ultimas = Trilha::with('foto')->orderBy('created_at','DESC')->take(2)->get();
+
+    	return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'ultimas' => $ultimas]);
     }
 }
