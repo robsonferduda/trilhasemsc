@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Trilha;
+use App\Cidade;
+use App\Nivel;
 use Illuminate\Http\Request;
 
 class TrilhaController extends Controller
@@ -30,6 +32,7 @@ class TrilhaController extends Controller
 
         $trilhas = Trilha::with('foto')
                           ->with('nivel')
+                          ->with('cidade')
                           ->when($request->nivel, function($query) use ($nivel){
                                 $query->where('id_nivel_niv',$nivel);
                           })
@@ -38,6 +41,10 @@ class TrilhaController extends Controller
                           })     
         ->get();
 
-    	return view('trilhas/lista', ['trilhas' => $trilhas]);
+        $cidades = Cidade::whereIn('cd_cidade_cde',Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde','nm_cidade_cde')->get();
+
+        $niveis = Nivel::get();
+
+    	return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel]);
     }
 }

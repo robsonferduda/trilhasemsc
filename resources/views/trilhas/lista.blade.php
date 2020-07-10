@@ -7,11 +7,11 @@
     <div class="container">
         <div class="shop-item-filter">
             <form action="#" id="banner-searchbox">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <div class="row" style="padding-top: 5px;">
+                    <div class="col-lg-2 col-md-12 col-sm-12">
                         <p>Mostrando {{ $trilhas->count() }} Trilha(s)</p>
                     </div>
-                    <div class="col-lg-3 col-md-5 col-sm-5 col-xs-12">
+                    <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
                         <div class="adventure-cat box-small">
                             <select name="type" class="search-adventure">
                                 <option>Selecione a Cidade</option>
@@ -22,7 +22,7 @@
                             </select>
                         </div>
                     </div>    
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="adventure-cat box-small">
                             <select name="level" class="search-adventure">
                                 <option>Selecione o Nível</option>
@@ -36,7 +36,7 @@
                     <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">    
 
                         <div class="box-busca-aventura-list">
-                            <button type="submit" class="btn btn-light btn-busca-aventura-list">Buscar Aventura</button>
+                            <button  type="submit" style="margin-top: 0px;"  class="btn btn-light btn-busca-aventura-list">Buscar Aventura</button>
                         </div>
                     </div> 
 
@@ -51,16 +51,8 @@
                                 <option>$900-$1000</option>
                             </select>
                         </div>
-                    </div> --}}
-                {{--    <div class="col-md-2 col-sm-3">
-                        <div class="adventure-tab clearfix">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs navbar-left">
-                                <li><a href="shop-grid-no-sidebar.html" class="grid-view">Shop Grid No Sidebar</a></li>
-                                <li><a href="shop-grid-with-sidebar.html" class="list-view">Shop Grid With Sidebar</a></li>
-                            </ul>
-                        </div>
-                    </div> --}}
+                    </div>  --}}
+              
                 </div>        
             </form>
         </div>
@@ -86,7 +78,8 @@
                         <div class="col-md-8 col-sm-7 margin-left-list">
                             <div class="adventure-list-container">
                                 <div class="adventure-list-text">
-                                    <h1><a href="#">{{$trilha->nm_trilha_tri}}</a></h1>
+                                    <h1><a href="{{ url($trilha->ds_url_tri) }}">{{$trilha->nm_trilha_tri}}</a></h1>
+                                    <h2 class='cidade-list' ><a href="{{ url('trilhas/?cidade='.$trilha->cidade->cd_cidade_cde.'#lista') }}">{{$trilha->cidade->nm_cidade_cde}}</a></h2>
                                     <p>
                                         {{ \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') }}
                                     </p>
