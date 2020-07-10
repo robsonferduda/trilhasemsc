@@ -3685,3 +3685,8 @@ textarea.yourmessage {
     font-weight: 600 !important;
     color: #00C0FF !important;
 }
+
+.msg-list-empty-trilhas{
+    text-align: center;
+    font-weight: 600
+}
