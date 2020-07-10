@@ -3659,8 +3659,25 @@ textarea.yourmessage {
 
 .btn-busca-aventura-list{
     height: 100%;
+    color: #4e4e4e;
+}
+
+.btn-busca-aventura-list::active:focus {
+    border: none;
 }
 
 .box-busca-aventura-list{
     height: 44px;
+}
+
+.cidade-list{
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #181818 !important;
+}
+
+.cidade-list a:hover{
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #00C0FF !important;
 }

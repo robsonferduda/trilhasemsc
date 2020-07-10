@@ -82,7 +82,7 @@
                                             <nav>
                                                 <ul id="nav">
                                                     <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
-                                                    <li><a href="{{ url('trilhas/buscar') }}">TRILHAS</a></li>
+                                                    <li><a href="{{ url('trilhas#lista') }}">TRILHAS</a></li>
                                                     <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
                                                     <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
                                                     <li><a href="{{ url('trilhas/fauna-e-flora') }}">FAUNA E FLORA</a>
@@ -129,9 +129,9 @@
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <h1>{{ !empty($titulo) ? $titulo : '' }}</h1>
+                                <h1>{{ !empty($titulo) ? $titulo : 'Trilhas' }}</h1>
                             </div>    
-                            <p class="text-white">{{ !empty($subtitulo) ? $subtitulo : '' }}</p>
+                            <p class="text-white">{{ !empty($subtitulo) ? $subtitulo : 'Em Santa Catarina' }}</p>
                         </div>
                     </div>
                 </div>

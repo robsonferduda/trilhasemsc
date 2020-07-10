@@ -6,42 +6,53 @@
 <div id="lista" class="adventures-grid section-padding list">
     <div class="container">
         <div class="shop-item-filter">
-            <form action="#" id="banner-searchbox">
+            <form action="{{url('trilhas/#lista')}}" id="banner-searchbox">
                 <div class="row" style="padding-top: 5px;">
-                    <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="col-lg-2 col-md-12 col-sm-12">
                         <p>Mostrando {{ $trilhas->count() }} Trilha(s)</p>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
                         <div class="adventure-cat box-small">
-                            <select name="type" class="search-adventure">
-                                <option>Selecione a Cidade</option>
-                                 <option>Price</option>
-                                <option>$100-$300</option>
-                                <option>$400-$600</option>
-                                <option>$700-$800</option>
-                                <option>$900-$1000</option>
+                            <select name="cidade" class="search-adventure">
+                                <option value="">Selecione a Cidade</option>
+                                @foreach($cidades as $cidade)
+                                <option {{ $cidade_p == $cidade->cd_cidade_cde || old('cidade') == $cidade->cd_cidade_cde ? 'selected': ''}} value="{{$cidade->cd_cidade_cde}}">{{$cidade->nm_cidade_cde}}</option>
+                                @endforeach
                                
                             </select>
                         </div>
                     </div>    
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="adventure-cat box-small">
-                            <select name="level" class="search-adventure">
-                                <option>Selecione o Nível</option>
+                            <select name="nivel" class="search-adventure">
+                                <option value="">Selecione o Nível</option>
+                                @foreach($niveis as $nivel)
+                                <option {{ $nivel_p == $nivel->id_nivel_niv || old('nivel') == $nivel->id_nivel_niv ? 'selected': ''}} value="{{$nivel->id_nivel_niv}}">{{$nivel->dc_nivel_niv}}</option>
+                                @endforeach
+                               
+                            </select>
+                        </div>
+                    </div>    
+                    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">    
+
+                        <div class="box-busca-aventura-list">
+                            <button  type="submit" style="margin-top: 0px;"  class="btn btn-light btn-busca-aventura-list">Buscar Aventura</button>
+                        </div>
+                    </div> 
+
+
+                {{--    <div class="col-md-2 hidden-sm">    
+                        <div class="adventure-cat box-small">
+                            <select name="price" class="search-adventure">
+                                <option>Price</option>
                                 <option>$100-$300</option>
                                 <option>$400-$600</option>
                                 <option>$700-$800</option>
                                 <option>$900-$1000</option>
                             </select>
                         </div>
-                    </div>  
+                    </div>  --}}
               
-                    <div class="col-lg-2 col-md-2 col-sm-6">
-                        <div class="adventure-tab clearfix">
-                            <button style="margin-top: 0px;" type="submit" id="btn-search-category" class="button-yellow btn-busca-aventura-list">Buscar</button>
-                        </div>
-                    </div>  
-                    
                 </div>        
             </form>
         </div>
@@ -67,7 +78,8 @@
                         <div class="col-md-8 col-sm-7 margin-left-list">
                             <div class="adventure-list-container">
                                 <div class="adventure-list-text">
-                                    <h1><a href="#">{{$trilha->nm_trilha_tri}}</a></h1>
+                                    <h1><a href="{{ url($trilha->ds_url_tri) }}">{{$trilha->nm_trilha_tri}}</a></h1>
+                                    <h2 class='cidade-list' ><a href="{{ url('trilhas/?cidade='.$trilha->cidade->cd_cidade_cde.'#lista') }}">{{$trilha->cidade->nm_cidade_cde}}</a></h2>
                                     <p>
                                         {{ \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') }}
                                     </p>
