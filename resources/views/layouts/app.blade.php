@@ -148,7 +148,7 @@
                                 <nav id="dropdown">
                                     <ul>
                                         <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
-                                        <li><a href="{{ url('trilhas/buscar') }}">TRILHAS</a></li>
+                                        <li><a href="{{ url('trilhas#lista') }}">TRILHAS</a></li>
                                         <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
                                         <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
                                         <li><a href="{{ url('trilhas/fauna-e-flora') }}">FAUNA E FLORA</a>
