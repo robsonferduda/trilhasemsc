@@ -6,15 +6,15 @@
 <div id="lista" class="adventures-grid section-padding list">
     <div class="container">
         <div class="shop-item-filter">
-            <form action="#" id="banner-searchbox">
+            <form action="{{url('trilhas/#lista')}}" id="banner-searchbox">
                 <div class="row" style="padding-top: 5px;">
                     <div class="col-lg-2 col-md-12 col-sm-12">
                         <p>Mostrando {{ $trilhas->count() }} Trilha(s)</p>
                     </div>
                     <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
                         <div class="adventure-cat box-small">
-                            <select name="type" class="search-adventure">
-                                <option>Selecione a Cidade</option>
+                            <select name="cidade" class="search-adventure">
+                                <option value="">Selecione a Cidade</option>
                                 @foreach($cidades as $cidade)
                                 <option {{ $cidade_p == $cidade->cd_cidade_cde || old('cidade') == $cidade->cd_cidade_cde ? 'selected': ''}} value="{{$cidade->cd_cidade_cde}}">{{$cidade->nm_cidade_cde}}</option>
                                 @endforeach
@@ -24,8 +24,8 @@
                     </div>    
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="adventure-cat box-small">
-                            <select name="level" class="search-adventure">
-                                <option>Selecione o Nível</option>
+                            <select name="nivel" class="search-adventure">
+                                <option value="">Selecione o Nível</option>
                                 @foreach($niveis as $nivel)
                                 <option {{ $nivel_p == $nivel->id_nivel_niv || old('nivel') == $nivel->id_nivel_niv ? 'selected': ''}} value="{{$nivel->id_nivel_niv}}">{{$nivel->dc_nivel_niv}}</option>
                                 @endforeach
