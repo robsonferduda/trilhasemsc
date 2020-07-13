@@ -143,7 +143,7 @@
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <br/><br/><h1>NOSSOS <span>Parceiros</span></h1>
+                                <br/><br/><h1>INFORMES <span>PUBLICITÁRIOS</span></h1>
                             </div>    
                         </div>
                     </div>
