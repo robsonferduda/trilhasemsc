@@ -1252,7 +1252,7 @@ button#btn-search-category:hover, .newsletter-content button:hover, .button-one:
     display: block;
     line-height: 25px;
 }
-.single-footer-widget.contact-text-info li {margin-bottom: 32px}
+.single-footer-widget.contact-text-info li {margin-bottom: 12px}
 .single-footer-widget.contact-text-info li:last-child {margin-bottom: 0}
 .footer-widget-list li span.icon {
     display: inline-block;
