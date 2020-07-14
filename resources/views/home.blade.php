@@ -86,39 +86,31 @@
                 <div class="row">
                     <div class="col-md-6">
 
-                        <div class="sell-text-container">
-                            <div class="title-container">
-                                <h3>PATROCINADO</h3>
-                                <div style="min-height: 130px;">
-                                    <h1>ANUNCIE AQUI!</h1>
-                                </div>
-                            </div>                            
-                        </div>
-
                         <div class="row">
                             <div class="best-sell-slider carousel-style-one">
 
-                                @foreach($preferidas as $key => $trilha)
+                                @foreach($preferidas->slice(1) as $key => $trilha)
 
-                                     @php 
+                                    @php 
                                         $img = ($trilha->foto->where('id_tipo_foto_tfo',1)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot : 'padrao.jpg';
                                         $alt = ($trilha->foto->where('id_tipo_foto_tfo',1)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',1)->first()->dc_alt_fot : 'Miniatura da Trilha';
                                     @endphp
 
-                                    @if($key%2 == 0)
+                                    @if($key%2 == 1)
                                         <div class="col-md-3">
                                     @endif
 
                                         <div class="hover-effect">
+                                            <p class="titulo_trilha_destaque">{{ $trilha->nm_trilha_tri }}</p>
                                             <div class="box-hover">
                                                 <a href="{{ url($trilha->ds_url_tri) }}">
-                                                    <img src="{{ asset('img/trilhas/destaque-pequena/'.$img) }}" alt="">
-                                                    <span>{{ $trilha->nm_trilha_tri }}</span>
+                                                    <img src="{{ asset('img/trilhas/destaque-pequena/'.$img) }}" alt="{{ $alt }}">
+                                                    <span>{{ $trilha->cidade->nm_cidade_cde }}</span>
                                                 </a>
                                             </div>
                                         </div>
 
-                                    @if($key%2 == 1)
+                                    @if($key%2 == 0)
                                         </div>
                                     @endif
 
@@ -126,13 +118,27 @@
                                 
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="box-publicidade-destaque">
+                                    <span>PUBLICIDADE</span>
+                                </div>
+                            </div> 
+                        </div>
                     </div>
 
+                    @php
+                        $trilha_destaque = $preferidas->shift();
+                        $img_destaque = ($trilha_destaque->foto->where('id_tipo_foto_tfo',2)->first()) ? $trilha_destaque->foto->where('id_tipo_foto_tfo',2)->first()->nm_path_fot : 'padrao.jpg';
+                        $alt_destaque = ($trilha_destaque->foto->where('id_tipo_foto_tfo',2)->first()) ? $trilha_destaque->foto->where('id_tipo_foto_tfo',2)->first()->dc_alt_fot : 'Miniatura da Trilha';
+                    @endphp
+
                     <div class="col-md-6 hidden-sm">
-                        <a href="#">
-                            <img src="{{ asset('img/trilhas/destaque-principal/padrao.jpg') }}" alt="">
-                        </a>
+                        <p class="titulo_trilha_destaque">{{ $trilha_destaque->nm_trilha_tri }}</p>
+                        <a href="{{ url($trilha_destaque->ds_url_tri) }}"><img src="{{ asset('img/trilhas/destaque-principal/'.$img_destaque) }}" alt="{{ $alt_destaque }}"></a>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -148,24 +154,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="partner-carousel carousel-style-two">
-                        <div class="col-md-3">
-                            <a href="#"><img src="img/brand/1.jpg" alt=""></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#"><img src="img/brand/2.jpg" alt=""></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#"><img src="img/brand/3.jpg" alt=""></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#"><img src="img/brand/4.jpg" alt=""></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#"><img src="img/brand/1.jpg" alt=""></a>
+                <div class="row publicidade">
+                    
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="box-publicidade">
+                            <span>PUBLICIDADE</span>
                         </div>
                     </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="box-publicidade">
+                            <span>PUBLICIDADE</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="box-publicidade">
+                            <span>PUBLICIDADE</span>
+                        </div>
+                    </div>             
+
                 </div>
             </div>
         </div>

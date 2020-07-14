@@ -27,7 +27,7 @@ class HomeController extends Controller
         $niveis = Nivel::get();
 
         $ultimas = Trilha::with('foto')->orderBy('created_at','DESC')->take(2)->get();
-        $preferidas = Trilha::with('foto')->orderBy('total_votos_tri','ASC')->take(4)->get();
+        $preferidas = Trilha::with('foto')->orderBy('total_votos_tri','ASC')->take(5)->get();
 
         return view('home',['totais' => $totais, 'ultimas' => $ultimas, 'preferidas' => $preferidas ,'cidades' => $cidades, 'niveis' => $niveis]);
     }

@@ -1003,8 +1003,10 @@ button#btn-search-category:hover, .newsletter-content button:hover, .button-one:
     line-height: 32px;
     position: absolute;
     text-align: center;
-    width: 134px;
+    /*width: 134px;*/
     z-index: 2;
+    padding-left: 5px;
+    padding-right: 20px;
 }
 .best-sell-slider .box-hover > a span::after {
     background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0;
@@ -3690,3 +3692,9 @@ textarea.yourmessage {
     text-align: center;
     font-weight: 600
 }
+
+.box-publicidade{ position: relative; background: #f1f1f1; width: 336px; height: 280px; padding: 5px; }
+.box-publicidade span{ position: absolute; bottom: 5px; right: 5px; }
+.titulo_trilha_destaque { max-width: 33ch; overflow: hidden; font-weight: 300; white-space: nowrap; }
+.box-publicidade-destaque { position: relative; background: #f1f1f1; min-height: 185px;}
+.box-publicidade-destaque span{ position: absolute; bottom: 5px; right: 5px; }
