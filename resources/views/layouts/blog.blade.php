@@ -84,8 +84,8 @@
                                                     <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
                                                     <li><a href="{{ url('trilhas#lista') }}">TRILHAS</a></li>
                                                     <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
+                                                    <li><a href="{{ url('trilhas/galerias') }}">GALERIAS</a></li>
                                                     <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
-                                                    <li><a href="{{ url('trilhas/fauna-e-flora') }}">FAUNA E FLORA</a>
                                                     </li><li><a href="{{ url('contato') }}">CONTATO</a></li>
                                                 </ul>
                                             </nav>
@@ -109,8 +109,8 @@
                                         <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
                                         <li><a href="{{ url('trilhas#lista') }}">TRILHAS</a></li>
                                         <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
+                                        <li><a href="{{ url('trilhas/galerias') }}">GALERIAS</a></li>
                                         <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
-                                        <li><a href="{{ url('trilhas/fauna-e-flora') }}">FAUNA E FLORA</a>
                                         </li><li><a href="{{ url('contato') }}">CONTATO</a></li>
                                     </ul>
                                 </nav>

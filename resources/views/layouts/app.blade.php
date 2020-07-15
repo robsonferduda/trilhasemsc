@@ -76,12 +76,14 @@
                         <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="header-top-right">
                                 @guest
+                                    <!--
                                     <div class="login">
                                         <a href="{{ route('register') }}"><i class="fa fa-pencil-square-o"></i>Cadastre-se</a>
                                     </div>
                                     <div class="account">
                                         <a href="{{ route('login') }}"><i class="fa fa-lock"></i>Acesse</a>
                                     </div>
+                                    -->
                                     <ul class="header-r-cart">
                                         <li><a href="#" class="cart"><span>Olá Visitante!</span></a>
                                             
@@ -127,8 +129,8 @@
                                                     <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
                                                     <li><a href="{{ url('trilhas/#lista') }}">TRILHAS</a></li>
                                                     <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
+                                                    <li><a href="{{ url('trilhas/galerias') }}">GALERIAS</a></li>
                                                     <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
-                                                    <li><a href="{{ url('trilhas/fauna-e-flora') }}">FAUNA E FLORA</a>
                                                     </li><li><a href="{{ url('contato') }}">CONTATO</a></li>
                                                 </ul>
                                             </nav>
@@ -152,8 +154,8 @@
                                         <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
                                         <li><a href="{{ url('trilhas#lista') }}">TRILHAS</a></li>
                                         <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
+                                        <li><a href="{{ url('trilhas/galerias') }}">GALERIAS</a></li>
                                         <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
-                                        <li><a href="{{ url('trilhas/fauna-e-flora') }}">FAUNA E FLORA</a></li>
                                         <li><a href="{{ url('contato') }}">CONTATO</a></li>
                                     </ul>
                                 </nav>
