@@ -29,6 +29,7 @@ class TrilhaController extends Controller
 
         $nivel  = $request->nivel;
         $cidade = $request->cidade;
+        $nome   = $request->nome;
 
         $trilhas = Trilha::with('foto')
                           ->with('nivel')
@@ -38,7 +39,10 @@ class TrilhaController extends Controller
                           })
                           ->when($request->cidade, function($query) use ($cidade){
                                 $query->where('cd_cidade_cde',$cidade);
-                          })     
+                          })    
+                          ->when($request->nome,function($query) use ($nome){
+                                $query->where('nm_trilha_tri', 'ilike', '%' . $nome . '%');
+                          })
         ->get();
 
         $cidades = Cidade::whereIn('cd_cidade_cde',Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde','nm_cidade_cde')->get();
