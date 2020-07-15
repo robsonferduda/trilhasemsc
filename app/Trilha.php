@@ -33,6 +33,10 @@ class Trilha extends Model
         return $this->hasOne('App\Nivel','id_nivel_niv','id_nivel_niv');
     }
 
+    public function user(){
+        return $this->hasOne('App\User','id','id_user_usu');
+    }
+
     public function cidade(){
         return $this->hasOne('App\Cidade','cd_cidade_cde','cd_cidade_cde');
     }

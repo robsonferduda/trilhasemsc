@@ -8,7 +8,7 @@
                     <div class="col-md-3">
                         <div class="sidebar-widget">
                             <div class="single-sidebar-widget">
-                                <h4>PESQUISAR <span>Trilha</span></h4>
+                                <h4>PESQUISAR <span>Trilhas</span></h4>
                                 <form id="text-search" action="#">
                                     <input type="text" placeholder="Digite aqui">
                                     <button class="submit"><i class="fa fa-search"></i></button>
@@ -16,51 +16,41 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="single-sidebar-widget country-select">
-                                <h4>Selecione a <span>Cidade</span></h4>
+                                <h4>BUSCA POR <span>Cidade</span></h4>
                                 <ul class="widget-categories">
-                                    <li><a href="#">Florianópolis <span>(10)</span></a></li>
+                                    @foreach($busca_cidade as $busca)
+                                        <li><a href="#">{{ $busca->cidade->nm_cidade_cde }}<span>({{ $busca->total }})</span></a></li>
+                                    @endforeach
                                 </ul>
                             </div>
-                            <div class="single-sidebar-widget">
-                                <h4>Últimas <span>AVENTURAS</span></h4>
-                                <div class="single-widget-posts">
-                                    <div class="post-img">
-                                        <a href="#"><img src="{{ asset('img/blog/trilha_cafe.jpg') }}" alt=""></a>
-                                    </div>
-                                    <div class="posts-text">
-                                        <h4><a href="#">Trilha da Lagoinha do Leste | Florianópolis</a></h4>
-                                        <p><i class="fa fa-clock-o"></i> May 27, 2015</p>
-                                    </div>
+    
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="min-height: 570px; background: #f1f1f1;">
+                                <div class="box-publicidade-detalhes">
+                                    <span>PUBLICIDADE</span>
                                 </div>
-                            </div>
+                            </div>                                
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="single-blog-post blog-post-details">
                             <div class="single-blog-post-img">
-                                <a href="#"><img src="{{ asset('img/blog/trilha_do_gravata_blog.jpeg') }}" alt=""></a>
+                                @php 
+                                    $img = ($trilha->foto->where('id_tipo_foto_tfo',5)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',5)->first()->nm_path_fot : 'padrao.jpg';
+                                    $alt = ($trilha->foto->where('id_tipo_foto_tfo',5)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',5)->first()->dc_alt_fot : 'Foto Principal da Trilha';
+                                @endphp
+                                <a href="#"><img src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}"></a>
                                 <div class="date-time">
-                                    <span class="date">20</span>
-                                    <span class="month">JUN</span>
+                                    <span class="date">{{ \Carbon\Carbon::parse($trilha->created_at)->format('d') }}</span>
+                                    <span class="month">{{ strtoupper(\Carbon\Carbon::parse($trilha->created_at)->format('M')) }}</span>
                                 </div>
                             </div>
                             <div class="single-blog-post-text">
-                                <h4>Trilha do Gravatá </h4>
+                                <h4>{{ $trilha->nm_trilha_tri }}</h4>
                                 <div class="author-comments">
-                                    <span><i class="fa fa-user"></i>Rafael de Moraes Costa</span>
+                                    <span><i class="fa fa-user"></i>{{ $trilha->user->name }}</span>
                                     <span><i class="fa fa-comment"></i>0 Comentŕaios</span>
                                 </div>
-                                <p>
-                                    Essa trilha encontra-se em Florianópolis no morro que separa a Lagoa da Conceição da Praia Mole, ela dá acesso a pequena praia do Gravatá. 
-                                </p>
-                                <p>
-                                    A trilha é uma das queridinhas dos iniciantes, pois tem um nível de dificuldade leve, maior parte do caminho é de trânsito fácil e tem uma duração de aproximadamente 30 minutos e percurso de 1.4 km. 
-                                    Para os amantes de fotografia, durante a trilha é possível encontrar algumas paradas que proporcionam fotos incríveis. 
-                                </p>
-                                <h5><strong>Percurso:</strong> 1.4 km</h5>
-                                <h5><strong>Tempo do percurso:</strong> 1.4 km</h5>
-                                <h5><strong>Cidade:</strong> Florianópolis</h5>
-
+                                {!! $trilha->ds_trilha_tri !!}
                             </div>
                             <div class="blog-button-links">
                                 <span class="blog-tags">Tags: <a href="#">Florianópolis,</a> <a href="#">Gravatá,</a> <a href="#">Trilha Curta,</a> <a href="#">Trilha Fácil</a></span>

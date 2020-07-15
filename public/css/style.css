@@ -3698,3 +3698,5 @@ textarea.yourmessage {
 .titulo_trilha_destaque { max-width: 33ch; overflow: hidden; font-weight: 300; white-space: nowrap; }
 .box-publicidade-destaque { position: relative; background: #f1f1f1; min-height: 185px;}
 .box-publicidade-destaque span{ position: absolute; bottom: 5px; right: 5px; }
+.box-publicidade-detalhes { background: #f1f1f1; }
+.box-publicidade-detalhes span{ position: absolute; bottom: 5px; right: 5px; }

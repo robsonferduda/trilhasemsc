@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Trilha;
 use App\Cidade;
 use App\Nivel;
@@ -17,12 +18,17 @@ class TrilhaController extends Controller
 
     public function show($cidade, $categoria, $url)
     {
-    	$trilha = Trilha::with('foto')->where('ds_url_tri', 'like', '%'.$url)->first();
+    	  $trilha = Trilha::with('foto')->with('cidade')->with('user')->where('ds_url_tri', 'like', '%'.$cidade.'/'.$categoria.'/'.$url)->first();
 
         $titulo = $trilha->nm_trilha_tri;
-        $subtitulo = "Um pedacinho do paraíso em Florianópolis";
+        $subtitulo = "Trilha em ".$trilha->cidade->nm_cidade_cde;
 
-    	return view('trilhas/detalhes',['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo]);
+        $busca_cidade = Trilha::with('cidade')
+           ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+           ->groupBy('cd_cidade_cde')
+           ->get();
+
+    	return view('trilhas/detalhes',['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
 
     public function search(Request $request){
