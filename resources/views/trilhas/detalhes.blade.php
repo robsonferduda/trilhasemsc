@@ -48,7 +48,7 @@
                                 <h4>{{ $trilha->nm_trilha_tri }}</h4>
                                 <div class="author-comments">
                                     <span><i class="fa fa-user"></i>{{ $trilha->user->name }}</span>
-                                    <span><i class="fa fa-comment"></i>0 Comentŕaios</span>
+                                    <span><i class="fa fa-comment"></i>{{ $trilha->comentarios->count() }} {{ ($trilha->comentarios->count() == 1) ? 'comentário' : 'comentários' }}</span>
                                 </div>
                                 {!! $trilha->ds_trilha_tri !!}
                             </div>
@@ -68,7 +68,23 @@
                         </div>
                         <div class="blog-comments">
                            <h4 class="blog-title">COMENTÁRIOS DOS <span>TRILHEIROS</span></h4>
-                           <h6>Nenhum comentário disponível</h6>
+                           @forelse($trilha->comentarios as $comentario)
+                                <div class="single-comment">
+                                    <div class="author-image">
+                                        <img style="max-width: 80%;" src="{{ asset('img/usuarios/perfil.png') }}" alt="">
+                                    </div>
+                                    <div class="comment-text">
+                                        <div class="author-info">
+                                            <h4><a href="#"><strong>{{ $comentario->usuario->name }}</strong></a></h4>
+                                            <span class="reply"><a href="#"><i class="fa fa-thumbs-up"></i>Curtir</a></span>
+                                            <span class="comment-time">{{ \Carbon\Carbon::parse($comentario->created_at)->diffForHumans(\Carbon\Carbon::now()) }}</span>
+                                        </div>
+                                        <p>{!! $comentario->comentario_com !!}</p>
+                                    </div>
+                                </div>
+                           @empty
+                                <h6>Nenhum comentário disponível</h6>
+                           @endforelse
                         </div>
                         <div class="leave-comment">
                             <h4 class="blog-title">FAZER UM <span>COMENTÁRIO</span></h4>
