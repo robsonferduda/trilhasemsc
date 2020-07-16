@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('{cidade}/{categoria}/{trilha}', 'TrilhaController@show')->name('detalhes');
 Route::get('trilhas', 'TrilhaController@search');
+Route::get('trilha/add-tags', 'TrilhaController@addTags');
 
 
 Route::get('usuario/add', 'UserController@store');

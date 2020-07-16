@@ -53,7 +53,13 @@
                                 {!! $trilha->ds_trilha_tri !!}
                             </div>
                             <div class="blog-button-links">
-                                <span class="blog-tags">Tags: <a href="#">Florianópolis,</a> <a href="#">Gravatá,</a> <a href="#">Trilha Curta,</a> <a href="#">Trilha Fácil</a></span>
+                                <span class="blog-tags">Tags: 
+                                    @forelse($trilha->tags as $tag)
+                                        <a href="#">{{ $tag->ds_tag_tag }}</a>
+                                    @empty
+                                        <a href="#">Nenhuma</a>
+                                    @endforelse
+                                </span>
                                 <div class="blog-links">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>
