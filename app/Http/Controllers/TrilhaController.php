@@ -63,10 +63,9 @@ class TrilhaController extends Controller
 
     public function addTags()
     {
+      /*
         $trilha = Trilha::find(1);
-        $tag    = Tag::find(1);
-
-        $trilha->tags()->attach(1);
-
+        $trilha->tags()->attach(4);
+      */
     }
 }
