@@ -41,4 +41,9 @@ class Trilha extends Model
         return $this->hasOne('App\Cidade','cd_cidade_cde','cd_cidade_cde');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag','trilha_tag_trt','id_trilha_tri','cd_tag_tag')->withTimestamps();
+    }
+
 }

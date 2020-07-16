@@ -18,5 +18,8 @@ Route::get('{cidade}/{categoria}/{trilha}', 'TrilhaController@show')->name('deta
 Route::get('trilhas', 'TrilhaController@search');
 
 
-Route::get('usuarios/add', 'UserController@store');
-Route::get('usuarios/listar', 'UserController@index');
+Route::get('usuario/add', 'UserController@store');
+Route::get('usuarios', 'UserController@index');
+
+Route::get('tag/add', 'TagController@store');
+Route::get('tags', 'TagController@index');

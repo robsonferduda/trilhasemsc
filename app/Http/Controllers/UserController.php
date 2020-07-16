@@ -15,7 +15,11 @@ class UserController extends Controller
 
     public function index()
     {
-      dd(User::all());
+         foreach (User::all() as $user) {
+            echo "<pre>";
+            echo $user;
+            echo "</pre>";
+        }
     }
 
     public function store()
