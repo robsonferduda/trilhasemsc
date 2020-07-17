@@ -21,6 +21,7 @@ Route::get('trilha/add-tags', 'TrilhaController@addTags');
 
 
 Route::get('usuario/add', 'UserController@store');
+Route::get('usuario/update', 'UserController@update');
 Route::get('usuarios', 'UserController@index');
 
 Route::get('tag/add', 'TagController@store');

@@ -27,10 +27,19 @@ class UserController extends Controller
         /*
         $dados = array('name' => 'Robson Fernando Duda', 
                        'email' => 'robsonferduda@gmail.com',
-                       'password' => '@trilhas');
+                       'password' => \Hash::make(@trilhas));
         User::create($dados);
         */
     }
 
+    public function update()
+    {
+        /*
+        $user = User::find(1);
+        $user->password = \Hash::make('@trilhas');
+        $user->save();
+        */
+        
+    }
    
 }
