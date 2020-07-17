@@ -60,7 +60,7 @@ class TrilhaController extends Controller
         
     }
 
-    public function searchTrilhaTag($tag){
+    public function searchTrilhasTag($tag){
         return $this->search(null,null,null,null,$tag);
     }
 
