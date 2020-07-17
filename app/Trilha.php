@@ -46,4 +46,9 @@ class Trilha extends Model
         return $this->belongsToMany('App\Tag','trilha_tag_trt','id_trilha_tri','cd_tag_tag')->withTimestamps();
     }
 
+    public function comentarios()
+    {
+        return $this->hasMany('App\Comentario','id_trilha_tri','id_trilha_tri');
+    }
+
 }

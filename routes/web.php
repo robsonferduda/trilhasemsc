@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('index');
 
+Route::get('trilha/add-tags', 'TrilhaController@addTags');
 Route::get('trilhas', 'TrilhaController@searchTrilhas');
 Route::get('{cidade}/trilhas', 'TrilhaController@searchTrilhasCidade');
 Route::get('trilhas/{nivel}', 'TrilhaController@searchTrilhasNivel');
@@ -22,6 +23,7 @@ Route::get('{cidade}/trilhas/{nivel}', 'TrilhaController@searchTrilhasCidadeNive
 Route::get('{cidade}/trilhas/{nivel}/{trilha}', 'TrilhaController@searchTrilha');
 
 Route::get('usuario/add', 'UserController@store');
+Route::get('usuario/update', 'UserController@update');
 Route::get('usuarios', 'UserController@index');
 
 Route::get('tag/add', 'TagController@store');

@@ -60,7 +60,7 @@
         
         <!--Header Area Start-->
         <header>
-
+            @include('trilhas.componentes.header_login')
             <!--Logo Mainmenu Start-->
             <div class="header-logo-menu">
                 <div class="container">

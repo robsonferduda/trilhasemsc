@@ -48,12 +48,18 @@
                                 <h4>{{ $trilha->nm_trilha_tri }}</h4>
                                 <div class="author-comments">
                                     <span><i class="fa fa-user"></i>{{ $trilha->user->name }}</span>
-                                    <span><i class="fa fa-comment"></i>0 Comentŕaios</span>
+                                    <span><i class="fa fa-comment"></i>{{ $trilha->comentarios->count() }} {{ ($trilha->comentarios->count() == 1) ? 'comentário' : 'comentários' }}</span>
                                 </div>
                                 {!! $trilha->ds_trilha_tri !!}
                             </div>
                             <div class="blog-button-links">
-                                <span class="blog-tags">Tags: <a href="#">Florianópolis,</a> <a href="#">Gravatá,</a> <a href="#">Trilha Curta,</a> <a href="#">Trilha Fácil</a></span>
+                                <span class="blog-tags">Tags: 
+                                    @forelse($trilha->tags as $tag)
+                                        <a href="#">{{ $tag->ds_tag_tag }}</a>
+                                    @empty
+                                        <a href="#">Nenhuma</a>
+                                    @endforelse
+                                </span>
                                 <div class="blog-links">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -62,7 +68,23 @@
                         </div>
                         <div class="blog-comments">
                            <h4 class="blog-title">COMENTÁRIOS DOS <span>TRILHEIROS</span></h4>
-                           <h6>Nenhum comentário disponível</h6>
+                           @forelse($trilha->comentarios as $comentario)
+                                <div class="single-comment">
+                                    <div class="author-image">
+                                        <img style="max-width: 80%;" src="{{ asset('img/usuarios/perfil.png') }}" alt="">
+                                    </div>
+                                    <div class="comment-text">
+                                        <div class="author-info">
+                                            <h4><a href="#"><strong>{{ $comentario->usuario->name }}</strong></a></h4>
+                                            <span class="reply"><a href="#"><i class="fa fa-thumbs-up"></i>Curtir</a></span>
+                                            <span class="comment-time">{{ \Carbon\Carbon::parse($comentario->created_at)->diffForHumans(\Carbon\Carbon::now()) }}</span>
+                                        </div>
+                                        <p>{!! $comentario->comentario_com !!}</p>
+                                    </div>
+                                </div>
+                           @empty
+                                <h6>Nenhum comentário disponível</h6>
+                           @endforelse
                         </div>
                         <div class="leave-comment">
                             <h4 class="blog-title">FAZER UM <span>COMENTÁRIO</span></h4>

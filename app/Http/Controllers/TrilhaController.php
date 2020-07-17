@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Tag;
 use App\Trilha;
 use App\Cidade;
 use App\Nivel;
@@ -97,5 +98,13 @@ class TrilhaController extends Controller
         $ultimas = Trilha::with('foto')->orderBy('created_at','DESC')->take(2)->get();
 
     	return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'ultimas' => $ultimas, 'termo' => $termo]);
+    }
+
+    public function addTags()
+    {
+      /*
+        $trilha = Trilha::find(1);
+        $trilha->tags()->attach(4);
+      */
     }
 }
