@@ -6,7 +6,7 @@
 <div id="lista" class="adventures-grid section-padding list">
     <div class="container">
         <div class="shop-item-filter">
-            <form action="{{url('trilhas/#lista')}}" id="banner-searchbox">
+            <form action="{{url('trilhas/#lista')}}" id="banner-searchbox" class="form-search-trilha">
                 <div class="row" style="padding-top: 5px;">
                     <div class="col-lg-2 col-md-12 col-sm-12">
                         <p>Mostrando {{ $trilhas->count() }} Trilha(s)</p>
@@ -16,7 +16,7 @@
                             <select name="cidade" class="search-adventure">
                                 <option value="">Selecione a Cidade</option>
                                 @foreach($cidades as $cidade)
-                                <option {{ $cidade_p == $cidade->cd_cidade_cde || old('cidade') == $cidade->cd_cidade_cde ? 'selected': ''}} value="{{$cidade->cd_cidade_cde}}">{{$cidade->nm_cidade_cde}}</option>
+                                <option {{ $cidade_p == stringToStringSeo($cidade->nm_cidade_cde) || old('cidade') == stringToStringSeo($cidade->nm_cidade_cde) ? 'selected': ''}} value="{{stringToStringSeo($cidade->nm_cidade_cde)}}">{{$cidade->nm_cidade_cde}}</option>
                                 @endforeach
                                
                             </select>
@@ -27,7 +27,7 @@
                             <select name="nivel" class="search-adventure">
                                 <option value="">Selecione o Nível</option>
                                 @foreach($niveis as $nivel)
-                                <option {{ $nivel_p == $nivel->id_nivel_niv || old('nivel') == $nivel->id_nivel_niv ? 'selected': ''}} value="{{$nivel->id_nivel_niv}}">{{$nivel->dc_nivel_niv}}</option>
+                                <option {{ $nivel_p == stringToStringSeo($nivel->dc_nivel_niv) || old('nivel') == stringToStringSeo($nivel->dc_nivel_niv) ? 'selected': ''}} value="{{stringToStringSeo($nivel->dc_nivel_niv)}}">{{$nivel->dc_nivel_niv}}</option>
                                 @endforeach
                                
                             </select>
@@ -36,7 +36,7 @@
                     <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">    
 
                         <div class="box-busca-aventura-list">
-                            <button  type="submit" style="margin-top: 0px;"  class="btn btn-light btn-busca-aventura-list">Buscar Aventura</button>
+                            <button type="button" style="margin-top: 0px;"  class="btn btn-light btn-busca-aventura-list btn-search-trilha">Buscar Aventura</button>
                         </div>
                     </div> 
 
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="adventure-list-image">
                                         <div class="image-top">
-                                            <img src="img/icon/level.png" alt="">
+                                            <img src="{{ asset('img/icon/level.png') }}" alt="Icon Gauge">
                                         </div>
                                         <h2>{{ $trilha->nivel->dc_nivel_niv }}</h2>
                                         <div style="height: 162px; width: 300px; display: inline-block;">
@@ -106,10 +106,14 @@
                 @endforeach
             @else
                 <div class='col-md-12 msg-list-empty-trilhas'>
-                    @if(!empty($cidade_p))
-                        <p>Ainda não fizemos nenhuma trilha desse nível no local escolhido!</p>
+                    @if(!empty($termo))
+                        <p>Nenhuma trilha encontrada com esse nome: <strong>{{$termo}}</strong></p>                        
                     @else
-                        <p>Ainda não fizemos nenhuma trilha desse nível!</p>
+                        @if(!empty($cidade_p))
+                            <p>Ainda não fizemos nenhuma trilha desse nível no local escolhido!</p>
+                        @else
+                            <p>Ainda não fizemos nenhuma trilha desse nível!</p>
+                        @endif                        
                     @endif
                 </div>
             @endif

@@ -78,7 +78,7 @@
     }
     .banner-content h2 {font-size: 30px}
     form#banner-searchbox {margin: 25px auto 0}
-    button#btn-search-category {margin-top: 24px}
+    button#btn-search-trilha {margin-top: 24px}
     .single-service {
         height: 134px;
         width: 131px;
@@ -242,7 +242,7 @@
     }
     .adventure-list-container::after {bottom: -7px}
 
-    .details-button button#btn-search-category {padding: 0 30px}
+    .details-button button#btn-search-trilha {padding: 0 30px}
     .details-info {margin-bottom: 35px}
     .details-info li span {
         width: auto;
@@ -325,7 +325,7 @@
         width: 475px;
     }
 
-    form#banner-searchbox #btn-search-category{
+    form#banner-searchbox #btn-search-trilha{
         margin-left: 198px; 
     }
     .single-icon {margin-top: 22px}

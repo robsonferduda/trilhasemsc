@@ -18,4 +18,5 @@ class Cidade extends Model
 
     public $timestamps = true;
 
+
 }

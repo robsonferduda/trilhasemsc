@@ -52,10 +52,6 @@
         <!-- responsive CSS
         ============================================ -->
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-        
-        <!-- modernizr JS
-        ============================================ -->        
-        <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -153,6 +149,9 @@
         @include('trilhas.componentes.footer')
         <!--End of Footer Area-->
         
+         <!-- modernizr JS
+        ============================================ -->        
+        <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
         
         <!-- jquery
         ============================================ -->        
@@ -202,5 +201,9 @@
         <!-- main JS
         ============================================ -->        
         <script src="{{ asset('js/main.js') }}"></script>
+
+        <!-- Custom
+        ============================================ -->        
+        <script src="{{ asset('js/custom.js') }}"></script>
     </body>
 </html>

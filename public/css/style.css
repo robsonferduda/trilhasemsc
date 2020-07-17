@@ -651,7 +651,7 @@ form#banner-searchbox {margin-top: 52px; width: 673px}
     line-height: 22px;
     padding: 4px 15px;
 }
-button#btn-search-category, .newsletter-content button {
+button#btn-search-trilha, .newsletter-content button {
     background: #000000 none repeat scroll 0 0;
     border: 0 none;
     color: #ffffff;
@@ -662,7 +662,7 @@ button#btn-search-category, .newsletter-content button {
     margin-top: 30px;
     transition: all 0.3s ease 0s
 }
-button#btn-search-category:hover, .newsletter-content button:hover, .button-one:hover {
+button#btn-search-trilha:hover, .newsletter-content button:hover, .button-one:hover {
     background: rgba(0, 0, 0, 0.5) none no-repeat scroll 0 0;
     color: #ffffff;
 }
@@ -2591,11 +2591,11 @@ header.header-three {top: 10px}
 /*----------------------------------------*/
 .banner-area.details-one {background: rgba(0, 0, 0, 0) url("img/banner/18.jpg") no-repeat scroll center top / cover}
 .banner-area.details-one::before {background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0}
-.details-button button#btn-search-category {
+.details-button button#btn-search-trilha {
     background: #212227 none repeat scroll 0 0;
     margin: 0;
 }
-.details-button button#btn-search-category:hover {background: #000000 none repeat scroll 0 0}
+.details-button button#btn-search-trilha:hover {background: #000000 none repeat scroll 0 0}
 /*----------------------------------------*/
 /*  20.1 Trip Information Area
 /*----------------------------------------*/

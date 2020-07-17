@@ -10,7 +10,7 @@
                             <div class="single-sidebar-widget">
                                 <h4>PESQUISAR <span>Trilha</span></h4>
                                 <form id="text-search" action="{{url('trilhas/#lista')}}" >
-                                    <input type="text" name="nome" placeholder="Digite aqui">
+                                    <input type="text" name="termo" placeholder="Digite aqui">
                                     <button class="submit"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
@@ -19,7 +19,7 @@
                                 <h4>BUSCA POR <span>Cidade</span></h4>
                                 <ul class="widget-categories">
                                     @foreach($busca_cidade as $busca)
-                                        <li><a href="{{url('trilhas/?cidade='.$busca->cidade->cd_cidade_cde.'#lista')}}">{{ $busca->cidade->nm_cidade_cde }}<span>({{ $busca->total }})</span></a></li>
+                                        <li><a href="{{url(stringToStringSeo($busca->cidade->nm_cidade_cde).'/trilhas/#lista')}}">{{ $busca->cidade->nm_cidade_cde }}<span>({{ $busca->total }})</span></a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -55,7 +55,7 @@
                             <div class="blog-button-links">
                                 <span class="blog-tags">Tags: 
                                     @forelse($trilha->tags as $tag)
-                                        <a href="#">{{ $tag->ds_tag_tag }}</a>
+                                        <a href="{{url('trilhas/tag/'.stringToStringSeo($tag->ds_tag_tag).'#lista')}}">{{ $tag->ds_tag_tag }}</a>
                                     @empty
                                         <a href="#">Nenhuma</a>
                                     @endforelse
