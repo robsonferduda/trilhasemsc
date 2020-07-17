@@ -55,7 +55,7 @@
                             <div class="blog-button-links">
                                 <span class="blog-tags">Tags: 
                                     @forelse($trilha->tags as $tag)
-                                        <a href="#">{{ $tag->ds_tag_tag }}</a>
+                                        <a href="{{url('trilhas/tag/'.stringToStringSeo($tag->ds_tag_tag).'#lista')}}">{{ $tag->ds_tag_tag }}</a>
                                     @empty
                                         <a href="#">Nenhuma</a>
                                     @endforelse

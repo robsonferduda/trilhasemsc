@@ -21,6 +21,7 @@ Route::get('{cidade}/trilhas', 'TrilhaController@searchTrilhasCidade');
 Route::get('trilhas/{nivel}', 'TrilhaController@searchTrilhasNivel');
 Route::get('{cidade}/trilhas/{nivel}', 'TrilhaController@searchTrilhasCidadeNivel');
 Route::get('{cidade}/trilhas/{nivel}/{trilha}', 'TrilhaController@searchTrilha');
+Route::get('trilhas/tag/{tag}', 'TrilhaController@searchTrilhaTag');
 
 Route::get('usuario/add', 'UserController@store');
 Route::get('usuario/update', 'UserController@update');

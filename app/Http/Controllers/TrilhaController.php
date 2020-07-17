@@ -60,8 +60,11 @@ class TrilhaController extends Controller
         
     }
 
+    public function searchTrilhaTag($tag){
+        return $this->search(null,null,null,null,$tag);
+    }
 
-    private function search($cidade = '', $nivel = '', $termo = '', $url = ''){
+    private function search($cidade = '', $nivel = '', $termo = '', $url = '', $tag = ''){
 
         $nivel    = $nivel;
         $cidade   = $cidade;
@@ -88,6 +91,11 @@ class TrilhaController extends Controller
                           })    
                           ->when($termo,function($query) use ($termo){
                                 $query->whereRaw("unaccent(lower(nm_trilha_tri)) like '%".strtolower($termo)."%'");
+                          })
+                          ->when($tag, function($query) use ($tag){
+                            $query->whereHas('tags', function($query) use ($tag){
+                                $query->whereRaw("unaccent(replace(lower(ds_tag_tag),' ','-')) = '".$tag."'");
+                            });
                           })
         ->get();
 
