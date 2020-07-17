@@ -19,7 +19,7 @@
                                 <h4>BUSCA POR <span>Cidade</span></h4>
                                 <ul class="widget-categories">
                                     @foreach($busca_cidade as $busca)
-                                        <li><a href="{{url('trilhas/?cidade='.$busca->cidade->cd_cidade_cde.'#lista')}}">{{ $busca->cidade->nm_cidade_cde }}<span>({{ $busca->total }})</span></a></li>
+                                        <li><a href="{{url(stringToStringSeo($busca->cidade->nm_cidade_cde).'/trilhas/#lista')}}">{{ $busca->cidade->nm_cidade_cde }}<span>({{ $busca->total }})</span></a></li>
                                     @endforeach
                                 </ul>
                             </div>
