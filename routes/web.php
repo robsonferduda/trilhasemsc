@@ -19,6 +19,7 @@ Route::get('{cidade}/{categoria}/{trilha}', 'TrilhaController@show')->name('deta
 Route::get('trilhas', 'TrilhaController@search');
 Route::get('trilha/add-tags', 'TrilhaController@addTags');
 
+Route::post('comentario/novo', 'ComentarioController@store');
 
 Route::get('usuario/add', 'UserController@store');
 Route::get('usuario/update', 'UserController@update');

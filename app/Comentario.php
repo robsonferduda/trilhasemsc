@@ -13,6 +13,8 @@ class Comentario extends Model
     protected $primaryKey = 'cd_comentario_com';
     protected $dates = ['deleted_at'];
     protected $fillable = [
+                            'id_trilha_tri',
+                            'id_user_usu',
     						'comentario_com',
                             'total_likes_com'
     					  ];

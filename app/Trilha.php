@@ -48,7 +48,7 @@ class Trilha extends Model
 
     public function comentarios()
     {
-        return $this->hasMany('App\Comentario','id_trilha_tri','id_trilha_tri');
+        return $this->hasMany('App\Comentario','id_trilha_tri','id_trilha_tri')->orderBy('created_at','DESC');
     }
 
 }

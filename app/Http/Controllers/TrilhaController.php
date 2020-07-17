@@ -19,7 +19,7 @@ class TrilhaController extends Controller
 
     public function show($cidade, $categoria, $url)
     {
-    	  $trilha = Trilha::with('foto')->with('cidade')->with('user')->where('ds_url_tri', 'like', '%'.$cidade.'/'.$categoria.'/'.$url)->first();
+    	  $trilha = Trilha::with('foto')->with('cidade')->with('user')->where('ds_url_tri', 'like', '%'.$url)->first();
 
         $titulo = $trilha->nm_trilha_tri;
         $subtitulo = "Trilha em ".$trilha->cidade->nm_cidade_cde;

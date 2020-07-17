@@ -66,8 +66,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="blog-comments">
+                        <div class="blog-comments" id="comentarios">
                            <h4 class="blog-title">COMENTÁRIOS DOS <span>TRILHEIROS</span></h4>
+
+                           @guest
+
+                                <h4>Você deve estar logado para fazer comentários. <a href="{{ route('login') }}">Clique aqui</a> e acesse sua conta!</h4><br/>
+
+                           @else
+                                
+                                <div class="leave-comment" style="margin-top: -20px; margin-bottom: 15px;">
+                                    {!! Form::open(['id' => 'frm_comentario', 'url' => ['comentario/novo'], 'method' => 'POST']) !!}
+                                        <input type="hidden" name="id_trilha_tri" value="{{ $trilha->id_trilha_tri }}">
+                                        <div class="comment-form">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label style="text-transform: uppercase;">Fazer comentário como <strong>{{ Auth::user()->name }}</strong></label>
+                                                    <textarea rows="12" name="comentario_com" id="comentario_com"></textarea>
+                                                </div>
+                                            </div>
+                                            <input type="submit" class="comment-btn" value="Enviar Comentário">
+                                        </div>
+                                    {!! Form::close() !!}
+                                </div>
+                                @include('layouts.mensagens')
+
+                           @endguest
+
+                           <hr/>
                            @forelse($trilha->comentarios as $comentario)
                                 <div class="single-comment">
                                     <div class="author-image">
@@ -76,7 +102,7 @@
                                     <div class="comment-text">
                                         <div class="author-info">
                                             <h4><a href="#"><strong>{{ $comentario->usuario->name }}</strong></a></h4>
-                                            <span class="reply"><a href="#"><i class="fa fa-thumbs-up"></i>Curtir</a></span>
+                                            <!-- <span class="reply"><a href="#"><i class="fa fa-thumbs-up"></i>Curtir</a></span> -->
                                             <span class="comment-time">{{ \Carbon\Carbon::parse($comentario->created_at)->diffForHumans(\Carbon\Carbon::now()) }}</span>
                                         </div>
                                         <p>{!! $comentario->comentario_com !!}</p>
@@ -85,28 +111,6 @@
                            @empty
                                 <h6>Nenhum comentário disponível</h6>
                            @endforelse
-                        </div>
-                        <div class="leave-comment">
-                            <h4 class="blog-title">FAZER UM <span>COMENTÁRIO</span></h4>
-                            <form action="#" method="post" id="comment">
-                                <div class="comment-form">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <label class="required">Nome</label>
-                                            <input type="text" name="name" value="">
-                                            <label class="required">Email</label>
-                                            <input type="email" name="email" value="">
-                                            <label>Assunto</label>
-                                            <input type="text" name="subject" value="">
-                                        </div>
-                                        <div class="col-md-7">
-                                            <label>Comentário</label>
-                                            <textarea rows="12" name="enquiry"></textarea>
-                                        </div>
-                                    </div>
-                                    <input type="submit" class="comment-btn" value="Enviar Comentário">
-                                </div>
-                            </form>
                         </div>
                     </div>       
                 </div>
