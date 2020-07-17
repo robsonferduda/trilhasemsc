@@ -18,10 +18,5 @@ class Cidade extends Model
 
     public $timestamps = true;
 
-    public function getNmCidadeAttribute(): String
-    {
-        return str_replace(' ','-',strtolower($this->nm_cidade_cde));
-        
-    }
 
 }
