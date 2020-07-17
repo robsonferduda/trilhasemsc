@@ -7,9 +7,6 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        
         <!-- favicon
         ============================================ -->        
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -55,10 +52,6 @@
         <!-- responsive CSS
         ============================================ -->
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-        
-        <!-- modernizr JS
-        ============================================ -->        
-        <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -183,12 +176,12 @@
                                         <h1 class="title1">GUIA DE TRILHAS</h1>
                                         <h2 class="sub-title">AS MELHORES TRILHAS DE SANTA CATARINA</h2>
                                         <h2 class="sub-title">VOCÊ ENCONTRA <span>AQUI</span></h2>
-                                        <form action="{{url('trilhas/#lista')}}" method="GET" id="banner-searchbox" class="hidden-xs">
+                                        <form action="{{url('trilhas/#lista')}}" method="GET" id="banner-searchbox" class="hidden-xs form-search-trilha">
                                             <div class="adventure-cat">
                                                 <select name="cidade" class="search-adventure">
                                                     <option selected value="">Selecione a Cidade</option>
                                                     @foreach($cidades as $cidade)
-                                                    <option {{ old('cidade') == $cidade->cd_cidade_cde ? 'selected': ''}} value="{{$cidade->cd_cidade_cde}}">{{$cidade->nm_cidade_cde}}</option>
+                                                    <option {{ old('cidade') == stringToStringSeo($cidade->nm_cidade_cde) ? 'selected': ''}} value="{{stringToStringSeo($cidade->nm_cidade_cde)}}">{{$cidade->nm_cidade_cde}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -196,12 +189,12 @@
                                                 <select name="nivel" class="search-adventure">
                                                     <option selected value="">Selecione o Nível</option>
                                                     @foreach($niveis as $nivel)
-                                                    <option {{ old('nivel') == $nivel->id_nivel_niv ? 'selected': ''}} value="{{$nivel->id_nivel_niv}}">{{$nivel->dc_nivel_niv}}</option>
+                                                    <option {{ old('nivel') == stringToStringSeo($nivel->dc_nivel_niv) ? 'selected': ''}} value="{{stringToStringSeo($nivel->dc_nivel_niv)}}">{{$nivel->dc_nivel_niv}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="clearfix"></div>
-                                            <button type="submit" id="btn-search-category">Buscar Aventura</button>
+                                            <button type="button" id="btn-search-trilha" class="btn-search-trilha">Buscar Aventura</button>
                                         </form>
                                     </div>
                                 </div>
@@ -220,7 +213,11 @@
         @include('trilhas.componentes.footer')
 
         <!--End of Footer Area-->     
-           
+
+        <!-- modernizr JS
+        ============================================ -->        
+        <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
+        <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <script src="{{ asset('js/vendor/jquery-1.12.3.min.js') }}"></script>     
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>    
         <script src="{{ asset('js/lib/nivo-slider/js/jquery.nivo.slider.js') }}" type="text/javascript"></script>
@@ -234,5 +231,8 @@
         <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>       
         <script src="{{ asset('js/plugins.js') }}"></script>        
         <script src="{{ asset('js/main.js') }}"></script>
+         <!-- Custom
+        ============================================ -->        
+        <script src="{{ asset('js/custom.js') }}"></script>
     </body>
 </html>

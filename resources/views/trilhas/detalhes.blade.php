@@ -10,7 +10,7 @@
                             <div class="single-sidebar-widget">
                                 <h4>PESQUISAR <span>Trilha</span></h4>
                                 <form id="text-search" action="{{url('trilhas/#lista')}}" >
-                                    <input type="text" name="nome" placeholder="Digite aqui">
+                                    <input type="text" name="termo" placeholder="Digite aqui">
                                     <button class="submit"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>

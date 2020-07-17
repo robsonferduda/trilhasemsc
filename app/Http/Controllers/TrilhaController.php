@@ -16,9 +16,12 @@ class TrilhaController extends Controller
         //
     }
 
-    public function show($cidade, $categoria, $url)
+    public function searchTrilha($cidade, $nivel, $trilha)
     {
-    	  $trilha = Trilha::with('foto')->with('cidade')->with('user')->where('ds_url_tri', 'like', '%'.$cidade.'/'.$categoria.'/'.$url)->first();
+
+        $url = $cidade.'/trilhas/'.$nivel.'/'.$trilha;
+
+    	  $trilha = Trilha::with('foto')->with('cidade')->with('user')->where('ds_url_tri',$url)->first();
 
         $titulo = $trilha->nm_trilha_tri;
         $subtitulo = "Trilha em ".$trilha->cidade->nm_cidade_cde;
@@ -31,23 +34,59 @@ class TrilhaController extends Controller
     	return view('trilhas/detalhes',['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
 
-    public function search(Request $request){
 
-        $nivel  = $request->nivel;
-        $cidade = $request->cidade;
-        $nome   = $request->nome;
+    public function searchTrilhas(Request $request){
+
+        return $this->search(null,null,$request->termo);
+        
+    }
+
+    public function searchTrilhasCidade($cidade){
+
+        return $this->search($cidade);
+        
+    }
+
+    public function searchTrilhasNivel($nivel){
+
+        return $this->search(null,$nivel);
+        
+    }
+
+    public function searchTrilhasCidadeNivel($cidade,$nivel){
+
+        return $this->search($cidade,$nivel);
+        
+    }
+
+
+    private function search($cidade = '', $nivel = '', $termo = '', $url = ''){
+
+        $nivel    = $nivel;
+        $cidade   = $cidade;
+        $termo     = $termo;
+        $idNivel  = '';
+        $idCidade = '';
+        $url      = $url;
+
+        if(!empty($cidade))
+            $idCidade = Cidade::whereRaw("unaccent(replace(lower(nm_cidade_cde),' ','-')) = '".$cidade."'")
+                  ->where('cd_estado_est',42)->first()->cd_cidade_cde;
+
+        if(!empty($nivel))
+            $idNivel = Nivel::whereRaw("unaccent(replace(lower(dc_nivel_niv),' ','-')) = '".$nivel."'")->first()->id_nivel_niv;
 
         $trilhas = Trilha::with('foto')
                           ->with('nivel')
                           ->with('cidade')
-                          ->when($request->nivel, function($query) use ($nivel){
-                                $query->where('id_nivel_niv',$nivel);
+                          ->when($nivel, function($query) use ($idNivel){
+                                $query->where('id_nivel_niv',$idNivel);
                           })
-                          ->when($request->cidade, function($query) use ($cidade){
-                                $query->where('cd_cidade_cde',$cidade);
+                          ->when($cidade, function($query) use ($idCidade){
+                                $query->where('cd_cidade_cde',$idCidade);
                           })    
-                          ->when($request->nome,function($query) use ($nome){
-                                $query->where('nm_trilha_tri', 'ilike', '%' . $nome . '%');
+                          ->when($termo,function($query) use ($termo){
+                                $query->whereRaw("unaccent(lower(nm_trilha_tri)) like '%".strtolower($termo)."%'");
                           })
         ->get();
 
@@ -57,6 +96,6 @@ class TrilhaController extends Controller
 
         $ultimas = Trilha::with('foto')->orderBy('created_at','DESC')->take(2)->get();
 
-    	return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'ultimas' => $ultimas]);
+    	return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'ultimas' => $ultimas, 'termo' => $termo]);
     }
 }
