@@ -1,68 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
- <!--Service Area Start-->
-        <div class="skills-area section-bottom-padding">
-            <div class="container"> 
+
+        <div class="blog-two-area section-padding">
+            <div class="container">              
                 <div class="row">
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <h1>NOSSAS <span>AVENTURAS</span></h1>
-                            </div>
+                                <br/><br/><h1>Apresentamos <span>Santa Catarina</span></h1>
+                            </div>    
                         </div>
                     </div>
                 </div>
-
-                <div class="row hidden-md hidden-lg">
-                    <h2>Acompanhe nossas aventuras pelas trilhas, campings e praias por todo estado de Santa Catarina</h2>
-                </div>
-
-                <div class="row hidden-xs hidden-sm">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="single-skill-item">
-                            <div class="single-skill-icon">
-                                <div class="skill-bg"></div>
-                                <div class="skill-border-left"></div>
-                                <img alt="" src="{{ asset('img/icon/skill-1.png') }}" class="primary-img">
-                                <img alt="" src="{{ asset('img/icon/skill-1-hover.png') }}" class="secondary-img">
-                                <div class="skill-border-right"></div>
-                            </div>
-                            <div class="single-skill-text">
-                                <h4>TRILHAS</h4>
-                                <h3><span class="counter">{{ $totais['trilha'] }}</span></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="single-skill-item low">
-                            <div class="single-skill-icon">
-                                <div class="skill-bg"></div>
-                                <div class="skill-border-left"></div>
-                                <img alt="" src="{{ asset('img/icon/skill-2.png') }}" class="primary-img">
-                                <img alt="" src="{{ asset('img/icon/skill-2-hover.png') }}" class="secondary-img">
-                                <div class="skill-border-right"></div>
-                            </div>
-                            <div class="single-skill-text">
-                                <h4>GALERIAS</h4>
-                                <h3><span class="counter">{{ $totais['galeria'] }}</span></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 hidden-sm">
-                        <div class="single-skill-item medium">
-                            <div class="single-skill-icon">
-                                <div class="skill-bg"></div>
-                                <div class="skill-border-left"></div>
-                                <img alt="" src="{{ asset('img/icon/skill-3.png') }}" class="primary-img">
-                                <img alt="" src="{{ asset('img/icon/skill-3-hover.png') }}" class="secondary-img">
-                                <div class="skill-border-right"></div>
-                            </div>
-                            <div class="single-skill-text">
-                                <h4>CAMPING</h4>
-                                <h3><span class="counter">{{ $totais['camping'] }}</span></h3>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>
+                            Olá trilheiros, como vão? É um prazer tê-los por aqui. Nossa missão não é uma das mais fáceis, mas faremos o melhor. Cabe a vocês a leitura, a crítica e também as sugestões, pois estamos abertas a elas. Mas qual é essa missão? Queremos apresentar a vocês Santa Catarina por meio de suas trilhas! Tá, nem é tão difícil assim. Imagina só percorrer as trilhas desse belo estado e poder compartilhar tudo com vocês. A dificuldade está em conseguir levar até vocês todas as sensações, visões e sentimentos que essas aventuras proporcionam, mas vamos tentar.
+                        </p>
+                        <p>
+                            Santa Catarina é um estado diverso. De norte a sul, de leste a oeste, nesse pequeno pedaço do nosso país podemos ter desde um verão de 40º em nossas belas praias, até invernos de temperaturas negativas, inclusive com neve!   
+                        </p>
+                        <p>
+                            Partindo de Florianópolis, vamos tentar mostrar para vocês um pouco das belezas no nosso estado e também guiá-los caso queiram seguir nossos passos. O objetivo é descrever as trilhas, os caminhos e os acessos, para que seja possível para cada um de vocês planejar e conhecer os mesmas trilhas que nós. E não esqueçam, sempre que fizerem isso, compartilhem conosco! Vamos criar uma grande comunidade de trilheiros, catarinenses ou não, mas todos com o mesmo objetivo: desbravar as belezas da nossa SC.
+                        </p>
+                        <p>
+                            Sabe aquela vontade e ao mesmo tempo medo de fazer a primeira trilha? Ou aquela dúvida se ela é segura? Vamos tentar te ajudar nisso! Todas as trilhas que traremos aqui são trilhas que fizemos e vivemos todas as experiências para poder compartilhar da forma mais precisa possível. 
+                        </p>
+                        <p>
+                            Será que eu aguento? Traremos um guia de dificuldade para poder ajudá-los. Como chegar até o início da trilha? Onde deixa o carro? Vamos contar como fizemos. A ideia é que a única preocupação que vocês devem ter é ter preocupação alguma, afinal, trilha é pra relaxar, pra curtir a natureza e ter boas histórias para contar! 
+                        </p>
+                        <p>
+                            Agradecemos se leu até aqui! As próximas leituras serão mais empolgantes, pois trarão nelas os detalhes e imagens de Santa Catarina em trilhas!
+                        </p>
                     </div>
                 </div>
             </div>
@@ -142,6 +112,8 @@
                 </div>
             </div>
         </div>
+
+        @include('trilhas.componentes.contador');
     
         <div class="partner-area section-bottom-padding">
             <div class="container">          
