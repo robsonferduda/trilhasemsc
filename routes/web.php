@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('home', 'HomeController@index')->name('index');
 
 Route::post('comentario/novo', 'ComentarioController@store');
 
@@ -31,3 +32,6 @@ Route::get('usuarios', 'UserController@index');
 
 Route::get('tag/add', 'TagController@store');
 Route::get('tags', 'TagController@index');
+
+Route::get('login/facebook', 'FacebookController@redirectToProvider');
+Route::get('login/facebook/callback', 'FacebookController@handleProviderCallback');
