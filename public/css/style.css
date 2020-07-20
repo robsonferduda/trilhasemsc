@@ -3700,3 +3700,4 @@ textarea.yourmessage {
 .box-publicidade-destaque span{ position: absolute; bottom: 5px; right: 5px; }
 .box-publicidade-detalhes { background: #f1f1f1; }
 .box-publicidade-detalhes span{ position: absolute; bottom: 5px; right: 5px; }
+.justificado { text-align: justify; }

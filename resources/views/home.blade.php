@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 justificado">
                         <p>
                             Olá trilheiros, como vão? É um prazer tê-los por aqui. Nossa missão não é uma das mais fáceis, mas faremos o melhor. Cabe a vocês a leitura, a crítica e também as sugestões, pois estamos abertas a elas. Mas qual é essa missão? Queremos apresentar a vocês Santa Catarina por meio de suas trilhas! Tá, nem é tão difícil assim. Imagina só percorrer as trilhas desse belo estado e poder compartilhar tudo com vocês. A dificuldade está em conseguir levar até vocês todas as sensações, visões e sentimentos que essas aventuras proporcionam, mas vamos tentar.
                         </p>
