@@ -31,4 +31,14 @@ class HomeController extends Controller
 
         return view('home',['totais' => $totais, 'ultimas' => $ultimas, 'preferidas' => $preferidas ,'cidades' => $cidades, 'niveis' => $niveis]);
     }
+
+    public function guia()
+    {
+        return view('guia');
+    }
+
+    public function sobre()
+    {
+        return view('sobre');
+    }
 }

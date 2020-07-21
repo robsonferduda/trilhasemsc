@@ -81,7 +81,7 @@
                                                     <li><a href="{{ url('trilhas#lista') }}">TRILHAS</a></li>
                                                     <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
                                                     <li><a href="{{ url('trilhas/galerias') }}">GALERIAS</a></li>
-                                                    <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
+                                                    <li><a href="{{ url('guia') }}">GUIA DE DIFICULDADE</a></li>
                                                     </li><li><a href="{{ url('contato') }}">CONTATO</a></li>
                                                 </ul>
                                             </nav>
@@ -106,7 +106,7 @@
                                         <li><a href="{{ url('trilhas#lista') }}">TRILHAS</a></li>
                                         <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
                                         <li><a href="{{ url('trilhas/galerias') }}">GALERIAS</a></li>
-                                        <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
+                                        <li><a href="{{ url('guia') }}">GUIA DE DIFICULDADE</a></li>
                                         </li><li><a href="{{ url('contato') }}">CONTATO</a></li>
                                     </ul>
                                 </nav>
