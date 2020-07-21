@@ -36,7 +36,7 @@ class FacebookController extends Controller
 
             Auth::login($user);
 
-            return redirect('home');
+            return redirect('https://trilhasemsc.com.br');
 
         } catch (Exception $e) {
             var_dump($e->getMessage());
