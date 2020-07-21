@@ -18,8 +18,11 @@ class FacebookController extends Controller
     public function handleProviderCallback()
     {
         try{
+            
             $user_facebook = Socialite::driver('facebook')->stateless()->user();
             $email = $user_facebook->getEmail();
+
+            dd($user_facebook);
 
             $user = User::where('email',$email)->first();
 
