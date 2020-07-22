@@ -5,6 +5,5 @@
         <li><a href="{{ url('camping') }}">CAMPING</a></li>
         <li><a href="{{ url('galerias') }}">GALERIAS</a></li>
         <li><a href="{{ url('guia') }}">GUIA DE DIFICULDADE</a></li>
-        <li><a href="{{ url('contato') }}">CONTATO</a></li>
     </ul>
 </nav>
