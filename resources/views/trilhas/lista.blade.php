@@ -122,7 +122,7 @@
 </div>
 <!--End of Adventures Grid-->
 <!--Blog Area Start-->
-@include('trilhas.componentes.ultima_trilha');
+@include('trilhas.componentes.ultima_trilha')
 <!--End of Blog Area-->
 @endsection
 
