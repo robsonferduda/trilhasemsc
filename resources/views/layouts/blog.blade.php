@@ -75,16 +75,7 @@
                                     </div>
                                     <div class="col-md-9 hidden-sm hidden-xs">
                                         <div class="mainmenu">
-                                            <nav>
-                                                <ul id="nav">
-                                                    <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
-                                                    <li><a href="{{ url('trilhas#lista') }}">TRILHAS</a></li>
-                                                    <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
-                                                    <li><a href="{{ url('trilhas/galerias') }}">GALERIAS</a></li>
-                                                    <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
-                                                    </li><li><a href="{{ url('contato') }}">CONTATO</a></li>
-                                                </ul>
-                                            </nav>
+                                            @include('trilhas.componentes.menu')
                                         </div> 
                                     </div>
                                 </div>
@@ -100,16 +91,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="mobile-menu">
-                                <nav id="dropdown">
-                                    <ul>
-                                        <li class="drop-down"><a href="{{ url('/') }}">HOME</a></li>
-                                        <li><a href="{{ url('trilhas#lista') }}">TRILHAS</a></li>
-                                        <li><a href="{{ url('camping/buscar') }}">CAMPING</a></li>
-                                        <li><a href="{{ url('trilhas/galerias') }}">GALERIAS</a></li>
-                                        <li><a href="{{ url('camping/buscar') }}">GUIA DE DIFICULDADE</a></li>
-                                        </li><li><a href="{{ url('contato') }}">CONTATO</a></li>
-                                    </ul>
-                                </nav>
+                                @include('trilhas.componentes.menu_mobile')
                             </div>                  
                         </div>
                     </div>
@@ -135,7 +117,7 @@
                     <div class="col-md-12 text-center">
                         <ul class="breadcrumb">
                             <li><a href="{{ url('/') }}">Home</a></li>
-                            <li>TRILHAS</li>
+                            <li>{{ (isset($page_name)) ? $page_name : "Trilhas" }}</li>
                         </ul>
                     </div>
                 </div>

@@ -11,7 +11,18 @@
                         </ul>
                     </div>
                 </div>
-            </div>                    
+            </div> 
+            <div class="col-lg-2 col-md-2 hidden-sm">
+                <div class="single-footer-widget">
+                    <h4>About Us</h4>
+                    <div class="footer-widget-list">
+                        <ul class="widget-lists">
+                            <li><a href="{{ url('sobre-nos') }}">Sobre nós</a></li>
+                            <li><a href="{{ url('guia') }}">Guia de Dificuldade</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>                   
         </div>
     </div>
 </div>

@@ -17,6 +17,7 @@ class HomeController extends Controller
             - Criar Enun para Categoria
             - Criar tabelas de Galeria de Fotos
         */
+        $page_name = "Trilha";
         
         $totais = array('trilha'  => Trilha::where('id_categoria_cat',1)->count(),
                         'camping' => Trilha::where('id_categoria_cat',2)->count(),
@@ -29,6 +30,34 @@ class HomeController extends Controller
         $ultimas = Trilha::with('foto')->orderBy('created_at','DESC')->take(2)->get();
         $preferidas = Trilha::with('foto')->orderBy('total_votos_tri','ASC')->take(5)->get();
 
-        return view('home',['totais' => $totais, 'ultimas' => $ultimas, 'preferidas' => $preferidas ,'cidades' => $cidades, 'niveis' => $niveis]);
+        return view('home',['totais' => $totais, 'ultimas' => $ultimas, 'preferidas' => $preferidas ,'cidades' => $cidades, 'niveis' => $niveis, 'page_name' => $page_name]);
+    }
+
+    public function guia()
+    {
+        $page_name = "Guia";
+
+        return view('guia',['page_name' => $page_name]);
+    }
+
+    public function sobre()
+    {
+        $page_name = "Sobre";
+
+        return view('sobre',['page_name' => $page_name]);
+    }
+
+    public function camping()
+    {
+        $page_name = "Camping";
+
+        return view('camping',['page_name' => $page_name]);
+    }
+
+    public function contato()
+    {
+        $page_name = "Contato";
+
+        return view('contato',['page_name' => $page_name]);
     }
 }
