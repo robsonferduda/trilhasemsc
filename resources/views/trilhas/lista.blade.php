@@ -93,7 +93,7 @@
                                             <img src="{{ asset('img/icon/level.png') }}" alt="Icon Gauge">
                                         </div>
                                         <h2>{{ $trilha->nivel->dc_nivel_niv }}</h2>
-                                        <div style="height: 162px; width: 300px; display: inline-block;">
+                                        <div style="height: 162px; display: inline-block;">
                                             
                                         </div>
                                       
