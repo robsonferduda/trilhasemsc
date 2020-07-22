@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Nivel;
 use App\Trilha;
 use App\Cidade;
-use App\Nivel;
 
 use Illuminate\Http\Request;
 
@@ -51,7 +52,12 @@ class HomeController extends Controller
     {
         $page_name = "Camping";
 
-        return view('camping',['page_name' => $page_name]);
+        $busca_cidade = Trilha::with('cidade')
+           ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+           ->groupBy('cd_cidade_cde')
+           ->get();
+
+        return view('camping',['page_name' => $page_name, 'busca_cidade' => $busca_cidade]);
     }
 
     public function contato()

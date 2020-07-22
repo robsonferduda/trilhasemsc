@@ -23,7 +23,7 @@
 
                         </p>
                         <p>
-                            Sabe aquela vontade e ao mesmo tempo medo de fazer a primeira trilha? Ou aquela dúvida se ela é segura? Vamos tentar te ajudar nisso! Todas as trilhas que traremos aqui são trilhas que fizemos e vivemos todas as experiências para poder compartilhar da forma mais precisa possível. Será que eu aguento? Como chegar até o início da trilha? Onde deixar o carro? Traremos um guia de dificuldade para poder ajudá-los e vamos contar  passo a passo como fizemos tudo. A ideia é que a única preocupação que vocês devem ter é não ter preocupação alguma, afinal trilha é para relaxar, para curtir a natureza e ter boas histórias para contar! 
+                            Sabe aquela vontade e ao mesmo tempo medo de fazer a primeira trilha? Ou aquela dúvida se ela é segura? Vamos te ajudar nisso! Todas as trilhas que traremos aqui são trilhas que fizemos e vivemos todas as experiências para poder compartilhar da forma mais precisa possível. Será que eu aguento? Como chegar até o início da trilha? Onde deixar o carro? Traremos um guia de dificuldade para poder ajudá-los e vamos contar  passo a passo como fizemos tudo. A ideia é que a única preocupação que vocês devem ter é não ter preocupação alguma, afinal trilha é para relaxar, para curtir a natureza e ter boas histórias para contar! 
                         </p>
                         <p>
                             Agradecemos se leu até aqui! As próximas leituras serão mais empolgantes, pois trarão nelas os detalhes e imagens de Santa Catarina em trilhas!
