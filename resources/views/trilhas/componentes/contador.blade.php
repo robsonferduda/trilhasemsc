@@ -1,4 +1,4 @@
- <div class="skills-area section-bottom-padding">
+ <div class="skills-area section-bottom-padding hidden-sm hidden-xs">
             <div class="container"> 
                 <div class="row">
                     <div class="col-md-12">
@@ -10,7 +10,7 @@
                     </div>
                 </div>
 
-                <div class="row hidden-md hidden-lg">
+                <div class="row hidden-sm hidden-xs">
                     <h2>Acompanhe nossas aventuras pelas trilhas, campings e praias por todo estado de Santa Catarina</h2>
                 </div>
 

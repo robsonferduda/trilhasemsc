@@ -771,7 +771,7 @@ button#btn-search-trilha:hover, .newsletter-content button:hover, .button-one:ho
     transition: all 0.3s ease-in-out 0s
 }
 .portfolio-text::after, .adventure-text::after, .member-text::after {
-    background: rgba(255, 255, 255, 0.9) none repeat scroll 0 0;
+    background: #ffb400 none repeat scroll 0 0;
     content: "";
     height: 135px;
     left: -7px;
@@ -3693,7 +3693,7 @@ textarea.yourmessage {
     font-weight: 600
 }
 
-.box-publicidade{ position: relative; background: #f1f1f1; width: 336px; height: 280px; padding: 5px; }
+.box-publicidade{ position: relative; background: #f1f1f1; width: 100%; height: 280px; padding: 5px; margin-bottom: 10px; }
 .box-publicidade span{ position: absolute; bottom: 5px; right: 5px; }
 .titulo_trilha_destaque { max-width: 33ch; overflow: hidden; font-weight: 300; white-space: nowrap; }
 .box-publicidade-destaque { position: relative; background: #f1f1f1; min-height: 185px;}

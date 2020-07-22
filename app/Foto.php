@@ -24,7 +24,7 @@ class Foto extends Model
         return $this->belongsTo('App\Trilha','id_trilha_tri','id_trilha_tri');
     }
 
-    public function trilhas()
+    public function galeria()
     {
         return $this->belongsToMany('App\Galeria','galeria_fotos_gaf','id_foto_fot','id_galeria_gal')->withTimestamps();
     }

@@ -20,7 +20,7 @@ class Galeria extends Model
 
     public function fotos()
     {
-        return $this->belongsToMany('App\Foto','galeria_fotos_gaf','id_galeria_gal','if_foto_fot')->withTimestamps();
+        return $this->belongsToMany('App\Foto','galeria_fotos_gaf','id_galeria_gal','id_foto_fot')->withTimestamps();
     }
 
 }

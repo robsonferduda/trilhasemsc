@@ -1,16 +1,20 @@
 @extends('layouts.blog')
 
 @section('content')
-        <div class="blog-post-area section-padding">
+        <div class="portfolio-area portfolio-two">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="section-title text-center">
+                        <div class="section-title title-two text-center">
                             <div class="title-border">
-                                <br/><br/><h1>Camping </h1>
+                                <h1>DICAS DE <span> Camping</span></h1>
                             </div>    
+                            <p>Everyone loves to travel, but not everyone loves to travel the same way. G Adventures Travel Styles gather trips of a feather<br> together so you can spend less time searching and more time dreaming about where you’ll go.</p>
                         </div>
-                    </div>                          
+                    </div>
+                </div>
+                <div class="row">
+                   
                 </div>
             </div>
         </div>
