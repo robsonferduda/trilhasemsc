@@ -12,10 +12,10 @@
                         </div>
                     </div>  
                     <div class="col-md-12">
-                        <img src="{{ asset('img/trilhas/dificuldade/abnt/condicoes-do-terreno.png') }}">
-                        <img src="{{ asset('img/trilhas/dificuldade/abnt/intensidade-de-esforco-fisico.png') }}">
-                        <img src="{{ asset('img/trilhas/dificuldade/abnt/intensidade-de-esforco-fisico.png') }}">
                         <img src="{{ asset('img/trilhas/dificuldade/abnt/severidade-do-meio.png') }}">
+                        <img src="{{ asset('img/trilhas/dificuldade/abnt/orientacao-do-percurso.png') }}">
+                        <img src="{{ asset('img/trilhas/dificuldade/abnt/condicoes-do-terreno.png') }}">
+                        <img src="{{ asset('img/trilhas/dificuldade/abnt/intensidade-de-esforco-fisico.png') }}">                      
                     </div>                        
                 </div>
             </div>
