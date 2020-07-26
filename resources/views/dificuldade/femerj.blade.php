@@ -170,6 +170,7 @@
                         <!--Table body-->
                     </table>
                     <!--Table-->
+                    <p>Fonte: Metodologia de Classificação de Trilhas (FEMERJ, 2015)</p>
                 </div>
 
                 <div class='table-responsive'>
@@ -218,6 +219,7 @@
                         <!--Table body-->
                     </table>
                     <!--Table-->
+                    <p>Fonte: Metodologia de Classificação de Trilhas (FEMERJ, 2015)</p>
                 </div>
 
                 <div class='table-responsive'>
@@ -256,7 +258,7 @@
                             </tr>                                                        
                         </tbody>
                         <!--Table body-->
-                    </table>
+                    </table>                    
                     <!--Table-->
                 </div>
 
