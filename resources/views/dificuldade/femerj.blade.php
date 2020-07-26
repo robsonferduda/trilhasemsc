@@ -201,7 +201,7 @@
                             </tr>
                             <tr>                            
                                 <th scope="row" style="vertical-align: middle;">Difícil</th>                
-                                <td style="vertical-align: middle;">rilha sem nenhuma sinalização, com muitas bifurcações que podem confundir o caminhante, passando às vezes por mata fechada ou por lajes com a trilha pouco definida. Ainda é possível identificar a calha da trilha, mesmo que em alguns trechos ela fique com o seu leito tênue. Pode requerer a identificação precisa dos acidentes geográficos (rios, fundos de vale, bordas, cumes etc.) e pontos cardeais. Requer conhecimento e habilidade para navegação terrestre por meio de mapas topográficos e bússola ou aparelho de GPS</td>
+                                <td style="vertical-align: middle;">Trilha sem nenhuma sinalização, com muitas bifurcações que podem confundir o caminhante, passando às vezes por mata fechada ou por lajes com a trilha pouco definida. Ainda é possível identificar a calha da trilha, mesmo que em alguns trechos ela fique com o seu leito tênue. Pode requerer a identificação precisa dos acidentes geográficos (rios, fundos de vale, bordas, cumes etc.) e pontos cardeais. Requer conhecimento e habilidade para navegação terrestre por meio de mapas topográficos e bússola ou aparelho de GPS</td>
                                 <td style="text-align: center;">
                                     <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/orientacao-dificil.png') }}">
                                 </td>
@@ -214,6 +214,46 @@
                                 </td>
                             </tr>
                             
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+
+                <div class='table-responsive'>
+                    <!--Table-->
+                    <table id="tablePreview" class="table">
+                        <!--Table head-->
+                        <thead>
+                            <tr>                            
+                                <th style="width: 20%">Nível</th>
+                                <th style="width: 70%">Descrição</th>
+                                <th style="min-width: 90px"></th>                       
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody>
+                            <tr>                            
+                                <th scope="row" style="vertical-align: middle;">Baixa</th>                  
+                                <td style="vertical-align: middle;">Até 33% do caminho com exposição ao sol</td>                      <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/insolacao-baixa.png') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="vertical-align: middle;">Média</th>                
+                                <td style="vertical-align: middle;">De 33% até 66% do caminho com exposição ao sol</td>
+                                <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/insolacao-media.png') }}">
+                                </td>
+                            </tr>
+                            <tr>                            
+                                <th scope="row" style="vertical-align: middle;">Alta</th>                
+                                <td style="vertical-align: middle;">De 66% até 100% do caminho com exposição ao sol</td>
+                                <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/insolacao-alta.png') }}">
+                                </td>
+                            </tr>                                                        
                         </tbody>
                         <!--Table body-->
                     </table>
