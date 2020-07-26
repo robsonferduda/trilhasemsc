@@ -124,6 +124,54 @@
                     <!--Table-->
                 </div>
 
+                <div class='table-responsive'>
+                    <!--Table-->
+                    <table id="tablePreview" class="table">
+                        <!--Table head-->
+                        <thead>
+                            <tr>                            
+                                <th style="width: 20%">Grau de Exposição</th>
+                                <th style="width: 70%">Descrição</th>
+                                <th style="min-width: 90px"></th>                       
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody>
+                            <tr>                            
+                                <th scope="row" style="vertical-align: middle;">Pequeno</th>                  <td style="vertical-align: middle;">Probabilidade de pequenas lesões, no máximo casos de primeiros socorros ou tratamento médico menor. Probabilidade baixa de acidentes graves</td>                           
+                                <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/exposicao-ao-risco-pequeno.png') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="vertical-align: middle;">Moderado</th>                
+                                <td style="vertical-align: middle;">Probabilidade de lesões médias e tratamento médico. Probabilidade pequena de acidentes graves</td>
+                                <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/exposicao-ao-risco-moderado.png') }}">
+                                </td>
+                            </tr>
+                            <tr>                            
+                                <th scope="row" style="vertical-align: middle;">Severo</th>                
+                                <td style="vertical-align: middle;">Probabilidade média de lesões de gravidade moderada a alta</td>
+                                <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/exposicao-ao-risco-severo.png') }}">
+                                </td>
+                            </tr>
+                            <tr>                            
+                                <th scope="row" style="vertical-align: middle;">Crítico</th>                
+                                <td style="vertical-align: middle;">Probabilidade alta de lesões graves ou morte caso o evento de risco aconteça</td>
+                                <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/exposicao-ao-risco-critico.png') }}">
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+
             </div>                       
         </div>
     </div>
