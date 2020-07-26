@@ -172,6 +172,54 @@
                     <!--Table-->
                 </div>
 
+                <div class='table-responsive'>
+                    <!--Table-->
+                    <table id="tablePreview" class="table">
+                        <!--Table head-->
+                        <thead>
+                            <tr>                            
+                                <th style="width: 20%">Nível</th>
+                                <th style="width: 70%">Descrição</th>
+                                <th style="min-width: 90px"></th>                       
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody>
+                            <tr>                            
+                                <th scope="row" style="vertical-align: middle;">Fácil</th>                  
+                                <td style="vertical-align: middle;">Caminhos e cruzamentos bem definidos: normalmente são trilhas com alguma sinalização, com poucas bifurcações e com o seu leito bem definido. Esse tipo de trilha pode até não ter sinalização, mas o seu traçado não deixa dúvida para onde seguir</td>                      <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/orientacao-facil.png') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="vertical-align: middle;">Moderado</th>                
+                                <td style="vertical-align: middle;">Trilha com pouca ou nenhuma sinalização, com algumas bifurcações mas com o seu leito ainda definido ou com poucos trechos poucos marcados</td>
+                                <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/orientacao-moderada.png') }}">
+                                </td>
+                            </tr>
+                            <tr>                            
+                                <th scope="row" style="vertical-align: middle;">Difícil</th>                
+                                <td style="vertical-align: middle;">rilha sem nenhuma sinalização, com muitas bifurcações que podem confundir o caminhante, passando às vezes por mata fechada ou por lajes com a trilha pouco definida. Ainda é possível identificar a calha da trilha, mesmo que em alguns trechos ela fique com o seu leito tênue. Pode requerer a identificação precisa dos acidentes geográficos (rios, fundos de vale, bordas, cumes etc.) e pontos cardeais. Requer conhecimento e habilidade para navegação terrestre por meio de mapas topográficos e bússola ou aparelho de GPS</td>
+                                <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/orientacao-dificil.png') }}">
+                                </td>
+                            </tr>
+                            <tr>                            
+                                <th scope="row" style="vertical-align: middle;">Muito Difícil</th>            
+                                <td style="vertical-align: middle;">Trilha fechada com traçado tênue ou inexistente e na mata. Na sua maioria são trilhas de montanhas do tipo exploração ou acessos a vias de escalada remotas. Requer conhecimento e habilidade para navegação terrestre por meio de mapas topográficos e bússola ou aparelho de GPS</td>
+                                <td style="text-align: center;">
+                                    <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/femerj/orientacao-muito-dificil.png') }}">
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+
             </div>                       
         </div>
     </div>
