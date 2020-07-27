@@ -261,7 +261,7 @@
                     </table>                    
                     <!--Table-->
                 </div>
-
+                <h4 class="center" style="margin-top: 50px;"><a class="link" href="{{ url('guia-de-dificuldade-em-trilhas') }}">Voltar para o Guia de Dificuldade</a></h4>
             </div>                       
         </div>
     </div>
