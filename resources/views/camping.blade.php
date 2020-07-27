@@ -7,7 +7,7 @@
                     <div class="col-md-12">
                         <div class="section-title title-two text-center">
                             <div class="title-border" style="margin-top: 50px;">
-                                <h1>NOSSOS <span> Campings</span></h1>
+                                <h1>GUIA DE <span> CAMPING</span></h1>
                             </div>    
                             <p>O camping é uma extensão natural das trilhas e vamos mostrar alguns lugares onde é possível ter essa interação com a natureza</p>
                         </div>
@@ -51,7 +51,7 @@
                                     <span><i class="fa fa-user"></i>Robson Fernando Duda</span>
                                 </div>
                                 <p>
-                                    Sabe aqueles lugares que parecem saídos de filmes, que te levam a uma viagem no tempo? Esse é o caso do Vale da Utopia, pequeno vale localizado na cidade de <a href="{{ url('palhoca/trilhas#lista') }}"><strong>Palhoça</strong></a>. O vale fica localizado entre a Praia da Pinheira e a Praia da Gurda do Embaú e faz parte do Parque Estadual da Serra do Tabuleiro. O vale é cpberto por uma grama verdinha e abriga a pequena Praia do Maço, que permite além do camping, também um gostoso banho de mar. 
+                                    Sabe aqueles lugares que parecem saídos de filmes, que te levam a uma viagem no tempo? Esse é o caso do Vale da Utopia, pequeno vale localizado na cidade de <a href="{{ url('palhoca/trilhas#lista') }}"><strong>Palhoça</strong></a>. O vale fica localizado entre a Praia da Pinheira e a Praia da Guarda do Embaú e faz parte do Parque Estadual da Serra do Tabuleiro. O vale é coberto por uma grama verdinha e abriga a pequena Praia do Maço, que permite além do camping, também um gostoso banho de mar. 
                                 </p>
                                 <p>
                                     O local do camping é uma propriedade privada, sob os cuidados do Sr. Mema que é o proprietário do local. Ele não mora ali, mas diarimante faz uma "ronda" pelo vale conversando com os campistas e verificando quem vai acampar, pois para o camping é cobrada uma taxa de R$ 25,00 por pessoa (atualizado em janeiro de 2020). Você não pecisa fazer reserva para acampar lá, pois é nessa verificação do proprietário que ele faz a cobrança. A taxa da direito ao acesso ao espaço e utilização da infraestrutura do local. Mas não espere muito, o camping é rústico! Ele possui dois chuveiros com água doce para banho, mas a água é fria. Também tem apenas um banheiro para uso coletivo. Mas isso não é problema, afinal o foco do camping é o local, que é fantástico.
@@ -88,7 +88,7 @@
                                 </div>
                                 <h5>Texto: Robson Fernando Duda</h5>
                             </div>
-                            <h4 class="center"><a href="{{ url('/') }}">Voltar para o início</a></h4>
+                            <h4 class="center"><a class="link" href="{{ url('/') }}">Voltar para o início</a></h4>
                         </div>
                     </div>
                 </div>
