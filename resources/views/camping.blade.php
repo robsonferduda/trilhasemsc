@@ -51,7 +51,7 @@
                                     <span><i class="fa fa-user"></i>Robson Fernando Duda</span>
                                 </div>
                                 <p>
-                                    Sabe aqueles lugares que parecem saídos de filmes, que te levam a uma viagem no tempo? Esse é o caso do Vale da Utopia, pequeno vale localizado na cidade de <a href="{{ url('palhoca/trilhas#lista') }}"><strong>Palhoça</strong></a>. O vale fica localizado entre a Praia da Pinheira e a Praia da Guarda do Embaú e faz parte do Parque Estadual da Serra do Tabuleiro. O vale é coberto por uma grama verdinha e abriga a pequena Praia do Maço, que permite além do camping, também um gostoso banho de mar. 
+                                    Sabe aqueles lugares que parecem saídos de filmes, que te levam a uma viagem no tempo? Esse é o caso do Vale da Utopia, pequeno vale localizado na cidade de <a class="link" href="{{ url('palhoca/trilhas#lista') }}">Palhoça</a>. O vale fica localizado entre a Praia da Pinheira e a Praia da Guarda do Embaú e faz parte do Parque Estadual da Serra do Tabuleiro. O vale é coberto por uma grama verdinha e abriga a pequena Praia do Maço, que permite além do camping, também um gostoso banho de mar. 
                                 </p>
                                 <p>
                                     O local do camping é uma propriedade privada, sob os cuidados do Sr. Mema que é o proprietário do local. Ele não mora ali, mas diarimante faz uma "ronda" pelo vale conversando com os campistas e verificando quem vai acampar, pois para o camping é cobrada uma taxa de R$ 25,00 por pessoa (atualizado em janeiro de 2020). Você não pecisa fazer reserva para acampar lá, pois é nessa verificação do proprietário que ele faz a cobrança. A taxa da direito ao acesso ao espaço e utilização da infraestrutura do local. Mas não espere muito, o camping é rústico! Ele possui dois chuveiros com água doce para banho, mas a água é fria. Também tem apenas um banheiro para uso coletivo. Mas isso não é problema, afinal o foco do camping é o local, que é fantástico.
@@ -68,7 +68,7 @@
                                 <div class="box_img">
                                     <h5>Animais do Vale da Utopia</h5>
                                     <img src="{{ asset('img/camping/vale-da-utopia/animais.jpg') }}" alt="Animais no Vale da Utopia">
-                                    <legend>Foto: Robson Fernando Duda</legend>
+                                    <legend class="border-none"><strong>Foto</strong>: Robson Fernando Duda</legend>
                                 </div>
                                 <p>
                                     Como mencionado, o camping possui possibilidade de banhos frios em chuveiros de água doce. Essa água vem das nascentes existentes no local e também pode ser usada para a limpeza de utensílios de camping, mas não possui tratamento para ser consumida, então leve água potável, por segurança. Sempre que for se bahnar ou lavar sua louça, evite o uso de sabão e detergente, preserve a natureza!
@@ -76,7 +76,7 @@
                                 <div class="box_img">
                                     <h5>Banheiros para banho</h5>
                                     <img src="{{ asset('img/camping/vale-da-utopia/banheiros.jpg') }}" alt="Banheiros no Vale da Utopia">  
-                                    <legend>Foto: Robson Fernando Duda</legend>                                
+                                    <legend class="border-none"><strong>Foto</strong>: Robson Fernando Duda</legend>                                
                                 </div>
                                 <p>
                                     Acredito que com essas dicas é possível você organizar o camping de maneira adequada e se preocupar apenas em aproveitar! O lugar é lindo e tem uma energia muito boa. Claro que a principal dica é acordar cedinho e curtir o nascer do sol! 
@@ -84,9 +84,9 @@
                                 <div class="box_img">
                                     <h5>Nascer do Sol no Vale da Utopia</h5>
                                     <img src="{{ asset('img/camping/vale-da-utopia/sunrise.jpg') }}" alt="Nascer do Sol Vale da Utopia">
-                                    <legend>Foto: Viviane dos Santos</legend>
+                                    <legend class="border-none"><strong>Foto</strong>: Viviane dos Santos</legend>
                                 </div>
-                                <h5>Texto: Robson Fernando Duda</h5>
+                                <h5><strong>Texto</strong>: Robson Fernando Duda</h5>
                             </div>
                             <h4 class="center"><a class="link" href="{{ url('/') }}">Voltar para o início</a></h4>
                         </div>
