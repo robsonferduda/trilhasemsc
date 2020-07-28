@@ -63,7 +63,7 @@
                                     1 Pouco severo 
                                 </td> 
                                 <td style="vertical-align: middle;">
-                                    Até 3
+                                    Até 3 fatores
                                 </td> 
                                 <td rowspan="5" style="text-align: center; vertical-align: middle;">
                                     <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/abnt/severidade-do-meio.png') }}">
@@ -74,7 +74,7 @@
                                     2 Moderadamente severo
                                 </td> 
                                 <td style="vertical-align: middle;">
-                                    4 ou 5
+                                    4 ou 5 fatores
                                 </td> 
                             </tr>
                             <tr>
@@ -82,7 +82,7 @@
                                     3 Severo 
                                 </td> 
                                 <td style="vertical-align: middle;">
-                                    6 a 8
+                                    6 a 8 fatores
                                 </td> 
                             </tr>
                             <tr>
@@ -90,7 +90,7 @@
                                     4 Bastante severo  
                                 </td> 
                                 <td style="vertical-align: middle;">
-                                    9 a 12
+                                    9 a 12 fatores
                                 </td> 
                             </tr>
                             <tr>
@@ -98,7 +98,7 @@
                                     5 Muito severo
                                 </td> 
                                 <td style="vertical-align: middle;">
-                                    Pelo menos 13
+                                    Pelo menos 13 fatores
                                 </td> 
                             </tr>
                             <tr>
