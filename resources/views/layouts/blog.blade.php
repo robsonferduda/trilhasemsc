@@ -130,7 +130,7 @@
         <!--Footer Widget Area Start-->
         @include('trilhas.componentes.footer')
         <!--End of Footer Area-->
-        
+        <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
          <!-- modernizr JS
         ============================================ -->        
         <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
