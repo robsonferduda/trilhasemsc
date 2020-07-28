@@ -65,7 +65,7 @@
                                 <td style="vertical-align: middle;">
                                     Até 3
                                 </td> 
-                                <td rowspan="5" style="text-align: center;">
+                                <td rowspan="5" style="text-align: center; vertical-align: middle;">
                                     <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/abnt/severidade-do-meio.png') }}">
                                 </td>
                             </tr>
@@ -112,7 +112,7 @@ explícita ou implícita. Manter-se sobre o caminho não exige esforço de ident
 Eventualmente, pode ser necessário acompanhar uma linha marcada por um acidente
 geográfico inconfundível (por exemplo, uma praia ou uma margem de um lago)
                                 </td> 
-                                <td rowspan="5"  style="text-align: center;">
+                                <td rowspan="5" style="text-align: center; vertical-align: middle;">
                                     <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/abnt/orientacao-do-percurso.png') }}">
                                 </td>
                             </tr>
@@ -153,7 +153,7 @@ trilhas para pedestres, caminhos para montaria, campos assinalados por marcos
                                 </td> 
                             </tr>
                             <tr>                            
-                                <th rowspan="5"  scope="row" style="vertical-align: middle;">Condições do Terreno</th>                
+                                <th rowspan="5"  scope="row" style="vertical-align: middle; ">Condições do Terreno</th>                
                                 <td style="vertical-align: middle;">
                                     1 Percurso em superfícies planas 
                                 </td> 
@@ -162,7 +162,7 @@ trilhas para pedestres, caminhos para montaria, campos assinalados por marcos
 Caminhos com degraus com piso plano e regular. Praias (de areia ou de
 cascalho) com piso nivelado e firme
                                 </td> 
-                                <td rowspan="5"  style="text-align: center;">
+                                <td rowspan="5"  style="text-align: center; vertical-align: middle;">
                                     <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/abnt/condicoes-do-terreno.png') }}">
                                 </td>
                             </tr>
@@ -214,7 +214,7 @@ areões ou grandes erosões
                                 <td style="vertical-align: middle;">
                                     Até 1 hora de caminhada
                                 </td> 
-                                <td rowspan="5" style="text-align: center;">
+                                <td rowspan="5" style="text-align: center; vertical-align: middle;">
                                     <img style="height: 50%" src="{{ asset('img/trilhas/dificuldade/abnt/intensidade-de-esforco-fisico.png') }}">
                                 </td>
                             </tr>
