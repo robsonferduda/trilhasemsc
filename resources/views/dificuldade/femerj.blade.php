@@ -13,6 +13,9 @@
                 <h4 class="center"><strong>Guia de Classificação de Dificuldade em Trilhas - FEMERJ</strong></h4>
             </div>   
             <div class="col-md-12">
+                <p>
+                    As trilhas são classificadas levando em consideração quatro parâmetros: esforço físico, exposição ao risco, orientação e insolação. Cada um desses parâmetros possui uma escala crescente de severidade. Além disso, deve ser adicionado fatores como distância da trilha, tempo de percurso e dificuldades técnicas do caminho. Listamos abaixo a definição de cada critério e a respectiva escala de severidade e sua explicação.
+                </p>
                 <h4 class="center"><strong>Esforço Físico</strong></h4>
                 <p>
                     Avalia o nível de esforço físico necessário para cumprir o percurso em função de parâmetros específicos.

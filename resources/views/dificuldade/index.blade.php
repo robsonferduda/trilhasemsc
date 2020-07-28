@@ -22,9 +22,9 @@
                             Antes de classificar as trilhas de acordo com sua dificuldade, vamos apresentar a classificação de acordo com o tipo do percurso. Conhecer o percurso da trilha é muito importante, pois ajuda a definir estratégias de onde deixar o veículo, identificar ocorrência de pontos de hidratação e se localizar em relação ao trajeto. Segundo a Federação de Esportes de Montanha no Estado do Rio de Janeiro (FEMERJ), podemos classificar as trilhas em 3 categorias: trilhas, circuitos e travessias.
                         </p>
                         <div class='table-responsive'>
+                            <h4 class="center" style="margin-top: 25px;">Tipos de Trilhas</h4>
                             <!--Table-->
                             <table id="tablePreview" class="table">
-                                <caption class="center">Tipos de Trilhas</caption>
                                 <!--Table head-->
                                 <thead>
                                     <tr>                            
@@ -84,6 +84,9 @@
                             </a>
                         </div>
                         <h5><strong>Referências</strong></h5>
+                        <p>
+                            ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. NBR 15505-2: Turismo com atividades de caminhada. Parte 2: Classificação de percursos. Rio de Janeiro, 2008.
+                        </p>
                         <p>
                             Infográfico: Os níveis de dificuldade de trilhas. Disponível em https://www.vamostrilhar.com.br/conteudo/infografico-os-niveis-de-dificuldade-de-trilhas/. Acesso em 27/07/2020.
                         </p>
