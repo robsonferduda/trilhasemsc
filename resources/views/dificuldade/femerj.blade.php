@@ -10,8 +10,13 @@
                         <br/><br/><h1>Guia de Dificuldade<span> em Trilhas</span></h1>
                     </div>    
                 </div>
+                <h4 class="center"><strong>Guia de Classificação de Dificuldade em Trilhas - FEMERJ</strong></h4>
             </div>   
             <div class="col-md-12">
+                <h4 class="center"><strong>Esforço Físico</strong></h4>
+                <p>
+                    Avalia o nível de esforço físico necessário para cumprir o percurso em função de parâmetros específicos.
+                </p>
                 <div class='table-responsive'>
                     <!--Table-->
                     <table id="tablePreview" class="table">
@@ -122,9 +127,14 @@
                         <!--Table body-->
                     </table>
                     <!--Table-->
+                    <p><strong>Fonte</strong>: Metodologia de Classificação de Trilhas (FEMERJ, 2015)</p>
                 </div>
 
                 <div class='table-responsive'>
+                    <h4 class="center"><strong>Exposição ao Risco</strong></h4>
+                    <p>
+                        Avalia a dificuldade do trajeto em relação ao nível e à frequência de exposição a riscos.
+                    </p>
                     <!--Table-->
                     <table id="tablePreview" class="table">
                         <!--Table head-->
@@ -170,10 +180,14 @@
                         <!--Table body-->
                     </table>
                     <!--Table-->
-                    <p>Fonte: Metodologia de Classificação de Trilhas (FEMERJ, 2015)</p>
+                    <p><strong>Fonte</strong>: Metodologia de Classificação de Trilhas (FEMERJ, 2015)</p>
                 </div>
 
                 <div class='table-responsive'>
+                    <h4 class="center"><strong>Orientação</strong></h4>
+                    <p>
+                        Avalia o grau de dificuldade para o usuário manter-se orientado na trilha.
+                    </p>
                     <!--Table-->
                     <table id="tablePreview" class="table">
                         <!--Table head-->
@@ -219,10 +233,14 @@
                         <!--Table body-->
                     </table>
                     <!--Table-->
-                    <p>Fonte: Metodologia de Classificação de Trilhas (FEMERJ, 2015)</p>
+                    <p><strong>Fonte</strong>: Metodologia de Classificação de Trilhas (FEMERJ, 2015)</p>
                 </div>
 
                 <div class='table-responsive'>
+                    <h4 class="center"><strong>Insolação</strong></h4>
+                    <p>
+                        Determina o percentual do percurso da trilha em que há exposição direta ao sol. Isso ajuda a determinar equipamentos de proteção contra o sol, como bonés, óculos de sol, protetor solar e também ajuda a planejar hidratação.
+                    </p>
                     <!--Table-->
                     <table id="tablePreview" class="table">
                         <!--Table head-->
@@ -260,6 +278,7 @@
                         <!--Table body-->
                     </table>                    
                     <!--Table-->
+                    <p><strong>Fonte</strong>: Metodologia de Classificação de Trilhas (FEMERJ, 2015)</p>
                 </div>
                 <h4 class="center" style="margin-top: 50px;"><a class="link" href="{{ url('guia-de-dificuldade-em-trilhas') }}">Voltar para o Guia de Dificuldade</a></h4>
             </div>                       
