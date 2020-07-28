@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="adventure-list-image">
                                         <div class="image-top">
-                                            <img src="{{ asset('img/trilhas/dificuldade/femerj/esforco-fisico-extra-pesada.png') }}" alt="Icon Gauge">
+                                            <img src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Ícone indicador de trilha com nível {{ ucfirst(trans($trilha->nivel->dc_nivel_niv)) }}">
                                         </div>
                                         <h2>{{ $trilha->nivel->dc_nivel_niv }}</h2>
                                         <div style="height: 162px; display: inline-block;">

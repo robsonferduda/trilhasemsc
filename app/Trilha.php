@@ -14,6 +14,7 @@ class Trilha extends Model
     protected $dates = ['deleted_at'];
     protected $fillable = [
     						'nm_trilha_tri',
+                            'ds_trilha_tri',
                             'ds_url_tri'
     					  ];
 

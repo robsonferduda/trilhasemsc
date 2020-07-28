@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use DB;
+use URL;
 use App\Tag;
 use App\Trilha;
 use App\Cidade;
 use App\Nivel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Response;
 
 class TrilhaController extends Controller
 {
@@ -15,6 +18,38 @@ class TrilhaController extends Controller
     public function __construct()
     {
         //
+    }
+
+    public function index()
+    {
+        $trilhas = Trilha::all();
+
+        return view('admin/trilha/index',['trilhas' => $trilhas]);
+    }
+
+    public function editar($id)
+    {
+        $trilha = Trilha::find($id);
+
+        return view('admin/trilha/editar',['trilha' => $trilha]);
+    }
+
+
+    public function update(Request $request){
+
+        $trilha = Trilha::where('id_trilha_tri',$request->id_trilha_tri)->first();
+
+        $trilha->ds_trilha_tri = $request->ds_trilha_tri;
+
+        if($trilha->save()){
+
+            return redirect(URL::previous());
+
+        }else{
+          dd("Erro");
+        }
+        
+        
     }
 
     public function searchTrilha($cidade, $nivel, $trilha)

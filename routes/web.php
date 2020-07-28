@@ -43,5 +43,15 @@ Route::get('usuarios', 'UserController@index');
 Route::get('tag/add', 'TagController@store');
 Route::get('tags', 'TagController@index');
 
+Route::get('tags', 'TagController@index');
+
 Route::get('login/facebook', 'FacebookController@redirectToProvider');
 Route::get('login/facebook/callback', 'FacebookController@handleProviderCallback');
+
+Route::prefix('admin')->group(function () {
+
+	Route::get('listar-trilhas', 'TrilhaController@index');
+	Route::get('editar-trilha/{id}', 'TrilhaController@editar');
+	Route::post('update-trilha', 'TrilhaController@update');
+    
+});
