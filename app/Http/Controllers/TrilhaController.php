@@ -30,8 +30,10 @@ class TrilhaController extends Controller
     public function editar($id)
     {
         $trilha = Trilha::find($id);
+        $niveis = Nivel::orderBy('dc_nivel_niv')->get();
+        $cidades = Cidade::where('cd_estado_est',42)->orderBy('nm_cidade_cde')->get();
 
-        return view('admin/trilha/editar',['trilha' => $trilha]);
+        return view('admin/trilha/editar', compact('trilha','niveis','cidades'));
     }
 
 
@@ -39,9 +41,7 @@ class TrilhaController extends Controller
 
         $trilha = Trilha::where('id_trilha_tri',$request->id_trilha_tri)->first();
 
-        $trilha->ds_trilha_tri = $request->ds_trilha_tri;
-
-        if($trilha->save()){
+        if($trilha->update($request->all())){
 
             return redirect(URL::previous());
 

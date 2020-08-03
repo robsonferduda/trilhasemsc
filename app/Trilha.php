@@ -15,7 +15,9 @@ class Trilha extends Model
     protected $fillable = [
     						'nm_trilha_tri',
                             'ds_trilha_tri',
-                            'ds_url_tri'
+                            'ds_url_tri',
+                            'id_nivel_niv',
+                            'cd_cidade_cde'
     					  ];
 
     public $timestamps = true;
