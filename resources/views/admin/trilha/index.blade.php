@@ -21,7 +21,7 @@
                         <h2>Trilhas</h2>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        <a href="{{ url('profissao/create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Novo</a>
+                        <a href="{{ url('admin/nova-trilha') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Novo</a>
                     </div> 
                 </div>
 	        </div>

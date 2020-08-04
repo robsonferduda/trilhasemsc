@@ -30,47 +30,94 @@
                 @include('layouts.mensagens')
                     <form action="{{ url('admin/update-trilha') }}" method="post">
                         @csrf
-                        <div class="sign-in-form">
-                            <input type="hidden" name="id_trilha_tri" value="{{ $trilha->id_trilha_tri }}">
-                            <div class="form-group">
-                                <label for="nm_trilha_tri">Nome</label>
-                                <input type="text" name="nm_trilha_tri" id="nm_trilha_tri" value="{{ ($trilha) ? $trilha->nm_trilha_tri : old('nm_trilha_tri') }}" class="form-control" required data-parsley-error-message="Campo nome é obrigatório">
-                            </div>
-                            <div class="form-group">
-                                <label for="ds_url_tri">URL</label>
-                                <input type="text" name="ds_url_tri" id="ds_url_tri" value="{{ ($trilha) ? $trilha->ds_url_tri : old('ds_url_tri') }}" class="form-control" required data-parsley-error-message="Campo nome é obrigatório">
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="cd_cidade_cde">Cidade</label>
-                                        <select name="cd_cidade_cde" id="cd_cidade_cde" class="form-control select2">
-                                            <option value="0">Selecione uma cidade</option>
-                                            @foreach($cidades as $cidade)
-                                                <option value="{{ $cidade->cd_cidade_cde }}" {{ ($trilha->cd_cidade_cde == $cidade->cd_cidade_cde) ? 'selected' : '' }}>{{ $cidade->nm_cidade_cde }}</option>
-                                            @endforeach
-                                        </select>
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h4>Dados da Trilha</h4>
+                                <input type="hidden" name="id_trilha_tri" value="{{ $trilha->id_trilha_tri }}">
+                                <div class="form-group">
+                                    <label for="nm_trilha_tri">Nome</label>
+                                    <input type="text" name="nm_trilha_tri" id="nm_trilha_tri" value="{{ ($trilha) ? $trilha->nm_trilha_tri : old('nm_trilha_tri') }}" class="form-control" required data-parsley-error-message="Campo nome é obrigatório">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ds_url_tri">URL</label>
+                                    <input type="text" name="ds_url_tri" id="ds_url_tri" value="{{ ($trilha) ? $trilha->ds_url_tri : old('ds_url_tri') }}" class="form-control" required data-parsley-error-message="Campo nome é obrigatório">
+                                </div>
+                                <div class="form-group">
+                                    <label for="id_user_usu">Autor</label>
+                                    <select name="id_user_usu" id="id_user_usu" class="form-control select2">
+                                        <option value="0">Selecione um autor</option>
+                                        @foreach($usuarios as $user)
+                                            <option value="{{ $user->id }}" {{ ($trilha->id_user_usu == $user->id ) ? 'selected' : '' }}>{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="id_categoria_cat">Categoria</label>
+                                            <select name="id_categoria_cat" id="id_categoria_cat" class="form-control select2">
+                                                <option value="0">Selecione uma categoria</option>
+                                                @foreach($categorias as $categoria)
+                                                    <option value="{{ $categoria->id_categoria_cat }}" {{ ($trilha->id_categoria_cat == $categoria->id_categoria_cat) ? 'selected' : '' }}>{{ $categoria->nm_categoria_cat }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="cd_cidade_cde">Cidade</label>
+                                            <select name="cd_cidade_cde" id="cd_cidade_cde" class="form-control select2">
+                                                <option value="0">Selecione uma cidade</option>
+                                                @foreach($cidades as $cidade)
+                                                    <option value="{{ $cidade->cd_cidade_cde }}" {{ ($trilha->cd_cidade_cde == $cidade->cd_cidade_cde) ? 'selected' : '' }}>{{ $cidade->nm_cidade_cde }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="id_nivel_niv">Nível</label>
+                                            <select name="id_nivel_niv" id="id_nivel_niv" class="form-control select2">
+                                                <option value="0">Selecione um nível</option>
+                                                @foreach($niveis as $nivel)
+                                                    <option value="{{ $nivel->id_nivel_niv }}" {{ ($trilha->id_nivel_niv == $nivel->id_nivel_niv) ? 'selected' : '' }}>{{ $nivel->dc_nivel_niv }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="id_complemento_nivel_con">Complemento</label>
+                                            <select name="id_complemento_nivel_con" id="id_complemento_nivel_con" class="form-control select2">
+                                                <option value="0">Selecione um complemento</option>
+                                                @foreach($complementos as $complemento)
+                                                    <option value="{{ $complemento->id_complemento_nivel_con }}" {{ ($trilha->id_complemento_nivel_con == $complemento->id_complemento_nivel_con) ? 'selected' : '' }}>{{ $complemento->nm_complemento_nivel_con }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="id_nivel_niv">Nível</label>
-                                        <select name="id_nivel_niv" id="id_nivel_niv" class="form-control select2">
-                                            <option value="0">Selecione um nível</option>
-                                            @foreach($niveis as $nivel)
-                                                <option value="{{ $nivel->id_nivel_niv }}" {{ ($trilha->id_nivel_niv == $nivel->id_nivel_niv) ? 'selected' : '' }}>{{ $nivel->dc_nivel_niv }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                <textarea name="ds_trilha_tri" id="ckeditor" rows="15" style="width: 100%;">
+                                    {{ $trilha->ds_trilha_tri }}
+                                </textarea> 
+                                                             
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 20px;">
+                                    <h5>Fotos da Trilha</h5>
+                                    @forelse($trilha->foto as $foto)
+                                        <hr/>
+                                        <h6>{{ $foto->nm_foto_fot }} ( {{ $foto->tipo->nm_tipo_foto_tfo }} )</h6>
+                                        <code>{{ $foto->dc_alt_fot }}</code>
+                                        <br/>
+                                        <img src="{{ asset('img/trilhas/'.$foto->tipo->dc_path_tfp.'/'.$foto->nm_path_fot) }}">
+                                    @empty
+                                        <h6>Nenhuma foto cadastrada</h6>
+                                    @endforelse
                                 </div>
-                            </div>
-                            <textarea name="ds_trilha_tri" id="ckeditor" rows="15" style="width: 100%;">
-                                {{ $trilha->ds_trilha_tri }}
-                            </textarea>  
-                            <div style="text-align: center; margin-top:15px; ">
-                                <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>
-                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
-                            </div>
+                            </div> 
+                        </div>
+                        <div style="text-align: center; margin-top:15px; ">
+                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
                         </div>
                     </form>
                 </div>
