@@ -25,6 +25,14 @@
                                     <span><i class="fa fa-comment"></i>{{ $trilha->comentarios->count() }} {{ ($trilha->comentarios->count() == 1) ? 'comentário' : 'comentários' }}</span>
                                 </div>
                                 {!! $trilha->ds_trilha_tri !!}
+
+                                <div style="text-align: center;">
+                                    <p>Grau de dificuldade</p>
+                                    <img src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
+                                    <p><strong>{{ $trilha->nivel->dc_nivel_niv }}</strong></p>
+                                    <p><a class="link" href="{{ url('guia-de-dificuldade-em-trilhas') }}">Entenda sobre o grau de dificuldade</a></p>
+                                </div>
+
                                 {!! $trilha->url_geolocalizacao_tri !!}
                             </div>
                             <div class="blog-button-links">
