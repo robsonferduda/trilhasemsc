@@ -95,6 +95,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="id_nivel_niv">Geolocalização (Wikiloc, Strava, Relive)</label>
+                                    <textarea name="url_geolocalizacao_tri" id="url_geolocalizacao_tri" rows="6" style="width: 100%;">
+                                    
+                                    </textarea>  
+                                </div>
                                 <textarea name="ds_trilha_tri" id="ckeditor" rows="15" style="width: 100%;">
                                     
                                 </textarea>       

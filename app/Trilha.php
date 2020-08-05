@@ -19,7 +19,8 @@ class Trilha extends Model
                             'id_nivel_niv',
                             'cd_cidade_cde',
                             'id_categoria_cat',
-                            'id_user_usu'
+                            'id_user_usu',
+                            'url_geolocalizacao_tri'
     					  ];
 
     public $timestamps = true;

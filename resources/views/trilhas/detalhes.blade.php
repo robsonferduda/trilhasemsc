@@ -51,6 +51,7 @@
                                     <span><i class="fa fa-comment"></i>{{ $trilha->comentarios->count() }} {{ ($trilha->comentarios->count() == 1) ? 'comentário' : 'comentários' }}</span>
                                 </div>
                                 {!! $trilha->ds_trilha_tri !!}
+                                {!! $trilha->url_geolocalizacao_tri !!}
                             </div>
                             <div class="blog-button-links">
                                 <span class="blog-tags">Tags: 
