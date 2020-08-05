@@ -86,7 +86,7 @@ class TrilhaController extends Controller
     {
         $url = $cidade.'/trilhas/'.$nivel.'/'.$trilha;
 
-    	  $trilha = Trilha::with('foto')->with('cidade')->with('user')->where('ds_url_tri',$url)->first();
+    	$trilha = Trilha::with('foto')->with('cidade')->with('user')->with('nivel')->with('complemento')->where('ds_url_tri',$url)->first();
 
         $titulo = $trilha->nm_trilha_tri;
         $subtitulo = "Trilha em ".$trilha->cidade->nm_cidade_cde;

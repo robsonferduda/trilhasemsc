@@ -19,8 +19,11 @@
                                 </div>
                             </div>
                             <div class="single-blog-post-text">
-                                <h4>{{ $trilha->nm_trilha_tri }}</h4>
+                                <h4>
+                                    {{ $trilha->nm_trilha_tri }}
+                                </h4>
                                 <div class="author-comments">
+                                    <span style="color: white; background: {{ ($trilha->nivel) ? $trilha->nivel->dc_color_nivel_niv : '#989898' }};" class="badge badge-secondary">{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</span>
                                     <span><i class="fa fa-user"></i>{{ $trilha->user->name }}</span>
                                     <span><i class="fa fa-comment"></i>{{ $trilha->comentarios->count() }} {{ ($trilha->comentarios->count() == 1) ? 'comentário' : 'comentários' }}</span>
                                 </div>
@@ -29,7 +32,7 @@
                                 <div style="text-align: center;">
                                     <p>Grau de dificuldade</p>
                                     <img src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
-                                    <p><strong>{{ $trilha->nivel->dc_nivel_niv }}</strong></p>
+                                    <p><strong>{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</strong></p>
                                     <p><a class="link" href="{{ url('guia-de-dificuldade-em-trilhas') }}">Entenda sobre o grau de dificuldade</a></p>
                                 </div>
 
