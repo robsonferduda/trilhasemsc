@@ -33,7 +33,7 @@
                                     <p>Grau de dificuldade</p>
                                     <img src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
                                     <p><strong>{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</strong></p>
-                                    <p><a class="link" href="{{ url('guia-de-dificuldade-em-trilhas') }}">Entenda sobre o grau de dificuldade</a></p>
+                                    <p><a class="link" href="{{ url('guia-de-dificuldade-em-trilhas') }}">Saiba mais sobre o grau de dificuldade</a></p>
                                 </div>
 
                                 {!! $trilha->url_geolocalizacao_tri !!}
