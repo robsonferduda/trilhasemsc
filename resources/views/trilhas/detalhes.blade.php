@@ -5,32 +5,6 @@
         <div class="blog-post-area section-padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="sidebar-widget">
-                            <div class="single-sidebar-widget">
-                                <h4>PESQUISAR <span>Trilha</span></h4>
-                                <form id="text-search" action="{{url('trilhas/#lista')}}" >
-                                    <input type="text" name="termo" placeholder="Digite aqui">
-                                    <button class="submit"><i class="fa fa-search"></i></button>
-                                </form>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="single-sidebar-widget country-select">
-                                <h4>BUSCA POR <span>Cidade</span></h4>
-                                <ul class="widget-categories">
-                                    @foreach($busca_cidade as $busca)
-                                        <li><a href="{{url(stringToStringSeo($busca->cidade->nm_cidade_cde).'/trilhas/#lista')}}">{{ $busca->cidade->nm_cidade_cde }}<span>({{ $busca->total }})</span></a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-    
-                            <div class="col-lg-12 col-md-12 col-sm-12" style="min-height: 570px; background: #f1f1f1;">
-                                <div class="box-publicidade-detalhes">
-                                    <span>PUBLICIDADE</span>
-                                </div>
-                            </div>                                
-                        </div>
-                    </div>
                     <div class="col-md-9">
                         <div class="single-blog-post blog-post-details">
                             <div class="single-blog-post-img">
@@ -113,7 +87,33 @@
                                 <h6>Nenhum comentário disponível</h6>
                            @endforelse
                         </div>
-                    </div>       
+                    </div>  
+                    <div class="col-md-3">
+                        <div class="sidebar-widget">
+                            <div class="single-sidebar-widget">
+                                <h4>PESQUISAR <span>Trilha</span></h4>
+                                <form id="text-search" action="{{url('trilhas/#lista')}}" >
+                                    <input type="text" name="termo" placeholder="Digite aqui">
+                                    <button class="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="single-sidebar-widget country-select">
+                                <h4>BUSCA POR <span>Cidade</span></h4>
+                                <ul class="widget-categories">
+                                    @foreach($busca_cidade as $busca)
+                                        <li><a href="{{url(stringToStringSeo($busca->cidade->nm_cidade_cde).'/trilhas/#lista')}}">{{ $busca->cidade->nm_cidade_cde }}<span>({{ $busca->total }})</span></a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+    
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="min-height: 570px; background: #f1f1f1;">
+                                <div class="box-publicidade-detalhes">
+                                    <span>PUBLICIDADE</span>
+                                </div>
+                            </div>                                
+                        </div>
+                    </div>     
                 </div>
             </div>
         </div>
