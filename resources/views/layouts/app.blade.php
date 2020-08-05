@@ -52,6 +52,8 @@
         <!-- responsive CSS
         ============================================ -->
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+
+        <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -155,9 +157,8 @@
         <!--End of Footer Area-->     
 
         <!-- modernizr JS
-        ============================================ -->        
+        ============================================ -->       
         <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
-        <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <script src="{{ asset('js/vendor/jquery-1.12.3.min.js') }}"></script>     
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>    
         <script src="{{ asset('js/lib/nivo-slider/js/jquery.nivo.slider.js') }}" type="text/javascript"></script>

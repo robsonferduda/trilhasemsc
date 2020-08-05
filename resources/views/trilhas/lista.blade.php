@@ -82,7 +82,7 @@
                                         <h1><a href="{{ url($trilha->ds_url_tri) }}">{{$trilha->nm_trilha_tri}}</a></h1>
                                         <h2 class='cidade-list' ><a href="{{ url('trilhas/?cidade='.$trilha->cidade->cd_cidade_cde.'#lista') }}">{{$trilha->cidade->nm_cidade_cde}}</a></h2>
                                         <p>
-                                            {!! \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') !!}
+                                            {!! \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 250, $end='...') !!}
                                         </p>
                                         <div class="list-buttons">
                                             <a href="{{ url($trilha->ds_url_tri) }}" class="button-one button-blue">LER MAIS</a>                                        
@@ -90,13 +90,12 @@
                                     </div>
                                     <div class="adventure-list-image">
                                         <div class="image-top">
-                                            <img src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Ícone indicador de trilha com nível {{ ucfirst(trans($trilha->nivel->dc_nivel_niv)) }}">
+                                            <img class="icone-nivel" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Ícone indicador de trilha com nível {{ ucfirst(trans($trilha->nivel->dc_nivel_niv)) }}">
                                         </div>
                                         <h2>{{ $trilha->nivel->dc_nivel_niv }}</h2>
-                                        <div style="height: 162px; display: inline-block;">
+                                        <div style="height: 150px; display: inline-block;">
                                             
-                                        </div>
-                                      
+                                        </div>                                      
                                     </div>
                                 </div>
                             </div>
@@ -120,9 +119,4 @@
         </div>
     </div>
 </div>
-<!--End of Adventures Grid-->
-<!--Blog Area Start-->
-@include('trilhas.componentes.ultima_trilha')
-<!--End of Blog Area-->
 @endsection
-

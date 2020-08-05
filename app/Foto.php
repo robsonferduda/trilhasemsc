@@ -28,4 +28,9 @@ class Foto extends Model
     {
         return $this->belongsToMany('App\Galeria','galeria_fotos_gaf','id_foto_fot','id_galeria_gal')->withTimestamps();
     }
+
+    public function tipo()
+    {
+        return $this->hasOne('App\TipoFoto','id_tipo_foto_tfo','id_tipo_foto_tfo');
+    }
 }

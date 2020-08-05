@@ -52,6 +52,8 @@ Route::prefix('admin')->group(function () {
 
 	Route::get('listar-trilhas', 'TrilhaController@index');
 	Route::get('editar-trilha/{id}', 'TrilhaController@editar');
+	Route::get('nova-trilha', 'TrilhaController@novo');
 	Route::post('update-trilha', 'TrilhaController@update');
+	Route::post('create-trilha', 'TrilhaController@create');
     
 });

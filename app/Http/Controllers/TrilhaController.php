@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use DB;
 use URL;
+use App\User;
 use App\Tag;
 use App\Trilha;
 use App\Cidade;
 use App\Nivel;
+use App\Categoria;
+use App\Complemento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
@@ -29,34 +32,61 @@ class TrilhaController extends Controller
 
     public function editar($id)
     {
-        $trilha = Trilha::find($id);
+        $trilha = Trilha::where('id_trilha_tri', $id)
+                          ->with(array('foto' => function($q){
+                            $q->with('tipo');
+                          }))                          
+                          ->first();
 
-        return view('admin/trilha/editar',['trilha' => $trilha]);
+        $usuarios = User::all();
+        $niveis = Nivel::orderBy('dc_nivel_niv')->get();
+        $cidades = Cidade::where('cd_estado_est',42)->orderBy('nm_cidade_cde')->get();
+        $categorias = Categoria::all();
+        $complementos = Complemento::orderBy('id_complemento_nivel_con')->get();
+
+        return view('admin/trilha/editar', compact('trilha','niveis','cidades','complementos','categorias','usuarios'));
     }
 
+    public function novo()
+    {
+        $usuarios = User::all();
+        $niveis = Nivel::orderBy('dc_nivel_niv')->get();
+        $cidades = Cidade::where('cd_estado_est',42)->orderBy('nm_cidade_cde')->get();
+        $categorias = Categoria::all();
+        $complementos = Complemento::orderBy('id_complemento_nivel_con')->get();
+
+        return view('admin/trilha/novo', compact('niveis','cidades','complementos','categorias','usuarios'));
+    }
+
+    public function create(Request $request){
+
+        if(Trilha::create($request->all())){
+
+            return redirect('admin/listar-trilhas');
+
+        }else{
+          dd("Erro");
+        }      
+    }
 
     public function update(Request $request){
 
         $trilha = Trilha::where('id_trilha_tri',$request->id_trilha_tri)->first();
 
-        $trilha->ds_trilha_tri = $request->ds_trilha_tri;
-
-        if($trilha->save()){
+        if($trilha->update($request->all())){
 
             return redirect(URL::previous());
 
         }else{
           dd("Erro");
-        }
-        
-        
+        }      
     }
 
     public function searchTrilha($cidade, $nivel, $trilha)
     {
         $url = $cidade.'/trilhas/'.$nivel.'/'.$trilha;
 
-    	  $trilha = Trilha::with('foto')->with('cidade')->with('user')->where('ds_url_tri',$url)->first();
+    	$trilha = Trilha::with('foto')->with('cidade')->with('user')->with('nivel')->with('complemento')->where('ds_url_tri',$url)->first();
 
         $titulo = $trilha->nm_trilha_tri;
         $subtitulo = "Trilha em ".$trilha->cidade->nm_cidade_cde;

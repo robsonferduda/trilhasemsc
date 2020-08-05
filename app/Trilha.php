@@ -15,7 +15,13 @@ class Trilha extends Model
     protected $fillable = [
     						'nm_trilha_tri',
                             'ds_trilha_tri',
-                            'ds_url_tri'
+                            'ds_url_tri',
+                            'id_nivel_niv',
+                            'cd_cidade_cde',
+                            'id_categoria_cat',
+                            'id_complemento_nivel_con',
+                            'id_user_usu',
+                            'url_geolocalizacao_tri'
     					  ];
 
     public $timestamps = true;
@@ -34,8 +40,16 @@ class Trilha extends Model
         return $this->hasOne('App\Nivel','id_nivel_niv','id_nivel_niv');
     }
 
+    public function complemento(){
+        return $this->hasOne('App\Complemento','id_complemento_nivel_con','id_complemento_nivel_con');
+    }
+
     public function user(){
         return $this->hasOne('App\User','id','id_user_usu');
+    }
+
+    public function categoria(){
+        return $this->hasOne('App\Categoria','id_categoria_cat','id_categoria_cat');
     }
 
     public function cidade(){

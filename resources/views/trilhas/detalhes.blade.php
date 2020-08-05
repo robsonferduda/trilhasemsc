@@ -5,32 +5,6 @@
         <div class="blog-post-area section-padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="sidebar-widget">
-                            <div class="single-sidebar-widget">
-                                <h4>PESQUISAR <span>Trilha</span></h4>
-                                <form id="text-search" action="{{url('trilhas/#lista')}}" >
-                                    <input type="text" name="termo" placeholder="Digite aqui">
-                                    <button class="submit"><i class="fa fa-search"></i></button>
-                                </form>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="single-sidebar-widget country-select">
-                                <h4>BUSCA POR <span>Cidade</span></h4>
-                                <ul class="widget-categories">
-                                    @foreach($busca_cidade as $busca)
-                                        <li><a href="{{url(stringToStringSeo($busca->cidade->nm_cidade_cde).'/trilhas/#lista')}}">{{ $busca->cidade->nm_cidade_cde }}<span>({{ $busca->total }})</span></a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-    
-                            <div class="col-lg-12 col-md-12 col-sm-12" style="min-height: 570px; background: #f1f1f1;">
-                                <div class="box-publicidade-detalhes">
-                                    <span>PUBLICIDADE</span>
-                                </div>
-                            </div>                                
-                        </div>
-                    </div>
                     <div class="col-md-9">
                         <div class="single-blog-post blog-post-details">
                             <div class="single-blog-post-img">
@@ -45,12 +19,24 @@
                                 </div>
                             </div>
                             <div class="single-blog-post-text">
-                                <h4>{{ $trilha->nm_trilha_tri }}</h4>
+                                <h4>
+                                    {{ $trilha->nm_trilha_tri }}
+                                </h4>
                                 <div class="author-comments">
+                                    <span style="color: white; background: {{ ($trilha->nivel) ? $trilha->nivel->dc_color_nivel_niv : '#989898' }};" class="badge badge-secondary">{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</span>
                                     <span><i class="fa fa-user"></i>{{ $trilha->user->name }}</span>
                                     <span><i class="fa fa-comment"></i>{{ $trilha->comentarios->count() }} {{ ($trilha->comentarios->count() == 1) ? 'comentário' : 'comentários' }}</span>
                                 </div>
                                 {!! $trilha->ds_trilha_tri !!}
+
+                                <div style="text-align: center;">
+                                    <p>Grau de dificuldade</p>
+                                    <img src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
+                                    <p><strong>{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</strong></p>
+                                    <p><a class="link" href="{{ url('guia-de-dificuldade-em-trilhas') }}">Saiba mais sobre o grau de dificuldade</a></p>
+                                </div>
+
+                                {!! $trilha->url_geolocalizacao_tri !!}
                             </div>
                             <div class="blog-button-links">
                                 <span class="blog-tags">Tags: 
@@ -112,7 +98,33 @@
                                 <h6>Nenhum comentário disponível</h6>
                            @endforelse
                         </div>
-                    </div>       
+                    </div>  
+                    <div class="col-md-3">
+                        <div class="sidebar-widget">
+                            <div class="single-sidebar-widget">
+                                <h4>PESQUISAR <span>Trilha</span></h4>
+                                <form id="text-search" action="{{url('trilhas/#lista')}}" >
+                                    <input type="text" name="termo" placeholder="Digite aqui">
+                                    <button class="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="single-sidebar-widget country-select">
+                                <h4>BUSCA POR <span>Cidade</span></h4>
+                                <ul class="widget-categories">
+                                    @foreach($busca_cidade as $busca)
+                                        <li><a href="{{url(stringToStringSeo($busca->cidade->nm_cidade_cde).'/trilhas/#lista')}}">{{ $busca->cidade->nm_cidade_cde }}<span>({{ $busca->total }})</span></a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+    
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="min-height: 570px; background: #f1f1f1;">
+                                <div class="box-publicidade-detalhes">
+                                    <span>PUBLICIDADE</span>
+                                </div>
+                            </div>                                
+                        </div>
+                    </div>     
                 </div>
             </div>
         </div>

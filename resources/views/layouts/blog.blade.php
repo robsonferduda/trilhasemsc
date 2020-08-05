@@ -52,6 +52,8 @@
         <!-- responsive CSS
         ============================================ -->
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+
+        <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -130,7 +132,6 @@
         <!--Footer Widget Area Start-->
         @include('trilhas.componentes.footer')
         <!--End of Footer Area-->
-        
          <!-- modernizr JS
         ============================================ -->        
         <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
