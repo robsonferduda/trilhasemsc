@@ -13,7 +13,6 @@ use App\Http\Requests\ComentarioRequest;
 
 class ComentarioController extends Controller
 {
-    
     public function __construct()
     {
         //
@@ -30,14 +29,14 @@ class ComentarioController extends Controller
 
     public function store(ComentarioRequest $request)
     {
-        $request->merge(['id_user_usu' => Auth::user()->id]);        
+        $request->merge(['id_user_usu' => Auth::user()->id]);
 
-        if(Comentario::create($request->all()))
+        if (Comentario::create($request->all())) {
             Flash::success('Seu comentário foi enviado com sucesso! Obrigado por compartilhar sua experiência!');
-        else
+        } else {
             Flash::error('Ops... Ocorreu um erro ao enviar seu comentário.');
+        }
         
         return redirect(URL::previous().'#comentarios');
     }
-   
 }

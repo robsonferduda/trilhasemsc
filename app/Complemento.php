@@ -13,9 +13,8 @@ class Complemento extends Model
     protected $primaryKey = 'id_complemento_nivel_con';
     protected $dates = ['deleted_at'];
     protected $fillable = [
-    						'nm_complemento_nivel_con'                        
-    					  ];
+                            'nm_complemento_nivel_con'
+                          ];
 
     public $timestamps = true;
-
 }

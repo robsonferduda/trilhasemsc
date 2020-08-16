@@ -13,14 +13,13 @@ class Galeria extends Model
     protected $primaryKey = 'id_galeria_gal';
     protected $dates = ['deleted_at'];
     protected $fillable = [
-    						'nm_galeria_gal', 'fl_ativa_gal'                        
-    					  ];
+                            'nm_galeria_gal', 'fl_ativa_gal'
+                          ];
 
     public $timestamps = true;
 
     public function fotos()
     {
-        return $this->belongsToMany('App\Foto','galeria_fotos_gaf','id_galeria_gal','id_foto_fot')->withTimestamps();
+        return $this->belongsToMany('App\Foto', 'galeria_fotos_gaf', 'id_galeria_gal', 'id_foto_fot')->withTimestamps();
     }
-
 }
