@@ -13,9 +13,8 @@ class Nivel extends Model
     protected $primaryKey = 'id_nivel_niv';
     protected $dates = ['deleted_at'];
     protected $fillable = [
-    						'dc_nivel_niv'                        
-    					  ];
+                            'dc_nivel_niv'
+                          ];
 
     public $timestamps = true;
-
 }

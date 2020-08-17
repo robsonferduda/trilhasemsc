@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    
     public function __construct()
     {
         //
@@ -15,7 +14,7 @@ class UserController extends Controller
 
     public function index()
     {
-         foreach (User::all() as $user) {
+        foreach (User::all() as $user) {
             echo "<pre>";
             echo $user;
             echo "</pre>";
@@ -25,7 +24,7 @@ class UserController extends Controller
     public function store()
     {
         /*
-        $dados = array('name' => 'Robson Fernando Duda', 
+        $dados = array('name' => 'Robson Fernando Duda',
                        'email' => 'robsonferduda@gmail.com',
                        'password' => \Hash::make(@trilhas));
         User::create($dados);
@@ -39,7 +38,5 @@ class UserController extends Controller
         $user->password = \Hash::make('@trilhas');
         $user->save();
         */
-        
     }
-   
 }

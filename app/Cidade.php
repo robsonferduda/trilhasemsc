@@ -13,10 +13,8 @@ class Cidade extends Model
     protected $primaryKey = 'cd_cidade_cde';
     protected $dates = ['deleted_at'];
     protected $fillable = [
-    						'nm_cidade_cde'                        
-    					  ];
+                            'nm_cidade_cde'
+                          ];
 
     public $timestamps = true;
-
-
 }

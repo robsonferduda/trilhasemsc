@@ -13,10 +13,8 @@ class Categoria extends Model
     protected $primaryKey = 'id_categoria_cat';
     protected $dates = ['deleted_at'];
     protected $fillable = [
-    						'nm_categoria_cat'                        
-    					  ];
+                            'nm_categoria_cat'
+                          ];
 
     public $timestamps = true;
-
-
 }

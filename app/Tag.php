@@ -13,14 +13,13 @@ class Tag extends Model
     protected $primaryKey = 'cd_tag_tag';
     protected $dates = ['deleted_at'];
     protected $fillable = [
-    						'ds_tag_tag'                        
-    					  ];
+                            'ds_tag_tag'
+                          ];
 
     public $timestamps = true;
 
     public function trilhas()
     {
-        return $this->belongsToMany('App\Trilha','trilha_tag_trt','cd_tag_tag','id_trilha_tri')->withTimestamps();
+        return $this->belongsToMany('App\Trilha', 'trilha_tag_trt', 'cd_tag_tag', 'id_trilha_tri')->withTimestamps();
     }
-
 }

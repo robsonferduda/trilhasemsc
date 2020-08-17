@@ -30,11 +30,11 @@ Route::get('guia-de-dificuldade-em-trilhas', 'DificuldadeController@index');
 Route::get('guia-de-dificuldade-em-trilhas/abnt', 'DificuldadeController@abnt');
 Route::get('guia-de-dificuldade-em-trilhas/femerj', 'DificuldadeController@femerj');
 
-Route::get('galerias','GaleriaController@index');
-Route::get('contato','HomeController@contato');
-Route::get('camping','HomeController@camping');
-Route::get('guia','HomeController@guia');
-Route::get('sobre-nos','HomeController@sobre');
+Route::get('galerias', 'GaleriaController@index');
+Route::get('contato', 'HomeController@contato');
+Route::get('camping', 'HomeController@camping');
+Route::get('guia', 'HomeController@guia');
+Route::get('sobre-nos', 'HomeController@sobre');
 
 Route::get('usuario/add', 'UserController@store');
 Route::get('usuario/update', 'UserController@update');
@@ -49,11 +49,13 @@ Route::get('login/facebook', 'FacebookController@redirectToProvider');
 Route::get('login/facebook/callback', 'FacebookController@handleProviderCallback');
 
 Route::prefix('admin')->group(function () {
-
-	Route::get('listar-trilhas', 'TrilhaController@index');
-	Route::get('editar-trilha/{id}', 'TrilhaController@editar');
-	Route::get('nova-trilha', 'TrilhaController@novo');
-	Route::post('update-trilha', 'TrilhaController@update');
-	Route::post('create-trilha', 'TrilhaController@create');
-    
+    Route::get('listar-trilhas', 'TrilhaController@index');
+    Route::get('editar-trilha/{id}', 'TrilhaController@editar');
+    Route::get('nova-trilha', 'TrilhaController@novo');
+    Route::post('update-trilha', 'TrilhaController@update');
+    Route::post('create-trilha', 'TrilhaController@create');
 });
+
+Route::get('sitemap', 'SiteMapController@gerar');
+Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
+Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');

@@ -7,13 +7,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ComentarioRequest extends FormRequest
 {
-
     public function authorize()
     {
-        if(!Auth::guest())
+        if (!Auth::guest()) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function rules()

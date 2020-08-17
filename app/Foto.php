@@ -7,30 +7,30 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Foto extends Model
 {
-	use SoftDeletes;
-	
+    use SoftDeletes;
+    
     protected $table = 'foto_fot';
     protected $primaryKey = 'id_foto_fot';
     protected $dates = ['deleted_at'];
     protected $fillable = [
-    						'nm_foto_fot',
+                            'nm_foto_fot',
                             'nm_path_fot'
-    					  ];
+                          ];
 
     public $timestamps = true;
 
     public function trilha()
     {
-        return $this->belongsTo('App\Trilha','id_trilha_tri','id_trilha_tri');
+        return $this->belongsTo('App\Trilha', 'id_trilha_tri', 'id_trilha_tri');
     }
 
     public function galeria()
     {
-        return $this->belongsToMany('App\Galeria','galeria_fotos_gaf','id_foto_fot','id_galeria_gal')->withTimestamps();
+        return $this->belongsToMany('App\Galeria', 'galeria_fotos_gaf', 'id_foto_fot', 'id_galeria_gal')->withTimestamps();
     }
 
     public function tipo()
     {
-        return $this->hasOne('App\TipoFoto','id_tipo_foto_tfo','id_tipo_foto_tfo');
+        return $this->hasOne('App\TipoFoto', 'id_tipo_foto_tfo', 'id_tipo_foto_tfo');
     }
 }

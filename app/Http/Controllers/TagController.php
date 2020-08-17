@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    
     public function __construct()
     {
         //
@@ -29,6 +28,4 @@ class TagController extends Controller
         Tag::create($dados);
         */
     }
-
-   
 }
