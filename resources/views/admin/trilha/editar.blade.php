@@ -109,15 +109,40 @@
                                                              
                                 <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 20px;">
                                     <h5>Fotos da Trilha</h5>
-                                    @forelse($trilha->foto as $foto)
-                                        <hr/>
-                                        <h6>{{ $foto->nm_foto_fot }} ( {{ $foto->tipo->nm_tipo_foto_tfo }} )</h6>
-                                        <code>{{ $foto->dc_alt_fot }}</code>
-                                        <br/>
-                                        <img src="{{ asset('img/trilhas/'.$foto->tipo->dc_path_tfp.'/'.$foto->nm_path_fot) }}">
-                                    @empty
-                                        <h6>Nenhuma foto cadastrada</h6>
-                                    @endforelse
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-custo">
+                                            <thead>
+                                                <tr>
+                                                    <th>Foto</th>
+                                                    <th>Tipo</th>
+                                                    <th>Descrição</th>
+                                                    <th class="center" style="width: 10%">Detalhes</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Foto</th>
+                                                    <th>Tipo</th>
+                                                    <th>Descrição</th>
+                                                    <th class="center">Detalhes</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                @forelse($trilha->foto as $foto)
+                                                    <tr>
+                                                        <td>{{ $foto->nm_foto_fot }}</td>
+                                                        <td>{{ $foto->tipo->nm_tipo_foto_tfo }}</td>
+                                                        <td>{{ $foto->dc_alt_fot }}</td>
+                                                        <td class="center">
+                                                            <button type="button" class="btn btn-default btn-view-img" data-url="{{ asset('img/trilhas/'.$foto->tipo->dc_path_tfp.'/'.$foto->nm_path_fot) }}"><i class="fa fa-image"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>           
                                 </div>
                             </div> 
                         </div>
@@ -129,5 +154,20 @@
                 </div>
 	    </div>
 	</div>       
+</div>
+<div class="modal fade" id="modal-img" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel">Imagem da Trilha</h4>
+            </div>
+            <div class="modal-body">
+                <img style="width: 100%; " src="" alt="Imagem da Trilha">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

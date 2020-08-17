@@ -232,6 +232,12 @@
                 }
             });
 
+            $(".btn-view-img").click(function(){
+                img = $(this).data("url");
+                $(".modal-body img").attr('src', img);
+                $("#modal-img").modal('show');                
+            });
+
         });
     </script>
 
