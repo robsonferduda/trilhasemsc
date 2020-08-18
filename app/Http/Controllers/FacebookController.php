@@ -32,7 +32,10 @@ class FacebookController extends Controller
 
             Auth::login($user);
 
+            dd($user);
+
             return redirect('home');
+
         } catch (Exception $e) {
             var_dump($e->getMessage());
         }
