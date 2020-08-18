@@ -15,7 +15,7 @@
                 <h3>Já possui uma conta? Acesse aqui</h3>
                 @include('layouts/mensagens')
                 <form action="{{ route('login') }}" method="post" id="signin">
-                    {{ csrf_field() }}
+                    @csrf
                     <div class="sign-in-form">
                         
                         <input name="email" id="email" type="email" class="form-box required @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email" required autocomplete="email" autofocus>
