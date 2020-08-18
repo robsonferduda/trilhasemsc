@@ -6,6 +6,7 @@
                         </div>
                         <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="header-top-right">
+                                {{ Auth::user() }}
                                 @guest
                                     <div class="login">
                                         <a href="{{ route('register') }}"><i class="fa fa-pencil-square-o"></i>Cadastre-se</a>
