@@ -131,17 +131,23 @@
                                             <div class="adventure-cat">
                                                 <select name="cidade" class="search-adventure">
                                                     <option selected value="">Selecione a Cidade</option>
-                                                    @foreach($cidades as $cidade)
-                                                    <option {{ old('cidade') == stringToStringSeo($cidade->nm_cidade_cde) ? 'selected': ''}} value="{{stringToStringSeo($cidade->nm_cidade_cde)}}">{{$cidade->nm_cidade_cde}}</option>
-                                                    @endforeach
+                                                    @if(isset($cidades))
+                                                        @forelse($cidades as $cidade)
+                                                            <option {{ old('cidade') == stringToStringSeo($cidade->nm_cidade_cde) ? 'selected': ''}} value="{{stringToStringSeo($cidade->nm_cidade_cde)}}">{{$cidade->nm_cidade_cde}}</option>
+                                                        @empty
+                                                            <option selected value="">Nenhuma cidade disponível</option>
+                                                        @endforelse
+                                                    @endif
                                                 </select>
                                             </div>
                                             <div class="adventure-cat destination">
                                                 <select name="nivel" class="search-adventure">
                                                     <option selected value="">Selecione o Nível</option>
-                                                    @foreach($niveis as $nivel)
-                                                    <option {{ old('nivel') == stringToStringSeo($nivel->dc_nivel_niv) ? 'selected': ''}} value="{{stringToStringSeo($nivel->dc_nivel_niv)}}">{{$nivel->dc_nivel_niv}}</option>
-                                                    @endforeach
+                                                    @if(isset($cidades))
+                                                        @foreach($niveis as $nivel)
+                                                            <option {{ old('nivel') == stringToStringSeo($nivel->dc_nivel_niv) ? 'selected': ''}} value="{{stringToStringSeo($nivel->dc_nivel_niv)}}">{{$nivel->dc_nivel_niv}}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                             <div class="clearfix"></div>

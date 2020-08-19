@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
 class FacebookController extends Controller
@@ -32,7 +33,7 @@ class FacebookController extends Controller
 
             Auth::login($user);
 
-            return redirect('home');
+            return redirect('login');
 
         } catch (Exception $e) {
             var_dump($e->getMessage());
