@@ -6,13 +6,14 @@ use DB;
 use App\Nivel;
 use App\Trilha;
 use App\Cidade;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        Session::put('TESTE', "Valor de teste!");
         /*
             - Criar Enun para Categoria
             - Criar tabelas de Galeria de Fotos
