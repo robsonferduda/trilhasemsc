@@ -33,6 +33,8 @@ class FacebookController extends Controller
 
             Auth::login($user);
 
+            Session::put('TESTE', "Valor de teste!");
+
             return redirect('login');
 
         } catch (Exception $e) {
