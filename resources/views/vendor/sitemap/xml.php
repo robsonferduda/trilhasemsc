@@ -1,4 +1,3 @@
-
 <?php if (null != $style) {
     echo '<'.'?'.'xml-stylesheet href="'.$style.'" type="text/xsl"?>'."\n";
 } ?>
