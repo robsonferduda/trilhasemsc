@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="">
     <head>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175572747-1"></script>
         <script>
@@ -14,8 +15,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Trilhas em SC</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
         <!-- favicon
         ============================================ -->        
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
