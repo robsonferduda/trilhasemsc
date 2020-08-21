@@ -1,3 +1,6 @@
 .no-padding-bottom { padding-bottom: 0px !important; }
 .form-delete { display: inline; }
 .center { text-align: center; }
+.btn-facebook{width: 180px !important; margin: 0 auto; }
+.margin-form { margin-bottom: 15px !important; }
+.btn-form { margin-top: 5px !important; margin-bottom: 25px; }
