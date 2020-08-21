@@ -14,7 +14,7 @@
             </div> 
             <div class="col-lg-2 col-md-2 hidden-sm">
                 <div class="single-footer-widget">
-                    <h4>About Us</h4>
+                    <h4>Trilhas em SC</h4>
                     <div class="footer-widget-list">
                         <ul class="widget-lists">
                             <li><a href="{{ url('sobre-nos') }}">Sobre nós</a></li>
