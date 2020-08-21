@@ -35,7 +35,7 @@
         
         <!-- owl.carousel CSS
         ============================================ -->
-        <link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
+        {!! Minify::stylesheet('/css/owl.carousel.css') !!}
         
         <!-- jquery-ui CSS
         ============================================ -->
@@ -47,20 +47,20 @@
         
         <!-- animate CSS
         ============================================ -->
-        <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+        {!! Minify::stylesheet('/css/animate.css') !!}
         
         <!-- nivo slider CSS
         ============================================ -->
-        <link rel="stylesheet" href="{{ asset('js/lib/nivo-slider/css/nivo-slider.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ asset('js/lib/nivo-slider/css/preview.css') }}" type="text/css" media="screen" />
+        {!! Minify::stylesheet('/js/lib/nivo-slider/css/nivo-slider.css') !!}
+        {!! Minify::stylesheet('/js/lib/nivo-slider/css/preview.css', array('media' => 'screen')) !!}
         
         <!-- style CSS
         ============================================ -->
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {!! Minify::stylesheet('/css/style.css') !!}
         
         <!-- responsive CSS
         ============================================ -->
-        <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+        {!! Minify::stylesheet('/css/responsive.css') !!}
 
         <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
     </head>
