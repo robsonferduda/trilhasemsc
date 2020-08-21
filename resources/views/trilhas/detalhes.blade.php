@@ -118,7 +118,7 @@
                                 </ul>
                             </div>
     
-                            <div class="col-lg-12 col-md-12 col-sm-12" style="min-height: 570px; background: #f1f1f1;">
+                            <div style="display: none" class="col-lg-12 col-md-12 col-sm-12" style="min-height: 570px; background: #f1f1f1;">
                                 <div class="box-publicidade-detalhes">
                                     <span>PUBLICIDADE</span>
                                 </div>

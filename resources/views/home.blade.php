@@ -84,7 +84,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div style="display: none" class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="box-publicidade-destaque">
                                     <span>PUBLICIDADE</span>
@@ -110,7 +110,7 @@
 
         @include('trilhas.componentes.contador')
     
-        <div class="partner-area section-bottom-padding">
+        <div style="display: none;" class="partner-area section-bottom-padding">
             <div class="container">          
                 <div class="row">
                     <div class="col-md-12">
