@@ -14,8 +14,8 @@
                 @foreach($ultimas as $trilha)
 
                 @php 
-                $img = ($trilha->foto->where('id_tipo_foto_tfo',4)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',4)->first()->nm_path_fot : 'padrao.jpg';
-                $alt = ($trilha->foto->where('id_tipo_foto_tfo',4)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',4)->first()->dc_alt_fot : 'Foto da Trilha';
+                $img = ($trilha->foto->where('id_tipo_foto_tfo',3)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',3)->first()->nm_path_fot : 'padrao.jpg';
+                $alt = ($trilha->foto->where('id_tipo_foto_tfo',3)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',3)->first()->dc_alt_fot : 'Foto da Trilha';
                 @endphp
 
                 <div class="col-md-6">
