@@ -175,18 +175,18 @@
         ============================================ -->       
         <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
         <script src="{{ asset('js/vendor/jquery-1.12.3.min.js') }}"></script>     
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>    
-        <script src="{{ asset('js/lib/nivo-slider/js/jquery.nivo.slider.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/lib/nivo-slider/home.js') }}" type="text/javascript"></script>       
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script> 
+        {!! Minify::javascript('/js/lib/nivo-slider/js/jquery.nivo.slider.js') !!} 
+        {!! Minify::javascript('/js/lib/nivo-slider/home.js') !!}               
         <script src="{{ asset('js/wow.min.js') }}"></script>       
-        <script src="{{ asset('js/jquery.meanmenu.js') }}"></script>     
+        {!! Minify::javascript('/js/jquery.meanmenu.js') !!}      
         <script src="{{ asset('js/owl.carousel.min.js') }}"></script>       
         <script src="{{ asset('js/jquery-price-slider.js') }}"></script>      
         <script src="{{ asset('js/jquery.scrollUp.min.js') }}"></script>        
         <script src="{{ asset('js/waypoints.min.js') }}"></script>        
         <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>       
-        <script src="{{ asset('js/plugins.js') }}"></script>        
-        <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ asset('js/plugins.js') }}"></script>
+        {!! Minify::javascript('/js/main.js') !!}          
          <!-- Custom
         ============================================ -->        
         <script src="{{ asset('js/custom.js') }}"></script>
