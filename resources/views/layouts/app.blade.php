@@ -35,7 +35,7 @@
         
         <!-- owl.carousel CSS
         ============================================ -->
-        {!! Minify::stylesheet('/css/owl.carousel.css') !!}
+        {!! Minify::stylesheet('/css/owl.carousel.css')->withFullUrl() !!}
         
         <!-- jquery-ui CSS
         ============================================ -->
@@ -47,20 +47,20 @@
         
         <!-- animate CSS
         ============================================ -->
-        {!! Minify::stylesheet('/css/animate.css') !!}
+        {!! Minify::stylesheet('/css/animate.css')->withFullUrl() !!}
         
         <!-- nivo slider CSS
         ============================================ -->
-        {!! Minify::stylesheet('/js/lib/nivo-slider/css/nivo-slider.css') !!}
-        {!! Minify::stylesheet('/js/lib/nivo-slider/css/preview.css', array('media' => 'screen')) !!}
+        {!! Minify::stylesheet('/js/lib/nivo-slider/css/nivo-slider.css')->withFullUrl() !!}
+        {!! Minify::stylesheet('/js/lib/nivo-slider/css/preview.css', array('media' => 'screen'))->withFullUrl() !!}
         
         <!-- style CSS
         ============================================ -->
-        {!! Minify::stylesheet('/css/style.css') !!}
+        {!! Minify::stylesheet('/css/style.css')->withFullUrl() !!}
         
         <!-- responsive CSS
         ============================================ -->
-        {!! Minify::stylesheet('/css/responsive.css') !!}
+        {!! Minify::stylesheet('/css/responsive.css')->withFullUrl() !!}
 
         <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
     </head>
@@ -176,17 +176,17 @@
         <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
         <script src="{{ asset('js/vendor/jquery-1.12.3.min.js') }}"></script>     
         <script src="{{ asset('js/bootstrap.min.js') }}"></script> 
-        {!! Minify::javascript('/js/lib/nivo-slider/js/jquery.nivo.slider.js') !!} 
-        {!! Minify::javascript('/js/lib/nivo-slider/home.js') !!}               
+        {!! Minify::javascript('/js/lib/nivo-slider/js/jquery.nivo.slider.js')->withFullUrl() !!} 
+        {!! Minify::javascript('/js/lib/nivo-slider/home.js')->withFullUrl() !!}               
         <script src="{{ asset('js/wow.min.js') }}"></script>       
-        {!! Minify::javascript('/js/jquery.meanmenu.js') !!}      
+        {!! Minify::javascript('/js/jquery.meanmenu.js')->withFullUrl() !!}      
         <script src="{{ asset('js/owl.carousel.min.js') }}"></script>       
         <script src="{{ asset('js/jquery-price-slider.js') }}"></script>      
         <script src="{{ asset('js/jquery.scrollUp.min.js') }}"></script>        
         <script src="{{ asset('js/waypoints.min.js') }}"></script>        
         <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>       
         <script src="{{ asset('js/plugins.js') }}"></script>
-        {!! Minify::javascript('/js/main.js') !!}          
+        {!! Minify::javascript('/js/main.js')->withFullUrl() !!}          
          <!-- Custom
         ============================================ -->        
         <script src="{{ asset('js/custom.js') }}"></script>
