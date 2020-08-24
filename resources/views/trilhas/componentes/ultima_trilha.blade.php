@@ -39,7 +39,7 @@
                             <div class="col-md-6 col-sm-6 margin-left">
                                 <div class="blog-text">
                                     <h4><a href="{{ url($trilha->ds_url_tri) }}">{{ $trilha->nm_trilha_tri }}</a></h4>
-                                    <p>{!! \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 200, $end='...') !!}</p>
+                                    <p>{!! nl2br(substr($trilha->ds_trilha_tri, 0, strpos($trilha->ds_trilha_tri, chr(10) ) - 1)) !!}</p>
                                     <a href="{{ url($trilha->ds_url_tri) }}" class="button-one button-yellow">Leia Mais</a>
                                 </div>
                             </div>

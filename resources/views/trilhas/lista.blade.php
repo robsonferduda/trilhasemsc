@@ -82,7 +82,7 @@
                                         <h1><a href="{{ url($trilha->ds_url_tri) }}">{{$trilha->nm_trilha_tri}}</a></h1>
                                         <h2 class='cidade-list' ><a href="{{ url('trilhas/?cidade='.$trilha->cidade->cd_cidade_cde.'#lista') }}">{{$trilha->cidade->nm_cidade_cde}}</a></h2>
                                         <p>
-                                            {!! \Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 250, $end='...') !!}
+                                            {!! nl2br(substr($trilha->ds_trilha_tri, 0, strpos($trilha->ds_trilha_tri, chr(10) ) - 1)) !!}
                                         </p>
                                         <div class="list-buttons">
                                             <a href="{{ url($trilha->ds_url_tri) }}" class="button-one button-blue">LER MAIS</a>                                        
