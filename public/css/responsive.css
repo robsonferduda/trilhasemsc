@@ -226,7 +226,7 @@
         font-size: 26px;
         margin-bottom: 5px;
     }
-    .adventure-list-text > p {line-height: 24px}
+    .adventure-list-text > p {line-height: 15px; text-align: justify;}
     .adventure-list-image {padding-top: 5px}
     .image-bottom > li {height: 49px}
     .adventure-list-image > h2 {
@@ -298,6 +298,15 @@
     #googleMap {height: 676px !important}
     .contact-container {padding-left: 9%}
     .contact-us-form.section-padding.thank-u {padding: 50px 0}
+
+    .adventure-list-text > h1 {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .list-buttons {
+        margin-top: 7px;
+    }
 }
  
 /* Tablet desktop :768px. */
