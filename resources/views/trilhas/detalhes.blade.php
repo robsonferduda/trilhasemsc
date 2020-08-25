@@ -54,11 +54,7 @@
                                     @endforelse
                                 </span>
                                 <div class="blog-links">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <div class="fb-share-button" 
-                                    data-href="{{ Request::fullUrl() }}" 
-                                    data-layout="button_count">
-                                    </div>
+                                <div class="fb-share-button" data-href="{{ Request::fullUrl() }}" data-layout="button" data-size="large"><a target="_blank" class="fb-xfbml-parse-ignore">Compartilhar</a></div>
                                 </div>
                             </div>
                         </div>
