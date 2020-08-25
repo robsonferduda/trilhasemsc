@@ -19,7 +19,27 @@ class SiteMapController extends Controller
         // add items to the sitemap (url, date, priority, freq)
         $sitemap->add(\URL::to('/'), now(), '1.0', 'daily');
         
-        $sitemap->add(\URL::to('camping'), now(), '0.9', 'weekly');
+
+        $images = array(
+            ['url' => \URL::to('public/img/camping/vale-da-utopia/capa.jpg'),
+             'title' =>  'Vista panorâmica Vale da Utopia',
+             'caption' => 'Vista panorâmica Vale da Utopia'
+            ],
+            ['url' => \URL::to('public/img/camping/vale-da-utopia/animais.jpg'),
+             'title' =>  'Animais no Vale da Utopia',
+             'caption' => 'Animais no Vale da Utopia'
+            ],
+            ['url' => \URL::to('public/img/camping/vale-da-utopia/banheiros.jpg'),
+             'title' =>  'Banheiros no Vale da Utopia',
+             'caption' => 'Banheiros no Vale da Utopia'
+            ],
+            ['url' => \URL::to('public/img/camping/vale-da-utopia/sunrise.jpg'),
+             'title' =>  'Nascer do Sol Vale da Utopia',
+             'caption' => 'Nascer do Sol Vale da Utopia'
+            ]
+        );
+
+        $sitemap->add(\URL::to('camping'), now(), '0.9', 'weekly', $images);
         $sitemap->add(\URL::to('guia-de-dificuldade-em-trilhas'), now(), '0.9', 'monthly');
         $sitemap->add(\URL::to('guia-de-dificuldade-em-trilhas/abnt'), now(), '0.9', 'monthly');
         $sitemap->add(\URL::to('guia-de-dificuldade-em-trilhas/femerj'), now(), '0.9', 'monthly');
