@@ -2,6 +2,11 @@
 
 @section('content')
   <!--Blog Post Area Start-->
+        @php 
+            $img = ($trilha->foto->where('id_tipo_foto_tfo',5)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',5)->first()->nm_path_fot : 'padrao.jpg';
+            $alt = ($trilha->foto->where('id_tipo_foto_tfo',5)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',5)->first()->dc_alt_fot : 'Foto Principal da Trilha';
+        @endphp
+
         <meta property="og:url"           content="{{ Request::fullUrl() }}" />
         <meta property="og:type"          content="website" />
         <meta property="og:title"         content="Trilhas em SC" />
@@ -14,10 +19,6 @@
                     <div class="col-md-9">
                         <div class="single-blog-post blog-post-details">
                             <div class="single-blog-post-img">
-                                @php 
-                                    $img = ($trilha->foto->where('id_tipo_foto_tfo',5)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',5)->first()->nm_path_fot : 'padrao.jpg';
-                                    $alt = ($trilha->foto->where('id_tipo_foto_tfo',5)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',5)->first()->dc_alt_fot : 'Foto Principal da Trilha';
-                                @endphp
                                 <a href="#"><img src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}"></a>
                                 <div class="date-time">
                                     <span class="date">{{ \Carbon\Carbon::parse($trilha->created_at)->format('d') }}</span>
