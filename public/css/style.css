@@ -613,7 +613,7 @@ ul.header-r-cart li:hover .mini-cart-content {
 }
 form#banner-searchbox {margin-top: 52px; width: 673px}
 .adventure-cat, .blog-archive {
-    background: rgba(0, 0, 0, 0) url("../img/icon/home-two-select-bg-two") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img/icon/select-bg-two.png") no-repeat scroll 0 0;
     cursor: pointer;
     float: left;
     height: 46px;
