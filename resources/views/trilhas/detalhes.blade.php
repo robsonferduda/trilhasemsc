@@ -2,6 +2,12 @@
 
 @section('content')
   <!--Blog Post Area Start-->
+        <meta property="og:url"           content="{{ Request::fullUrl() }}" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="Trilhas em SC" />
+        <meta property="og:description"   content="Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil" />
+        <meta property="og:image"         content="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" />
+
         <div class="blog-post-area section-padding">
             <div class="container">
                 <div class="row">
@@ -48,7 +54,10 @@
                                 </span>
                                 <div class="blog-links">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <div class="fb-share-button" 
+                                    data-href="{{ Request::fullUrl() }}" 
+                                    data-layout="button_count">
+                                    </div>
                                 </div>
                             </div>
                         </div>
