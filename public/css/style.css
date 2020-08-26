@@ -585,7 +585,7 @@ ul.header-r-cart li:hover .mini-cart-content {
 .banner-content h1, .banner-content h2, .banner-content h3 {text-transform: uppercase}
 .banner-content h1 {
     animation: 1500ms ease-in-out 0s normal none 1 running bounceInLeft;
-    font-size: 90px;
+    font-size: 60px;
     font-weight: 700;
     margin-bottom: 14px;
     text-shadow: 0 5px 5px rgba(216, 216, 216, 0.75);
@@ -613,14 +613,14 @@ ul.header-r-cart li:hover .mini-cart-content {
 }
 form#banner-searchbox {margin-top: 52px; width: 673px}
 .adventure-cat, .blog-archive {
-    background: rgba(0, 0, 0, 0) url("../img/icon/select-bg-one.png") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img/icon/select-bg-two.png") no-repeat scroll 0 0;
     cursor: pointer;
     float: left;
     height: 46px;
     line-height: 46px;
     padding: 0;
     text-transform: capitalize;
-    width: 220px;
+    width: 270px;
 }
 .adventure-cat.destination {
     background: rgba(0, 0, 0, 0) url("../img/icon/select-bg-two.png") no-repeat scroll 0 0;

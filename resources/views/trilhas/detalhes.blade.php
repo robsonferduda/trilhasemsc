@@ -7,12 +7,6 @@
             $alt = ($trilha->foto->where('id_tipo_foto_tfo',5)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',5)->first()->dc_alt_fot : 'Foto Principal da Trilha';
         @endphp
 
-        <meta property="og:url"           content="{{ Request::fullUrl() }}" />
-        <meta property="og:type"          content="website" />
-        <meta property="og:title"         content="Trilhas em SC" />
-        <meta property="og:description"   content="Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil" />
-        <meta property="og:image"         content="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" />
-
         <div class="blog-post-area section-padding">
             <div class="container">
                 <div class="row">

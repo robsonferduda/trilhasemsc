@@ -32,8 +32,7 @@
                                     </div>
                                 </div>
                                 <div class="blog-link">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 margin-left">
