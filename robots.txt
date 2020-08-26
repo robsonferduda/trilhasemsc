@@ -1,3 +1,4 @@
 User-agent: *
-Disallow: Disallow: /guia/
-Disallow: Disallow: /register/
+Disallow: /guia/
+Disallow: /register/
+Disallow: /*.xml$
