@@ -65,21 +65,21 @@ class SiteMapController extends Controller
     public function gerar()
     {
         $sitemap = $this->make();
-        
-        if (strpos(\URL::to('/'), 'https') !== false && strpos(\URL::to('/'), 'www') !== false) {
-            $sitemapName = 'sitemap-https-www';
-        }
 
+        if (strpos(\URL::to('/'), 'http') !== false && strpos(\URL::to('/'), 'www') === false) {
+            $sitemapName = 'sitemap-http';
+        }
+        
         if (strpos(\URL::to('/'), 'http') !== false && strpos(\URL::to('/'), 'www') !== false) {
             $sitemapName = 'sitemap-http-www';
         }
 
-        if (strpos(\URL::to('/'), 'https') !== false&& strpos(\URL::to('/'), 'www') === false) {
+        if (strpos(\URL::to('/'), 'https') !== false && strpos(\URL::to('/'), 'www') === false) {
             $sitemapName = 'sitemap-https';
         }
 
-        if (strpos(\URL::to('/'), 'https') !== false && strpos(\URL::to('/'), 'www') === false) {
-            $sitemapName = 'sitemap-http';
+        if (strpos(\URL::to('/'), 'https') !== false && strpos(\URL::to('/'), 'www') !== false) {
+            $sitemapName = 'sitemap-https-www';
         }
 
         // generate your sitemap (format, filename)
