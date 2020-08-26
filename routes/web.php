@@ -31,6 +31,7 @@ Route::get('guia-de-dificuldade-em-trilhas/abnt', 'DificuldadeController@abnt');
 Route::get('guia-de-dificuldade-em-trilhas/femerj', 'DificuldadeController@femerj');
 
 Route::get('galerias', 'GaleriaController@index');
+Route::get('galerias/{nome}', 'GaleriaController@buscar');
 Route::get('contato', 'HomeController@contato');
 Route::get('camping', 'HomeController@camping');
 Route::get('guia', 'HomeController@guia');

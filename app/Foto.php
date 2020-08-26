@@ -26,7 +26,7 @@ class Foto extends Model
 
     public function galeria()
     {
-        return $this->belongsToMany('App\Galeria', 'galeria_fotos_gaf', 'id_foto_fot', 'id_galeria_gal')->withTimestamps();
+        return $this->belongsTo('App\Galeria', 'id_galeria_gal', 'id_galeria_gal')->withTimestamps();
     }
 
     public function tipo()
