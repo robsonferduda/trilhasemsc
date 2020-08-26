@@ -2,3 +2,4 @@ User-agent: *
 Disallow: /guia/
 Disallow: /register/
 Disallow: /*.xml$
+Sitemap: https://trilhasemsc.com.br/public/sitemap-https.xml
