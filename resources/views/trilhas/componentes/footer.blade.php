@@ -18,7 +18,7 @@
                     <div class="footer-widget-list">
                         <ul class="widget-lists">
                             <li><a href="{{ url('sobre-nos') }}">Sobre nós</a></li>
-                            <li><a href="{{ url('guia') }}">Guia de Dificuldade</a></li>
+                            <li><a href="{{ url('guia-de-dificuldade-em-trilhas') }}">Guia de Dificuldade</a></li>
                             <li><a href="{{ url('termos-de-uso') }}">Termos de Uso</a></li>
                             <li><a href="{{ url('politica-de-privacidade') }}">Política de Privacidade</a></li>
                         </ul>

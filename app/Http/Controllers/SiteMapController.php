@@ -14,12 +14,11 @@ class SiteMapController extends Controller
 
     private function make()
     {
-        $sitemap = \App::make("sitemap");
+        $sitemap = \App::make('sitemap');
 
         // add items to the sitemap (url, date, priority, freq)
         $sitemap->add(\URL::to('/'), now(), '1.0', 'daily');
         
-
         $images = array(
             ['url' => \URL::to('public/img/camping/vale-da-utopia/capa.jpg'),
              'title' =>  'Vista panorâmica Vale da Utopia',
@@ -66,9 +65,25 @@ class SiteMapController extends Controller
     public function gerar()
     {
         $sitemap = $this->make();
+
+        if (strpos(\URL::to('/'), 'http') !== false && strpos(\URL::to('/'), 'www') === false) {
+            $sitemapName = 'sitemap-http';
+        }
         
+        if (strpos(\URL::to('/'), 'http') !== false && strpos(\URL::to('/'), 'www') !== false) {
+            $sitemapName = 'sitemap-http-www';
+        }
+
+        if (strpos(\URL::to('/'), 'https') !== false && strpos(\URL::to('/'), 'www') === false) {
+            $sitemapName = 'sitemap-https';
+        }
+
+        if (strpos(\URL::to('/'), 'https') !== false && strpos(\URL::to('/'), 'www') !== false) {
+            $sitemapName = 'sitemap-https-www';
+        }
+
         // generate your sitemap (format, filename)
-        return $sitemap->store('xml', 'sitemap');
+        return $sitemap->store('xml', $sitemapName);
     }
 
     public function visualizar($tipo)
