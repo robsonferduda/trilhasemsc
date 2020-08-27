@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="pt-br">
     <head>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Global site tag (gtag.js) - Google Analytics -->
