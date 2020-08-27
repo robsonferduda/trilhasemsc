@@ -23,7 +23,7 @@
                         <div class="col-md-3 col-sm-4">
                             <div class="single-portfolio">
                                 <a href="{{ url('galerias',$galeria->url_gal) }}">
-                                    <img src="{{ asset('img/galerias/capa/'.$img) }}" alt="">
+                                    <img src="{{ asset('img/galerias/capa/'.$img) }}" alt="{{ $alt }}">
                                 </a>
                                 <div class="portfolio-text effect-bottom">
                                     <h4><a href="#">{{ $galeria->nm_galeria_gal }}</a></h4>
