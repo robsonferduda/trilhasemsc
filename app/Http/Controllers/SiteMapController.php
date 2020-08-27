@@ -83,7 +83,7 @@ class SiteMapController extends Controller
         }
 
         // generate your sitemap (format, filename)
-        return $sitemap->store('xml', $sitemapName);
+        return $sitemap->store('xml', 'sitemap');
     }
 
     public function visualizar($tipo)
