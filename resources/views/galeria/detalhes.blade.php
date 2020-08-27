@@ -28,9 +28,9 @@
 @endsection
 @section('script')
 <script src="{{ asset('js/galeria/galleria.min.js') }}"></script>
+<script src="{{ asset('js/galeria/themes/classic/galleria.classic.min.js') }}"></script>
 <script>
     (function() {
-        Galleria.loadTheme('../public/js/galeria/themes/classic/galleria.classic.min.js');
         Galleria.run('.galleria');
     }());
 </script>
