@@ -10,8 +10,8 @@
                         <div class="section-title title-two text-center">
                             <div class="title-border" style="margin-top: 50px;">
                                 <h1>GALERIA <span>{{ $galeria->nm_galeria_gal }}</span></h1>
-                                <h3><a href="{{ url('galerias') }}">Voltar para Galerias</h3>
                             </div>    
+                            <h4 style="margin-top: 15px;"><a href="{{ url('galerias') }}">VOLTAR PARA GALERIAS</h4>
                         </div>
                     </div>
                 </div>
