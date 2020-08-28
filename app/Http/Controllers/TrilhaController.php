@@ -93,6 +93,7 @@ class TrilhaController extends Controller
 
         $busca_cidade = Trilha::with('cidade')
            ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+           ->where('fl_publicacao_tri','S')
            ->groupBy('cd_cidade_cde')
            ->get();
 
@@ -160,6 +161,7 @@ class TrilhaController extends Controller
                                   $query->whereRaw("unaccent(replace(lower(ds_tag_tag),' ','-')) = '".$tag."'");
                               });
                           })
+                          ->where('fl_publicacao_tri','S')
         ->get();
 
         $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
