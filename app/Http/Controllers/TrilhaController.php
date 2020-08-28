@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use URL;
+use Auth;
 use App\User;
 use App\Tag;
 use App\Trilha;
