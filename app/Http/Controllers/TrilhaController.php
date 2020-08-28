@@ -22,10 +22,16 @@ class TrilhaController extends Controller
         //
     }
 
+    public function permission()
+    {
+        if(Auth::user() and Auth::user()->id_role != 'ADMIN'){
+            return redirect('login');
+        }
+    }
+
     public function index()
     {
         $trilhas = Trilha::all();
-
         return view('admin/trilha/index', ['trilhas' => $trilhas]);
     }
 

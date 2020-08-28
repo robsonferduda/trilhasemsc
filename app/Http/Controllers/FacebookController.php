@@ -26,14 +26,13 @@ class FacebookController extends Controller
             if (!$user) {
                 $dados = array('name' =>  $user_facebook->getName(),
                                'email' => $user_facebook->getEmail(),
+                               'fl_facebook' => 'S',
                                'password' => \Hash::make(rand(1, 10000)));
                 
                 $user = User::create($dados);
             }
 
             Auth::login($user);
-
-            Session::put('TESTE', "Valor de teste!");
 
             return redirect('login');
 
