@@ -23,16 +23,12 @@ class TrilhaController extends Controller
         //
     }
 
-    public function permission()
-    {
-        if(Auth::user() and Auth::user()->id_role != 'ADMIN'){
-            return redirect('login');
-        }
-    }
-
     public function index()
     {
-        $this->permission();
+
+        if(Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN'){
+            return redirect('login');
+        }
 
         $trilhas = Trilha::all();
         return view('admin/trilha/index', ['trilhas' => $trilhas]);
@@ -175,11 +171,4 @@ class TrilhaController extends Controller
         return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'ultimas' => $ultimas, 'termo' => $termo]);
     }
 
-    public function addTags()
-    {
-        /*
-          $trilha = Trilha::find(1);
-          $trilha->tags()->attach(4);
-        */
-    }
 }
