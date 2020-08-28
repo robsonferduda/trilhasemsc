@@ -33,6 +33,7 @@
                             <tr>
                                 <th class="center" style="width: 12%">Nível</th>
                                 <th>Trilha</th>
+                                <th>Publicado</th>
                                 <th class="center" style="width: 10%">Ações</th>
                             </tr>
                         </thead>
@@ -40,6 +41,7 @@
                             <tr>
                                 <th>Nível</th>
                                 <th>Trilha</th>
+                                <th>Publicado</th>
                                 <th>Ações</th>
                             </tr>
                         </tfoot>
@@ -51,6 +53,13 @@
                                         {{ $trilha->nivel->dc_nivel_niv }}
                                     </td>
                                     <td>{{ $trilha->nm_trilha_tri }}</td>
+                                    <td>
+                                        @if($trilha->fl_publicacao_tri == 'S')
+                                            <span class="badge badge-success">SIM</span>
+                                        @else
+                                            <span class="badge badge-danger">NÃO</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a class="btn btn-primary" href="{{ url('admin/editar-trilha/'.$trilha->id_trilha_tri) }}"><i class="fa fa-edit"></i></a>
                                     </td>
