@@ -31,6 +31,8 @@ class TrilhaController extends Controller
 
     public function index()
     {
+        $this->permission();
+
         $trilhas = Trilha::all();
         return view('admin/trilha/index', ['trilhas' => $trilhas]);
     }
