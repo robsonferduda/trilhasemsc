@@ -6,6 +6,7 @@ use DB;
 use App\Nivel;
 use App\Trilha;
 use App\Cidade;
+use App\Galeria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -13,7 +14,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        Session::put('TESTE', "Valor de teste!");
         /*
             - Criar Enun para Categoria
             - Criar tabelas de Galeria de Fotos
@@ -21,15 +21,15 @@ class HomeController extends Controller
         $page_name = "Trilha";
         
         $totais = array('trilha'  => Trilha::where('id_categoria_cat', 1)->count(),
-                        'camping' => Trilha::where('id_categoria_cat', 2)->count(),
-                        'galeria' => null );
+                        'camping' => 1,
+                        'galeria' => Galeria::all()->count() );
 
         $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
 
         $niveis = Nivel::get();
 
-        $ultimas = Trilha::with('foto')->orderBy('created_at', 'DESC')->take(2)->get();
-        $preferidas = Trilha::with('foto')->orderBy('total_votos_tri', 'ASC')->take(5)->get();
+        $ultimas = Trilha::with('foto')->where('fl_publicacao_tri','S')->orderBy('created_at', 'DESC')->take(2)->get();
+        $preferidas = Trilha::with('foto')->where('fl_publicacao_tri','S')->orderBy('total_votos_tri', 'ASC')->take(5)->get();
 
         return view('home', ['totais' => $totais, 'ultimas' => $ultimas, 'preferidas' => $preferidas ,'cidades' => $cidades, 'niveis' => $niveis, 'page_name' => $page_name]);
     }

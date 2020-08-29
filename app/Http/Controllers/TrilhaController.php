@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use URL;
+use Auth;
 use App\User;
 use App\Tag;
 use App\Trilha;
@@ -24,8 +25,12 @@ class TrilhaController extends Controller
 
     public function index()
     {
-        $trilhas = Trilha::all();
 
+        if(Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN'){
+            return redirect('login');
+        }
+
+        $trilhas = Trilha::all();
         return view('admin/trilha/index', ['trilhas' => $trilhas]);
     }
 
@@ -88,6 +93,7 @@ class TrilhaController extends Controller
 
         $busca_cidade = Trilha::with('cidade')
            ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+           ->where('fl_publicacao_tri','S')
            ->groupBy('cd_cidade_cde')
            ->get();
 
@@ -155,6 +161,7 @@ class TrilhaController extends Controller
                                   $query->whereRaw("unaccent(replace(lower(ds_tag_tag),' ','-')) = '".$tag."'");
                               });
                           })
+                          ->where('fl_publicacao_tri','S')
         ->get();
 
         $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
@@ -166,11 +173,4 @@ class TrilhaController extends Controller
         return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'ultimas' => $ultimas, 'termo' => $termo]);
     }
 
-    public function addTags()
-    {
-        /*
-          $trilha = Trilha::find(1);
-          $trilha->tags()->attach(4);
-        */
-    }
 }

@@ -74,7 +74,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="col-lg-2 col-md-2 col-sm-12">
                                         <div class="form-group">
                                             <label for="id_nivel_niv">Nível</label>
                                             <select name="id_nivel_niv" id="id_nivel_niv" class="form-control select2">
@@ -85,7 +85,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="col-lg-2 col-md-2 col-sm-12">
                                         <div class="form-group">
                                             <label for="id_complemento_nivel_con">Complemento</label>
                                             <select name="id_complemento_nivel_con" id="id_complemento_nivel_con" class="form-control select2">
@@ -93,6 +93,16 @@
                                                 @foreach($complementos as $complemento)
                                                     <option value="{{ $complemento->id_complemento_nivel_con }}" {{ ($trilha->id_complemento_nivel_con == $complemento->id_complemento_nivel_con) ? 'selected' : '' }}>{{ $complemento->nm_complemento_nivel_con }}</option>
                                                 @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="fl_publicacao_tri">Publicado</label>
+                                            <select name="fl_publicacao_tri" id="fl_publicacao_tri" class="form-control select2">
+                                                <option value="0">Selecione</option>
+                                                <option value="N" {{ ($trilha->fl_publicacao_tri == 'N') ? 'selected' : '' }}>Não</option>
+                                                <option value="S" {{ ($trilha->fl_publicacao_tri == 'S') ? 'selected' : '' }}>Sim</option>
                                             </select>
                                         </div>
                                     </div>
