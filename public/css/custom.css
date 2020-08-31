@@ -4,4 +4,6 @@
 .btn-facebook{width: 180px !important; margin: 0 auto; }
 .margin-form { margin-bottom: 15px !important; }
 .btn-form { margin-top: 5px !important; margin-bottom: 25px; }
-#descricao table { border: none; }
+#descricao table { border: none; text-align: center; }
+#descricao table tr td{ padding: 10px 15px; }
+#descricao table tr td img{ width: 60px; height: 60px; }
