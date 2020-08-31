@@ -123,9 +123,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="text-content">
-                                        <h1 class="title1">GUIA DE TRILHAS</h1>
-                                        <h2 class="sub-title">AS MELHORES TRILHAS DE SANTA CATARINA</h2>
-                                        <h2 class="sub-title">VOCÊ ENCONTRA <span>AQUI</span></h2>
+                                        <h1 class="title1">GUIA DE TRILHAS DE SANTA CATARINA</h1>
+                                        <h2 class="sub-title">AS MELHORES TRILHAS VOCÊ ENCONTRA <span>AQUI</span></h2>                                  
                                         <form action="{{url('trilhas/#lista')}}" method="GET" id="banner-searchbox" class="hidden-xs form-search-trilha">
                                             <div class="adventure-cat">
                                                 <select name="cidade" class="search-adventure">

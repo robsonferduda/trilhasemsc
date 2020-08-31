@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Trilha;
+use App\Galeria;
 
 class SiteMapController extends Controller
 {
@@ -46,7 +47,7 @@ class SiteMapController extends Controller
         $trilhas = Trilha::get();
 
         foreach ($trilhas as $trilha) {
-            // get all images for the current post
+            // get all images for the current Trilha
             $images = array();
             foreach ($trilha->foto as $foto) {
                 $images[] = array(
@@ -58,6 +59,22 @@ class SiteMapController extends Controller
 
             $sitemap->add(\URL::to($trilha->ds_url_tri), $trilha->updated_at, '0.9', 'weekly', $images);
         }
+
+        $galerias = Galeria::get();
+
+        foreach ($galerias as $galeria) {
+            // get all images for the current Galeria
+            $images = array();
+            foreach ($galeria->itens as $foto) {
+                $images[] = array(
+                    'url' => \URL::to('public/img/galerias/fotos/'.$foto->nm_path_fot),
+                    'title' => $foto->dc_alt_fot,
+                    'caption' => $foto->dc_alt_fot
+                );
+            }
+            $sitemap->add(\URL::to('galerias/'.$galeria->url_gal), $galeria->updated_at, '0.9', 'weekly', $images);
+        }
+
 
         return $sitemap;
     }
