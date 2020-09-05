@@ -116,7 +116,7 @@
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <br/><br/><h1>INFORMES <span>PUBLICITÁRIOS</span></h1>
+                                <br/><br/><h2 class="h2-section">INFORMES <span class="h2-section-span">PUBLICITÁRIOS</span></h2>
                             </div>    
                         </div>
                     </div>
