@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="section-title text-center">
                     <div class="title-border">
-                        <h1>Últimas <span>TRILHAS</span></h1>
+                        <h2 class="h2-section">Últimas <span class="h2-section-span">TRILHAS</span></h2>
                     </div>                            
                 </div>
             </div>

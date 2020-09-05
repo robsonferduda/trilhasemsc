@@ -4,7 +4,7 @@
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <h1>NOSSAS <span>AVENTURAS</span></h1>
+                                <h2 class="h2-section">NOSSAS <span class="h2-section-span">AVENTURAS</span></h2>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                             </div>
                             <div class="single-skill-text">
                                 <h4>TRILHAS</h4>
-                                <h3><span class="counter">{{ $totais['trilha'] }}</span></h3>
+                                <span class="contador"><span class="counter">{{ $totais['trilha'] }}</span></span>
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="single-skill-text">
                                 <h4>GALERIAS</h4>
-                                <h3><span class="counter">{{ $totais['galeria'] }}</span></h3>
+                                <span class="contador"><span class="counter">{{ $totais['galeria'] }}</span></span>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                             </div>
                             <div class="single-skill-text">
                                 <h4>CAMPING</h4>
-                                <h3><span class="counter">{{ $totais['camping'] }}</span></h3>
+                                <span class="contador"><span class="counter">{{ $totais['camping'] }}</span></span>
                             </div>
                         </div>
                     </div>
