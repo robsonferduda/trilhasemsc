@@ -20,7 +20,7 @@ class HomeController extends Controller
         */
         $page_name = "Trilha";
         
-        $totais = array('trilha'  => Trilha::where('id_categoria_cat', 1)->count(),
+        $totais = array('trilha'  => Trilha::where('id_categoria_cat', 1)->where('fl_publicacao_tri','S')->count(),
                         'camping' => 1,
                         'galeria' => Galeria::all()->count() );
 

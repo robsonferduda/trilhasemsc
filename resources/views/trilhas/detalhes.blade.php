@@ -28,7 +28,10 @@
                                     <span><i class="fa fa-user"></i>{{ $trilha->user->name }}</span>
                                     <span><i class="fa fa-comment"></i>{{ $trilha->comentarios->count() }} {{ ($trilha->comentarios->count() == 1) ? 'comentário' : 'comentários' }}</span>
                                 </div>
-                                {!! $trilha->ds_trilha_tri !!}
+
+                                <div id="descricao">
+                                    {!! $trilha->ds_trilha_tri !!}
+                                </div>
 
                                 <div style="text-align: center;">
                                     <p>Grau de dificuldade</p>
