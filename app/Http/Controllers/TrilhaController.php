@@ -10,6 +10,7 @@ use App\Tag;
 use App\Trilha;
 use App\Cidade;
 use App\Nivel;
+use App\Foto;
 use App\Categoria;
 use App\Complemento;
 use Illuminate\Http\Request;
@@ -66,6 +67,15 @@ class TrilhaController extends Controller
     {
         if (Trilha::create($request->all())) {
             return redirect('admin/listar-trilhas');
+        } else {
+            dd("Erro");
+        }
+    }
+
+    public function insertFoto(Request $request)
+    {
+        if (Foto::create($request->all())) {
+            return redirect('admin/editar-trilha/'.$request->id_trilha_tri);
         } else {
             dd("Erro");
         }

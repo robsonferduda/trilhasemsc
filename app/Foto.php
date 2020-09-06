@@ -13,8 +13,11 @@ class Foto extends Model
     protected $primaryKey = 'id_foto_fot';
     protected $dates = ['deleted_at'];
     protected $fillable = [
+                            'id_trilha_tri',
+                            'id_tipo_foto_tfo',
                             'nm_foto_fot',
-                            'nm_path_fot'
+                            'nm_path_fot',
+                            'dc_alt_fot'
                           ];
 
     public $timestamps = true;

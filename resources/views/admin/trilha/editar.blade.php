@@ -116,10 +116,61 @@
                                 <textarea name="ds_trilha_tri" id="ckeditor" rows="15" style="width: 100%;">
                                     {{ $trilha->ds_trilha_tri }}
                                 </textarea> 
-                                                             
-                                <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 20px;">
-                                    <h5>Fotos da Trilha</h5>
-                                    <div class="table-responsive">
+                            </div> 
+                        </div>
+                        <div style="text-align: center; margin-top:15px; ">
+                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
+                        </div>
+                    </form>
+
+                    <form action="{{ url('admin/insert-foto') }}" method="post">
+                        @csrf
+                            <h4>Dados da Foto</h4>
+                            <h6>Tipos obrigatórios para publicar: [Principais Aventuras - Miniatura, Principais Aventuras - Principal, Últimas Trilhas, Detalhes - Principal]</h6>
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <input type="hidden" name="id_trilha_tri" value="{{ $trilha->id_trilha_tri }}">
+                                        <label for="id_tipo_foto_tfo">Tipo</label>
+                                        <select name="id_tipo_foto_tfo" id="id_tipo_foto_tfo" class="form-control select2">
+                                            <option value="0">Selecione um tipo</option>
+                                            @foreach(\App\TipoFoto::all() as $tipo)
+                                                <option value="{{ $tipo->id_tipo_foto_tfo }}">{{ $tipo->nm_tipo_foto_tfo }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="nm_foto_fot">Nome</label>
+                                        <input type="text" name="nm_foto_fot" id="nm_foto_fot" class="form-control" required data-parsley-error-message="Campo nome é obrigatório">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="nm_path_fot">Caminho (Ex.: trilha-de-naufragados.jpg)</label>
+                                        <input type="text" name="nm_path_fot" id="nm_path_fot" class="form-control" required data-parsley-error-message="Campo caminho é obrigatório">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="dc_alt_fot">Descrição</label>
+                                        <input type="text" name="dc_alt_fot" id="dc_alt_fot" class="form-control" required data-parsley-error-message="Campo descrição é obrigatório">
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <div style="text-align: center; margin-top:15px; ">
+                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
+                        </div>
+                    </form>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 20px;">
+                            <h5>Fotos da Trilha</h5>
+                            <div class="table-responsive">
                                         <table class="table table-hover table-custo">
                                             <thead>
                                                 <tr>
@@ -152,15 +203,9 @@
                                                 @endforelse
                                             </tbody>
                                         </table>
-                                    </div>           
-                                </div>
-                            </div> 
+                            </div>           
                         </div>
-                        <div style="text-align: center; margin-top:15px; ">
-                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
 	    </div>
 	</div>       

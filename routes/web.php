@@ -64,5 +64,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('nova-trilha', 'TrilhaController@novo');
         Route::post('update-trilha', 'TrilhaController@update');
         Route::post('create-trilha', 'TrilhaController@create');
+        Route::post('insert-foto', 'TrilhaController@insertFoto');
     });
 });
