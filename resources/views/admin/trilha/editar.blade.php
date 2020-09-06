@@ -45,9 +45,9 @@
                                 <div class="form-group">
                                     <label for="id_user_usu">Autor</label>
                                     <select name="id_user_usu" id="id_user_usu" class="form-control select2">
-                                        <option value="0">Selecione um autor</option>
+                                        <option value="0">Selecione um autor </option>
                                         @foreach($usuarios as $user)
-                                            <option value="{{ $user->id }}" {{ ($trilha->id_user_usu == Auth::user()->id ) ? 'selected' : '' }}>{{ $user->name }}</option>
+                                            <option value="{{ $user->id }}" {{ ($trilha->id_user_usu == $user->id ) ? 'selected' : '' }}>{{ $user->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
