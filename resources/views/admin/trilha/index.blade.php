@@ -33,6 +33,7 @@
                             <tr>
                                 <th class="center" style="width: 12%">Nível</th>
                                 <th>Trilha</th>
+                                <th>URL</th>
                                 <th>Publicado</th>
                                 <th class="center" style="width: 10%">Ações</th>
                             </tr>
@@ -41,6 +42,7 @@
                             <tr>
                                 <th>Nível</th>
                                 <th>Trilha</th>
+                                <th>URL</th>
                                 <th>Publicado</th>
                                 <th>Ações</th>
                             </tr>
@@ -53,6 +55,7 @@
                                         {{ $trilha->nivel->dc_nivel_niv }}
                                     </td>
                                     <td>{{ $trilha->nm_trilha_tri }}</td>
+                                    <td>{{ $trilha->ds_url_tri }}</td>
                                     <td>
                                         @if($trilha->fl_publicacao_tri == 'S')
                                             <span class="badge badge-success">SIM</span>
@@ -61,6 +64,7 @@
                                         @endif
                                     </td>
                                     <td>
+                                        <a class="btn btn-warning" href="{{ url('https://trilhasemsc.com.br/'.$trilha->ds_url_tri) }}"><i class="fa fa-search"></i></a>
                                         <a class="btn btn-primary" href="{{ url('admin/editar-trilha/'.$trilha->id_trilha_tri) }}"><i class="fa fa-edit"></i></a>
                                     </td>
                                 </tr>
