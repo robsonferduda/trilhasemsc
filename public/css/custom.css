@@ -7,3 +7,94 @@
 #descricao table { border: none; text-align: center; }
 #descricao table tr td{ padding: 10px 15px; }
 #descricao table tr td img{ width: 60px; height: 60px; }
+
+.h2-section { 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	text-align: center;
+	box-sizing: border-box;
+	color: inherit;
+	margin: 0 0 10px;
+	font-family: 'Raleway', sans-serif;
+	display: inline-block;
+	font-size: 35px;
+	font-weight: 300;
+	line-height: 26px;
+	margin-bottom: 18px;
+	padding-bottom: 38px;
+	position: relative;
+	text-transform: uppercase;
+}
+
+.h2-section-span {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	text-align: center;
+	color: inherit;
+	font-family: 'Raleway', sans-serif;
+	font-size: 35px;
+	line-height: 26px;
+	text-transform: uppercase;
+	box-sizing: border-box;
+	font-weight: 700;
+}
+
+.h2-section::before {
+    background: #bcbcbc none repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    height: 1px;
+    left: 50%;
+    margin-left: -193.5px;
+    position: absolute;
+    text-align: center;
+    width: 160px;
+}
+
+.h2-section::after {
+    background: #bcbcbc none repeat scroll 0 0;
+    bottom: 0px;
+    content: "";
+    height: 1px;
+    right: 50%;
+    margin-right: -193.5px;
+    position: absolute;
+    text-align: center;
+    width: 160px;
+}
+
+.contador {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	text-align: left;
+	box-sizing: border-box;
+	line-height: 1.1;
+	margin: 0 0 10px;
+	color: #000000;
+	font-family: "Open Sans",sans-serif;
+	font-weight: 700;
+	margin-bottom: 3px;
+	text-transform: uppercase;
+	font-size: 35px;
+}
+
+
+@media (max-width: 767px) {
+	.h2-section { 
+		font-size: 29px;
+		line-height: 42px;
+	}
+
+	.h2-section-span {
+		font-size: 29px;
+		line-height: 42px;
+	}
+	.h2-section::before {
+	   margin-left: -135px;
+       width: 100px;
+	}
+
+	.h2-section::after {
+	    margin-right: -135px;
+    	width: 100px;
+	}
+
+}
+

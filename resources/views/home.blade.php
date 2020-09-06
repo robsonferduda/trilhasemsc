@@ -8,7 +8,7 @@
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <br/><br/><h1>Apresentamos <span>Santa Catarina</span></h1>
+                                <br/><br/><h2 class="h2-section">Apresentamos <span class="h2-section-span">Santa Catarina</span></h2>
                             </div>    
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <h1>AVENTURAS <span>FAVORITAS</span></h1>
+                                <h2 class="h2-section">AVENTURAS <span class="h2-section-span">FAVORITAS</span></h2>
                             </div>    
                             <p>As trilhas favoritas na opinião dos nossos aventureiros. <br/> Escolha sua preferida você também!</p>
                         </div>
@@ -116,7 +116,7 @@
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <br/><br/><h1>INFORMES <span>PUBLICITÁRIOS</span></h1>
+                                <br/><br/><h2 class="h2-section">INFORMES <span class="h2-section-span">PUBLICITÁRIOS</span></h2>
                             </div>    
                         </div>
                     </div>
