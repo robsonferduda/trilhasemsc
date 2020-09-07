@@ -117,7 +117,7 @@
         <div class="slider-area">
             <div class="preview-2">
                 <div id="nivoslider" class="slides">    
-                    <a href="#"><img src="{{ asset('img/slider/lagoinha-do-leste.jpg') }}" alt="" title="#slider-1-caption1"/></a>
+                    <a href="#"><img src="{{ asset('img/slider/lagoinha-do-leste.jpg') }}" alt="Foto panorâmina da trilha da lagoinha do leste em Florianópolis" title="#slider-1-caption1"/></a>
                 </div> 
                 <div id="slider-1-caption1" class="nivo-html-caption nivo-caption">
                     <div class="banner-content slider-1">
