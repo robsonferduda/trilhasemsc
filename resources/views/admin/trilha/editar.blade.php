@@ -127,7 +127,7 @@
                     <form action="{{ url('admin/insert-foto') }}" method="post">
                         @csrf
                             <h4>Dados da Foto</h4>
-                            <h6>Tipos obrigatórios para publicar: [Principais Aventuras - Miniatura, Principais Aventuras - Principal, Últimas Trilhas, Detalhes - Principal]</h6>
+                            <h6>Tipos obrigatórios para publicar: [Busca - Miniatura, Principais Aventuras - Miniatura, Principais Aventuras - Principal, Últimas Trilhas, Detalhes - Principal]</h6>
                             <div class="row clearfix">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
