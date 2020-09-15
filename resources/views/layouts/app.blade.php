@@ -32,7 +32,7 @@
 
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Trilhas em SC</title>
+        <title>Trilhas em Santa Catarina</title>
         <meta name="description" content="Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil">
         <meta name="viewport" content="width=device-width, initial-scale=1">        
         <!-- favicon
