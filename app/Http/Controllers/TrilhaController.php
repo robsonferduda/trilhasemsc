@@ -26,8 +26,7 @@ class TrilhaController extends Controller
 
     public function index()
     {
-
-        if(Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN'){
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
             return redirect('login');
         }
 
@@ -48,8 +47,9 @@ class TrilhaController extends Controller
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
         $categorias = Categoria::all();
         $complementos = Complemento::orderBy('id_complemento_nivel_con')->get();
+        $tags   = Tag::orderBy('ds_tag_tag')->get();
 
-        return view('admin/trilha/editar', compact('trilha', 'niveis', 'cidades', 'complementos', 'categorias', 'usuarios'));
+        return view('admin/trilha/editar', compact('trilha', 'niveis', 'cidades', 'complementos', 'categorias', 'usuarios', 'tags'));
     }
 
     public function novo()
@@ -59,13 +59,19 @@ class TrilhaController extends Controller
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
         $categorias = Categoria::all();
         $complementos = Complemento::orderBy('id_complemento_nivel_con')->get();
+        $tags   = Tag::orderBy('ds_tag_tag')->get();
 
-        return view('admin/trilha/novo', compact('niveis', 'cidades', 'complementos', 'categorias', 'usuarios'));
+        return view('admin/trilha/novo', compact('niveis', 'cidades', 'complementos', 'categorias', 'usuarios', 'tags'));
     }
 
     public function create(Request $request)
     {
-        if (Trilha::create($request->all())) {
+        $trilha = Trilha::create($request->all());
+        if ($trilha) {
+            if (!empty($request->tags)) {
+                $trilha->tags()->sync($request->tags);
+            }
+
             return redirect('admin/listar-trilhas');
         } else {
             dd("Erro");
@@ -86,6 +92,10 @@ class TrilhaController extends Controller
         $trilha = Trilha::where('id_trilha_tri', $request->id_trilha_tri)->first();
 
         if ($trilha->update($request->all())) {
+            if (!empty($request->tags)) {
+                $trilha->tags()->sync($request->tags);
+            }
+            
             return redirect(URL::previous());
         } else {
             dd("Erro");
@@ -103,7 +113,7 @@ class TrilhaController extends Controller
 
         $busca_cidade = Trilha::with('cidade')
            ->select('cd_cidade_cde', DB::raw('count(*) as total'))
-           ->where('fl_publicacao_tri','S')
+           ->where('fl_publicacao_tri', 'S')
            ->groupBy('cd_cidade_cde')
            ->get();
 
@@ -171,7 +181,7 @@ class TrilhaController extends Controller
                                   $query->whereRaw("unaccent(replace(lower(ds_tag_tag),' ','-')) = '".$tag."'");
                               });
                           })
-                          ->where('fl_publicacao_tri','S')
+                          ->where('fl_publicacao_tri', 'S')
         ->get();
 
         $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
@@ -182,5 +192,4 @@ class TrilhaController extends Controller
 
         return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'ultimas' => $ultimas, 'termo' => $termo]);
     }
-
 }

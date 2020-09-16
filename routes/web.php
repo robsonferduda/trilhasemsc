@@ -41,11 +41,14 @@ Route::get('sitemap', 'SiteMapController@gerar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
 
-Route::get('politica-de-privacidade', function(){ return view('politica-de-privacidade'); })->name('politica-de-privacidade');
-Route::get('termos-de-uso', function(){ return view('termos-de-uso'); })->name('termos-de-uso');
+Route::get('politica-de-privacidade', function () {
+    return view('politica-de-privacidade');
+})->name('politica-de-privacidade');
+Route::get('termos-de-uso', function () {
+    return view('termos-de-uso');
+})->name('termos-de-uso');
 
 Route::group(['middleware' => ['web']], function () {
-
     Route::get('usuario/add', 'UserController@store');
     Route::get('usuario/update', 'UserController@update');
     Route::get('usuarios', 'UserController@index');

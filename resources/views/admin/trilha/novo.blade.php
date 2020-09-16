@@ -105,6 +105,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">    
+                                     <label for="tags[]">TAGs</label>
+                                     <select name="tags[]" multiple="multiple" class="form-control select2">
+                                        @foreach($tags as $tag)
+                                            <option value="{{ $tag->cd_tag_tag }}">{{ $tag->ds_tag_tag }}</option>
+                                        @endforeach
+                                    </select> 
+                                </div>                               
                                 <div class="form-group">
                                     <label for="id_nivel_niv">Geolocalização (Wikiloc, Strava, Relive)</label>
                                     <textarea name="url_geolocalizacao_tri" id="url_geolocalizacao_tri" rows="6" style="width: 100%;">
@@ -113,7 +121,7 @@
                                 </div>
                                 <textarea name="ds_trilha_tri" id="ckeditor" rows="15" style="width: 100%;">
                                     
-                                </textarea>       
+                                </textarea>                                  
                             </div> 
                         </div>
                         <div style="text-align: center; margin-top:15px; ">
