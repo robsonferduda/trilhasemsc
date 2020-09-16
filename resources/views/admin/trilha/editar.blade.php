@@ -132,23 +132,42 @@
                         </div>
                     </form>
 
-                    <form action="{{ url('admin/insert-foto') }}" method="post">
+                    <form action="{{ url('admin/insert-foto') }}" method="post" enctype="multipart/form-data">
                         @csrf
                             <h4>Dados da Foto</h4>
                             <h6>Tipos obrigatórios para publicar: [Busca - Miniatura, Principais Aventuras - Miniatura, Principais Aventuras - Principal, Últimas Trilhas, Detalhes - Principal]</h6>
                             <div class="row clearfix">
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <input type="hidden" name="id_trilha_tri" value="{{ $trilha->id_trilha_tri }}">
                                         <label for="id_tipo_foto_tfo">Tipo</label>
                                         <select name="id_tipo_foto_tfo" id="id_tipo_foto_tfo" class="form-control select2">
                                             <option value="0">Selecione um tipo</option>
                                             @foreach(\App\TipoFoto::all() as $tipo)
-                                                <option value="{{ $tipo->id_tipo_foto_tfo }}">{{ $tipo->nm_tipo_foto_tfo }}</option>
+                                                <option  data-height="{{ $tipo->height_tfo }}" data-width="{{ $tipo->width_tfo }}"  value="{{ $tipo->id_tipo_foto_tfo }}">{{ $tipo->nm_tipo_foto_tfo }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-lg-1 col-md-1 col-sm-12">
+                                    <div class="form-group">     
+                                        <label for="height">Height</label>                                  
+                                        <input type="text" name="height" id="height" class="form-control" required data-parsley-error-message="Campo Height é obrigatório">                
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-12">
+                                    <div class="form-group">   
+                                        <label for="width">Width</label>                                      
+                                        <input type="text" name="width" id="width" class="form-control" required data-parsley-error-message="Campo Width é obrigatório">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="nm_foto_fot">Nome</label>
+                                        <input type="text" name="nm_foto_fot" id="nm_foto_fot" class="form-control" required data-parsley-error-message="Campo nome é obrigatório">
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="nm_foto_fot">Nome</label>
@@ -167,8 +186,11 @@
                                         <input type="text" name="dc_alt_fot" id="dc_alt_fot" class="form-control" required data-parsley-error-message="Campo descrição é obrigatório">
                                     </div>
                                 </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <input required type="file" name="imagem">
+                                </div>
                             </div>
-                        
+
                         <div style="text-align: center; margin-top:15px; ">
                             <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>
                             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
@@ -233,4 +255,16 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#id_tipo_foto_tfo').on('change', function() {
+            $("#height").val($(this).find(':selected').data('height'));
+            $("#width").val($(this).find(':selected').data('width'));
+        });
+    });
+
+</script>
+    
 @endsection

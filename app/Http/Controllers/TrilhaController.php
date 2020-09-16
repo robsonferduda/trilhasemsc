@@ -13,6 +13,7 @@ use App\Nivel;
 use App\Foto;
 use App\Categoria;
 use App\Complemento;
+use App\TipoFoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
@@ -80,6 +81,31 @@ class TrilhaController extends Controller
 
     public function insertFoto(Request $request)
     {
+        $tipoFoto = TipoFoto::find($request->id_tipo_foto_tfo);
+        $trilha = Trilha::find($request->id_trilha_tri);
+
+        // Categoria Trilha
+        if ($trilha->id_categoria_cat === 1) {
+            $path = $tipoFoto->dc_path_tfp;
+
+            if (count(explode('/', $request->nm_path_fot)) > 1) {
+                $path = $path.'/'.explode('/', $request->nm_path_fot)[0];
+            }
+
+            $pathArray = explode('/', $request->nm_path_fot);
+            $fileName = end($pathArray);
+
+            $request->file('imagem')->storeAs($path, $fileName, 'trilhas');
+
+            \Image::make('public/img/trilhas/'.$path.'/'.$fileName)->resize($request->height, $request->width)->save();
+            \ImageOptimizer::optimize('public/img/trilhas/'.$path.'/'.$fileName);
+        }
+
+        // Categoria Camping
+        if ($trilha->id_categoria_cat === 2) {
+            exit;
+        }
+
         if (Foto::create($request->all())) {
             return redirect('admin/editar-trilha/'.$request->id_trilha_tri);
         } else {
