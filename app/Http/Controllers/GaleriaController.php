@@ -17,7 +17,7 @@ class GaleriaController extends Controller
         $page_name = "Galerias";
         $galerias = Galeria::with('fotos')->orderBy('nm_galeria_gal')->get();
 
-        return view('galeria/index', ['page_name' => $page_name, 'galerias' => $galerias]);
+        return view('galeria/index', ['page_name' => $page_name, 'galerias' => $galerias, 'titulo' => 'Nossas Galerias']);
     }
 
     public function buscar($nome)
