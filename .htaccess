@@ -4,6 +4,9 @@
     </IfModule>
 
     RewriteEngine On
+	
+    RewriteCond %{HTTP_HOST} !^trilhasemsc.com.br$
+    RewriteRule ^(.*)$ https://trilhasemsc.com.br/$1 [R=301,L]
 
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/$ /$1 [L,R=301]
@@ -32,3 +35,8 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
+
+<Files .env>
+ order allow,deny
+ Deny from all
+</Files>
