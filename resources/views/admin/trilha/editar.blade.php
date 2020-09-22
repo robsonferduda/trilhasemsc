@@ -152,22 +152,15 @@
                                 <div class="col-lg-1 col-md-1 col-sm-12">
                                     <div class="form-group">     
                                         <label for="height">Height</label>                                  
-                                        <input type="text" name="height" id="height" class="form-control" required data-parsley-error-message="Campo Height é obrigatório">                
+                                        <input type="text" name="height" id="height" class="form-control" >                
                                     </div>
                                 </div>
                                 <div class="col-lg-1 col-md-1 col-sm-12">
                                     <div class="form-group">   
                                         <label for="width">Width</label>                                      
-                                        <input type="text" name="width" id="width" class="form-control" required data-parsley-error-message="Campo Width é obrigatório">
+                                        <input type="text" name="width" id="width" class="form-control" >
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="nm_foto_fot">Nome</label>
-                                        <input type="text" name="nm_foto_fot" id="nm_foto_fot" class="form-control" required data-parsley-error-message="Campo nome é obrigatório">
-                                    </div>
-                                </div>
-
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="nm_foto_fot">Nome</label>
