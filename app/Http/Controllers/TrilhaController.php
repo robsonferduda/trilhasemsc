@@ -98,7 +98,7 @@ class TrilhaController extends Controller
             $request->file('imagem')->storeAs($path, $fileName, 'trilhas');
 
             if (!empty($request->height) && !empty($request->width)) {
-                \Image::make('public/img/trilhas/'.$path.'/'.$fileName)->resize($request->height, $request->width)->save();
+                \Image::make('public/img/trilhas/'.$path.'/'.$fileName)->resize($request->width, $request->height)->save();
             }
             \ImageOptimizer::optimize('public/img/trilhas/'.$path.'/'.$fileName);
         }
