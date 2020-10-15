@@ -15,7 +15,7 @@
                 echo '<ul>';
                 foreach ($item['images'] as $image) {
                     echo '<li>';
-                    echo "<a href=".$image['url'].">".$image['url']."</a>".'<br>';
+                    echo "<a href=".str_replace(' ', '%20',$image['url']).">".$image['url']."</a>".'<br>';
                     if (isset($image['title'])) {
                         echo 'Title: '.$image['title'].'<br>';
                     }
