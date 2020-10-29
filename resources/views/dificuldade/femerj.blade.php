@@ -1,5 +1,7 @@
 @extends('layouts.blog')
 
+@section('pageTitle', 'Guia de Dificuldade em Trilhas' )
+
 @section('content')
 <div class="blog-post-area section-padding">
     <div class="container">

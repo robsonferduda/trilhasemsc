@@ -1,5 +1,7 @@
 @extends('layouts.blog')
 
+@section('pageTitle','Acesso')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center" style="margin-top: 30px;">

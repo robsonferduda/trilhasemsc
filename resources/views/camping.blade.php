@@ -1,5 +1,7 @@
 @extends('layouts.blog')
 
+@section('pageTitle', 'Camping Vale da Utopia' )
+
 @section('content')
         <div class="portfolio-area portfolio-two">
             <div class="container">

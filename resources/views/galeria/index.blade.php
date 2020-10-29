@@ -1,4 +1,7 @@
 @extends('layouts.blog')
+
+@section('pageTitle', 'Galerias' )
+
 @section('content')
         <div class="portfolio-area portfolio-two">
             <div class="container">

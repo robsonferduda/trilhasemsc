@@ -1,4 +1,7 @@
 @extends('layouts.blog')
+
+@section('pageTitle', 'Galeria '.$galeria->nm_galeria_gal )
+
 @section('content')
     <style>
         .galleria{ width: 100%; height: 600px; background: #000 }

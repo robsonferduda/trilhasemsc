@@ -1,5 +1,7 @@
 @extends('layouts.blog')
 
+@section('pageTitle', $trilha->nm_trilha_tri )
+
 @section('content')
   <!--Blog Post Area Start-->
         @php 

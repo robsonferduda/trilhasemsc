@@ -1,5 +1,6 @@
 @extends('layouts.blog')
 
+@section('pageTitle','Lista de Trilhas')
 @section('content')
 
 <!--Adventures Grid Start-->

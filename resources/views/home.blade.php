@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('pageTitle','Trilhas em Santa Catarina')
 @section('content')
 
         <div class="blog-two-area section-padding">
