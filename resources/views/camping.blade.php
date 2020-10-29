@@ -2,6 +2,8 @@
 
 @section('pageTitle', 'Camping Vale da Utopia' )
 
+@section('description', 'Sabe aqueles lugares que parecem saídos de filmes, que te levam a uma viagem no tempo? Esse é o caso do Vale da Utopia, pequeno vale localizado na cidade de Palhoça. O vale fica localizado entre a Praia da Pinheira e a Praia da Guarda do Embaú e faz parte do Parque Estadual da Serra do Tabuleiro. O vale é coberto por uma grama verdinha e abriga a pequena Praia do Maço, que permite além do camping, também um gostoso banho de mar.' )
+
 @section('content')
         <div class="portfolio-area portfolio-two">
             <div class="container">

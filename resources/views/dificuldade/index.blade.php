@@ -1,6 +1,7 @@
 @extends('layouts.blog')
 
 @section('pageTitle', 'Guia de Dificuldade em Trilhas' )
+@section('description', 'Uma das principais questões quando falamos em trilha é o nível de dificuldade. E essa preocupação é essencial para evitar problemas durante o percurso e transformar uma atividade prazerosa em uma experiência ruim. Mas simplesmente perguntar sobre o grau de dificuldade para alguém que fez o convite para a trilha não resolve, pois a percepção de dificuldade pode variar de pessoa para pessoa, além de estar relacionada também ao preparo físico e experiência em percorrer trajetos em trilhas.' )
 
 @section('content')
         <div class="blog-post-area section-padding">

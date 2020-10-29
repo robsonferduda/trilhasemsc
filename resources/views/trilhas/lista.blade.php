@@ -1,6 +1,7 @@
 @extends('layouts.blog')
 
 @section('pageTitle','Lista de Trilhas')
+@section('description', 'Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil' )
 @section('content')
 
 <!--Adventures Grid Start-->

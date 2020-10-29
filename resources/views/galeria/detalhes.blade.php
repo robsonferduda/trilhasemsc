@@ -1,6 +1,7 @@
 @extends('layouts.blog')
 
 @section('pageTitle', 'Galeria '.$galeria->nm_galeria_gal )
+@section('description', 'Nossas trilhas rendem belas fotos, dos mais diversos tipos! Então criamos as galerias temáticas, para organizar e trazer as mais legais para vocês. Escolha a que mais gosta e aproveite a paisagem!' )
 
 @section('content')
     <style>

@@ -1,6 +1,7 @@
 @extends('layouts.blog')
 
 @section('pageTitle', 'Guia de Dificuldade em Trilhas' )
+@section('description', 'A norma estabelece critérios referentes à classificação de percursos utilizados em caminhadas sem pernoite quanto às suas características de severidade. São apresentados critérios com escala de intensidade crescente que determinam o grau em cada um deles. A classificação é composta por quatro critérios: severidade do meio, orientação do percurso, condições do terreno e intensidade do esforço físico.' )
 
 @section('content')
         <div class="blog-post-area section-padding">

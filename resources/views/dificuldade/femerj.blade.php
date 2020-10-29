@@ -1,6 +1,7 @@
 @extends('layouts.blog')
 
 @section('pageTitle', 'Guia de Dificuldade em Trilhas' )
+@section('description', 'As trilhas são classificadas levando em consideração quatro parâmetros: esforço físico, exposição ao risco, orientação e insolação. Cada um desses parâmetros possui uma escala crescente de severidade. Além disso, deve ser adicionado fatores como distância da trilha, tempo de percurso e dificuldades técnicas do caminho. Listamos abaixo a definição de cada critério e a respectiva escala de severidade e sua explicação.' )
 
 @section('content')
 <div class="blog-post-area section-padding">

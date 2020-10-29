@@ -1,6 +1,7 @@
 @extends('layouts.blog')
 
 @section('pageTitle', $trilha->nm_trilha_tri )
+@section('description', strip_tags(html_entity_decode(substr($trilha->ds_trilha_tri, 0, strpos($trilha->ds_trilha_tri, chr(10) ) - 1))) )
 
 @section('content')
   <!--Blog Post Area Start-->
