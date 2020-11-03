@@ -20,7 +20,7 @@ class HomeController extends Controller
         */
         $page_name = "Trilha";
         
-        $totais = array('trilha'  => Trilha::where('id_categoria_cat', 1)->where('fl_publicacao_tri','S')->count(),
+        $totais = array('trilha'  => Trilha::where('id_categoria_cat', 1)->where('fl_publicacao_tri', 'S')->count(),
                         'camping' => 1,
                         'galeria' => Galeria::all()->count() );
 
@@ -28,8 +28,8 @@ class HomeController extends Controller
 
         $niveis = Nivel::get();
 
-        $ultimas = Trilha::with('foto')->where('fl_publicacao_tri','S')->orderBy('created_at', 'DESC')->take(2)->get();
-        $preferidas = Trilha::with('foto')->where('fl_publicacao_tri','S')->orderBy('total_votos_tri', 'ASC')->take(5)->get();
+        $ultimas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('created_at', 'DESC')->take(2)->get();
+        $preferidas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('total_votos_tri', 'ASC')->take(5)->get();
 
         return view('home', ['totais' => $totais, 'ultimas' => $ultimas, 'preferidas' => $preferidas ,'cidades' => $cidades, 'niveis' => $niveis, 'page_name' => $page_name]);
     }
@@ -57,7 +57,11 @@ class HomeController extends Controller
            ->groupBy('cd_cidade_cde')
            ->get();
 
-        return view('camping', ['page_name' => $page_name, 'busca_cidade' => $busca_cidade]);
+
+        $titulo = 'Vale da Utopia';
+        $subtitulo = "Camping em Palhoça";
+
+        return view('camping', ['page_name' => $page_name, 'busca_cidade' => $busca_cidade, 'titulo' => $titulo, 'subtitulo' => $subtitulo]);
     }
 
     public function contato()
