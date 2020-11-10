@@ -31,8 +31,6 @@ class HomeController extends Controller
         $ultimas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('created_at', 'DESC')->take(2)->get();
         $preferidas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('total_votos_tri', 'DESC')->take(5)->get();
 
-        dd($preferidas);
-
         return view('home', ['totais' => $totais, 'ultimas' => $ultimas, 'preferidas' => $preferidas ,'cidades' => $cidades, 'niveis' => $niveis, 'page_name' => $page_name]);
     }
 
