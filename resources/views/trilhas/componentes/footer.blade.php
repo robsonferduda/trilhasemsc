@@ -6,7 +6,7 @@
                     <h4>Contato</h4>
                     <div class="footer-widget-list">
                         <ul>
-                            <!--<li><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></li>-->
+                            <li><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></li>
                             <li><i class="fa fa-envelope" aria-hidden="true"></i> trilhasemsc@gmail.com</li>
                         </ul>
                     </div>
