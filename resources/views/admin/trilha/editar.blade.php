@@ -235,7 +235,7 @@
                             <h5>Fotos para Postagem</h5>
                                 <textarea>
                                 @forelse($trilha->foto as $foto)
-                                    <p><img alt="{{ $foto->nm_foto_fot }} - {{ $foto->dc_alt_fot }}" src="https://trilhasemsc.com.br/public/img/trilhas/descricao/$foto->nm_path_fot.jpg" /></p>
+                                    <p><img alt="{{ $foto->nm_foto_fot }} - {{ $foto->dc_alt_fot }}" src="https://trilhasemsc.com.br/public/img/trilhas/descricao/".{{ $foto->nm_path_fot }}.".jpg" /></p>
                                 @empty
                                     Nenhuma foto cadastrada
                                 @endforelse
