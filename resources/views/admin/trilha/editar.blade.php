@@ -230,7 +230,19 @@
                         </div>
                     </div>
 
-                   
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 20px;">
+                            <h5>Fotos para Postagem</h5>
+                                <textarea>
+                                    @forelse($trilha->foto as $foto)
+                                        <p><img alt="" src="https://trilhasemsc.com.br/public/img/trilhas/descricao.jpg" /></p>
+                                    @empty
+                                        Nenhuma foto cadastrada
+                                    @endforelse
+                                </textarea>
+                            </div>           
+                        </div>
+                    </div>
                 </div>
 	    </div>
 	</div>       
