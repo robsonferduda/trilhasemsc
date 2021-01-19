@@ -82,7 +82,7 @@
                                 <div class="adventure-list-container">
                                     <div class="adventure-list-text">
                                         <h1><a href="{{ url($trilha->ds_url_tri) }}">{{$trilha->nm_trilha_tri}}</a></h1>
-                                        <h2 class='cidade-list' ><a href="{{ url('trilhas/?cidade='.$trilha->cidade->cd_cidade_cde.'#lista') }}">{{$trilha->cidade->nm_cidade_cde}}</a></h2>
+                                        <h2 class='cidade-list' ><a href="{{ url(stringToStringSeo($trilha->cidade->nm_cidade_cde).'/trilhas/#lista') }}">{{$trilha->cidade->nm_cidade_cde}}</a></h2>
                                         <p>
                                             {!! nl2br(substr($trilha->ds_trilha_tri, 0, strpos($trilha->ds_trilha_tri, chr(10) ) - 1)) !!}
                                         </p>
