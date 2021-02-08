@@ -61,6 +61,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('login/facebook', 'FacebookController@redirectToProvider');
     Route::get('login/facebook/callback', 'FacebookController@handleProviderCallback');
 
+    Route::get('login/google', 'GoogleController@redirectToProvider');
+    Route::get('login/google/callback', 'GoogleController@handleProviderCallback');
+
     Route::prefix('admin')->group(function () {
         Route::get('listar-trilhas', 'TrilhaController@index');
         Route::get('editar-trilha/{id}', 'TrilhaController@editar');

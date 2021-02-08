@@ -3378,6 +3378,7 @@ textarea.yourmessage {
 }
 .sign-in-buttons a.facebook::after {background: #3d5c98 none repeat scroll 0 0}
 .sign-in-buttons a.twitter::after {background: #1ab2e8 none repeat scroll 0 0}
+.sign-in-buttons a.google::after {background: #3367d6 none repeat scroll 0 0}
 .sign-in-buttons a::after {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     content: "";
@@ -3391,6 +3392,7 @@ textarea.yourmessage {
 }
 .sign-in-buttons a.facebook:hover::after {background: rgba(61, 92, 152, 0.9) none repeat scroll 0 0}
 .sign-in-buttons a.twitter:hover::after {background: rgba(26, 178, 232, 0.9) none repeat scroll 0 0}
+.sign-in-buttons a.google:hover::after {background: rgb(61, 113, 234) none repeat scroll 0 0}
 .sign-in-form .form-box, .sign-up-form .form-box {
     height: 43px;
     line-height: 43px;
