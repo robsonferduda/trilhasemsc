@@ -3,19 +3,11 @@ $(function () {
     
     CKEDITOR.replace( 'ckeditor', {
         toolbarGroups: [
-            { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-            { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-            { name: 'links' },
-            { name: 'insert' },
-            { name: 'forms' },
-            { name: 'tools' },
-            { name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
-            { name: 'others' },
-            '/',
-            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-            { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-            { name: 'styles' },
-            { name: 'colors', items: [ 'TextColor', 'BGColor' ] }
+            { name: 'document',	   groups: [ 'mode', 'document' ] },			// Displays document group with its two subgroups.
+             { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },			// Group's name will be used to create voice label.
+             '/',																// Line break - next group will be placed in new line.
+             { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+             { name: 'links' }
         ]
     
         // NOTE: Remember to leave 'toolbar' property with the default value (null).
