@@ -1,5 +1,7 @@
 $(function () {
     //CKEditor
+
+    CKEDITOR.config.colorButton_colors = 'CF5D4E,454545,FFF,DDD,CCEAEE,66AB16';
     
     CKEDITOR.replace( 'ckeditor', {
         toolbarGroups: [
