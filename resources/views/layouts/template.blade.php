@@ -213,7 +213,6 @@
     <script src="{{ asset('bundles/mainscripts.bundle.js') }}"></script>
     <script src="{{ asset('js/pages/tables/jquery-datatable.js') }}"></script>
     <script src="{{ asset('js/pages/forms/editors.js') }}"></script>
-    <script src="{{ asset('vendor/ckeditor/config.js') }}"></script>
 
     <script>
         $(function() {

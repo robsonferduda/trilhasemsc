@@ -1,6 +1,6 @@
 $(function () {
     //CKEditor
-   
+    
     CKEDITOR.replace( 'ckeditor', {
         toolbarGroups: [
             { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
@@ -15,7 +15,7 @@ $(function () {
             { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
             { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
             { name: 'styles' },
-            { name: 'colors' }
+            { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
         ]
     
         // NOTE: Remember to leave 'toolbar' property with the default value (null).
