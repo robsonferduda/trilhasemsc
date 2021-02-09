@@ -15,7 +15,7 @@ $(function () {
             { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
             { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
             { name: 'styles' },
-            { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+            { name: 'colors', items: [ 'TextColor', 'BGColor' ] }
         ]
     
         // NOTE: Remember to leave 'toolbar' property with the default value (null).
