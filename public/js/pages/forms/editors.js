@@ -1,8 +1,6 @@
 $(function () {
     //CKEditor
-    CKEDITOR.replace('ckeditor');
-    CKEDITOR.config.height = 300;
-
+   
     CKEDITOR.replace( 'ckeditor', {
         toolbarGroups: [
             { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
