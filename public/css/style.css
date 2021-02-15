@@ -2542,7 +2542,7 @@ header.header-three {top: 10px}
     position: absolute;
     top: 0;
 }
-.adventure-list-text {float: left; width: 74%}
+.adventure-list-text {float: left; width: 74%; padding-right: 10px; padding-bottom: 10px;}
 .adventure-list-image {
     display: inline-block;
     margin-left: 2%;
