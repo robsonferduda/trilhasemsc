@@ -60,20 +60,20 @@ class SiteMapController extends Controller
             $sitemap->add(\URL::to($trilha->ds_url_tri), $trilha->updated_at, '0.9', 'weekly', $images);
         }
 
-        $galerias = Galeria::get();
+        // $galerias = Galeria::get();
 
-        foreach ($galerias as $galeria) {
-            // get all images for the current Galeria
-            $images = array();
-            foreach ($galeria->itens as $foto) {
-                $images[] = array(
-                    'url' => \URL::to('public/img/galerias/fotos/'.$foto->nm_path_fot),
-                    'title' => $foto->dc_alt_fot,
-                    'caption' => $foto->dc_alt_fot
-                );
-            }
-            $sitemap->add(\URL::to('galerias/'.$galeria->url_gal), $galeria->updated_at, '0.9', 'weekly', $images);
-        }
+        // foreach ($galerias as $galeria) {
+        //     // get all images for the current Galeria
+        //     $images = array();
+        //     foreach ($galeria->itens as $foto) {
+        //         $images[] = array(
+        //             'url' => \URL::to('public/img/galerias/fotos/'.$foto->nm_path_fot),
+        //             'title' => $foto->dc_alt_fot,
+        //             'caption' => $foto->dc_alt_fot
+        //         );
+        //     }
+        //     $sitemap->add(\URL::to('galerias/'.$galeria->url_gal), $galeria->updated_at, '0.9', 'weekly', $images);
+        // }
 
 
         return $sitemap;
