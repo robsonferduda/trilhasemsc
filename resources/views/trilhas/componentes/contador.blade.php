@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="row hidden-xs hidden-sm">
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-4 col-sm-6">
                         <div class="single-skill-item">
                             <div class="single-skill-icon">
                                 <div class="skill-bg"></div>
@@ -26,7 +26,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 hidden-sm">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-skill-item low">
+                            <div class="single-skill-icon">
+                                <div class="skill-bg"></div>
+                                <div class="skill-border-left"></div>
+                                <img alt="" src="{{ asset('img/icon/skill-2.png') }}" class="primary-img">
+                                <img alt="" src="{{ asset('img/icon/skill-2-hover.png') }}" class="secondary-img">
+                                <div class="skill-border-right"></div>
+                            </div>
+                            <div class="single-skill-text">
+                                <h4>GALERIAS</h4>
+                                <span class="contador"><span class="counter">{{ $totais['galeria'] }}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 hidden-sm">
                         <div class="single-skill-item medium">
                             <div class="single-skill-icon">
                                 <div class="skill-bg"></div>
