@@ -11,7 +11,7 @@
             <form action="{{url('trilhas/#lista')}}" id="banner-searchbox" class="form-search-trilha">
                 <div class="row" style="padding-top: 5px;">
                     <div class="col-lg-2 col-md-12 col-sm-12">
-                        <p>Mostrando {{ $trilhas->count() }} Trilha(s)</p>
+                        <p>Mostrando {{ $trilhas->count() }} de {{ $trilhas->total() }} Trilha(s)</p>
                     </div>
                     <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
                         <div class="adventure-cat box-small">
@@ -40,21 +40,7 @@
                         <div class="box-busca-aventura-list">
                             <button type="button" style="margin-top: 0px;"  class="btn btn-light btn-busca-aventura-list btn-search-trilha">Buscar Aventura</button>
                         </div>
-                    </div> 
-
-
-                {{--    <div class="col-md-2 hidden-sm">    
-                        <div class="adventure-cat box-small">
-                            <select name="price" class="search-adventure">
-                                <option>Price</option>
-                                <option>$100-$300</option>
-                                <option>$400-$600</option>
-                                <option>$700-$800</option>
-                                <option>$900-$1000</option>
-                            </select>
-                        </div>
-                    </div>  --}}
-              
+                    </div>               
                 </div>        
             </form>
         </div>
@@ -70,41 +56,53 @@
                     @endphp
 
                     <div class="col-md-12">
-                    <div class="single-list-item">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-5">
-                                <div class="adventure-img">
-                                    <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/trilhas/busca/'.$img) }} " alt="{{$alt}}"></a>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-md-8 col-sm-7 margin-left-list">
-                                <div class="adventure-list-container">
-                                    <div class="adventure-list-text">
-                                        <h1><a href="{{ url($trilha->ds_url_tri) }}">{{$trilha->nm_trilha_tri}}</a></h1>
-                                        <h2 class='cidade-list' ><a href="{{ url(stringToStringSeo($trilha->cidade->nm_cidade_cde).'/trilhas/#lista') }}">{{$trilha->cidade->nm_cidade_cde}}</a></h2>
-                                        <p>
-                                            {!! nl2br(substr($trilha->ds_trilha_tri, 0, strpos($trilha->ds_trilha_tri, chr(10) ) - 1)) !!}
-                                        </p>
-                                        <div class="list-buttons">
-                                            <a href="{{ url($trilha->ds_url_tri) }}" class="button-one button-blue">LER MAIS</a>                                        
-                                        </div>
-                                    </div>
-                                    <div class="adventure-list-image">
-                                        <div class="image-top">
-                                            <img class="icone-nivel" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Ícone indicador de trilha com nível {{ ucfirst(trans($trilha->nivel->dc_nivel_niv)) }}">
-                                        </div>
-                                        <h2>{{ $trilha->nivel->dc_nivel_niv }}</h2>
-                                        <div style="height: 150px; display: inline-block;">
-                                            
-                                        </div>                                      
+                        <div class="single-list-item">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-5">
+                                    <div class="adventure-img">
+                                        <a href="{{ url($trilha->ds_url_tri) }}"><img src="{{ asset('img/trilhas/busca/'.$img) }} " alt="{{$alt}}"></a>
+                                        
                                     </div>
                                 </div>
+                                <div class="col-md-8 col-sm-7 margin-left-list">
+                                    <div class="adventure-list-container">
+                                        <div class="adventure-list-text">
+                                            <h1><a href="{{ url($trilha->ds_url_tri) }}">{{$trilha->nm_trilha_tri}}</a></h1>
+                                            <h2 class='cidade-list' ><a href="{{ url(stringToStringSeo($trilha->cidade->nm_cidade_cde).'/trilhas/#lista') }}">{{$trilha->cidade->nm_cidade_cde}}</a></h2>
+                                            <p>
+                                                {!! nl2br(substr($trilha->ds_trilha_tri, 0, strpos($trilha->ds_trilha_tri, chr(10) ) - 1)) !!}
+                                            </p>
+                                            <div class="list-buttons">
+                                                <a href="{{ url($trilha->ds_url_tri) }}" class="button-one button-blue">LER MAIS</a>                                        
+                                            </div>
+                                        </div>
+                                        <div class="adventure-list-image">
+                                            <div class="image-top">
+                                                <img class="icone-nivel" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Ícone indicador de trilha com nível {{ ucfirst(trans($trilha->nivel->dc_nivel_niv)) }}">
+                                            </div>
+                                            <h2>{{ $trilha->nivel->dc_nivel_niv }}</h2>
+                                            <div style="height: 150px; display: inline-block;">
+                                                
+                                            </div>                                      
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </div>                        
+                    </div>                    
+                @endforeach                
+                <div class="clearfix"></div>
+                <div class="pagination-content">
+                    <div class="pagination-button">
+                        <ul class="pagination">
+                            <li><a href="{{ $trilhas->previousPageUrl().'#lista' }}"><i class="fa fa-angle-left"></i></a></li>
+                            @for ($i = 1; $i <= $trilhas->lastpage(); $i++)
+                                <li {!! $trilhas->currentPage() ==  $i ? 'class="current"' : ' '  !!}><a href="{{ $trilhas->url($i).'#lista' }}">{{ $i }}</a></li>
+                            @endfor                            
+                            <li><a href="{{ $trilhas->nextPageUrl().'#lista' }}"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
                     </div>
-                    </div>
-                @endforeach
+                </div>
             @else
                 <div class='col-md-12 msg-list-empty-trilhas'>
                     @if(!empty($termo))

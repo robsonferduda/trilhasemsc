@@ -210,14 +210,14 @@ class TrilhaController extends Controller
                               });
                           })
                           ->where('fl_publicacao_tri', 'S')
-        ->get();
+        ->paginate(10);
 
         $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
 
         $niveis = Nivel::get();
 
-        $ultimas = Trilha::with('foto')->orderBy('created_at', 'DESC')->take(2)->get();
+        #dd($trilhas->nextPageUrl());
 
-        return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'ultimas' => $ultimas, 'termo' => $termo]);
+        return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'termo' => $termo]);
     }
 }
