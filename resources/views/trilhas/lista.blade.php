@@ -11,7 +11,7 @@
             <form action="{{url('trilhas/#lista')}}" id="banner-searchbox" class="form-search-trilha">
                 <div class="row" style="padding-top: 5px;">
                     <div class="col-lg-2 col-md-12 col-sm-12">
-                        <p>Mostrando {{ $trilhas->count() }} de {{ $trilhas->total() }} Trilha(s)</p>
+                        <p>Mostrando {{ $trilhas->count() }} Trilha(s) - Página {{ $trilhas->currentPage()  }} de {{ $trilhas->lastPage()  }}</p>
                     </div>
                     <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
                         <div class="adventure-cat box-small">
