@@ -6,3 +6,4 @@
 composer.lock
 /public/css/builds
 /public/js/builds
+.htaccess
