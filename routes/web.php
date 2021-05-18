@@ -37,6 +37,9 @@ Route::get('camping', 'HomeController@camping');
 Route::get('guia', 'HomeController@guia');
 Route::get('sobre-nos', 'HomeController@sobre');
 
+Route::get('campings', 'CampingController@campings');
+Route::get('joinville/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
+
 Route::get('sitemap', 'SiteMapController@gerar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
@@ -44,9 +47,14 @@ Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
 Route::get('politica-de-privacidade', function () {
     return view('politica-de-privacidade');
 })->name('politica-de-privacidade');
+
 Route::get('termos-de-uso', function () {
     return view('termos-de-uso');
 })->name('termos-de-uso');
+
+Route::get('caneca', function () {
+    return view('caneca');
+})->name('caneca');
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('usuario/add', 'UserController@store');
