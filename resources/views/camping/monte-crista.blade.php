@@ -25,37 +25,39 @@
                                     Com toda certeza vencer os quase 8km que separam o aventureiro do início da trilha até o topo do Monte Crista é uma grande conquista. Para auxiliar nesse objetivo, já escrevemos sobre a <strong><a href="https://trilhasemsc.com.br/garuva/trilhas/semi-pesada/trilha-do-monte-crista">Trilha do Monte Crista</a></strong>.
                                 </p>
                                 <p>Logo, os detalhes de chegada ao topo do morro já são trazidos na postagem sobre a trilha, que inclusive fizemos com o intuito de acampar. Por isso, falaremos aqui sobre as questões que envolvem o camping. No quadro abaixo trazemos um pequeno resumo de algumas informações úteis.</p>
-                                <table class="table">
-                                    <caption>Quadro Resumido - Detalhes do Camping</caption>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col"></th>
-                                            <th>Item</th>
-                                            <th scope="col">Resposta</th>
-                                            <th scope="col">Descrição</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><i class="fa fa-car" aria-hidden="true"></i></td>
-                                            <td>Estacionamento</td>
-                                            <td>Sim</td>
-                                            <td>O estacionamento fica na base da trilha e tem o custo de R$ 40,00 por veículo, mais R$ 5,00 por pessoa que faz a trilha</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fa fa-tint" aria-hidden="true"></i></td>
-                                            <td>Hidratação</td>
-                                            <td>Sim</td>
-                                            <td>São muitos pontos de hidratação pela trilha, sendo o último próximo das bases de acampamento, sendo possível retornar a ela para pegar água</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fa fa-fire" aria-hidden="true"></i></td>
-                                            <td>Fogueiras</td>
-                                            <td>Não</td>
-                                            <td>Não é permitido fazer fogueiras no cume do morro. Não faça fogueiras em locais não permitidos!</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <caption>Quadro Resumido - Detalhes do Camping</caption>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th>Item</th>
+                                                <th scope="col">Resposta</th>
+                                                <th scope="col">Descrição</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><i class="fa fa-car" aria-hidden="true"></i></td>
+                                                <td>Estacionamento</td>
+                                                <td>Sim</td>
+                                                <td>O estacionamento fica na base da trilha e tem o custo de R$ 40,00 por veículo, mais R$ 5,00 por pessoa que faz a trilha</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-tint" aria-hidden="true"></i></td>
+                                                <td>Hidratação</td>
+                                                <td>Sim</td>
+                                                <td>São muitos pontos de hidratação pela trilha, sendo o último próximo das bases de acampamento, sendo possível retornar a ela para pegar água</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-fire" aria-hidden="true"></i></td>
+                                                <td>Fogueiras</td>
+                                                <td>Não</td>
+                                                <td>Não é permitido fazer fogueiras no cume do morro. Não faça fogueiras em locais não permitidos!</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <p>O quadro em si já traz muito do que é importante para o trilheiro que opta por fazer a trilha para acampar, mas frisamos aqui duas características importantes: água e espaço para barracas.</p>
                                 <p>
                                     Pelo caminho existem vários pequenos rios e bicas de água, que são limpas e cristalinas. Eles podem ser usados para se hidratar durante o percurso. Nos quase 5km de trecho mais plano, eles estão em muitos pontos. Quando começar a parte de subida morro acima, temos dois pontos de água importantes.
