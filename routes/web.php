@@ -38,7 +38,7 @@ Route::get('guia', 'HomeController@guia');
 Route::get('sobre-nos', 'HomeController@sobre');
 
 Route::get('campings', 'CampingController@campings');
-Route::get('joinville/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
+Route::get('garuva/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
 
 Route::get('sitemap', 'SiteMapController@gerar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
