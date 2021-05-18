@@ -79,8 +79,6 @@
         <!-- responsive CSS
         ============================================ -->
         {!! Minify::stylesheet('/css/responsive.css')->withFullUrl() !!}
-
-        <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
