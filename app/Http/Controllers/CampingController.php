@@ -41,7 +41,7 @@ class CampingController extends Controller
     public function monteCrista()
     {
         $titulo = 'Monte Crista';
-        $subtitulo = "Camping em Joinville";
+        $subtitulo = "Camping em Garuva";
 
         $busca_cidade = Trilha::with('cidade')
         ->select('cd_cidade_cde', DB::raw('count(*) as total'))
