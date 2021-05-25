@@ -2,7 +2,7 @@
 
 @section('pageTitle', 'Camping em Santa Catarina' )
 
-@section('description', 'Camping localizado em Garuva')
+@section('description', 'Lista de Camping de Santa Catarina')
 
 @section('content')
 <div id="lista" class="adventures-grid section-padding list">
