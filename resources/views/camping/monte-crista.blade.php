@@ -52,6 +52,12 @@
                                                     <td>São muitos pontos de hidratação pela trilha, sendo o último próximo das bases de acampamento, sendo possível retornar a ela para pegar água</td>
                                                 </tr>
                                                 <tr>
+                                                    <td><i class="fa fa-bath" aria-hidden="true"></i></td>
+                                                    <td>Banho</td>
+                                                    <td>Não</td>
+                                                    <td>Mesmo em camping selvagem, é possível tomar banho. Rios, cachoeiras e afins servem para esse fim. Mas não é esse caso, pois o último ponto de pagua não é grande o suficiente para isso, mas permite a higiene básica</td>
+                                                </tr>
+                                                <tr>
                                                     <td><i class="fa fa-fire" aria-hidden="true"></i></td>
                                                     <td>Fogueiras</td>
                                                     <td>Não</td>

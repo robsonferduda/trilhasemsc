@@ -38,6 +38,19 @@ class CampingController extends Controller
         return view('camping/index',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
 
+    public function picoRinoceronte()
+    {
+        $titulo = 'Pico do Rinoceronte';
+        $subtitulo = "Camping em Bom Jardim da Serra";
+
+        $busca_cidade = Trilha::with('cidade')
+                                ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+                                ->groupBy('cd_cidade_cde')
+                                ->get();
+
+        return view('camping/pico-rinoceronte',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
+    }
+
     public function monteCrista()
     {
         $titulo = 'Monte Crista';
