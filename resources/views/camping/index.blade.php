@@ -68,7 +68,7 @@
                                             </p>
                                             <p></p>
                                             <div class="list-buttons">
-                                                <a href="{{ ('bom-jardim-da-serra/campings/selvagem/camping-monte-crista') }}" class="button-one button-blue">LER MAIS</a>                                        
+                                                <a href="{{ ('bom-jardim-da-serra/campings/selvagem/camping-pico-rinoceronte') }}" class="button-one button-blue">LER MAIS</a>                                        
                                             </div>
                                         </div>
                                         <div class="adventure-list-image">
