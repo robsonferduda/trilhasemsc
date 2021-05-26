@@ -35,7 +35,7 @@ class CampingController extends Controller
         ->groupBy('cd_cidade_cde')
         ->get();
 
-        return view('camping/index',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
+        return view('camping/index',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping']);
     }
 
     public function picoRinoceronte()
@@ -48,7 +48,7 @@ class CampingController extends Controller
                                 ->groupBy('cd_cidade_cde')
                                 ->get();
 
-        return view('camping/pico-rinoceronte',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
+        return view('camping/pico-rinoceronte',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping']);
     }
 
     public function monteCrista()
@@ -61,6 +61,6 @@ class CampingController extends Controller
         ->groupBy('cd_cidade_cde')
         ->get();
 
-        return view('camping/monte-crista',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
+        return view('camping/monte-crista',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping']);
     }
 }

@@ -43,6 +43,8 @@ class SiteMapController extends Controller
 
         $sitemap->add(\URL::to('campings'), now(), '0.9', 'weekly');
         $sitemap->add(\URL::to('garuva/campings/selvagem/camping-monte-crista'), now(), '0.9', 'weekly');
+        $sitemap->add(\URL::to('bom-jardim-da-serra/campings/selvagem/camping-pico-rinoceronte'), now(), '0.9', 'weekly');
+        
         $sitemap->add(\URL::to('guia-de-dificuldade-em-trilhas'), now(), '0.9', 'monthly');
         $sitemap->add(\URL::to('guia-de-dificuldade-em-trilhas/abnt'), now(), '0.9', 'monthly');
         $sitemap->add(\URL::to('guia-de-dificuldade-em-trilhas/femerj'), now(), '0.9', 'monthly');
