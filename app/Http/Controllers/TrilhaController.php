@@ -220,4 +220,18 @@ class TrilhaController extends Controller
 
         return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'termo' => $termo]);
     }
+
+
+    public function trilhasLeste()
+    {
+        $titulo = 'Trilhas em Florianópolis';
+        $subtitulo = "A Região Leste da Ilha da Magia";
+
+        $busca_cidade = Trilha::with('cidade')
+        ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+        ->groupBy('cd_cidade_cde')
+        ->get();
+
+        return view('trilhas/leste',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
+    }
 }
