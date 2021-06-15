@@ -18,6 +18,7 @@ Route::get('home', 'HomeController@index')->name('index');
 
 Route::post('comentario/novo', 'ComentarioController@store');
 
+Route::get('trilhas/regioes', 'TrilhaController@regioes');
 Route::get('trilha/add-tags', 'TrilhaController@addTags');
 Route::get('trilhas', 'TrilhaController@searchTrilhas');
 Route::get('{cidade}/trilhas', 'TrilhaController@searchTrilhasCidade');
@@ -38,9 +39,10 @@ Route::get('guia', 'HomeController@guia');
 Route::get('sobre-nos', 'HomeController@sobre');
 
 Route::get('campings', 'CampingController@campings');
-Route::get('bom-jardim-da-serra/campings/selvagem/camping-pico-rinoceronte', 'CampingController@picoRinoceronte'); 
+Route::get('bom-jardim-da-serra/campings/selvagem/camping-pico-rinoceronte', 'CampingController@picoRinoceronte');
 Route::get('garuva/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
-Route::get('trilhas/florianopolis/regioes/leste','TrilhaController@trilhasLeste');
+Route::get('trilhas/florianopolis/regioes/leste', 'TrilhaController@trilhasLeste');
+Route::get('trilhas/florianopolis/regioes/norte', 'TrilhaController@trilhasNorte');
 
 Route::get('sitemap', 'SiteMapController@gerar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
