@@ -255,4 +255,17 @@ class TrilhaController extends Controller
 
         return view('trilhas/norte',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
+
+    public function trilhasSul()
+    {
+        $titulo = 'Trilhas em Florianópolis';
+        $subtitulo = "A Região Sul da Ilha da Magia";
+
+        $busca_cidade = Trilha::with('cidade')
+        ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+        ->groupBy('cd_cidade_cde')
+        ->get();
+
+        return view('trilhas/sul',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
+    }
 }

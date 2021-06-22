@@ -9,7 +9,46 @@
     <div class="container">
         <div class="clearfix"></div>
             <div class="row">
-                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="single-list-item">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-5">
+                                    <div class="adventure-img">
+                                        <a href="{{ url('trilhas/florianopolis/regioes/sul') }}"><img src="http://trilhasemsc.com.br/public/img/trilhas/busca/trilha-das-cavernas-do-pantano-do-sul.jpg" alt="Foto da Trilha das Cavernas do Pântano do Sul"></a>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-7 margin-left-list">
+                                    <div class="adventure-list-container">
+                                        <div class="adventure-list-text">
+                                            <h1><a href="{{ url('trilhas/florianopolis/regioes/sul') }}">Trilhas no Sul de Florianópolis</a></h1>
+                                            <h2 class="cidade-list"><a>Florianópolis</a></h2>
+                                            <p></p>
+                                            <p>
+                                                Quando falamos de trilhas em Florianópolis, com certeza as primeiras que nós lembramos estão localizadas no sul da ilha. E não é para menos. A região é conhecida por ser preservada e possuir uma natureza exuberante. 
+                                                Basta dizer que é essa região que abriga a belíssima Trilha da Lagoinha do Leste e também as belas Cavernas do Pântano do Sul.
+                                            </p>                                                
+                                            <p></p>
+                                            <div class="list-buttons">
+                                                <a href="{{ url('trilhas/florianopolis/regioes/sul') }}" class="button-one button-blue">LER MAIS</a>                                        
+                                            </div>
+                                        </div>
+                                        <div class="adventure-list-image">
+                                            <div class="image-top">
+                                                <img class="icone-nivel" src="{{ url('public/img/icon/selvagem.png') }}" alt="Ícone indicador de trilha com nível Passeio">
+                                            </div>
+                                            <h2></h2>
+                                            <div style="height: 150px; display: inline-block;">
+                                                
+                                            </div>                                      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+
+                    <div class="col-md-12">
                         <div class="single-list-item">
                             <div class="row">
                                 <div class="col-md-4 col-sm-5">

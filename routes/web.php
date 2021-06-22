@@ -43,6 +43,7 @@ Route::get('bom-jardim-da-serra/campings/selvagem/camping-pico-rinoceronte', 'Ca
 Route::get('garuva/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
 Route::get('trilhas/florianopolis/regioes/leste', 'TrilhaController@trilhasLeste');
 Route::get('trilhas/florianopolis/regioes/norte', 'TrilhaController@trilhasNorte');
+Route::get('trilhas/florianopolis/regioes/sul', 'TrilhaController@trilhasSul');
 
 Route::get('sitemap', 'SiteMapController@gerar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
