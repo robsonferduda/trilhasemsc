@@ -51,6 +51,7 @@ class SiteMapController extends Controller
 
         $sitemap->add(\URL::to('trilhas/florianopolis/regioes/leste'), now(), '0.9', 'monthly');
         $sitemap->add(\URL::to('trilhas/florianopolis/regioes/norte'), now(), '0.9', 'monthly');
+        $sitemap->add(\URL::to('trilhas/florianopolis/regioes/sul'), now(), '0.9', 'monthly');
 
         $trilhas = Trilha::where('fl_publicacao_tri', 'S')->get();
 
