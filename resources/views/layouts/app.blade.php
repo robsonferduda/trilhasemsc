@@ -3,6 +3,7 @@
     <head>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Global site tag (gtag.js) - Google Analytics -->
+        @env('production')
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175572747-1"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
@@ -11,6 +12,7 @@
 
           gtag('config', 'UA-175572747-1');
         </script>
+        @endenv
         <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
         <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('img/favicon/apple-icon-57x57.png') }}">
