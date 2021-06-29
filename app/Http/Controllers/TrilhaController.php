@@ -243,6 +243,27 @@ class TrilhaController extends Controller
         return view('trilhas/regioes',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'page_name' => 'Trilhas']);
     }
 
+    public function brasil()
+    {
+        $titulo = 'Trilhas';
+        $subtitulo = "no Brasil";
+
+        return view('trilhas/brasil',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'page_name' => 'Trilhas']);
+    }
+
+    public function chapada()
+    {
+        $titulo = 'Trilhas no Brasil';
+        $subtitulo = "Chapada Diamantina";
+
+        $busca_cidade = Trilha::with('cidade')
+                        ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+                        ->groupBy('cd_cidade_cde')
+                        ->get();
+
+        return view('trilhas/brasil/regioes/nordeste/chapada',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Trilhas']);
+    }
+
     public function trilhasNorte()
     {
         $titulo = 'Trilhas em Florianópolis';

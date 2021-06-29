@@ -18,6 +18,7 @@ Route::get('home', 'HomeController@index')->name('index');
 
 Route::post('comentario/novo', 'ComentarioController@store');
 
+Route::get('trilhas/brasil', 'TrilhaController@brasil');
 Route::get('trilhas/regioes', 'TrilhaController@regioes');
 Route::get('trilha/add-tags', 'TrilhaController@addTags');
 Route::get('trilhas', 'TrilhaController@searchTrilhas');
@@ -44,6 +45,8 @@ Route::get('garuva/campings/selvagem/camping-monte-crista', 'CampingController@m
 Route::get('trilhas/florianopolis/regioes/leste', 'TrilhaController@trilhasLeste');
 Route::get('trilhas/florianopolis/regioes/norte', 'TrilhaController@trilhasNorte');
 Route::get('trilhas/florianopolis/regioes/sul', 'TrilhaController@trilhasSul');
+
+Route::get('trilhas/brasil/regioes/nordeste/chapada', 'TrilhaController@chapada');
 
 Route::get('sitemap', 'SiteMapController@gerar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
