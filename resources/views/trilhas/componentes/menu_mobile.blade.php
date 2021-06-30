@@ -3,7 +3,7 @@
         <li><a href="{{ url('/') }}">HOME</a></li>
         <li><a href="{{ url('trilhas/#lista') }}">TRILHAS</a>
             <ul>                
-                <li><a href="{{ url('trilhas/#lista') }}">Todas em SC</a></li>
+                <li><a href="{{ url('trilhas/#lista') }}">Trilhas em SC</a></li>
                 <li><a href="{{ url('trilhas/regioes') }}">Regiões de SC</a></li>
                 <li><a href="{{ url('trilhas/brasil') }}">Trilhas no Brasil</a></li>
             </ul>
