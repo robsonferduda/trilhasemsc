@@ -42,6 +42,7 @@ Route::get('sobre-nos', 'HomeController@sobre');
 Route::get('campings', 'CampingController@campings');
 Route::get('bom-jardim-da-serra/campings/selvagem/camping-pico-rinoceronte', 'CampingController@picoRinoceronte');
 Route::get('garuva/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
+Route::get('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista','CampingController@altoBoaVista');
 Route::get('trilhas/florianopolis/regioes/leste', 'TrilhaController@trilhasLeste');
 Route::get('trilhas/florianopolis/regioes/norte', 'TrilhaController@trilhasNorte');
 Route::get('trilhas/florianopolis/regioes/sul', 'TrilhaController@trilhasSul');

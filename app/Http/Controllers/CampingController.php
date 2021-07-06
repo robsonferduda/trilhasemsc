@@ -63,4 +63,17 @@ class CampingController extends Controller
 
         return view('camping/monte-crista',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping']);
     }
+
+    public function altoBoaVista()
+    {
+        $titulo = 'Mirante Alto da Boa Vista';
+        $subtitulo = "Camping em Rancho Queimado";
+
+        $busca_cidade = Trilha::with('cidade')
+        ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+        ->groupBy('cd_cidade_cde')
+        ->get();
+
+        return view('camping/alto-da-boa-vista',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping']);
+    }
 }

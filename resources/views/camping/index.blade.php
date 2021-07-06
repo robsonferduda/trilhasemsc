@@ -45,6 +45,44 @@
                                 </div>
                             </div>
                         </div>                        
+                    </div>
+                    <div class="single-list-item">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-5">
+                                    <div class="adventure-img">
+                                        <a href="{{ ('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista') }}"><img src="{{ asset('img/camping/alto-da-boa-vista/capa.jpg') }}" alt="Camping Mirante do Alto da Boa Vista, Rancho Queimado, Santa Catarina"></a>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-7 margin-left-list">
+                                    <div class="adventure-list-container">
+                                        <div class="adventure-list-text">
+                                            <h1><a href="{{ ('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista') }}">Camping Mirante do Alto da Boa Vista</a></h1>
+                                            <h2 class="cidade-list"><a>Rancho Queimado</a></h2>
+                                            <p></p>
+                                            <p>
+                                                Que tal acampar em meio a lindos campos de altitude, com uma vista panorâmica e com um belo pôr e nascer do sol? E mais, isso tudo sem ter que fazer muito esforço físico. Nesse caso, quase nada.
+                                                Esse é o cenário de quem procura o camping no Mirante do Alto da Boa Vista. Com acesso fácil e possível de ser feito com o carro, o local é um convite para quem busca uma primeira experiência 
+                                                em um camping, mas ainda não tem muito preparo para uma trilha mais longa.
+                                            </p>                                                
+                                            <p></p>
+                                            <div class="list-buttons">
+                                                <a href="{{ ('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista') }}" class="button-one button-blue">LER MAIS</a>                                        
+                                            </div>
+                                        </div>
+                                        <div class="adventure-list-image">
+                                            <div class="image-top">
+                                                <img class="icone-nivel" src="{{ url('public/img/icon/estrutura.png') }}" alt="Camping Estruturado em Santa catarina">
+                                            </div>
+                                            <h2>ESTRUTURADO</h2>
+                                            <div style="height: 150px; display: inline-block;">
+                                                
+                                            </div>                                      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
                     </div> 
                     <div class="col-md-12">
                         <div class="single-list-item">
