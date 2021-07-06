@@ -50,7 +50,7 @@
                             <div class="row">
                                 <div class="col-md-4 col-sm-5">
                                     <div class="adventure-img">
-                                        <a href="{{ ('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista') }}"><img src="{{ asset('img/camping/alto-da-boa-vista/capa.jpg') }}" alt="Camping Mirante do Alto da Boa Vista, Rancho Queimado, Santa Catarina"></a>
+                                        <a href="{{ ('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista') }}"><img src="{{ asset('img/camping/alto-da-boa-vista/busca.jpg') }}" alt="Camping Mirante do Alto da Boa Vista, Rancho Queimado, Santa Catarina"></a>
                                         
                                     </div>
                                 </div>
