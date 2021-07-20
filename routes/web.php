@@ -46,6 +46,8 @@ Route::get('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-
 Route::get('trilhas/florianopolis/regioes/leste', 'TrilhaController@trilhasLeste');
 Route::get('trilhas/florianopolis/regioes/norte', 'TrilhaController@trilhasNorte');
 Route::get('trilhas/florianopolis/regioes/sul', 'TrilhaController@trilhasSul');
+Route::get('trilhas/santa-catarina/regioes','TrilhaController@regioesSC');
+Route::get('trilhas/santa-catarina/regioes/serra-catarinense','TrilhaController@serraCatarinense');
 
 Route::get('trilhas/brasil/regioes/nordeste/chapada', 'TrilhaController@chapada');
 

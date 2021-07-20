@@ -289,4 +289,30 @@ class TrilhaController extends Controller
 
         return view('trilhas/sul',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
+
+    public function regioesSC()
+    {
+        $titulo = 'Trilhas em Santa Catarina';
+        $subtitulo = "Região Serrana";
+
+        $busca_cidade = Trilha::with('cidade')
+        ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+        ->groupBy('cd_cidade_cde')
+        ->get();
+
+        return view('trilhas/santa-catarina/regioes',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
+    }
+
+    public function serraCatarinense()
+    {
+        $titulo = 'Trilhas em Santa Catarina';
+        $subtitulo = "Serra Catarinense";
+
+        $busca_cidade = Trilha::with('cidade')
+        ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+        ->groupBy('cd_cidade_cde')
+        ->get();
+
+        return view('trilhas/santa-catarina/serra',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
+    }
 }
