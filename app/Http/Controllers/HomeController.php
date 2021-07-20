@@ -21,7 +21,7 @@ class HomeController extends Controller
         $page_name = "Trilha";
         
         $totais = array('trilha'  => Trilha::where('id_categoria_cat', 1)->where('fl_publicacao_tri', 'S')->count(),
-                        'camping' => 3,
+                        'camping' => 4,
                         'galeria' => Galeria::all()->count() );
 
         $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();

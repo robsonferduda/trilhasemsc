@@ -26,7 +26,7 @@
                                     Distante 60km de Florianópolis, a pequena cidade de colonização alemã é muito procurada pelas suas fazendas e pousadas. 
                                 </p>
                                 <p>
-                                    Mas o mirante não está localizado próximo ao centro da cidade, na verdade ele está a mais ou menos 27km da regiçao central, às margens da SC-282. Conhecida na região, a estrada é sinuosa e possui pista simples, então cuidado. Mas o asfalto garante um trajeto 
+                                    Mas o mirante não está localizado próximo ao centro da cidade, na verdade ele está a mais ou menos 27km da região central, às margens da SC-282. Conhecida na região, a estrada é sinuosa e possui pista simples, então cuidado. Mas o asfalto garante um trajeto 
                                     tranquilo até o local. Apenas a subida até o alto do planalto é um pouco ruim, pois é uma estrada de chão com boa inclinação. Com a estrada seca foi bem tranquilo, mesmo com carro baixo. Talvez com chuva a subida se torne mais difícil. 
                                 </p>
                                 <p>
