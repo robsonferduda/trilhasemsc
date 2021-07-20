@@ -39,10 +39,10 @@
                                         entrada dessas aventuras e também um dos cartões postais da região. Subindo por ela chegamos a cidade de Bom Jardim da Serra, que abriga os belos da Ronda, do Funil e Laranjeiras. 
                                     </p>
                                     <p>
-                                        As aventuras nessa região alternam entre trajetos longos, como a Trilha do Cânion do Funil, com seus quase 15km de ida e volta, ou trajetos bem curtos e acesśiveis, como é o caso do Cânion da Ronda, com suas poucas centenas de metros. 
+                                        As aventuras nessa região alternam entre trajetos longos, como a Trilha do Cânion do Funil, com seus quase 15km de ida e volta, ou trajetos bem curtos e acessíveis, como é o caso do Cânion da Ronda, com suas poucas centenas de metros. 
                                     </p>
                                     <p>
-                                        Seja qual for a sua escolha, vamos ajudar no seu estímulo inicial, trazendo uma coleção de trilhas com diferentes temáticas, para que vocẽ possa escolher seu destino preferido!
+                                        Seja qual for a sua escolha, vamos ajudar no seu estímulo inicial, trazendo uma coleção de trilhas com diferentes temáticas, para que você possa escolher seu destino preferido!
                                     </p>
                                     <br/>
 

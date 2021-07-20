@@ -55,6 +55,9 @@ class SiteMapController extends Controller
         $sitemap->add(\URL::to('trilhas/florianopolis/regioes/sul'), now(), '0.9', 'monthly');
         $sitemap->add(\URL::to('trilhas/brasil/regioes/nordeste/chapada'), now(), '0.9', 'monthly');
 
+        $sitemap->add(\URL::to('https://trilhasemsc.com.br/trilhas/santa-catarina/regioes'), now(), '0.9', 'monthly');
+        $sitemap->add(\URL::to('https://trilhasemsc.com.br/trilhas/santa-catarina/regioes/serra-catarinense'), now(), '0.9', 'monthly');
+
         $trilhas = Trilha::where('fl_publicacao_tri', 'S')->get();
 
         foreach ($trilhas as $trilha) {
