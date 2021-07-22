@@ -6,18 +6,20 @@
 
 @section('content')
 <div id="lista" class="adventures-grid section-padding list">
-    <div class="container">
-        <!-- Horizontal Tela Detalhes Trilha -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-1229685353625953"
-            data-ad-slot="7739149091"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+    <div class="container">       
         <div class="clearfix"></div>
+            <div>
+                <!-- Horizontal Tela Detalhes Trilha -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1229685353625953"
+                    data-ad-slot="7739149091"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
             <div class="row">                
                 <div class="col-md-12">                     
                         <div class="single-list-item">
