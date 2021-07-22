@@ -1,6 +1,16 @@
 <div class="footer-widget-area">
     <div class="container" style="min-height: 300px;">
         <div class="row">
+            <!-- Horizontal Tela Detalhes Trilha -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-1229685353625953"
+                data-ad-slot="7739149091"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
             <div class="col-lg-3 col-md-3 col-sm-12">
                 <div class="single-footer-widget contact-text-info">
                     <h4>Contato</h4>
