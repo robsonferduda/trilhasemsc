@@ -20,6 +20,7 @@
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
+            <div class="clearfix"></div>
             <div class="row">                
                 <div class="col-md-12">                     
                         <div class="single-list-item">
