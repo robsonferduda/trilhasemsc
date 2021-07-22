@@ -7,17 +7,17 @@
         <div class="blog-post-area section-padding">
             <div class="container">
                 <div class="row">
-                    <!-- Horizontal Tela Detalhes Trilha -->
-                    <ins class="adsbygoogle"
-                        style="display:block"
-                        data-ad-client="ca-pub-1229685353625953"
-                        data-ad-slot="7739149091"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
                     <div class="col-md-12">
+                        <!-- Horizontal Tela Detalhes Trilha -->
+                        <ins class="adsbygoogle"
+                            style="display:block"
+                            data-ad-client="ca-pub-1229685353625953"
+                            data-ad-slot="7739149091"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                         <div class="section-title text-center">
                             <div class="title-border">
                                 <br/><br/><h1>Guia de Dificuldade<span> em Trilhas</span></h1>
@@ -100,7 +100,7 @@
                         <p>
                             ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. NBR 15505-2: Turismo com atividades de caminhada. Parte 2: Classificação de percursos. Rio de Janeiro, 2008.
                         </p>
-                        <p>
+                        <p style='word-wrap: break-word;'>
                             Infográfico: Os níveis de dificuldade de trilhas. Disponível em https://www.vamostrilhar.com.br/conteudo/infografico-os-niveis-de-dificuldade-de-trilhas/. Acesso em 27/07/2020.
                         </p>
                         <p>
