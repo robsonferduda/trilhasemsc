@@ -18,6 +18,16 @@
                                 <div class="author-comments">
                                     <span><i class="fa fa-user"></i>Robson Fernando Duda</span>
                                 </div>
+                                <!-- Horizontal Tela Detalhes Trilha -->
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-1229685353625953"
+                                     data-ad-slot="7739149091"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
                                 <p>
                                     Sabe aqueles lugares que parecem saídos de filmes, que te levam a uma viagem no tempo? Esse é o caso do Vale da Utopia, pequeno vale localizado na cidade de <a class="link" href="{{ url('palhoca/trilhas#lista') }}">Palhoça</a>. O vale fica localizado entre a Praia da Pinheira e a Praia da Guarda do Embaú e faz parte do Parque Estadual da Serra do Tabuleiro. O vale é coberto por uma grama verdinha e abriga a pequena Praia do Maço, que permite além do camping, também um gostoso banho de mar. 
                                 </p>
@@ -56,6 +66,16 @@
                                 </div>
                                 <h5><strong>Texto</strong>: Robson Fernando Duda</h5>
                             </div>
+                            <!-- Horizontal Tela Detalhes Trilha -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-1229685353625953"
+                                 data-ad-slot="7739149091"
+                                 data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
                             <h4 class="center"><a class="link" href="{{ url('/') }}">Voltar para o início</a></h4>
                         </div>
                     </div>
