@@ -28,6 +28,7 @@
                                 <script>
                                      (adsbygoogle = window.adsbygoogle || []).push({});
                                 </script>
+                                <br />
                                 <p>
                                     <p class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i> Não jogue lixo</p>
                                     <p class="text-success"><i class="fa fa-leaf" aria-hidden="true"></i> Proteja a natureza e os animais selvagens</p>
@@ -124,6 +125,7 @@
                                 
                                 <h5><strong>Texto</strong>: Robson Fernando Duda</h5>
                             </div>
+                             <h4 class="center"><a class="link" href="{{ url('/') }}">Voltar para o início</a></h4>
                             <!-- Horizontal Tela Detalhes Trilha -->
                             <ins class="adsbygoogle"
                                  style="display:block"
@@ -133,8 +135,7 @@
                                  data-full-width-responsive="true"></ins>
                             <script>
                                  (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                            <h4 class="center"><a class="link" href="{{ url('/') }}">Voltar para o início</a></h4>
+                            </script>                           
                         </div>
                     </div>
                     <div class="col-md-3">
