@@ -113,6 +113,7 @@
                         </ul>
                     </div>
                 </div>
+                <br />
                 <!-- Horizontal Tela Detalhes Trilha -->
                 <ins class="adsbygoogle"
                     style="display:block"
