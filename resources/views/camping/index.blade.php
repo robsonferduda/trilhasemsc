@@ -8,18 +8,18 @@
 <div id="lista" class="adventures-grid section-padding list">
     <div class="container">
         <div class="clearfix"></div>
-            <div class="row">
-                <!-- Horizontal Tela Detalhes Trilha -->
-                <ins class="adsbygoogle"
-                    style="display:block"
-                    data-ad-client="ca-pub-1229685353625953"
-                    data-ad-slot="7739149091"
-                    data-ad-format="auto"
-                    data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>      
+            <div class="row">                
                 <div class="col-md-12">
+                        <!-- Horizontal Tela Detalhes Trilha -->
+                        <ins class="adsbygoogle"
+                            style="display:block"
+                            data-ad-client="ca-pub-1229685353625953"
+                            data-ad-slot="7739149091"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>      
                         <div class="single-list-item">
                             <div class="row">
                                 <div class="col-md-4 col-sm-5">
@@ -170,16 +170,6 @@
                             </div>
                         </div>                        
                     </div>
-                    <!-- Horizontal Tela Detalhes Trilha -->
-                    <ins class="adsbygoogle"
-                        style="display:block"
-                        data-ad-client="ca-pub-1229685353625953"
-                        data-ad-slot="7739149091"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>                     
             </div>
         </div>
     </div>
