@@ -32,7 +32,16 @@
                                     <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #696969;"><i class="fa fa-instagram" aria-hidden="true"></i>@trilhasemsc</a></span>
                                     <span><i class="fa fa-comment"></i>{{ $trilha->comentarios->count() }} {{ ($trilha->comentarios->count() == 1) ? 'comentário' : 'comentários' }}</span>
                                 </div>
-
+                                <!-- Horizontal Tela Detalhes Trilha -->
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-1229685353625953"
+                                     data-ad-slot="7739149091"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
                                 <div id="descricao">
                                     {!! $trilha->ds_trilha_tri !!}
                                 </div>
