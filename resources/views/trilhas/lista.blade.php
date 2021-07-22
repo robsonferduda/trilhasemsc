@@ -18,6 +18,7 @@
             <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
+            <br />
             <form action="{{url('trilhas/#lista')}}" id="banner-searchbox" class="form-search-trilha">
                 <div class="row" style="padding-top: 5px;">
                     <div class="col-lg-2 col-md-12 col-sm-12">
