@@ -27,8 +27,9 @@
                                      data-full-width-responsive="true"></ins>
                                 <script>
                                      (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>                                
+                                </script>
                                 <br />
+                                <p>
                                     <p class="text-danger"><i class="fa fa-ban" aria-hidden="true"></i> Não jogue lixo na natureza</p>
                                 </p>
                                 <p>
