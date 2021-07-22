@@ -8,7 +8,7 @@
 <div id="lista" class="adventures-grid section-padding list">
     <div class="container">       
         <div class="clearfix"></div>
-            <div>
+            <div style="margin-bottom: 56px;">
                 <!-- Horizontal Tela Detalhes Trilha -->
                 <ins class="adsbygoogle"
                     style="display:block"
