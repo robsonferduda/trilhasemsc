@@ -32,8 +32,7 @@
                     </div>                
                 </div>
             </div>
-        </div>
-        <!-- Horizontal Tela Detalhes Trilha -->
+         <!-- Horizontal Tela Detalhes Trilha -->
         <ins class="adsbygoogle"
             style="display:block"
             data-ad-client="ca-pub-1229685353625953"
@@ -43,6 +42,7 @@
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
+        </div>
 
         @include('trilhas.componentes.ultima_trilha')
         
