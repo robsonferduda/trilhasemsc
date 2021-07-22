@@ -79,6 +79,7 @@
                         <script>
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
+                        <br />
                         {{--
                         <div class="blog-comments" id="comentarios">
                            <h4 class="blog-title">COMENTÁRIOS DOS <span>TRILHEIROS</span></h4>
