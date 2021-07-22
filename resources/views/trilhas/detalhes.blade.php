@@ -42,6 +42,7 @@
                                 <script>
                                      (adsbygoogle = window.adsbygoogle || []).push({});
                                 </script>
+                                <br />
                                 <div id="descricao">
                                     {!! $trilha->ds_trilha_tri !!}
                                 </div>
