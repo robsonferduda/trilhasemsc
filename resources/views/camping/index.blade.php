@@ -27,7 +27,7 @@
                             <div class="row">
                                 <div class="col-md-4 col-sm-5">
                                     <div class="adventure-img">
-                                        <a href="https://trilhasemsc.com.br/camping"><img src="https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-da-guarda-do-embau-vale-da-utopia.jpg" alt="Camping Mirante"></a>
+                                        <a href="https://trilhasemsc.com.br/camping"><img src="{{ url('/public/img/camping/camping-mirante/busca.jpg') }}" alt="Camping Mirante"></a>
                                         
                                     </div>
                                 </div>
