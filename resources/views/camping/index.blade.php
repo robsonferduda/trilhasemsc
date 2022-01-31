@@ -21,8 +21,48 @@
                 </script>
             </div>
             <div class="clearfix"></div>
-            <div class="row">                
-                <div class="col-md-12">                     
+                <div class="row">      
+                    <div class="col-md-12">                     
+                        <div class="single-list-item">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-5">
+                                    <div class="adventure-img">
+                                        <a href="https://trilhasemsc.com.br/camping"><img src="https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-da-guarda-do-embau-vale-da-utopia.jpg" alt="Camping Mirante"></a>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-7 margin-left-list">
+                                    <div class="adventure-list-container">
+                                        <div class="adventure-list-text">
+                                            <h1><a href="{{ url('grao-para/campings/estruturado/camping-mirante') }}">Camping Mirante</a></h1>
+                                            <h2 class="cidade-list"><a>Grão-Pará</a></h2>
+                                            <p></p>
+                                            <p>
+                                                Quem já ouviu falar do Parque Estadual da Serra Furada, certamente já ouviu falar do Vale das Pirâmides e das belíssimas formações rochosas chamadas de Pirâmides Sagradas. 
+                                                Sobre o parque, ele fica situado no território dos municípios de Grão-Pará e Orleans. Foi no interior do município de Grão-Pará que conhecemos a região das Pirâmides, 
+                                                rodeada de cachoeiras e belas montanhas em formato de pirâmide, que dão ao nome do lugar. É lá que fica situado o Camping Mirante, 
+                                                uma fazenda que recebe os campistas e aventureiros que procuram pela bela região.
+                                            </p>                                                
+                                            <p></p>
+                                            <div class="list-buttons">
+                                                <a href="{{ url('grao-para/campings/estruturado/camping-mirante') }}" class="button-one button-blue">LER MAIS</a>                                        
+                                            </div>
+                                        </div>
+                                        <div class="adventure-list-image">
+                                            <div class="image-top">
+                                                <img class="icone-nivel" src="{{ url('public/img/icon/estruturado.png') }}" alt="Ícone indicador de camping estruturado em Santa Catarina">
+                                            </div>
+                                            <h2>ESTRUTURADO</h2>
+                                            <div style="height: 150px; display: inline-block;">
+                                                
+                                            </div>                                      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>          
+                    <div class="col-md-12">                     
                         <div class="single-list-item">
                             <div class="row">
                                 <div class="col-md-4 col-sm-5">
@@ -49,7 +89,7 @@
                                             <div class="image-top">
                                                 <img class="icone-nivel" src="{{ url('public/img/icon/estrutura.png') }}" alt="Ícone indicador de trilha com nível Passeio">
                                             </div>
-                                            <h2>ESTRUTURADO</h2>
+                                            <h2>SEMI-ESTRUTURADO</h2>
                                             <div style="height: 150px; display: inline-block;">
                                                 
                                             </div>                                      
@@ -59,7 +99,8 @@
                             </div>
                         </div>                        
                     </div>
-                    <div class="single-list-item">
+                    <div class="col-md-12">
+                        <div class="single-list-item">
                             <div class="row">
                                 <div class="col-md-4 col-sm-5">
                                     <div class="adventure-img">
@@ -87,7 +128,7 @@
                                             <div class="image-top">
                                                 <img class="icone-nivel" src="{{ url('public/img/icon/estrutura.png') }}" alt="Camping Estruturado em Santa catarina">
                                             </div>
-                                            <h2>ESTRUTURADO</h2>
+                                            <h2>SEMI-ESTRUTURADO</h2>
                                             <div style="height: 150px; display: inline-block;">
                                                 
                                             </div>                                      
