@@ -41,7 +41,7 @@
                                     mas quer ter o prazer de conhecer esse lindo lugar.
                                 </p>  
                                 <p>
-                                    O local é administrado pela Cris, que é responsável pelo perfil do local no Instagram, o <a href="https://www.instagram.com/campingmirante/">@campingmirante</a> e também pelo Whatsapp, no número (48) 98423-4328.
+                                    O local é administrado pela Cris, que é responsável pelo perfil do local no Instagram, o <a href="https://www.instagram.com/campingmirante/">@campingmirante</a> e também pelo Whatsapp, no número (48) 99663-7112.
                                     O valor em janeiro de 2022, data de nossa visita, é de R$ 55,00 por pessoa.
                                 </p>
                                 <p>
@@ -51,7 +51,7 @@
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3518.6468055085957!2d-49.406255984928706!3d-28.126791582620115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd0df22ba6f06cde4!2zMjjCsDA3JzM2LjUiUyA0OcKwMjQnMTQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1643671151821!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                 <p>
                                     Por se tratar de um local com grande elevação e de estradas rurais, uma das mais importantes informações trazidas pela Cris é sobre a questão da chegada final até o camping.
-                                    A estrada é perticular, já dentro da fazenda e recomendad apenas para carro com tração ou pelo menos com força suficiente para vencer a estrada íngrime e com condições não tão boas.
+                                    A estrada é particular, e dentro da fazenda é recomendado subir apenas carro com tração ou pelo menos com força suficiente para vencer a estrada íngrime e com condições não tão boas.
                                 </p>
                                 <p>
                                     Para quem tem carro pequeno, a opção é deixar ele logo na chegada, antes da subida para o camping, onde existe um local para estacionamento. 
@@ -94,7 +94,7 @@
                                     Não bastasse o contraste entre montanhas e o belo céu azul, o lago ajuda a formar uma cena que mais parece uma pintura.
                                 </p>
                                 <p>
-                                    Além de ser parte importante na composição da paisagem, ele também possui um pequeno deck de madeira, acessível via passarela (eue o próprio pais da Cris construiu), onde se pode curir 
+                                    Além de ser parte importante na composição da paisagem, ele também possui um pequeno deck de madeira, acessível via passarela (que o próprio pais da Cris construiu), onde se pode curir 
                                     a paisagem e um belo café da tarde.
                                 </p>
                                 <div class="box_img">
