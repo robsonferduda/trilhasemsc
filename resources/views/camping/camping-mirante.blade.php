@@ -184,7 +184,7 @@
                                                     <td><i class="fa fa-cutlery" aria-hidden="true"></i></td>
                                                     <td>Restaurante</td>
                                                     <td>Sim</td>
-                                                    <td>Os proprietários da fazenda utilizam a sua casa como espaço para comprar algumas bebidas e saborosos pastéis, que são fritos na hora.</td>
+                                                    <td>Os proprietários da fazenda utilizam a sua casa como espaço para vender algumas bebidas e saborosos pastéis, que são fritos na hora.</td>
                                                 </tr>
                                             </tbody>
                                         </table>
