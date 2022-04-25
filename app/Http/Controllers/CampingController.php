@@ -38,6 +38,19 @@ class CampingController extends Controller
         return view('camping/index',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping']);
     }
 
+    public function anitaGaribaldi()
+    {
+        $titulo = 'Camping Mirante da Ponte Anita Garibaldi';
+        $subtitulo = "Camping em Laguna";
+
+        $busca_cidade = Trilha::with('cidade')
+                                ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+                                ->groupBy('cd_cidade_cde')
+                                ->get();
+
+        return view('camping/camping-mirante-anita-garibaldi',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping']);
+    }
+
     public function campingMirante()
     {
         $titulo = 'Camping Mirante';

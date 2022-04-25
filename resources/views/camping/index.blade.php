@@ -21,7 +21,46 @@
                 </script>
             </div>
             <div class="clearfix"></div>
-                <div class="row">      
+                <div class="row">    
+                    <div class="col-md-12">
+                        <div class="single-list-item">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-5">
+                                    <div class="adventure-img">
+                                        <a href="{{ ('laguna/campings/selvagem/camping-mirante-anita-garibaldi') }}"><img src="https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-bananal.jpg" alt="Camping Mirante Ponte Anita Garibaldi"></a>                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-7 margin-left-list">
+                                    <div class="adventure-list-container">
+                                        <div class="adventure-list-text">
+                                            <h1><a href="{{ ('laguna/campings/selvagem/camping-mirante-anita-garibaldi') }}">Camping Mirante Ponte Anita Garibaldi</a></h1>
+                                            <h2 class="cidade-list"><a>Laguna</a></h2>
+                                            <p></p>
+                                            <p>
+                                                Parte dos elementos que esperamos quando planejamos um camping é a vista panorâmica. Montanhas, praias, lagos, sempre nos despertam a expectativa em relação a uma vista 
+                                                panorâmica em um nascer ou pôr do sol. Mas quando essa vista é um dos cartões postais do estado e, apesar de não ser natural, forma uma bela vista para um acampamento.
+                                                Esse é o caso do camping no mirante que dá visão para a Ponte Anita Garibaldi. Para chegar ao ponto de acampamento, devemos seguir a Trilha no Bananal e ao final dela 
+                                                escolher o melhor lugar para curtir tudo que essa aventura tem a oferecer.
+                                            </p>
+                                            <p></p>
+                                            <div class="list-buttons">
+                                                <a href="{{ ('laguna/campings/selvagem/camping-mirante-anita-garibaldi') }}" class="button-one button-blue">LER MAIS</a>                                        
+                                            </div>
+                                        </div>
+                                        <div class="adventure-list-image">
+                                            <div class="image-top">
+                                                <img class="icone-nivel" src="{{ url('public/img/icon/selvagem.png') }}" alt="Ícone indicador de trilha com nível Passeio">
+                                            </div>
+                                            <h2>SELVAGEM</h2>
+                                            <div style="height: 150px; display: inline-block;">
+                                                
+                                            </div>                                      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>    
                     <div class="col-md-12">                     
                         <div class="single-list-item">
                             <div class="row">

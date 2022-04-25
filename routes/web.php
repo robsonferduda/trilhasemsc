@@ -42,6 +42,7 @@ Route::get('sobre-nos', 'HomeController@sobre');
 Route::get('grupos', 'GrupoController@index');
 
 Route::get('campings', 'CampingController@campings');
+Route::get('laguna/campings/selvagem/camping-mirante-anita-garibaldi', 'CampingController@anitaGaribaldi');
 Route::get('bom-jardim-da-serra/campings/selvagem/camping-pico-rinoceronte', 'CampingController@picoRinoceronte');
 Route::get('grao-para/campings/estruturado/camping-mirante','CampingController@campingMirante');
 Route::get('garuva/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
