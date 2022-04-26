@@ -51,6 +51,14 @@
                                     A estrada que sobe até o camping, no dia que fomos, mostra partes de uma obra de colocação de calçada, o que certamente facilitará o acesso ao local, 
                                     pois carros pequenos podem ter dificuldade de chegar até o fim do caminho.
                                 </p>
+                                <p>
+                                    Chegando lá existe um primeiro mirante, mais baixo, onde existe um grande espaço para acampar. Mas o melhor lugar é na parte mais alta, em meio as pedras, onde a vista 
+                                    do mirante é bem melhor. Nesse segundo ponto não é possível chegar com o carro muito perto, caso seja esse teu objetivo.
+                                </p>
+                                <p>
+                                    Quando fomos conhecer o local, ficamos neste segundo mirante e estava ventando muito. Como era apena suma barraca, conseguimos colocar em um lugar protegido do vento e com o 
+                                    bônus de poder colocar a rede.
+                                </p>
                                 <div class="box_img">
                                     <h5>Barraca e rede com vista para a Ponte Anita Garibaldi</h5>
                                     <img src="{{ url('public/img/camping/camping-mirante-anita-garibaldi/barraca_rede_camping.jpg') }}" alt="Barraca e rede com vista para a Ponte Anita Garibaldi">
@@ -122,7 +130,11 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </section>                               
+                                </section>   
+                                <p>
+                                    De modo geral, gostamos muito do local de acampamento, mas fomos em um dia de semana, pois estávamos de férias. Existem vários relatos de excesso de barulho em finais de semana, 
+                                    devido a facilidade de acesso e ao fato de muitas pessoas subirem lá de carro e levarem caixas de som.
+                                </p>                            
                                 <h5><strong>Texto</strong>: Robson Fernando Duda</h5>
                             </div>
                              <h4 class="center"><a class="link" href="{{ url('/') }}">Voltar para o início</a></h4>
