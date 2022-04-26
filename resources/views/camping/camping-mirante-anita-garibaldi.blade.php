@@ -37,17 +37,19 @@
                                 <p><strong>Como Chegar</strong></p>
                                 <p>
                                     O local da trilha é a cidade de Laguna. Logo, é necessário seguir até lá e dirigir-se até a propriedade privada onde fica o camping. 
-                                    Você pode buscar pela Trilha do Bananal para se orientar em relação a isso.  
+                                    Você pode buscar pela Trilha do Bananal para se orientar em relação a isso. Basicamente é necessário seguir via BR-101 e entrar no acesso do bairro Bananal. 
+                                    Segue por uma estrada marginal até entrar em uma estrada de chão. Colocamos abaixo o ponto final até o mirante, sendo que antes desse ponto existe o portão que dá acesso a propriedade 
+                                    e o caminho até o mirante.
                                 </p>
-                                <p>
-                                    Basicamente é necessário seguir via BR-101 e entrar no acesso do bairro Bananal. Segue por uma estrada marginal até entrar em uma estrada de chão.
-                                </p>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5470.698739068698!2d-48.862900538982636!3d-28.435419778456843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95214f3a0e02fe37%3A0x6513fdc128532a43!2sTrilha%20do%20Bananal!5e1!3m2!1spt-BR!2sbr!4v1650984768620!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 <p>
                                     Caso deseje conhecer o caminho da entrada da propriedade até o camping, pode utilizar o relato que fizemos sobre a trilha, que está disponivel <a href="https://trilhasemsc.com.br/laguna/trilhas/leve/trilha-do-bananal">aqui</a>.
                                 </p>
                                 <p><strong>Estrutura</strong></p>
                                 <p>
-                                    
+                                    O local não possui estrutura como banheiros, restaurantes ou cozinha, é praticamente um camping selvagem, mas com a comodidade de chegar de carro, caso queira. 
+                                    A estrada que sobe até o camping, no dia que fomos, mostra partes de uma obra de colocação de calçada, o que certamente facilitará o acesso ao local, 
+                                    pois carros pequenos podem ter dificuldade de chegar até o fim do caminho.
                                 </p>
                                 <div class="box_img">
                                     <h5>Barraca e rede com vista para a Ponte Anita Garibaldi</h5>
