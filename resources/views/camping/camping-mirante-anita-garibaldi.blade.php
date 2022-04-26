@@ -52,7 +52,16 @@
                                 <p><strong>Valores</strong></p>
                                 <p>
                                     Existem diferentes valores para ter acesso à propriedade e eles dependem do tipo de transporte utilizado. Logo na entrada da propriedade existe uma placa indicando esses valores.
-                                </p>                                
+                                </p> 
+                                <p>
+                                    Com toda certeza ao chegar no local do camping, a primeira coisa que pensamos é em como será o narcer e o pôr do sol.
+                                    No dia que fomos, o céu estava aberto e esses dois eventos tiveram boa visibilidade. O legal é que o sol nasce logo atrás da ponte, garantindo uma vista linda.
+                                </p>
+                                <div class="box_img">
+                                    <h5>Parte da estrada para o camping</h5>
+                                    <img src="{{ url('public/img/camping/camping-mirante-anita-garibaldi/nascer_do_sol.jpg') }}" alt="Nascer do Sol na Ponte Anita Garibaldi">
+                                    <legend class="border-none"><strong>Foto</strong>: Robson Fernando Duda</legend>
+                                </div>
                                 <p><strong>Considerações Finais</strong></p>
                                 <p>
                                     Para facilitar a sua ida, trouxemos também um pequeno resumo, que pode te ajudar bastante em relação ao que esperar do camping.

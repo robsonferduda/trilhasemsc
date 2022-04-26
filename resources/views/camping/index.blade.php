@@ -37,9 +37,9 @@
                                             <h2 class="cidade-list"><a>Laguna</a></h2>
                                             <p></p>
                                             <p>
-                                                Parte dos elementos que esperamos quando planejamos um camping é a vista panorâmica. Montanhas, praias, lagos, sempre nos despertam a expectativa em relação a uma vista 
-                                                panorâmica em um nascer ou pôr do sol. Mas quando essa vista é um dos cartões postais do estado e, apesar de não ser natural, forma uma bela vista para um acampamento.
-                                                Esse é o caso do camping no mirante que dá visão para a Ponte Anita Garibaldi. Para chegar ao ponto de acampamento, devemos seguir a Trilha no Bananal e ao final dela 
+                                                Parte dos elementos que esperamos quando planejamos um camping é a aquela paisagem de tirar o fôlego. Montanhas, praias, lagos, sempre nos despertam a expectativa em relação a uma 
+                                                vista privilegiada do nascer ou pôr do sol. Mas quando essa vista é um dos cartões postais do estado e, apesar de não ser natural, forma uma bela vista para um acampamento?
+                                                Esse é o caso do camping no mirante que dá visão para a Ponte Anita Garibaldi, na cidade de Laguna. Para chegar ao ponto de acampamento, devemos seguir a Trilha no Bananal e ao final dela 
                                                 escolher o melhor lugar para curtir tudo que essa aventura tem a oferecer.
                                             </p>
                                             <p></p>
