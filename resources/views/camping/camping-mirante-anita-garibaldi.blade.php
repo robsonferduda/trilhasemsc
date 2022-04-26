@@ -35,8 +35,24 @@
                                 </p>
                                 
                                 <p><strong>Como Chegar</strong></p>
-                                
-                                
+                                <p>
+                                    O local da trilha é a cidade de Laguna. Logo, é necessário seguir até lá e dirigir-se até a propriedade privada onde fica o camping. 
+                                    Você pode buscar pela Trilha do Bananal para se orientar em relação a isso.  
+                                </p>
+                                <p>
+                                    Basicamente é necessário seguir via BR-101 e entrar no acesso do bairro Bananal. Segue por uma estrada marginal até entrar em uma estrada de chão.
+                                </p>
+                                <p>
+                                    Caso deseje conhecer o caminho da entrada da propriedade até o camping, pode utilizar o relato que fizemos sobre a trilha, que está disponivel <a href="https://trilhasemsc.com.br/laguna/trilhas/leve/trilha-do-bananal">aqui</a>.
+                                </p>
+                                <p><strong>Estrutura</strong></p>
+                                <p>
+                                    
+                                </p>
+                                <p><strong>Valores</strong></p>
+                                <p>
+                                    Existem diferentes valores para ter acesso à propriedade e eles dependem do tipo de transporte utilizado. Logo na entrada da propriedade existe uma placa indicando esses valores.
+                                </p>                                
                                 <p><strong>Considerações Finais</strong></p>
                                 <p>
                                     Para facilitar a sua ida, trouxemos também um pequeno resumo, que pode te ajudar bastante em relação ao que esperar do camping.
@@ -59,37 +75,28 @@
                                                     <td>Estacionamento</td>
                                                     <td>Sim</td>
                                                     <td>
-                                                        O camping possui estacionamento próprio que já está incluso na taxa de camping e também pode ser usado pelos visitantes que procuram o local apenas para conhecer. 
+                                                        Existem duas opções possíveis em relação ao estacionamento. Você pode subir com o carro até o local do camping ou deixar o carro no início da propriedade e subir os pouco mais de 1500 metros à pé.
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><i class="fa fa-tint" aria-hidden="true"></i></td>
                                                     <td>Hidratação</td>
                                                     <td>Sim</td>
-                                                    <td>Não é necessário levar água, pois o camping possui água nos espaços comuns utilizados pelos campistas.</td>
+                                                    <td>Apesar de existir um pequeno riacho no caminho, a água não é própria para consumo. Também não existem torneiras no local.</td>
                                                 </tr>
                                                 <tr>
                                                     <td><i class="fa fa-bath" aria-hidden="true"></i></td>
                                                     <td>Banho</td>
-                                                    <td>Sim</td>
+                                                    <td>Não</td>
                                                     <td>
-                                                        Até a escrita deste relato, existem dois banheiros no camping. Eles são equipados com chuveiros com água aqueida e sanitários.
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><i class="fa fa-fire" aria-hidden="true"></i></td>
-                                                    <td>Fogueiras</td>
-                                                    <td>Sim</td>
-                                                    <td>
-                                                        As fogueiras são permitidas, mas claro, tomando todo o cuidado e utilizando os espaços já definidos para esse fim. 
-                                                        No local é possível comprar lenha. 
+                                                        Não existe estrutura de banheiros para banho 
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><i class="fa fa-cutlery" aria-hidden="true"></i></td>
                                                     <td>Restaurante</td>
-                                                    <td>Sim</td>
-                                                    <td>Os proprietários da fazenda utilizam a sua casa como espaço para vender algumas bebidas e saborosos pastéis, que são fritos na hora.</td>
+                                                    <td>Não</td>
+                                                    <td>Melhor levar toda comida e bebeida necessária, pois o local não conta com nenhuma estrutura nesse sentido</td>
                                                 </tr>
                                             </tbody>
                                         </table>
