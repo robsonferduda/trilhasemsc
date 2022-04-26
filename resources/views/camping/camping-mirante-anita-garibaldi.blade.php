@@ -56,7 +56,7 @@
                                     do mirante é bem melhor. Nesse segundo ponto não é possível chegar com o carro muito perto, caso seja esse teu objetivo.
                                 </p>
                                 <p>
-                                    Quando fomos conhecer o local, ficamos neste segundo mirante e estava ventando muito. Como era apena suma barraca, conseguimos colocar em um lugar protegido do vento e com o 
+                                    Quando fomos conhecer o local, ficamos neste segundo mirante e estava ventando muito. Como era apenas uma barraca, conseguimos colocar em um lugar protegido do vento e com o 
                                     bônus de poder colocar a rede.
                                 </p>
                                 <div class="box_img">
