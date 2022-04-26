@@ -46,6 +46,7 @@ class SiteMapController extends Controller
         $sitemap->add(\URL::to('bom-jardim-da-serra/campings/selvagem/camping-pico-rinoceronte'), now(), '0.9', 'weekly');
         $sitemap->add(\URL::to('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista'), now(), '0.9', 'weekly');
         $sitemap->add(\URL::to('grao-para/campings/estruturado/camping-mirante'), now(), '0.9', 'weekly');
+        $sitemap->add(\URL::to('laguna/campings/selvagem/camping-mirante-anita-garibaldi'), now(), '0.9', 'weekly');
         
         $sitemap->add(\URL::to('guia-de-dificuldade-em-trilhas'), now(), '0.9', 'monthly');
         $sitemap->add(\URL::to('guia-de-dificuldade-em-trilhas/abnt'), now(), '0.9', 'monthly');
