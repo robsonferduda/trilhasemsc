@@ -9,13 +9,26 @@
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <br/><br/><h2 class="h2-section">Apresentamos <span class="h2-section-span">Santa Catarina</span></h2>
+                                <br/><br/><h2 class="h2-section">CADASTRO DE <span class="h2-section-span">CONDUTORES</span></h2>
                             </div>    
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 justificado">
+                        <p>
+                            O Trilhasemsc surgiu com o objetivo de compartilhar conteúdo sobre trilhas para trilheiros. Em nosso site, todos os relatos são de trilhas que conhecemos e fizemos. 
+                        </p>
+                        <p>
+                            Com o crescimento do site e principalmente do perfil no Instagram, as interações e mensagens aumentaram e um tema sempre é constante: trilhas guiadas.
+                        </p>
+                        <p>
+                            Como não somos habilitados para a tarefa de condução em trilhas e queremos levar a melhor experiências para nossos seguidores, convidamos vocês Condutores de Trilhas e Caminhadas e Condutores Ambientais a fazerem o cadastro em nossa página e serem encontrados por todas essas pessoas que buscam profissionais qualificados para iniciar suas aventuras no mundo das trilhas ou mesmo os trilheiros mais experientes, que buscam orientação em trilhas difíceis e desconhecidas.
+                        </p>
+                        <div class="center">
+                            <a href="https://forms.gle/S21P1v4imm3rX7KG7" class="button-one button-yellow">Cadastre-se Aqui</a>
+                        </div>
+                        <!--
                         <p>
                             Olá trilheiros (as), como vão, tudo bem? É um prazer tê-los por aqui acompanhando nossa missão, que não é uma das mais fáceis, mas faremos o melhor! Para que tenhamos êxito, cabe a vocês a leitura, a crítica e também as sugestões, pois estamos abertos a elas. Mas qual é essa missão? Queremos apresentar Santa Catarina por meio de suas trilhas! Tá, nem é tão difícil assim, pois imaginem só percorrer as trilhas desse belo estado e poder compartilhar tudo com vocês. A dificuldade está em transmitir todas as sensações, visões e sentimentos que essas aventuras proporcionam, mas vamos tentar.
                         </p>
@@ -29,6 +42,7 @@
                         <p>
                             Agradecemos se leu até aqui! As próximas leituras serão mais empolgantes, pois trarão nelas os detalhes e imagens de Santa Catarina em trilhas!
                         </p>
+                        --!>
                         <br />
                         <!-- Horizontal Tela Detalhes Trilha -->
                         <ins class="adsbygoogle"
