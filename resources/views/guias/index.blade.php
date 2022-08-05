@@ -6,25 +6,30 @@
                     <div class="col-md-12">
                         <div class="section-title text-center">
                             <div class="title-border">
-                                <br/><br/><h1>Grupos</h1>
+                                <br/><br/><h1>Guias e Condutores</h1>
                             </div>    
                         </div>
                     </div>                          
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <img class="img-fluid rounded mb-3 mb-md-0" src="{{ asset('img/grupos/familia_na_trilha.png') }}" alt="Logo Família na Trilha">
+                @foreach($guias as $key => $guia)
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="img-fluid rounded-circle mb-3 mb-md-0" src="{{ asset('img/guias/'.$guia->id_guia_gui.'.jpg') }}" alt="Logo Guia {{ $guia->nm_guia_gui }}">
+                        </div>
+                        <div class="col-md-9">
+                            <h4>{{ $guia->nm_guia_gui }}</h4>
+                            <p><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/instagram", $guia->id_guia_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
+                            <p><strong>Cidade</strong>: {{ $guia->origem->nm_cidade_cde }}</p>
+                            <p><strong>Contato</strong>: {{ ($guia->fone) ? $guia->fone->nu_fone_fon : '' }}</p>
+                            <p>
+                                {{ $guia->dc_biografia_gui }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="col-md-9">
-                        <h3>Família na Trilha</h3>
-                        <h4>Operadora de turismo de aventura</h4>
-                        <p><strong>Cidade</strong>: Florianópolis</p>
-                        <p><strong>Responsável</strong>: Claudia Tiscoski</p>
-                        <p><strong>Contato</strong>: (48) 4141-0450</p>
-                        <a class="btn btn-success" href="https://chat.whatsapp.com/GvvzWUySo9f00HGikK11kP"><i class="fa fa-whatsapp" aria-hidden="true"></i> Entrar no Grupo</a>
-                    </div>
-                </div>
-                <hr/>
+                    @if($key < count($guias) - 1)
+                        <hr/>   
+                    @endif                 
+                @endforeach
             </div>
         </div>
 @endsection
