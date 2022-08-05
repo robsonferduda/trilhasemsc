@@ -14,7 +14,7 @@ class GuiaController extends Controller
 {
     public function index()
     {
-        $page_name = "Condutores";
+        $page_name = "Guias";
         return view('guias/index', ['page_name' => $page_name]);
     }
 }
