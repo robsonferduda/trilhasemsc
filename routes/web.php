@@ -28,6 +28,7 @@ Route::get('{cidade}/trilhas/{nivel}', 'TrilhaController@searchTrilhasCidadeNive
 Route::get('{cidade}/trilhas/{nivel}/{trilha}', 'TrilhaController@searchTrilha');
 Route::get('trilhas/tag/{tag}', 'TrilhaController@searchTrilhasTag');
 
+Route::get('guia/perfil/estatistica/{tipo}/{id}', 'GuiaController@estatisticas');
 Route::get('guias-e-condutores', 'GuiaController@index');
 
 Route::get('guia-de-dificuldade-em-trilhas', 'DificuldadeController@index');
