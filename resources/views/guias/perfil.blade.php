@@ -24,6 +24,7 @@
                         <p><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/estatistica/instagram", $guia->id_guia_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
                         <p><strong>Cidade</strong>: {{ $guia->origem->nm_cidade_cde }}</p>
                         <p><strong>Contato</strong>: {{ ($guia->fone) ? $guia->fone->nu_fone_fon : '' }}</p>
+                        <p><strong>Cidades de Atuação</strong>: {{ $guia->ds_atuacao_gui }}</p>
                         <p>
                             {{ $guia->dc_biografia_gui }}
                         </p>
