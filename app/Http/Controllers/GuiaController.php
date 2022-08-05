@@ -19,11 +19,14 @@ class GuiaController extends Controller
 
     public function estatisticas($tipo, $id)
     {
+        $url = null;
         $interacao = 0;
+        $guia = Guia::find($id);
 
         switch ($tipo) {
             case 'instagram':
                 $interacao = 1;
+                $url = 'https://www.instagram.com/'.$guia->nm_instagram_gui;
                 break;
             
             case 'telefone':
@@ -35,5 +38,7 @@ class GuiaController extends Controller
                        'id_guia_gui' => $id);
 
         Interacao::create($dados);
+
+        return redirect($url);
     }
 }
