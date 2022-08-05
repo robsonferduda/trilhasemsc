@@ -22,7 +22,7 @@ class GuiaController extends Controller
         $url = null;
         $interacao = 0;
         $guia = Guia::find($id);
-        $fone = ($guia->fone) ? $guia->fone->nu_fone_fon : '';
+        $fone = ($guia->fone) ? preg_replace('/[(\)\-\" "]+/', '', $guia->fone->nu_fone_fon) : '';
 
         switch ($tipo) {
             case 'instagram':
