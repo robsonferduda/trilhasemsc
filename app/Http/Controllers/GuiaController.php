@@ -22,6 +22,7 @@ class GuiaController extends Controller
         $url = null;
         $interacao = 0;
         $guia = Guia::find($id);
+        $fone = ($guia->fone) ? $guia->fone->nu_fone_fon : '';
 
         switch ($tipo) {
             case 'instagram':
@@ -31,6 +32,7 @@ class GuiaController extends Controller
             
             case 'telefone':
                 $interacao = 2;
+                $url = 'https://api.whatsapp.com/send?phone=55'.$fone;
                 break;
         }
 
