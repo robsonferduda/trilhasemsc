@@ -40,7 +40,7 @@ class GuiaController extends Controller
             
             case 'telefone':
                 $interacao = 2;
-                $url = 'https://api.whatsapp.com/send?phone=55'.$fone;
+                $url = 'https://api.whatsapp.com/send?phone=55'.$fone.'&text=Olá! Vi seu perfil no https://trilhasemsc.com.br/guias-e-condutores e fiquei interessado. Pode me dar mais informações?';
                 break;
 
             case 'perfil':
