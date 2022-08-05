@@ -14,7 +14,11 @@
                 @foreach($guias as $key => $guia)
                     <div class="row">
                         <div class="col-md-3">
-                            <img class="img-fluid rounded-circle mb-3 mb-md-0" src="{{ asset('img/guias/'.$guia->id_guia_gui.'.jpg') }}" alt="Logo Guia {{ $guia->nm_guia_gui }}">
+                            @if($guia->nm_path_logo_gui)
+                                <img class="img-fluid rounded-circle mb-3 mb-md-0" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $guia->nm_guia_gui }}">
+                            @else
+                                <img class="img-fluid rounded-circle mb-3 mb-md-0" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $guia->nm_guia_gui }}">
+                            @endif
                         </div>
                         <div class="col-md-9">
                             <h4>{{ $guia->nm_guia_gui }}</h4>
