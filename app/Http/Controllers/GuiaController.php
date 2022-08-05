@@ -17,6 +17,14 @@ class GuiaController extends Controller
         return view('guias/index', ['page_name' => $page_name, 'guias' => $guias]);
     }
 
+    public function perfil($id)
+    {
+        $page_name = "Perfil";
+        $guia = Guia::find($id);
+
+        return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia]);
+    }
+
     public function estatisticas($tipo, $id)
     {
         $url = null;
@@ -33,6 +41,11 @@ class GuiaController extends Controller
             case 'telefone':
                 $interacao = 2;
                 $url = 'https://api.whatsapp.com/send?phone=55'.$fone;
+                break;
+
+            case 'perfil':
+                $interacao = 3;
+                $url = 'guia/perfil/'.$id;
                 break;
         }
 
