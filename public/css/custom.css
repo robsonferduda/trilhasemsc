@@ -107,15 +107,11 @@
   -webkit-background-clip: text  !important;
 }
 
-.circle-image{
-
-	width: 60%;
-	height: 200px;
-	text-align: center;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 20px;
-}
-
-
+.custom-circle-image {
+	width: 20vw; /* note i used vw not px for better responsive */
+	height: 20vw;
+  }
+  
+  .custom-circle-image img {
+	object-fit: cover;
+  }
