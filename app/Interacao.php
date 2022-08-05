@@ -12,7 +12,7 @@ class Interacao extends Model
     protected $table = 'guia_interacao_gin';
     protected $primaryKey = 'id_guia_interacao_gin';
     protected $dates = ['deleted_at'];
-    protected $fillable = [];
+    protected $fillable = ['id_tipo_interacao_tin','id_guia_gui'];
     public $timestamps = true;
 
 }
