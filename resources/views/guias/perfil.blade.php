@@ -28,7 +28,9 @@
                             {{ $guia->dc_biografia_gui }}
                         </p>
                         <a class="btn btn-success" href="{{ url("guia/perfil/estatistica/telefone", $guia->id_guia_gui) }}"><i class="fa fa-whatsapp" aria-hidden="true"></i> Enviar Mensagem</a>
-                        <a href="{{ url('guias-e-condutores') }}">Voltar</a>
+                        <p>
+                            <a href="{{ url('guias-e-condutores') }}">Voltar</a>
+                        </p>
                     </div>
                 </div>                
             </div>

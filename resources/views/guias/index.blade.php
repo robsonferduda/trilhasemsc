@@ -29,6 +29,7 @@
                                 {{ $guia->dc_biografia_gui }}
                             </p>
                             <a class="btn btn-success" href="{{ url("guia/perfil/estatistica/telefone", $guia->id_guia_gui) }}"><i class="fa fa-whatsapp" aria-hidden="true"></i> Enviar Mensagem</a>
+                            <a class="btn btn-primary mr-2 ml-3" href="{{ url("guia/perfil/estatistica/perfil", $guia->id_guia_gui) }}"><i class="fa fa-user" aria-hidden="true"></i> Perfil Completo</a>
                         </div>
                     </div>
                     @if($key < count($guias) - 1)
