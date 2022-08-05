@@ -12,7 +12,7 @@ class GuiaController extends Controller
     public function index()
     {
         $page_name = "Guias";
-        $guias = Guia::orderBy("nm_guia_gui")->get();
+        $guias = Guia::inRandomOrder()->get();
 
         return view('guias/index', ['page_name' => $page_name, 'guias' => $guias]);
     }
