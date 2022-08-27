@@ -30,7 +30,6 @@
                                     <span style="color: white; background: {{ ($trilha->nivel) ? $trilha->nivel->dc_color_nivel_niv : '#989898' }};" class="badge badge-secondary">{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</span>
                                     <span><i class="fa fa-user"></i>{{ $trilha->user->name }}</span>
                                     <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #696969;"><i class="fa fa-instagram" aria-hidden="true"></i>@trilhasemsc</a></span>
-                                    <span class="text-info">Última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
                                     {{--<span><i class="fa fa-comment"></i>{{ $trilha->comentarios->count() }} {{ ($trilha->comentarios->count() == 1) ? 'comentário' : 'comentários' }}</span>--}}
                                     
                                 </div>
@@ -46,6 +45,12 @@
                                 </script>
                                 <br />
                                 <div id="descricao">
+                                    <p><span class="text-success">Trilha cadastrada em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}</span></p>
+                                    <p><span class="text-info">Última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span></p>
+                                    <p><span class="text-danger">
+                                        <span style="color: white; background: #a94442;" class="badge badge-secondary">Atenção!</span>
+                                        Fique sempre atento à data de atualização dos textos. 
+                                        Os textos são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.</span></p>
                                     {!! $trilha->ds_trilha_tri !!}
                                 </div>
 
