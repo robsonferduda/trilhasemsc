@@ -107,3 +107,11 @@
   -webkit-background-clip: text  !important;
 }
 
+.custom-circle-image {
+	width: 20vw; /* note i used vw not px for better responsive */
+	height: 20vw;
+  }
+  
+  .custom-circle-image img {
+	object-fit: cover;
+  }
