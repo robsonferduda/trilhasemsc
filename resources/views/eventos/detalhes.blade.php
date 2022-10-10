@@ -17,7 +17,12 @@
                     </div>
                     <div class="col-md-9">
                         <h4>{{ $evento->nm_evento_eve }}</h4>
+                        <p><strong>Responsável</strong>: {{ $evento->guia->nm_guia_gui }}</p>
                         <p><strong>Cidade</strong>: {{ $evento->local->nm_cidade_cde }}</p>
+                        <p><strong>Data/Horário</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y H:i:s')}}</p>
+                        <p><strong>Horário Término</strong>: {{ \Carbon\Carbon::parse($evento->dt_termino_eve)->format('H:i') }}</p>
+                        <p><strong>Valor</strong>: R$ {{ $evento->valor_eve }}</p>
+                        <p><strong>Contato</strong>: {{ $evento->local->nm_cidade_cde }}</p>
                         <p>
                             {{ $evento->descricao }}
                         </p>
