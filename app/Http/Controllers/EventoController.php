@@ -13,6 +13,8 @@ class EventoController extends Controller
         $page_name = "Eventos";
         $eventos = Evento::inRandomOrder()->get();
 
+        dd($eventos);
+
         return view('eventos/index', ['page_name' => $page_name, 'eventos' => $eventos]);
     }
 
