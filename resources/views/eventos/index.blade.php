@@ -13,7 +13,7 @@
                 </div>
                 @foreach($eventos as $key => $evento)
                     <div class="row">
-                        
+                        <h6>{{ $evento->nm_evento_eve }}</h6>
                     </div>               
                 @endforeach
             </div>
