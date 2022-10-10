@@ -13,7 +13,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <img class="circle-image mb-3 mb-md-0" src="{{ asset('img/eventos/'.$evento->id_evento_eve) }}" alt="Logo Evento {{ $evento->nm_evento_eve }}">
+                        <img class="circle-image mb-3 mb-md-0" src="{{ asset('img/eventos/'.$evento->id_evento_eve.'.png') }}" alt="Logo Evento {{ $evento->nm_evento_eve }}">
                     </div>
                     <div class="col-md-9">
                         <h4>{{ $evento->nm_evento_eve }}</h4>
