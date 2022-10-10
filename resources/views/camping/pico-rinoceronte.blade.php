@@ -29,7 +29,8 @@
                                      (adsbygoogle = window.adsbygoogle || []).push({});
                                 </script>
                                 <br />
-                                <p>
+                                <p>  
+                                    <p class="text-info"><i class="fa fa-info" aria-hidden="true"></i> Última atualização em 27 de agosto de 2022</p>
                                     <p class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i> Não jogue lixo</p>
                                     <p class="text-success"><i class="fa fa-leaf" aria-hidden="true"></i> Proteja a natureza e os animais selvagens</p>
                                 </p>
@@ -41,7 +42,7 @@
                                 <p>Em nosso relato sobre a trilha, trouxemos os detalhes necessários para chegar até o local e curtir o visual, logo, seria repetitivo falar tudo novamente. Vamos trazer aqui alguns detalhes sobre a atividade de camping na região, que é o foco deste texto</p>
                                 <p>
                                     A primeira coisa que você precisa saber é que se trata de uma propriedade privada, logo, procure a autorização do proprietário para entrar. Em nosso caminho, que partiu da Fazenda dos Papagaios, foram praticamente 7 quilômetros de caminhada. 
-                                    Foi na fazenda que deixamos nosso carro e pagamos a taxa de R$ 20,00 para o camping.
+                                    Foi na fazenda que deixamos nosso carro e pagamos a taxa de R$ 50,00 poe pessoa para o camping.
                                 </p>    
                                 <p>
                                     Ao chegar no camping nos deparamos com outros aventureiros que fizeram a famosa Trilha dos Tropeiros e chegaram ali subindo a serra em um trajeto de aproximadamente 15km.
@@ -49,8 +50,7 @@
                                 <p>
                                     Quando entramos em contato com o proprietário do local, tivemos duas dúvidas principais. Sobre disponibilidade de água e possibilidade de fazer fogueiras. Sobre a água, fomos informados que existiam muitos pontos pelo caminho, inclusive um muito 
                                     próximo ao Pico. Além disso, margeamos um rio durante boa parte do percurso, logo, água não é um problema.
-                                    Sobre a fogueira, é permitido fazer, seguindo as dicas de segurança e nunca deixando nenhum tipo de resquício de fogo para trás. No local é possível encontrar lenha em vários pontos, pois existem muitas árvores secas que derrubam 
-                                    galhos que podem ser usados como lenha. Foi essa lenha que utilizamos para o fogo.
+                                    Sobre a fogueira, por questões de segurança, é proibido fazer em qualquer parte.
                                 </p>
                                 <p>
                                     Sobre os locais para acampar, as possibilidades são grandes, pois a área é bem grande. O que se deve ponderar é quão perto do Pico se deseja ficar, pois o nascer e pôr do sol ali são os principais atrativos. E também a questão da água, pois 
@@ -81,7 +81,7 @@
                                                     <td><i class="fa fa-car" aria-hidden="true"></i></td>
                                                     <td>Estacionamento</td>
                                                     <td>Sim</td>
-                                                    <td>O estacionamento fica no início da trilha, na Fazenda dos Papagaios. É necessário pagar uma taxa de R$ 20,00 para o Sr. Roberto, proprietário do local. Dica: leve o dinehiro em espécie e de preferência trocado, facilita o pagamento.</td>
+                                                    <td>O estacionamento fica no início da trilha, na Fazenda dos Papagaios. É necessário pagar uma taxa de R$ 50,00 para o Sr. Roberto, proprietário do local. Dica: leve o dinehiro em espécie e de preferência trocado, facilita o pagamento.</td>
                                                 </tr>
                                                 <tr>
                                                     <td><i class="fa fa-tint" aria-hidden="true"></i></td>
@@ -100,8 +100,8 @@
                                                 <tr>
                                                     <td><i class="fa fa-fire" aria-hidden="true"></i></td>
                                                     <td>Fogueiras</td>
-                                                    <td>Sim</td>
-                                                    <td>As fogueiras são permitidas ali, mas claro, tomando todo o cuidado necessário e utilizando somente a lenha coletada pelo caminho.</td>
+                                                    <td>Não</td>
+                                                    <td>As fogueiras são proibidas em qualquer parte do cânion.</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -109,8 +109,11 @@
                                 </section>
 
                                 <p>
-                                    Existem outras alternativas para o camping no caminho até o pico. Claro que o que nos leva até lá é justamente estar ali, próximos da formação rochosa que lembra um rinoceronte. Mas se quiser varias ou mesmo se for ficar mais de um dia, 
-                                    existem alguns pontos excelentes no caminho, com proteção do vento, água abundante e muito espaço para as barracas. Além, claro, das belas paisagens do local.
+                                    Existem outras alternativas de local para o camping no caminho até o pico, mas com certeza a borda do cânion é o mais atrativo,
+                                    tanto pela vista do cânion quando por estarmos próximos da formação rochosa que lembra um rinoceronte. 
+                                    Mas se quiser variar o local ou mesmo se for ficar mais de um dia, 
+                                    existem alguns pontos excelentes no caminho, com proteção do vento, água abundante e muito espaço para as barracas. 
+                                    Além, claro, das belas paisagens do local.
                                 <p>
 
                                 <div class="box_img">
