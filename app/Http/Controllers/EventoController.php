@@ -11,7 +11,7 @@ class EventoController extends Controller
     public function index()
     {
         $page_name = "Eventos";
-        $eventos = Evento::inRandomOrder()->get();
+        $eventos = Evento::all();
 
         dd($eventos);
 
