@@ -13,7 +13,7 @@
                 </div>
                 @foreach($eventos as $key => $evento)
                     <div class="row">
-                        <h6>{{ $evento->nm_evento_eve }}</h6>
+                        <h6><a href="{{ url('eventos/detalhes', $evento->id_evento_eve) }}">{{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y H:i:s') }} - {{ $evento->nm_evento_eve }}</a></h6>
                     </div>               
                 @endforeach
             </div>
