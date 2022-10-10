@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Guia;
-use App\Interacao;
+use App\Evento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
