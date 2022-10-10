@@ -13,8 +13,6 @@ class EventoController extends Controller
         $page_name = "Eventos";
         $eventos = Evento::all();
 
-        dd($eventos);
-
         return view('eventos/index', ['page_name' => $page_name, 'eventos' => $eventos]);
     }
 
