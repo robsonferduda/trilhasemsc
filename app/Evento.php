@@ -17,7 +17,7 @@ class Evento extends Model
 
     public function local()
     {
-        return $this->hasOne('App\Cidade', 'cd_cidade_cde', 'cd_cidade_origem_gui');
+        return $this->hasOne('App\Cidade', 'cd_cidade_cde', 'cd_cidade_cde');
     }
 
     public function guia()
