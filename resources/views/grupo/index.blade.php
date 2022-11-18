@@ -39,6 +39,7 @@
                     </div>
                 </div>
                 <hr/>
+                <!--
                 <div class="row">
                     <div class="col-md-3">
                         <img class="img-fluid rounded mb-3 mb-md-0" src="{{ asset('img/grupos/vibe_de_aventura.jpg') }}" alt="Logo Família na Trilha">
@@ -51,6 +52,7 @@
                         <p><strong>Contato</strong>: (48) 98433-0946 </p>
                     </div>
                 </div>
+            -->
             </div>
         </div>
 @endsection
