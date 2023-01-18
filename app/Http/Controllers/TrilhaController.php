@@ -143,7 +143,7 @@ class TrilhaController extends Controller
            ->select('cd_cidade_cde', DB::raw('count(*) as total'))
            ->where('fl_publicacao_tri', 'S')
            ->groupBy('cd_cidade_cde')
-           ->get();
+           ->get()->sortBy('cidade.nm_cidade_cde');
 
         return view('trilhas/detalhes', ['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
@@ -230,7 +230,7 @@ class TrilhaController extends Controller
         $busca_cidade = Trilha::with('cidade')
         ->select('cd_cidade_cde', DB::raw('count(*) as total'))
         ->groupBy('cd_cidade_cde')
-        ->get();
+        ->get()->sortBy('cidade.nm_cidade_cde');
 
         return view('trilhas/leste',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
@@ -259,7 +259,7 @@ class TrilhaController extends Controller
         $busca_cidade = Trilha::with('cidade')
                         ->select('cd_cidade_cde', DB::raw('count(*) as total'))
                         ->groupBy('cd_cidade_cde')
-                        ->get();
+                        ->get()->sortBy('cidade.nm_cidade_cde');
 
         return view('trilhas/brasil/regioes/nordeste/chapada',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Trilhas']);
     }
@@ -272,7 +272,7 @@ class TrilhaController extends Controller
         $busca_cidade = Trilha::with('cidade')
         ->select('cd_cidade_cde', DB::raw('count(*) as total'))
         ->groupBy('cd_cidade_cde')
-        ->get();
+        ->get()->sortBy('cidade.nm_cidade_cde');
 
         return view('trilhas/norte',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
@@ -285,7 +285,7 @@ class TrilhaController extends Controller
         $busca_cidade = Trilha::with('cidade')
         ->select('cd_cidade_cde', DB::raw('count(*) as total'))
         ->groupBy('cd_cidade_cde')
-        ->get();
+        ->get()->sortBy('cidade.nm_cidade_cde');
 
         return view('trilhas/sul',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
@@ -298,7 +298,7 @@ class TrilhaController extends Controller
         $busca_cidade = Trilha::with('cidade')
         ->select('cd_cidade_cde', DB::raw('count(*) as total'))
         ->groupBy('cd_cidade_cde')
-        ->get();
+        ->get()->sortBy('cidade.nm_cidade_cde');
 
         return view('trilhas/santa-catarina/regioes',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
@@ -311,7 +311,7 @@ class TrilhaController extends Controller
         $busca_cidade = Trilha::with('cidade')
         ->select('cd_cidade_cde', DB::raw('count(*) as total'))
         ->groupBy('cd_cidade_cde')
-        ->get();
+        ->get()->sortBy('cidade.nm_cidade_cde');
 
         return view('trilhas/santa-catarina/serra',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }

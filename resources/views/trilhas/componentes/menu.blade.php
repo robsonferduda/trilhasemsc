@@ -12,6 +12,7 @@
         </li>
         <li><a href="{{ url('campings') }}">CAMPING</a></li>
         <li><a href="{{ url('grupos') }}">GRUPOS</a></li>
+        <li><a href="{{ url('eventos') }}">EVENTOS</a></li>
         <li><a href="{{ url('guias-e-condutores') }}">GUIAS E CONDUTORES</a></li>
     </ul>
 </nav>
