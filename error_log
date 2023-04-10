@@ -1,0 +1,66 @@
+[20-Aug-2020 11:48:54 America/Sao_Paulo] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/trilhasemsc/public_html/app/Helper.php:1) in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php:347
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home/trilhasem...', 347, Array)
+#1 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(347): header('Cache-Control: ...', false, 500)
+#2 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(381): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#3 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): Symfony\Component\HttpFoundation\Response->send()
+#4 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(100): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Er in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php on line 347
+[20-Aug-2020 11:48:54 America/Sao_Paulo] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/trilhasemsc/public_html/app/Helper.php:1) in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php:347
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home/trilhasem...', 347, Array)
+#1 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(347): header('Cache-Control: ...', false, 500)
+#2 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(381): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#3 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): Symfony\Component\HttpFoundation\Response->send()
+#4 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(100): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Sy in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php on line 347
+[20-Aug-2020 11:49:06 America/Sao_Paulo] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/trilhasemsc/public_html/app/Helper.php:1) in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php:347
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home/trilhasem...', 347, Array)
+#1 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(347): header('Cache-Control: ...', false, 500)
+#2 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(381): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#3 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): Symfony\Component\HttpFoundation\Response->send()
+#4 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(100): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Er in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php on line 347
+[20-Aug-2020 11:49:06 America/Sao_Paulo] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/trilhasemsc/public_html/app/Helper.php:1) in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php:347
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home/trilhasem...', 347, Array)
+#1 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(347): header('Cache-Control: ...', false, 500)
+#2 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(381): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#3 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): Symfony\Component\HttpFoundation\Response->send()
+#4 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(100): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Sy in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php on line 347
+[20-Aug-2020 11:50:30 America/Sao_Paulo] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/trilhasemsc/public_html/app/Helper.php:1) in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php:347
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home/trilhasem...', 347, Array)
+#1 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(347): header('Cache-Control: ...', false, 500)
+#2 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(381): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#3 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): Symfony\Component\HttpFoundation\Response->send()
+#4 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(100): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Er in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php on line 347
+[20-Aug-2020 11:50:30 America/Sao_Paulo] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/trilhasemsc/public_html/app/Helper.php:1) in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php:347
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home/trilhasem...', 347, Array)
+#1 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(347): header('Cache-Control: ...', false, 500)
+#2 /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php(381): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#3 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): Symfony\Component\HttpFoundation\Response->send()
+#4 /home/trilhasemsc/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(100): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Sy in /home/trilhasemsc/public_html/vendor/symfony/http-foundation/Response.php on line 347
+[20-Aug-2020 13:24:07 America/Sao_Paulo] PHP Warning:  require(/home/trilhasemsc/public_html/public/../vendor/autoload.php): failed to open stream: No such file or directory in /home/trilhasemsc/public_html/public/index.php on line 24
+[20-Aug-2020 13:24:07 America/Sao_Paulo] PHP Fatal error:  require(): Failed opening required '/home/trilhasemsc/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/trilhasemsc/public_html/public/index.php on line 24
+[20-Aug-2020 13:24:09 America/Sao_Paulo] PHP Warning:  require(/home/trilhasemsc/public_html/public/../vendor/autoload.php): failed to open stream: No such file or directory in /home/trilhasemsc/public_html/public/index.php on line 24
+[20-Aug-2020 13:24:09 America/Sao_Paulo] PHP Fatal error:  require(): Failed opening required '/home/trilhasemsc/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/trilhasemsc/public_html/public/index.php on line 24
+[06-Oct-2020 07:59:06 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 24576 bytes) in /home/trilhasemsc/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[06-Oct-2020 07:59:06 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 147456 bytes) in /home/trilhasemsc/public_html/vendor/composer/ClassLoader.php on line 444
+[06-Oct-2020 08:02:05 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 24576 bytes) in /home/trilhasemsc/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[06-Oct-2020 08:02:05 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 147456 bytes) in /home/trilhasemsc/public_html/vendor/composer/ClassLoader.php on line 444
+[06-Oct-2020 08:03:23 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 24576 bytes) in /home/trilhasemsc/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[06-Oct-2020 08:03:23 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 147456 bytes) in /home/trilhasemsc/public_html/vendor/composer/ClassLoader.php on line 444
+[06-Oct-2020 08:05:45 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 24576 bytes) in /home/trilhasemsc/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[06-Oct-2020 08:05:45 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 147456 bytes) in /home/trilhasemsc/public_html/vendor/composer/ClassLoader.php on line 444
+[06-Oct-2020 08:18:12 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 24576 bytes) in /home/trilhasemsc/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[06-Oct-2020 08:18:12 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 147456 bytes) in /home/trilhasemsc/public_html/vendor/composer/ClassLoader.php on line 444
+[06-Oct-2020 08:27:22 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 24576 bytes) in /home/trilhasemsc/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[06-Oct-2020 08:27:22 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 147456 bytes) in /home/trilhasemsc/public_html/vendor/composer/ClassLoader.php on line 444
+[06-Oct-2020 08:30:48 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 24576 bytes) in /home/trilhasemsc/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[06-Oct-2020 08:30:48 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 147456 bytes) in /home/trilhasemsc/public_html/vendor/composer/ClassLoader.php on line 444
+[06-Oct-2020 08:31:04 America/Sao_Paulo] PHP Warning:  require(/home/trilhasemsc/public_html/vendor/composer/../laravel/framework/src/Illuminate/Foundation/helpers.php): failed to open stream: No such file or directory in /home/trilhasemsc/public_html/vendor/composer/autoload_real.php on line 66
+[06-Oct-2020 08:31:04 America/Sao_Paulo] PHP Fatal error:  require(): Failed opening required '/home/trilhasemsc/public_html/vendor/composer/../laravel/framework/src/Illuminate/Foundation/helpers.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/trilhasemsc/public_html/vendor/composer/autoload_real.php on line 66
+[06-Oct-2020 08:32:42 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 24576 bytes) in /home/trilhasemsc/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[06-Oct-2020 08:32:42 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 147456 bytes) in /home/trilhasemsc/public_html/vendor/composer/ClassLoader.php on line 444
+[06-Oct-2020 08:34:35 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 24576 bytes) in /home/trilhasemsc/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[06-Oct-2020 08:34:35 America/Sao_Paulo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 147456 bytes) in /home/trilhasemsc/public_html/vendor/composer/ClassLoader.php on line 444

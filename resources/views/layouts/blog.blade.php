@@ -165,9 +165,9 @@
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         
         <!-- nivo slider js
-        ============================================ -->       
-        {!! Minify::javascript('/js/lib/nivo-slider/js/jquery.nivo.slider.js')->withFullUrl() !!} 
-        {!! Minify::javascript('/js/lib/nivo-slider/home.js')->withFullUrl() !!}
+        ============================================ -->
+        <script src="{{ asset('js/lib/nivo-slider/js/jquery.nivo.slider.js') }}"></script>
+        <script src="{{ asset('js/lib/nivo-slider/home.js') }}"></script>
         
         <!-- wow JS
         ============================================ -->        
@@ -202,8 +202,8 @@
         <script src="{{ asset('js/plugins.js') }}"></script>
         
         <!-- main JS
-        ============================================ -->        
-        {!! Minify::javascript('/js/main.js')->withFullUrl() !!}   
+        ============================================ -->
+        <script src="{{ asset('js/main.js') }}"></script>
 
         <!-- Custom
         ============================================ -->        
