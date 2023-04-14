@@ -10,7 +10,7 @@
       </title>
       <link rel="canonical" href="https://www.creative-tim.com/product/now-ui-design-system-pro" />
       <meta name="keywords" content="bootstrap, bootstrap 5, bootstrap5, ui kit, design system, responsive design, web design ui, ui design system, now ui kit, now ui design system">
-      <meta name="description" content="Most complex and innovative Design System Made by Creative Tim. Check our latest Premium Bootstrap 5 UI Kit.">
+      <meta name="description" content="Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil">
       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,200|Open+Sans+Condensed:700" rel="stylesheet">
       <link href="css/nucleo-icons.css" rel="stylesheet" />
       <link href="css/nucleo-svg.css" rel="stylesheet" />
@@ -200,6 +200,11 @@
       </header>
       <section class="pt-5 pb-0">
          <div class="container">
+            <div class="row mb-2">
+                <div class="col-md-7">
+                   <h3 class="text-primary">Destaques</h3>
+                </div>
+             </div>
             <div class="row">
 
                 @foreach($ultimas as $trilha)
@@ -245,51 +250,92 @@
             </div>
          </div>
       </section>
+
+      <section class="pt-1 pb-0 mt-5">
+        <div class="container">
+           <div class="row mb-2">
+              <div class="col-md-7">
+                 <h3 class="text-success">Eventos</h3>
+              </div>
+           </div>
+           <div class="row">
+               @for($i = 0; $i < 4; $i++)
+                <div class="col-lg-3">
+                    <!-- Start Card Blog Fullbackground - text centered -->
+                    <a href="javascript:;">
+                    <div class="card card-background mb-4">
+                        <div class="full-background" style="background-image: url('{{ asset('img/trilhas/destaque-pequena/'.$preferidas[$i]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}')"></div>
+                        <div class="card-body pt-12">
+                        <h4 class="text-white text-decoration-underline-hover">{{ $preferidas[$i]->nm_trilha_tri }}</h4>
+                        <p>{{ $preferidas[$i]->cidade->nm_cidade_cde }}</p>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- End Card Blog Fullbackground - text centered -->
+                </div>
+              @endfor
+             
+           </div>
+        </div>
+     </section>
+     
       <section class="pt-1 pb-0">
          <div class="container">
-            <div class="row">
+            <div class="row mb-2">
                <div class="col-md-7">
-                  <h3 class="text-primary">Condutores de Aventura</h3>
+                  <h3 class="text-info">Condutores de Aventura</h3>
                </div>
             </div>
-            <div class="row mt-5">
+            <div class="row">
                 @foreach($guias as $guia)
-               <div class="col-lg-4 col-md-6 mt-md-5 mt-5">
-                  <div class="card card-profile card-plain">
-                     <div class="text-start mt-n5 z-index-1">
-                        <div class="position-relative w-25">
-                           <div>
-                              <img class="avatar avatar-xxl shadow-lg rounded-circle" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}">
-                           </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-profile">
+                      
+                      <div class="card-body justify-content-center text-center">
+                        <a href="javascript:;">
+                            <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}">
+                          </a>
+                        <h6 class="mb-0 mt-2">{{ $guia->nm_guia_gui }}</h6>
+                        <p>{{ $guia->origem->nm_cidade_cde }}</p>
+                        <div class="row justify-content-center text-center">
+                          <div class="col-lg-4 col-4">
+                            <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-facebook" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
+                                <span class="btn-inner--icon"><i class="fa fa-user" style="font-size: 40px;"></i></span>
+                                </button>
+                          </div>
+                          <div class="col-lg-4 col-4">
+                            <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-dribbble" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
+                                <span class="btn-inner--icon"><i class="fab fa-instagram" style="font-size: 40px;"></i></span>
+                                </button>
+                          </div>
+                          <div class="col-lg-4 col-4">
+                            <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-slack" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
+                                <span class="btn-inner--icon"><i class="fab fa-whatsapp" style="font-size: 40px;"></i></span>
+                                </button>
+                          </div>
                         </div>
-                     </div>
-                     <div class="card-body ps-0">
-                        <h5 class="mb-0">{{ $guia->nm_guia_gui }}</h5>
-                        <p class="text-muted">{{ $guia->origem->nm_cidade_cde }}</p>
-                        <p>
-                            {{ \Illuminate\Support\Str::limit($guia->dc_biografia_gui, 150, $end='...') }}
-                        </p>
-                        <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-dribbble" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
-                        <span class="btn-inner--icon"><i class="fab fa-instagram"></i></span>
-                        </button>
-                        <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-slack" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
-                        <span class="btn-inner--icon"><i class="fab fa-whatsapp"></i></span>
-                        </button>
-                     </div>
+                      </div>
+                    </div>
                   </div>
-               </div>
+
+                
                @endforeach
               
             </div>
          </div>
       </section>
+
+     
+
+
       <section class="pt-5 pb-0 mt-5 mb-6">
          <div class="container">
             <div class="row">
                <!-- -------- START HEADER 5 w/ text and illustration ------- -->
                <div class="container">
                   <div class="row">
-                     <div class="col-lg-4 my-auto">
+                     <div class="col-lg-3 my-auto">
                         <h1 class="mb-0 text-primary">Trilhas </h1>
                         <h1 class="mb-4 text-primary">Favoritas</h1>
                         <p class="lead">Essas são as trilhas favoritas dos trilherios de Santa Catarina</p>
@@ -297,7 +343,7 @@
                            <button type="button" class="btn bg-gradient-warning mt-4">Saiba Mais</button>
                         </div>
                      </div>
-                     <div class="col-lg-8 ps-5 pe-0">
+                     <div class="col-lg-9 ps-5 pe-0">
                         <div class="row">
                             <div class="col-lg-3 col-6">
                               <img class="w-100 border-radius-lg h-50 shadow mt-0 mt-lg-7" src="{{ asset('img/trilhas/destaque-pequena/'.$preferidas[0]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt="">

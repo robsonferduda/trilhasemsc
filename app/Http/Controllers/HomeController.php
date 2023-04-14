@@ -39,7 +39,7 @@ class HomeController extends Controller
     {
         $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
         $niveis = Nivel::get();
-        $guias = Guia::inRandomOrder()->take(6)->get();
+        $guias = Guia::inRandomOrder()->take(3)->get();
         $preferidas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('total_votos_tri', 'DESC')->take(7)->get();
 
         $ultimas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('created_at', 'DESC')->take(3)->get();
