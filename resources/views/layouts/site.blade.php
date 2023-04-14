@@ -289,8 +289,8 @@
             <div class="row">
                 @foreach($guias as $guia)
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="card card-profile">
+                <div class="col-lg-3 col-md-3">
+                    <div class="card card-profile" style="min-height: 320px;">
                       
                       <div class="card-body justify-content-center text-center">
                         <a href="javascript:;">
@@ -298,20 +298,20 @@
                           </a>
                         <h6 class="mb-0 mt-2">{{ $guia->nm_guia_gui }}</h6>
                         <p>{{ $guia->origem->nm_cidade_cde }}</p>
-                        <div class="row justify-content-center text-center">
+                        <div class="row justify-content-center text-center" style="position: absolute; bottom: 1px;">
                           <div class="col-lg-4 col-4">
                             <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-facebook" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
-                                <span class="btn-inner--icon"><i class="fa fa-user" style="font-size: 40px;"></i></span>
+                                <span class="btn-inner--icon"><i class="fa fa-user" style="font-size: 30px;"></i></span>
                                 </button>
                           </div>
                           <div class="col-lg-4 col-4">
                             <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-dribbble" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
-                                <span class="btn-inner--icon"><i class="fab fa-instagram" style="font-size: 40px;"></i></span>
+                                <span class="btn-inner--icon"><i class="fab fa-instagram" style="font-size: 30px;"></i></span>
                                 </button>
                           </div>
                           <div class="col-lg-4 col-4">
                             <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-slack" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
-                                <span class="btn-inner--icon"><i class="fab fa-whatsapp" style="font-size: 40px;"></i></span>
+                                <span class="btn-inner--icon"><i class="fab fa-whatsapp" style="font-size: 30px;"></i></span>
                                 </button>
                           </div>
                         </div>
