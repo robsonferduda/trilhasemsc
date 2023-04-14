@@ -7,6 +7,7 @@ use App\Nivel;
 use App\Trilha;
 use App\Cidade;
 use App\Galeria;
+use App\Guia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -32,6 +33,18 @@ class HomeController extends Controller
         $preferidas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('total_votos_tri', 'DESC')->take(5)->get();
 
         return view('home', ['totais' => $totais, 'ultimas' => $ultimas, 'preferidas' => $preferidas ,'cidades' => $cidades, 'niveis' => $niveis, 'page_name' => $page_name]);
+    }
+
+    public function novo()
+    {
+        $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
+        $niveis = Nivel::get();
+        $guias = Guia::inRandomOrder()->take(6)->get();
+        $preferidas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('total_votos_tri', 'DESC')->take(7)->get();
+
+        $ultimas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('created_at', 'DESC')->take(3)->get();
+
+        return view('inicio', compact('ultimas','cidades','niveis','guias','preferidas'));
     }
 
     public function guia()
