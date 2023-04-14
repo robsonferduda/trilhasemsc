@@ -336,8 +336,8 @@
                <div class="container">
                   <div class="row">
                      <div class="col-lg-2 my-auto text-center">
-                        <h2 class="mb-0 text-primary">Trilhas </h2>
-                        <h2 class="mb-4 text-primary">Favoritas</h2>
+                        <h1 class="mb-0 text-primary">Trilhas </h1>
+                        <h3 class="mb-4 text-primary">Favoritas</h3>
                         <p class="lead">Essas são as trilhas favoritas dos trilherios de Santa Catarina</p>
                         <div class="buttons">
                            <button type="button" class="btn bg-gradient-warning mt-4">Saiba Mais</button>
