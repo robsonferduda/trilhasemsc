@@ -42,7 +42,7 @@ class HomeController extends Controller
         $guias = Guia::inRandomOrder()->take(4)->get();
         $preferidas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('total_votos_tri', 'DESC')->take(7)->get();
 
-        $ultimas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('created_at', 'DESC')->take(3)->get();
+        $ultimas = Trilha::with('foto')->where('fl_destaque_tri', true)->where('fl_publicacao_tri', 'S')->orderBy('created_at', 'DESC')->take(3)->get();
 
         return view('inicio', compact('ultimas','cidades','niveis','guias','preferidas'));
     }
