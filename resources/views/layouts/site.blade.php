@@ -251,7 +251,7 @@
          </div>
       </section>
 
-      <section class="pt-1 pb-0 mt-5">
+      <section class="pt-1 pb-0 mt-2">
         <div class="container">
            <div class="row mb-2">
               <div class="col-md-7">
@@ -278,8 +278,8 @@
            </div>
         </div>
      </section>
-     
-      <section class="pt-1 pb-0">
+
+      <section class="pt-1 pb-0 mt-2">
          <div class="container">
             <div class="row mb-2">
                <div class="col-md-7">
