@@ -10,12 +10,12 @@ use Laravel\Socialite\Facades\Socialite;
 
 class GoogleController extends Controller
 {
-    public function redirectToProvider()
+    public function redirectToProvider($tipo = null)
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->with(['tipo' => $tipo])->redirect();
     }
 
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
         try {
             $userGoogle = Socialite::driver('google')->stateless()->user();
@@ -27,9 +27,14 @@ class GoogleController extends Controller
                 $dados = array('name' =>  $userGoogle->getName(),
                                'email' => $userGoogle->getEmail(),
                                'fl_google' => 'S',
+                               'id_role' => $request->tipo == 'guia' ? 'guia' : null, //Para evitar que alterem a URL e acessem outros níveis de privilégios.
                                'password' => \Hash::make(rand(1, 10000)));
                 
                 $user = User::create($dados);
+            }
+
+            if($request->tipo == 'guia') {
+                return redirect('guia-e-condutores/privado/atualizar-cadastro');
             }
 
             Auth::login($user);
