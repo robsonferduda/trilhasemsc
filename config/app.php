@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Devfactory\Minify\MinifyServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -228,6 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Minify' => Devfactory\Minify\Facades\MinifyFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
 
     ],
 

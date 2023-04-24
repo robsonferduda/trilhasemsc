@@ -2,27 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Cidade;
+use App\Fone;
 use App\Guia;
 use App\Interacao;
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Laracasts\Flash\Flash;
 
 class GuiaController extends Controller
 {
     public function index()
     {
         $page_name = "Guias";
-        $guias = Guia::inRandomOrder()->get();
+        $guias = Guia::inRandomOrder()->where('fl_perfil_moderado_gui', true)->where('fl_ativo_gui', true)->get();
+        $titulo = 'Guias e Condutores';
 
-        return view('guias/index', ['page_name' => $page_name, 'guias' => $guias]);
+        return view('guias/index', ['page_name' => $page_name, 'guias' => $guias, 'titulo' => $titulo]);
     }
 
     public function perfil($id)
     {
+        $titulo = 'Guias e Condutores';
+        $subtitulo = "Perfil";
+
         $page_name = "Perfil";
         $guia = Guia::find($id);
 
-        return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia]);
+        return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
     }
 
     public function estatisticas($tipo, $id)
@@ -56,4 +66,158 @@ class GuiaController extends Controller
 
         return redirect($url);
     }
+
+    public function cadastro(Request $request)
+    {
+        if($request->isMethod('post')) {
+            $validated= $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required|confirmed',
+                recaptchaFieldName() => recaptchaRuleName()
+            ], [
+                'name.required' => 'O campo "Nome" é obrigatório.',
+                'email.required' => 'O campo "Email" é obrigatório.',
+                'password.required' => 'O campo "Senha" é obrigatório.',
+                'password.confirmed' => 'O campo "Senha" e "Confirme a Senha" possuem valores divergentes.',
+                'g-recaptcha-response.recaptcha' => 'O campo "Não sou um robô" é obrigatório.'
+            ]);
+
+            $user = \App\User::where('email', trim($request->email))->first();
+
+            if($user) {
+                Flash::error("Usuário já cadastrado no sistema.");
+            } else {
+                $usuario = User::create([
+                    'name' => $request->name,
+                    'email' => trim($request->email),
+                    'password' => Hash::make($request->password)
+                ]);
+
+                $usuario->id_role = 'GUIA';
+                $usuario->save();
+                Flash::success("Usuário cadastrado com sucesso!");
+            }
+
+            return redirect('login');
+
+        }
+
+        return view('guias.cadastro');
+    }
+
+    public function atualizarCadastro(Request $request)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'GUIA') {
+            return redirect('login');
+        }
+        //dd($request);
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+
+        if(empty($guia)) {
+            $guia = Guia::create([
+                'id_user' => Auth::user()->id,
+                'nm_guia_gui' => Auth::user()->name
+            ]);
+        }
+
+        if($request->isMethod('post')) {
+
+            $validated = $request->validate([
+                'nome' => 'required',
+                'email' => 'required',
+                'cidade_origem' => 'required',
+                'cidades_atuacao' => 'required',
+                'biografia' => 'required'
+            ]);
+
+            $nome = $request->nome;
+            $email = $request->email;
+            $instagram = $request->instagram;
+            $site = $request->site;
+            $cidadeOrigem = $request->cidade_origem;
+            $cidadesAtuacao = $request->cidades_atuacao;
+            $biografia = $request->biografia;
+            $celular = $request->celular;
+            $whatsap = $request->whatsap;
+            $imagem_deletada = $request->imagem_deletada;
+
+            $guia->update([
+                'cd_cidade_origem_gui' => $cidadeOrigem,
+                'nm_guia_gui' => $nome,
+                'nm_instagram_gui' => $instagram,
+                'nm_site_gui' => $site,
+                'dc_biografia_gui' => $biografia,
+                'fl_perfil_completo_gui' => true,
+                'fl_perfil_moderado_gui' => false,
+                'fl_ativo_gui' => isset($request->ativo)
+            ]);
+
+            $guia->cidadesAtuacao()->sync($cidadesAtuacao);
+
+            $imagem = null;
+
+            if ($request->hasFile('imagem')) {
+                $extension = $request->file('imagem')->getClientOriginalExtension();
+                $filename = $guia->id_guia_gui . '.' . $extension;
+                $imagem = $request->imagem->storeAs('', $filename, 'guias');
+
+            }
+
+            if($request->hasFile('imagem')) {
+                $guia->update(['nm_path_logo_gui' => $imagem]);
+            } else {
+
+                if($imagem_deletada == "true") {
+                    $guia->update(['nm_path_logo_gui' => $imagem]);
+                }
+            }
+
+            if($celular) {
+                Fone::updateOrCreate([
+                   'id_guia_gui' => $guia->id_guia_gui,
+                   'id_tipo_fone_tif' => 1
+                ],['nu_fone_fon' => $celular]);
+            }
+
+            if($whatsap) {
+                Fone::updateOrCreate([
+                    'id_guia_gui' => $guia->id_guia_gui,
+                    'id_tipo_fone_tif' => 2
+                ],['nu_fone_fon' => $whatsap]);
+            }
+
+            Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $imagem]);
+
+        }
+
+        $usuario = Auth::user();
+
+        $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
+
+        return view('guias/atualizar-cadastro', compact('usuario', 'cidades', 'guia'));
+    }
+
+    public function previaPerfil()
+    {
+
+        $titulo = 'Guias e Condutores';
+        $subtitulo = "Perfil";
+
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'GUIA') {
+            return redirect('login');
+        }
+
+        $guia = Guia::where('id_user', Auth::user()->id)->where('fl_perfil_completo_gui', true)->first();
+
+        $page_name = "Perfil";
+
+        if(empty($guia)) {
+            Flash::error('Perfil incompleto! Preencha o restante das informações.');
+            return redirect('guia-e-condutores/privado/atualizar-cadastro');
+        }
+
+        return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+    }
+
 }

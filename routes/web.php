@@ -34,6 +34,7 @@ Route::get('eventos/detalhes/{id}', 'EventoController@detalhes');
 Route::get('guia/perfil/{id}', 'GuiaController@perfil');
 Route::get('guia/perfil/estatistica/{tipo}/{id}', 'GuiaController@estatisticas');
 Route::get('guias-e-condutores', 'GuiaController@index');
+Route::match(['GET', 'POST'],'guias-e-condutores/cadastro', 'GuiaController@cadastro');
 
 Route::get('guia-de-dificuldade-em-trilhas', 'DificuldadeController@index');
 Route::get('guia-de-dificuldade-em-trilhas/abnt', 'DificuldadeController@abnt');
@@ -88,10 +89,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('tags', 'TagController@index');
 
-    Route::get('login/facebook', 'FacebookController@redirectToProvider');
+    Route::get('login/facebook/{tipo?}', 'FacebookController@redirectToProvider');
     Route::get('login/facebook/callback', 'FacebookController@handleProviderCallback');
 
-    Route::get('login/google', 'GoogleController@redirectToProvider');
+    Route::get('login/google/{tipo?}', 'GoogleController@redirectToProvider');
     Route::get('login/google/callback', 'GoogleController@handleProviderCallback');
 
     Route::prefix('admin')->group(function () {
@@ -102,4 +103,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('create-trilha', 'TrilhaController@create');
         Route::post('insert-foto', 'TrilhaController@insertFoto');
     });
+
+    Route::prefix('guia-e-condutores/privado')->group(function () {
+        Route::match(['GET', 'POST'], 'atualizar-cadastro', 'GuiaController@atualizarCadastro');
+        Route::get('perfil', 'GuiaController@previaPerfil');
+    });
+
 });

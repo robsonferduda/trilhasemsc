@@ -37,6 +37,10 @@ class TrilhaController extends Controller
 
     public function editar($id)
     {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
         $trilha = Trilha::where('id_trilha_tri', $id)
                           ->with(array('foto' => function ($q) {
                               $q->with('tipo');
@@ -55,6 +59,10 @@ class TrilhaController extends Controller
 
     public function novo()
     {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
         $usuarios = User::all();
         $niveis = Nivel::orderBy('dc_nivel_niv')->get();
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
@@ -67,6 +75,10 @@ class TrilhaController extends Controller
 
     public function create(Request $request)
     {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
         $trilha = Trilha::create($request->all());
         if ($trilha) {
             if (!empty($request->tags)) {
@@ -81,6 +93,10 @@ class TrilhaController extends Controller
 
     public function insertFoto(Request $request)
     {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
         $tipoFoto = TipoFoto::find($request->id_tipo_foto_tfo);
         $trilha = Trilha::find($request->id_trilha_tri);
 
@@ -117,6 +133,10 @@ class TrilhaController extends Controller
 
     public function update(Request $request)
     {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
         $trilha = Trilha::where('id_trilha_tri', $request->id_trilha_tri)->first();
 
         if ($trilha->update($request->all())) {

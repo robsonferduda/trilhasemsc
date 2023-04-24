@@ -1,14 +1,23 @@
 $(function() {
+
     $('.dropify').dropify();
 
-    var drEvent = $('#dropify-event').dropify();
+    var drEvent = $('#dropify-event').dropify({  messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove':  'Remover',
+            'error':   'Ooops, algum erro aconteceu.'
+    }});
+
     drEvent.on('dropify.beforeClear', function(event, element) {
-        return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        return confirm("Você realmente quer deletar \"" + element.file.name + "\" ?");
     });
 
     drEvent.on('dropify.afterClear', function(event, element) {
-        alert('File deleted');
+        alert('Arquivo deletado');
     });
+
+
 
     $('.dropify-fr').dropify({
         messages: {

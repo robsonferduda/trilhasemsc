@@ -72,6 +72,7 @@
         <!-- responsive CSS
         ============================================ -->
         {!! Minify::stylesheet('/css/responsive.css')->withFullUrl() !!}
+        {!! htmlScriptTagJsApi() !!}
     </head>
     <body>
         <!--[if lt IE 8]>

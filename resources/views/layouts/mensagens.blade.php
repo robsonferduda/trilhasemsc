@@ -1,3 +1,4 @@
+
 @if(\Session::has('flash_notification'))
     @foreach (Session::get('flash_notification') as $message)
         <div class="alert alert-{{ $message['level'] }}">
@@ -7,7 +8,6 @@
     @endforeach
 @endif    
 {{ Session::forget('flash_notification') }}
-
 @if ($errors->any())
 	@foreach($errors->all() as $error)
 

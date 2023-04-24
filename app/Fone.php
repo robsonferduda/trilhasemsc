@@ -12,6 +12,6 @@ class Fone extends Model
     protected $table = 'fone_fon';
     protected $primaryKey = 'id_fone_fon';
     protected $dates = ['deleted_at'];
-    protected $fillable = [];
+    protected $fillable = ['id_guia_gui', 'nu_fone_fon', 'id_tipo_fone_tif'];
     public $timestamps = true;
 }

@@ -1,4 +1,5 @@
 @extends('layouts.blog')
+@section('pageTitle', 'Guias e Condutores');
 @section('content')
         <div class="blog-post-area section-padding">
             <div class="container">
@@ -24,7 +25,7 @@
                         <p><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/estatistica/instagram", $guia->id_guia_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
                         <p><strong>Cidade</strong>: {{ $guia->origem->nm_cidade_cde }}</p>
                         <p><strong>Contato</strong>: {{ ($guia->fone) ? $guia->fone->nu_fone_fon : '' }}</p>
-                        <p><strong>Cidades de Atuação</strong>: {{ $guia->ds_atuacao_gui }}</p>
+                        <p><strong>Cidades de Atuação</strong>: {{ count($guia->cidadesAtuacao) > 0 ? implode(', ',$guia->cidadesAtuacao->pluck('nm_cidade_cde')->toArray()) : $guia->ds_atuacao_gui }}</p>
                         <p>
                             {{ $guia->dc_biografia_gui }}
                         </p>

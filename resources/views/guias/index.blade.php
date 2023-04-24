@@ -1,4 +1,5 @@
 @extends('layouts.blog')
+@section('pageTitle', 'Guias e Condutores');
 @section('content')
         <div class="blog-post-area section-padding">
             <div class="container">
