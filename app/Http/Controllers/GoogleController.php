@@ -17,7 +17,6 @@ class GoogleController extends Controller
 
     public function handleProviderCallback(Request $request)
     {
-        dd($request);
         try {
             $userGoogle = Socialite::driver('google')->stateless()->user();
             $email = $userGoogle->getEmail();
