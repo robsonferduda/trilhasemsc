@@ -12,7 +12,7 @@ class GoogleController extends Controller
 {
     public function redirectToProvider($tipo = null)
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->with(['tipo' => $tipo])->redirect();
     }
 
     public function handleProviderCallback(Request $request)
@@ -33,6 +33,7 @@ class GoogleController extends Controller
                 $user = User::create($dados);
             }
 
+            dd($request->tipo);
             if($request->tipo == 'guia') {
                 return redirect('guia-e-condutores/privado/atualizar-cadastro');
             }
