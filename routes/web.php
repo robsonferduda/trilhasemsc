@@ -95,7 +95,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('login/google/{tipo?}', 'GoogleController@redirectToProvider');
     Route::get('login/google/callback', 'GoogleController@handleProviderCallback');
-    Route::get('login/google/guia/callback', 'GoogleController@handleProviderCallback');
 
 
     Route::prefix('admin')->group(function () {
