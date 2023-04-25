@@ -37,7 +37,7 @@ class GoogleController extends Controller
 
             Auth::login($user);
 
-            if($user->id_role == 'guia') {
+            if($user->id_role == 'GUIA') {
                 return redirect('guia-e-condutores/privado/atualizar-cadastro');
             }
 
