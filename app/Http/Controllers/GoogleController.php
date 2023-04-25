@@ -35,11 +35,11 @@ class GoogleController extends Controller
                 $user = User::create($dados);
             }
 
+            Auth::login($user);
+
             if($request->tipo == 'guia') {
                 return redirect('guia-e-condutores/privado/atualizar-cadastro');
             }
-
-            Auth::login($user);
 
             return redirect('login');
         } catch (Exception $e) {
