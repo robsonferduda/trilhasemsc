@@ -10,13 +10,15 @@ use Laravel\Socialite\Facades\Socialite;
 
 class GoogleController extends Controller
 {
-    public function redirectToProvider($tipo = null)
+    public function redirectToProvider()
     {
-        return Socialite::driver('google')->with(['tipo' => $tipo])->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     public function handleProviderCallback(Request $request)
     {
+        $request->tipo = 'guia';
+
         try {
             $userGoogle = Socialite::driver('google')->stateless()->user();
             $email = $userGoogle->getEmail();

@@ -90,10 +90,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('tags', 'TagController@index');
 
-    Route::get('login/facebook/{tipo}', 'FacebookController@redirectToProvider');
+    Route::get('login/facebook', 'FacebookController@redirectToProvider');
     Route::get('login/facebook/callback', 'FacebookController@handleProviderCallback');
 
-    Route::get('login/google/{tipo?}', 'GoogleController@redirectToProvider');
+    Route::get('login/google', 'GoogleController@redirectToProvider');
     Route::get('login/google/callback', 'GoogleController@handleProviderCallback');
 
 

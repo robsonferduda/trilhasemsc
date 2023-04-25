@@ -12,11 +12,13 @@ class FacebookController extends Controller
 {
     public function redirectToProvider($tipo = null)
     {
-        return Socialite::driver('facebook')->with(['tipo' => $tipo])->redirect();
+        return Socialite::driver('facebook')->redirect();
     }
 
     public function handleProviderCallback(Request $request)
     {
+        $request->tipo = 'guia';
+
         try {
             $user_facebook = Socialite::driver('facebook')->stateless()->user();
             $email = $user_facebook->getEmail();
