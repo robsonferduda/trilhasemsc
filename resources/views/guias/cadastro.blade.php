@@ -40,8 +40,8 @@
             <div class="col-sm-12 col-md-6 center" style="margin-top: 50px;">
                 <h3>Cadastre-se usando suas redes sociais</h3>
                 <div class="sign-in-buttons">
-                    <a href="{{ url('login/facebook/guia') }}" class="facebook btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                    <a href="{{ url('login/google/guia') }}" class="google btn-google"><i class="fa fa-google"></i> Google</a>
+                    <a href="{{ url('login/facebook') }}" class="facebook btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                    <a href="{{ url('login/google') }}" class="google btn-google"><i class="fa fa-google"></i> Google</a>
                 </div>
             </div>
         </div>
