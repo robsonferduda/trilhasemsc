@@ -29,7 +29,7 @@ class GoogleController extends Controller
                 $dados = array('name' =>  $userGoogle->getName(),
                                'email' => $userGoogle->getEmail(),
                                'fl_google' => 'S',
-                               'id_role' => $request->tipo == 'guia' ? 'guia' : null, //Para evitar que alterem a URL e acessem outros níveis de privilégios.
+                               'id_role' => 'GUIA',
                                'password' => \Hash::make(rand(1, 10000)));
                 
                 $user = User::create($dados);
@@ -37,7 +37,7 @@ class GoogleController extends Controller
 
             Auth::login($user);
 
-            if($request->tipo == 'guia') {
+            if($user->id_role == 'guia') {
                 return redirect('guia-e-condutores/privado/atualizar-cadastro');
             }
 

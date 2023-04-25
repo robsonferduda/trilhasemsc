@@ -29,7 +29,7 @@ class FacebookController extends Controller
                 $dados = array('name' =>  $user_facebook->getName(),
                                'email' => $user_facebook->getEmail(),
                                'fl_facebook' => 'S',
-                               'id_role' => $request->tipo == 'guia' ? 'guia' : null, //Para evitar que alterem a URL e acessem outros níveis de privilégios.
+                               'id_role' => 'GUIA',
                                'password' => \Hash::make(rand(1, 10000)));
                 
                 $user = User::create($dados);
@@ -37,7 +37,7 @@ class FacebookController extends Controller
 
             Auth::login($user);
 
-            if($request->tipo == 'guia') {
+            if($user->id_role == 'guia') {
                 return redirect('guia-e-condutores/privado/atualizar-cadastro');
             }
 
