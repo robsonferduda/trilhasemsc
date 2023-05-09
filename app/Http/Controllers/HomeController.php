@@ -47,6 +47,19 @@ class HomeController extends Controller
         return view('inicio', compact('ultimas','cidades','niveis','guias','preferidas'));
     }
 
+    public function perfil($id)
+    {
+        $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
+        $niveis = Nivel::get();
+        $guias = Guia::inRandomOrder()->take(4)->get();
+        $preferidas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->orderBy('total_votos_tri', 'DESC')->take(7)->get();
+        $guia = Guia::find($id);
+
+        $ultimas = Trilha::with('foto')->where('fl_destaque_tri', true)->where('fl_publicacao_tri', 'S')->orderBy('created_at', 'DESC')->take(3)->get();
+
+        return view('perfil', compact('ultimas','cidades','niveis','guias','preferidas','guia'));
+    }
+
     public function guia()
     {
         $page_name = "Guia";
