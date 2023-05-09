@@ -1,5 +1,7 @@
 $( document ).ready(function() {
-    
+
+	$('.phone').mask('(99) 999-999999');
+
 	$(".btn-search-trilha").click(function(){
 
 		var cidade = $('select[name ="cidade"]').val();  

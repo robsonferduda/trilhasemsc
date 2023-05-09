@@ -15,8 +15,10 @@ class GoogleController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
+        $request->tipo = 'guia';
+
         try {
             $userGoogle = Socialite::driver('google')->stateless()->user();
             $email = $userGoogle->getEmail();
@@ -27,12 +29,17 @@ class GoogleController extends Controller
                 $dados = array('name' =>  $userGoogle->getName(),
                                'email' => $userGoogle->getEmail(),
                                'fl_google' => 'S',
+                               'id_role' => 'GUIA',
                                'password' => \Hash::make(rand(1, 10000)));
                 
                 $user = User::create($dados);
             }
 
             Auth::login($user);
+
+            if($user->id_role == 'GUIA') {
+                return redirect('guia-e-condutores/privado/atualizar-cadastro');
+            }
 
             return redirect('login');
         } catch (Exception $e) {

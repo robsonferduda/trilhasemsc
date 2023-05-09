@@ -52,7 +52,11 @@ class LoginController extends Controller
         }
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('/');
+            if (trim(Auth::user()->id_role) == 'GUIA') {
+                return redirect('guia-e-condutores/privado/atualizar-cadastro');
+            } else {
+               return redirect()->intended('/');
+            }
         }
 
         $this->incrementLoginAttempts($request);

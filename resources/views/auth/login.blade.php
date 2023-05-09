@@ -28,8 +28,8 @@
                         <input name="password" id="password" type="password" class="form-box margin-form required @error('password') is-invalid @enderror" placeholder="Senha" required autocomplete="current-password">
 
                         <div class="sign-in-settings">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <span>Lembrar-me</span>
+{{--                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>--}}
+{{--                            <span>Lembrar-me</span>--}}
                             <a href="{{ route('password.request') }}">Esqueceu sua senha?</a>
                         </div>
                         <input type="submit" class="submit-button btn-form" value="LOGIN">
@@ -40,8 +40,8 @@
         <div class="col-sm-12 col-md-6 center" style="margin-top: 50px;">
             <h3>Utilize suas redes sociais</h3>
             <div class="sign-in-buttons">
-                <a href="{{ url('login/facebook') }}" class="facebook btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>       
-                 <a href="{{ url('login/google') }}" class="google btn-google"><i class="fa fa-google"></i> Google</a>                  
+                <a href="{{ url('login/facebook') }}" class="facebook btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                 <a href="{{ url('login/google') }}" class="google btn-google"><i class="fa fa-google"></i> Google</a>
             </div>
         </div>
     </div>

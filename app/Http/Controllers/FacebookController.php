@@ -10,13 +10,15 @@ use Laravel\Socialite\Facades\Socialite;
 
 class FacebookController extends Controller
 {
-    public function redirectToProvider()
+    public function redirectToProvider($tipo = null)
     {
         return Socialite::driver('facebook')->redirect();
     }
 
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
+        $request->tipo = 'guia';
+
         try {
             $user_facebook = Socialite::driver('facebook')->stateless()->user();
             $email = $user_facebook->getEmail();
@@ -27,12 +29,17 @@ class FacebookController extends Controller
                 $dados = array('name' =>  $user_facebook->getName(),
                                'email' => $user_facebook->getEmail(),
                                'fl_facebook' => 'S',
+                               'id_role' => 'GUIA',
                                'password' => \Hash::make(rand(1, 10000)));
                 
                 $user = User::create($dados);
             }
 
             Auth::login($user);
+
+            if($user->id_role == 'GUIA') {
+                return redirect('guia-e-condutores/privado/atualizar-cadastro');
+            }
 
             return redirect('login');
 
