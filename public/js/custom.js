@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-	$('.phone').mask('(99) 999-999999');
+	//$('.phone').mask('(99) 999-999999');
 
 	$(".btn-search-trilha").click(function(){
 
