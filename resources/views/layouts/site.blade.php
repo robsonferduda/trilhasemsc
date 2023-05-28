@@ -44,7 +44,7 @@
                         <div class="d-none d-lg-block">
                            <ul class="list-group">
                               <li class="nav-item list-group-item border-0 p-0">
-                                 <a class="dropdown-item py-2 ps-3 border-radius-md" href=" https://www.creative-tim.com/learning-lab/bootstrap/overview/now-ui-design-system ">
+                                 <a class="dropdown-item py-2 ps-3 border-radius-md" href="{{ url('trilhas#lista') }}">
                                     <div class="d-flex">
                                        <div class="icon h-10 me-3 d-flex mt-1">
                                           <i class="ni ni-planet text-secondary"></i>
@@ -55,42 +55,16 @@
                                        </div>
                                     </div>
                                  </a>
-                              </li>
+                              </li>                                                  
                               <li class="nav-item list-group-item border-0 p-0">
-                                 <a class="dropdown-item py-2 ps-3 border-radius-md" href=" https://www.creative-tim.com/learning-lab/bootstrap/colors/now-ui-design-system ">
-                                    <div class="d-flex">
-                                       <div class="icon h-10 me-3 d-flex mt-1">
-                                          <i class="ni ni-palette text-secondary"></i>
-                                       </div>
-                                       <div>
-                                          <h6 class="dropdown-header text-dark font-weight-bold d-flex justify-content-cente align-items-center p-0">Regiões de Florianópolis</h6>
-                                          <span class="text-sm">Dividimos as Trilhas de Floripa em regiões, confira!</span>
-                                       </div>
-                                    </div>
-                                 </a>
-                              </li>
-                              <li class="nav-item list-group-item border-0 p-0">
-                                 <a class="dropdown-item py-2 ps-3 border-radius-md" href=" https://www.creative-tim.com/learning-lab/bootstrap/alerts/now-ui-design-system ">
-                                    <div class="d-flex">
-                                       <div class="icon h-10 me-3 d-flex mt-1">
-                                          <i class="ni ni-tag text-secondary"></i>
-                                       </div>
-                                       <div>
-                                          <h6 class="dropdown-header text-dark font-weight-bold d-flex justify-content-cente align-items-center p-0">Regiões de Santa Catarina</h6>
-                                          <span class="text-sm">Trilhas de Santa Catarina por região do estado</span>
-                                       </div>
-                                    </div>
-                                 </a>
-                              </li>
-                              <li class="nav-item list-group-item border-0 p-0">
-                                 <a class="dropdown-item py-2 ps-3 border-radius-md" href=" https://www.creative-tim.com/learning-lab/bootstrap/datepicker/now-ui-design-system ">
+                                 <a class="dropdown-item py-2 ps-3 border-radius-md" href="{{ url('trilhas/brasil') }}">
                                     <div class="d-flex">
                                        <div class="icon h-10 me-3 d-flex mt-1">
                                           <i class="ni ni-spaceship text-secondary"></i>
                                        </div>
                                        <div>
                                           <h6 class="dropdown-header text-dark font-weight-bold d-flex justify-content-cente align-items-center p-0">Trilhas no Brasil</h6>
-                                          <span class="text-sm">Trilhas feitas por todo o Brasil</span>
+                                          <span class="text-sm">Trilhas no Brasil</span>
                                        </div>
                                     </div>
                                  </a>
@@ -102,22 +76,22 @@
                      </div>
                   </li>
                   <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="{{ url('campings') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
                     Camping
                     </a>
                 </li>
                 <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="{{ url('grupos') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
                     Grupos
                     </a>
                 </li>
                 <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="{{ url('eventos') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
                     Eventos
                     </a>
                 </li>
                 <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="{{ url('guias-e-condutores') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
                     Guias e Condutores
                     </a>
                 </li>
