@@ -1,7 +1,7 @@
 @extends('layouts.site')
 @section('content')
     @include('inicio/destaques')
-    <section class="pt-1 pb-0 mt-0 mb-3">
+    <section class="pt-1 pb-0 mt-0 mb-5">
         <div class="container">
            <div class="row mb-2">
               <div class="col-md-7">
