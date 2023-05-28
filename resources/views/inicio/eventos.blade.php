@@ -15,7 +15,7 @@
                         A agenda de eventos depende da oferta feita pelos guias e condutores. 
                         Mantenha-se atualizados sobre todos os eventos em nossa página de eventos.
                      </p>
-                     <a href="javascript:;" class="font-weight-bold text-xs text-success text-uppercase font-weight-bolder text-decoration-underline-hover">
+                     <a href="{{ url('eventos') }}" class="font-weight-bold text-xs text-success text-uppercase font-weight-bolder text-decoration-underline-hover">
                         Ver todos
                      </a>
                   </div>
@@ -28,9 +28,9 @@
                      <h5 class="mt-2">Localização</h5>
                      <p class="mb-3">
                         Nossos guias são de diferentes cidades do estado de Santa Catarina, oferecendo 
-                        opções de aventuras por todas as regiões de Santa Catarina.
+                        opções de aventuras por todas as regiões do estado.
                      </p>
-                     <a href="javascript:;" class="font-weight-bold text-xs text-danger text-uppercase font-weight-bolder text-decoration-underline-hover">
+                     <a href="{{ url('guias-e-condutores') }}" class="font-weight-bold text-xs text-danger text-uppercase font-weight-bolder text-decoration-underline-hover">
                         Buscar guias
                      </a>
                   </div>
@@ -46,7 +46,7 @@
                         Cada região tem suas características, por isso, fique atento ao procedimentos 
                         de segurança. 
                      </p>
-                     <a href="javascript:;" class="font-weight-bold text-xs text-warning text-uppercase font-weight-bolder text-decoration-underline-hover">
+                     <a href="{{ url('dicas-de-seguranca') }}" class="font-weight-bold text-xs text-warning text-uppercase font-weight-bolder text-decoration-underline-hover">
                         dicas de segurança
                      </a>
                   </div>
@@ -61,7 +61,7 @@
                         Nã encontrou um evento? Busque pelas trilhas e fale com um guia disponível 
                         para sua aventura. Cada trilha possui uma lista de guias habilitados.
                      </p>
-                     <a href="javascript:;" class="font-weight-bold text-xs text-info text-uppercase font-weight-bolder text-decoration-underline-hover">
+                     <a href="{{ url('trilhas#lista') }}" class="font-weight-bold text-xs text-info text-uppercase font-weight-bolder text-decoration-underline-hover">
                         pesquisar trilhas
                      </a>
                   </div>

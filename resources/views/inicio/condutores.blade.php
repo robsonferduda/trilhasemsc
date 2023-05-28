@@ -37,6 +37,9 @@
                </div>
              </div>           
           @endforeach
+          <div class="col-lg-2 col-md-3 mt-4">
+            <a href="{{ url('guias-e-condutores') }}" type="button" class="btn btn-outline-primary btn-sm">Ver Todos</a>
+          </div>
        </div>
     </div>
  </section>
