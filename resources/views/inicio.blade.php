@@ -3,7 +3,7 @@
     @include('inicio/destaques')
     <section class="pt-1 pb-0 mt-1">
         <div class="container">
-           <div class="row mb-2 mt-3">
+           <div class="row mb-5 mt-2">
               <div class="col-md-7">
                  <h3 class="text-default">Publicidade</h3>
               </div>
