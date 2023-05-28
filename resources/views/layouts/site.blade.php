@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<html lang="pt-br">
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,10 +12,11 @@
       <meta name="keywords" content="bootstrap, bootstrap 5, bootstrap5, ui kit, design system, responsive design, web design ui, ui design system, now ui kit, now ui design system">
       <meta name="description" content="Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil">
       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,200|Open+Sans+Condensed:700" rel="stylesheet">
-      <link href="css/nucleo-icons.css" rel="stylesheet" />
-      <link href="css/nucleo-svg.css" rel="stylesheet" />
+      <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet" />
+      <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
       <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
       <link id="pagestyle" href="{{ asset('css/template.css') }}" rel="stylesheet" />
+      <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
       <style>
          .async-hide {
          opacity: 0 !important
@@ -28,14 +29,11 @@
            
             <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
                <ul class="navbar-nav navbar-nav-hover mx-auto">
-
                 <li class="nav-item dropdown dropdown-hover mx-2">
                     <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
                     Início
                     </a>
-
-                </li>
-            
+                </li>            
                   <li class="nav-item dropdown dropdown-hover mx-2">
                      <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
                      Trilhas
@@ -107,25 +105,21 @@
                     <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
                     Camping
                     </a>
-
                 </li>
                 <li class="nav-item dropdown dropdown-hover mx-2">
                     <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
                     Grupos
                     </a>
-
                 </li>
                 <li class="nav-item dropdown dropdown-hover mx-2">
                     <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
                     Eventos
                     </a>
-
                 </li>
                 <li class="nav-item dropdown dropdown-hover mx-2">
                     <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
                     Guias e Condutores
                     </a>
-
                 </li>
                </ul>
                <ul class="navbar-nav d-lg-block d-none">
@@ -151,225 +145,65 @@
          </div>
          <div class="container">
             <div class="row bg-white shadow mt-n5 border-radius-lg pb-4 p-3 mx-sm-0 mx-1 position-relative">
-               <div class="col-lg-3 mt-lg-n2 mt-2">
-                  <label class="">Selecione a Cidade</label>
-                  <div class="choices" data-type="select-one" tabindex="0" role="listbox" aria-haspopup="true" aria-expanded="false">
-                     <div class="choices__inner">
-                        <select class="form-control choices__input" name="choices-leave" id="choices-leave" placeholder="Departure" hidden="" tabindex="-1" data-choice="active">
-                            @if(isset($cidades))
-                            @forelse($cidades as $cidade)
-                                <option {{ old('cidade') == stringToStringSeo($cidade->nm_cidade_cde) ? 'selected': ''}} value="{{stringToStringSeo($cidade->nm_cidade_cde)}}">{{$cidade->nm_cidade_cde}}</option>
-                            @empty
-                                <option selected value="">Nenhuma cidade disponível</option>
-                            @endforelse
+               <form action="{{ url('trilhas/#lista') }}" style="display: inherit;" method="GET" id="banner-searchbox" class="">
+                  <div class="col-lg-4 mt-2 mr-2" style="padding-right: 15px;">
+                     <label class="">Selecione a cidade</label>
+                     <select class="form-control" name="cidade" id="list-cidade">
+                        <option value="">Selecione uma cidade</option>
+                        @if(isset($cidades))
+                           @forelse($cidades as $cidade)
+                              <option {{ old('cidade') == stringToStringSeo($cidade->nm_cidade_cde) ? 'selected': ''}} value="{{stringToStringSeo($cidade->nm_cidade_cde)}}">{{$cidade->nm_cidade_cde}}</option>
+                           @empty
+                              <option selected value="">Nenhuma cidade disponível</option>
+                           @endforelse
                         @endif
-                        </select>
-                       
-                     </div>
-                    
+                     </select>
                   </div>
-               </div>
-               <div class="col-lg-3 mt-lg-n2 mt-2">
-                  <label class="">Selecione o nível</label>
-                  <div class="choices" data-type="select-one" tabindex="0" role="listbox" aria-haspopup="true" aria-expanded="false">
-                     <div class="choices__inner">
-                        <select class="form-control choices__input" name="choices-to" id="choices-to" placeholder="Destination" hidden="" tabindex="-1" data-choice="active">
-                            @if(isset($cidades))
-                            @foreach($niveis as $nivel)
-                                <option {{ old('nivel') == stringToStringSeo($nivel->dc_nivel_niv) ? 'selected': ''}} value="{{stringToStringSeo($nivel->dc_nivel_niv)}}">{{$nivel->dc_nivel_niv}}</option>
-                            @endforeach
+                  <div class="col-lg-3 mt-2 mr-2" style="padding-right: 15px;">
+                     <label class="">Selecione o nível</label>
+                     <select class="form-control" name="nivel" id="list-niveis">
+                        <option value="">Selecione um nível</option>
+                        @if(isset($niveis))
+                           @foreach($niveis as $nivel)
+                              <option {{ old('nivel') == stringToStringSeo($nivel->dc_nivel_niv) ? 'selected': ''}} value="{{stringToStringSeo($nivel->dc_nivel_niv)}}">{{$nivel->dc_nivel_niv}}</option>
+                           @endforeach
                         @endif
-                        </select>
-                      
+                     </select>
+                  </div>
+                  <div class="col-lg-3 mt-2 mr-2" style="padding-right: 15px;">
+                     <label class="">Nome da Trilha</label>
+                     <div class="input-group">
+                        <input type="text" name="termo" class="form-control flatpickr-input" placeholder="Nome da Trilha">
                      </div>
-                   
                   </div>
-               </div>
-               <div class="col-lg-3 mt-lg-n2 mt-2">
-                  <label class="">Nome da Trilha</label>
-                  <div class="input-group">
-                     <input class="form-control flatpickr-input" placeholder="Nome da Trilha" type="text">
+                  <div class="col-lg-2 mt-2">
+                     <label class="">&nbsp;</label>
+                     <button type="submit" class="btn bg-gradient-primary w-100 mb-0">Buscar Trilhas</button>
                   </div>
-               </div>
-               <div class="col-lg-3 mt-lg-n2 mt-2">
-                  <label class="">&nbsp;</label>
-                  <button type="button" class="btn bg-gradient-primary w-100 mb-0">Buscar Trilhas</button>
-               </div>
+               </form>
             </div>
          </div>
       </header>
-      <section class="pt-5 pb-0">
+      @yield('content')    
+      <div class="pt-5 mb-5 mt-3">
          <div class="container">
-            <div class="row mb-2">
-                <div class="col-md-7">
-                   <h3 class="text-primary">Destaques</h3>
-                </div>
-             </div>
             <div class="row">
-
-                @foreach($ultimas as $trilha)
-                @php
-                     $img = ($trilha->foto->where('id_tipo_foto_tfo',3)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',3)->first()->nm_path_fot : 'padrao.jpg';
-                @endphp
-               
-                    <div class="col-lg-4 col-md-6">
-                    <div class="card card-blog card-plain">
-                        <div class="position-relative">
-                            <a class="d-block">
-                            <img src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
-                            </a>
-                        </div>
-                        <div class="card-body px-1 pt-3">
-                            <p class="text-gradient text-dark mb-2 text-sm">{{ $trilha->cidade->nm_cidade_cde }}</p>
-                            <a href="javascript:;">
-                            <h5>
-                                {{ $trilha->nm_trilha_tri }}
-                            </h5>
-                            </a>
-                            <p>
-                                
-                                {!! nl2br(\Illuminate\Support\Str::limit($trilha->ds_trilha_tri, 250, $end='...')) !!}
-                            </p>
-                            <div class="author align-items-center mt-3 mb-3">
-                            <img src="{{ asset('img/guias/12.png') }}" alt="..." class="avatar rounded-circle shadow">
-                            <div class="name ps-2">
-                                <span>Eco Trilhas Floripa</span>
-                                <div class="stats">
-                                    <small>Membro desde 12/02/2023</small>
-                                </div>
-                            </div>
-                            </div>
-                            <button type="button" class="btn btn-outline-primary btn-sm">Veja Mais</button>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-               
-
-
-            </div>
-         </div>
-      </section>
-
-      <section class="pt-1 pb-0 mt-2">
-        <div class="container">
-           <div class="row mb-2">
-              <div class="col-md-7">
-                 <h3 class="text-success">Eventos</h3>
-              </div>
-           </div>
-           <div class="row">
-               @for($i = 0; $i < 4; $i++)
-                <div class="col-lg-3">
-                    <!-- Start Card Blog Fullbackground - text centered -->
-                    <a href="javascript:;">
-                    <div class="card card-background mb-4">
-                        <div class="full-background" style="background-image: url('{{ asset('img/trilhas/destaque-pequena/'.$preferidas[$i]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}')"></div>
-                        <div class="card-body pt-12">
-                        <h4 class="text-white text-decoration-underline-hover">{{ $preferidas[$i]->nm_trilha_tri }}</h4>
-                        <p>{{ $preferidas[$i]->cidade->nm_cidade_cde }}</p>
-                        </div>
-                    </div>
-                    </a>
-                    <!-- End Card Blog Fullbackground - text centered -->
-                </div>
-              @endfor
-             
-           </div>
-        </div>
-     </section>
-
-      <section class="pt-1 pb-0 mt-3">
-         <div class="container">
-            <div class="row mb-2">
-               <div class="col-md-7">
-                  <h3 class="text-info">Condutores de Aventura</h3>
+               <div class="col-lg-5 ms-auto">
+                  <h4 class="mb-1">Gostou do nosso conteúdo?</h4>
+                  <p class="lead mb-0">Compartilhe em suas redes sociais</p>
+               </div>
+               <div class="col-lg-5 me-lg-auto my-lg-auto text-lg-end mt-5">
+                  <a href="https://twitter.com/intent/tweet?text=Quer conhecer as melhores trilhas de Santa Catarina? Acesse http://trilhasemsc.com.br @trilhasemsc" class="btn btn-twitter mb-0 me-2" target="_blank">
+                  <i class="fab fa-twitter me-1" aria-hidden="true"></i> Twitter
+                  </a>
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=http://trilhasemsc.com.br" class="btn btn-facebook mb-0 me-2" target="_blank">
+                  <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Facebook
+                  </a>
                </div>
             </div>
-            <div class="row">
-                @foreach($guias as $guia)
-
-                <div class="col-lg-3 col-md-3">
-                    <div class="card card-profile" style="min-height: 320px;">
-                      
-                      <div class="card-body justify-content-center text-center">
-                        <a href="javascript:;">
-                            <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}">
-                          </a>
-                        <h6 class="mb-0 mt-2">{{ $guia->nm_guia_gui }}</h6>
-                        <p>{{ $guia->origem->nm_cidade_cde }}</p>
-                        <div class="row justify-content-center text-center" style="position: absolute; bottom: 1px;">
-                          <div class="col-lg-4 col-4">
-                            <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-facebook" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
-                                <span class="btn-inner--icon"><i class="fa fa-user" style="font-size: 30px;"></i></span>
-                                </button>
-                          </div>
-                          <div class="col-lg-4 col-4">
-                            <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-dribbble" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
-                                <span class="btn-inner--icon"><i class="fab fa-instagram" style="font-size: 30px;"></i></span>
-                                </button>
-                          </div>
-                          <div class="col-lg-4 col-4">
-                            <button type="button" class="btn-icon-only btn-simple btn btn-lg btn-slack" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
-                                <span class="btn-inner--icon"><i class="fab fa-whatsapp" style="font-size: 30px;"></i></span>
-                                </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                
-               @endforeach
-              
-            </div>
          </div>
-      </section>
-
-     
-
-
-      <section class="pt-5 pb-0 mt-5 mb-6">
-         <div class="container">
-            <div class="row">
-               <!-- -------- START HEADER 5 w/ text and illustration ------- -->
-               <div class="container">
-                  <div class="row">
-                     <div class="col-lg-2 my-auto text-center">
-                        <h1 class="mb-0 text-primary">Trilhas </h1>
-                        <h3 class="mb-4 text-primary">Favoritas</h3>
-                        <p class="lead">Essas são as trilhas favoritas dos trilherios de Santa Catarina</p>
-                        <div class="buttons">
-                           <button type="button" class="btn bg-gradient-warning mt-4">Saiba Mais</button>
-                        </div>
-                     </div>
-                     <div class="col-lg-10 ps-5 pe-0">
-                        <div class="row">
-                            <div class="col-lg-3 col-6">
-                              <img class="w-100 border-radius-lg h-50 shadow mt-0 mt-lg-7" src="{{ asset('img/trilhas/destaque-pequena/'.$preferidas[0]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt="">
-                           </div>
-                           <div class="col-lg-3 col-6">
-                              <img class="w-100 border-radius-lg h-50 shadow" src="{{ asset('img/trilhas/destaque-pequena/'.$preferidas[1]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt="">
-                              <img class="w-100 border-radius-lg h-50 shadow mt-4" src="{{ asset('img/trilhas/destaque-pequena/'.$preferidas[2]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt="">
-                           </div>
-                           <div class="col-lg-3 col-6">
-                                <img class="w-100 border-radius-lg h-50 shadow mt-0 mt-lg-5" src="{{ asset('img/trilhas/destaque-pequena/'.$preferidas[3]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt="">
-                                <img class="w-100 border-radius-lg h-50 shadow mt-4" src="{{ asset('img/trilhas/destaque-pequena/'.$preferidas[4]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt="">
-                           </div>
-                           <div class="col-lg-3 col-6">
-                                <img class="w-100 border-radius-lg h-50 shadow mt-3" src="{{ asset('img/trilhas/destaque-pequena/'.$preferidas[5]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt="">
-                                <img class="w-100 border-radius-lg h-50 shadow mt-4" src="{{ asset('img/trilhas/destaque-pequena/'.$preferidas[6]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt="">
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <!-- -------- END HEADER 5 w/ text and illustration ------- -->
-            </div>
-         </div>
-      </section>
-      <br/><br/><br/>
-      <br/>      <footer class="footer py-5 bg-dark position-relative overflow-hidden">
+      </div>       
+      <footer class="footer py-5 bg-dark position-relative overflow-hidden">
          <div class="container position-relative z-index-1">
             <div class="row">
                <div class="col-lg-6 me-auto mb-lg-0 mb-4 text-lg-start text-start">
@@ -379,8 +213,7 @@
                      <li class="nav-item"><a class="nav-link text-white opacity-8" href="{{ url('guia-de-dificuldade-em-trilhas') }}">Guia de Dificuldade</a></li>
                      <li class="nav-item"><a class="nav-link text-white opacity-8" href="{{ url('termos-de-uso') }}">Termos de Uso</a></li>
                      <li class="nav-item"><a class="nav-link text-white opacity-8" href="{{ url('politica-de-privacidade') }}">Política de Privacidade</a></li>
-                  </ul>
-                  
+                  </ul>                  
                </div>
                <div class="col-lg-6 ms-auto text-lg-end text-center">
                   <p class="mb-5 text-lg text-white font-weight-bold">
@@ -391,25 +224,52 @@
                   </a>
                   <a href="javascript:;" target="_blank" class="text-white me-xl-4 me-4 opacity-5">
                   <span class="fa fa-envelope"></span>
-                  </a>
-                  
+                  </a>                  
                </div>
             </div>
          </div>
       </footer>
-      <script src="js/core/popper.min.js" type="text/javascript"></script>
-      <script src="js/core/bootstrap.min.js" type="text/javascript"></script>
-      <script src="js/plugins/perfect-scrollbar.min.js"></script>
-      <script src="js/plugins/typedjs.js"></script>
-      <script src="js/plugins/parallax.min.js"></script>
-      <script src="js/plugins/nouislider.min.js" type="text/javascript"></script>
-      <script src="js/plugins/glidejs.min.js" type="text/javascript"></script>
-      <script src="js/plugins/anime.min.js" type="text/javascript"></script>
-      <script src="js/plugins/chartjs.min.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
-      <script async defer src="https://buttons.github.io/buttons.js"></script>
-      <script src="js/now-design-system-pro.min.js?v=2.2.0" type="text/javascript"></script>
-      <script></script>
-      <script src="js/plugins/tilt.min.js"></script>
+      <script src="{{ asset('js/core/bootstrap.min.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('js/plugins/choices.min.js') }}"></script>
+      <script>
+         if (document.getElementById('list-cidade')) {
+           var element = document.getElementById('list-cidade');
+           const example = new Choices(element, {
+             searchEnabled: false
+           });
+         }
+
+         if (document.getElementById('list-niveis')) {
+           var element = document.getElementById('list-niveis');
+           const example = new Choices(element, {
+             searchEnabled: false
+           });
+         }
+      </script>
+      <script>
+         if (document.getElementsByClassName('page-header')) {
+           window.addEventListener('scroll', function() {
+             var scrollPosition = window.pageYOffset;
+             var bgParallax = document.querySelector('.page-header');
+             var limit = bgParallax.offsetTop + bgParallax.offsetHeight;
+             if (scrollPosition > bgParallax.offsetTop && scrollPosition <= limit) {
+               bgParallax.style.backgroundPositionY = (50 - 10 * scrollPosition / limit * 3) + '%';
+             } else {
+               bgParallax.style.backgroundPositionY = '50%';
+             }
+           });
+         }
+      </script>
+      @env('production')
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175572747-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-175572747-1');
+      </script>
+      @endenv
+      <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    </body>
 </html>

@@ -171,7 +171,7 @@ class TrilhaController extends Controller
 
     public function searchTrilhas(Request $request)
     {
-        return $this->search(null, null, $request->termo);
+        return $this->search($request->cidade, $request->nivel, $request->termo);
     }
 
     public function searchTrilhasCidade($cidade)
@@ -222,7 +222,7 @@ class TrilhaController extends Controller
                               $query->where('cd_cidade_cde', $idCidade);
                           })
                           ->when($termo, function ($query) use ($termo) {
-                              $query->whereRaw("unaccent(lower(nm_trilha_tri)) like '%".strtolower($termo)."%'");
+                              $query->where('nm_trilha_tri', 'ILIKE', '%'.trim($termo).'%');
                           })
                           ->when($tag, function ($query) use ($tag) {
                               $query->whereHas('tags', function ($query) use ($tag) {
