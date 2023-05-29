@@ -1,16 +1,45 @@
 @extends('layouts.site')
 @section('content')
-        <div class="blog-post-area section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title text-center">
-                            <div class="title-border">
-                                <br/><br/><h1>Guia de <span>Dificuldade</span></h1>
-                            </div>    
-                        </div>
-                    </div>                          
-                </div>
+    @include('inicio/destaques')
+    <section class="pt-1 pb-0 mt-0 mb-5">
+        <div class="container">
+           <div class="row mb-2">
+              <div class="col-md-7">
+                 <h3 class="text-default">Publicidade</h3>
+              </div>
+           </div>
+           <div class="row">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1229685353625953"
+                    data-ad-slot="7739149091"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true">
+                </ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({});  </script>  
             </div>
         </div>
+    </section>
+    @include('inicio/eventos')
+    @include('inicio/condutores')
+    <section class="pt-1 pb-0 mt-0 mb-5">
+        <div class="container">
+           <div class="row mb-2">
+              <div class="col-md-7">
+                 <h3 class="text-default">Publicidade</h3>
+              </div>
+           </div>
+           <div class="row">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1229685353625953"
+                    data-ad-slot="7739149091"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true">
+                </ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({});  </script>  
+            </div>
+        </div>
+    </section>
+    @include('inicio/favoritos')
 @endsection
