@@ -178,8 +178,7 @@ class TrilhaController extends Controller
     {
 
         if (!empty($id_cidade)) {
-            $cidade = Cidade::whereRaw("unaccent(replace(lower(nm_cidade_cde),' ','-')) = '".$id_cidade."'")
-                  ->where('cd_estado_est', 42)->first();
+            $cidade = Cidade::whereRaw("unaccent(replace(lower(nm_cidade_cde),' ','-')) = '".$id_cidade."'")->where('cd_estado_est', 42)->first();
         }
 
         $trilhas = Trilha::with('foto')

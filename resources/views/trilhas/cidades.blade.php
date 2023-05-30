@@ -26,10 +26,11 @@
                 </div>
                 @if($trilhas->count() > 0)
                     @if($trilhas->count() > 1)
-                        <h6>Foram encontradas {{ $trilhas->count() }} trilhas </h6>
+                        <h6>Foram encontradas {{ $trilhas->total() }} trilhas </h6>
                     @else
-                        <h6>Foi encontrada {{ $trilhas->count() }} trilha </h6>
+                        <h6>Foi encontrada {{ $trilhas->total() }} trilha </h6>
                     @endif
+                                     
                     @foreach($trilhas as $key => $trilha)
                         @php 
                             $foto = $trilha->foto->where('id_tipo_foto_tfo',7)->first();
@@ -60,6 +61,26 @@
                             </div>
                         </div>
                     @endforeach 
+
+                    <div class="col-lg-4 col-md-4 mx-auto mt-5">
+                        <ul class="pagination pagination-primary mt-4 ml-2">
+                           <li class="page-item">
+                              <a class="page-link" href="{{ $trilhas->previousPageUrl().'#lista' }}" aria-label="Previous">
+                              <span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
+                              </a>
+                           </li>
+                           @for ($i = 1; $i <= $trilhas->lastpage(); $i++)
+                           <li class="page-item {!! $trilhas->currentPage() ==  $i ? "active" : ' '  !!}">
+                           <a class="page-link" href="{{ $trilhas->url($i).'#lista' }}">{{ $i }}</a>
+                           </li>
+                           @endfor                            
+                           <li class="page-item">
+                              <a class="page-link" href="{{ $trilhas->nextPageUrl().'#lista' }}" aria-label="Next">
+                              <span aria-hidden="true"><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                              </a>
+                           </li>
+                        </ul>
+                    </div>     
                 @endif       
             </section>
         </div>
