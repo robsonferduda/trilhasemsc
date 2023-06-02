@@ -9,7 +9,7 @@
           </div>
        </div>
        <div class="row">
-        <div class="col-md-9">
+         <div class="col-md-12">
             <h4>{{ $guia->nm_guia_gui }}</h4>
             <p><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/estatistica/instagram", $guia->id_guia_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
             
@@ -17,10 +17,11 @@
             <p>
                 {{ $guia->dc_biografia_gui }}
             </p>
+         </div>
+         <div class="col-md-12 mt-2">
             <a class="btn btn-success" href="{{ url("guia/perfil/estatistica/telefone", $guia->id_guia_gui) }}"><i class="fa fa-whatsapp" aria-hidden="true"></i> Enviar Mensagem</a>
             <a class="btn btn-primary mr-2 ml-3" href="{{ url("guias-e-condutores") }}"><i class="fa fa-users" aria-hidden="true"></i> Todos os Guias</a>
-        </div>
-          
+         </div>          
        </div>
     </div>
  </section>

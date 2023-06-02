@@ -36,7 +36,7 @@ Route::get('eventos/detalhes/{id}', 'EventoController@detalhes');
 
 Route::get('guia/perfil/{id}', 'GuiaController@perfil');
 Route::get('guia/perfil/estatistica/{tipo}/{id}', 'GuiaController@estatisticas');
-Route::get('guias-e-condutores', 'GuiaController@index');
+Route::match(['GET', 'POST'],'guias-e-condutores', 'GuiaController@index');
 Route::match(['GET', 'POST'],'guias-e-condutores/cadastro', 'GuiaController@cadastro');
 
 Route::get('guia-de-dificuldade-em-trilhas', 'DificuldadeController@index');
