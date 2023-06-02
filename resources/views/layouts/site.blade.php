@@ -106,7 +106,7 @@
          </div>
       </nav>
       <header class="position-relative">
-         <div class="page-header min-vh-50" style="background-image: url('public/img/bg/lagoinha-do-leste.jpg');">
+         <div class="page-header min-vh-50" style="background-image: url('{{ asset('img/bg/lagoinha-do-leste.jpg') }}');">
             <span class="mask bg-gradient-dark opacity-6"></span>
             <div class="container">
                <div class="row justify-content-center">
