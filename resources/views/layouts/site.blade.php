@@ -25,8 +25,7 @@
    </head>
    <body class="help-center">
       <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3  navbar-transparent ">
-         <div class="container">
-           
+         <div class="container">           
             <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
                <ul class="navbar-nav navbar-nav-hover mx-auto">
                 <li class="nav-item dropdown dropdown-hover mx-2">
@@ -105,59 +104,17 @@
             </div>
          </div>
       </nav>
-      <header class="position-relative">
-         <div class="page-header min-vh-50" style="background-image: url('{{ asset('img/bg/lagoinha-do-leste.jpg') }}');">
-            <span class="mask bg-gradient-dark opacity-6"></span>
-            <div class="container">
-               <div class="row justify-content-center">
-                  <div class="col-lg-6 col-sm-9 text-center mx-auto">
-                     <h2 class="text-white mb-4">Quer planejar sua próxima aventura?</h2>
-                     <p class="lead text-white">Procure por trilhas e guias no estado de Santa Catarina</p>
-                  </div>
+      <div class="page-header min-vh-50" style="background-image: url('{{ asset('img/bg/lagoinha-do-leste.jpg') }}');">
+         <span class="mask bg-gradient-dark opacity-6"></span>
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-lg-6 col-sm-9 text-center mx-auto">
+                  <h2 class="text-white mb-4">Quer planejar sua próxima aventura?</h2>
+                  <p class="lead text-white">Procure por trilhas e guias no estado de Santa Catarina</p>
                </div>
             </div>
          </div>
-         <div class="container">
-            <div class="row bg-white shadow mt-n5 border-radius-lg pb-4 p-3 mx-sm-0 mx-1 position-relative">
-               <form action="{{ url('trilhas/#lista') }}" style="display: inherit;" method="GET" id="banner-searchbox" class="">
-                  <div class="col-lg-4 mt-2 mr-2" style="padding-right: 15px;">
-                     <label class="">Selecione a cidade</label>
-                     <select class="form-control" name="cidade" id="list-cidade">
-                        <option value="">Selecione uma cidade</option>
-                        @if(isset($cidades))
-                           @forelse($cidades as $cidade)
-                              <option {{ old('cidade') == stringToStringSeo($cidade->nm_cidade_cde) ? 'selected': ''}} value="{{stringToStringSeo($cidade->nm_cidade_cde)}}">{{$cidade->nm_cidade_cde}}</option>
-                           @empty
-                              <option selected value="">Nenhuma cidade disponível</option>
-                           @endforelse
-                        @endif
-                     </select>
-                  </div>
-                  <div class="col-lg-3 mt-2 mr-2" style="padding-right: 15px;">
-                     <label class="">Selecione o nível</label>
-                     <select class="form-control" name="nivel" id="list-niveis">
-                        <option value="">Selecione um nível</option>
-                        @if(isset($niveis))
-                           @foreach($niveis as $nivel)
-                              <option {{ old('nivel') == stringToStringSeo($nivel->dc_nivel_niv) ? 'selected': ''}} value="{{stringToStringSeo($nivel->dc_nivel_niv)}}">{{$nivel->dc_nivel_niv}}</option>
-                           @endforeach
-                        @endif
-                     </select>
-                  </div>
-                  <div class="col-lg-3 mt-2 mr-2" style="padding-right: 15px;">
-                     <label class="">Nome da Trilha</label>
-                     <div class="input-group">
-                        <input type="text" name="termo" class="form-control flatpickr-input" placeholder="Nome da Trilha">
-                     </div>
-                  </div>
-                  <div class="col-lg-2 mt-2">
-                     <label class="">&nbsp;</label>
-                     <button type="submit" class="btn bg-gradient-primary w-100 mb-0">Buscar Trilhas</button>
-                  </div>
-               </form>
-            </div>
-         </div>
-      </header>
+      </div>
       @yield('content')    
       <div class="pt-5 mb-5 mt-3">
          <div class="container">

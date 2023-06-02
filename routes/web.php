@@ -29,6 +29,7 @@ Route::get('trilhas/{nivel}', 'TrilhaController@searchTrilhasNivel');
 Route::get('{cidade}/trilhas/{nivel}', 'TrilhaController@searchTrilhasCidadeNivel');
 Route::get('{cidade}/trilhas/{nivel}/{trilha}', 'TrilhaController@searchTrilha');
 Route::get('trilhas/tag/{tag}', 'TrilhaController@searchTrilhasTag');
+Route::get('trilhas-em-{cidade}', 'TrilhaController@searchTrilhasCidadeDetalhes');
 
 Route::get('eventos', 'EventoController@index');
 Route::get('eventos/detalhes/{id}', 'EventoController@detalhes');

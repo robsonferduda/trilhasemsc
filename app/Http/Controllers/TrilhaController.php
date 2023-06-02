@@ -174,6 +174,25 @@ class TrilhaController extends Controller
         return $this->search($request->cidade, $request->nivel, $request->termo);
     }
 
+    public function searchTrilhasCidadeDetalhes($id_cidade)
+    {
+
+        if (!empty($id_cidade)) {
+            $cidade = Cidade::whereRaw("unaccent(replace(lower(nm_cidade_cde),' ','-')) = '".$id_cidade."'")->where('cd_estado_est', 42)->first();
+        }
+
+        $trilhas = Trilha::with('foto')
+                ->with('nivel')
+                ->with('cidade')
+                ->when($cidade, function ($query) use ($cidade) {
+                    $query->where('cd_cidade_cde', $cidade->cd_cidade_cde);
+                })
+                ->where('fl_publicacao_tri', 'S')
+                ->paginate(10);
+
+        return view('trilhas/cidades', compact(['trilhas', 'cidade']));
+    }
+
     public function searchTrilhasCidade($cidade)
     {
         return $this->search($cidade);
