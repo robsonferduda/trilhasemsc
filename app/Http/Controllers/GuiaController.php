@@ -112,7 +112,7 @@ class GuiaController extends Controller
             return redirect('login');
 
         }
-        return view('layouts.partes.cadastro');
+        //return view('layouts.partes.cadastro');
         return view('guias.cadastro');
     }
 
