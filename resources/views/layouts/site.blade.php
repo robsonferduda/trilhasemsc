@@ -3,18 +3,18 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
-      <link rel="icon" type="image/png" href="img/favicon.png">
-      <title>
-        Trilhas em Santa Catarina
-      </title>
-      <link rel="canonical" href="https://www.creative-tim.com/product/now-ui-design-system-pro" />
-      <meta name="keywords" content="bootstrap, bootstrap 5, bootstrap5, ui kit, design system, responsive design, web design ui, ui design system, now ui kit, now ui design system">
       <meta name="description" content="Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil">
-      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,200|Open+Sans+Condensed:700" rel="stylesheet">
+      <meta name="keywords" content="trilhas em sc, camping em sc, trilhas em santa catarina">
+      <meta name="viewport" content="width=device-width, initial-scale=1">  
+      <title>
+         @yield('pageTitle')
+      </title>
+      <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">      
       <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet" />
       <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
-      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,200|Open+Sans+Condensed:700" rel="stylesheet">
       <link id="pagestyle" href="{{ asset('css/template.css') }}" rel="stylesheet" />
       <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
       <style>
@@ -29,9 +29,9 @@
             <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
                <ul class="navbar-nav navbar-nav-hover mx-auto">
                 <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
-                    Início
-                    </a>
+                     <a href="{{ url('/') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
+                     Início
+                     </a>
                 </li>            
                   <li class="nav-item dropdown dropdown-hover mx-2">
                      <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
@@ -193,14 +193,15 @@
       </script>
       @env('production')
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175572747-1"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+         <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
 
-        gtag('config', 'UA-175572747-1');
-      </script>
+         gtag('config', 'UA-175572747-1');
+         </script>
       @endenv
       <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
    </body>
 </html>
