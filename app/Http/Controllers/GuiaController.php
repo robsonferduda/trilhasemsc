@@ -84,13 +84,15 @@ class GuiaController extends Controller
                 'name' => 'required',
                 'email' => 'required',
                 'password' => 'required|confirmed',
+                'term' => 'required',
                 recaptchaFieldName() => recaptchaRuleName()
             ], [
                 'name.required' => 'O campo "Nome" é obrigatório.',
                 'email.required' => 'O campo "Email" é obrigatório.',
                 'password.required' => 'O campo "Senha" é obrigatório.',
                 'password.confirmed' => 'O campo "Senha" e "Confirme a Senha" possuem valores divergentes.',
-                'g-recaptcha-response.recaptcha' => 'O campo "Não sou um robô" é obrigatório.'
+                'g-recaptcha-response.recaptcha' => 'O campo "Não sou um robô" é obrigatório.',
+                'term.required' => 'O campo "Termo de Uso" é obrigatório.'
             ]);
 
             $user = \App\User::where('email', trim($request->email))->first();
