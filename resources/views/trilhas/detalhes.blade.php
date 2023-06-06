@@ -13,10 +13,15 @@
         <div class="blog-post-area section-padding">
             <div class="container">
                 <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <a href="#"><img src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}"></a>
+                    </div>
+                </div>
+                
+                <div class="row">
                     <div class="col-md-9 conteudo">
                         <div class="single-blog-post blog-post-details">
                             <div class="single-blog-post-img">
-                                <a href="#"><img src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}"></a>
                                 <div class="date-time">
                                     <span class="date">{{ \Carbon\Carbon::parse($trilha->created_at)->format('d') }}</span>
                                     <span class="month">{{ strtoupper(\Carbon\Carbon::parse($trilha->created_at)->format('M')) }}</span>
