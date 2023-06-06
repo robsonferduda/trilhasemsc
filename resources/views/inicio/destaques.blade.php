@@ -15,13 +15,13 @@
                <div class="col-lg-4 col-md-6">
                <div class="card card-blog card-plain">
                    <div class="position-relative">
-                       <a class="d-block">
-                       <img src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                       <a href="{{ url($trilha->ds_url_tri) }}" class="d-block">
+                            <img src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
                        </a>
                    </div>
                    <div class="card-body px-1 pt-3">
                        <p class="text-gradient text-dark mb-2 text-sm">{{ $trilha->cidade->nm_cidade_cde }}</p>
-                       <a href="javascript:;">
+                       <a href="{{ url($trilha->ds_url_tri) }}">
                        <h5>
                            {{ $trilha->nm_trilha_tri }}
                        </h5>
