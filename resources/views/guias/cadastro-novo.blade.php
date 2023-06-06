@@ -1,4 +1,7 @@
 @extends('layouts.site')
+@section('pageTitle','Cadastro de Guias e Condutores')
+@section('description', 'Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil' )
+
 @section('content')
 <div class="row mt-n8 mb-5">
     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
@@ -7,8 +10,9 @@
               <h5>Faça seu cadastro</h5>
            </div>
            <div class="card-body">
-               @include('layouts/mensagens')
+               @include('layouts/mensagens-novo')
                <form action="{{ url('guias-e-condutores/cadastro') }}" method="post" >
+                  @csrf
                  <div class="mb-3">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nome" value="{{ old('name') }}" required autocomplete="name" autofocus>
                  </div>
@@ -22,8 +26,9 @@
                      <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirmar Senha" required autocomplete="new-password">
                   </div>
                   {!! htmlFormSnippet() !!}
+                  <br>
                  <div class="form-check form-check-info text-left">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="">
+                    <input class="form-check-input" type="checkbox" value="S" id="flexCheckDefault" name="term" required>
                     <label class="form-check-label" for="flexCheckDefault">
                         Eu aceito os termos e condições<a href="{{ url('termos-de-uso') }}" class="text-dark font-weight-bold text-decoration-underline-hover"> Termos e Condições</a>
                     </label>
@@ -41,7 +46,7 @@
                </p>
             </div>
             <div class="col-3 ms-auto px-1 d-flex justify-content-center">
-               <a class="btn btn-outline-light w-75 h-75 px-3" href="javascript:;">
+               <a class="btn btn-outline-light w-75 h-75 px-3" href="{{ url('login/facebook') }}" >
                   <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g id="facebook-3" transform="translate(3.000000, 3.000000)" fill-rule="nonzero">
@@ -53,7 +58,7 @@
                </a>
             </div>
             <div class="col-3 me-auto px-1 d-flex justify-content-center">
-               <a class="btn btn-outline-light w-75 h-75 px-3" href="javascript:;">
+               <a class="btn btn-outline-light w-75 h-75 px-3" href="{{ url('login/google') }}" >
                   <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g id="google-icon" transform="translate(3.000000, 2.000000)" fill-rule="nonzero">
