@@ -4,10 +4,9 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta name="description" content="Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil">
-      <meta name="keywords" content="trilhas em sc, camping em sc, trilhas em santa catarina">
-      <meta name="viewport" content="width=device-width, initial-scale=1">  
+      <meta name="keywords" content="trilhas em sc, camping em sc, trilhas em santa catarina"> 
       <title>
-         @yield('pageTitle')
+         {{ (isset($page_name)) ? $page_name : 'Trilhas em Santa Catarina' }}
       </title>
       <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
@@ -20,7 +19,7 @@
       <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
       <style>
          .async-hide {
-         opacity: 0 !important
+            opacity: 0 !important
          }
       </style>
    </head>

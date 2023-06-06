@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function indexOld()
     {
         /*
             - Criar Enun para Categoria
@@ -35,15 +35,16 @@ class HomeController extends Controller
         return view('home', ['totais' => $totais, 'ultimas' => $ultimas, 'preferidas' => $preferidas ,'cidades' => $cidades, 'niveis' => $niveis, 'page_name' => $page_name]);
     }
 
-    public function novo()
+    public function index()
     {
+        $page_name = "Trilhas em Santa Catarina";
         $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
         $niveis = Nivel::orderBy('ordem_niv', 'ASC')->get();
         $guias = Guia::where('fl_ativo_gui', true)->where('fl_perfil_moderado_gui', true)->inRandomOrder()->take(4)->get();
         $preferidas = Trilha::with('foto')->where('fl_publicacao_tri', 'S')->where('total_votos_tri','>',0)->orderBy('total_votos_tri', 'DESC')->take(7)->get();
         $ultimas = Trilha::with('foto')->where('fl_destaque_tri', true)->where('fl_publicacao_tri', 'S')->orderBy('created_at', 'DESC')->take(3)->get();
 
-        return view('inicio', compact('ultimas','cidades','niveis','guias','preferidas'));
+        return view('inicio', compact('ultimas','cidades','niveis','guias','preferidas','page_name'));
     }
 
     public function perfil($id)

@@ -223,9 +223,14 @@ class TrilhaController extends Controller
         $idCidade = '';
         $url      = $url;
 
+        $page_name = "Trilhas em Santa Catarina";
+
         if (!empty($cidade)) {
-            $idCidade = Cidade::whereRaw("unaccent(replace(lower(nm_cidade_cde),' ','-')) = '".$cidade."'")
-                  ->where('cd_estado_est', 42)->first()->cd_cidade_cde;
+
+            $objCidade = Cidade::whereRaw("unaccent(replace(lower(nm_cidade_cde),' ','-')) = '".$cidade."'")->where('cd_estado_est', 42)->first();
+            $idCidade = $objCidade->cd_cidade_cde;
+
+            $page_name = "Trilhas em ".$objCidade->nm_cidade_cde;
         }
 
         if (!empty($nivel)) {
@@ -258,7 +263,7 @@ class TrilhaController extends Controller
 
         #dd($trilhas->nextPageUrl());
 
-        return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'termo' => $termo]);
+        return view('trilhas/lista', ['trilhas' => $trilhas, 'cidades' => $cidades, 'niveis' => $niveis, 'cidade_p' => $cidade, 'nivel_p' => $nivel, 'termo' => $termo, 'page_name' => $page_name]);
     }
 
 

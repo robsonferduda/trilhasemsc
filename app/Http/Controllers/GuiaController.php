@@ -18,7 +18,7 @@ class GuiaController extends Controller
 {
     public function index(Request $request)
     {
-        $page_name = "Guias";
+        $page_name = "Guias e Condutores em Santa Catarina";
         $titulo = 'Guias e Condutores';
 
         $id_cidade = $request->cidade;
