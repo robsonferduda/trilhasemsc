@@ -1,7 +1,10 @@
 .conteudo > p >  img {
 	width: 100% !important;
+	border-radius: 1rem;
 }
 
 .geolocalizao{
 	width: 100% !important;
 }
+
+iframe { width: 100% !important; }
