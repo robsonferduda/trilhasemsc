@@ -13,7 +13,7 @@
         <div class="blog-post-area section-padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-9 conteudo">
                         <div class="single-blog-post blog-post-details">
                             <div class="single-blog-post-img">
                                 <a href="#"><img src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}"></a>

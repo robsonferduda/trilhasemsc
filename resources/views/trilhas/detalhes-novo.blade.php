@@ -59,7 +59,9 @@
                     <h4 class="text-success">
                         Use o Wikiloc
                     </h4>
-                    {!! $trilha->url_geolocalizacao_tri !!}
+                    <div class="geolocalizao">
+                        {!! $trilha->url_geolocalizacao_tri !!}
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">            
