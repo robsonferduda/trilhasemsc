@@ -22,7 +22,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4">
                                         <div class="card-image position-relative border-radius-lg">
-                                            <img class="img border-radius-lg" src="{{ asset('img/trilhas/busca/'.$img) }}" alt="{{ $alt }}">
+                                            <a href="{{ url($trilha->ds_url_tri) }}"><img class="img border-radius-lg" src="{{ asset('img/trilhas/busca/'.$img) }}" alt="{{ $alt }}"></a>
                                         </div>
                                     </div>
                                     <div class="col-lg-7 col-md-7 my-sm-auto mt-3 ms-sm-3">
