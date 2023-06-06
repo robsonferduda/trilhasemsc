@@ -70,6 +70,10 @@ Route::get('sitemap', 'SiteMapController@gerar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
 
+Route::get('dicas-de-seguranca', function () {
+    return view('dicas-de-seguranca');
+})->name('dicas-de-seguranca');
+
 Route::get('politica-de-privacidade', function () {
     return view('politica-de-privacidade');
 })->name('politica-de-privacidade');

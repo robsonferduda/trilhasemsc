@@ -17,6 +17,7 @@
       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,200|Open+Sans+Condensed:700" rel="stylesheet">
       <link id="pagestyle" href="{{ asset('css/template.css') }}" rel="stylesheet" />
       <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
       <style>
          .async-hide {
          opacity: 0 !important
@@ -97,8 +98,10 @@
                </ul>
                <ul class="navbar-nav d-lg-block d-none">
                   <li class="nav-item">
-                     <a href="{{ url('guias-e-condutores') }}" class="btn btn-sm  bg-gradient-primary  btn-round mb-0 me-1">TRILHEIROS</a>
-                     <a href="{{ url('guias-e-condutores/cadastro') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">CONDUTORES</a>
+                     <!--
+                        <a href="{{ url('guias-e-condutores') }}" class="btn btn-sm  bg-gradient-primary  btn-round mb-0 me-1">TRILHEIROS</a>
+                        <a href="{{ url('guias-e-condutores/cadastro') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">CONDUTORES</a>
+                     -->
                   </li>
                </ul>
             </div>
@@ -150,10 +153,10 @@
                   <p class="mb-5 text-lg text-white font-weight-bold">
                     Desde 2020, o site. Trilhas fazemos desde sempre!
                   </p>
-                  <a href="javascript:;" target="_blank" class="text-white me-xl-4 me-4 opacity-5">
+                  <a href="https://www.instagram.com/trilhasemsc" target="_blank" class="text-white me-xl-4 me-4 opacity-5">
                     <span class="fab fa-instagram"></span>
                   </a>
-                  <a href="javascript:;" target="_blank" class="text-white me-xl-4 me-4 opacity-5">
+                  <a href="mailto:trilhasemsc@gmail.com?subject=Contato Site" target="_blank" class="text-white me-xl-4 me-4 opacity-5">
                   <span class="fa fa-envelope"></span>
                   </a>                  
                </div>

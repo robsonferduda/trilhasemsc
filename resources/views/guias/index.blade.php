@@ -40,6 +40,9 @@
                </div>
              </div>           
           @endforeach
+          <div class="col-lg-12 col-md-12 mt-4">
+            <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Voltar ao Início</a>
+          </div>
        </div>
     </div>
  </section>

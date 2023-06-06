@@ -50,7 +50,8 @@
                                     <p><span class="text-danger">
                                         <span style="color: white; background: #a94442;" class="badge badge-secondary">Atenção!</span>
                                         Fique sempre atento à data de atualização dos textos. 
-                                        Os textos são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.</span></p>
+                                        Os textos são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.</span>
+                                    </p>
                                     {!! $trilha->ds_trilha_tri !!}
                                 </div>
 

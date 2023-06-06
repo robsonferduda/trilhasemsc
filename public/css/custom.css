@@ -115,3 +115,11 @@
   .custom-circle-image img {
 	object-fit: cover;
   }
+
+.conteudo > p >  img {
+	width: 100% !important;
+}
+
+.geolocalizao{
+	width: 100% !important;
+}

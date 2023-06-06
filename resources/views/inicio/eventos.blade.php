@@ -8,7 +8,7 @@
          <div class="row">
             <div class="col-lg-3 col-md-12 mb-5">
                <div class="card mb-3">
-                  <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 ">
+                  <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 " style="min-height: 365px;">
                      <i class="fa fa-calendar fa-3x text-success"></i>
                      <h5 class="mt-2">Agenda</h5>
                      <p class="mb-3">
@@ -23,11 +23,11 @@
             </div>
             <div class="col-lg-3 col-md-12 mb-5">
                <div class="card mb-3">
-                  <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 ">
+                  <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 " style="min-height: 365px;">
                      <i class="fa fa-map-marker fa-3x text-danger"></i>
                      <h5 class="mt-2">Localização</h5>
                      <p class="mb-3">
-                        Nossos guias são de diferentes cidades do estado de Santa Catarina, oferecendo 
+                        Nossos guias são de diferentes cidades de Santa Catarina, oferecendo 
                         opções de aventuras por todas as regiões do estado.
                      </p>
                      <a href="{{ url('guias-e-condutores') }}" class="font-weight-bold text-xs text-danger text-uppercase font-weight-bolder text-decoration-underline-hover">
@@ -38,7 +38,7 @@
             </div>
             <div class="col-lg-3 col-md-12 mb-5">
                <div class="card mb-3">
-                  <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 ">
+                  <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 " style="min-height: 365px;">
                      <i class="fa fa-shield fa-3x text-warning"></i>
                      <h5 class="mt-2">Segurança</h5>
                      <p class="mb-3">
@@ -54,7 +54,7 @@
             </div>
             <div class="col-lg-3 col-md-12 mb-5">
                <div class="card mb-3">
-                  <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 ">
+                  <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 " style="min-height: 365px;">
                      <i class="fa fa-ticket fa-3x text-info"></i>
                      <h5 class="mt-2">Eventos</h5>
                      <p class="mb-3">

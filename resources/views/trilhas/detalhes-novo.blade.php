@@ -51,7 +51,7 @@
                                     <script>
                                         (adsbygoogle = window.adsbygoogle || []).push({});
                                     </script>
-                    <div class="mt-2">
+                    <div class="mt-2 conteudo">
                         {!! $trilha->ds_trilha_tri !!}
                     </div>
                 </div> 
