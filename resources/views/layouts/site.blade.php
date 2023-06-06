@@ -42,46 +42,10 @@
                      </a>
                 </li>            
                   <li class="nav-item dropdown dropdown-hover mx-2">
-                     <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" role="button" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
-                     Trilhas
-                     <img src="{{ asset('img/down-arrow-white.svg') }}" alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
-                     <img src="{{ asset('img/down-arrow-dark.svg') }}" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
+                     <a href="{{ url('trilhas') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
+                        Trilhas
                      </a>
-                     <div class="dropdown-menu dropdown-menu-animation dropdown-lg mt-0 mt-lg-3 p-3 border-radius-lg" aria-labelledby="dropdownMenuDocs">
-                        <div class="d-none d-lg-block">
-                           <ul class="list-group">
-                              <li class="nav-item list-group-item border-0 p-0">
-                                 <a class="dropdown-item py-2 ps-3 border-radius-md" href="{{ url('trilhas#lista') }}">
-                                    <div class="d-flex">
-                                       <div class="icon h-10 me-3 d-flex mt-1">
-                                          <i class="ni ni-planet text-secondary"></i>
-                                       </div>
-                                       <div>
-                                          <h6 class="dropdown-header text-dark font-weight-bold d-flex justify-content-cente align-items-center p-0">Trilhas em SC</h6>
-                                          <span class="text-sm">Trilhas em Santa Catarina</span>
-                                       </div>
-                                    </div>
-                                 </a>
-                              </li>                                                  
-                              <li class="nav-item list-group-item border-0 p-0">
-                                 <a class="dropdown-item py-2 ps-3 border-radius-md" href="{{ url('trilhas/brasil') }}">
-                                    <div class="d-flex">
-                                       <div class="icon h-10 me-3 d-flex mt-1">
-                                          <i class="ni ni-spaceship text-secondary"></i>
-                                       </div>
-                                       <div>
-                                          <h6 class="dropdown-header text-dark font-weight-bold d-flex justify-content-cente align-items-center p-0">Trilhas no Brasil</h6>
-                                          <span class="text-sm">Trilhas no Brasil</span>
-                                       </div>
-                                    </div>
-                                 </a>
-                              </li>
-                             
-                           </ul>
-                        </div>
-                      
-                     </div>
-                  </li>
+                 </li>
                   <li class="nav-item dropdown dropdown-hover mx-2">
                     <a href="{{ url('campings') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
                     Camping
