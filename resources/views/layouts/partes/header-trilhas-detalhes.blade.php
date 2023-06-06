@@ -4,7 +4,6 @@
             <div class="col-md-12 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4 text-center">
                 <h2>{{ $trilha->nm_trilha_tri }}</h2>
                 <h5>{{ $trilha->cidade->nm_cidade_cde }}</h5>
-                <h6>{{ $trilha->cidade->nm_mesorregiao_cde }}</h6>
             </div>
        </div>
     </div>

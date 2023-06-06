@@ -20,6 +20,14 @@
                     <img class="mx-auto" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
                     <span style="color: white; background: {{ ($trilha->nivel) ? $trilha->nivel->dc_color_nivel_niv : '#989898' }};" class="badge badge-secondary">{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</span>
                 </div>
+                <div class="col-lg-12 col-md-12 mt-5">
+                    <p><i class="fa fa-road text-success"></i> <strong>Distância</strong>: </p>
+                    <p><i class="fa fa-clock-o text-info"></i> <strong>Tempo Médio</strong>: </p>
+                    <p><i class="fa fa-sun text-warning"></i> <strong>Exposição</strong>: </p>
+                    <p><i class="fa fa-heartbeat text-danger"></i> <strong>Esforço</strong>: </p>
+                    <p><i class="fa fa-compass text-info"></i> <strong>Orientação</strong>: </p>
+                    <p><a href="{{ url('guia-de-dificuldade-em-trilhas/abnt') }}">Clique e entenda as medidas</a></p>
+                </div>
             </div>
         </div>
         <div class="row">
