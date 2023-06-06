@@ -6,7 +6,7 @@
           </div>
        </div>
          <div class="row">
-            <div class="col-lg-3 col-md-12 mb-5">
+            <div class="col-lg-3 col-md-12 mb-3">
                <div class="card mb-3">
                   <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 " style="min-height: 365px;">
                      <i class="fa fa-calendar fa-3x text-success"></i>
@@ -21,7 +21,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-lg-3 col-md-12 mb-5">
+            <div class="col-lg-3 col-md-12 mb-3">
                <div class="card mb-3">
                   <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 " style="min-height: 365px;">
                      <i class="fa fa-map-marker fa-3x text-danger"></i>
@@ -36,7 +36,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-lg-3 col-md-12 mb-5">
+            <div class="col-lg-3 col-md-12 mb-3">
                <div class="card mb-3">
                   <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 " style="min-height: 365px;">
                      <i class="fa fa-shield fa-3x text-warning"></i>
@@ -52,7 +52,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-lg-3 col-md-12 mb-5">
+            <div class="col-lg-3 col-md-12 mb-3">
                <div class="card mb-3">
                   <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 " style="min-height: 365px;">
                      <i class="fa fa-ticket fa-3x text-info"></i>
