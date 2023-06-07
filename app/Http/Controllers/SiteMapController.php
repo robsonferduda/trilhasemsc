@@ -65,7 +65,7 @@ class SiteMapController extends Controller
 
         $cidades = $trilhas->unique('cd_cidade_cde')->pluck('cd_cidade_cde')->toArray();
 
-        $cidades = Cidade::whereIn('cd_cidade_cde', $cidades)->selectRaw("unaccent(replace(lower(nm_cidade_cde),' ','-'))")->get();
+        $cidades = Cidade::whereIn('cd_cidade_cde', $cidades)->selectRaw("unaccent(replace(lower(nm_cidade_cde),' ','-')) as nm_cidade_cde")->get();
 
         foreach ($trilhas as $trilha) {
             // get all images for the current Trilha
@@ -82,6 +82,7 @@ class SiteMapController extends Controller
         }
 
         foreach ($cidades as $cidade) {
+            dd($cidade->nm_cidade_cde);
             $sitemap->add(\URL::to('trilhas-em-'.$cidade->nm_cidade_cde), now(), '0.9', 'monthly');
         }
 
