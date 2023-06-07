@@ -8,3 +8,7 @@
 }
 
 iframe { width: 100% !important; }
+
+body {
+	padding: 0px !important; 
+}
