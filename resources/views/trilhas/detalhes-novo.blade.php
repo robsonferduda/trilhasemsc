@@ -20,7 +20,10 @@
             <div class="col-md-9 mt-2">
                 <div class="col-md-12 mt-3">
                     <h4 class="mt-2">{{ $trilha->nm_trilha_tri }}</h4>
-                    <h6><i class="ni ni-pin-3 text-danger"></i>{{ $trilha->cidade->nm_cidade_cde }} </h6>
+                    <h6>
+                        <i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }} 
+                        <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
+                    </h6>
                     <p class="mb-1"><span class="text-success">Trilha cadastrada em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}</span></p>
                     <p class="mb-1"><span class="text-info">Última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span></p>
                     <p><span class="text-danger">
