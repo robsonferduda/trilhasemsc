@@ -81,8 +81,7 @@ class SiteMapController extends Controller
             $sitemap->add(\URL::to($trilha->ds_url_tri), $trilha->updated_at, '0.9', 'weekly', $images);
         }
 
-        foreach ($cidades as $cidade) {
-            dd($cidade->nm_cidade_cde);
+        foreach ($cidades as $cidade) {            
             $sitemap->add(\URL::to('trilhas-em-'.$cidade->nm_cidade_cde), now(), '0.9', 'monthly');
         }
 
