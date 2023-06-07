@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cidade;
 use Illuminate\Http\Request;
 use App\Trilha;
 use App\Galeria;
@@ -62,6 +63,10 @@ class SiteMapController extends Controller
 
         $trilhas = Trilha::where('fl_publicacao_tri', 'S')->get();
 
+        $cidades = $trilhas->unique('cd_cidade_cde')->pluck('cd_cidade_cde')->toArray();
+
+        $cidades = Cidade::whereIn('cd_cidade_cde', $cidades)->selectRaw("unaccent(replace(lower(nm_cidade_cde),' ','-'))")->get();
+
         foreach ($trilhas as $trilha) {
             // get all images for the current Trilha
             $images = array();
@@ -76,21 +81,9 @@ class SiteMapController extends Controller
             $sitemap->add(\URL::to($trilha->ds_url_tri), $trilha->updated_at, '0.9', 'weekly', $images);
         }
 
-        // $galerias = Galeria::get();
-
-        // foreach ($galerias as $galeria) {
-        //     // get all images for the current Galeria
-        //     $images = array();
-        //     foreach ($galeria->itens as $foto) {
-        //         $images[] = array(
-        //             'url' => \URL::to('public/img/galerias/fotos/'.$foto->nm_path_fot),
-        //             'title' => $foto->dc_alt_fot,
-        //             'caption' => $foto->dc_alt_fot
-        //         );
-        //     }
-        //     $sitemap->add(\URL::to('galerias/'.$galeria->url_gal), $galeria->updated_at, '0.9', 'weekly', $images);
-        // }
-
+        foreach ($cidades as $cidade) {
+            $sitemap->add(\URL::to('trilhas-em-'.$cidade->nm_cidade_cde), now(), '0.9', 'monthly');
+        }
 
         return $sitemap;
     }
