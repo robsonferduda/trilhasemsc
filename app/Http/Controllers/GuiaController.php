@@ -7,10 +7,12 @@ use App\Fone;
 use App\Guia;
 use App\Trilha;
 use App\Interacao;
+use App\Mail\GuiaModeracao;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Laracasts\Flash\Flash;
 
@@ -201,6 +203,7 @@ class GuiaController extends Controller
 
             Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $imagem]);
 
+            Mail::send(new GuiaModeracao($guia));
         }
 
         $usuario = Auth::user();

@@ -141,6 +141,8 @@
         $(function() {
             $('#form-guia').parsley();
 
+            $('.phone').mask('(99) 999-999999');
+
             var drEvent = $('#dropify-event').dropify();
 
             drEvent.on('dropify.afterClear', function(event, element) {
