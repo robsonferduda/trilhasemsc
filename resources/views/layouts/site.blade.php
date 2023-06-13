@@ -166,16 +166,16 @@
          }
       </script>
       @env('production')
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175572747-1"></script>
+         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175572747-1"></script>
          <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-         gtag('config', 'UA-175572747-1');
+            gtag('config', 'UA-175572747-1');
          </script>
+         <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       @endenv
-      <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
    </body>
 </html>
