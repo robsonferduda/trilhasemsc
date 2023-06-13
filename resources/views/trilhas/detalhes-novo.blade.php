@@ -25,30 +25,12 @@
                         <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
                     </h6>
                     <p class="mb-1"><span class="text-success">Trilha cadastrada em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}</span></p>
-                    <p class="mb-1"><span class="text-info">Última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span></p>
-                    <div class="row mb-3">
-                        <div class="col-lg-12 col-sm-12 mb-sm-0">
-                           <div class="info-horizontal bg-gradient-primary border-radius-lg p-3">
-                              <i class="ni ni-calendar-grid-58 h4 text-white icon"></i>
-                              <div class="description ps-3">
-                                 <h5 class="text-white">Atualização das Informações</h5>
-                                 <p class="text-white">Fique sempre atento à data de atualização dos textos. Os textos são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.</p>
-                              </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 col-sm-12 mb-sm-0">
-                            <div class="info-horizontal bg-gradient-info border-radius-lg p-3">
-                               <i class="ni ni-compass-04 h4 text-white icon"></i>
-                               <div class="description ps-3">
-                                  <h5 class="text-white">Contrate um Condutor</h5>
-                                  <p class="text-white">Sempre que visitar um local desconhecido, procure por condutores locais autorizados. Faça turismo seguro.</p>
-                                  <a href="{{ url('guias-e-condutores') }}">Lista de Condutores</a>
-                               </div>
-                            </div>
-                         </div>
-                     </div>                    
+                    <p class="mb-1"><span class="text-primary">Última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
+                        (Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.)
+                    </p>
+                    <p class="text-info">
+                        Sempre que visitar um local desconhecido, procure por condutores locais autorizados. Faça turismo seguro!
+                    </p>            
                     @env('production')
                         <ins class="adsbygoogle"
                                         style="display:block"
@@ -64,7 +46,7 @@
                         {!! $trilha->ds_trilha_tri !!}
                     </div>
                 </div> 
-                <div class="col-md-12 mt-2">
+                <div class="col-md-12 mt-2 text-center">
                     <div class="col-lg-3 col-md-3 col-sm-12 position-relative my-auto justify-content-center text-center">
                         <img class="mx-auto" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
                         <span style="color: white; background: {{ ($trilha->nivel) ? $trilha->nivel->dc_color_nivel_niv : '#989898' }};" class="badge badge-secondary">{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</span>
@@ -80,7 +62,8 @@
                         </div>
                     -->
                 </div>
-                <div class="col-md-12 mt-2">
+                    
+                <div class="col-md-12 mt-2 mb-3">
                     <h4 class="text-success">
                         Use o Wikiloc
                     </h4>
@@ -88,6 +71,29 @@
                         {!! $trilha->url_geolocalizacao_tri !!}
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col-lg-12 col-sm-12 mb-sm-0 mb-4">
+                       <div class="info-horizontal bg-gradient-primary border-radius-lg p-3">
+                          <i class="ni ni-calendar-grid-58 h4 text-white icon"></i>
+                          <div class="description ps-3">
+                             <h5 class="text-white">Atualização das Informações</h5>
+                             <p class="text-white">Fique sempre atento à data de atualização dos textos. Os textos são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.</p>
+                          </div>
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 mb-sm-0 mb-4">
+                        <div class="info-horizontal bg-gradient-info border-radius-lg p-3">
+                           <i class="ni ni-compass-04 h4 text-white icon"></i>
+                           <div class="description ps-3">
+                              <h5 class="text-white">Contrate um Condutor</h5>
+                              <p class="text-white">Sempre que visitar um local desconhecido, procure por condutores locais autorizados. Faça turismo seguro.</p>
+                              <a href="{{ url('guias-e-condutores') }}">Lista de Condutores</a>
+                           </div>
+                        </div>
+                     </div>
+                 </div>    
             </div>
             <div class="col-md-3">            
                 <div class="col-lg-12 mt-4">
