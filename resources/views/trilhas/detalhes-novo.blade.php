@@ -26,12 +26,31 @@
                     </h6>
                     <p class="mb-1"><span class="text-success">Trilha cadastrada em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}</span></p>
                     <p class="mb-1"><span class="text-info">Última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span></p>
-                    <p><span class="text-danger">
-                        <span style="color: white; background: #a94442;" class="badge badge-secondary">Atenção!</span>
-                                            Fique sempre atento à data de atualização dos textos. 
-                                            Os textos são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.</span>
-                    </p>
-                    <ins class="adsbygoogle"
+                    <div class="row mb-3">
+                        <div class="col-lg-12 col-sm-12 mb-sm-0">
+                           <div class="info-horizontal bg-gradient-primary border-radius-lg p-3">
+                              <i class="ni ni-calendar-grid-58 h4 text-white icon"></i>
+                              <div class="description ps-3">
+                                 <h5 class="text-white">Atualização das Informações</h5>
+                                 <p class="text-white">Fique sempre atento à data de atualização dos textos. Os textos são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.</p>
+                              </div>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 mb-sm-0">
+                            <div class="info-horizontal bg-gradient-info border-radius-lg p-3">
+                               <i class="ni ni-compass-04 h4 text-white icon"></i>
+                               <div class="description ps-3">
+                                  <h5 class="text-white">Contrate um Condutor</h5>
+                                  <p class="text-white">Sempre que visitar um local desconhecido, procure por condutores locais autorizados. Faça turismo seguro.</p>
+                                  <a href="{{ url('guias-e-condutores') }}">Lista de Condutores</a>
+                               </div>
+                            </div>
+                         </div>
+                     </div>                    
+                    @env('production')
+                        <ins class="adsbygoogle"
                                         style="display:block"
                                         data-ad-client="ca-pub-1229685353625953"
                                         data-ad-slot="7739149091"
@@ -40,6 +59,7 @@
                                     <script>
                                         (adsbygoogle = window.adsbygoogle || []).push({});
                                     </script>
+                    @endenv
                     <div class="mt-2 conteudo">
                         {!! $trilha->ds_trilha_tri !!}
                     </div>
@@ -85,15 +105,17 @@
             </div>         
        </div>
        <div class="row">
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-1229685353625953"
-            data-ad-slot="7739149091"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        @env('production')
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-1229685353625953"
+                data-ad-slot="7739149091"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        @endenv
        </div>
     </div>
  </section>
