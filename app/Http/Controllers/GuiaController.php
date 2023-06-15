@@ -250,7 +250,7 @@ class GuiaController extends Controller
 
     }
 
-    public function recursar($guia)
+    public function recusar($guia)
     {
         if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
             return redirect('login');
