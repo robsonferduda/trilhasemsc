@@ -33,7 +33,7 @@ class GuiaModeracao extends Mailable
     {
         $this->subject('(Pendente) - Guia Cadastrado');
         $this->to('rafael01costa@gmail.com', 'Rafael de Moraes Costa');
-        $this->to('robsonferduda@gmail.com', 'Robson');
+        //$this->to('robsonferduda@gmail.com', 'Robson');
         return $this->view('mail.guia-moderacao', ['guia' => $this->guia]);
     }
 }

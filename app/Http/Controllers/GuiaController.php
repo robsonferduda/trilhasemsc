@@ -203,7 +203,10 @@ class GuiaController extends Controller
 
             Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $imagem]);
 
-            Mail::send(new GuiaModeracao($guia));
+            if(isset($request->ativo)) {
+                Mail::send(new GuiaModeracao($guia));
+            }
+            
         }
 
         $usuario = Auth::user();
@@ -233,6 +236,30 @@ class GuiaController extends Controller
         }
 
         return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+    }
+
+    public function ativar($guia)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        Guia::where('id_guia_gui')->update(['fl_perfil_moderado_gui' => true]);
+
+        return redirect('guia/perfil/'.$guia);
+
+    }
+
+    public function recursar($guia)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        Guia::where('id_guia_gui')->update(['fl_perfil_moderado_gui' => false, 'fl_perfil_recusado_gui' => true]);
+
+        return redirect('guia/perfil/'.$guia);
+
     }
 
 }

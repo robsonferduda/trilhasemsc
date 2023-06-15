@@ -34,6 +34,8 @@ Route::get('trilhas-em-{cidade}', 'TrilhaController@searchTrilhasCidadeDetalhes'
 Route::get('eventos', 'EventoController@index');
 Route::get('eventos/detalhes/{id}', 'EventoController@detalhes');
 
+Route::get('guia/{id}/ativar', 'GuiaController@ativar');
+Route::get('guia/{id}/recursar', 'GuiaController@recusar');
 Route::get('guia/perfil/{id}', 'GuiaController@perfil');
 Route::get('guia/perfil/estatistica/{tipo}/{id}', 'GuiaController@estatisticas');
 Route::match(['GET', 'POST'],'guias-e-condutores', 'GuiaController@index');
