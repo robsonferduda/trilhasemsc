@@ -244,9 +244,9 @@ class GuiaController extends Controller
             return redirect('login');
         }
 
-        Guia::where('id_guia_gui')->update(['fl_perfil_moderado_gui' => true]);
+        Guia::where('id_guia_gui', $guia)->update(['fl_perfil_moderado_gui' => true]);
 
-        return redirect('guia/perfil/'.$guia);
+        return redirect('guias-e-condutores');
 
     }
 
@@ -256,9 +256,9 @@ class GuiaController extends Controller
             return redirect('login');
         }
 
-        Guia::where('id_guia_gui')->update(['fl_perfil_moderado_gui' => false, 'fl_perfil_recusado_gui' => true]);
+        Guia::where('id_guia_gui', $guia)->update(['fl_perfil_moderado_gui' => false, 'fl_perfil_recusado_gui' => true]);
 
-        return redirect('guia/perfil/'.$guia);
+        return redirect('guias-e-condutores');
 
     }
 
