@@ -349,8 +349,8 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Hi there,</p>
-                        <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
+                        <p>Olá, {{ $guia->nm_guia_gui }}</p>
+                        <p>Seu perfil foi publicado em nosso <a href="{{ url('guias-e-condutores') }}">site</a>.</p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -358,16 +358,14 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="http://htmlemail.io" target="_blank">Call To Action</a> </td>
+                                      <td> <a href={{ url("guia/perfil/{$guia->id_guia_gui}") }} target="_blank">Acesso seu Perfil</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
                               </td>
                             </tr>
                           </tbody>
-                        </table>
-                        <p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-                        <p>Good luck! Hope it works.</p>
+                        </table>                        
                       </td>
                     </tr>
                   </table>
@@ -383,15 +381,14 @@
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
-                    <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
+                    <span class="apple-link">Trilhas em SC</span>                    
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td class="content-block powered-by">
                     Powered by <a href="http://htmlemail.io">HTMLemail</a>.
                   </td>
-                </tr>
+                </tr> -->
               </table>
             </div>
             <!-- END FOOTER -->
