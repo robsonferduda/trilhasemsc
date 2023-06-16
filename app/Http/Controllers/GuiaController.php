@@ -247,12 +247,8 @@ class GuiaController extends Controller
 
         $guia = Guia::where('id_guia_gui', $guia)->update(['fl_perfil_moderado_gui' => true]);
         
-        if($guia->fl_perfil_moderado_gui) {
-            Mail::send(new GuiaConfirmacao($guia));
-        }
-
-        $guia = Guia::where('id_guia_gui', $guia)->update(['fl_perfil_moderado_gui' => false]);
-
+        Mail::send(new GuiaConfirmacao($guia));
+        
         return redirect('guias-e-condutores');
 
     }
