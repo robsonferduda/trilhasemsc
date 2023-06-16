@@ -358,7 +358,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href={{ url("guia/perfil/{$guia->id_guia_gui}") }} target="_blank">Acesso seu Perfil</a> </td>
+                                      <td> <a href={{ url("guia/perfil/{$guia->id_guia_gui}") }} target="_blank">Acesse seu perfil</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -379,11 +379,11 @@
             <!-- START FOOTER -->
             <div class="footer">
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                <tr>
+                <!-- <tr>
                   <td class="content-block">
                     <span class="apple-link">Trilhas em SC</span>                    
                   </td>
-                </tr>
+                </tr> -->
                 <!-- <tr>
                   <td class="content-block powered-by">
                     Powered by <a href="http://htmlemail.io">HTMLemail</a>.
