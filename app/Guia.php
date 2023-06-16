@@ -43,4 +43,9 @@ class Guia extends Model
     {
         return $this->belongsToMany(Cidade::class, 'guia_cidade_atuacao_gca', 'id_guia_gui', 'cd_cidade_cde');
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'id_user');
+    }
 }
