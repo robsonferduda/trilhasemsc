@@ -7,6 +7,7 @@ use App\Fone;
 use App\Guia;
 use App\Trilha;
 use App\Interacao;
+use App\Mail\GuiaConfirmacao;
 use App\Mail\GuiaModeracao;
 use App\User;
 use Auth;
@@ -244,7 +245,13 @@ class GuiaController extends Controller
             return redirect('login');
         }
 
-        Guia::where('id_guia_gui', $guia)->update(['fl_perfil_moderado_gui' => true]);
+        $guia = Guia::where('id_guia_gui', $guia)->update(['fl_perfil_moderado_gui' => true]);
+        
+        if($guia->fl_perfil_moderado_gui) {
+            Mail::send(new GuiaConfirmacao($guia));
+        }
+
+        $guia = Guia::where('id_guia_gui', $guia)->update(['fl_perfil_moderado_gui' => false]);
 
         return redirect('guias-e-condutores');
 
