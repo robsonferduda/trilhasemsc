@@ -68,6 +68,9 @@ Route::get('trilhas/santa-catarina/regioes/serra-catarinense','TrilhaController@
 
 Route::get('trilhas/brasil/regioes/nordeste/chapada', 'TrilhaController@chapada');
 
+Route::get('unidades-de-conservacao', 'UCController@index');
+Route::get('unidades-de-conservacao/detalhes/{id}', 'UCController@detalhes');
+
 Route::get('sitemap', 'SiteMapController@gerar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
 Route::get('sitemap/visualizar/{tipo}', 'SiteMapController@visualizar');
