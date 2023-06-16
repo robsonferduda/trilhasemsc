@@ -31,7 +31,7 @@ class GuiaConfirmacao extends Mailable
      */
     public function build()
     {
-        $this->subject('Perfil Cadastrado.');
+        $this->subject('Perfil Publicado.');
         $this->to($this->guia->user->email, $this->guia->nm_guia_gui);
         $this->bcc('rafael01costa@gmail.com', 'Rafael de Moraes Costa');
         $this->bcc('robsonferduda@gmail.com', 'Robson Duda');
