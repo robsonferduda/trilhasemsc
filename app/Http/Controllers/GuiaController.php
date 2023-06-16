@@ -239,16 +239,18 @@ class GuiaController extends Controller
         return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
     }
 
-    public function ativar($guia)
+    public function ativar($guia_id)
     {
         if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
             return redirect('login');
         }
 
-        $guia = Guia::where('id_guia_gui', $guia)->update(['fl_perfil_moderado_gui' => true]);
+        $guia = Guia::where('id_guia_gui', $guia_id)->update(['fl_perfil_moderado_gui' => true]);
         
-        Mail::send(new GuiaConfirmacao($guia));
-        
+        if($guia) {
+            Mail::send(new GuiaConfirmacao(Guia::where('id_guia_gui', $guia_id)->first()));
+        }
+
         return redirect('guias-e-condutores');
 
     }
