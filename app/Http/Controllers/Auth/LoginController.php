@@ -55,7 +55,7 @@ class LoginController extends Controller
             if (trim(Auth::user()->id_role) == 'GUIA') {
                 return redirect('guia-e-condutores/privado/atualizar-cadastro');
             } else {
-               return redirect()->intended('/');
+               return redirect()->intended('admin/dashboard');
             }
         }
 

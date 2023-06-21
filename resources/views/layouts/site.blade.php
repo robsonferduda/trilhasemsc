@@ -79,13 +79,20 @@
                </ul>
                <ul class="navbar-nav d-lg-block d-none">
                   <li class="nav-item">
-                     <a href="{{ url('login') }}" class="btn btn-sm  bg-gradient-info  btn-round mb-0 me-1">LOGIN</a>
+                     @if(Auth::user())
+                        <a href="{{ url('logout') }}" class="btn btn-sm  bg-gradient-danger  btn-round mb-0 me-1" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SAIR</a>
+                     @else
+                        <a href="{{ url('login') }}" class="btn btn-sm  bg-gradient-info  btn-round mb-0 me-1">LOGIN</a>
+                     @endif
                      <!--
                         <a href="{{ url('guias-e-condutores') }}" class="btn btn-sm  bg-gradient-primary  btn-round mb-0 me-1">TRILHEIROS</a>
                         <a href="{{ url('guias-e-condutores/cadastro') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">CONDUTORES</a>
                      -->
                   </li>
                </ul>
+               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+               </form>
             </div>
          </div>
       </nav>
