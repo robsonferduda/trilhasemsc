@@ -47,6 +47,11 @@ class HomeController extends Controller
         return view('inicio', compact('ultimas','cidades','niveis','guias','preferidas','page_name'));
     }
 
+    public function dashboard()
+    {
+        
+    }
+
     public function perfil($id)
     {
         $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();

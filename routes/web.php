@@ -14,7 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('index');
-Route::get('home', 'HomeController@index')->name('index');
+Route::get('home', 'HomeController@index')->name('home');
 Route::get('novo', 'HomeController@novo')->name('novo');
 Route::get('perfil/{id}', 'HomeController@perfil')->name('perfil');
 
@@ -109,6 +109,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::prefix('admin')->group(function () {
+        Route::get('dashboard', 'HomeController@dashboard');
         Route::get('listar-trilhas', 'TrilhaController@index');
         Route::get('editar-trilha/{id}', 'TrilhaController@editar');
         Route::get('nova-trilha', 'TrilhaController@novo');

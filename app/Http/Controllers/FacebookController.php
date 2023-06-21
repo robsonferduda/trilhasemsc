@@ -39,6 +39,8 @@ class FacebookController extends Controller
 
             if($user->id_role == 'GUIA') {
                 return redirect('guia-e-condutores/privado/atualizar-cadastro');
+            }else{
+                return redirect('admin/dashboard');
             }
 
             return redirect('login');
