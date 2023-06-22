@@ -59,7 +59,18 @@
             </div>
 
             <div class="navbar-brand">
-                <a href="{{ url('/') }}" class="hidden-sm hidden-xs"><img src="{{ asset('img/logo/logo_admin.jpg') }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> Trilhas em SC</a>
+                @if(trim(Auth::user()->id_role) == 'GUIA')
+                    <a href="{{ url('/') }}" class="hidden-sm hidden-xs">
+                        @if($guia->nm_path_logo_gui)    
+                            <img src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> 
+                        @else
+                            <img src="{{ asset('img/logo/logo_admin.jpg') }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> 
+                        @endif
+                        Trilhas em SC
+                    </a>
+                @else
+                    <a href="{{ url('/') }}" class="hidden-sm hidden-xs"><img src="{{ asset('img/logo/logo_admin.jpg') }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> Trilhas em SC</a>
+                @endif            
             </div>
             
             <div class="navbar-right">
@@ -131,6 +142,9 @@
                             @if(trim(Auth::user()->id_role) == 'GUIA')
                                 <li>
                                     <a href="{{ url('guia-e-condutores/privado/perfil') }}" target="_blank"><i class="icon-user"></i> <span>Perfil</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> <span>Editar Dados</span></a>
                                 </li>
                             @endif
                             <li>

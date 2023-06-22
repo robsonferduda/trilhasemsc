@@ -4,9 +4,9 @@
     <div class="block-header">
         <div class="row">
             <div class="col-lg-5 col-md-8 col-sm-12">
-                <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Guias e Condutores</h2>
+                <h2>Guias e Condutores</h2>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><i class="fa fa-leaf"></i> Guias e Condutores</li>
+                    <li class="breadcrumb-item"><i class="fa fa-id-card"></i> Guias e Condutores</li>
                     <li class="breadcrumb-item">Atualizar Cadastro</li>
                 </ul>
             </div>
@@ -14,21 +14,22 @@
     </div>
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12">
-            @if($guia->fl_perfil_completo_gui == true and $guia->fl_ativo_gui == false)
-                <h4 class="text-danger"> Seu perfil está desativado, para ativar selecione o campo "Ativo".</h4>
-            @endif
-            @if($guia->fl_perfil_completo_gui == true and $guia->fl_perfil_moderado_gui == false and $guia->fl_ativo_gui == true)
-                <h4 class="text-danger"> Seu perfil está pendente de aceite. Assim que o aceite for dado você receberá um email.</h4>
-            @endif
             <div class="card planned_task">
                 <div class="header no-padding-bottom">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <h2>Cadastro</h2>
                         </div>
-{{--                        <div class="col-lg-6 col-md-6 col-sm-12">--}}
-{{--                            <a href="{{ url('admin/nova-trilha') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Novo</a>--}}
-{{--                        </div>--}}
+                    </div>
+                </div>
+                <div class="row ml-2 mr-2">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        @if($guia->fl_perfil_completo_gui == true and $guia->fl_ativo_gui == false)
+                            <h4 class="text-danger"> Seu perfil está desativado, para ativar selecione o campo "Ativo".</h4>
+                        @endif
+                        @if($guia->fl_perfil_completo_gui == true and $guia->fl_perfil_moderado_gui == false and $guia->fl_ativo_gui == true)
+                            <h4 class="text-danger"> Seu perfil está pendente de aceite. Assim que o aceite for dado você receberá um email.</h4>
+                        @endif
                     </div>
                 </div>
                 <div class="body">
