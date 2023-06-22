@@ -4,7 +4,7 @@
 <head>
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Trilhas em SC</title>
+<title>Sistema de Gerenciamento de Trilhas e Roteiros</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -59,15 +59,11 @@
             </div>
 
             <div class="navbar-brand">
-{{--                <a href="{{ url('/') }}"><img src="{{ asset('img/logo/logo_trilhas.png') }}" alt="Logo" class="img-responsive logo"></a>--}}
+                <a href="{{ url('/') }}" class="hidden-sm hidden-xs"><img src="{{ asset('img/logo/logo_admin.jpg') }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> Trilhas em SC</a>
             </div>
             
             <div class="navbar-right">
-{{--                <form id="navbar-search" class="navbar-form search-form">--}}
-{{--                    <input value="" class="form-control" placeholder="Busca rápida" type="text">--}}
-{{--                    <button type="button" class="btn btn-default"><i class="icon-magnifier"></i></button>--}}
-{{--                </form>--}}
-
+            
                 <div id="navbar-menu">
                     <ul class="nav navbar-nav">
 {{--                        <li>--}}
