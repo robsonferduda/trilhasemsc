@@ -41,7 +41,7 @@
 </head>
 <body class="theme-cyan">
 
-    <!-- Page Loader -->
+<!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
         <div class="m-t-30"><img src="{{ asset('images/logo-icon.svg') }}" width="48" height="48" alt="Lucid"></div>
@@ -49,7 +49,6 @@
     </div>
 </div>
 <!-- Overlay For Sidebars -->
-
 <div id="wrapper">
 
     <nav class="navbar navbar-fixed-top">
@@ -66,12 +65,6 @@
             
                 <div id="navbar-menu">
                     <ul class="nav navbar-nav">
-{{--                        <li>--}}
-{{--                            <a href="{{ url('arquivos') }}" class="icon-menu d-none d-sm-block d-md-none d-lg-block"><i class="fa fa-folder-open-o"></i></a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="{{ url('agenda') }}" class="icon-menu d-none d-sm-block d-md-none d-lg-block"><i class="icon-calendar"></i></a>--}}
-{{--                        </li>                     --}}
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="icon-menu"><i class="icon-logout"></i></a>
                         </li>
@@ -91,13 +84,6 @@
                 @endif                
                 <div class="dropdown">
                     <a href="javascript:void(0);" class="user-name" data-toggle="dropdown"><strong>{{ (Auth::user()) ? explode(' ', Auth::user()->name)[0] : "Não Logado" }}</strong></a>
-{{--                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ (Auth::user()) ? explode(' ', Auth::user()->name)[0] : "Não Logado" }}</strong></a>--}}
-{{--                    <ul class="dropdown-menu dropdown-menu-right account">--}}
-{{--                        <li><a href="{{ url('usuario/perfil') }}"><i class="icon-user"></i>Meu Perfil</a></li>--}}
-{{--                        <li class="divider"></li>--}}
-{{--                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault();--}}
-{{--                          document.getElementById('logout-form').submit();"><i class="icon-power"></i>Sair</a></li>--}}
-{{--                    </ul>--}}
                 </div>
                 <hr>
                 @if(trim(Auth::user()->id_role) == 'ADMIN')
