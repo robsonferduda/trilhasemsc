@@ -3,6 +3,10 @@
 	border-radius: 1rem;
 }
 
+.conteudo > p {
+	color: #383838 !important;
+}
+
 .geolocalizao{
 	width: 100% !important;
 }

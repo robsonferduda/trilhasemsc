@@ -23,8 +23,18 @@
          }
       </style>
       {!! htmlScriptTagJsApi() !!}
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5H3D7W9');</script>
+      <!-- End Google Tag Manager -->
    </head>
    <body class="help-center">
+      <!-- Google Tag Manager (noscript) -->
+         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H3D7W9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
       <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3  navbar-transparent ">
          <div class="container">           
             <button class="navbar-toggler shadow-none ms-md-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,12 +79,21 @@
                </ul>
                <ul class="navbar-nav d-lg-block d-none">
                   <li class="nav-item">
+                     @if(Auth::user())
+                        <a href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">CONDUTORES</a>
+                        <a href="{{ url('logout') }}" class="btn btn-sm  bg-gradient-danger  btn-round mb-0 me-1" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SAIR</a>
+                     @else
+                        <a href="{{ url('login') }}" class="btn btn-sm  bg-gradient-info  btn-round mb-0 me-1">LOGIN</a>
+                     @endif
                      <!--
                         <a href="{{ url('guias-e-condutores') }}" class="btn btn-sm  bg-gradient-primary  btn-round mb-0 me-1">TRILHEIROS</a>
                         <a href="{{ url('guias-e-condutores/cadastro') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">CONDUTORES</a>
                      -->
                   </li>
                </ul>
+               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+               </form>
             </div>
          </div>
       </nav>
@@ -166,16 +185,16 @@
          }
       </script>
       @env('production')
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175572747-1"></script>
+         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175572747-1"></script>
          <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-         gtag('config', 'UA-175572747-1');
+            gtag('config', 'UA-175572747-1');
          </script>
+         <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       @endenv
-      <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
    </body>
 </html>

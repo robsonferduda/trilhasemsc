@@ -7,10 +7,13 @@ use App\Fone;
 use App\Guia;
 use App\Trilha;
 use App\Interacao;
+use App\Mail\GuiaConfirmacao;
+use App\Mail\GuiaModeracao;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Laracasts\Flash\Flash;
 
@@ -204,6 +207,10 @@ class GuiaController extends Controller
 
             Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $imagem]);
 
+            if(isset($request->ativo)) {
+                Mail::send(new GuiaModeracao($guia));
+            }
+            
         }
 
         $usuario = Auth::user();
@@ -233,6 +240,34 @@ class GuiaController extends Controller
         }
 
         return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+    }
+
+    public function ativar($guia_id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $guia = Guia::where('id_guia_gui', $guia_id)->update(['fl_perfil_moderado_gui' => true]);
+        
+        if($guia) {
+            Mail::send(new GuiaConfirmacao(Guia::where('id_guia_gui', $guia_id)->first()));
+        }
+
+        return redirect('guias-e-condutores');
+
+    }
+
+    public function recusar($guia)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        Guia::where('id_guia_gui', $guia)->update(['fl_perfil_moderado_gui' => false, 'fl_perfil_recusado_gui' => true]);
+
+        return redirect('guias-e-condutores');
+
     }
 
 }

@@ -158,6 +158,7 @@ class TrilhaController extends Controller
 
         $titulo = $trilha->nm_trilha_tri;
         $subtitulo = "Trilha em ".$trilha->cidade->nm_cidade_cde;
+        $page_name = $trilha->nm_trilha_tri;
 
         $busca_cidade = Trilha::with('cidade')
            ->select('cd_cidade_cde', DB::raw('count(*) as total'))
@@ -165,7 +166,7 @@ class TrilhaController extends Controller
            ->groupBy('cd_cidade_cde')
            ->get()->sortBy('cidade.nm_cidade_cde');
 
-        return view('trilhas/detalhes-novo', ['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
+        return view('trilhas/detalhes-novo', ['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => $page_name]);
         return view('trilhas/detalhes', ['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
 

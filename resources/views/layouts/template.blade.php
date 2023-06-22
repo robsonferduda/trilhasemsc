@@ -4,7 +4,7 @@
 <head>
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Trilhas em SC</title>
+<title>Sistema de Gerenciamento de Trilhas e Roteiros</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -41,15 +41,14 @@
 </head>
 <body class="theme-cyan">
 
-    <!-- Page Loader -->
+<!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
-        <div class="m-t-30"><img src="{{ asset('images/logo-icon.svg') }}" width="48" height="48" alt="Lucid"></div>
+        <div class="m-t-30"><img src="{{ asset('img/logo/logo_trilhas.png') }}" alt="Trilhas em SC"></div>
         <p>Carregando...</p>        
     </div>
 </div>
 <!-- Overlay For Sidebars -->
-
 <div id="wrapper">
 
     <nav class="navbar navbar-fixed-top">
@@ -59,26 +58,15 @@
             </div>
 
             <div class="navbar-brand">
-{{--                <a href="{{ url('/') }}"><img src="{{ asset('img/logo/logo_trilhas.png') }}" alt="Logo" class="img-responsive logo"></a>--}}
+                <a href="{{ url('/') }}" class="hidden-sm hidden-xs"><img src="{{ asset('img/logo/logo_admin.jpg') }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> Trilhas em SC</a>           
             </div>
             
             <div class="navbar-right">
-{{--                <form id="navbar-search" class="navbar-form search-form">--}}
-{{--                    <input value="" class="form-control" placeholder="Busca rápida" type="text">--}}
-{{--                    <button type="button" class="btn btn-default"><i class="icon-magnifier"></i></button>--}}
-{{--                </form>--}}
-
+            
                 <div id="navbar-menu">
                     <ul class="nav navbar-nav">
-{{--                        <li>--}}
-{{--                            <a href="{{ url('arquivos') }}" class="icon-menu d-none d-sm-block d-md-none d-lg-block"><i class="fa fa-folder-open-o"></i></a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="{{ url('agenda') }}" class="icon-menu d-none d-sm-block d-md-none d-lg-block"><i class="icon-calendar"></i></a>--}}
-{{--                        </li>                     --}}
                         <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" class="icon-menu"><i class="icon-logout"></i></a>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="icon-menu"><i class="icon-logout"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -89,16 +77,13 @@
     <div id="left-sidebar" class="sidebar">
         <div class="sidebar-scroll">
             <div class="user-account">
-                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
+                @if(trim(Auth::user()->id_role) == 'GUIA')
+                    <img src="{{ $guia->nm_path_logo_gui ? asset('img/guias/'.$guia->nm_path_logo_gui) : asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
+                @else
+                    <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
+                @endif                
                 <div class="dropdown">
                     <a href="javascript:void(0);" class="user-name" data-toggle="dropdown"><strong>{{ (Auth::user()) ? explode(' ', Auth::user()->name)[0] : "Não Logado" }}</strong></a>
-{{--                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ (Auth::user()) ? explode(' ', Auth::user()->name)[0] : "Não Logado" }}</strong></a>--}}
-{{--                    <ul class="dropdown-menu dropdown-menu-right account">--}}
-{{--                        <li><a href="{{ url('usuario/perfil') }}"><i class="icon-user"></i>Meu Perfil</a></li>--}}
-{{--                        <li class="divider"></li>--}}
-{{--                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault();--}}
-{{--                          document.getElementById('logout-form').submit();"><i class="icon-power"></i>Sair</a></li>--}}
-{{--                    </ul>--}}
                 </div>
                 <hr>
                 @if(trim(Auth::user()->id_role) == 'ADMIN')
@@ -120,6 +105,9 @@
                 <div class="tab-pane active" id="menu">
                     <nav id="left-sidebar-nav" class="sidebar-nav">
                         <ul id="main-menu" class="metismenu">
+                            <li>
+                                <a href="{{ url('/') }}"><i class="fa fa-globe"></i> <span>Site</span></a>
+                            </li>
                             @if(trim(Auth::user()->id_role) == 'ADMIN')
                                 <li>
                                     <a href="{{ url('/') }}"><i class="icon-home"></i> <span>Início</span></a>
@@ -130,18 +118,22 @@
                                         <li><a href="{{ url('admin/listar-trilhas') }}">Listar</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                        <i class="icon-logout"></i> <span>Sair</span>
-                                    </a>
-                                </li>
+                                
                             @endif
                             @if(trim(Auth::user()->id_role) == 'GUIA')
                                 <li>
                                     <a href="{{ url('guia-e-condutores/privado/perfil') }}" target="_blank"><i class="icon-user"></i> <span>Perfil</span></a>
                                 </li>
+                                <li>
+                                    <a href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> <span>Editar Dados</span></a>
+                                </li>
                             @endif
+                            <li>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    <i class="icon-logout"></i> <span>Sair</span>
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

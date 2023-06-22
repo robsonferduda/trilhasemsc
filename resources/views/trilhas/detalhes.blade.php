@@ -39,15 +39,17 @@
                                     
                                 </div>
                                 <!-- Horizontal Tela Detalhes Trilha -->
-                                <ins class="adsbygoogle"
-                                     style="display:block"
-                                     data-ad-client="ca-pub-1229685353625953"
-                                     data-ad-slot="7739149091"
-                                     data-ad-format="auto"
-                                     data-full-width-responsive="true"></ins>
-                                <script>
-                                     (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>
+                                @env('production')
+                                    <ins class="adsbygoogle"
+                                        style="display:block"
+                                        data-ad-client="ca-pub-1229685353625953"
+                                        data-ad-slot="7739149091"
+                                        data-ad-format="auto"
+                                        data-full-width-responsive="true"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                    </script>
+                                @endenv
                                 <br />
                                 <div id="descricao">
                                     <p><span class="text-success">Trilha cadastrada em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}</span></p>
@@ -83,15 +85,17 @@
                             </div>
                         </div>
                         <!-- Horizontal Tela Detalhes Trilha -->
-                        <ins class="adsbygoogle"
-                            style="display:block"
-                            data-ad-client="ca-pub-1229685353625953"
-                            data-ad-slot="7739149091"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
+                        @env('production')
+                            <ins class="adsbygoogle"
+                                style="display:block"
+                                data-ad-client="ca-pub-1229685353625953"
+                                data-ad-slot="7739149091"
+                                data-ad-format="auto"
+                                data-full-width-responsive="true"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        @endenv
                         <br />
                         {{--
                         <div class="blog-comments" id="comentarios">
