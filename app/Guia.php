@@ -20,7 +20,8 @@ class Guia extends Model
         'nm_path_logo_gui',
         'dc_biografia_gui',
         'fl_perfil_completo_gui',
-        'fl_ativo_gui'
+        'fl_ativo_gui',
+        'nu_cadastur_gui'
         ];
     public $timestamps = true;
 
