@@ -32,7 +32,18 @@
                         <div class="icon"><i class="fa fa-id-card" style="color: orange;"></i> </div>
                         <div class="content">
                             <div class="text">Guias</div>
-                            <h5 class="number"><a href="{{ url('admin/listar-guias') }}">{{ App\Guia::all()->count() }}</a></h5>
+                            <h5 class="number"><a href="{{ url('admin/guias') }}">{{ App\Guia::all()->count() }}</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card top_counter">
+                    <div class="body">
+                        <div class="icon"><i class="fa fa-check" style="color: rgb(64, 64, 234);"></i> </div>
+                        <div class="content">
+                            <div class="text">Guias Pendentes</div>
+                            <h5 class="number"><a href="{{ url('admin/guias/aprovar') }}">{{ App\Guia::where('fl_perfil_moderado_gui', false)->count() }}</a></h5>
                         </div>
                     </div>
                 </div>

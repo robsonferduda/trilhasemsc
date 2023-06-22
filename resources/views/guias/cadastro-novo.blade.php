@@ -6,8 +6,9 @@
 <div class="row mt-n8 mb-5">
     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
         <div class="card z-index-0">
-           <div class="card-header text-center pt-4 mt-2">
-              <h5>Faça seu cadastro</h5>
+           <div class="card-header text-center pt-4 mt-2 mb-0">
+              <h5>Cadastro de Guias e Condutores</h5>
+              <p>Esse cadastro é exclusivo para guias e condutores e está sujeito a análise</p>
            </div>
            <div class="card-body">
                @include('layouts/mensagens-novo')

@@ -239,6 +239,18 @@ class GuiaController extends Controller
         return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
     }
 
+    public function aprovar()
+    {
+        $guias_pendentes = Guia::where('fl_perfil_moderado_gui', false)->get();
+
+        return view('admin/guia/aprovar', compact('guias_pendentes'));
+    }
+
+    public function listar()
+    {
+        return view('admin/guia/listar');
+    }
+
     public function ativar($guia_id)
     {
         if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
