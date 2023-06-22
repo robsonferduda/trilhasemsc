@@ -222,7 +222,6 @@ class GuiaController extends Controller
 
     public function previaPerfil()
     {
-
         $titulo = 'Guias e Condutores';
         $subtitulo = "Perfil";
 
@@ -244,6 +243,10 @@ class GuiaController extends Controller
 
     public function aprovar()
     {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
         $guias_pendentes = Guia::where('fl_perfil_moderado_gui', false)->get();
 
         return view('admin/guia/aprovar', compact('guias_pendentes'));
@@ -251,6 +254,10 @@ class GuiaController extends Controller
 
     public function listar()
     {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
         return view('admin/guia/listar');
     }
 
