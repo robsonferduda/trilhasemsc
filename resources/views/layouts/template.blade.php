@@ -105,6 +105,9 @@
                 <div class="tab-pane active" id="menu">
                     <nav id="left-sidebar-nav" class="sidebar-nav">
                         <ul id="main-menu" class="metismenu">
+                            <li>
+                                <a href="{{ url('/') }}"><i class="fa fa-globe"></i> <span>Site</span></a>
+                            </li>
                             @if(trim(Auth::user()->id_role) == 'ADMIN')
                                 <li>
                                     <a href="{{ url('/') }}"><i class="icon-home"></i> <span>Início</span></a>
