@@ -110,6 +110,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::prefix('admin')->group(function () {
         Route::get('dashboard', 'HomeController@dashboard');
+        Route::get('listar-guia', 'GuiaController@index');
         Route::get('listar-trilhas', 'TrilhaController@index');
         Route::get('editar-trilha/{id}', 'TrilhaController@editar');
         Route::get('nova-trilha', 'TrilhaController@novo');
