@@ -30,7 +30,7 @@
                                         <p><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/estatistica/instagram", $guia->id_guia_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
                                         <p><strong>Cidades de Origem</strong>: {{ ($guia->origem) ? $guia->origem->nm_cidade_cde : 'Santa Catarina' }}</p>
                                         <p><strong>Cidades de Atuação</strong>: {{ count($guia->cidadesAtuacao) > 0 ? implode(', ',$guia->cidadesAtuacao->pluck('nm_cidade_cde')->toArray()) : $guia->ds_atuacao_gui }}</p>
-                                        <p><strong>Cidades de Atuação</strong>{{ $guia->dc_biografia_gui }}</p>
+                                        <p><strong>Bibliografia</strong>{{ $guia->dc_biografia_gui }}</p>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                         <div style="position: absolute; right: 0;">
