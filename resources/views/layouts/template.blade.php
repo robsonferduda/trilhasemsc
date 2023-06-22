@@ -44,7 +44,7 @@
 <!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
-        <div class="m-t-30"><img src="{{ asset('images/logo-icon.svg') }}" width="48" height="48" alt="Lucid"></div>
+        <div class="m-t-30"><img src="{{ asset('img/logo/logo_admin.jpg') }}" width="48" height="48" alt="Trilhas em SC"></div>
         <p>Carregando...</p>        
     </div>
 </div>
