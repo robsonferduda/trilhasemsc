@@ -59,18 +59,7 @@
             </div>
 
             <div class="navbar-brand">
-                @if(trim(Auth::user()->id_role) == 'GUIA')
-                    <a href="{{ url('/') }}" class="hidden-sm hidden-xs">
-                        @if($guia->nm_path_logo_gui)    
-                            <img src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> 
-                        @else
-                            <img src="{{ asset('img/logo/logo_admin.jpg') }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> 
-                        @endif
-                        Trilhas em SC
-                    </a>
-                @else
-                    <a href="{{ url('/') }}" class="hidden-sm hidden-xs"><img src="{{ asset('img/logo/logo_admin.jpg') }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> Trilhas em SC</a>
-                @endif            
+                <a href="{{ url('/') }}" class="hidden-sm hidden-xs"><img src="{{ asset('img/logo/logo_admin.jpg') }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> Trilhas em SC</a>           
             </div>
             
             <div class="navbar-right">
@@ -84,8 +73,7 @@
 {{--                            <a href="{{ url('agenda') }}" class="icon-menu d-none d-sm-block d-md-none d-lg-block"><i class="icon-calendar"></i></a>--}}
 {{--                        </li>                     --}}
                         <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" class="icon-menu"><i class="icon-logout"></i></a>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="icon-menu"><i class="icon-logout"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -96,7 +84,11 @@
     <div id="left-sidebar" class="sidebar">
         <div class="sidebar-scroll">
             <div class="user-account">
-                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
+                @if(trim(Auth::user()->id_role) == 'GUIA')
+                    <img src="{{ $guia->nm_path_logo_gui ? asset('img/guias/'.$guia->nm_path_logo_gui) : asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
+                @else
+                    <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
+                @endif                
                 <div class="dropdown">
                     <a href="javascript:void(0);" class="user-name" data-toggle="dropdown"><strong>{{ (Auth::user()) ? explode(' ', Auth::user()->name)[0] : "Não Logado" }}</strong></a>
 {{--                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ (Auth::user()) ? explode(' ', Auth::user()->name)[0] : "Não Logado" }}</strong></a>--}}
