@@ -247,7 +247,7 @@ class GuiaController extends Controller
             return redirect('login');
         }
 
-        $guias_pendentes = Guia::where('fl_perfil_moderado_gui', false)->get();
+        $guias_pendentes = Guia::where('fl_perfil_moderado_gui', false)->where('fl_perfil_recusado_gui', false)->get();
 
         return view('admin/guia/aprovar', compact('guias_pendentes'));
     }

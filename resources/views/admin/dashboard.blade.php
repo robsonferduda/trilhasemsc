@@ -43,7 +43,7 @@
                         <div class="icon"><i class="fa fa-check" style="color: rgb(64, 64, 234);"></i> </div>
                         <div class="content">
                             <div class="text">Guias Pendentes</div>
-                            <h5 class="number"><a href="{{ url('admin/guias/aprovar') }}">{{ App\Guia::where('fl_perfil_moderado_gui', false)->count() }}</a></h5>
+                            <h5 class="number"><a href="{{ url('admin/guias/aprovar') }}">{{ App\Guia::where('fl_perfil_moderado_gui', false)->where('fl_perfil_recusado_gui', false)->count() }}</a></h5>
                         </div>
                     </div>
                 </div>
