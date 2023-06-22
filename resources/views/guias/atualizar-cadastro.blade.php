@@ -38,6 +38,12 @@
                         <div class="row clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
+                                    <label for="nome">Número do Cadastur</label><span class="text-danger"> Obrigatório</span>
+                                    <input type="text" name="cadastur" id="cadastur" value="{{ $guia->nu_cadastur_gui }}" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
                                     <label for="nome">Nome</label><span class="text-danger"> Obrigatório</span>
                                     <input type="text" name="nome" id="nome" value="{{ $guia->nm_guia_gui }}" class="form-control" required>
                                 </div>
@@ -54,20 +60,12 @@
                                     <input type="text" name="celular" id="celular" value="{{ $guia->fone ? $guia->fone->nu_fone_fon : ''  }}" placeholder="(99) 999-9999" class="form-control phone" >
                                 </div>
                             </div>
-                        </div>
-                        <div class="row clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="col-lg-4 col-md-43 col-sm-12">
                                 <div class="form-group">
                                     <label for="site">Whatsap</label>
                                     <input type="text" name="whatsap" id="whatsap" value="{{ $guia->whatsap ? $guia->whatsap->nu_fone_fon : ''  }}"  placeholder="(99) 999-9999" class="form-control phone" >
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="instagram">Instagram</label>
-                                    <input type="text" name="instagram" id="instagram" value="{{ $guia->nm_instagram_gui ?: ''  }}" placeholder="Ex: trilhasemsc" class="form-control" >
-                                </div>
-                            </div>
+                            </div>            
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="site">Site</label>
@@ -76,7 +74,16 @@
                             </div>
                         </div>
                         <div class="row clearfix">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
+                          
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="instagram">Instagram</label>
+                                    <input type="text" name="instagram" id="instagram" value="{{ $guia->nm_instagram_gui ?: ''  }}" placeholder="Ex: trilhasemsc" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="cidade_origem">Cidade de Origem</label><span class="text-danger"> Obrigatório</span>
                                     <select name="cidade_origem" id="cidade_origem" class="form-control select2" data-parsley-errors-container="#error-cidade-origem" required>
@@ -89,7 +96,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="cidades_atuacao">Cidades de Atuação</label><span class="text-danger"> Obrigatório</span>
                                     <select name="cidades_atuacao[]" id="cidades_atuacao" class="form-control select2" multiple="multiple" data-parsley-errors-container="#error-cidade-atuacao" required>
