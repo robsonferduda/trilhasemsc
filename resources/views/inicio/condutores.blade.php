@@ -7,7 +7,7 @@
        </div>
        <div class="row">
            @foreach($guias as $guia)
-           <div class="col-lg-3 col-md-3">
+           <div class="col-lg-3 col-md-3 mt-3">
                <div class="card card-profile" style="min-height: 320px;">
                  
                  <div class="card-body justify-content-center text-center">

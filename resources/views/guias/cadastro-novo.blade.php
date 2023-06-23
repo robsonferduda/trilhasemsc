@@ -3,7 +3,7 @@
 @section('description', 'Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil' )
 
 @section('content')
-<div class="row mt-n8 mb-5">
+<div class="row mt-n6 mb-5">
     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
         <div class="card z-index-0">
            <div class="card-header text-center pt-4 mt-2 mb-0">
