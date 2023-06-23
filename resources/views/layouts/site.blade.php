@@ -80,7 +80,11 @@
                <ul class="navbar-nav d-lg-block d-none">
                   <li class="nav-item">
                      @if(Auth::user())
-                        <a href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">MEU PERFIL</a>
+                        @if(trim(Auth::user()->id_role) == 'ADMIN')
+                           <a href="{{ url('admin/dashboard') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">MEU PERFIL</a>
+                        @else
+                           <a href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">MEU PERFIL</a>
+                        @endif
                         <a href="{{ url('logout') }}" class="btn btn-sm  bg-gradient-danger  btn-round mb-0 me-1" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SAIR</a>
                      @else
                         <a href="{{ url('guias-e-condutores/cadastro') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">CADASTRE-SE</a>
