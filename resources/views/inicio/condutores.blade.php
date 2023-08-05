@@ -7,11 +7,11 @@
        </div>
        <div class="row">
            @foreach($guias as $guia)
-           <div class="col-lg-3 col-md-3">
+           <div class="col-lg-3 col-md-3 mt-3">
                <div class="card card-profile" style="min-height: 320px;">
                  
                  <div class="card-body justify-content-center text-center">
-                   <a href="javascript:;">
+                   <a href="{{ url("guia/perfil/estatistica/perfil", $guia->id_guia_gui) }}">
                        <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}">
                      </a>
                    <h6 class="mb-0 mt-2">{{ $guia->nm_guia_gui }}</h6>

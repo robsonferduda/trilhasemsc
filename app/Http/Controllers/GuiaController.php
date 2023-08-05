@@ -143,7 +143,8 @@ class GuiaController extends Controller
                 'email' => 'required',
                 'cidade_origem' => 'required',
                 'cidades_atuacao' => 'required',
-                'biografia' => 'required'
+                'biografia' => 'required',
+                'cadastur' => 'required'
             ]);
 
             $nome = $request->nome;
@@ -156,6 +157,7 @@ class GuiaController extends Controller
             $celular = $request->celular;
             $whatsap = $request->whatsap;
             $imagem_deletada = $request->imagem_deletada;
+            $cadastur = $request->cadastur;
 
             $guia->update([
                 'cd_cidade_origem_gui' => $cidadeOrigem,
@@ -165,7 +167,8 @@ class GuiaController extends Controller
                 'dc_biografia_gui' => $biografia,
                 'fl_perfil_completo_gui' => true,
                 'fl_perfil_moderado_gui' => false,
-                'fl_ativo_gui' => isset($request->ativo)
+                'fl_ativo_gui' => isset($request->ativo),
+                'nu_cadastur_gui' => $request->cadastur
             ]);
 
             $guia->cidadesAtuacao()->sync($cidadesAtuacao);
@@ -219,7 +222,6 @@ class GuiaController extends Controller
 
     public function previaPerfil()
     {
-
         $titulo = 'Guias e Condutores';
         $subtitulo = "Perfil";
 
@@ -237,6 +239,26 @@ class GuiaController extends Controller
         }
 
         return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+    }
+
+    public function aprovar()
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $guias_pendentes = Guia::where('fl_perfil_moderado_gui', false)->where('fl_perfil_recusado_gui', false)->get();
+
+        return view('admin/guia/aprovar', compact('guias_pendentes'));
+    }
+
+    public function listar()
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        return view('admin/guia/listar');
     }
 
     public function ativar($guia_id)

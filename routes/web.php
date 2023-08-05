@@ -110,7 +110,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::prefix('admin')->group(function () {
         Route::get('dashboard', 'HomeController@dashboard');
-        Route::get('listar-guia', 'GuiaController@index');
+
+        Route::get('guias', 'GuiaController@listar');
+        Route::get('guias/aprovar', 'GuiaController@aprovar');
+
         Route::get('listar-trilhas', 'TrilhaController@index');
         Route::get('editar-trilha/{id}', 'TrilhaController@editar');
         Route::get('nova-trilha', 'TrilhaController@novo');
@@ -118,6 +121,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('create-trilha', 'TrilhaController@create');
         Route::post('insert-foto', 'TrilhaController@insertFoto');
     });
+    
 
     Route::prefix('guia-e-condutores/privado')->group(function () {
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'GuiaController@atualizarCadastro');
