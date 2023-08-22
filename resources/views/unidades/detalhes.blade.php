@@ -16,11 +16,11 @@
                         </div>
                     </div>
                     <div class="col-lg-9 d-flex flex-column pl-lg-5 pt-lg-0 pt-3">
-                        <h6 class="category text-primary mt-3">{{ ($unidade) ? $unidade->instancia->nm_unidade_conservacao_instancia_uci : 'Santa Catarina' }}</h6>
-                        <h3 class="card-title">{{ $unidade->nome_unc }}</h3>
-                        <p class="card-description">
-                        
-                        </p>
+                        <h4 class="card-title">{{ $unidade->nome_unc }}</h4>
+                        <h6 class="category text-primary">{{ ($unidade) ? $unidade->instancia->nm_unidade_conservacao_instancia_uci : 'Santa Catarina' }}</h6>
+                        <div class="card-description">
+                            {!! $unidade->descricao_unc !!}
+                        </div>
                     </div>
                 </div>
             </div>            
