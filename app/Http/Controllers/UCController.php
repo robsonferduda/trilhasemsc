@@ -18,9 +18,9 @@ class UCController extends Controller
         return view('unidades/index', compact('page_name','unidades'));
     }
 
-    public function detalhes($id)
+    public function detalhes($sigla)
     {
-        $unidade = UnidadeConservacao::find($id);
+        $unidade = UnidadeConservacao::where('sigla_unc',$sigla)->first();
         $page_name = "Unidades de Conservação em Santa Catarina ".$unidade->nm_unidade_conservacao_instancia_uci;
 
         return view('unidades/detalhes', compact('page_name','unidade'));

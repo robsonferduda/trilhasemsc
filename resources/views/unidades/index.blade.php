@@ -15,7 +15,7 @@
                 <div class="card card-profile" style="min-height: 450px;">
                   
                   <div class="card-body justify-content-center text-center">
-                    <a href="{{ url("unidades-de-conservacao/detalhes", $unidade->id_unidade_conservacao_unc) }}">
+                    <a href="{{ url("unidades-de-conservacao/detalhes", $unidade->sigla_unc) }}">
                         <img class="card-image mx-auto w-100" src="{{ asset('img/logos-uc/'.$unidade->logo_unc) }}">
                     </a>
                     <h6 class="mb-0 mt-2">{{ $unidade->nome_unc }}</h6>
