@@ -113,6 +113,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('guias', 'GuiaController@listar');
         Route::get('guias/aprovar', 'GuiaController@aprovar');
+        Route::get('guias/listar', 'GuiaController@listar');
 
         Route::get('listar-trilhas', 'TrilhaController@index');
         Route::get('editar-trilha/{id}', 'TrilhaController@editar');

@@ -113,6 +113,12 @@
                                     <a href="{{ url('/') }}"><i class="icon-home"></i> <span>Início</span></a>
                                 </li>
                                 <li>
+                                    <a href="#" class="has-arrow"><i class="fa fa-id-card"></i> <span>Guias</span></a>
+                                    <ul>
+                                        <li><a href="{{ url('admin/guias/listar') }}">Listar</a></li>
+                                    </ul>
+                                </li>
+                                <li>
                                     <a href="#" class="has-arrow"><i class="fa fa-leaf"></i> <span>Trilhas</span></a>
                                     <ul>
                                         <li><a href="{{ url('admin/listar-trilhas') }}">Listar</a></li>

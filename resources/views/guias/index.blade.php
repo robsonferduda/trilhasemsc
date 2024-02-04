@@ -51,7 +51,7 @@
                                 (adsbygoogle = window.adsbygoogle || []).push({});
                             </script>
                         @endenv
-          <div class="col-lg-12 col-md-12 mt-4">
+          <div class="col-lg-12 col-md-12 mt-4 text-center">
             <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Voltar ao Início</a>
           </div>
        </div>

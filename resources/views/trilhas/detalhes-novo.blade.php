@@ -46,21 +46,35 @@
                         {!! $trilha->ds_trilha_tri !!}
                     </div>
                 </div> 
-                <div class="col-md-12 mt-2 text-center">
-                    <div class="col-lg-3 col-md-3 col-sm-12 position-relative my-auto justify-content-center text-center">
-                        <img class="mx-auto" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
-                        <span style="color: white; background: {{ ($trilha->nivel) ? $trilha->nivel->dc_color_nivel_niv : '#989898' }};" class="badge badge-secondary">{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</span>
-                    </div>
-                    <!--
-                        <div class="col-lg-12 col-md-12 mt-5">
-                            <p><i class="fa fa-road text-success"></i> <strong>Distância</strong>: </p>
-                            <p><i class="fa fa-clock-o text-info"></i> <strong>Tempo Médio</strong>: </p>
-                            <p><i class="fa fa-sun text-warning"></i> <strong>Exposição</strong>: </p>
-                            <p><i class="fa fa-heartbeat text-danger"></i> <strong>Esforço</strong>: </p>
-                            <p><i class="fa fa-compass text-info"></i> <strong>Orientação</strong>: </p>
-                            <p><a href="{{ url('guia-de-dificuldade-em-trilhas/abnt') }}">Clique e entenda as medidas</a></p>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 position-relative my-auto justify-content-center text-center">
+                            <img class="mx-auto" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
+                            <span style="color: white; background: {{ ($trilha->nivel) ? $trilha->nivel->dc_color_nivel_niv : '#989898' }};" class="badge badge-secondary">{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</span>
+                            <p class="mt-3"><a href="{{ url('guia-de-dificuldade-em-trilhas/abnt') }}">Clique e entenda as medidas</a></p>
                         </div>
-                    -->
+                        <div class="col-lg-9 col-md-9 col-sm-12" style="text-align: right">
+                            <h5 class="mb-2 mt-2">Gostou do conteúdo?</h5>                          
+                            <p class="mb-2">Que tal nos pagar um café?</p>
+                            
+                            <script src="https://www.mercadopago.com.br/integrations/v1/web-payment-checkout.js"
+                            data-preference-id="34954480-ac37aa7e-97ec-49da-8850-fc01887879f5" data-source="button">
+                            </script>
+
+
+
+                        </div>
+                        <!--
+                            <div class="col-lg-12 col-md-12 mt-5">
+                                <p><i class="fa fa-road text-success"></i> <strong>Distância</strong>: </p>
+                                <p><i class="fa fa-clock-o text-info"></i> <strong>Tempo Médio</strong>: </p>
+                                <p><i class="fa fa-sun text-warning"></i> <strong>Exposição</strong>: </p>
+                                <p><i class="fa fa-heartbeat text-danger"></i> <strong>Esforço</strong>: </p>
+                                <p><i class="fa fa-compass text-info"></i> <strong>Orientação</strong>: </p>
+                                <p><a href="{{ url('guia-de-dificuldade-em-trilhas/abnt') }}">Clique e entenda as medidas</a></p>
+                            </div>
+                        -->
+                    </div>
                 </div>
                     
                 <div class="col-md-12 mt-2 mb-3">
