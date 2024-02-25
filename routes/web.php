@@ -127,6 +127,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::prefix('guia-e-condutores/privado')->group(function () {
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'GuiaController@atualizarCadastro');
         Route::get('perfil', 'GuiaController@previaPerfil');
+        Route::get('eventos', 'EventoController@eventos');
+        Route::get('evento/novo', 'EventoController@cadastro');
+        Route::post('evento/cadastrar', 'EventoController@cadastrar');
     });
 
 });
