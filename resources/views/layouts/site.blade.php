@@ -201,5 +201,7 @@
          <script data-ad-client="ca-pub-1229685353625953" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       @endenv
       <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+      <script src="{{ asset('js/vendor/jquery-1.12.3.min.js') }}"></script>
+      <script src="{{ asset('js/custom.js') }}"></script>
    </body>
 </html>

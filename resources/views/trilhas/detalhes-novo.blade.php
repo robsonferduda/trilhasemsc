@@ -56,13 +56,9 @@
                         <div class="col-lg-9 col-md-9 col-sm-12" style="text-align: right">
                             <h5 class="mb-2 mt-2">Gostou do conteúdo?</h5>                          
                             <p class="mb-2">Que tal nos pagar um café?</p>
+
+                            <a href="https://pag.ae/7-dSqqaS8" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1"><i class="fa fa-coffee" style="font-size: 12px;" aria-hidden="true"></i> Pagar um café!</a>
                             
-                            <script src="https://www.mercadopago.com.br/integrations/v1/web-payment-checkout.js"
-                            data-preference-id="34954480-ac37aa7e-97ec-49da-8850-fc01887879f5" data-source="button">
-                            </script>
-
-
-
                         </div>
                         <!--
                             <div class="col-lg-12 col-md-12 mt-5">
