@@ -3,13 +3,13 @@
 	<url>
 	<loc>https://trilhasemsc.com.br</loc>
 		<priority>1.0</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/camping</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 		<image:image>
 			<image:loc>https://trilhasemsc.com.br/public/img/camping/vale-da-utopia/capa.jpg</image:loc>
@@ -35,92 +35,193 @@
 	<url>
 	<loc>https://trilhasemsc.com.br/campings</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/garuva/campings/selvagem/camping-monte-crista</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/bom-jardim-da-serra/campings/selvagem/camping-pico-rinoceronte</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/grao-para/campings/estruturado/camping-mirante</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/laguna/campings/selvagem/camping-mirante-anita-garibaldi</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/guia-de-dificuldade-em-trilhas</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/guia-de-dificuldade-em-trilhas/abnt</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/guia-de-dificuldade-em-trilhas/femerj</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/florianopolis/regioes/leste</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/florianopolis/regioes/norte</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/florianopolis/regioes/sul</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/brasil/regioes/nordeste/chapada</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/santa-catarina/regioes</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/santa-catarina/regioes/serra-catarinense</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:55:04-03:00</lastmod>
+		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
 		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+	<loc>https://trilhasemsc.com.br/palhoca/trilhas/semi-pesada/trilha-do-morro-do-cambirela</loc>
+		<priority>0.9</priority>
+		<lastmod>2024-01-18T19:11:30-03:00</lastmod>
+		<changefreq>weekly</changefreq>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-morro-do-cambirela.jpg</image:loc>
+			<image:title>Trilha do Morro do Cambirela</image:title>
+			<image:caption>Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/trilha-do-morro-do-cambirela.jpg</image:loc>
+			<image:title>Trilha do Morro do Cambirela</image:title>
+			<image:caption>Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/trilha-do-morro-do-cambirela.jpg</image:loc>
+			<image:title>Trilha do Morro do Cambirela</image:title>
+			<image:caption>Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/trilha-do-morro-do-cambirela.jpg</image:loc>
+			<image:title>Trilha do Morro do Cambirela</image:title>
+			<image:caption>Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/trilha-do-morro-do-cambirela.jpg</image:loc>
+			<image:title>Trilha do Morro do Cambirela</image:title>
+			<image:caption>Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/rochas-na-subida.jpg</image:loc>
+			<image:title>Rochas na subida na Trilha do Morro do Cambirela</image:title>
+			<image:caption>Rochas na subida na Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/visao-de-santo-amaro.jpg</image:loc>
+			<image:title>Visão de Santo Amaro na Trilha do Morro do Cambirela</image:title>
+			<image:caption>Visão de Santo Amaro na Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/subida-de-pedras.jpg</image:loc>
+			<image:title>Subida de pedras na Trilha do Morro do Cambirela</image:title>
+			<image:caption>Subida de pedras na Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/visao-do-sul-da-ilha.jpg</image:loc>
+			<image:title>Visão do sul da ilha  na Trilha do Morro do Cambirela</image:title>
+			<image:caption>Visão do sul da ilha  na Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/vista-do-sul-da-ilha.jpg</image:loc>
+			<image:title>vista do sul da ilha  na Trilha do Morro do Cambirela</image:title>
+			<image:caption>vista do sul da ilha  na Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/bifurcacao.jpg</image:loc>
+			<image:title>Bifurcação na Trilha do Morro do Cambirela</image:title>
+			<image:caption>Bifurcação na Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/estacionamento.jpg</image:loc>
+			<image:title>Estacionamento da Trilha do Morro do Cambirela</image:title>
+			<image:caption>Estacionamento da Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/fonte-de-agua.jpg</image:loc>
+			<image:title>Fonte de água na Trilha do Morro do Cambirela</image:title>
+			<image:caption>Fonte de água na Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/grampos.jpg</image:loc>
+			<image:title>Grampos na Trilha do Morro do Cambirela</image:title>
+			<image:caption>Grampos na Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/inicio-da-trilha.jpg</image:loc>
+			<image:title>Início da Trilha do Morro do Cambirela</image:title>
+			<image:caption>Início da Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/livro-do-cume.jpg</image:loc>
+			<image:title>Livro do cume na Trilha do Morro do Cambirela</image:title>
+			<image:caption>Livro do cume na Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/obstaculo-arvore.jpg</image:loc>
+			<image:title>Obstáculo árvore na Trilha do Morro do Cambirela</image:title>
+			<image:caption>Obstáculo árvore na Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/elevacao.jpg</image:loc>
+			<image:title>Elevação Trilha do Morro do Cambirela</image:title>
+			<image:caption>Elevação Trilha do Morro do Cambirela</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/entrada-da-trilha-maps.jpg</image:loc>
+			<image:title>Entrada da Trilha do Morro do Cambirela Maps</image:title>
+			<image:caption>Entrada da Trilha do Morro do Cambirela Maps</image:caption>
+		</image:image>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/florianopolis/trilhas/leve/trilha-da-praia-secreta</loc>
@@ -5533,107 +5634,6 @@
 		</image:image>
 	</url>
 	<url>
-	<loc>https://trilhasemsc.com.br/palhoca/trilhas/semi-pesada/trilha-do-morro-do-cambirela</loc>
-		<priority>0.9</priority>
-		<lastmod>2023-04-18T09:43:57-03:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-morro-do-cambirela.jpg</image:loc>
-			<image:title>Trilha do Morro do Cambirela</image:title>
-			<image:caption>Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/trilha-do-morro-do-cambirela.jpg</image:loc>
-			<image:title>Trilha do Morro do Cambirela</image:title>
-			<image:caption>Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/trilha-do-morro-do-cambirela.jpg</image:loc>
-			<image:title>Trilha do Morro do Cambirela</image:title>
-			<image:caption>Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/trilha-do-morro-do-cambirela.jpg</image:loc>
-			<image:title>Trilha do Morro do Cambirela</image:title>
-			<image:caption>Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/trilha-do-morro-do-cambirela.jpg</image:loc>
-			<image:title>Trilha do Morro do Cambirela</image:title>
-			<image:caption>Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/rochas-na-subida.jpg</image:loc>
-			<image:title>Rochas na subida na Trilha do Morro do Cambirela</image:title>
-			<image:caption>Rochas na subida na Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/visao-de-santo-amaro.jpg</image:loc>
-			<image:title>Visão de Santo Amaro na Trilha do Morro do Cambirela</image:title>
-			<image:caption>Visão de Santo Amaro na Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/subida-de-pedras.jpg</image:loc>
-			<image:title>Subida de pedras na Trilha do Morro do Cambirela</image:title>
-			<image:caption>Subida de pedras na Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/visao-do-sul-da-ilha.jpg</image:loc>
-			<image:title>Visão do sul da ilha  na Trilha do Morro do Cambirela</image:title>
-			<image:caption>Visão do sul da ilha  na Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/vista-do-sul-da-ilha.jpg</image:loc>
-			<image:title>vista do sul da ilha  na Trilha do Morro do Cambirela</image:title>
-			<image:caption>vista do sul da ilha  na Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/bifurcacao.jpg</image:loc>
-			<image:title>Bifurcação na Trilha do Morro do Cambirela</image:title>
-			<image:caption>Bifurcação na Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/estacionamento.jpg</image:loc>
-			<image:title>Estacionamento da Trilha do Morro do Cambirela</image:title>
-			<image:caption>Estacionamento da Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/fonte-de-agua.jpg</image:loc>
-			<image:title>Fonte de água na Trilha do Morro do Cambirela</image:title>
-			<image:caption>Fonte de água na Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/grampos.jpg</image:loc>
-			<image:title>Grampos na Trilha do Morro do Cambirela</image:title>
-			<image:caption>Grampos na Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/inicio-da-trilha.jpg</image:loc>
-			<image:title>Início da Trilha do Morro do Cambirela</image:title>
-			<image:caption>Início da Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/livro-do-cume.jpg</image:loc>
-			<image:title>Livro do cume na Trilha do Morro do Cambirela</image:title>
-			<image:caption>Livro do cume na Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/obstaculo-arvore.jpg</image:loc>
-			<image:title>Obstáculo árvore na Trilha do Morro do Cambirela</image:title>
-			<image:caption>Obstáculo árvore na Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/elevacao.jpg</image:loc>
-			<image:title>Elevação Trilha do Morro do Cambirela</image:title>
-			<image:caption>Elevação Trilha do Morro do Cambirela</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-morro-do-cambirela/entrada-da-trilha-maps.jpg</image:loc>
-			<image:title>Entrada da Trilha do Morro do Cambirela Maps</image:title>
-			<image:caption>Entrada da Trilha do Morro do Cambirela Maps</image:caption>
-		</image:image>
-	</url>
-	<url>
 	<loc>https://trilhasemsc.com.br/urubici/trilhas/leve/trilha-da-cascata-do-avencal</loc>
 		<priority>0.9</priority>
 		<lastmod>2022-06-07T16:06:26-03:00</lastmod>
@@ -6096,153 +6096,209 @@
 		</image:image>
 	</url>
 	<url>
+	<loc>https://trilhasemsc.com.br/bom-jardim-da-serra/trilhas/leve/trilha-do-canion-das-laranjeiras</loc>
+		<priority>0.9</priority>
+		<lastmod>2023-06-16T10:06:16-03:00</lastmod>
+		<changefreq>weekly</changefreq>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-canion-das-laranjeiras_.jpg</image:loc>
+			<image:title>Trilha do Cânion das Laranjeiras</image:title>
+			<image:caption>Trilha do Cânion das Laranjeiras</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/trilha-do-canion-das-laranjeiras_.jpg</image:loc>
+			<image:title>Trilha do Cânion das Laranjeiras</image:title>
+			<image:caption>Trilha do Cânion das Laranjeiras</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/trilha-do-canion-das-laranjeiras_.jpg</image:loc>
+			<image:title>Trilha do Cânion das Laranjeiras</image:title>
+			<image:caption>Trilha do Cânion das Laranjeiras</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/trilha-do-canion-das-laranjeiras_.jpg</image:loc>
+			<image:title>Trilha do Cânion das Laranjeiras</image:title>
+			<image:caption>Trilha do Cânion das Laranjeiras</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/trilha-do-canion-das-laranjeiras_.jpg</image:loc>
+			<image:title>Trilha do Cânion das Laranjeiras</image:title>
+			<image:caption>Trilha do Cânion das Laranjeiras</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-canion-das-laranjeiras_/caminho.jpg</image:loc>
+			<image:title>Caminho - Trilha do Cânion das Laranjeiras</image:title>
+			<image:caption>Caminho - Trilha do Cânion das Laranjeiras</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-canion-das-laranjeiras_/campos.jpg</image:loc>
+			<image:title>Campos - Trilha do Cânion das Laranjeiras</image:title>
+			<image:caption>Campos - Trilha do Cânion das Laranjeiras</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-canion-das-laranjeiras_/Mirante.jpg</image:loc>
+			<image:title>Mirante - Trilha do Cânion das Laranjeiras</image:title>
+			<image:caption>Mirante - Trilha do Cânion das Laranjeiras</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-canion-das-laranjeiras_/porteira-fazenda.jpg</image:loc>
+			<image:title>Porteira Fazenda - Trilha do Cânion das Laranjeiras</image:title>
+			<image:caption>Porteira Fazenda - Trilha do Cânion das Laranjeiras</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-canion-das-laranjeiras_/vista-chegada.jpg</image:loc>
+			<image:title>Vista Chegada - Trilha do Cânion das Laranjeiras</image:title>
+			<image:caption>Vista Chegada - Trilha do Cânion das Laranjeiras</image:caption>
+		</image:image>
+	</url>
+	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-alfredo-wagner</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-balneario-camboriu</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-biguacu</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-bombinhas</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-bom-jardim-da-serra</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-camboriu</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-florianopolis</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-garopaba</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-garuva</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-governador-celso-ramos</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-grao-para</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-ilhota</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-imbituba</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-itajai</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-itapema</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-lages</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-laguna</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-morro-grande</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-palhoca</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-praia-grande</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-santo-amaro-da-imperatriz</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-sao-bento-do-sul</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-sao-francisco-do-sul</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-sao-jose</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-urubici</loc>
 		<priority>0.9</priority>
-		<lastmod>2023-06-07T14:56:18-03:00</lastmod>
+		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 </urlset>
