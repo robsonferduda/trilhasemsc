@@ -258,7 +258,12 @@ class GuiaController extends Controller
             return redirect('login');
         }
 
-        return view('admin/guia/listar');
+        $page_name = "Guias e Condutores em Santa Catarina";
+        $titulo = 'Guias e Condutores';
+        
+        $guias = Guia::all();
+
+        return view('admin/guia/listar', ['page_name' => $page_name, 'guias' => $guias]);
     }
 
     public function ativar($guia_id)

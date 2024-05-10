@@ -113,6 +113,12 @@
                                     <a href="{{ url('/') }}"><i class="icon-home"></i> <span>Início</span></a>
                                 </li>
                                 <li>
+                                    <a href="#" class="has-arrow"><i class="fa fa-id-card"></i> <span>Guias</span></a>
+                                    <ul>
+                                        <li><a href="{{ url('admin/guias/listar') }}">Listar</a></li>
+                                    </ul>
+                                </li>
+                                <li>
                                     <a href="#" class="has-arrow"><i class="fa fa-leaf"></i> <span>Trilhas</span></a>
                                     <ul>
                                         <li><a href="{{ url('admin/listar-trilhas') }}">Listar</a></li>
@@ -126,6 +132,9 @@
                                 </li>
                                 <li>
                                     <a href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> <span>Editar Dados</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('guia-e-condutores/privado/eventos') }}"><i class="fa fa-tags"></i> <span>Eventos</span></a>
                                 </li>
                             @endif
                             <li>

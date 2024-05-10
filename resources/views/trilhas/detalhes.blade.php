@@ -163,6 +163,16 @@
                                     @endforeach
                                 </ul>
                             </div>
+
+                            <div class="col-lg-12 col-sm-12 mb-sm-0 mb-4">
+                                <div class="info-horizontal bg-gradient-primary border-radius-lg p-3">
+                                   <i class="ni ni-calendar-grid-58 h4 text-white icon"></i>
+                                   <div class="description ps-3">
+                                      <h5 class="text-white">Atualização das Informações</h5>
+                                      <p class="text-white">Fique sempre atento à data de atualização dos textos. Os textos são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.</p>
+                                   </div>
+                                </div>
+                             </div>
     
                             <div style="display: none" class="col-lg-12 col-md-12 col-sm-12" style="min-height: 570px; background: #f1f1f1;">
                                 <div class="box-publicidade-detalhes">

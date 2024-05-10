@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Evento;
 use App\Cidade;
+use App\Guia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -27,5 +29,31 @@ class EventoController extends Controller
                        'id_guia_gui' => $id);
 
         return view('eventos/detalhes', ['page_name' => $page_name, 'evento' => $evento]);
+    }
+
+    public function eventos()
+    {
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+
+        return view('admin/eventos/listar', compact('guia'));
+    }
+
+    public function cadastro()
+    {
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+        $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
+
+        return view('admin/eventos/cadastro', compact('guia','cidades'));
+    }
+
+    public function cadastrar(Request $request)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'GUIA') {
+            return redirect('login');
+        }
+        //dd($request);
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+
+        dd($guia);
     }
 }
