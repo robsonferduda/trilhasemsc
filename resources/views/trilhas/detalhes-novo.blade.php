@@ -48,17 +48,20 @@
                 </div> 
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-12 position-relative my-auto justify-content-center text-center">
+                        <div class="col-lg-4 col-md-4 col-sm-12 position-relative my-auto justify-content-center text-center">
                             <img class="mx-auto" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
                             <span style="color: white; background: {{ ($trilha->nivel) ? $trilha->nivel->dc_color_nivel_niv : '#989898' }};" class="badge badge-secondary">{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</span>
                             <p class="mt-3"><a href="{{ url('guia-de-dificuldade-em-trilhas/abnt') }}">Clique e entenda as medidas</a></p>
                         </div>
-                        <div class="col-lg-9 col-md-9 col-sm-12" style="text-align: right">
+                        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center">
                             <h5 class="mb-2 mt-2">Gostou do conteúdo?</h5>                          
                             <p class="mb-2">Que tal nos pagar um café?</p>
-
-                            <a href="https://pag.ae/7-dSqqaS8" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1"><i class="fa fa-coffee" style="font-size: 12px;" aria-hidden="true"></i> Pagar um café!</a>
-                            
+                            <a href="https://pag.ae/7-dSqqaS8" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1"><i class="fa fa-coffee" style="font-size: 12px;" aria-hidden="true"></i> Pagar um café!</a>                            
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center">
+                            <h5 class="mb-2 mt-2">Também pode ser um PIX</h5>   
+                            <p class="mb-2">Chave: trilhasemsc@gmail.com</p>     
+                            <img class="mx-auto" src="{{ asset('img/qrcode.png') }}" style="width: 80%;" alt="PIX TrilhasemSC">                                              
                         </div>
                         <!--
                             <div class="col-lg-12 col-md-12 mt-5">
