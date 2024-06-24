@@ -125,18 +125,20 @@
             </div>         
        </div>
        <div class="row">
-        @env('production')
-            {{-- <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-1229685353625953"
-                data-ad-slot="7739149091"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script> --}}
-            <div id="125834-28"><script src="//ads.themoneytizer.com/s/gen.js?type=28"></script><script src="//ads.themoneytizer.com/s/requestform.js?siteId=125834&formatId=28"></script></div>
-        @endenv
+            <div class="col-md-9 mt-2">
+            @env('production')
+                {{-- <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1229685353625953"
+                    data-ad-slot="7739149091"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script> --}}
+                <div id="125834-28"><script src="//ads.themoneytizer.com/s/gen.js?type=28"></script><script src="//ads.themoneytizer.com/s/requestform.js?siteId=125834&formatId=28"></script></div>
+            @endenv
+            </div>
        </div>
     </div>
  </section>
