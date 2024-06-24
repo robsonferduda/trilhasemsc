@@ -41,7 +41,7 @@
                                     <script>
                                         (adsbygoogle = window.adsbygoogle || []).push({});
                                     </script> --}}
-                        <div style="text-align:center;" id="125834-31"><script src="//ads.themoneytizer.com/s/gen.js?type=31"></script><script src="//ads.themoneytizer.com/s/requestform.js?siteId=125834&formatId=31"></script></div>
+                        <div id="125834-1"><script src="//ads.themoneytizer.com/s/gen.js?type=1"></script><script src="//ads.themoneytizer.com/s/requestform.js?siteId=125834&formatId=1"></script></div>
                     @endenv
                     <div class="mt-2 conteudo">
                         {!! $trilha->ds_trilha_tri !!}
@@ -126,7 +126,7 @@
        </div>
        <div class="row">
         @env('production')
-            <ins class="adsbygoogle"
+            {{-- <ins class="adsbygoogle"
                 style="display:block"
                 data-ad-client="ca-pub-1229685353625953"
                 data-ad-slot="7739149091"
@@ -134,7 +134,8 @@
                 data-full-width-responsive="true"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script> --}}
+            <div id="125834-28"><script src="//ads.themoneytizer.com/s/gen.js?type=28"></script><script src="//ads.themoneytizer.com/s/requestform.js?siteId=125834&formatId=28"></script></div>
         @endenv
        </div>
     </div>
