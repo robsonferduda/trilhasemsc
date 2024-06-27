@@ -31,7 +31,7 @@
                     <p class="text-info">
                         Sempre que visitar um local desconhecido, procure por condutores locais autorizados. Faça turismo seguro!
                     </p>            
-                    @env('production')
+                    <!-- @env('production')
                         <ins class="adsbygoogle"
                                         style="display:block"
                                         data-ad-client="ca-pub-1229685353625953"
@@ -41,7 +41,7 @@
                                     <script>
                                         (adsbygoogle = window.adsbygoogle || []).push({});
                                     </script>                         
-                    @endenv
+                    @endenv -->
                     <div class="mt-2 conteudo">
                         {!! $trilha->ds_trilha_tri !!}
                     </div>
@@ -125,7 +125,7 @@
        </div>
        <div class="row">
             <div class="col-md-9 mt-2">
-            @env('production')
+            <!-- @env('production')
                 <ins class="adsbygoogle"
                     style="display:block"
                     data-ad-client="ca-pub-1229685353625953"
@@ -135,7 +135,7 @@
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>                
-            @endenv
+            @endenv -->
             </div>
        </div>
     </div>
