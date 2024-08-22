@@ -31,7 +31,7 @@
                     <p class="text-info">
                         Sempre que visitar um local desconhecido, procure por condutores locais autorizados. Faça turismo seguro!
                     </p>            
-                    @env('production')
+                    <!-- @env('production')
                         <ins class="adsbygoogle"
                                         style="display:block"
                                         data-ad-client="ca-pub-1229685353625953"
@@ -40,8 +40,8 @@
                                         data-full-width-responsive="true"></ins>
                                     <script>
                                         (adsbygoogle = window.adsbygoogle || []).push({});
-                                    </script>
-                    @endenv
+                                    </script>                         
+                    @endenv -->
                     <div class="mt-2 conteudo">
                         {!! $trilha->ds_trilha_tri !!}
                     </div>
@@ -124,17 +124,19 @@
             </div>         
        </div>
        <div class="row">
-        @env('production')
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-1229685353625953"
-                data-ad-slot="7739149091"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        @endenv
+            <div class="col-md-9 mt-2">
+            <!-- @env('production')
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1229685353625953"
+                    data-ad-slot="7739149091"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>                
+            @endenv -->
+            </div>
        </div>
     </div>
  </section>

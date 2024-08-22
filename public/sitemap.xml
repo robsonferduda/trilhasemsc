@@ -3,13 +3,13 @@
 	<url>
 	<loc>https://trilhasemsc.com.br</loc>
 		<priority>1.0</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/camping</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 		<image:image>
 			<image:loc>https://trilhasemsc.com.br/public/img/camping/vale-da-utopia/capa.jpg</image:loc>
@@ -35,97 +35,208 @@
 	<url>
 	<loc>https://trilhasemsc.com.br/campings</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/garuva/campings/selvagem/camping-monte-crista</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/bom-jardim-da-serra/campings/selvagem/camping-pico-rinoceronte</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/grao-para/campings/estruturado/camping-mirante</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/laguna/campings/selvagem/camping-mirante-anita-garibaldi</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/guia-de-dificuldade-em-trilhas</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/guia-de-dificuldade-em-trilhas/abnt</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/guia-de-dificuldade-em-trilhas/femerj</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/florianopolis/regioes/leste</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/florianopolis/regioes/norte</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/florianopolis/regioes/sul</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/brasil/regioes/nordeste/chapada</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/santa-catarina/regioes</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas/santa-catarina/regioes/serra-catarinense</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:38:18-03:00</lastmod>
+		<lastmod>2024-06-20T09:31:02-03:00</lastmod>
 		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+	<loc>https://trilhasemsc.com.br/bom-jardim-da-serra/trilhas/moderada/trilha-do-pico-do-rinoceronte</loc>
+		<priority>0.9</priority>
+		<lastmod>2024-04-12T10:07:00-03:00</lastmod>
+		<changefreq>weekly</changefreq>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-pico-do-rinoceronte.jpg</image:loc>
+			<image:title>Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/trilha-do-pico-do-rinoceronte.jpg</image:loc>
+			<image:title>Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/trilha-do-pico-do-rinoceronte.jpg</image:loc>
+			<image:title>Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/trilha-do-pico-do-rinoceronte.jpg</image:loc>
+			<image:title>Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/trilha-do-pico-do-rinoceronte.jpg</image:loc>
+			<image:title>Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/vista-da-serra-aparados-da-serra.jpg</image:loc>
+			<image:title>Vista da Serra do aparados da serra na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Vista da Serra do aparados da serra na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/vista-panoramica-dos-campos.jpg</image:loc>
+			<image:title>Vista panorâmica dos campos na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Vista panorâmica dos campos na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/vista-da-serra-geral.jpg</image:loc>
+			<image:title>Vista da serra geral na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Vista da serra geral na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/vista-chegada-canion.jpg</image:loc>
+			<image:title>Vista chegada cânion na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Vista chegada cânion na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/serra-ao-nascer-do-sol.jpg</image:loc>
+			<image:title>Serra ao nascer do sol na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Serra ao nascer do sol na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/riacho-no-caminho.jpg</image:loc>
+			<image:title>Riacho no caminho na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Riacho no caminho na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/ponto-inicial-da-trilha.jpg</image:loc>
+			<image:title>Ponto inicial da Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Ponto inicial da Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/penultimo-ponto-de-hidratacao.jpg</image:loc>
+			<image:title>Penúltimo ponto de hidratação na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Penúltimo ponto de hidratação na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/parque-eolico.jpg</image:loc>
+			<image:title>Parque eólico na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Parque eólico na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/paisagem-rio-montanhas.jpg</image:loc>
+			<image:title>Paisagem, rios e montanhas na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Paisagem, rios e montanhas na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/paisagem-rio-campos.jpg</image:loc>
+			<image:title>Paisagem, rio e campos na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Paisagem, rio e campos na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/inicio-caminhada-fazenda.jpg</image:loc>
+			<image:title>Início caminhada na fazenda na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Início caminhada na fazenda na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/gado-no-caminho.jpg</image:loc>
+			<image:title>Gado no caminho na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Gado no caminho na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/campos-de-altitude.jpg</image:loc>
+			<image:title>Campos de altitude  na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Campos de altitude  na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/caminhada-no-pasto.jpg</image:loc>
+			<image:title>Caminhada no pasto na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Caminhada no pasto na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/atalho-entre-morros.jpg</image:loc>
+			<image:title>Atalho entre morros na Trilha do Pico do Rinoceronte</image:title>
+			<image:caption>Atalho entre morros na Trilha do Pico do Rinoceronte</image:caption>
+		</image:image>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/palhoca/trilhas/semi-pesada/trilha-do-morro-do-cambirela</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-18T19:11:30-03:00</lastmod>
+		<lastmod>2024-06-04T09:53:55-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 		<image:image>
 			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-morro-do-cambirela.jpg</image:loc>
@@ -861,70 +972,9 @@
 		</image:image>
 	</url>
 	<url>
-	<loc>https://trilhasemsc.com.br/florianopolis/trilhas/leve/caminho-da-costa-da-lagoa-a-ratones</loc>
-		<priority>0.9</priority>
-		<lastmod>2020-10-06T16:28:09-03:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
-			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
-			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
-			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
-			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
-			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
-			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
-			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
-			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
-			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
-			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/caminho-da-costa-da-lagoa-a-ratones/pitangas.jpg</image:loc>
-			<image:title>Pitangas</image:title>
-			<image:caption>Pitangas</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/caminho-da-costa-da-lagoa-a-ratones/inicio-da-subida.jpg</image:loc>
-			<image:title>Início da subida</image:title>
-			<image:caption>Início da subida</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/caminho-da-costa-da-lagoa-a-ratones/entrada-da-trilha.jpg</image:loc>
-			<image:title>Entrada da Trilha</image:title>
-			<image:caption>Entrada da Trilha</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/caminho-da-costa-da-lagoa-a-ratones/costa-da-lagoa.jpg</image:loc>
-			<image:title>Costa da Lagoa</image:title>
-			<image:caption>Costa da Lagoa</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/caminho-da-costa-da-lagoa-a-ratones/chegada-na-costa.jpg</image:loc>
-			<image:title>Chegada na costa</image:title>
-			<image:caption>Chegada na costa</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
-			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
-			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
-		</image:image>
-	</url>
-	<url>
 	<loc>https://trilhasemsc.com.br/florianopolis/trilhas/leve/trilha-da-praia-do-forte-para-daniela-vista-jurere</loc>
 		<priority>0.9</priority>
-		<lastmod>2020-10-13T18:36:22-03:00</lastmod>
+		<lastmod>2024-02-08T13:14:35-03:00</lastmod>
 		<changefreq>weekly</changefreq>
 		<image:image>
 			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-da -praia-do-forte-para-daniela.jpg</image:loc>
@@ -1000,6 +1050,67 @@
 			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-da -praia-do-forte-para-daniela/entrada-trecho-final.jpg</image:loc>
 			<image:title>Entrada trecho final</image:title>
 			<image:caption>Entrada trecho final</image:caption>
+		</image:image>
+	</url>
+	<url>
+	<loc>https://trilhasemsc.com.br/florianopolis/trilhas/leve/caminho-da-costa-da-lagoa-a-ratones</loc>
+		<priority>0.9</priority>
+		<lastmod>2020-10-06T16:28:09-03:00</lastmod>
+		<changefreq>weekly</changefreq>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
+			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
+			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
+			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
+			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
+			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
+			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
+			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
+			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
+			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
+			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/caminho-da-costa-da-lagoa-a-ratones/pitangas.jpg</image:loc>
+			<image:title>Pitangas</image:title>
+			<image:caption>Pitangas</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/caminho-da-costa-da-lagoa-a-ratones/inicio-da-subida.jpg</image:loc>
+			<image:title>Início da subida</image:title>
+			<image:caption>Início da subida</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/caminho-da-costa-da-lagoa-a-ratones/entrada-da-trilha.jpg</image:loc>
+			<image:title>Entrada da Trilha</image:title>
+			<image:caption>Entrada da Trilha</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/caminho-da-costa-da-lagoa-a-ratones/costa-da-lagoa.jpg</image:loc>
+			<image:title>Costa da Lagoa</image:title>
+			<image:caption>Costa da Lagoa</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/caminho-da-costa-da-lagoa-a-ratones/chegada-na-costa.jpg</image:loc>
+			<image:title>Chegada na costa</image:title>
+			<image:caption>Chegada na costa</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/caminho-da-costa-da-lagoa-a-ratones.jpg</image:loc>
+			<image:title>Caminho da Costa da Lagoa à Ratones</image:title>
+			<image:caption>Caminho da Costa da Lagoa à Ratones</image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -3552,37 +3663,6 @@
 		</image:image>
 	</url>
 	<url>
-	<loc>https://trilhasemsc.com.br/sao-jose/trilhas/semi-pesada/trilha-do-morro-da-pedra-branca</loc>
-		<priority>0.9</priority>
-		<lastmod>2021-04-08T08:50:32-03:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/trilha-do-morro-da-pedra-branca.jpg</image:loc>
-			<image:title>Trilha do Morro da Pedra Branca</image:title>
-			<image:caption>Trilha do Morro da Pedra Branca</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/trilha-do-morro-da-pedra-branca.jpg</image:loc>
-			<image:title>Trilha do Morro da Pedra Branca</image:title>
-			<image:caption>Trilha do Morro da Pedra Branca</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/trilha-do-morro-da-pedra-branca.jpg</image:loc>
-			<image:title>Trilha do Morro da Pedra Branca</image:title>
-			<image:caption>Trilha do Morro da Pedra Branca</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/trilha-do-morro-da-pedra-branca.jpg</image:loc>
-			<image:title>Trilha do Morro da Pedra Branca</image:title>
-			<image:caption>Trilha do Morro da Pedra Branca</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-morro-da-pedra-branca.jpg</image:loc>
-			<image:title>Trilha do Morro da Pedra Branca</image:title>
-			<image:caption>Trilha do Morro da Pedra Branca</image:caption>
-		</image:image>
-	</url>
-	<url>
 	<loc>https://trilhasemsc.com.br/florianopolis/trilhas/leve/trilha-da-costa-da-lagoa</loc>
 		<priority>0.9</priority>
 		<lastmod>2021-03-09T15:10:34-03:00</lastmod>
@@ -4145,6 +4225,37 @@
 		</image:image>
 	</url>
 	<url>
+	<loc>https://trilhasemsc.com.br/sao-jose/trilhas/semi-pesada/trilha-do-morro-da-pedra-branca</loc>
+		<priority>0.9</priority>
+		<lastmod>2024-03-28T08:22:09-03:00</lastmod>
+		<changefreq>weekly</changefreq>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/trilha-do-morro-da-pedra-branca.jpg</image:loc>
+			<image:title>Trilha do Morro da Pedra Branca</image:title>
+			<image:caption>Trilha do Morro da Pedra Branca</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/trilha-do-morro-da-pedra-branca.jpg</image:loc>
+			<image:title>Trilha do Morro da Pedra Branca</image:title>
+			<image:caption>Trilha do Morro da Pedra Branca</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/trilha-do-morro-da-pedra-branca.jpg</image:loc>
+			<image:title>Trilha do Morro da Pedra Branca</image:title>
+			<image:caption>Trilha do Morro da Pedra Branca</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/trilha-do-morro-da-pedra-branca.jpg</image:loc>
+			<image:title>Trilha do Morro da Pedra Branca</image:title>
+			<image:caption>Trilha do Morro da Pedra Branca</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-morro-da-pedra-branca.jpg</image:loc>
+			<image:title>Trilha do Morro da Pedra Branca</image:title>
+			<image:caption>Trilha do Morro da Pedra Branca</image:caption>
+		</image:image>
+	</url>
+	<url>
 	<loc>https://trilhasemsc.com.br/sao-francisco-do-sul/trilhas/leve/trilha-do-morro-da-enseada</loc>
 		<priority>0.9</priority>
 		<lastmod>2023-01-10T12:56:41-03:00</lastmod>
@@ -4451,117 +4562,6 @@
 			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/travessia-laranjeiras-x-funil/vista-serra-rio-do-rastro.jpg</image:loc>
 			<image:title>Vista Serra Rio do Rastro na Travessia Laranjeiras x Funil</image:title>
 			<image:caption>Vista Serra Rio do Rastro na Travessia Laranjeiras x Funil</image:caption>
-		</image:image>
-	</url>
-	<url>
-	<loc>https://trilhasemsc.com.br/bom-jardim-da-serra/trilhas/moderada/trilha-do-pico-do-rinoceronte</loc>
-		<priority>0.9</priority>
-		<lastmod>2022-08-27T14:12:16-03:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-pico-do-rinoceronte.jpg</image:loc>
-			<image:title>Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/trilha-do-pico-do-rinoceronte.jpg</image:loc>
-			<image:title>Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/trilha-do-pico-do-rinoceronte.jpg</image:loc>
-			<image:title>Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/trilha-do-pico-do-rinoceronte.jpg</image:loc>
-			<image:title>Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/trilha-do-pico-do-rinoceronte.jpg</image:loc>
-			<image:title>Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/vista-da-serra-aparados-da-serra.jpg</image:loc>
-			<image:title>Vista da Serra do aparados da serra na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Vista da Serra do aparados da serra na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/vista-panoramica-dos-campos.jpg</image:loc>
-			<image:title>Vista panorâmica dos campos na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Vista panorâmica dos campos na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/vista-da-serra-geral.jpg</image:loc>
-			<image:title>Vista da serra geral na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Vista da serra geral na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/vista-chegada-canion.jpg</image:loc>
-			<image:title>Vista chegada cânion na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Vista chegada cânion na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/serra-ao-nascer-do-sol.jpg</image:loc>
-			<image:title>Serra ao nascer do sol na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Serra ao nascer do sol na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/riacho-no-caminho.jpg</image:loc>
-			<image:title>Riacho no caminho na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Riacho no caminho na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/ponto-inicial-da-trilha.jpg</image:loc>
-			<image:title>Ponto inicial da Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Ponto inicial da Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/penultimo-ponto-de-hidratacao.jpg</image:loc>
-			<image:title>Penúltimo ponto de hidratação na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Penúltimo ponto de hidratação na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/parque-eolico.jpg</image:loc>
-			<image:title>Parque eólico na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Parque eólico na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/paisagem-rio-montanhas.jpg</image:loc>
-			<image:title>Paisagem, rios e montanhas na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Paisagem, rios e montanhas na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/paisagem-rio-campos.jpg</image:loc>
-			<image:title>Paisagem, rio e campos na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Paisagem, rio e campos na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/inicio-caminhada-fazenda.jpg</image:loc>
-			<image:title>Início caminhada na fazenda na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Início caminhada na fazenda na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/gado-no-caminho.jpg</image:loc>
-			<image:title>Gado no caminho na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Gado no caminho na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/campos-de-altitude.jpg</image:loc>
-			<image:title>Campos de altitude  na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Campos de altitude  na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/caminhada-no-pasto.jpg</image:loc>
-			<image:title>Caminhada no pasto na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Caminhada no pasto na Trilha do Pico do Rinoceronte</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-pico-do-rinoceronte/atalho-entre-morros.jpg</image:loc>
-			<image:title>Atalho entre morros na Trilha do Pico do Rinoceronte</image:title>
-			<image:caption>Atalho entre morros na Trilha do Pico do Rinoceronte</image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -5878,87 +5878,6 @@
 		</image:image>
 	</url>
 	<url>
-	<loc>https://trilhasemsc.com.br/laguna/trilhas/leve/trilha-do-bananal</loc>
-		<priority>0.9</priority>
-		<lastmod>2022-04-19T11:58:03-03:00</lastmod>
-		<changefreq>weekly</changefreq>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/bifurcacao.jpg</image:loc>
-			<image:title>Bifurcação - Trilha do Bananal</image:title>
-			<image:caption>Bifurcação - Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-bananal.jpg</image:loc>
-			<image:title>Trilha do Bananal</image:title>
-			<image:caption>Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/trilha-do-bananal.jpg</image:loc>
-			<image:title>Trilha do Bananal</image:title>
-			<image:caption>Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/trilha-do-bananal.jpg</image:loc>
-			<image:title>Trilha do Bananal</image:title>
-			<image:caption>Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/trilha-do-bananal.jpg</image:loc>
-			<image:title>Trilha do Bananal</image:title>
-			<image:caption>Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/trilha-do-bananal.jpg</image:loc>
-			<image:title>Trilha do Bananal</image:title>
-			<image:caption>Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/area-camping.jpg</image:loc>
-			<image:title>Área Camping - Trilha do Bananal</image:title>
-			<image:caption>Área Camping - Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/atalho.jpg</image:loc>
-			<image:title>Atalho - Trilha do Bananal</image:title>
-			<image:caption>Atalho - Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/condicoes-estrada.jpg</image:loc>
-			<image:title>Condições Estrada - Trilha do Bananal</image:title>
-			<image:caption>Condições Estrada - Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/estrada-de-acesso.jpg</image:loc>
-			<image:title>Estrada de acesso - Trilha do Bananal</image:title>
-			<image:caption>Estrada de acesso - Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/tr</image:loc>
-			<image:title>Portão Entrada - Trilha do Bananal</image:title>
-			<image:caption>Portão Entrada - Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/portao-entrada.jpg</image:loc>
-			<image:title>Portão Entrada - Trilha do Bananal</image:title>
-			<image:caption>Portão Entrada - Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/riacho.jpg</image:loc>
-			<image:title>Riacho - Trilha do Bananal</image:title>
-			<image:caption>Riacho - Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/vista-mirante.jpg</image:loc>
-			<image:title>Vista Mirante - Trilha do Bananal</image:title>
-			<image:caption>Vista Mirante - Trilha do Bananal</image:caption>
-		</image:image>
-		<image:image>
-			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/vista-parcial.jpg</image:loc>
-			<image:title>Vista Parcial - Trilha do Bananal</image:title>
-			<image:caption>Vista Parcial - Trilha do Bananal</image:caption>
-		</image:image>
-	</url>
-	<url>
 	<loc>https://trilhasemsc.com.br/itapema/trilhas/passeio/trilha-da-praia-grossa</loc>
 		<priority>0.9</priority>
 		<lastmod>2021-11-30T13:05:25-03:00</lastmod>
@@ -6096,6 +6015,87 @@
 		</image:image>
 	</url>
 	<url>
+	<loc>https://trilhasemsc.com.br/laguna/trilhas/leve/trilha-do-bananal</loc>
+		<priority>0.9</priority>
+		<lastmod>2024-02-03T11:17:17-03:00</lastmod>
+		<changefreq>weekly</changefreq>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/bifurcacao.jpg</image:loc>
+			<image:title>Bifurcação - Trilha do Bananal</image:title>
+			<image:caption>Bifurcação - Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/busca/trilha-do-bananal.jpg</image:loc>
+			<image:title>Trilha do Bananal</image:title>
+			<image:caption>Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-pequena/trilha-do-bananal.jpg</image:loc>
+			<image:title>Trilha do Bananal</image:title>
+			<image:caption>Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/destaque-principal/trilha-do-bananal.jpg</image:loc>
+			<image:title>Trilha do Bananal</image:title>
+			<image:caption>Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/recentes/trilha-do-bananal.jpg</image:loc>
+			<image:title>Trilha do Bananal</image:title>
+			<image:caption>Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/detalhes-principal/trilha-do-bananal.jpg</image:loc>
+			<image:title>Trilha do Bananal</image:title>
+			<image:caption>Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/area-camping.jpg</image:loc>
+			<image:title>Área Camping - Trilha do Bananal</image:title>
+			<image:caption>Área Camping - Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/atalho.jpg</image:loc>
+			<image:title>Atalho - Trilha do Bananal</image:title>
+			<image:caption>Atalho - Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/condicoes-estrada.jpg</image:loc>
+			<image:title>Condições Estrada - Trilha do Bananal</image:title>
+			<image:caption>Condições Estrada - Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/estrada-de-acesso.jpg</image:loc>
+			<image:title>Estrada de acesso - Trilha do Bananal</image:title>
+			<image:caption>Estrada de acesso - Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/tr</image:loc>
+			<image:title>Portão Entrada - Trilha do Bananal</image:title>
+			<image:caption>Portão Entrada - Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/portao-entrada.jpg</image:loc>
+			<image:title>Portão Entrada - Trilha do Bananal</image:title>
+			<image:caption>Portão Entrada - Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/riacho.jpg</image:loc>
+			<image:title>Riacho - Trilha do Bananal</image:title>
+			<image:caption>Riacho - Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/vista-mirante.jpg</image:loc>
+			<image:title>Vista Mirante - Trilha do Bananal</image:title>
+			<image:caption>Vista Mirante - Trilha do Bananal</image:caption>
+		</image:image>
+		<image:image>
+			<image:loc>https://trilhasemsc.com.br/public/img/trilhas/descricao/trilha-do-bananal/vista-parcial.jpg</image:loc>
+			<image:title>Vista Parcial - Trilha do Bananal</image:title>
+			<image:caption>Vista Parcial - Trilha do Bananal</image:caption>
+		</image:image>
+	</url>
+	<url>
 	<loc>https://trilhasemsc.com.br/bom-jardim-da-serra/trilhas/leve/trilha-do-canion-das-laranjeiras</loc>
 		<priority>0.9</priority>
 		<lastmod>2023-06-16T10:06:16-03:00</lastmod>
@@ -6154,151 +6154,151 @@
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-alfredo-wagner</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-balneario-camboriu</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-biguacu</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-bombinhas</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-bom-jardim-da-serra</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-camboriu</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-florianopolis</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-garopaba</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-garuva</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-governador-celso-ramos</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-grao-para</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-ilhota</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-imbituba</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-itajai</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-itapema</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-lages</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-laguna</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-morro-grande</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-palhoca</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-praia-grande</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-santo-amaro-da-imperatriz</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-sao-bento-do-sul</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-sao-francisco-do-sul</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-sao-jose</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
 	<loc>https://trilhasemsc.com.br/trilhas-em-urubici</loc>
 		<priority>0.9</priority>
-		<lastmod>2024-01-28T03:39:26-03:00</lastmod>
+		<lastmod>2024-06-20T09:32:21-03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 </urlset>
