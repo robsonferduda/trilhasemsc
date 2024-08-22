@@ -15,10 +15,24 @@
             @if($guia->nu_cadastur_gui)
                <p><strong>Cadastur</strong>: {{ $guia->nu_cadastur_gui }} </p>
             @endif
+            @if($guia->unidadesConservacao)
+               <p><strong>Unidades de Conservação</strong>: {{ count($guia->unidadesConservacao) > 0 ? implode(', ',$guia->unidadesConservacao->pluck('nome_unc')->toArray()) : ''}}</p>
+            @endif
             <p><strong>Cidades de Atuação</strong>: {{ count($guia->cidadesAtuacao) > 0 ? implode(', ',$guia->cidadesAtuacao->pluck('nm_cidade_cde')->toArray()) : $guia->ds_atuacao_gui }}</p>
             <p>
                 {{ $guia->dc_biografia_gui }}
             </p>
+         </div>
+         <div class="col-md-12 mb-3 mt-3">
+            <div class="row">
+               @forelse ($guia->unidadesConservacao as $key => $uc)
+                  <div class="col col-xl-2 col-md-2 mb-3 mt-3">
+                     <img class="img-fluid" src="http://localhost/trilhasemsc/public/img/logos-uc/{{ $uc->logo_unc }}" alt="Logo {{ $uc->nome_uc }}">
+                  </div>
+               @empty
+               
+               @endforelse
+            </div>
          </div>
          <div class="col-md-12 mt-2">
             <a class="btn btn-success" href="{{ url("guia/perfil/estatistica/telefone", $guia->id_guia_gui) }}"><i class="fa fa-whatsapp" aria-hidden="true"></i> Enviar Mensagem</a>
