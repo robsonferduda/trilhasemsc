@@ -18,17 +18,17 @@
                 <div class="header no-padding-bottom">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <h2>Cadastro</h2>
+                            <h2>Dados do Condutor</h2>
                         </div>
                     </div>
                 </div>
                 <div class="row ml-2 mr-2">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         @if($guia->fl_perfil_completo_gui == true and $guia->fl_ativo_gui == false)
-                            <h4 class="text-danger"> Seu perfil está desativado, para ativar selecione o campo "Ativo".</h4>
+                            <h6 class="text-danger"> Seu perfil está desativado, para ativar selecione o campo "Ativo".</h6>
                         @endif
                         @if($guia->fl_perfil_completo_gui == true and $guia->fl_perfil_moderado_gui == false and $guia->fl_ativo_gui == true)
-                            <h4 class="text-danger"> Seu perfil está pendente de aceite. Assim que o aceite for dado você receberá um email.</h4>
+                            <h6 class="text-danger"> Seu perfil está pendente de aceite. Assim que o aceite for dado você receberá um email. Perfis sem Cadastur não serão aprovados.</h6>
                         @endif
                     </div>
                 </div>
@@ -80,8 +80,9 @@
                         <div class="row clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label for="instagram">Instagram</label>
+                                    <label for="instagram">Instagram </label><span class="text-info"> Somente o nome do perfil</span>
                                     <input type="text" name="instagram" id="instagram" value="{{ $guia->nm_instagram_gui ?: ''  }}" placeholder="Ex: trilhasemsc" class="form-control" >
+                                    <span class="text-info"> Não use arroba ou URL. Ex.: trilhasemsc</span>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
@@ -108,12 +109,23 @@
                                     <span id="error-cidade-atuacao"></span>
                                 </div>
                             </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="unidades_conservacao">Unidades de Conservação</label><span class="text-info"> Marque as unidades que você possui autorização para guiar</span>
+                                    <select name="unidades_conservacao[]" id="unidades_conservacao" class="form-control select2" multiple="multiple" data-parsley-errors-container="#error-unidades_conservacao" required>
+                                        @foreach($ucs as $uc)
+                                            <option {!! in_array($uc->id_unidade_conservacao_unc, $guia->unidadesConservacao->pluck('id_unidade_conservacao_unc')->toArray()) ? 'selected' : '' !!}  value="{{ $uc->id_unidade_conservacao_unc }}">{{ $uc->nome_unc }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span id="error-cidade-atuacao"></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <label class="fancy-checkbox">
                                     <input type="checkbox" {!! $guia->fl_ativo_gui ? 'checked' : '' !!} name="ativo">
-                                        <span>Ativo</span>
+                                        <span>Ativo</span><span class="text-info"> Utilize essa opção para alterar sua visualização no site. Guias inativos não são mostrados.</span>
                                 </label>
                             </div>
                         </div>
@@ -128,7 +140,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="dropify-event">Faça aqui o upload da sua foto de perfil</label><span class="text-danger"> (Preferencialmente foto em formato quadrado)</span>
+                                    <label for="dropify-event">Faça aqui o upload da sua foto de perfil</label><span class="text-info"> Preferencialmente foto em formato quadrado</span>
                                     <input name="imagem" type="file" id="dropify-event"  data-default-file="{{  $guia->nm_path_logo_gui ? asset('img/guias/'.$guia->nm_path_logo_gui) : asset('img/guias/default.png') }}">
                                     <input name="imagem_deletada" id="imagem_deletada" type="hidden" value='false' >
                                 </div>

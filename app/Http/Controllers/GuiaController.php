@@ -8,6 +8,7 @@ use App\Guia;
 use App\Trilha;
 use App\Interacao;
 use App\Mail\GuiaConfirmacao;
+use App\UnidadeConservacao;
 use App\Mail\GuiaModeracao;
 use App\User;
 use Auth;
@@ -153,6 +154,7 @@ class GuiaController extends Controller
             $site = $request->site;
             $cidadeOrigem = $request->cidade_origem;
             $cidadesAtuacao = $request->cidades_atuacao;
+            $unidades_conservacao = $request->unidades_conservacao;
             $biografia = $request->biografia;
             $celular = $request->celular;
             $whatsap = $request->whatsap;
@@ -172,6 +174,7 @@ class GuiaController extends Controller
             ]);
 
             $guia->cidadesAtuacao()->sync($cidadesAtuacao);
+            $guia->unidadesConservacao()->sync($unidades_conservacao);
 
             $imagem = null;
 
@@ -216,8 +219,9 @@ class GuiaController extends Controller
         $usuario = Auth::user();
 
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
+        $ucs = UnidadeConservacao::orderBy('nome_unc')->get();
 
-        return view('guias/atualizar-cadastro', compact('usuario', 'cidades', 'guia'));
+        return view('guias/atualizar-cadastro', compact('usuario', 'cidades', 'guia', 'ucs'));
     }
 
     public function previaPerfil()
