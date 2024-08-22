@@ -27,12 +27,12 @@
                      </div>
                      <div class="col-lg-4 col-4">
                        <a href="{{ url("https://www.instagram.com/".$guia->nm_instagram_gui) }}" target="BLANK" type="button" class="btn-icon-only btn-simple btn btn-lg btn-dribbble" data-toggle="tooltip" data-placement="bottom" title="Follow me!">
-                           <span class="btn-inner--icon"><i class="fab fa-instagram" style="font-size: 30px;"></i></span>
+                           <span class="btn-inner--icon"><i class="fa fa-instagram" style="font-size: 30px;"></i></span>
                        </a>
                      </div>
                      <div class="col-lg-4 col-4">
                        <a href="{{ url("guia/perfil/estatistica/telefone", $guia->id_guia_gui) }}" target="BLANK" type="button" class="btn-icon-only btn-simple btn btn-lg btn-slack" data-toggle="tooltip" data-placement="bottom" title="Enviar Mensagem">
-                           <span class="btn-inner--icon"><i class="fab fa-whatsapp" style="font-size: 30px;"></i></span>
+                           <span class="btn-inner--icon"><i class="fa fa-whatsapp" style="font-size: 30px;"></i></span>
                        </a>
                      </div>
                    </div>
