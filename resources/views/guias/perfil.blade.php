@@ -15,7 +15,7 @@
             @if($guia->nu_cadastur_gui)
                <p><strong>Cadastur</strong>: {{ $guia->nu_cadastur_gui }} </p>
             @endif
-            @if($guia->unidadesConservacao)
+            @if(count($guia->unidadesConservacao) > 0)
                <p><strong>Unidades de Conservação</strong>: {{ count($guia->unidadesConservacao) > 0 ? implode(', ',$guia->unidadesConservacao->pluck('nome_unc')->toArray()) : ''}}</p>
             @endif
             <p><strong>Cidades de Atuação</strong>: {{ count($guia->cidadesAtuacao) > 0 ? implode(', ',$guia->cidadesAtuacao->pluck('nm_cidade_cde')->toArray()) : $guia->ds_atuacao_gui }}</p>
