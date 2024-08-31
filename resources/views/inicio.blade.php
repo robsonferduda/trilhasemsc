@@ -4,9 +4,9 @@
     @include('layouts/partes/acesso_guias')
     @include('inicio/destaques')
     @include('inicio/eventos')
-    @include('partes/publicidade-google')
+    @include('layouts/partes/publicidade-google')
     @include('inicio/condutores')
-    @include('partes/publicidade-google')
+    @include('layouts/partes/publicidade-google')
     @include('inicio/favoritos')
-    @include('partes/publicidade-google')
+    @include('layouts/partes/publicidade-google')
 @endsection
