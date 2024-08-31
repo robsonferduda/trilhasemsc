@@ -16,3 +16,10 @@ iframe { width: 100% !important; }
 body {
 	padding: 0px !important; 
 }
+.box-publicidade{
+	background-image: radial-gradient(#cfcfcf 1px, transparent 0);
+    background-size: 4px 4px;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
