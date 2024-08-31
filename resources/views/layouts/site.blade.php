@@ -65,7 +65,7 @@
             iframe.name = TCF_LOCATOR_NAME;
             doc.body.appendChild(iframe);
           } else {
-            setTimeout(addFrame, 5);
+            setTimeout(addFrame, 3);
           }
         }
         return !otherCMP;
