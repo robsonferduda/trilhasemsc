@@ -298,6 +298,14 @@
                                     <a href="{{ url('guia-e-condutores/privado/eventos') }}"><i class="fa fa-tags"></i> <span>Eventos</span></a>
                                 </li>
                             @endif
+                            @if(trim(Auth::user()->id_role) == 'TRILHEIRO')
+                                <li>
+                                    <a href="{{ url('trilheiro/privado/perfil') }}"><i class="icon-user"></i> <span>Perfil</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('trilheiro/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> <span>Editar Dados</span></a>
+                                </li>
+                            @endif
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

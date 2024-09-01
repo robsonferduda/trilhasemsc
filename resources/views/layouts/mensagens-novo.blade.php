@@ -1,8 +1,8 @@
 @if(\Session::has('flash_notification'))
     @foreach (Session::get('flash_notification') as $message)
-        <div class="alert alert-{{ $message['level'] }}">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {!! $message['message'] !!}
+        <div class="alert alert-{{ $message['level'] }}">   
+			<i class="fa fa fa-warning"></i>         
+            <strong>Atenção! </strong>{!! $message['message'] !!}			
         </div>
     @endforeach
 @endif    
@@ -11,9 +11,8 @@
 	@foreach($errors->all() as $error)
 
 	<div class="alert alert-warning">
-		<i class="fa-fw fa fa-warning"></i>
-		<strong><font><font>Atenção!</font></font></strong><font><font> {!! $error !!}
-		</font></font>
+		<i class="fa fa fa-warning"></i>
+		<strong>Atenção! </strong> {!! $error !!}
 	</div>
 
 	@endforeach
