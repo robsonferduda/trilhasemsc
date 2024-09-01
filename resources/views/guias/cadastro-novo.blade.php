@@ -73,13 +73,13 @@
                      <div class="mb-3">
                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirmar Senha" value="{{ old('password_confirmation') }}" required autocomplete="new-password">
                         </div>
-                        <div class="row center"> 
+                        <div class="row center mb-3"> 
                            <div class="col-xl-12 col-lg-12 col-md-12">
                               {!! htmlFormSnippet() !!}
                            </div>
                         </div>
                         
-                     <div class="form-check form-check-info text-left">
+                     <div class="form-check form-check-info text-left ">
                         <input class="form-check-input" type="checkbox" value="S" id="flexCheckDefault" name="term" required>
                         <label class="form-check-label" for="flexCheckDefault">
                               Eu aceito os termos e condições<a href="{{ url('termos-de-uso') }}" target="blank" class="text-dark font-weight-bold text-decoration-underline-hover"> Termos e Condições</a>
