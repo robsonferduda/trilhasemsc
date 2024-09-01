@@ -16,7 +16,7 @@
       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,200|Open+Sans+Condensed:700" rel="stylesheet">
       <link id="pagestyle" href="{{ asset('css/template.css') }}" rel="stylesheet" />
       <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-      <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/custom.css') }}?v=<?php echo date("Ymdhis") ?>">
       <style>
          .async-hide {
             opacity: 0 !important
