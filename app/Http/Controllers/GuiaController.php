@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cidade;
 use App\Fone;
 use App\Guia;
+use App\Trilheiro;
 use App\Trilha;
 use App\Interacao;
 use App\Mail\GuiaConfirmacao;
@@ -84,42 +85,106 @@ class GuiaController extends Controller
     public function cadastro(Request $request)
     {
         if($request->isMethod('post')) {
-            $validated= $request->validate([
-                'name' => 'required',
-                'email' => 'required',
-                'password' => 'required|confirmed',
-                'term' => 'required',
-                recaptchaFieldName() => recaptchaRuleName()
-            ], [
-                'name.required' => 'O campo "Nome" é obrigatório.',
-                'email.required' => 'O campo "Email" é obrigatório.',
-                'password.required' => 'O campo "Senha" é obrigatório.',
-                'password.confirmed' => 'O campo "Senha" e "Confirme a Senha" possuem valores divergentes.',
-                'g-recaptcha-response.recaptcha' => 'O campo "Não sou um robô" é obrigatório.',
-                'term.required' => 'O campo "Termo de Uso" é obrigatório.'
-            ]);
 
-            $user = \App\User::where('email', trim($request->email))->first();
+            $validated= $request->validate(['tipo_cadastro' => 'required'],['tipo_cadastro.required' => 'É obrigatório selecionar uma atividade']);
 
-            if($user) {
-                Flash::error("Usuário já cadastrado no sistema.");
-            } else {
-                $usuario = User::create([
-                    'name' => $request->name,
-                    'email' => trim($request->email),
-                    'password' => Hash::make($request->password)
-                ]);
+            switch ($request->tipo_cadastro) {
 
-                $usuario->id_role = 'GUIA';
-                $usuario->save();
-                Flash::success("Usuário cadastrado com sucesso!");
+                case 'guia':
+
+                    $validated= $request->validate([
+                        'name' => 'required',
+                        'email' => 'required',
+                        'password' => 'required|confirmed',
+                        'term' => 'required',
+                        recaptchaFieldName() => recaptchaRuleName()
+                    ], [
+                        'name.required' => 'O campo "Nome" é obrigatório.',
+                        'email.required' => 'O campo "Email" é obrigatório.',
+                        'password.required' => 'O campo "Senha" é obrigatório.',
+                        'password.confirmed' => 'O campo "Senha" e "Confirme a Senha" possuem valores divergentes.',
+                        'g-recaptcha-response.recaptcha' => 'O campo "Não sou um robô" é obrigatório.',
+                        'term.required' => 'O campo "Termo de Uso" é obrigatório.'
+                    ]);
+        
+                    $user = \App\User::where('email', trim($request->email))->first();
+        
+                    if($user) {
+                        Flash::error("Usuário já cadastrado no sistema.");
+                    } else {
+
+                        $usuario = User::create([
+                            'name' => $request->name,
+                            'email' => trim($request->email),
+                            'password' => Hash::make($request->password)
+                        ]);
+        
+                        $usuario->id_role = 'GUIA';
+                        $usuario = $usuario->save();
+
+                        if($usuario){
+                            $guia = Guia::create([
+                                'id_user' => $usuario->id,
+                                'nm_guia_gui' => $usuario->name,
+                                'cadastur' => $request->cadastur
+                            ]);
+                        }
+
+                        Flash::success("Usuário cadastrado com sucesso!");
+                    }
+                    
+                    break;
+
+                case 'trilheiro':
+
+                    $validated= $request->validate([
+                        'name' => 'required',
+                        'email' => 'required',
+                        'password' => 'required|confirmed',
+                        'term' => 'required'
+                        //recaptchaFieldName() => recaptchaRuleName()
+                    ], [
+                        'name.required' => 'O campo "Nome" é obrigatório.',
+                        'email.required' => 'O campo "Email" é obrigatório.',
+                        'password.required' => 'O campo "Senha" é obrigatório.',
+                        'password.confirmed' => 'O campo "Senha" e "Confirme a Senha" possuem valores divergentes.',
+                        'g-recaptcha-response.recaptcha' => 'O campo "Não sou um robô" é obrigatório.',
+                        'term.required' => 'O campo "Termo de Uso" é obrigatório.'
+                    ]);
+        
+                    $user = \App\User::where('email', trim($request->email))->first();
+        
+                    if($user) {
+                        Flash::error("Usuário já cadastrado no sistema.");
+                    } else {
+                        $usuario = User::create([
+                            'name' => $request->name,
+                            'email' => trim($request->email),
+                            'password' => Hash::make($request->password)
+                        ]);
+        
+                        $usuario->id_role = 'TRILHEIRO';
+                        $usuario->save();
+
+                        if($usuario){
+                            $trilheiro = Trilheiro::create([
+                                'id_user' => $usuario->id,
+                                'nm_trilheiro_tri' => $usuario->name
+                            ]);
+                        }
+                        Flash::success("Usuário cadastrado com sucesso!");
+                    }
+                    
+                    break;
+                default:
+                    # code...
+                    break;
             }
 
             return redirect('login');
 
         }
         return view('guias.cadastro-novo');
-        return view('guias.cadastro');
     }
 
     public function atualizarCadastro(Request $request)

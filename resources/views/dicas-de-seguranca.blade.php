@@ -52,7 +52,7 @@
                      </div>
                    
                </div>
-               <div class="col-lg-12 col-md-12 mt-4">
+               <div class="col-lg-12 col-md-12 mt-4 center">
                   <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Voltar ao Início</a>
                </div>
            </div>

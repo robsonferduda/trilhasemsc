@@ -1,43 +1,97 @@
 @extends('layouts.site')
-@section('pageTitle','Cadastro de Guias e Condutores')
+@section('pageTitle','Cadastro de Guias e Condutores e Trilheiros')
 @section('description', 'Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil' )
 
 @section('content')
 <div class="row mt-n6 mb-5">
     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
         <div class="card z-index-0">
-           <div class="card-header text-center pt-4 mt-2 mb-0">
-              <h5>Cadastro de Guias e Condutores</h5>
-              <p>Esse cadastro é exclusivo para guias e condutores e está sujeito a análise</p>
+           <div class="card-header text-center pt-4 mt-2 mb-0 pb-0">
+              <h5>Cadastre-se no Trilhas em SC</h5>
            </div>
-           <div class="card-body">
-               @include('layouts/mensagens-novo')
+           <div class="card-body mt-0">
+               
                <form action="{{ url('guias-e-condutores/cadastro') }}" method="post" >
-                  @csrf
-                 <div class="mb-3">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nome" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                 </div>
-                 <div class="mb-3">
-                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email">
-                 </div>
-                 <div class="mb-3">
-                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  placeholder="Senha" required autocomplete="new-password">
-                 </div>
-                 <div class="mb-3">
-                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirmar Senha" required autocomplete="new-password">
+                  @csrf                 
+                  @include('layouts/mensagens-novo')
+                  <div class="mb-3">
+                      <div class="row"> 
+                        <div class="col-xl-12 col-lg-12 col-md-12">
+                           <p class="center"><strong>Escolha sua atividade</strong></p>
+                        </div>
+                     </div>
+                     <div class="row center">
+                        <div class="col-xl-12 col-lg-12 col-md-12 ml-0 mr-0">
+                           <label class="custom-radio-button__container w-45">
+                              <input class="tipo_cadastro" type="radio" name="tipo_cadastro" value="guia">
+                              <span class="custom-radio-button designer">
+
+                                 <div class="svg-designer"><i class="fa fa-id-card-o" aria-hidden="true"></i></div>
+                                 
+                                <h5>Guia/Condutor</h5>
+                              </span>
+                            </label>
+         
+                            <label class="custom-radio-button__container w-45">
+                              <input class="tipo_cadastro" type="radio" name="tipo_cadastro" value="trilheiro">
+                              <span class="custom-radio-button">
+                                 <div class="svg-designer"><i class="fa fa-map" aria-hidden="true"></i></div>
+                                <h5>Trilheiro</h5>
+                              </span>
+                            </label>
+                        </div>
+                     </div>
                   </div>
-                  {!! htmlFormSnippet() !!}
-                  <br>
-                 <div class="form-check form-check-info text-left">
-                    <input class="form-check-input" type="checkbox" value="S" id="flexCheckDefault" name="term" required>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Eu aceito os termos e condições<a href="{{ url('termos-de-uso') }}" class="text-dark font-weight-bold text-decoration-underline-hover"> Termos e Condições</a>
-                    </label>
-                 </div>
-                 <div class="text-center">
-                    <button type="submit" class="btn bg-gradient-dark w-40 my-4 mb-2">Cadastrar</button>
-                 </div>
-                 <p class="text-sm mt-3 mb-0 text-center">Já possui uma conta? <br/><a href="{{ url('login') }}" class="text-dark font-weight-bold text-decoration-underline-hover">Clique aqui</a></p>
+                  
+                  <div class="row"> 
+                     <div class="col-xl-12 col-lg-12 col-md-12">
+                     
+                       <div class="alert alert-warning alert-dismissible text-white fade show d-none alert-atividade" role="alert">
+                         <strong>Atenção!</strong> É obrigatório selecionar o tipo de atividade.
+                         <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                         </button>
+                       </div>
+                     
+                   </div>
+                  </div>
+
+                   <div class="row"> 
+                     <div class="col-xl-12 col-lg-12 col-md-12">
+                     <div class="mb-3">
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nome" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                     </div>
+                     <div class="mb-3">
+                           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email">
+                     </div>
+                     <div class="mb-3 box-cadastur d-none">
+                        <input id="cadastur" type="text" class="form-control @error('cadastur') is-invalid @enderror" name="cadastur" placeholder="Cadastur" value="{{ old('cadastur') }}" autocomplete="cadastur" autofocus>
+                     </div>
+                     <div class="mb-3">
+                           <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  placeholder="Senha" value="{{ old('password') }}" required autocomplete="new-password">
+                     </div>
+                     <div class="mb-3">
+                           <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirmar Senha" value="{{ old('password_confirmation') }}" required autocomplete="new-password">
+                        </div>
+                        <div class="row center"> 
+                           <div class="col-xl-12 col-lg-12 col-md-12">
+                              {!! htmlFormSnippet() !!}
+                           </div>
+                        </div>
+                        
+                     <div class="form-check form-check-info text-left">
+                        <input class="form-check-input" type="checkbox" value="S" id="flexCheckDefault" name="term" required>
+                        <label class="form-check-label" for="flexCheckDefault">
+                              Eu aceito os termos e condições<a href="{{ url('termos-de-uso') }}" target="blank" class="text-dark font-weight-bold text-decoration-underline-hover"> Termos e Condições</a>
+                        </label>
+                     </div>
+                     
+                     <div class="text-center">
+                        <button type="submit" class="btn bg-gradient-dark w-40 my-4 mb-2 btn-cadastrar">Cadastrar</button>
+                     </div>
+                     <p class="text-sm mt-3 mb-0 text-center">Já possui uma conta? <br/><a href="{{ url('login') }}" class="text-dark font-weight-bold text-decoration-underline-hover">Clique aqui</a></p>
+                     </div>
+                  </div>
               </form>
            </div>
            <div class="row px-xl-5 px-sm-4 px-3">
@@ -77,4 +131,34 @@
         </div>
      </div>
 </div>
+@endsection
+@section('script')
+    <script>
+
+        $(document).ready(function() {       
+
+            $(".tipo_cadastro").click(function(){
+
+               var tipo = $(this).val();
+               $(".alert-atividade").addClass("d-none");
+
+               if(tipo == "guia"){
+                  $(".box-cadastur").removeClass("d-none");
+               }else{
+                  $(".box-cadastur").addClass("d-none");
+               }
+
+            });
+
+            $(".btn-cadastrar").click(function(){
+
+               var tipo = $('input[name="tipo_cadastro"]:checked').val();
+
+               if(!tipo){
+                  $(".alert-atividade").removeClass("d-none");
+                  return false;
+               }
+            });
+         });
+    </script>
 @endsection

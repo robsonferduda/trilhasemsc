@@ -52,10 +52,21 @@ class LoginController extends Controller
         }
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            if (trim(Auth::user()->id_role) == 'GUIA') {
-                return redirect('guia-e-condutores/privado/atualizar-cadastro');
-            } else {
-               return redirect()->intended('admin/dashboard');
+
+            switch (trim(Auth::user()->id_role)) {
+
+                case 'ADMIN':
+                    return redirect()->intended('admin/dashboard');
+                    break;
+                case 'GUIA':
+                    return redirect('guia-e-condutores/privado/atualizar-cadastro');
+                    break;
+                case 'TRILHEIRO':
+                    return redirect('trilheiro/privado/atualizar-cadastro');
+                    break;
+                default:
+                    return redirect()->intended('/');
+                    break;
             }
         }
 

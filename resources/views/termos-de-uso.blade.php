@@ -1,17 +1,15 @@
-@extends('layouts.blog')
+@extends('layouts.site')
 @section('content')
-        <div class="portfolio-area portfolio-two">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title title-two text-center">
-                            <div class="title-border" style="margin-top: 50px;">
-                                <h1>Termos de <span>uso</span></h1>
-                            </div>    
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
+@include('layouts/partes/header')
+<section class="pt-1 pb-0 mt-3 mb-5">
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-md-7">
+                <h3 class="text-warning"><i class="fa fa-shield" aria-hidden="true"></i> Termos de Uso</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 mt-1 ml-5 mr-5 px-4">
                 <h4>1. Termos</h4>
                 <p>Ao acessar ao site <a href='https://trilhasemsc.com.br'>Trilhas em SC</a>, concorda em cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis ​​e concorda que é responsável pelo cumprimento de todas as leis locais aplicáveis. Se você não concordar com algum                desses termos, está proibido de usar ou acessar este site. Os materiais contidos neste site são protegidos pelas leis de direitos autorais e marcas comerciais aplicáveis.</p>
                 <h4>2. Uso de Licença</h4>
@@ -40,7 +38,11 @@
                 <p>O Trilhas em SC pode revisar estes termos de serviço do site a qualquer momento, sem aviso prévio. Ao usar este site, você concorda em ficar vinculado à versão atual desses termos de serviço.</p>
                 <h3>Lei aplicável</h3>
                 <p>Estes termos e condições são regidos e interpretados de acordo com as leis do Trilhas em SC e você se submete irrevogavelmente à jurisdição exclusiva dos tribunais naquele estado ou localidade.</p>
-                </div>
             </div>
-        </div>
+            <div class="col-lg-12 col-md-12 mt-4 center">
+                <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Voltar ao Início</a>
+            </div>
+        </div>    
+    </div>
+</section>    
 @endsection

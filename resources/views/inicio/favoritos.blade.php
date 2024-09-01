@@ -10,6 +10,7 @@
                 </div>
                 <div class="col-lg-10 ps-5 pe-0">
                    <div class="row">
+                     @if(count($preferidas) > 0)
                        <div class="col-lg-3 col-6">
                         <a href="{{ url($preferidas[0]->ds_url_tri) }}"><img class="w-100 border-radius-lg h-50 shadow mt-0 mt-lg-7" src="{{ asset('img/trilhas/busca/'.$preferidas[0]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt=""></a>
                       </div>
@@ -25,6 +26,7 @@
                            <a href="{{ url($preferidas[5]->ds_url_tri) }}"><img class="w-100 border-radius-lg h-50 shadow mt-3" src="{{ asset('img/trilhas/busca/'.$preferidas[5]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt=""></a>
                            <a href="{{ url($preferidas[6]->ds_url_tri) }}"><img class="w-100 border-radius-lg h-50 shadow mt-4" src="{{ asset('img/trilhas/busca/'.$preferidas[6]->foto->where('id_tipo_foto_tfo',1)->first()->nm_path_fot) }}" alt=""></a>
                       </div>
+                      @endif
                    </div>
                 </div>
              </div>
