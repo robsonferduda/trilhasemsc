@@ -50,7 +50,7 @@ class CadastroController extends Controller
             return redirect('login');
         }
         
-        $usuario = Auth::user();
+        $usuario = User::find(Auth::user()->id);
         
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
 
