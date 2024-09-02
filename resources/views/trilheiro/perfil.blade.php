@@ -19,12 +19,36 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <h2>Dados do Trilheiro</h2>
                         </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 text-right">
+                            <h2><a href="{{ url('/trilheiro/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> Editar Dados</a></h2>
+                        </div>
                     </div>
                 </div>
                
                 <div class="body">
                     @include('layouts.mensagens')
-                   
+                    <div class="col-lg-3 col-md-3">
+                        <div class="card profile-header">
+                            <div class="body">
+                                <div class="profile-image center mb-4">
+                                    @switch(trim(Auth::user()->id_role))
+                                        @case('GUIA')
+                                            <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
+                                            @break
+                                        @case('TRILHEIRO')
+                                            <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/trilheiros/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle w-50" alt="Foto de Perfil">
+                                            @break
+                                        @default
+                                            <img src="{{ asset('images/user.png') }}" class="rounded-circle o" alt="Foto de Perfil">
+                                    @endswitch
+                                </div>
+                                <div class="center">
+                                    <h5 class="m-b-0">{{ $trilheiro->nm_trilheiro_tri }}</h5>
+                                    <span>{{ ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '' }}</span>
+                                </div>                       
+                            </div>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>

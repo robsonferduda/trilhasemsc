@@ -23,7 +23,7 @@
                      <div class="row center">
                         <div class="col-xl-12 col-lg-12 col-md-12 ml-0 mr-0">
                            <label class="custom-radio-button__container w-45">
-                              <input class="tipo_cadastro" type="radio" name="tipo_cadastro" value="guia">
+                              <input class="tipo_cadastro" type="radio" name="tipo_cadastro" value="guia" {{ (old('tipo_cadastro') and old('tipo_cadastro') == 'guia') ? 'checked' : '' }}>
                               <span class="custom-radio-button designer">
 
                                  <div class="svg-designer"><i class="fa fa-id-card-o" aria-hidden="true"></i></div>
@@ -33,7 +33,7 @@
                             </label>
          
                             <label class="custom-radio-button__container w-45">
-                              <input class="tipo_cadastro" type="radio" name="tipo_cadastro" value="trilheiro">
+                              <input class="tipo_cadastro" type="radio" name="tipo_cadastro" value="trilheiro" {{ (old('tipo_cadastro') and old('tipo_cadastro') == 'trilheiro') ? 'checked' : '' }}>
                               <span class="custom-radio-button">
                                  <div class="svg-designer"><i class="fa fa-map" aria-hidden="true"></i></div>
                                 <h5>Trilheiro</h5>
@@ -59,13 +59,13 @@
                    <div class="row"> 
                      <div class="col-xl-12 col-lg-12 col-md-12">
                      <div class="mb-3">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nome" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nome" value="{{ old('name') }}" required autocomplete="name">
                      </div>
                      <div class="mb-3">
                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email">
                      </div>
                      <div class="mb-3 box-cadastur d-none">
-                        <input id="cadastur" type="text" class="form-control @error('cadastur') is-invalid @enderror" name="cadastur" placeholder="Cadastur" value="{{ old('cadastur') }}" autocomplete="cadastur" autofocus>
+                        <input id="cadastur" type="text" class="form-control @error('cadastur') is-invalid @enderror" name="cadastur" placeholder="Cadastur" value="{{ old('cadastur') }}" autocomplete="cadastur">
                      </div>
                      <div class="mb-3">
                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  placeholder="Senha" value="{{ old('password') }}" required autocomplete="new-password">

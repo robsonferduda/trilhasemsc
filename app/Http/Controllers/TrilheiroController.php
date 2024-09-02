@@ -45,13 +45,69 @@ class TrilheiroController extends Controller
         $subtitulo = "Perfil";
         $page_name = "Perfil";
         
-        $guia = Trilheiro::where('id_user', Auth::user()->id)->first();
+        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
 
-        return view('trilheiro/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+        return view('trilheiro/perfil', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
     }
 
     public function atualizarCadastro(Request $request)
     {
-        return view('trilheiro/atualizar-cadastro');
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'TRILHEIRO') {
+            return redirect('login');
+        }
+        
+        $usuario = Auth::user();
+        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
+
+        if(empty($trilheiro)) {
+            $trilheiro = Trilheiro::create([
+                'id_user' => Auth::user()->id,
+                'nm_trilheiro_tri' => Auth::user()->name
+            ]);
+        }
+
+        $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
+
+        if($request->isMethod('post')) {
+
+            $validated = $request->validate([
+                'nome' => 'required',
+                'email' => 'required',
+                'cidade_origem' => 'required'
+            ]);
+
+            $nome = $request->nome;
+            $email = $request->email;
+            $cidadeOrigem = $request->cidade_origem;
+            $imagem_deletada = $request->imagem_deletada;
+
+            $trilheiro->update([
+                'cd_cidade_tri' => $cidadeOrigem,
+                'nm_trilheiro_tri' => $nome
+            ]);
+
+            $imagem = null;
+
+            if ($request->hasFile('imagem')) {
+                $extension = $request->file('imagem')->getClientOriginalExtension();
+                $filename = $trilheiro->id_trilheiro_tri . '.' . $extension;
+                $imagem = $request->imagem->storeAs('', $filename, 'trilheiros');
+            }else{
+                $imagem = $trilheiro->nm_path_foto_tri;
+            }
+
+            if($request->hasFile('imagem')) {
+                $trilheiro->update(['nm_path_foto_tri' => $imagem]);
+            } else {
+
+                if($imagem_deletada == "true") {
+                    $trilheiro->update(['nm_path_foto_tri' => $imagem]);
+                }
+            }
+
+            Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $imagem]);
+        }
+
+        return view('trilheiro/atualizar-cadastro', compact('cidades','trilheiro','usuario'));
     }
 }
