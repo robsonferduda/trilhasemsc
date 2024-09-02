@@ -138,4 +138,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'TrilheiroController@atualizarCadastro');
     });
 
+    Route::prefix('cadastro/privado')->group(function () {
+        Route::match(['GET', 'POST'], 'escolher-perfil', 'CadastroController@selecionarPerfil');
+    });
+
+
+
 });
