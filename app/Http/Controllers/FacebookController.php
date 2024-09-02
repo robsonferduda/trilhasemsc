@@ -29,7 +29,7 @@ class FacebookController extends Controller
                 $dados = array('name' =>  $user_facebook->getName(),
                                'email' => $user_facebook->getEmail(),
                                'fl_facebook' => 'S',
-                               'id_role' => 'GUIA',
+                               'id_role' => 'SOCIAL',
                                'password' => \Hash::make(rand(1, 10000)));
                 
                 $user = User::create($dados);
@@ -37,10 +37,8 @@ class FacebookController extends Controller
 
             Auth::login($user);
 
-            if($user->id_role == 'GUIA') {
-                return redirect('guia-e-condutores/privado/atualizar-cadastro');
-            }else{
-                return redirect('admin/dashboard');
+            if($user->id_role == 'SOCIAL') {
+                return redirect('cadastro/privado/escolher-perfil');
             }
 
             return redirect('login');

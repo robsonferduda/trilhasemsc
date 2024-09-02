@@ -29,7 +29,7 @@ class GoogleController extends Controller
                 $dados = array('name' =>  $userGoogle->getName(),
                                'email' => $userGoogle->getEmail(),
                                'fl_google' => 'S',
-                               'id_role' => 'GUIA',
+                               'id_role' => 'SOCIAL',
                                'password' => \Hash::make(rand(1, 10000)));
                 
                 $user = User::create($dados);
@@ -37,8 +37,8 @@ class GoogleController extends Controller
 
             Auth::login($user);
 
-            if($user->id_role == 'GUIA') {
-                return redirect('guia-e-condutores/privado/atualizar-cadastro');
+            if($user->id_role == 'SOCIAL') {
+                return redirect('cadastro/privado/escolher-perfil');
             }
 
             return redirect('login');

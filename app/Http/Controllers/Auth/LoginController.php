@@ -64,6 +64,9 @@ class LoginController extends Controller
                 case 'TRILHEIRO':
                     return redirect('trilheiro/privado/atualizar-cadastro');
                     break;
+                case 'SOCIAL':
+                    return redirect('cadastro/privado/escolher-perfil');
+                    break;
                 default:
                     return redirect()->intended('/');
                     break;
