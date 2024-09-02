@@ -19,8 +19,8 @@
             @forelse($trilheiros as $trilheiro)
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
-                        <div class="row p-5">
-                            <div class="col-lg-2 col-md-2 col-sm-12">
+                        <div class="row p-3">
+                            <div class="col-lg-1 col-md-1 col-sm-12">
                                 <img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('images/user.png') }}" class="rounded-circle user-photo w-100" alt="Foto de Perfil">
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-12">
