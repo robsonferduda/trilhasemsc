@@ -27,7 +27,7 @@
                                 <div class="row">
                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                         <div class="text">{{ $trilheiro->nm_trilheiro_tri }}</div>
-                                        <p><strong>Cidades de Origem</strong>: {{ ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : 'Santa Catarina' }}</p>
+                                        <p><strong>Cidade de Origem</strong>: {!! ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '<span class="text-danger">Não Informada</span>' !!}</p>
                                     </div>
                                 </div>
                             </div>
