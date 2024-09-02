@@ -50,6 +50,20 @@ class TrilheiroController extends Controller
         return view('trilheiro/perfil', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
     }
 
+    public function listar()
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $page_name = "Guias e Condutores em Santa Catarina";
+        $titulo = 'Guias e Condutores';
+        
+        $trilheiros = Trilheiro::all();
+
+        return view('admin/trilheiro/listar', ['page_name' => $page_name, 'trilheiros' => $trilheiros]);
+    }
+
     public function atualizarCadastro(Request $request)
     {
         if (Auth::guest() or trim(Auth::user()->id_role) != 'TRILHEIRO') {
