@@ -32,4 +32,5 @@ class Trilheiro extends Model
     {
         return $this->hasOne('App\User', 'id', 'id_user');
     }
+
 }

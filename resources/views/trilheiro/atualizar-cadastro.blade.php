@@ -17,14 +17,55 @@
                 <div class="header no-padding-bottom">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <h2>Dados do Condutor</h2>
+                            <h2>Dados do Trilheiro</h2>
                         </div>
                     </div>
                 </div>
                
                 <div class="body">
                     @include('layouts.mensagens')
-                   
+                    <form action="{{ url('trilheiro/privado/atualizar-cadastro') }}" enctype="multipart/form-data" method="post" id="form-trilheiro">
+                        @csrf
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="nome">Nome</label><span class="text-danger"> Obrigatório</span>
+                                    <input type="text" name="nome" id="nome" value="{{ $trilheiro->nm_trilheiro_tri }}" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                                    <input type="text" name="email" id="email" value="{{ $usuario->email }}" class="form-control" required readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="cidade_origem">Cidade de Origem</label><span class="text-danger"> Obrigatório</span>
+                                    <select name="cidade_origem" id="cidade_origem" class="form-control select2" data-parsley-errors-container="#error-cidade-origem" required>
+                                        <option value="">Selecione uma cidade</option>
+                                        @foreach($cidades as $cidade)
+                                            <option {!! $trilheiro->cd_cidade_tri == $cidade->cd_cidade_cde ? 'selected' : '' !!}  value="{{ $cidade->cd_cidade_cde }}">{{ $cidade->nm_cidade_cde }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span id="error-cidade-origem"></span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="dropify-event">Faça aqui o upload da sua foto de perfil</label><span class="text-info"> Preferencialmente foto em formato quadrado</span>
+                                    <input name="imagem" type="file" id="dropify-event"  data-default-file="{{  $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('img/trilheiros/default.png') }}">
+                                    <input name="imagem_deletada" id="imagem_deletada" type="hidden" value='false' >
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top:15px; ">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -33,7 +74,7 @@
 @section('script')
     <script>
         $(function() {
-            $('#form-guia').parsley();
+            $('#form-trilheiro').parsley();
 
             $('.phone').mask('(99) 999-999999');
 

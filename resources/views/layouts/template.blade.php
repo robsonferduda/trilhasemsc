@@ -58,7 +58,7 @@
             </div>
 
             <div class="navbar-brand">
-                <a href="{{ url('/') }}" class="hidden-sm hidden-xs"><img src="{{ asset('img/logo/logo_admin.jpg') }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> Trilhas em SC</a>           
+                <a href="{{ url('/') }}" class="hidden-sm hidden-xs" style="color: black;"><img src="{{ asset('img/logo/logo_admin.jpg') }}" alt="Logo" class="img-responsive logo" style="width: 30px !important;"> Trilhas em SC</a>           
             </div>
             
             <div class="navbar-right">
@@ -77,12 +77,20 @@
     <div id="left-sidebar" class="sidebar">
         <div class="sidebar-scroll">
             <div class="user-account">
-                @if(trim(Auth::user()->id_role) == 'GUIA')
-                    <img src="{{ $guia->nm_path_logo_gui ? asset('img/guias/'.$guia->nm_path_logo_gui) : asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
-                @else
-                    <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
-                @endif                
+               
+                @switch(trim(Auth::user()->id_role))
+                    @case('GUIA')
+                        <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
+                        @break
+                    @case('TRILHEIRO')
+                        <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/trilheiros/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
+                        @break
+                    @default
+                        <img src="{{ asset('images/user.png') }}" class="rounded-circle user-photo" alt="Foto de Perfil">
+                @endswitch
+                
                 <div class="dropdown">
+                    <span>Bem-vindo,</span>
                     <a href="javascript:void(0);" class="user-name" data-toggle="dropdown"><strong>{{ (Auth::user()) ? explode(' ', Auth::user()->name)[0] : "Não Logado" }}</strong></a>
                 </div>
                 <hr>
