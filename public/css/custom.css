@@ -29,6 +29,12 @@ body {
     text-align: center;
 }
 
+.box-indice{
+	position: absolute;
+    bottom: 15px;
+    right: 10px;
+}
+
 .svg-designer {
 	color: #979797; 
 	font-size: 35px;
