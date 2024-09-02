@@ -54,16 +54,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-7 col-md-7 center">
+                        <div class="col-lg-9 col-md-9 center">
 
-                        </div>
-                        <div class="col-lg-2 col-md-2 center">
-                            <div class="box-indice">
-                                <h2 class="mb-0">{{ $trilheiro->nr_score_tri }}</h2>
-                                <span>{{ $trilheiro->indice->ds_indice_ind }}</span>
-                                <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Experiência em Trilhas">
-                                <strong>Índice de Experiência em Trilhas</strong>
-                            </div>
                         </div>
                     </div>
                 </div>
