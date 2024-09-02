@@ -33,4 +33,10 @@ class Trilheiro extends Model
         return $this->hasOne('App\User', 'id', 'id_user');
     }
 
+
+    public function indice()
+    {
+        return $this->hasOne('App\Indice', 'id_indice_ind', 'id_indice_ind');
+    }
+
 }
