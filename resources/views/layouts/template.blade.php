@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/dropify/css/dropify.css') }}">
 
 <!-- MAIN CSS -->
-<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}?v={{ date("YmdHis") }}">
 <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 <link rel="stylesheet" href="{{ asset('css/color_skins.css') }}">
 
