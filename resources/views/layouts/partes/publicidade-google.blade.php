@@ -6,6 +6,8 @@
           </div>
        </div>
        <div class="row box-publicidade">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1229685353625953"
+            crossorigin="anonymous"></script>
             <ins class="adsbygoogle"
                 style="display:block"
                 data-ad-client="ca-pub-1229685353625953"
