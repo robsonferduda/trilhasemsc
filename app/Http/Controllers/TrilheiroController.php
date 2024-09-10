@@ -51,6 +51,20 @@ class TrilheiroController extends Controller
         return view('trilheiro/perfil', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
     }
 
+    public function score()
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'TRILHEIRO') {
+            return redirect('login');
+        }
+
+        $page_name = "Guias e Condutores em Santa Catarina";
+        $titulo = 'Guias e Condutores';
+        
+        $trilheiros = Trilheiro::all();
+
+        return view('trilheiro/score', ['page_name' => $page_name, 'trilheiros' => $trilheiros]);
+    }
+
     public function listar()
     {
         if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
@@ -130,5 +144,10 @@ class TrilheiroController extends Controller
         }
 
         return view('trilheiro/atualizar-cadastro', compact('estados', 'cidades','trilheiro','usuario'));
+    }
+
+    public function calcularScore(Request $request)
+    {
+        dd($request->all());
     }
 }
