@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cidade;
+use App\Estado;
 use App\Fone;
 use App\Guia;
 use App\Trilheiro;
@@ -80,6 +81,8 @@ class TrilheiroController extends Controller
             ]);
         }
 
+        $estados = Estado::orderBy('nm_estado_est')->get();
+
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
 
         if($request->isMethod('post')) {
@@ -94,10 +97,14 @@ class TrilheiroController extends Controller
             $email = $request->email;
             $cidadeOrigem = $request->cidade_origem;
             $imagem_deletada = $request->imagem_deletada;
+            $estado = $request->estado_origem;
+            $sexo = $request->sexo;
 
             $trilheiro->update([
                 'cd_cidade_tri' => $cidadeOrigem,
-                'nm_trilheiro_tri' => $nome
+                'nm_trilheiro_tri' => $nome,
+                'cd_estado_est' => $estado,
+                'cd_sexo_sex' => $sexo
             ]);
 
             $imagem = null;
@@ -122,6 +129,6 @@ class TrilheiroController extends Controller
             Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $imagem]);
         }
 
-        return view('trilheiro/atualizar-cadastro', compact('cidades','trilheiro','usuario'));
+        return view('trilheiro/atualizar-cadastro', compact('estados', 'cidades','trilheiro','usuario'));
     }
 }
