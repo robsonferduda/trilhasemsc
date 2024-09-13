@@ -43,7 +43,7 @@ class GuiaController extends Controller
     {
         $titulo = 'Guias e Condutores';
         $subtitulo = "Perfil";
-        $page_name = "Página Não Encontrada";
+        $page_name = "Perfil";
         
         $guia = Guia::where('nm_instagram_gui', $instagram)->first();
 
