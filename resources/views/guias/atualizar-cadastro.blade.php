@@ -82,7 +82,7 @@
                                 <div class="form-group">
                                     <label for="instagram">Instagram </label><span class="text-info"> Somente o nome do perfil</span>
                                     <input type="text" name="instagram" id="instagram" value="{{ $guia->nm_instagram_gui ?: ''  }}" placeholder="Ex: trilhasemsc" class="form-control" >
-                                    <span class="text-info"> Não use arroba ou URL. Ex.: trilhasemsc</span>
+                                    <span class="text-danger"> Não use arroba ou URL. Ex.: trilhasemsc</span>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">

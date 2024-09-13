@@ -18,7 +18,10 @@ class Trilheiro extends Model
         'nm_instagram_tri',
         'nm_path_foto_tri',
         'fl_ativo_gui',
-        'cd_cidade_tri'
+        'cd_cidade_tri',
+        'cd_estado_est',
+        'dt_nascimento',
+        'cd_sexo_sex'
         ];
 
     public $timestamps = true;

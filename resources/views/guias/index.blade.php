@@ -14,7 +14,7 @@
                <div class="card card-profile" style="min-height: 335px;">
                  
                  <div class="card-body justify-content-center text-center">
-                   <a href="{{ url("guia/perfil/estatistica/perfil", $guia->id_guia_gui) }}">
+                   <a href="{{ url("guia/perfil/estatistica/perfil", $guia->nm_instagram_gui) }}">
                        <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}">
                      </a>
                    <h6 class="mb-0 mt-2">{{ $guia->nm_guia_gui }}</h6>

@@ -39,15 +39,19 @@ class GuiaController extends Controller
         return view('guias/index', ['page_name' => $page_name, 'guias' => $guias, 'titulo' => $titulo, 'cidades' => $cidades]);
     }
 
-    public function perfil($id)
+    public function perfil($instagram)
     {
         $titulo = 'Guias e Condutores';
         $subtitulo = "Perfil";
-        $page_name = "Perfil";
+        $page_name = "Página Não Encontrada";
         
-        $guia = Guia::find($id);
+        $guia = Guia::where('nm_instagram_gui', $instagram)->first();
 
-        return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+        if($guia){
+            return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+        }else{
+            return view('guias/guia-not-found', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+        }        
     }
 
     public function estatisticas($tipo, $id)

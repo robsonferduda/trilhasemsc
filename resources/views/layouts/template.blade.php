@@ -319,6 +319,9 @@
                                 <li>
                                     <a href="{{ url('trilheiro/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> <span>Editar Dados</span></a>
                                 </li>
+                                <li>
+                                    <a href="{{ url('trilheiro/privado/meu-score') }}"><i class="fa fa-thermometer-half"></i> <span>Meu Score</span></a>
+                                </li>
                             @endif
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();

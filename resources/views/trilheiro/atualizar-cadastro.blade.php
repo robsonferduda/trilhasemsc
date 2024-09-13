@@ -27,16 +27,38 @@
                     <form action="{{ url('trilheiro/privado/atualizar-cadastro') }}" enctype="multipart/form-data" method="post" id="form-trilheiro">
                         @csrf
                         <div class="row clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="nome">Nome</label><span class="text-danger"> Obrigatório</span>
                                     <input type="text" name="nome" id="nome" value="{{ $trilheiro->nm_trilheiro_tri }}" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label for="email">E-mail</label>
                                     <input type="text" name="email" id="email" value="{{ $usuario->email }}" class="form-control" required readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label for="email">Sexo</label><span class="text-danger"> Obrigatório</span>
+                                    <select name="sexo" id="sexo" class="form-control select2" data-parsley-errors-container="#error-sexo" required>
+                                        <option value="">Selecione uma opção</option>
+                                        <option value="F" {!! $trilheiro->cd_sexo_sex == 'F' ? 'selected' : '' !!}>Feminino</option>
+                                        <option value="M" {!! $trilheiro->cd_sexo_sex == 'M' ? 'selected' : '' !!}>Masculino</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="estado_origem">Estado de Origem</label><span class="text-danger"> Obrigatório</span>
+                                    <select name="estado_origem" id="estado_origem" class="form-control select2" data-parsley-errors-container="#error-estado-origem" required>
+                                        <option value="">Selecione um estado</option>
+                                        @foreach($estados as $estado)
+                                            <option {!! $trilheiro->cd_estado_est == $estado->cd_estado_est ? 'selected' : '' !!}  value="{{ $estado->cd_estado_est }}">{{ $estado->nm_estado_est }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span id="error-estado-origem"></span>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
@@ -51,7 +73,12 @@
                                     <span id="error-cidade-origem"></span>
                                 </div>
                             </div>
-                            
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="dt_nascimento">Data de Nascimento</label><span class="text-danger"> Obrigatório</span>
+                                    <input type="text" name="dt_nascimento" id="dt_nascimento" value="{{ $usuario->email }}" class="form-control" placeholder="__/__/____" required>
+                                </div>
+                            </div>                            
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
