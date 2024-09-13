@@ -197,7 +197,7 @@
    <!-- End InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.2) -->
    </head>
    <body class="help-center">
-      <div id="125834-47"><script src="//ads.themoneytizer.com/s/gen.js?type=47"></script><script src="//ads.themoneytizer.com/s/requestform.js?siteId=125834&formatId=47"></script></div>
+      {{-- <div id="125834-47"><script src="//ads.themoneytizer.com/s/gen.js?type=47"></script><script src="//ads.themoneytizer.com/s/requestform.js?siteId=125834&formatId=47"></script></div>--}}
       <!-- Google Tag Manager (noscript) -->
          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H3D7W9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- End Google Tag Manager (noscript) -->
