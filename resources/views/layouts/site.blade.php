@@ -199,9 +199,7 @@
    <body class="help-center">
       {{-- <div id="125834-47"><script src="//ads.themoneytizer.com/s/gen.js?type=47"></script><script src="//ads.themoneytizer.com/s/requestform.js?siteId=125834&formatId=47"></script></div>--}}
       <!-- Google Tag Manager (noscript) -->
-      <!--
          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H3D7W9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-      -->
       <!-- End Google Tag Manager (noscript) -->
       <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3  navbar-transparent ">
          <div class="container">           
