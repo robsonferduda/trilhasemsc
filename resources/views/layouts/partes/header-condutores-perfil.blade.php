@@ -10,7 +10,7 @@
           </div>
           <div class="col-md-10 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
              <h4 class="mb-1">{{ $guia->nm_guia_gui }}</h4>
-             <p class="mb-1"><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/estatistica/instagram", $guia->id_guia_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
+             <p class="mb-1"><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/estatistica/instagram", $guia->nm_instagram_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
              <p class="mb-1"><strong>Cidade</strong>: {{ $guia->origem->nm_cidade_cde }}</p>
              <p class="mb-1"><strong>Contato</strong>: {{ ($guia->fone) ? $guia->fone->nu_fone_fon : '' }}</p>
           </div>
