@@ -40,19 +40,11 @@
                </div>
              </div>           
           @endforeach
-          @env('production')
-            <ins class="adsbygoogle"
-                 style="display:block"
-                  data-ad-client="ca-pub-1229685353625953"
-                  data-ad-slot="7739149091"
-                  data-ad-format="auto"
-                  data-full-width-responsive="true"></ins>
-              <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-          @endenv
           <div class="col-lg-12 col-md-12 mt-4 text-center">
             <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Voltar ao Início</a>
           </div>
        </div>
     </div>
  </section>
+ @include('layouts/partes/publicidade-google')
 @endsection
