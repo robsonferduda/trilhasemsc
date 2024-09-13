@@ -79,7 +79,7 @@ class GuiaController extends Controller
         }
 
         $dados = array('id_tipo_interacao_tin' => $interacao,
-                       'id_guia_gui' => $guia->id);
+                       'id_guia_gui' => $guia->id_guia_gui);
 
         Interacao::create($dados);
 
