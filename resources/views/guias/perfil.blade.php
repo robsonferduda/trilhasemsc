@@ -35,7 +35,7 @@
             </div>
          </div>
          <div class="col-md-12 mt-2">
-            <a class="btn btn-success" href="{{ url("guia/perfil/estatistica/telefone", $guia->id_guia_gui) }}"><i class="fa fa-whatsapp" aria-hidden="true"></i> Enviar Mensagem</a>
+            <a class="btn btn-success" href="{{ url("guia/perfil/estatistica/telefone", $guia->nm_instagram_gui) }}"><i class="fa fa-whatsapp" aria-hidden="true"></i> Enviar Mensagem</a>
             <a class="btn btn-primary mr-2 ml-3" href="{{ url("guias-e-condutores") }}"><i class="fa fa-users" aria-hidden="true"></i> Todos os Guias</a>
          </div> 
          @include('layouts/partes/publicidade-google')         
