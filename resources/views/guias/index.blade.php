@@ -21,7 +21,7 @@
                    <p>{{ ($guia->origem) ? $guia->origem->nm_cidade_cde : 'Santa Catarina' }}</p>
                    <div class="row justify-content-center text-center" style="position: absolute; bottom: 1px;">
                      <div class="col-lg-4 col-4">
-                       <a href="{{ url("guia/perfil/estatistica/perfil", $guia->id_guia_gui) }}" type="button" class="btn-icon-only btn-simple btn btn-lg btn-facebook" data-toggle="tooltip" data-placement="bottom" title="Conhecer Perfil">
+                       <a href="{{ url("guia/perfil/estatistica/perfil", $guia->nm_instagram_gui) }}" type="button" class="btn-icon-only btn-simple btn btn-lg btn-facebook" data-toggle="tooltip" data-placement="bottom" title="Conhecer Perfil">
                            <span class="btn-inner--icon"><i class="fa fa-user" style="font-size: 30px;"></i></span>
                        </a>
                      </div>
@@ -31,7 +31,7 @@
                        </a>
                      </div>
                      <div class="col-lg-4 col-4">
-                       <a href="{{ url("guia/perfil/estatistica/telefone", $guia->id_guia_gui) }}" target="BLANK" type="button" class="btn-icon-only btn-simple btn btn-lg btn-slack" data-toggle="tooltip" data-placement="bottom" title="Enviar Mensagem">
+                       <a href="{{ url("guia/perfil/estatistica/telefone", $guia->nm_instagram_gui) }}" target="BLANK" type="button" class="btn-icon-only btn-simple btn btn-lg btn-slack" data-toggle="tooltip" data-placement="bottom" title="Enviar Mensagem">
                            <span class="btn-inner--icon"><i class="fa fa-whatsapp" style="font-size: 30px;"></i></span>
                        </a>
                      </div>
