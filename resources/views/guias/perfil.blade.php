@@ -11,7 +11,7 @@
        <div class="row">
          <div class="col-md-12">
             <h4>{{ $guia->nm_guia_gui }}</h4>
-            <p><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/estatistica/instagram", $guia->id_guia_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
+            <p><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/estatistica/instagram", $guia->nm_instagram_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
             @if($guia->nu_cadastur_gui)
                <p><strong>Cadastur</strong>: {{ $guia->nu_cadastur_gui }} </p>
             @endif
