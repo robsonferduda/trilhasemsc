@@ -54,11 +54,11 @@ class GuiaController extends Controller
         }        
     }
 
-    public function estatisticas($tipo, $id)
+    public function estatisticas($tipo, $instagram)
     {
         $url = null;
         $interacao = 0;
-        $guia = Guia::find($id);
+        $guia = Guia::where('nm_instagram_gui', $instagram)->first();
         $fone = ($guia->fone) ? preg_replace('/[(\)\-\" "]+/', '', $guia->fone->nu_fone_fon) : '';
 
         switch ($tipo) {
@@ -74,7 +74,7 @@ class GuiaController extends Controller
 
             case 'perfil':
                 $interacao = 3;
-                $url = 'guia/perfil/'.$id;
+                $url = 'guia/perfil/'.$instagram;
                 break;
         }
 
