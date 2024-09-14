@@ -82,7 +82,7 @@ class GuiaController extends Controller
 
             case 'perfil':
                 $interacao = 3;
-                $url = 'guia/perfil/'.$instagram;
+                $url = 'guia/perfil/'.$identificador;
                 break;
         }
 
