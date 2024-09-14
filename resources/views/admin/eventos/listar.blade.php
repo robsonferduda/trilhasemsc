@@ -19,7 +19,7 @@
                 <div class="header no-padding-bottom">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <h2>Meus Eventos</h2>
+                            <h2><i class="fa fa-tags"></i> Meus Eventos</h2>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <a href="{{ url('guia-e-condutores/privado/evento/novo') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Novo Evento</a>
@@ -27,29 +27,40 @@
                     </div>
                 </div>
                 
-                <div class="body">
+                <div class="body mt-0 pt-0">
                     @include('layouts.mensagens')
-                    <div class="">
-                    <ul class="list-unstyled feeds_widget">
-                        @forelse($eventos as $key => $evento)
-                            <li>
-                                <div class="feeds-left"><i class="fa fa-ticket"></i></div>
-                                <div class="feeds-body">
-                                    <h4 class="title">{{ $evento->nm_evento_eve }} <small class="float-right text-muted">{{ $evento->hora_inicio_eve }} - {{ $evento->hora_fim_eve }} </small></h4>
-                                    <small>{{ $evento->descricao }}</small>
+
+                    @forelse($eventos as $key => $evento)
+                        <div class="card rounded shadow">
+                            <div class="body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="title">{{ $evento->nm_evento_eve }} <small class="float-right text-muted">{{ \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i') }} - {{ \Carbon\Carbon::parse($evento->hora_fim_eve )->format('H:i') }} </small></h6>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="mb-1"><strong>Local</strong>: {{ $evento->local->nm_cidade_cde }}</p>
+                                        <p class="mb-1"><strong>Data</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y') }}</p>
+                                        <p class="mb-1"><strong>Valor</strong>: R$ {{ $evento->valor_eve }}</p>
+                                        <div style="position: absolute; bottom: 1px; right: 5px;">
+                                            <a href="{{ url('eventos/detalhes', $evento->id_evento_eve) }}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye"></i> Ver</a>
+                                            <a href="" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i> Editar</a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </li> 
-                        @empty
-                            <li>
-                                <div class="feeds-left"><i class="fa fa-frown-o fa-1x"></i></div>
-                                <div class="feeds-body">
-                                    <h4 class="title text-danger">Nenhum evento cadastrado</h4>
-                                    <small>Você pode atualizar sua agenda de eventos usando a opção <strong>Novo Evento</strong></small>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="card rounded shadow">
+                            <div class="body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6>Nenhum evento cadastrado</h6>
+                                        <p class="mb-1">Cadastre novos eventos na opção <a href="{{ url('guia-e-condutores/privado/evento/novo') }}"><strong>Novo Evento</strong></a> e torne-se visível para quem procura aventura</p>
+                                    </div>
                                 </div>
-                            </li> 
-                        @endforelse                                                   
-                    </ul>
-                    </div>
+                            </div>
+                        </div>
+                    @endforelse 
                 </div>
             </div>
         </div>

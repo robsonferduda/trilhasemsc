@@ -19,7 +19,7 @@
                 <div class="header no-padding-bottom">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <h2>Cadastro de Eventos</h2>
+                            <h2><i class="fa fa-tags"></i> Cadastro de Eventos</h2>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-primary pull-right"><i class="fa fa-tags"></i> Meus Eventos</a>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 
-                <div class="body no-padding-top">
+                <div class="body no-padding-top pt-0">
                     @include('layouts.mensagens')
                     <form action="{{ url('guia-e-condutores/privado/evento/cadastrar') }}" enctype="multipart/form-data" method="post" id="form-guia">
                         @csrf
@@ -59,7 +59,7 @@
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label for="site">Valor</label><span class="text-danger"> Obrigatório</span>
-                                    <input type="text" name="valor_eve" id="valor_eve" value="" placeholder="R$ 999,99" class="form-control" >
+                                    <input type="text" name="valor_eve" id="valor_eve" value="0.00" placeholder="" class="form-control" >
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
@@ -97,11 +97,20 @@
                             </div>
                         </div>
                         <div class="row clearfix">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="dropify-event">Faça aqui o upload da imagem de divulgação no Instagram</label> <span class="text-danger">Obrigatório</span>
-                                    <input name="imagem" type="file" id="dropify-event"  data-default-file="{{  $guia->nm_path_logo_gui ? asset('img/eventos/'.$guia->nm_path_logo_gui) : asset('img/eventos/default.png') }}">
-                                    <input name="imagem_deletada" id="imagem_deletada" type="hidden" value='false' >
+                                    <label class="mb-0" for="img_instagram">Faça aqui o upload da imagem de divulgação no Instagram</label> <span class="text-danger">Obrigatório</span>
+                                    <p class="mt-0 mb-0 text-info">Imagem em formato vertical, para ser postada nos storys do Instagram</p>
+                                    <input name="imagem" type="file" id="img_instagram"  data-default-file="{{  $guia->nm_path_logo_gui ? asset('img/eventos/'.$guia->nm_path_logo_gui) : asset('img/eventos/evento_story.png') }}">
+                                    <input name="img_deletada_instagram" id="img_deletada_instagram" type="hidden" value='false' >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="mb-0" for="img_evento">Faça aqui o upload da imagem de divulgação do evento</label> <span class="text-danger">Obrigatório</span>
+                                    <p class="mt-0 mb-0 text-info">Imagem em formato horizontal, para ser postada na página do evento.</p>
+                                    <input name="imagem" type="file" id="img_evento"  data-default-file="{{  $guia->nm_path_logo_gui ? asset('img/eventos/'.$guia->nm_path_logo_gui) : asset('img/eventos/fundo_evento.jpg') }}">
+                                    <input name="img_deletada_evento" id="img_deletada_evento" type="hidden" value='false' >
                                 </div>
                             </div>
                         </div>
@@ -123,11 +132,18 @@
         $('.phone').mask('(99) 99999-9999');
         $('.hora').mask('99:99');
         $('.data').mask('99/99/9999');
+        $('#valor_eve').maskMoney({thousands:'', decimal:'.'});
 
-        var drEvent = $('#dropify-event').dropify();
+        var drEvent = $('#img_instagram').dropify();
 
         drEvent.on('dropify.afterClear', function(event, element) {
-            $('#imagem_deletada').val(true);
+            $('#img_deletada_instagram').val(true);
+        });
+
+        var drEvent = $('#img_evento').dropify();
+
+        drEvent.on('dropify.afterClear', function(event, element) {
+            $('#img_deletada_evento').val(true);
         });
     });
 </script>
