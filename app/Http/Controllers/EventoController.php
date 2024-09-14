@@ -15,7 +15,7 @@ class EventoController extends Controller
     public function index()
     {
         $page_name = "Eventos e Trilhas em Santa Catarina";
-        $eventos = Evento::all();
+        $eventos = Evento::orderBy('dt_realizacao_eve','DESC')->get();
         $cidades = Cidade::whereIn('cd_cidade_cde', Evento::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
 
         return view('eventos/index', ['page_name' => $page_name, 'eventos' => $eventos, 'cidades' => $cidades]);
@@ -25,11 +25,12 @@ class EventoController extends Controller
     {
         $evento = Evento::find($id);
         $page_name = "Eventos e Trilhas em Santa Catarina - ".$evento->nm_evento_eve;
+        $cidades = Cidade::whereIn('cd_cidade_cde', Evento::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
         
         $dados = array('id_tipo_interacao_tin' => 5,
                        'id_guia_gui' => $id);
 
-        return view('eventos/detalhes', ['page_name' => $page_name, 'evento' => $evento]);
+        return view('eventos/detalhes', ['page_name' => $page_name, 'evento' => $evento, 'cidades' => $cidades]);
     }
 
     public function eventos()

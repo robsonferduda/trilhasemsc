@@ -23,8 +23,8 @@
                     </h4>
                     <p class="mb-1"><strong>Responsável</strong>: <a href="{{ url("guia/perfil/estatistica/perfil", $evento->guia->nm_instagram_gui) }}">{{ $evento->guia->nm_guia_gui }}</a></p>
                     <p class="mb-1"><strong>Cidade</strong>: {{ $evento->local->nm_cidade_cde }}</p>
-                    <p class="mb-1"><strong>Data/Horário</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y H:i:s')}}</p>
-                    <p class="mb-1"><strong>Horário Término</strong>: {{ \Carbon\Carbon::parse($evento->dt_termino_eve)->format('H:i') }}</p>
+                    <p class="mb-1"><strong>Data/Horário</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i') }}</p>
+                    <p class="mb-1"><strong>Horário Término</strong>: {{ \Carbon\Carbon::parse($evento->hora_fim_eve)->format('H:i') }}</p>
                     <p class="mb-1"><strong>Valor</strong>: R$ {{ $evento->valor_eve }}</p>
                     <p class="mb-1"><strong>Contato</strong>: {{ $evento->local->nm_cidade_cde }}</p>
                 </div>

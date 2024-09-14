@@ -9,7 +9,7 @@
           </div>
        </div>
        <div class="row">
-            @foreach($eventos as $key => $evento)
+            @forelse($eventos as $key => $evento)
                 <div class="row mb-1">
                     <div class="col-lg-2 col-md-2 mt-2 mb-4 position-relative text-center d-xs-block d-sm-block d-md-none">
                         @if($evento->guia->nm_path_logo_gui)
@@ -24,8 +24,8 @@
                         </h4>
                         <p class="mb-1"><strong>Responsável</strong>: <a href="{{ url("guia/perfil/estatistica/perfil", $evento->guia->nm_instagram_gui) }}">{{ $evento->guia->nm_guia_gui }}</a></p>
                         <p class="mb-1"><strong>Cidade</strong>: {{ $evento->local->nm_cidade_cde }}</p>
-                        <p class="mb-1"><strong>Data/Horário</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y H:i:s')}}</p>
-                        <p class="mb-1"><strong>Horário Término</strong>: {{ \Carbon\Carbon::parse($evento->dt_termino_eve)->format('H:i') }}</p>
+                        <p class="mb-1"><strong>Data/Horário</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i') }}</p>
+                        <p class="mb-1"><strong>Horário Término</strong>: {{ \Carbon\Carbon::parse($evento->hora_fim_eve)->format('H:i') }}</p>
                         <p class="mb-1"><strong>Valor</strong>: R$ {{ $evento->valor_eve }}</p>
                         <p class="mb-1"><strong>Contato</strong>: {{ $evento->local->nm_cidade_cde }}</p>
                     </div>
@@ -48,7 +48,9 @@
                 @if($key < count($eventos)-1)  
                     <hr class="mb-4"/>      
                 @endif
-            @endforeach
+            @empty
+                <h6 class="center">Nenhum evento disponível no momento. Aguarde por mais aventuras!</h6>
+            @endforelse
             <div class="col-lg-12 col-md-12 mt-4 text-center">
                 <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Voltar ao Início</a>
             </div>
