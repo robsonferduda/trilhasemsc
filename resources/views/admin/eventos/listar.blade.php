@@ -8,7 +8,7 @@
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-id-card"></i> Guias e Condutores</li>
                     <li class="breadcrumb-item">Eventos</li>
-                    <li class="breadcrumb-item">Listar Eventos</li>
+                    <li class="breadcrumb-item">Meus Eventos</li>
                 </ul>
             </div>
         </div>
@@ -19,7 +19,7 @@
                 <div class="header no-padding-bottom">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <h2>Listagem de Eventos</h2>
+                            <h2>Meus Eventos</h2>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <a href="{{ url('guia-e-condutores/privado/evento/novo') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Novo Evento</a>
@@ -29,7 +29,27 @@
                 
                 <div class="body">
                     @include('layouts.mensagens')
-                    
+                    <div class="">
+                    <ul class="list-unstyled feeds_widget">
+                        @forelse($eventos as $key => $evento)
+                            <li>
+                                <div class="feeds-left"><i class="fa fa-ticket"></i></div>
+                                <div class="feeds-body">
+                                    <h4 class="title">{{ $evento->nm_evento_eve }} <small class="float-right text-muted">{{ $evento->hora_inicio_eve }} - {{ $evento->hora_fim_eve }} </small></h4>
+                                    <small>{{ $evento->descricao }}</small>
+                                </div>
+                            </li> 
+                        @empty
+                            <li>
+                                <div class="feeds-left"><i class="fa fa-frown-o fa-1x"></i></div>
+                                <div class="feeds-body">
+                                    <h4 class="title text-danger">Nenhum evento cadastrado</h4>
+                                    <small>Você pode atualizar sua agenda de eventos usando a opção <strong>Novo Evento</strong></small>
+                                </div>
+                            </li> 
+                        @endforelse                                                   
+                    </ul>
+                    </div>
                 </div>
             </div>
         </div>

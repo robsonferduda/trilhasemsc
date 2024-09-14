@@ -12,7 +12,21 @@ class Evento extends Model
     protected $table = 'evento_eve';
     protected $primaryKey = 'id_evento_eve';
     protected $dates = ['deleted_at'];
-    protected $fillable = [];
+    protected $fillable = ['id_guia_gui',
+                            'cd_cidade_cde',
+                            'nm_evento_eve',
+                            'ds_fone_contato_eve',
+                            'dt_realizacao_eve',
+                            'dt_termino_eve',
+                            'valor_eve',
+                            'total_participantes_eve',
+                            'descricao',
+                            'ds_imagem_vertical_eve',
+                            'ds_imagem_horizontal_eve',
+                            'fl_ativo_eve',
+                            'hora_inicio_eve',
+                            'hora_fim_eve'];
+                            
     public $timestamps = true;
 
     public function local()

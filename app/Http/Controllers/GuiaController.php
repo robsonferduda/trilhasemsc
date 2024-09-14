@@ -39,13 +39,16 @@ class GuiaController extends Controller
         return view('guias/index', ['page_name' => $page_name, 'guias' => $guias, 'titulo' => $titulo, 'cidades' => $cidades]);
     }
 
-    public function perfil($instagram)
+    public function perfil($identificador)
     {
         $titulo = 'Guias e Condutores';
         $subtitulo = "Perfil";
         $page_name = "Perfil";
         
-        $guia = Guia::where('nm_instagram_gui', $instagram)->first();
+        if(is_int($identificador))
+            $guia = Guia::where('id_guia_gui', $identificador)->first();
+        else
+            $guia = Guia::where('nm_instagram_gui', $identificador)->first();
 
         if($guia){
             return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
@@ -54,11 +57,16 @@ class GuiaController extends Controller
         }        
     }
 
-    public function estatisticas($tipo, $instagram)
+    public function estatisticas($tipo, $identificador)
     {
         $url = null;
         $interacao = 0;
-        $guia = Guia::where('nm_instagram_gui', $instagram)->first();
+
+        if(is_int($identificador))
+            $guia = Guia::where('id_guia_gui', $identificador)->first();
+        else
+            $guia = Guia::where('nm_instagram_gui', $identificador)->first();
+
         $fone = ($guia->fone) ? preg_replace('/[(\)\-\" "]+/', '', $guia->fone->nu_fone_fon) : '';
 
         switch ($tipo) {
