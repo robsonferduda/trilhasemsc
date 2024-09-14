@@ -45,7 +45,7 @@ class GuiaController extends Controller
         $subtitulo = "Perfil";
         $page_name = "Perfil";
         
-        if(is_int($identificador))
+        if(is_numeric($identificador))
             $guia = Guia::where('id_guia_gui', $identificador)->first();
         else
             $guia = Guia::where('nm_instagram_gui', $identificador)->first();
@@ -62,7 +62,7 @@ class GuiaController extends Controller
         $url = null;
         $interacao = 0;
 
-        if(is_int($identificador))
+        if(is_numeric($identificador))
             $guia = Guia::where('id_guia_gui', $identificador)->first();
         else
             $guia = Guia::where('nm_instagram_gui', $identificador)->first();
