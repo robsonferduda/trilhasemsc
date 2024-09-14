@@ -259,7 +259,6 @@ class GuiaController extends Controller
                 $extension = $request->file('imagem')->getClientOriginalExtension();
                 $filename = $guia->id_guia_gui . '.' . $extension;
                 $imagem = $request->imagem->storeAs('', $filename, 'guias');
-
             }
 
             if($request->hasFile('imagem')) {

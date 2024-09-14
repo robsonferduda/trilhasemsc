@@ -131,6 +131,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('perfil', 'GuiaController@previaPerfil');
         Route::get('eventos', 'EventoController@eventos');
         Route::get('evento/novo', 'EventoController@cadastro');
+        Route::get('evento/editar/{id}', 'EventoController@editar');
+        Route::post('evento/update', 'EventoController@update');
         Route::post('evento/cadastrar', 'EventoController@cadastrar');
     });
 

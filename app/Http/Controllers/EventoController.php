@@ -42,10 +42,20 @@ class EventoController extends Controller
 
     public function cadastro()
     {
+        $evento = null;
         $guia = Guia::where('id_user', Auth::user()->id)->first();
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
 
-        return view('admin/eventos/cadastro', compact('guia','cidades'));
+        return view('admin/eventos/cadastro', compact('guia','cidades','evento'));
+    }
+
+    public function editar($id)
+    {
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+        $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
+        $evento = Evento::where('id_evento_eve', $id)->first();
+
+        return view('admin/eventos/cadastro', compact('guia','cidades','evento'));
     }
 
     public function cadastrar(Request $request)
@@ -65,11 +75,23 @@ class EventoController extends Controller
                         'valor_eve' =>  $request->valor_eve,
                         'total_participantes_eve' => $request->total_participantes_eve,
                         'descricao' => $request->descricao,                           
-                        'ds_imagem_vertical_eve' => null,
-                        'ds_imagem_horizontal_eve' => null,
                         'fl_ativo_eve' => null,
                         'hora_inicio_eve' => $request->hora_inicio_eve,
                         'hora_fim_eve' => $request->hora_fim_eve);
+
+        if($request->hasFile('img_instagram')) {
+            $extension = $request->file('img_instagram')->getClientOriginalExtension();
+            $filename = 'instagram_'.$guia->id_guia_gui.'_'.date("YmdHis").'.' . $extension;
+            $imagem = $request->img_instagram->storeAs('', $filename, 'eventos');
+            $dados['ds_imagem_vertical_eve'] = $filename;
+        }
+
+        if($request->hasFile('img_evento')) {
+            $extension = $request->file('img_evento')->getClientOriginalExtension();
+            $filename = 'evento_'.$guia->id_guia_gui.'_'.date("YmdHis").'.' . $extension;
+            $imagem = $request->img_evento->storeAs('', $filename, 'eventos');
+            $dados['ds_imagem_horizontal_eve'] = $filename;
+        }
 
         $evento = Evento::create($dados);
 
@@ -80,5 +102,45 @@ class EventoController extends Controller
             Flash::error("Ocorreu um erro ao cadastrar o evento. Revise os dados e tente novamente");
             return redirect('guia-e-condutores/privado/evento/novo');
         }
+    }
+
+    public function update(Request $request)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'GUIA') {
+            return redirect('login');
+        }
+        
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+        $evento = Evento::where('id_evento_eve', $request->id_evento_eve)->first();
+
+        $evento->cd_cidade_cde = $request->cd_cidade_cde;
+        $evento->nm_evento_eve = $request->nm_evento_eve;
+        $evento->ds_fone_contato_eve = $request->ds_fone_contato_eve;
+        $evento->dt_realizacao_eve = $request->dt_realizacao_eve;
+        $evento->dt_termino_eve = $request->dt_realizacao_eve;
+        $evento->valor_eve =  $request->valor_eve;
+        $evento->total_participantes_eve = $request->total_participantes_eve;
+        $evento->descricao = $request->descricao;                           
+        $evento->fl_ativo_eve = null;
+        $evento->hora_inicio_eve = $request->hora_inicio_eve;
+        $evento->hora_fim_eve = $request->hora_fim_eve;
+
+        if($request->hasFile('img_instagram')) {
+            $extension = $request->file('img_instagram')->getClientOriginalExtension();
+            $filename = 'instagram_'.$guia->id_guia_gui.'_'.date("YmdHis").'.' . $extension;
+            $imagem = $request->img_instagram->storeAs('', $filename, 'eventos');
+            $evento->ds_imagem_vertical_eve = $filename;
+        }
+
+        if($request->hasFile('img_evento')) {
+            $extension = $request->file('img_evento')->getClientOriginalExtension();
+            $filename = 'evento_'.$guia->id_guia_gui.'_'.date("YmdHis").'.' . $extension;
+            $imagem = $request->img_evento->storeAs('', $filename, 'eventos');
+            $evento->ds_imagem_horizontal_eve = $filename;
+        }
+        
+        $evento->save();
+
+        return redirect('guia-e-condutores/privado/eventos');
     }
 }

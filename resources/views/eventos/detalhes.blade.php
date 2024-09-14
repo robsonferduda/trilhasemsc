@@ -41,7 +41,9 @@
                     </p>
                 </div>
                 <div class="col-lg-12 col-md-12">
-                
+                    @if($evento->ds_imagem_horizontal_eve)
+                        <img src="{{ asset('img/eventos/'.$evento->ds_imagem_horizontal_eve) }}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                    @endif
                 </div>
             </div>
         </div>

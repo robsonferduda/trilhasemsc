@@ -61,6 +61,12 @@ return [
             'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],
+        'eventos' => [
+            'driver' => 'local',
+            'root' => public_path('img/eventos'),
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+        ],
         'guias' => [
             'driver' => 'local',
             'root' => public_path('img/guias'),
