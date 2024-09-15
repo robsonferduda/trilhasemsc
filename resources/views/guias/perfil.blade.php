@@ -27,8 +27,8 @@
             <div class="row">
                @forelse ($guia->unidadesConservacao as $key => $uc)
                   <div class="col col-xl-2 col-md-2 mb-3 mt-3">
-                     <p class="center">{{ Str::upper($uc->sigla_unc) }}</p>
-                     <img class="img-fluid" src=" {{ asset('img/logos-uc/'.$uc->logo_unc) }}" alt="Logo {{ $uc->nome_uc }}">
+                     <p class="center"><strong>{{ Str::upper($uc->sigla_unc) }}</strong></p>
+                     <img class="img-fluid w-75" src=" {{ asset('img/logos-uc/'.$uc->logo_unc) }}" alt="Logo {{ $uc->nome_uc }}">
                   </div>
                @empty
                
