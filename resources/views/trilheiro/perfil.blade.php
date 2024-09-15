@@ -45,8 +45,10 @@
                                     <div class="center">
                                         <h5 class="m-b-0">{{ $trilheiro->nm_trilheiro_tri }}</h5>
                                         <span>{{ ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '' }}</span>
-
                                         <h2 class="mb-0">{{ $trilheiro->nr_score_tri }}</h2>
+                                        @if(!$trilheiro->nr_score_tri)
+                                            <p class="mb-0"><a href="{{ url('trilheiro/privado/meu-score') }}">Clique para calcular</a></p>
+                                        @endif
                                         <span>{{ $trilheiro->indice->ds_indice_ind }}</span>
                                         <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Experiência em Trilhas">
                                         <strong>Índice de Experiência em Trilhas</strong>

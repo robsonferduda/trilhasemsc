@@ -4,7 +4,7 @@
          <form action="{{ url('eventos') }}" style="display: inherit;" method="GET" id="banner-searchbox" class="">
               <div class="row w-100">
                  <div class="col-lg-10 col-md-10 col-sm-12 mt-2 mr-2" style="padding-right: 15px;">
-                    <label class="">Selecione a cidade <span class="text-info">Somente cidades com eventos cadastrados</span></label>
+                    <label class="">Selecione a cidade <span class="text-info">Somente cidades com eventos disponíveis</span></label>
                     <select class="form-control" name="cidade" id="list-cidade">
                        <option value="">Selecione uma cidade</option>
                        @if(isset($cidades))

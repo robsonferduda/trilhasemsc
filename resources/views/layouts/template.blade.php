@@ -320,7 +320,7 @@
                                     <a href="{{ url('trilheiro/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> <span>Editar Dados</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('trilheiro/privado/meu-score') }}"><i class="fa fa-thermometer-half"></i> <span>Meu Score</span></a>
+                                    <a href="{{ url('trilheiro/privado/meu-score') }}"><i class="icon-speedometer"></i> <span>Meu Score</span></a>
                                 </li>
                             @endif
                             <li>
@@ -401,7 +401,8 @@
     <script src="{{ asset('vendor/jquery-datatable/buttons/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-datatable/buttons/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-datatable/buttons/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('vendor/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
 
     <script src="{{ asset('vendor/bootstrap-multiselect/bootstrap-multiselect.js') }}"></script>
     <script src="{{ asset('vendor/parsleyjs/js/parsley.min.js') }}"></script>
