@@ -27,6 +27,7 @@
             <div class="row">
                @forelse ($guia->unidadesConservacao as $key => $uc)
                   <div class="col col-xl-2 col-md-2 mb-3 mt-3">
+                     <span>{{ $uc->sigla_unc }}</span>
                      <img class="img-fluid" src=" {{ asset('img/logos-uc/'.$uc->logo_unc) }}" alt="Logo {{ $uc->nome_uc }}">
                   </div>
                @empty
