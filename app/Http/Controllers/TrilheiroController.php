@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Cidade;
 use App\Estado;
 use App\Fone;
+use App\Corrida;
 use App\Guia;
 use App\Trilheiro;
+use App\Distancia;
+use App\Elevacao;
 use App\Trilha;
 use App\Interacao;
+use App\Questionario;
 use App\Mail\GuiaConfirmacao;
 use App\UnidadeConservacao;
 use App\Mail\GuiaModeracao;
@@ -60,9 +64,13 @@ class TrilheiroController extends Controller
         $page_name = "Guias e Condutores em Santa Catarina";
         $titulo = 'Guias e Condutores';
         
-        $trilheiros = Trilheiro::all();
+        $corridas = Corrida::all();
+        $elevacoes = Elevacao::all();
+        $distancias = Distancia::all();
+        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
+        $questionario = Questionario::where('cd_trilheiro_tri', $trilheiro->id_trilheiro_tri)->first();
 
-        return view('trilheiro/score', ['page_name' => $page_name, 'trilheiros' => $trilheiros]);
+        return view('trilheiro/score', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'elevacoes' => $elevacoes, 'distancias' => $distancias, 'questionario' => $questionario, 'corridas' => $corridas]);
     }
 
     public function listar()
@@ -148,6 +156,142 @@ class TrilheiroController extends Controller
 
     public function calcularScore(Request $request)
     {
-        dd($request->all());
+        $score = 0;
+        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
+        $chave = array('cd_trilheiro_tri' => $trilheiro->id_trilheiro_tri);
+
+        $dados = array('cd_distancia_dis' => $request->escala_distancia,
+                       'cd_elevacao_ele' => $request->escala_elevacao,
+                        'cd_corrida_cor' => $request->escala_corrida,
+                        'fl_musculacao_que' => $request->fl_musculacao_que,
+                        'fl_travessia_que' => $request->fl_travessia,
+                        'fl_trilhas_que' => $request->fl_trilhas,
+                        'fl_trekking_que' => $request->fl_trekking,
+                        'fl_areia_que' => $request->fl_areia,
+                        'fl_altura_que' => !$request->fl_altura,
+                        'nu_distancia_que' => $request->nu_distancia,
+                        'nu_altura_que' => $request->altura,
+                        'nu_peso_que' => $request->peso);
+
+        $questionario = Questionario::updateOrCreate($chave, $dados);
+
+        if($questionario){
+            $score = $this->calculaScore($trilheiro, $questionario);
+            $trilheiro->id_indice_ind = $this->calculaIndice($score);
+            $trilheiro->save();
+
+            Flash::success('<i class="fa fa-check"></i> Questionário atualizado com sucesso. Seu score é <strong>'.$score.'</strong> e seu Índice de Experiência em Trilha (IET) é <strong>'.$trilheiro->indice->ds_indice_ind.'</strong>');
+        }else{
+            Flash::error('Erro ao atualizar questionário');
+        }
+
+        return redirect('trilheiro/privado/meu-score');
+    }
+
+    public function calculaScore($trilheiro, $questionario){
+        
+        $score = 0;
+
+        $score += $this->calculaIMC($questionario->nu_altura_que, $questionario->nu_peso_que); //150
+        $score += $this->calculaDistancia($questionario->nu_distancia_que); //60
+        $score += $questionario->distancia->nu_score_dis; //200
+        $score += $questionario->elevacao->nu_score_ele; //200
+        $score += $questionario->corrida->nu_score_cor; //100
+
+        if($questionario->fl_musculacao_que){
+            $score += 100;
+        }
+
+        if($questionario->fl_areia_que){
+            $score += 30;
+        }
+
+        if($questionario->fl_travessia_que){
+            $score += 30;
+        }
+
+        if(!$questionario->fl_altura_que){
+            $score += 30;
+        }
+
+        if($questionario->fl_trekking_que){
+            $score += 100;
+        }
+
+        $trilheiro->nr_score_tri = $score;
+        $trilheiro->save();
+        
+        return $score;
+    }
+
+
+    public function calculaDistancia($distancia){
+
+        $score = 0;
+
+        $dicionario = [
+            0 => 0,
+            5 => 20,
+            10 => 40
+        ];
+
+        foreach($dicionario as $key => $value){
+            if($distancia > 10){
+                return 60;
+            }else{
+                if($distancia <= $key){
+                    return $value;
+                    break;
+                }
+            }
+        }
+
+    }
+
+    public function calculaIndice($score){
+        
+        $indice = 1;
+
+        $dicionario = [
+            280 => 2,
+            410 => 3,
+            810 => 4,
+            935 => 5,
+            1000 => 6
+        ];
+
+        foreach($dicionario as $key => $value){
+            if($score >= $key){
+                $indice = $value;
+            }
+        }
+
+        return $indice;
+    }
+
+    public function calculaIMC($altura, $peso){
+
+        $imc = $peso / ($altura * 2);
+
+        $dicionario = [
+            "18.5" => 135,
+            "24.9" => 150,
+            "29.9" => 135,
+            "34.9" => 120,
+            "39.9" => 100,
+            "40.0" => 80
+        ];
+
+        foreach($dicionario as $key => $value){
+        
+            if((float) $key < 40.0){
+                if($imc <= (float) $key){
+                    return $value;
+                    break;
+                }
+            }else{ 
+                return $value;
+            }
+        }
     }
 }
