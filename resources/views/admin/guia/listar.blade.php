@@ -23,7 +23,7 @@
                             <div class="col-lg-1 col-md-1 col-sm-12">
                                 <img src="{{ $guia->nm_path_logo_gui ? asset('img/guias/'.$guia->nm_path_logo_gui) : asset('images/user.png') }}" class="rounded-circle user-photo w-100" alt="Foto de Perfil">
                             </div>
-                            <div class="col-lg-10 col-md-10 col-sm-12">
+                            <div class="col-lg-11 col-md-11 col-sm-12">
                                 <div class="row">
                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                         <div class="text">{{ $guia->nm_guia_gui }}</div>
@@ -40,7 +40,7 @@
                                                 <a href="{{ url('guia/'.$guia->id_guia_gui.'/ativar') }}" class="btn btn-success mr-1 mt-1"><i class="fa fa-check-circle"></i> Ativar</a>
                                                 <a href="#" class="btn btn-danger disabled mr-1 mt-1"><i class="fa fa-ban"></i> Recusar</a>
                                             @endif
-                                            <a href="{{ url('guia/perfil/estatistica/perfil/'.$guia->id_guia_gui) }}" class="btn btn-success disabled mr-1 mt-1"><i class="fa fa-check-circle"></i> Perfil</a>
+                                            <a href="{{ url('guia/perfil/estatistica/perfil/'.$guia->id_guia_gui) }}" class="btn btn-primary mr-1 mt-1"><i class="fa fa-user"></i> Perfil</a>
                                         </div>
                                     </div>
                                 </div>
