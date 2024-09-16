@@ -101,4 +101,10 @@ class HomeController extends Controller
 
         return view('contato', ['page_name' => $page_name]);
     }
+
+    public function getCidades($id)
+    {
+        $cidades = Cidade::where('cd_estado_est', $id)->orderBy('nm_cidade_cde')->get();
+        return response()->json($cidades);
+    }
 }

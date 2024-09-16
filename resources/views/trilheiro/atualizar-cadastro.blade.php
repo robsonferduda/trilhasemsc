@@ -70,6 +70,7 @@
                                             <option {!! $trilheiro->cd_cidade_tri == $cidade->cd_cidade_cde ? 'selected' : '' !!}  value="{{ $cidade->cd_cidade_cde }}">{{ $cidade->nm_cidade_cde }}</option>
                                         @endforeach
                                     </select>
+                                    <input type="hidden" name="cidade_selecionada" id="cidade_selecionada" value="{{ ($trilheiro and $trilheiro->cd_cidade_tri) ? $trilheiro->cd_cidade_tri : '' }}"/>
                                     <span id="error-cidade-origem"></span>
                                 </div>
                             </div>
@@ -101,6 +102,9 @@
 @section('script')
     <script>
         $(function() {
+
+            var host = $('meta[name="base-url"]').attr('content');
+
             $('#form-trilheiro').parsley();
 
             $('.phone').mask('(99) 999-999999');
@@ -109,6 +113,61 @@
 
             drEvent.on('dropify.afterClear', function(event, element) {
                 $('#imagem_deletada').val(true);
+            });
+
+            $(document).ready(function(){
+
+                $("#estado_origem").trigger('change');
+
+            });
+
+            $(document).on('change', '#estado_origem', function() {
+
+                var estado = $(this).val();
+                var cd_cidade = $("#cidade_origem").val();
+                var cidade_selecionada = $("#cidade_selecionada").val();
+
+                $('#cidade_origem').find('option').remove().end();
+
+                if($(this).val() == '') {
+                    $('#cidade_origem').attr('disabled', true);
+                    $('#cidade_origem').append('<option value="">Selecione</option>').val('');
+                    return;
+                }
+
+                $('#cidade_origem').append('<option value="">Carregando...</option>').val('');
+
+                $.ajax({
+                    url: host+'/estado/'+estado+'/cidades',
+                    type: 'POST',
+                    data: {
+                        "_token": $('meta[name="csrf-token"]').attr('content'),
+                        "estado": $(this).val(),
+                    },
+                    beforeSend: function() {
+                        
+                    },
+                    success: function(data) {
+                        if(!data) {
+                           
+                        }
+                        $('#cidade_origem').attr('disabled', false);
+                        $('#cidade_origem').find('option').remove().end();
+                        $('#cidade_origem').append('<option value="" selected>Selecione uma cidade</option>').val('');
+
+                        data.forEach(element => {
+                            let option = new Option(element.nm_cidade_cde, element.cd_cidade_cde);
+                            $('#cidade_origem').append(option);
+
+                            if(cidade_selecionada == element.cd_cidade_cde)
+                                $('#cidade_origem').val(cidade_selecionada);
+                        });
+
+                    },
+                    complete: function(){
+                        
+                    }
+                });
             });
         });
     </script>

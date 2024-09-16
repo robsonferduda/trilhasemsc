@@ -20,6 +20,8 @@ Route::get('perfil/{id}', 'HomeController@perfil')->name('perfil');
 
 Route::post('comentario/novo', 'ComentarioController@store');
 
+Route::post('estado/{estado}/cidades', 'HomeController@getCidades');
+
 Route::get('trilhas/brasil', 'TrilhaController@brasil');
 Route::get('trilhas/regioes', 'TrilhaController@regioes');
 Route::get('trilha/add-tags', 'TrilhaController@addTags');

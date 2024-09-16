@@ -2,13 +2,13 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-<!-- CSRF Token -->
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Sistema de Gerenciamento de Trilhas e Roteiros</title>
 <meta charset="utf-8">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="base-url" content="{{ env('APP_URL') }}">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
- <meta name="description" content="Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil"><meta name="author" content="">
+<meta name="description" content="Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil"><meta name="author" content="">
+<title>Sistema de Gerenciamento de Trilhas e Roteiros</title>
 
 <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
