@@ -61,9 +61,11 @@
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group mt-0">
                                     <label for="nu_distancia">Distância média feita por semana (caminhada + corrida) (Indicar em km)</label><span class="text-danger"> Obrigatório</span>
-                                    <input type="number" name="nu_distancia" id="nu_distancia" value="{{ ($questionario and $questionario->nu_distancia_que) ? $questionario->nu_distancia_que : old("nu_distancia") }}" class="form-control w-1" required style="width: 10%;">
+                                    <input type="number" name="nu_distancia" id="nu_distancia" value="{{ ($questionario and $questionario->nu_distancia_que) ? $questionario->nu_distancia_que : old("nu_distancia") }}" class="form-control col-sm-12 col-md-3 col-lg-3" required>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
