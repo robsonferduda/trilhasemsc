@@ -146,6 +146,39 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>Trilhas</h2>                                      
+                                    </div>
+                                    <div class="body">
+                                        <select id="optgroup" class="ms" multiple="multiple" name=trilhas>
+                                            @php
+                                               $codigoCidade = '';
+                                               $primeiraPassada = true;
+                                            @endphp
+                                            
+                                            @foreach($trilhas as $trilha)
+                                                
+                                                @if($trilha->cidade->cd_cidade_cde != $codigoCidade) 
+                                                    @if($primeiraPassada)
+                                                        </optgroup>
+                                                    @endif
+                                                    <optgroup label="{{ $trilha->cidade->nm_cidade_cde }}">
+                                                @endif
+                                                <option value="{{ $trilha->id_trilha_tri }}">{{ $trilha->nm_trilha_tri }}</option>
+                                                @php
+                                                    $codigoCidade = $trilha->cidade->cd_cidade_cde;
+                                                    $primeiraPassada = false;
+                                                @endphp
+                                                
+                                            @endforeach                                                                                                                           
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> --}}
                         <div style="text-align: center; margin-top:15px; ">
 {{--                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>--}}
                             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
@@ -168,6 +201,8 @@
             drEvent.on('dropify.afterClear', function(event, element) {
                 $('#imagem_deletada').val(true);
             });
+
+            //$('#optgroup').multiSelect({ selectableOptgroup: true });
         });
     </script>
 @endsection

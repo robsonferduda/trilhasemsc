@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap-multiselect/bootstrap-multiselect.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/multi-select/css/multi-select.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/parsleyjs/css/parsley.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/summernote/dist/summernote.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
@@ -405,6 +406,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
 
     <script src="{{ asset('vendor/bootstrap-multiselect/bootstrap-multiselect.js') }}"></script>
+    <script src="{{ asset('vendor/multi-select/js/jquery.multi-select.js') }}"></script> <!-- Multi Select Plugin Js -->
     <script src="{{ asset('vendor/parsleyjs/js/parsley.min.js') }}"></script>
     <script src="{{ asset('vendor/parsleyjs/js/il8n/pt-br.js') }}"></script>
 

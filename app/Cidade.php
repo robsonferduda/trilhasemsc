@@ -17,4 +17,9 @@ class Cidade extends Model
                           ];
 
     public $timestamps = true;
+
+    public function trilhas()
+    {
+        return $this->hasMany('App\Trilha', 'cd_cidade_cde', 'cd_cidade_cde');
+    }
 }

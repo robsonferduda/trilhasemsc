@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cidade;
 use App\Fone;
 use App\Guia;
+use App\GuiaTrilha;
 use App\Trilheiro;
 use App\Trilha;
 use App\Interacao;
@@ -14,6 +15,7 @@ use App\Mail\GuiaModeracao;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -296,6 +298,7 @@ class GuiaController extends Controller
 
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
         $ucs = UnidadeConservacao::orderBy('nome_unc')->get();
+        //$trilhas = Trilha::with('cidade')->where('fl_publicacao_tri', 'S')->get()->sortBy('cidade.nm_cidade_cde');
 
         return view('guias/atualizar-cadastro', compact('usuario', 'cidades', 'guia', 'ucs'));
     }
@@ -373,5 +376,48 @@ class GuiaController extends Controller
         return redirect('guias-e-condutores');
 
     }
+
+    public function trilhas(Request $request)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'GUIA') {
+            return redirect('login');
+        }
+        //dd($request);
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+
+        if($request->isMethod('post')) {
+
+            if(count($request->trilhas) < 6 || isset($request->trilhas) == false) {
+                GuiaTrilha::where('id_guia_gui',$guia->id_guia_gui)->delete();
+
+                if(isset($request->trilhas)) {            
+                    foreach($request->trilhas as $id){
+                        GuiaTrilha::create([
+                            'id_trilha_tri' => $id,
+                            'id_guia_gui' => $guia->id_guia_gui
+                        ]);
+                    }
+                }
+            } else {
+                
+                Flash::error('Limite de trilhas excedido!');                
+            }
+                             
+        }
+
+        $cidades = Cidade::has('trilhas')->with(['trilhas' => function($query){
+            $query->orderBy('nm_trilha_tri');
+        }])->orderBy('nm_cidade_cde')->get();
+
+        $qtdGuiasPorTrilha = null;
+        DB::table('guia_trilha_gut')->selectRaw('id_trilha_tri, count(*) as qtd_guias')->where('id_guia_gui','!=',$guia->id_guia_gui)->groupBy('id_trilha_tri')->get()->map(function($item) use(&$qtdGuiasPorTrilha) {
+            $qtdGuiasPorTrilha[$item->id_trilha_tri] = $item->qtd_guias;
+        });
+
+        $trilhasGuia = GuiaTrilha::where('id_guia_gui',$guia->id_guia_gui)->pluck('id_trilha_tri')->toArray();
+
+        return view('guias/trilhas', compact('cidades', 'trilhasGuia', 'qtdGuiasPorTrilha'));
+    }
+
 
 }

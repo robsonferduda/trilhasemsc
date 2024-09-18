@@ -136,6 +136,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('evento/editar/{id}', 'EventoController@editar');
         Route::post('evento/update', 'EventoController@update');
         Route::post('evento/cadastrar', 'EventoController@cadastrar');
+        Route::match(['GET', 'POST'],'trilhas', 'GuiaController@trilhas');
     });
 
 
@@ -143,7 +144,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('perfil', 'TrilheiroController@perfil');
         Route::get('meu-score', 'TrilheiroController@score');
         Route::post('score', 'TrilheiroController@calcularScore');
-        Route::match(['GET', 'POST'], 'atualizar-cadastro', 'TrilheiroController@atualizarCadastro');
+        Route::match(['GET', 'POST'], 'atualizar-cadastro', 'TrilheiroController@atualizarCadastro');       
     });
 
     Route::prefix('cadastro/privado')->group(function () {
