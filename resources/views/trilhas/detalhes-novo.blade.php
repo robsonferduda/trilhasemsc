@@ -24,13 +24,13 @@
                         <i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }} 
                         <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
                     </h6>
-                    <p class="mb-1"><span class="text-success">Trilha cadastrada em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}</span></p>
-                    <p class="mb-1"><span class="text-primary">Última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
+                    <p class="mb-1">
+                        <span class="text-info">Trilha cadastrada em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }} com última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
+                    </p>
+                    <p class="mb-1">
                         (Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.)
                     </p>
-                    <p class="text-info">
-                        Sempre que visitar um local desconhecido, procure por condutores locais autorizados. Faça turismo seguro!
-                    </p>            
+                              
                     <!-- @env('production')
                         <ins class="adsbygoogle"
                                         style="display:block"
@@ -42,10 +42,32 @@
                                         (adsbygoogle = window.adsbygoogle || []).push({});
                                     </script>                         
                     @endenv -->
-                    <div class="mt-2 conteudo">
+                    
+                </div> 
+                @if(count($trilha->guias))
+                    <div class="col-md-12 mt-1">
+                        <h6>Quem faz esta trilha?</h6>
+                    </div>                    
+                    <div class="row mt-0 mb-0">
+                        @foreach($trilha->guias as $key => $guia)
+                            <div class="col col-xs-1 col-sm-1 d-sm-block d-md-none mb-3">
+                                <a href="{{ url("guia/perfil/estatistica/perfil", $guia->nm_instagram_gui) }}"><img class="avatar avatar-xl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $guia->nm_guia_gui }}"></a>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="row">
+                        @foreach($trilha->guias as $key => $guia)
+                            <div class="col-sm-1 col-md-2 col-lg-2 d-none d-md-block">
+                                <a href="{{ url("guia/perfil/estatistica/perfil", $guia->nm_instagram_gui) }}"><img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $guia->nm_guia_gui }}"></a>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+                <div class="col-md-12 mt-3">
+                    <div class="mt-0 conteudo">
                         {!! $trilha->ds_trilha_tri !!}
                     </div>
-                </div> 
+                </div>
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-12 position-relative my-auto justify-content-center text-center">
@@ -75,7 +97,6 @@
                         -->
                     </div>
                 </div>
-                    
                 <div class="col-md-12 mt-2 mb-3">
                     <h4 class="text-success">
                         Use o Wikiloc

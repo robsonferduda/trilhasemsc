@@ -71,4 +71,9 @@ class Trilha extends Model
     {
         return $this->hasMany('App\Comentario', 'id_trilha_tri', 'id_trilha_tri')->orderBy('created_at', 'DESC');
     }
+
+    public function guias()
+    {
+        return $this->belongsToMany('App\Guia', 'guia_trilha_gut' , 'id_trilha_tri', 'id_guia_gui')->orderBy('created_at', 'DESC');
+    }
 }
