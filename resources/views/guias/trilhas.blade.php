@@ -19,6 +19,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <h2>Escolha 5 trilhas de sua preferência:</h2>
+                            <span class="text-info">Seu perfil aparecerá de forma randômica nas trilhas selecionadas. </span>
                         </div>
                     </div>
                 </div>
@@ -61,7 +62,7 @@
 
                         var checkboxes = document.querySelectorAll('input[name="trilhas[]"]:checked')
                         if(checkboxes.length > 5) {
-                            alert('Limite de trilhas excedido!');
+                            swal("Excedido o limite de 5 trilhas selecionadas!");                            
 	                        this.checked = false;
                         }
                         
