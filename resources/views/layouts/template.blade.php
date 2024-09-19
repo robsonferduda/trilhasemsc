@@ -309,7 +309,10 @@
                                     <a href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> <span>Editar Dados</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('guia-e-condutores/privado/eventos') }}"><i class="fa fa-tags"></i> <span>Eventos</span></a>
+                                  <a href="{{ url('guia-e-condutores/privado/eventos') }}"><i class="fa fa-tags"></i> <span>Eventos</span></a>
+                                </li>
+                                <li>
+                                  <a href="{{ url('guia-e-condutores/privado/trilhas') }}"><i class="fa fa-thumb-tack"></i> <span>Trilhas</span></a>
                                 </li>
                             @endif
                             @if(trim(Auth::user()->id_role) == 'TRILHEIRO')

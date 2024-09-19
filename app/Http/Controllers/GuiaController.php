@@ -416,7 +416,7 @@ class GuiaController extends Controller
 
         $trilhasGuia = GuiaTrilha::where('id_guia_gui',$guia->id_guia_gui)->pluck('id_trilha_tri')->toArray();
 
-        return view('guias/trilhas', compact('cidades', 'trilhasGuia', 'qtdGuiasPorTrilha'));
+        return view('guias/trilhas', compact('cidades', 'trilhasGuia', 'qtdGuiasPorTrilha', 'guia'));
     }
 
 
