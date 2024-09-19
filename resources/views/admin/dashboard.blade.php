@@ -48,6 +48,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card top_counter">
+                    <div class="body">
+                        <div class="icon"><i class="fa fa-check" style="color: rgb(64, 64, 234);"></i> </div>
+                        <div class="content">
+                            <div class="text">Trilheiros</div>
+                            <h5 class="number"><a href="{{ url('admin/trilheiros/listar') }}">{{ App\Trilheiro::count() }}</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 	</div>       
 </div>

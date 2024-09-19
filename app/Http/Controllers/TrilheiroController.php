@@ -144,7 +144,7 @@ class TrilheiroController extends Controller
             } else {
 
                 if($imagem_deletada == "true") {
-                    $trilheiro->update(['nm_path_foto_tri' => $imagem]);
+                    $trilheiro->update(['nm_path_foto_tri' => null]);
                 }
             }
 

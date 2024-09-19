@@ -85,3 +85,15 @@ body {
   .custom-radio-button__container input[type="radio"]:checked + .custom-radio-button .svg-developer {
 	fill: #e94174;
   }
+  .tabela-criterios td:nth-child(4) {
+	text-align: center;
+ }
+ .tabela-niveis tbody > tr > td{
+	text-align: center;
+ }
+ .tabela-niveis td:nth-child(1) {
+	text-align: left !important;
+ }
+ .zebra { background: #f3f3f3;}
+ .tabela-criterios .zebra { background: #f3f3f3;}
+ .pontuacao{ background:#f3f3f3; font-weight: bold;}
