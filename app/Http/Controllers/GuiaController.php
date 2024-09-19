@@ -387,7 +387,7 @@ class GuiaController extends Controller
 
         if($request->isMethod('post')) {
 
-            if(count($request->trilhas) < 6 || isset($request->trilhas) == false) {
+            if(isset($request->trilhas) == false || count($request->trilhas) < 6) {
                 GuiaTrilha::where('id_guia_gui',$guia->id_guia_gui)->delete();
 
                 if(isset($request->trilhas)) {            
