@@ -29,20 +29,7 @@
                     </p>
                     <p class="mb-1">
                         (Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.)
-                    </p>
-                              
-                    <!-- @env('production')
-                        <ins class="adsbygoogle"
-                                        style="display:block"
-                                        data-ad-client="ca-pub-1229685353625953"
-                                        data-ad-slot="7739149091"
-                                        data-ad-format="auto"
-                                        data-full-width-responsive="true"></ins>
-                                    <script>
-                                        (adsbygoogle = window.adsbygoogle || []).push({});
-                                    </script>                         
-                    @endenv -->
-                    
+                    </p>                    
                 </div> 
                 @if(count($trilha->guias))
                     <div class="col-md-12 mt-1">
@@ -105,6 +92,7 @@
                         {!! $trilha->url_geolocalizacao_tri !!}
                     </div>
                 </div>
+                @include('layouts/partes/publicidade-google')
                 <div class="row mb-3">
                     <div class="col-lg-12 col-sm-12 mb-sm-0 mb-4">
                        <div class="info-horizontal bg-gradient-primary border-radius-lg p-3">
