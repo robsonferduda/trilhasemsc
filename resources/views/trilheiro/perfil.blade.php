@@ -23,11 +23,10 @@
                             <h2><a href="{{ url('/trilheiro/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> Editar Dados</a></h2>
                         </div>
                     </div>
-                </div>
-               
+                </div>               
                 <div class="body">
                     <div class="row">
-                        <div class="col-lg-3 col-md-3">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
                             <div class="card profile-header">
                                 <div class="body">
                                     <div class="profile-image center mb-4">
@@ -50,14 +49,21 @@
                                             <p class="mb-0"><a href="{{ url('trilheiro/privado/meu-score') }}">Clique para calcular</a></p>
                                         @endif
                                         <span>{{ $trilheiro->indice->ds_indice_ind }}</span>
-                                        <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Experiência em Trilhas">
+                                        <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Índice de Experiência em Trilhas">
                                         <strong>Índice de Experiência em Trilhas</strong>
+                                        <p><a href="{{ url('indice-experiencia-trilhas') }}" target="BLANK">Entenda o Índice</a></p>
                                     </div>                       
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-9 center">
-
+                        <div class="col-lg-9 col-md-9">
+                            <div class="card profile-header">
+                                <div class="body">
+                                    <h6>Pontos de Experiência</h6>
+                                    <p><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

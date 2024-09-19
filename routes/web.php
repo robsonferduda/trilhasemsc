@@ -81,6 +81,10 @@ Route::get('dicas-de-seguranca', function () {
     return view('dicas-de-seguranca');
 })->name('dicas-de-seguranca');
 
+Route::get('indice-experiencia-trilhas', function () {
+    return view('indice');
+})->name('indice');
+
 Route::get('politica-de-privacidade', function () {
     return view('politica-de-privacidade');
 })->name('politica-de-privacidade');
