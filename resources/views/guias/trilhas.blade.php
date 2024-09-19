@@ -19,33 +19,37 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <h2>Escolha 5 trilhas de sua preferência:</h2>
-                            <span class="text-info">Seu perfil aparecerá de forma randômica nas trilhas selecionadas. </span>
+                            <span class="text-info">Seu perfil aparecerá de forma randômica nas trilhas selecionadas. </span>                           
                         </div>
                     </div>
                 </div>
              
                 <div class="body">
                     @include('layouts.mensagens')
-                    <form action="{{ url('guia-e-condutores/privado/trilhas') }}" enctype="multipart/form-data" method="post" id="form-guia">
-                        @csrf
-                        <div class="row clearfix" style="margin-left: 20px">
-                            @foreach($cidades as $cidade) 
-                                <h5>{{ $cidade->nm_cidade_cde }}</h5>
-                                @foreach($cidade->trilhas as $trilha)
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <label class="fancy-checkbox">
-                                            <input type="checkbox" name="trilhas[]" value="{{ $trilha->id_trilha_tri }}"  {!! in_array($trilha->id_trilha_tri, $trilhasGuia) ? 'checked' : '' !!} class="check_trilha">
-                                            <span>{{ $trilha->nm_trilha_tri}}</span><br><span class="text-danger">{{ isset($qtdGuiasPorTrilha[$trilha->id_trilha_tri])  ?  $qtdGuiasPorTrilha[$trilha->id_trilha_tri].' guia(s) vinculado(s) a essa trilha.' :'Nenhum guia está vinculado a essa trilha.' }}</span>
-                                        </label>
-                                    </div>
+                    @if($guia->fl_ativo_gui)
+                        <form action="{{ url('guia-e-condutores/privado/trilhas') }}" enctype="multipart/form-data" method="post" id="form-guia">
+                            @csrf
+                            <div class="row clearfix" style="margin-left: 20px">
+                                @foreach($cidades as $cidade) 
+                                    <h5>{{ $cidade->nm_cidade_cde }}</h5>
+                                    @foreach($cidade->trilhas as $trilha)
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <label class="fancy-checkbox">
+                                                <input type="checkbox" name="trilhas[]" value="{{ $trilha->id_trilha_tri }}"  {!! in_array($trilha->id_trilha_tri, $trilhasGuia) ? 'checked' : '' !!} class="check_trilha">
+                                                <span>{{ $trilha->nm_trilha_tri}}</span><br><span class="text-danger">{{ isset($qtdGuiasPorTrilha[$trilha->id_trilha_tri])  ?  $qtdGuiasPorTrilha[$trilha->id_trilha_tri].' guia(s) vinculado(s) a essa trilha.' :'Nenhum guia está vinculado a essa trilha.' }}</span>
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 @endforeach
-                            @endforeach
-                        </div>   
-                        <div style="text-align: center; margin-top:15px; ">
-{{--                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>--}}
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
-                        </div>
-                    </form>
+                            </div>   
+                            <div style="text-align: center; margin-top:15px; ">
+    {{--                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>--}}
+                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
+                            </div>
+                        </form>
+                    @else 
+                        <h6 class="text-danger"> Seu perfil está desativado, selecione o campo "Ativo" na edição do seu cadastro para ativar.</h6>
+                    @endif
                 </div>
             </div>
         </div>
