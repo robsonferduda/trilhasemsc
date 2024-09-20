@@ -32,6 +32,11 @@ class Trilha extends Model
         return date($data);
     }
 
+    public function detalhes()
+    {
+        return $this->hasOne('App\Detalhe', 'id_trilha_tri', 'id_trilha_tri');
+    }
+
     public function foto()
     {
         return $this->hasMany('App\Foto', 'id_trilha_tri', 'id_trilha_tri');
