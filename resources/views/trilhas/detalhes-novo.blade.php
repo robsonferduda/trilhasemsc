@@ -10,7 +10,7 @@
 <section class="pt-1 pb-0 mt-3 mb-5">
     <div class="container">
         <div class="row">
-            @if($thilha->detalhes)
+            @if(true)
                 <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
                     <div class="col-md-12">
                         <a href="#"><img class="border-radius-xl shadow w-100" src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}"></a>
