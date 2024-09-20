@@ -6,6 +6,7 @@ use Auth;
 use App\Evento;
 use App\Cidade;
 use App\Guia;
+use App\Estatistica;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -29,6 +30,14 @@ class EventoController extends Controller
         
         $dados = array('id_tipo_interacao_tin' => 5,
                        'id_guia_gui' => $id);
+
+        $usuario_logado = (Auth::user()) ? Auth::user()->id : null;
+
+        $estatistica = array('cd_usuario_usu' => $usuario_logado,
+                            'cd_tipo_monitoramento_tim' => 2,
+                            'cd_monitoramento_esa' => $id);              
+
+        Estatistica::create($estatistica);
 
         return view('eventos/detalhes', ['page_name' => $page_name, 'evento' => $evento, 'cidades' => $cidades]);
     }
