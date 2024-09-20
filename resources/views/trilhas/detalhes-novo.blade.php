@@ -10,20 +10,31 @@
 <section class="pt-1 pb-0 mt-3 mb-5">
     <div class="container">
         <div class="row">
-            @if(true)
+            @if($trilha->detalhes)
                 <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
                     <div class="col-md-12">
                         <a href="#"><img class="border-radius-xl shadow w-100" src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}"></a>
                     </div>
                 </div>
-            @else
                 <div class="col-lg-3 col-md-3 col-sm-12 mt-2">
-                    <p><i class="fa fa-road text-success"></i> <strong>Distância</strong>: </p>
-                    <p><i class="fa fa-clock-o text-info"></i> <strong>Duração</strong>: </p>
-                    <p><i class="fa fa-sun text-warning"></i> <strong>Exposição</strong>: </p>
-                    <p><i class="fa fa-heartbeat text-danger"></i> <strong>Esforço</strong>: </p>
-                    <p><i class="fa fa-compass text-info"></i> <strong>Orientação</strong>: </p>
-                    <p><a href="{{ url('guia-de-dificuldade-em-trilhas/abnt') }}">Clique e entenda as medidas</a></p>
+                    <div class="center mt-3">
+                        <img class="mx-auto" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
+                        <span style="color: white; background: {{ ($trilha->nivel) ? $trilha->nivel->dc_color_nivel_niv : '#989898' }};" class="badge badge-secondary">{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</span>
+                    </div>
+                    <div class="mt-5">
+                        <p><i class="fa fa-road text-success"></i> <strong>Distância</strong>: {{ $trilha->detalhes->nu_distancia_trd }} km</p>
+                        <p><i class="fa fa-clock-o text-info"></i> <strong>Duração</strong>: {{ \Carbon\Carbon::parse($trilha->detalhes->duracao_trd)->format('H:i')}} (Somente ida)</p>
+                        <p><i class="fa fa-sun text-warning"></i> <strong>Exposição</strong>: {{ $trilha->detalhes->ds_exposicao_trd }} </p>
+                        <p><i class="fa fa-heartbeat text-danger"></i> <strong>Esforço</strong>: {{ $trilha->detalhes->ds_esforco_trd }} </p>
+                        <p><i class="fa fa-compass text-info"></i> <strong>Orientação</strong>: {{ $trilha->detalhes->ds_orientacao_trd }} </p>
+                        <p><a href="{{ url('guia-de-dificuldade-em-trilhas/abnt') }}">Clique e entenda as medidas</a></p>
+                    </div>
+                </div>
+            @else
+                <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
+                    <div class="col-md-12">
+                        <a href="#"><img class="border-radius-xl shadow w-100" src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}"></a>
+                    </div>
                 </div>
             @endif
         </div>
