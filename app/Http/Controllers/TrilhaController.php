@@ -11,6 +11,7 @@ use App\Trilha;
 use App\Cidade;
 use App\Nivel;
 use App\Foto;
+use App\Estatistica;
 use App\Categoria;
 use App\Complemento;
 use App\TipoFoto;
