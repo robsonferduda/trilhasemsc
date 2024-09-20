@@ -156,6 +156,14 @@ class TrilhaController extends Controller
 
         $trilha = Trilha::with('foto')->with('cidade')->with('user')->with('nivel')->with('complemento')->where('ds_url_tri', $url)->first();
 
+        $usuario_logado = (Auth::user()) ? Auth::user()->id : null;
+
+        $estatistica = array('cd_usuario_usu' => $usuario_logado,
+                            'cd_tipo_monitoramento_tim' => 1,
+                            'cd_monitoramento_esa' => $trilha->id_trilha_tri);              
+
+        Estatistica::create($estatistica);
+
         $titulo = $trilha->nm_trilha_tri;
         $subtitulo = "Trilha em ".$trilha->cidade->nm_cidade_cde;
         $page_name = $trilha->nm_trilha_tri;
@@ -167,7 +175,6 @@ class TrilhaController extends Controller
            ->get()->sortBy('cidade.nm_cidade_cde');
 
         return view('trilhas/detalhes-novo', ['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => $page_name]);
-        return view('trilhas/detalhes', ['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade]);
     }
 
 
