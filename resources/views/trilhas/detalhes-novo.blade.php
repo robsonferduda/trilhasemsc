@@ -75,7 +75,7 @@
                         <!--
                             <div class="col-lg-12 col-md-12 mt-5">
                                 <p><i class="fa fa-road text-success"></i> <strong>Distância</strong>: </p>
-                                <p><i class="fa fa-clock-o text-info"></i> <strong>Tempo Médio</strong>: </p>
+                                <p><i class="fa fa-clock-o text-info"></i> <strong>Duração</strong>: </p>
                                 <p><i class="fa fa-sun text-warning"></i> <strong>Exposição</strong>: </p>
                                 <p><i class="fa fa-heartbeat text-danger"></i> <strong>Esforço</strong>: </p>
                                 <p><i class="fa fa-compass text-info"></i> <strong>Orientação</strong>: </p>

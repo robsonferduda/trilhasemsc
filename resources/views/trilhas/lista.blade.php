@@ -29,6 +29,7 @@
                                         <h4>
                                             <a href="{{ url($trilha->ds_url_tri) }}" class="text-danger text-decoration-underline-none">{{ $trilha->nm_trilha_tri }}</a>
                                         </h4>
+                                        <p>{{ $trilha->cidade->nm_cidade_cde }}</p>
                                         <p>
                                             {!! nl2br(substr($trilha->ds_trilha_tri, 0, strpos($trilha->ds_trilha_tri, chr(10) ) - 1)) !!}
                                         </p>
