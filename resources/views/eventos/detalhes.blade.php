@@ -48,8 +48,10 @@
             </div>
         </div>
         <div class="col-lg-12 col-md-12 mt-4 text-center">
-            @if(trim(Auth::user()->id_role) == 'GUIA')
-                <a href="{{ url('guia-e-condutores/privado/eventos') }}" type="button" class="btn btn-outline-danger btn-sm">Meus Eventos</a>
+            @if(Auth::user())
+                @if(trim(Auth::user()->id_role) == 'GUIA')
+                    <a href="{{ url('guia-e-condutores/privado/eventos') }}" type="button" class="btn btn-outline-danger btn-sm">Meus Eventos</a>
+                @endif
             @endif
             <a href="{{ url('eventos') }}" type="button" class="btn btn-outline-info btn-sm">Todos os Eventos</a>
             <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Início</a>
