@@ -76,12 +76,15 @@ class EventoController extends Controller
         
         $guia = Guia::where('id_user', Auth::user()->id)->first();
 
+        $request->merge(['dt_realizacao_eve' => date('Y-m-d', strtotime(str_replace('/', '-', $request->dt_realizacao_eve)))]);
+        $request->merge(['dt_termino_eve' => date('Y-m-d', strtotime(str_replace('/', '-', $request->dt_termino_eve)))]);
+
         $dados = array('id_guia_gui' => $guia->id_guia_gui,
                         'cd_cidade_cde' => $request->cd_cidade_cde,
                         'nm_evento_eve' => $request->nm_evento_eve,
                         'ds_fone_contato_eve' => $request->ds_fone_contato_eve,
                         'dt_realizacao_eve' => $request->dt_realizacao_eve,
-                        'dt_termino_eve' => $request->dt_realizacao_eve,
+                        'dt_termino_eve' => $request->dt_termino_eve,
                         'valor_eve' =>  $request->valor_eve,
                         'total_participantes_eve' => $request->total_participantes_eve,
                         'descricao' => $request->descricao,                           
@@ -122,12 +125,14 @@ class EventoController extends Controller
         
         $guia = Guia::where('id_user', Auth::user()->id)->first();
         $evento = Evento::where('id_evento_eve', $request->id_evento_eve)->first();
+        $request->merge(['dt_realizacao_eve' => date('Y-m-d', strtotime(str_replace('/', '-', $request->dt_realizacao_eve)))]);
+        $request->merge(['dt_termino_eve' => date('Y-m-d', strtotime(str_replace('/', '-', $request->dt_termino_eve)))]);
 
         $evento->cd_cidade_cde = $request->cd_cidade_cde;
         $evento->nm_evento_eve = $request->nm_evento_eve;
         $evento->ds_fone_contato_eve = $request->ds_fone_contato_eve;
         $evento->dt_realizacao_eve = $request->dt_realizacao_eve;
-        $evento->dt_termino_eve = $request->dt_realizacao_eve;
+        $evento->dt_termino_eve = $request->dt_termino_eve;
         $evento->valor_eve =  $request->valor_eve;
         $evento->total_participantes_eve = $request->total_participantes_eve;
         $evento->descricao = $request->descricao;                           

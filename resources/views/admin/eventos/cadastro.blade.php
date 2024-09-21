@@ -43,33 +43,9 @@
                                     <input type="text" name="nm_evento_eve" id="nm_evento_eve" value="{{ ($evento) ? $evento->nm_evento_eve : old('nm_evento_eve') }}" class="form-control" placeholder="Nome do evento. Ex.: Trilha do Cambierela" required>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="site">Data de Realização</label><span class="text-danger"> Obrigatório</span>
-                                    <input type="text" name="dt_realizacao_eve" id="dt_realizacao_eve" value="{{ ($evento) ? \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y') : old('dt_realizacao_eve') }}" placeholder="DD/MM/AAAA" class="form-control data" >
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                <div class="form-group">
-                                    <label for="site">Horário de Início</label><span class="text-danger"> Obrigatório</span>
-                                    <input type="text" name="hora_inicio_eve" id="hora_inicio_eve" value="{{ ($evento) ? $evento->hora_inicio_eve : old('hora_inicio_eve') }}" placeholder="00:00" class="form-control hora" >
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                <div class="form-group">
-                                    <label for="site">Horário de Término</label><span class="text-danger"> Obrigatório</span>
-                                    <input type="text" name="hora_fim_eve" id="hora_fim_eve" value="{{ ($evento) ? $evento->hora_fim_eve : old('hora_fim_eve') }}" placeholder="00:00" class="form-control hora" >
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                <div class="form-group">
-                                    <label for="site">Valor</label><span class="text-danger"> Obrigatório</span>
-                                    <input type="text" name="valor_eve" id="valor_eve" value="{{ ($evento) ? $evento->valor_eve : old('valor_eve') }}" placeholder="0.00" class="form-control" >
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="cidade_origem">Cidade de Origem</label><span class="text-danger"> Obrigatório</span>
+                                    <label for="cidade_origem">Cidade de Origem</label><span class="text-info"> Somente eventos em Santa Catarina</span><span class="text-danger"> Obrigatório</span>
                                     <select name="cd_cidade_cde" id="cd_cidade_cde" class="form-control select2" data-parsley-errors-container="#error-cidade-origem" required>
                                         <option value="">Selecione uma cidade</option>
                                         @foreach($cidades as $cidade)
@@ -80,15 +56,45 @@
                                 </div>
 
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <label for="site">Contato</label><span class="text-danger"> Obrigatório</span>
+                                    <label for="dt_realizacao_eve">Data de Realização</label><span class="text-danger"> Obrigatório</span>
+                                    <input type="text" name="dt_realizacao_eve" id="dt_realizacao_eve" value="{{ ($evento) ? \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y') : old('dt_realizacao_eve') }}" placeholder="DD/MM/AAAA" class="form-control data" >
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label for="hora_inicio_eve">Horário de Início</label><span class="text-danger"> Obrigatório</span>
+                                    <input type="text" name="hora_inicio_eve" id="hora_inicio_eve" value="{{ ($evento) ? $evento->hora_inicio_eve : old('hora_inicio_eve') }}" placeholder="00:00" class="form-control hora" >
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label for="dt_termino_eve">Data de Término</label><span class="text-danger"> Obrigatório</span>
+                                    <input type="text" name="dt_termino_eve" id="dt_termino_eve" value="{{ ($evento) ? \Carbon\Carbon::parse($evento->dt_termino_eve)->format('d/m/Y') : old('dt_termino_eve') }}" placeholder="DD/MM/AAAA" class="form-control data" >
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label for="hora_fim_eve">Horário de Término</label><span class="text-danger"> Obrigatório</span>
+                                    <input type="text" name="hora_fim_eve" id="hora_fim_eve" value="{{ ($evento) ? $evento->hora_fim_eve : old('hora_fim_eve') }}" placeholder="00:00" class="form-control hora" >
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label for="valor_eve">Valor</label><span class="text-danger"> Obrigatório</span>
+                                    <input type="text" name="valor_eve" id="valor_eve" value="{{ ($evento) ? $evento->valor_eve : old('valor_eve') }}" placeholder="0.00" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label for="ds_fone_contato_eve">Contato</label><span class="text-danger"> Obrigatório</span>
                                     <input type="text" name="ds_fone_contato_eve" id="ds_fone_contato_eve" value="{{ ($evento) ? $evento->ds_fone_contato_eve : old('ds_fone_contato_eve') }}" placeholder="(99) 99999-9999" class="form-control phone" >
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <label for="site">Total Máximo de Participantes</label><span class="text-primary"> Opcional</span>
+                                    <label for="total_participantes_eve">Máximo de Participantes</label><span class="text-primary"> Opcional</span>
                                     <input type="text" name="total_participantes_eve" id="total_participantes_eve" value="{{ ($evento) ? $evento->total_participantes_eve : old('total_participantes_eve') }}" placeholder="" class="form-control" >
                                 </div>
                             </div>
