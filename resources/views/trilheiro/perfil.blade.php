@@ -32,7 +32,7 @@
                                     <div class="profile-image center mb-4">
                                         @switch(trim(Auth::user()->id_role))
                                             @case('ADMIN')
-                                                <img src="{{ $trilheiro->dc_foto_perfil ? asset('img/guias/'.$trilheiro->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
+                                                <img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/guias/'.$trilheiro->nm_path_foto_tri) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
                                                 @break
                                             @case('GUIA')
                                                 <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
