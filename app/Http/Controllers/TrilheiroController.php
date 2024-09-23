@@ -50,7 +50,7 @@ class TrilheiroController extends Controller
         $subtitulo = "Perfil";
         $page_name = "Perfil";
         
-        $trilheiro = Trilheiro::where($id)->first();
+        $trilheiro = Trilheiro::where('id_trilheiro_tri', $id)->first();
 
         return view('trilheiro/perfil', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
     }
