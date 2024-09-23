@@ -93,7 +93,7 @@ class TrilheiroController extends Controller
         $page_name = "Guias e Condutores em Santa Catarina";
         $titulo = 'Guias e Condutores';
         
-        $trilheiros = Trilheiro::all();
+        $trilheiros = Trilheiro::orderBy('created_at','DESC')->get();
 
         return view('admin/trilheiro/listar', ['page_name' => $page_name, 'trilheiros' => $trilheiros]);
     }
