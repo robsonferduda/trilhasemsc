@@ -84,7 +84,8 @@
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="dropify-event">Faça aqui o upload da sua foto de perfil</label><span class="text-info"> Preferencialmente foto em formato quadrado</span>
+                                    <label for="dropify-event">Faça aqui o upload da sua foto de perfil</label><span class="text-info"> Preferencialmente foto em formato quadrado, com medidas proporcionais</span>
+                                    <p class="text-danger">Ao usar fotos em formato diferente do sugerido, sua imagem de perfil pode ficar desproporcional ou sua foto pouco nítida.</p>
                                     <input name="imagem" type="file" id="dropify-event"  data-default-file="{{  $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('img/trilheiros/default.png') }}">
                                     <input name="imagem_deletada" id="imagem_deletada" type="hidden" value='false' >
                                 </div>
