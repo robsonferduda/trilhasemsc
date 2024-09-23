@@ -44,6 +44,17 @@ class TrilheiroController extends Controller
         return view('guias/index', ['page_name' => $page_name, 'guias' => $guias, 'titulo' => $titulo, 'cidades' => $cidades]);
     }
 
+    public function show($id)
+    {
+        $titulo = 'Guias e Condutores';
+        $subtitulo = "Perfil";
+        $page_name = "Perfil";
+        
+        $trilheiro = Trilheiro::where($id)->first();
+
+        return view('trilheiro/perfil', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+    }
+
     public function perfil()
     {
         $titulo = 'Guias e Condutores';
