@@ -373,6 +373,30 @@
       <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
       <script src="{{ asset('js/vendor/jquery-1.12.3.min.js') }}"></script>
       <script src="{{ asset('js/custom.js') }}"></script>
+      
       @yield('script')
+      
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+            "@type": "ListItem", 
+            "position": 3, 
+            "name": "Nossas Trilhas",
+            "item": "https://trilhasemsc.com.br/trilhas"  
+          },{
+            "@type": "ListItem", 
+            "position": 1, 
+            "name": "Guias de Aventuras",
+            "item": "https://trilhasemsc.com.br/guias-e-condutores"  
+          },{
+            "@type": "ListItem", 
+            "position": 2, 
+            "name": "Eventos",
+            "item": "https://trilhasemsc.com.br/eventos"  
+          }]
+        }
+        </script>
    </body>
 </html>
