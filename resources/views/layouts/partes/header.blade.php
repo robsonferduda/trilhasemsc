@@ -1,6 +1,6 @@
 <header class="position-relative">
     <div class="container">
-       <div class="row bg-white shadow mt-n5 border-radius-lg pb-4 p-3 mx-sm-0 mx-1 position-relative">
+       <div class="row bg-white shadow mt-n5 border-radius-lg pb-5 p-3 mx-sm-0 mx-1 position-relative">
           <form action="{{ url('trilhas/#lista') }}" style="display: inherit;" method="GET" id="banner-searchbox" class="">
             <div class="row w-100">
                <div class="col-lg-4 col-md-4 col-sm-12 mt-2 mr-2" style="padding-right: 15px;">
