@@ -37,11 +37,13 @@
                         @endif
                     </div>
                     <div class="col-lg-12 col-md-12">
+                        <!--
                         <p>
                             <strong>Detalhes</strong>: {!! nl2br($evento->descricao) !!}
                         </p>
+                    -->
                         <div class="center">
-                            <a href="{{ url('eventos/detalhes', $evento->id_evento_eve) }}" type="button" class="btn btn-outline-info btn-sm">Ver Mais</a>
+                            <a href="{{ url('eventos/detalhes', $evento->id_evento_eve) }}" type="button" class="btn btn-outline-info btn-sm">Ver Detalhes</a>
                         </div>
                     </div>
                 </div>  
