@@ -28,6 +28,7 @@
                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                         <div class="text">{{ $trilheiro->nm_trilheiro_tri }}</div>
                                         <p><strong>Cidade de Origem</strong>: {!! ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '<span class="text-danger">Não Informada</span>' !!}</p>
+                                        <p><strong>Data de Nascimento</strong>: {{ ($trilheiro->dt_nascimento) ? \Carbon\Carbon::parse($trilheiro->dt_nascimento)->format('d/m/Y').' '.Carbon::parse($trilheiro->dt_nascimento)->age : 'Não Informada' }}</p>
                                         <p>Cadastro realizado em {{ \Carbon\Carbon::parse($trilheiro->created_at)->format('d/m/Y H:i:s') }}</p>
                                     </div>
                                 </div>
