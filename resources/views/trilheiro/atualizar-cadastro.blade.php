@@ -77,7 +77,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="dt_nascimento">Data de Nascimento</label><span class="text-danger"> Obrigatório</span>
-                                    <input type="text" name="dt_nascimento" id="dt_nascimento" value="{{ $usuario->email }}" class="form-control" placeholder="__/__/____" required>
+                                    <input type="text" name="dt_nascimento" id="dt_nascimento" value="{{ ($trilheiro) ? \Carbon\Carbon::parse($trilheiro->dt_nascimento)->format('d/m/Y') : old('dt_nascimento') }}" class="form-control data" placeholder="__/__/____" required>
                                 </div>
                             </div>                            
                         </div>
@@ -109,6 +109,7 @@
             $('#form-trilheiro').parsley();
 
             $('.phone').mask('(99) 999-999999');
+            $('.data').mask('99/99/9999');
 
             var drEvent = $('#dropify-event').dropify();
 

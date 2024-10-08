@@ -132,12 +132,14 @@ class TrilheiroController extends Controller
             $imagem_deletada = $request->imagem_deletada;
             $estado = $request->estado_origem;
             $sexo = $request->sexo;
+            $dt_nascimento = date('Y-m-d', strtotime(str_replace('/', '-', $request->dt_nascimento)));
 
             $trilheiro->update([
                 'cd_cidade_tri' => $cidadeOrigem,
                 'nm_trilheiro_tri' => $nome,
                 'cd_estado_est' => $estado,
-                'cd_sexo_sex' => $sexo
+                'cd_sexo_sex' => $sexo,
+                'dt_nascimento' => $dt_nascimento
             ]);
 
             $imagem = null;
