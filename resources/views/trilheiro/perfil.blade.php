@@ -16,15 +16,16 @@
             <div class="card planned_task">
                 <div class="header no-padding-bottom">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="col col-lg-6 col-md-6 col-sm-4">
                             <h2>Dados do Trilheiro</h2>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 text-right">
+                        <div class="col col-lg-6 col-md-6 col-sm-4 text-right">
                             <h2><a href="{{ url('/trilheiro/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> Editar Dados</a></h2>
                         </div>
                     </div>
                 </div>               
                 <div class="body">
+                    @include('layouts.mensagens')
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-12">
                             <div class="card profile-header">
@@ -49,12 +50,15 @@
                                         <span>{{ ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '' }}</span>
                                         <h2 class="mb-0">{{ $trilheiro->nr_score_tri }}</h2>
                                         @if(!$trilheiro->nr_score_tri)
-                                            <p class="mb-0"><a href="{{ url('trilheiro/privado/meu-score') }}">Clique para calcular</a></p>
+                                            <p class="mb-0"><a href="{{ url('trilheiro/privado/meu-nivel') }}">Clique para calcular</a></p>
                                         @endif
                                         <span>{{ $trilheiro->indice->ds_indice_ind }}</span>
                                         <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Índice de Experiência em Trilhas">
                                         <strong>Índice de Experiência em Trilhas</strong>
-                                        <p><a href="{{ url('indice-experiencia-trilhas') }}" target="BLANK">Entenda o Índice</a></p>
+                                        @if($trilheiro->nr_score_tri)
+                                            <p class="mt-2 mb-2"><a href="{{ url('trilheiro/privado/meu-nivel') }}">Atualizar Índice</a></p>
+                                        @endif
+                                        <p class="mt-0 mb-0 text-danger"><a href="{{ url('indice-experiencia-trilhas') }}" class="text-danger" target="BLANK">Entenda o Índice</a></p>
                                     </div>                       
                                 </div>
                             </div>

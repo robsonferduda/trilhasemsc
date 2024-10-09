@@ -323,7 +323,7 @@
                                     <a href="{{ url('trilheiro/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> <span>Editar Dados</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('trilheiro/privado/meu-score') }}"><i class="icon-speedometer"></i> <span>Meu Score</span></a>
+                                    <a href="{{ url('trilheiro/privado/meu-nivel') }}"><i class="icon-speedometer"></i> <span>Meu Nível</span></a>
                                 </li>
                             @endif
                             <li>

@@ -162,6 +162,8 @@ class TrilheiroController extends Controller
             }
 
             Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $imagem]);
+
+            return redirect('trilheiro/privado/perfil')->withInput();
         }
 
         return view('trilheiro/atualizar-cadastro', compact('estados', 'cidades','trilheiro','usuario'));
@@ -198,7 +200,7 @@ class TrilheiroController extends Controller
             Flash::error('Erro ao atualizar questionário');
         }
 
-        return redirect('trilheiro/privado/meu-score');
+        return redirect('trilheiro/privado/perfil');
     }
 
     public function calculaScore($trilheiro, $questionario){

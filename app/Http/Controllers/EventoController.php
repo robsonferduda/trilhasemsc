@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Evento;
+use App\Trilheiro;
 use App\Cidade;
 use App\Guia;
 use App\Estatistica;
@@ -33,13 +34,19 @@ class EventoController extends Controller
 
         $usuario_logado = (Auth::user()) ? Auth::user()->id : null;
 
+        if($usuario_logado){
+            $trilheiro = Trilheiro::where('id_user', $usuario_logado)->first();
+        }else{
+            $trilheiro = null;
+        }
+
         $estatistica = array('cd_usuario_usu' => $usuario_logado,
                             'cd_tipo_monitoramento_tim' => 2,
                             'cd_monitoramento_esa' => $id);              
 
         Estatistica::create($estatistica);
 
-        return view('eventos/detalhes', ['page_name' => $page_name, 'evento' => $evento, 'cidades' => $cidades]);
+        return view('eventos/detalhes', ['page_name' => $page_name, 'evento' => $evento, 'cidades' => $cidades, 'trilheiro' => $trilheiro]);
     }
 
     public function eventos()
@@ -48,6 +55,16 @@ class EventoController extends Controller
         $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)->orderBy('dt_realizacao_eve')->get();
 
         return view('admin/eventos/listar', compact('guia','eventos'));
+    }
+
+    public function participar($id_evento)
+    {
+        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+
+        $trilheiro->evento()->sync($id_evento);
+
+        return redirect('eventos/detalhes/'.$id_evento);
     }
 
     public function cadastro()

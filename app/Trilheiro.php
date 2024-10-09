@@ -42,4 +42,8 @@ class Trilheiro extends Model
         return $this->hasOne('App\Indice', 'id_indice_ind', 'id_indice_ind');
     }
 
+    public function evento()
+    {
+        return $this->belongsToMany('App\Evento','evento_trilheiro_evt', 'id_trilheiro_tri','cd_evento_eve')->withTimestamps();
+    }
 }
