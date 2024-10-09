@@ -57,7 +57,6 @@ class TrilheiroController extends Controller
 
     public function perfil()
     {
-        /*
         $titulo = 'Guias e Condutores';
         $subtitulo = "Perfil";
         $page_name = "Perfil";
@@ -65,8 +64,6 @@ class TrilheiroController extends Controller
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
 
         return view('trilheiro/perfil', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
-        */
-        return redirect('trilheiro/privado/perfil')->withInput();
     }
 
     public function score()
