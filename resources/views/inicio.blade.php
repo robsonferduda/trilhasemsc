@@ -2,6 +2,7 @@
 @section('content')
     @include('layouts/partes/header')
     @include('layouts/partes/acesso_guias')
+    @include('layouts/partes/eventos')
     @include('inicio/destaques')
     @include('layouts/partes/publicidade-google')
     @include('inicio/condutores')

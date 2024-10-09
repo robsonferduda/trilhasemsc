@@ -17,7 +17,11 @@
                       <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
                     @endif
                     @if(Auth::user())
-                        <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-success btn-sm mt-3"><i class="fa fa-check"></i> Participar do Evento</a>
+                        @if($trilheiro->evento->contains($evento->id_evento_eve))
+                            <button type="button" class="btn btn-outline-success btn-sm mt-3"><i class="fa fa-check"></i> Presença Confirmada</button>
+                        @else
+                            <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-success btn-sm mt-3"><i class="fa fa-check"></i> Participar do Evento</a>
+                        @endif
                     @else
                         <p class="mt-3 mb-0"><a class="text-danger" href="{{ url('login') }}">Faça login para participar</a></p>
                     @endif
