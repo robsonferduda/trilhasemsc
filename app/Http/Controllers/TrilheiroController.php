@@ -132,6 +132,7 @@ class TrilheiroController extends Controller
             $imagem_deletada = $request->imagem_deletada;
             $estado = $request->estado_origem;
             $sexo = $request->sexo;
+            $objetivos = $request->objetivos;
             $dt_nascimento = date('Y-m-d', strtotime(str_replace('/', '-', $request->dt_nascimento)));
 
             $trilheiro->update([
@@ -139,7 +140,8 @@ class TrilheiroController extends Controller
                 'nm_trilheiro_tri' => $nome,
                 'cd_estado_est' => $estado,
                 'cd_sexo_sex' => $sexo,
-                'dt_nascimento' => $dt_nascimento
+                'dt_nascimento' => $dt_nascimento,
+                'ds_objetivos_tri' => $objetivos
             ]);
 
             $imagem = null;
