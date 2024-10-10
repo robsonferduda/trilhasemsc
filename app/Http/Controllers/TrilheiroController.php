@@ -315,16 +315,16 @@ class TrilheiroController extends Controller
 
     public function trilhas(Request $request)
     {
-        $experiencia = 0;
 
         if (Auth::guest() or trim(Auth::user()->id_role) != 'TRILHEIRO') {
             return redirect('login');
         }
        
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
-        $trilhasTrilheiro = TrilheiroTrilha::where('id_trilheiro_tri',$trilheiro->id_trilheiro_tri)->pluck('id_trilha_tri')->toArray();
 
         if($request->isMethod('post')) {
+
+            $experiencia = 0;
             
             TrilheiroTrilha::where('id_trilheiro_tri',$trilheiro->id_trilheiro_tri)->delete();
 
@@ -337,6 +337,7 @@ class TrilheiroController extends Controller
                 }
             }  
 
+            $trilhasTrilheiro = TrilheiroTrilha::where('id_trilheiro_tri',$trilheiro->id_trilheiro_tri)->pluck('id_trilha_tri')->toArray();
             $trilhasIndice = Trilha::whereIn('id_trilha_tri',$trilhasTrilheiro)->get();
 
             foreach($trilhasIndice as $trilha){
@@ -351,6 +352,8 @@ class TrilheiroController extends Controller
             
             return redirect('trilheiro/privado/perfil');
         }
+
+        $trilhasTrilheiro = TrilheiroTrilha::where('id_trilheiro_tri',$trilheiro->id_trilheiro_tri)->pluck('id_trilha_tri')->toArray();
 
         $cidades = Cidade::has('trilhas')->with(['trilhas' => function($query){
             $query->orderBy('nm_trilha_tri');
