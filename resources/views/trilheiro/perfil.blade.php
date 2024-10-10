@@ -67,7 +67,11 @@
                             <div class="card profile-header">
                                 <div class="body">
                                     <h6>Pontos de Experiência</h6>
-                                    <p class="mb-2"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
+                                    @if($trilheiro->nu_pontos_experiencia_tri)
+                                        <p class="mb-2"><i class="fa fa-star text-warning" aria-hidden="true"></i> <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong> Pontos de Experiência</p>
+                                    @else
+                                        <p class="mb-2"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
+                                    @endif
                                     <p class="mt-2 mb-2"><a href="{{ url('trilheiro/privado/trilhas') }}">Clique aqui para selecionar suas trilhas</a></p>
                                 </div>
                             </div>

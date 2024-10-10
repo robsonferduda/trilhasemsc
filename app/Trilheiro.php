@@ -22,7 +22,8 @@ class Trilheiro extends Model
         'cd_estado_est',
         'dt_nascimento',
         'cd_sexo_sex',
-        'ds_objetivos_tri'
+        'ds_objetivos_tri',
+        'nu_pontos_experiencia_tri'
         ];
 
     public $timestamps = true;
