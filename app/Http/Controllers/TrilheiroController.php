@@ -16,6 +16,7 @@ use App\Questionario;
 use App\Mail\GuiaConfirmacao;
 use App\UnidadeConservacao;
 use App\Mail\GuiaModeracao;
+use App\TrilheiroTrilha;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -311,4 +312,36 @@ class TrilheiroController extends Controller
             }
         }
     }
+
+    public function trilhas(Request $request)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'TRILHEIRO') {
+            return redirect('login');
+        }
+        //dd($request);
+        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
+
+        if($request->isMethod('post')) {
+            
+            TrilheiroTrilha::where('id_trilheiro_tri',$trilheiro->id_trilheiro_tri)->delete();
+
+            if(isset($request->trilhas)) {            
+                foreach($request->trilhas as $id){
+                    TrilheiroTrilha::create([
+                        'id_trilha_tri' => $id,
+                        'id_trilheiro_tri' => $trilheiro->id_trilheiro_tri
+                    ]);
+                }
+            }                                                   
+        }
+
+        $cidades = Cidade::has('trilhas')->with(['trilhas' => function($query){
+            $query->orderBy('nm_trilha_tri');
+        }])->orderBy('nm_cidade_cde')->get();
+
+        $trilhasTrilheiro = TrilheiroTrilha::where('id_trilheiro_tri',$trilheiro->id_trilheiro_tri)->pluck('id_trilha_tri')->toArray();
+
+        return view('trilheiro/trilhas', compact('cidades', 'trilhasTrilheiro', 'trilheiro'));
+    }
+
 }
