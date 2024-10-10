@@ -22,6 +22,7 @@
                         <div class="row p-3">
                             <div class="col-lg-1 col-md-2 col-sm-12">
                                 <a href="{{ url('admin/trilheiro/perfil/'.$trilheiro->id_trilheiro_tri) }}"><img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('images/user.png') }}" class="rounded-circle user-photo w-100" alt="Foto de Perfil"></a>
+                                <p class="mb-2 text-center mt-2 mb-0"><i class="fa fa-star text-warning" aria-hidden="true"></i> <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong> XP</p>
                             </div>
                             <div class="col-lg-10 col-md-8 col-sm-12">
                                 <div class="row">
