@@ -67,8 +67,8 @@
                             <div class="card profile-header">
                                 <div class="body">
                                     <h6>Pontos de Experiência</h6>
-                                    <p><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
-                                    
+                                    <p class="mb-2"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
+                                    <p class="mt-2 mb-2"><a href="{{ url('trilheiro/privado/trilhas') }}">Clique aqui para selecionar suas trilhas</a></p>
                                 </div>
                             </div>
                         </div>
