@@ -325,6 +325,9 @@
                                 <li>
                                     <a href="{{ url('trilheiro/privado/meu-nivel') }}"><i class="icon-speedometer"></i> <span>Meu Nível</span></a>
                                 </li>
+                                <li>
+                                    <a href="{{ url('trilheiro/privado/trilhas') }}"><i class="fa fa-thumb-tack"></i> <span>Trilhas</span></a>
+                                </li>
                             @endif
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
