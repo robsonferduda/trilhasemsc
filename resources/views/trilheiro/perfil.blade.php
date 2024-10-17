@@ -66,13 +66,47 @@
                         <div class="col-lg-9 col-md-9">
                             <div class="card profile-header">
                                 <div class="body">
-                                    <h6>Pontos de Experiência</h6>
-                                    @if($trilheiro->nu_pontos_experiencia_tri)
-                                        <p class="mb-2"><i class="fa fa-star text-warning" aria-hidden="true"></i> <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong> Pontos de Experiência</p>
-                                    @else
-                                        <p class="mb-2"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
-                                    @endif
-                                    <p class="mt-2 mb-2"><a href="{{ url('trilheiro/privado/trilhas') }}">Clique aqui para selecionar suas trilhas</a></p>
+                                    <div class="d-none d-md-block">
+                                        @if($trilheiro->nu_pontos_experiencia_tri)
+                                            <h6 class="mb-2"><i class="fa fa-star text-warning" aria-hidden="true"></i> <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong> Pontos de Experiência</h6>
+                                        @else
+                                            <p class="mb-2"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
+                                        @endif
+                                        <p class="mt-2"><a href="{{ url('trilheiro/privado/trilhas') }}" style="position: absolute; right: 10px; top: 15px;">Clique aqui para selecionar suas trilhas</a></p>
+                                    </div>
+                                    <div class="d-block center d-md-none">
+                                        @if($trilheiro->nu_pontos_experiencia_tri)
+                                            <h6 class="mb-2"><i class="fa fa-star text-warning" aria-hidden="true"></i> <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong> Pontos de Experiência</h6>
+                                        @else
+                                            <p class="mb-2"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
+                                        @endif
+                                        <p class="mt-2 center"><a href="{{ url('trilheiro/privado/trilhas') }}">Clique aqui para selecionar suas trilhas</a></p>
+                                    </div>
+                                    @foreach($trilheiro->trilhas as $key => $trilha)
+                                        <div class="row mb-3 mt-3">
+                                            <div class="col-lg-1 col-md-1 mr-0 ml-0 px-2 d-none d-sm-none d-md-block">
+                                                <img class="img-fluid mt-2" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 d-none d-md-block">
+                                                <h6>{{ $trilha->nm_trilha_tri }}</h6>
+                                                <p>{{ $trilha->nivel->dc_nivel_niv }} - {{ $trilha->complemento->nm_complemento_nivel_con }} </p>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 d-none d-md-block">
+                                                <h5 class="float-right mt-2">+{{ $trilha->complemento->nu_pontos_con }}</h5>
+                                            </div>
+
+                                            <div class="col-sm-12 mr-0 ml-0 px-2 d-block d-md-none center">
+                                                <img class="img-fluid mt-2 w-50" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
+                                            </div>
+                                            <div class="col-sm-12 d-block d-md-none center mb-0">
+                                                <h6 class="mt-2">{{ $trilha->nm_trilha_tri }}</h6>
+                                                <p class="mb-0">{{ $trilha->nivel->dc_nivel_niv }} - {{ $trilha->complemento->nm_complemento_nivel_con }} </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-2 mt-0 d-block d-md-none center">
+                                                <h6 class="center mt-0">+{{ $trilha->complemento->nu_pontos_con }}</h6>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
