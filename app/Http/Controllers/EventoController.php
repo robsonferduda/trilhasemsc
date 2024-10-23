@@ -17,7 +17,7 @@ class EventoController extends Controller
     public function index()
     {
         $page_name = "Eventos e Trilhas em Santa Catarina";
-        $eventos = Evento::orderBy('dt_realizacao_eve','DESC')->get();
+        $eventos = Evento::where('dt_realizacao_eve','<',date('Y-m-d H:i:s'))->orderBy('dt_realizacao_eve','ASC')->get();
         $cidades = Cidade::whereIn('cd_cidade_cde', Evento::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
 
         return view('eventos/index', ['page_name' => $page_name, 'eventos' => $eventos, 'cidades' => $cidades]);
