@@ -16,7 +16,7 @@
                     @else
                       <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
                     @endif
-                    @if(Auth::user())
+                    @if(Auth::user() and $trilheiro)
                         @if($trilheiro->evento->contains($evento->id_evento_eve))
                             <button type="button" class="btn btn-outline-success btn-sm mt-3"><i class="fa fa-check"></i> Presença Confirmada</button>
                         @else
