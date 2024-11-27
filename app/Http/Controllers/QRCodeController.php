@@ -10,7 +10,7 @@ class QRCodeController extends Controller
 {
     public function rastreio($codigo)
     {
-        $qrcode = QRCode::where('ds_hash_qrc',$hash)->first();
+        $qrcode = QRCode::where('ds_hash_qrc',$codigo)->first();
         $qrcode->nu_acessos_qrc = $qrcode->nu_acessos_qrc + 1;
         $qrcode->save();        
 
