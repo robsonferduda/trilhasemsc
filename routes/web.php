@@ -18,6 +18,8 @@ Route::get('home', 'HomeController@index')->name('home');
 Route::get('novo', 'HomeController@novo')->name('novo');
 Route::get('perfil/{id}', 'HomeController@perfil')->name('perfil');
 
+Route::get('rastreio/{codigo}', 'QRCodeController@rastreio');
+
 Route::post('comentario/novo', 'ComentarioController@store');
 
 Route::post('estado/{estado}/cidades', 'HomeController@getCidades');
@@ -113,8 +115,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('login/google', 'GoogleController@redirectToProvider');
     Route::get('login/google/callback', 'GoogleController@handleProviderCallback');
-
-    Route::get('rastreio/{codigo}', 'QRCodeController@rastreio');
 
     Route::prefix('admin')->group(function () {
 
