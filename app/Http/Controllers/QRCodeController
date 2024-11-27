@@ -6,7 +6,7 @@ use App\QRCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class RastreioController extends Controller
+class QRCodeController extends Controller
 {
     public function rastreio($codigo)
     {
