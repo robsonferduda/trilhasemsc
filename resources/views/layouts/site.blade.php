@@ -304,7 +304,7 @@
          </div>
       </div>       
        <!-- Banner para mobile -->
-     <div class="mobile-banner shadow mt-n5 border-radius-lg">
+     <div class="mobile-banner shadow mb-5 border-radius-lg">
       <div class="banner-content">
         <h2>Eventos e Trilhas em Santa Catarina</h2>   
         <h3 class="text-danger" >{{ $eventoBanner->nm_evento_eve }}</h3>       
