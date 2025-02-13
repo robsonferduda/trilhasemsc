@@ -98,3 +98,91 @@ body {
  .tabela-criterios .zebra { background: #f3f3f3;}
  .pontuacao{ background:#f3f3f3; font-weight: bold;}
  
+
+ /* Estilo do banner flutuante */
+ .floating-banner {
+	position: fixed;
+	top: 50%;
+	left: 20px;
+	padding: 10px;
+	transform: translateY(-50%);
+	width: 220px;
+	height: 430px;
+	/* background: linear-gradient(to bottom, #2E7D32, #81D4FA); */
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center; 
+	text-align: center;	
+	z-index: 1000;
+  }
+ 
+  /* Texto do banner */
+  .floating-banner h2 {
+	font-size: 16px;
+	margin: 0;
+  }
+ 
+  /* Texto do banner */
+  .floating-banner h3 {
+	 font-size: 16px;
+	 margin-top: 20px;
+   }
+ 
+  /* Informações do evento */
+  .floating-banner p {
+	 font-size: 14px;
+	 margin: 5px 0;	 
+   }
+ 
+
+  .banner-content {
+	margin-top: 10px;
+  }
+ 
+   /* Responsividade */
+   @media (max-width: 1775px) {
+	 .floating-banner {
+	   display: none; /* Oculta o banner em telas menores */
+	 }
+   }
+
+  /* Estilo do banner para mobile */
+  .mobile-banner {
+	width: 90%; /* Ocupa toda a largura da tela */
+	background-color: #ffffff;
+	text-align: center;
+	margin: auto;
+	padding: 15px 10px; /* Espaçamento interno */
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+	font-family: 'Roboto', sans-serif;
+	line-height: 1.4;
+  }  
+
+  /* Texto do banner */
+  .mobile-banner h2 {
+	font-size: 16px;
+	margin: 0;
+  }
+ 
+  /* Texto do banner */
+  .mobile-banner h3 {
+	 font-size: 16px;
+	 margin-top: 20px;
+   }
+ 
+  /* Informações do evento */
+  .mobile-banner p {
+	 font-size: 14px;
+	 margin: 5px 0;	 
+   }
+
+   /* Responsividade */
+   @media (min-width: 769px) {
+	.mobile-banner {
+	  display: none; /* Oculta o banner em telas maiores */
+	}
+  }
