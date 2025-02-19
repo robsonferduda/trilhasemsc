@@ -29,6 +29,9 @@ class PraiaController extends Controller
 
     public function getPraia($url)
     {
+
+        dd($url);
+
         $praia = Praia::where('ds_url_pra', $url)->first();
 
         dd($praia);
