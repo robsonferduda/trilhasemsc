@@ -23,7 +23,7 @@
                 </div> 
                 <div class="col-md-12 mt-3">
                     <div class="mt-0 conteudo">
-                        {!! $praia->txt_descricao_pra !!}
+                        {!! $praia !!}
                     </div>
                 </div>
                 <div class="col-md-12">
