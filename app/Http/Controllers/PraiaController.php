@@ -29,7 +29,7 @@ class PraiaController extends Controller
 
     public function getPraia($url)
     {
-        $praia = Praia::where('ds_url-pra', $url)->first();
+        $praia = Praia::where('ds_url_pra', $url)->first();
 
         dd($praia);
     }
