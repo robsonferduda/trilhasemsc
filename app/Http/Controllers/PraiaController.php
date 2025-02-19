@@ -5,16 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use URL;
 use Auth;
-use App\User;
-use App\Tag;
-use App\Trilha;
-use App\Cidade;
-use App\Nivel;
-use App\Foto;
-use App\Estatistica;
-use App\Categoria;
-use App\Complemento;
-use App\TipoFoto;
+use App\Praia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
@@ -36,8 +27,10 @@ class PraiaController extends Controller
         return view('admin/trilha/index', ['trilhas' => $trilhas]);
     }
 
-    public function getPraia($nome)
+    public function getPraia($url)
     {
-        
+        $praia = Praia::where('ds_url-pra', $url)->first();
+
+        dd($praia);
     }
 }
