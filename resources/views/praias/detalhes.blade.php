@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('pageTitle', $praia->nm_praia_pra )
+@section('pageTitle', '')
 @section('description', '')
 @section('content')
 @include('layouts/partes/header-trilhas-detalhes')
@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-9 mt-2">
                 <div class="col-md-12 mt-3">
-                    <h4 class="mt-2">{{ $praia->nm_praia_pra }}</h4>
+                    <h4 class="mt-2">Nome da Praia</h4>
                     <h6>
                         <i class="ni ni-pin-3 text-danger"></i> Florianópolis 
                         <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
@@ -23,7 +23,7 @@
                 </div> 
                 <div class="col-md-12 mt-3">
                     <div class="mt-0 conteudo">
-                        {!! $praia !!}
+                        
                     </div>
                 </div>
                 <div class="col-md-12">
