@@ -1,6 +1,6 @@
 @extends('layouts.site')
 @section('pageTitle', $praia->nm_praia_pra )
-@section('description', strip_tags(html_entity_decode(substr($praia->nm_praia_pra, 0, strpos($praia->nm_praia_pra, chr(10) ) - 1))) )
+@section('description', '')
 @section('content')
 @include('layouts/partes/header-trilhas-detalhes')
 <section class="pt-1 pb-0 mt-3 mb-5">
