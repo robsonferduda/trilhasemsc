@@ -56,6 +56,11 @@ Route::get('sobre-nos', 'HomeController@sobre');
 
 Route::get('grupos', 'GrupoController@index');
 
+Route::get('praias', 'PraiaController@index');
+Route::get('praias/florianopolis', 'PraiaController@index');
+Route::get('praias/florianopolis/sul', 'PraiaController@index');
+Route::get('praias/florianopolis/sul/{nome}', 'PraiaController@getPraia');
+
 Route::get('campings', 'CampingController@campings');
 Route::get('laguna/campings/selvagem/camping-mirante-anita-garibaldi', 'CampingController@anitaGaribaldi');
 Route::get('bom-jardim-da-serra/campings/selvagem/camping-pico-do-rinoceronte', 'CampingController@picoRinoceronte');
@@ -98,6 +103,7 @@ Route::get('caneca', function () {
 })->name('caneca');
 
 Route::group(['middleware' => ['web']], function () {
+
     Route::get('usuario/add', 'UserController@store');
     Route::get('usuario/update', 'UserController@update');
     Route::get('usuarios', 'UserController@index');
@@ -112,7 +118,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('login/google', 'GoogleController@redirectToProvider');
     Route::get('login/google/callback', 'GoogleController@handleProviderCallback');
-
 
     Route::prefix('admin')->group(function () {
         Route::get('dashboard', 'HomeController@dashboard');
@@ -132,7 +137,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('insert-foto', 'TrilhaController@insertFoto');
     });
     
-
     Route::prefix('guia-e-condutores/privado')->group(function () {
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'GuiaController@atualizarCadastro');
         Route::get('perfil', 'GuiaController@previaPerfil');
@@ -143,7 +147,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('evento/cadastrar', 'EventoController@cadastrar');
         Route::match(['GET', 'POST'],'trilhas', 'GuiaController@trilhas');
     });
-
 
     Route::prefix('trilheiro/privado')->group(function () {
         Route::get('perfil', 'TrilheiroController@perfil');
@@ -157,7 +160,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::prefix('cadastro/privado')->group(function () {
         Route::match(['GET', 'POST'], 'escolher-perfil', 'CadastroController@selecionarPerfil');
     });
-
-
 
 });
