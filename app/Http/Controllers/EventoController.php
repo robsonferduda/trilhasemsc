@@ -59,12 +59,18 @@ class EventoController extends Controller
 
     public function participar($id_evento)
     {
-        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
-        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+        if(Auth::user()){
 
-        $trilheiro->evento()->sync($id_evento);
+            $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
+            $evento = Evento::where('id_evento_eve', $id_evento)->first();
 
-        return redirect('eventos/detalhes/'.$id_evento);
+            $trilheiro->evento()->sync($id_evento);
+
+            return redirect('eventos/detalhes/'.$id_evento);
+
+        }else{
+            return redirect('login');
+        }
     }
 
     public function cadastro()

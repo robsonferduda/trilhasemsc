@@ -326,7 +326,10 @@
                                     <a href="{{ url('trilheiro/privado/meu-nivel') }}"><i class="icon-speedometer"></i> <span>Meu Nível</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('trilheiro/privado/trilhas') }}"><i class="fa fa-thumb-tack"></i> <span>Trilhas</span></a>
+                                    <a href="{{ url('trilheiro/privado/trilhas') }}"><i class="fa fa-thumb-tack"></i> <span>Minhas Trilhas</span></a>
+                                </li>
+                                <li>
+                                  <a href="{{ url('eventos') }}"><i class="fa fa-tags"></i> <span>Eventos</span></a>
                                 </li>
                             @endif
                             <li>

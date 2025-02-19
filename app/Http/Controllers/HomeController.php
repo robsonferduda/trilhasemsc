@@ -6,6 +6,7 @@ use DB;
 use App\Nivel;
 use App\Trilha;
 use App\Cidade;
+use App\Evento;
 use App\Galeria;
 use App\Guia;
 use Illuminate\Http\Request;
