@@ -141,16 +141,20 @@
             </div>
             <div class="col-md-3">            
                 <div class="col-lg-12 mt-4">
-                    <h4 class="mt-0">Busca por Cidade</h4>
-                        <ul class="flex-column ms-n3 nav">
-                            @foreach($busca_cidade as $busca)
-                                <li class="nav-item">
-                                    <a class="nav-link text-secondary" href="{{url(stringToStringSeo($busca->cidade->nm_cidade_cde).'/trilhas/#lista')}}">
-                                        <h6>{{ $busca->cidade->nm_cidade_cde }} ({{ $busca->total }})</h6>
-                                    </a>
-                                </li>
-                            @endforeach
-                      </ul>
+                    <h4 class="mt-0">Busca por Cidade</h4>                    
+                        <label class="" style="font-size: 100%; margin: 0px;">Selecione a cidade</label>
+                        <p class="mt-0 text-danger" style="font-size: 85%;">São mostradas somente cidades que possuem alguma trilha cadastrada.</p>
+                        <select class="form-control mb-0" name="cidade" id="list-cidade">
+                           <option value="">Selecione a cidade</option>
+                           @if(isset($busca_cidade))
+                              @forelse($busca_cidade as $busca)
+                                 <option value="{{ url(stringToStringSeo($busca->cidade->nm_cidade_cde).'/trilhas/#lista') }}">{{ $busca->cidade->nm_cidade_cde }} ({{ $busca->total }})</option>
+                              @empty
+                                 <option selected value="">Nenhuma cidade disponível</option>
+                              @endforelse
+                           @endif
+                        </select>
+                        @include('layouts/partes/publicidade-google')
                 </div>
             </div>         
        </div>
