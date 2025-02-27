@@ -388,7 +388,7 @@
       @endenv
       <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
       <script src="{{ asset('js/vendor/jquery-1.12.3.min.js') }}"></script>
-      <script src="{{ asset('js/custom.js') }}"></script>
+      <script src="{{ asset('js/custom.js') }}?v=<?php echo date("Ymdhis") ?>"></script>
       
       @yield('script')
 
