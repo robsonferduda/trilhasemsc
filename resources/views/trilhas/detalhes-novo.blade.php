@@ -71,6 +71,8 @@
                             </div>
                         @endforeach
                     </div>
+                @else
+                    <h6>Acesse <a class="font-italic text-decoration-underline" href="{{ url("guias-e-condutores") }}">aqui</a> os guais e condutores cadastrados em nossa plataforma. </h6>
                 @endif
                 <div class="col-md-12 mt-3">
                     <div class="mt-0 conteudo">
