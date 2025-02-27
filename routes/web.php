@@ -58,6 +58,11 @@ Route::get('sobre-nos', 'HomeController@sobre');
 
 Route::get('grupos', 'GrupoController@index');
 
+Route::get('praias', 'PraiaController@index');
+Route::get('praias/florianopolis', 'PraiaController@index');
+Route::get('praias/florianopolis/sul', 'PraiaController@index');
+Route::get('praias/florianopolis/sul/{nome}', 'PraiaController@getPraia');
+
 Route::get('campings', 'CampingController@campings');
 Route::get('laguna/campings/selvagem/camping-mirante-anita-garibaldi', 'CampingController@anitaGaribaldi');
 Route::get('bom-jardim-da-serra/campings/selvagem/camping-pico-do-rinoceronte', 'CampingController@picoRinoceronte');
