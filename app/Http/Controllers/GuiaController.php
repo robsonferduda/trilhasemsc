@@ -144,9 +144,13 @@ class GuiaController extends Controller
                             ]);
                         }
 
+                        Auth::login($usuario);
+
                         Flash::success("Usuário cadastrado com sucesso!");
                     }
                     
+                    return redirect('guia-e-condutores/privado/atualizar-cadastro');
+
                     break;
 
                 case 'trilheiro':
@@ -188,7 +192,11 @@ class GuiaController extends Controller
                         }
                         Flash::success("Usuário cadastrado com sucesso!");
                     }
+
+                    Auth::login($usuario);
                     
+                    return redirect('trilheiro/privado/perfil');
+
                     break;
                 default:
                     # code...
