@@ -125,6 +125,8 @@ class GuiaController extends Controller
         
                     if($user) {
                         Flash::error("Usuário já cadastrado no sistema.");
+
+                        return redirect('guias-e-condutores/cadastro');
                     } else {
 
                         $usuario = User::create([
@@ -145,9 +147,9 @@ class GuiaController extends Controller
                         }
 
                         Flash::success("Cadastro realizado com sucesso. Complete seu perfil para que os trilheiros possam te encontrar.");
-                    }
 
-                    Auth::login($usuario);
+                        Auth::login($usuario);
+                    }
                     
                     return redirect('guia-e-condutores/privado/atualizar-cadastro');
 
