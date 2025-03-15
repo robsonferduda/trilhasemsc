@@ -144,10 +144,10 @@ class GuiaController extends Controller
                             ]);
                         }
 
-                        Auth::login($usuario);
-
-                        Flash::success("Usuário cadastrado com sucesso!");
+                        Flash::success("Cadastro realizado com sucesso. Complete seu perfil para que os trilheiros possam te encontrar.");
                     }
+
+                    Auth::login($usuario);
                     
                     return redirect('guia-e-condutores/privado/atualizar-cadastro');
 
@@ -190,7 +190,7 @@ class GuiaController extends Controller
                                 'nm_trilheiro_tri' => $usuario->name
                             ]);
                         }
-                        Flash::success("Usuário cadastrado com sucesso!");
+                        Flash::success("Usuário cadastrado com sucesso. Deixe seu perfil completo para que os guias possam te encontrar.");
                     }
 
                     Auth::login($usuario);
