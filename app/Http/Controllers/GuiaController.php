@@ -136,7 +136,7 @@ class GuiaController extends Controller
                         ]);
         
                         $usuario->id_role = 'GUIA';
-                        $usuario = $usuario->save();
+                        $usuario->save();
 
                         if($usuario){
                             $guia = Guia::create([
