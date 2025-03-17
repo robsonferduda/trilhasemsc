@@ -41,8 +41,8 @@
                                     <input type="text" name="ds_url_tri" id="ds_url_tri" value="{{ old('ds_url_tri') }}" class="form-control" required data-parsley-error-message="Campo nome é obrigatório">
                                 </div>
                                 <div class="form-group">
-                                    <label for="id_categoria_cat">Autor</label>
-                                    <select name="id_categoria_cat" id="id_categoria_cat" class="form-control select2">
+                                    <label for="id_user_usu">Autor</label>
+                                    <select name="id_user_usu" id="id_user_usu" class="form-control select2">
                                         <option value="0">Selecione um autor</option>
                                         @foreach($usuarios as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
