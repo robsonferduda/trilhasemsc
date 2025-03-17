@@ -119,9 +119,7 @@
                                     
                                     </textarea>  
                                 </div>
-                                <textarea name="ds_trilha_tri" id="ckeditor" rows="15" style="width: 100%;">
-                                    
-                                </textarea>                                  
+                                <textarea name="ds_trilha_tri" id="ckeditor" rows="15" style="width: 100%;"></textarea>                                  
                             </div> 
                         </div>
                         <div style="text-align: center; margin-top:15px; ">

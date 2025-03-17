@@ -48,7 +48,7 @@ class TrilhaController extends Controller
                           }))
                           ->first();
 
-        $usuarios = User::all();
+        $usuarios = User::where("id_role","ADMIN")->orderBy("name")->get();
         $niveis = Nivel::orderBy('dc_nivel_niv')->get();
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
         $categorias = Categoria::all();
@@ -64,7 +64,7 @@ class TrilhaController extends Controller
             return redirect('login');
         }
 
-        $usuarios = User::all();
+        $usuarios = User::where("id_role","ADMIN")->orderBy("name")->get();
         $niveis = Nivel::orderBy('dc_nivel_niv')->get();
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
         $categorias = Categoria::all();
