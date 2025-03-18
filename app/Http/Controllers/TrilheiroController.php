@@ -19,6 +19,7 @@ use App\Mail\GuiaModeracao;
 use App\TrilheiroTrilha;
 use App\User;
 use Auth;
+use Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -146,6 +147,17 @@ class TrilheiroController extends Controller
             ]);
 
             $imagem = null;
+
+            $base64Image = $request->input('cropped_image');
+
+            if ($base64Image) {
+                $base64Image = preg_replace('/^data:image\/\w+;base64,/', '', $base64Image);
+                $base64Image = base64_decode($base64Image);
+
+                $croppedPath = Storage::disk('trilheiros')->put($trilheiro->id_trilheiro_tri.'.jpg', $base64Image);
+
+                $trilheiro->update(['nm_path_foto_tri' => $trilheiro->id_trilheiro_tri.'.jpg']);
+            }
 
             if ($request->hasFile('imagem')) {
                 $extension = $request->file('imagem')->getClientOriginalExtension();

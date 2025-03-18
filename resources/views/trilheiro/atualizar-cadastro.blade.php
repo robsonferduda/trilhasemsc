@@ -92,6 +92,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
+                                    <input type="hidden" id="cropped-image" name="cropped_image" />
                                     <label for="dropify-event">Faça aqui o upload da sua foto de perfil</label><span class="text-info"> Preferencialmente foto em formato quadrado, com medidas proporcionais</span>
                                     <p class="text-danger"><strong>Atenção!</strong> Ao usar fotos em formato diferente do sugerido, sua imagem de perfil pode ficar desproporcional ou sua foto pouco nítida.</p>
                                     <input name="imagem" type="file" id="dropify-event"  
@@ -207,7 +208,9 @@
                         $('#dropify-event').dropify('destroy');
                         $('#dropify-event')[0].value = '';
 
-                        $('.dropify').dropify({
+                        $('#cropped-image').val(croppedImage);
+
+                        $('#dropify-event').dropify({
                             defaultFile: croppedImage
                         });
 
