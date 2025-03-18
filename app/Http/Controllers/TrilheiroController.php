@@ -159,6 +159,7 @@ class TrilheiroController extends Controller
                 $trilheiro->update(['nm_path_foto_tri' => $trilheiro->id_trilheiro_tri.'.jpg']);
             }
 
+            /*
             if ($request->hasFile('imagem')) {
                 $extension = $request->file('imagem')->getClientOriginalExtension();
                 $filename = $trilheiro->id_trilheiro_tri . '.' . $extension;
@@ -174,9 +175,9 @@ class TrilheiroController extends Controller
                 if($imagem_deletada == "true") {
                     $trilheiro->update(['nm_path_foto_tri' => null]);
                 }
-            }
+            }*/
 
-            Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $imagem]);
+            Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $trilheiro->id_trilheiro_tri.'.jpg']);
 
             return redirect('trilheiro/privado/perfil')->withInput();
         }
