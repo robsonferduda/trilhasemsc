@@ -161,8 +161,6 @@
 
                 var file = event.target.files[0];
 
-                console.log(element.file);
-
                 if (!file) {
                     console.error('No file selected');
                     return;
@@ -206,8 +204,6 @@
                     reader.readAsDataURL(blob);
                     reader.onloadend = function() {
 
-                        console.log(croppedImage);
-
                         $('#dropify-event').dropify('destroy');
                         $('#dropify-event')[0].value = '';
 
@@ -235,21 +231,6 @@
                         }, 100); // Pequeno atraso para garantir que o Dropify esteja pronto
 
                         $('#cropperModal').modal('hide');
-                       
-                        /*
-                        var base64data = reader.result;
-                        $('#dropify-event').attr('data-default-file', base64data);
-                        //$('#dropify-event').dropify().resetPreview();
-                        $('#dropify-event').dropify({
-                            defaultFile: base64data
-                        });
-
-                        $('#dropify-event').dropify('destroy');
-                        $('#dropify-event').dropify({
-                            defaultFile: base64data
-                        });
-
-                        $('#cropperModal').modal('hide');*/
                     };
                 }, 'image/jpeg');
             });
