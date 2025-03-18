@@ -94,7 +94,8 @@
                                 <div class="form-group">
                                     <label for="dropify-event">Faça aqui o upload da sua foto de perfil</label><span class="text-info"> Preferencialmente foto em formato quadrado, com medidas proporcionais</span>
                                     <p class="text-danger"><strong>Atenção!</strong> Ao usar fotos em formato diferente do sugerido, sua imagem de perfil pode ficar desproporcional ou sua foto pouco nítida.</p>
-                                    <input name="imagem" type="file" id="dropify-event"  data-default-file="{{  $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('img/trilheiros/default.png') }}">
+                                    <input name="imagem" type="file" id="dropify-event"  
+                                    data-default-file="{{  $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('img/trilheiros/default.png') }}">
                                     <input name="imagem_deletada" id="imagem_deletada" type="hidden" value='false' >
                                 </div>
                             </div>
@@ -103,6 +104,28 @@
                             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para recorte de imagem -->
+    <div class="modal fade" id="cropperModal" tabindex="-1" role="dialog" aria-labelledby="cropperModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cropperModalLabel">Recortar Imagem</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <img id="image" src="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="cropButton">Recortar</button>
                 </div>
             </div>
         </div>
@@ -120,6 +143,118 @@
             $('.data').mask('99/99/9999');
 
             var drEvent = $('#dropify-event').dropify();
+
+            var cropper;
+            var image = document.getElementById('image');
+            
+            /*
+            drEvent.on('dropify.fileReady', function(event, element) {
+               var reader = new FileReader();
+                reader.onload = function(e) {
+                    image.src = $('#dropify-event').attr('data-default-file');
+                    $('#cropperModal').modal('show');
+                };
+                reader.readAsDataURL($('#dropify-event').attr('data-default-file'));
+            });*/
+
+            drEvent.on('dropify.fileReady', function(event, element) {
+
+                var file = event.target.files[0];
+
+                console.log(element.file);
+
+                if (!file) {
+                    console.error('No file selected');
+                    return;
+                }
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    image.src = e.target.result;
+                    $('#cropperModal').modal('show');
+                };
+                reader.readAsDataURL(file);
+            });
+
+            $('#cropperModal').on('shown.bs.modal', function() {
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    autoCropArea: 1,
+                });
+            }).on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            $('#cropButton').on('click', function() {
+                
+                var canvas = cropper.getCroppedCanvas({
+                    width: 300,
+                    height: 300,
+                });
+
+                const croppedCanvas = cropper.getCroppedCanvas();
+                const croppedImage = croppedCanvas.toDataURL('image/jpeg');
+                
+                $('#dropify-event').attr('data-default-file', croppedImage);
+
+                canvas.toBlob(function(blob) {
+                    
+                    var url = URL.createObjectURL(blob);
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function() {
+
+                        console.log(croppedImage);
+
+                        $('#dropify-event').dropify('destroy');
+                        $('#dropify-event')[0].value = '';
+
+                        $('.dropify').dropify({
+                            defaultFile: croppedImage
+                        });
+
+                        // Força a atualização manual da visualização
+                        setTimeout(() => {
+                            const dropifyWrapper = $('.dropify-wrapper');
+                            const previewImage = dropifyWrapper.find('.dropify-preview');
+                            const imageElement = previewImage.find('img');
+
+                            // Atualiza a imagem no DOM diretamente
+                            if (imageElement.length > 0) {
+                                imageElement.attr('src', croppedImage);
+                            } else {
+                                // Cria uma nova tag <img> se não existir
+                                previewImage.append(`<img src="${croppedImage}" />`);
+                            }
+
+                            // Exibe a área de pré-visualização
+                            previewImage.show();
+                            dropifyWrapper.addClass('has-preview');
+                        }, 100); // Pequeno atraso para garantir que o Dropify esteja pronto
+
+                        $('#cropperModal').modal('hide');
+                       
+                        /*
+                        var base64data = reader.result;
+                        $('#dropify-event').attr('data-default-file', base64data);
+                        //$('#dropify-event').dropify().resetPreview();
+                        $('#dropify-event').dropify({
+                            defaultFile: base64data
+                        });
+
+                        $('#dropify-event').dropify('destroy');
+                        $('#dropify-event').dropify({
+                            defaultFile: base64data
+                        });
+
+                        $('#cropperModal').modal('hide');*/
+                    };
+                }, 'image/jpeg');
+            });
+
+            
 
             drEvent.on('dropify.afterClear', function(event, element) {
                 $('#imagem_deletada').val(true);
