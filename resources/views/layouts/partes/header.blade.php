@@ -5,7 +5,7 @@
             <div class="row w-100">
                <div class="col-lg-4 col-md-4 col-sm-12 mt-2 mr-2" style="padding-right: 15px;">
                   <label class="">Selecione a cidade</label>
-                  <select class="form-control" name="cidade" id="list-cidade">
+                  <select class="form-control" name="cidade" id="cidades">
                      <option value="">Selecione uma cidade</option>
                      @if(isset($cidades))
                         @forelse($cidades as $cidade)
