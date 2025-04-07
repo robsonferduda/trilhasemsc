@@ -308,13 +308,15 @@
         <div class="mobile-banner shadow mb-5 border-radius-lg">
           <div class="banner-content">
             <h2>Eventos e Trilhas em Santa Catarina</h2>   
-            <h3 class="text-danger" >{{ $eventoBanner->nm_evento_eve }}</h3>       
-            <p><strong>Responsável:</strong> {{ $eventoBanner->guia->nm_guia_gui }}</p>
-            <p><strong>Cidade:</strong> {{ $eventoBanner->local->nm_cidade_cde }}</p>
-            <p><strong>Início:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($eventoBanner->hora_inicio_eve)->format('H:i') }}</p>
-            <p><strong>Término:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_termino_eve)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($eventoBanner->hora_fim_eve)->format('H:i') }}</p>
-            <p><strong>Valor:</strong> R$ {{ $eventoBanner->valor_eve }}</p>
-            <p><strong>Contato:</strong> {{ $eventoBanner->ds_fone_contato_eve }}</p>
+            <h3 class="text-danger" >{{ $eventoBanner->nm_evento_eve }}</h3> 
+            <div style="text-align: left;">      
+              <p><strong>Responsável:</strong> {{ $eventoBanner->guia->nm_guia_gui }}</p>
+              <p><strong>Cidade:</strong> {{ $eventoBanner->local->nm_cidade_cde }}</p>
+              <p><strong>Início:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($eventoBanner->hora_inicio_eve)->format('H:i') }}</p>
+              <p><strong>Término:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_termino_eve)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($eventoBanner->hora_fim_eve)->format('H:i') }}</p>
+              <p class="mb-1"><strong>Valor</strong>: {!! ($evento->valor_eve) ? " R$ ".$evento->valor_eve : '<strong class="text-success">Gratuita</strong>' !!}</p>
+              <p><strong>Contato:</strong> {{ $eventoBanner->ds_fone_contato_eve }}</p>
+            </div>
             <a href="{{ url('eventos/detalhes', $eventoBanner->id_evento_eve) }}" type="button" class="btn btn-outline-info btn-sm-block">Ver Detalhes</a><br>
             <a href="{{ url('eventos') }}" class="btn bg-gradient-primary w-45 mb-0">TODOS EVENTOS</a>
           </div>
@@ -400,12 +402,14 @@
           <div class="banner-content">
             <h2>Eventos e Trilhas em Santa Catarina</h2>   
             <h3 class="text-danger" >{{ $eventoBanner->nm_evento_eve }}</h3>       
-            <p><strong>Responsável:</strong> {{ $eventoBanner->guia->nm_guia_gui }}</p>
-            <p><strong>Cidade:</strong> {{ $eventoBanner->local->nm_cidade_cde }}</p>
-            <p><strong>Início:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($eventoBanner->hora_inicio_eve)->format('H:i') }}</p>
-            <p><strong>Término:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_termino_eve)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($eventoBanner->hora_fim_eve)->format('H:i') }}</p>
-            <p><strong>Valor:</strong> R$ {{ $eventoBanner->valor_eve }}</p>
-            <p><strong>Contato:</strong> {{ $eventoBanner->ds_fone_contato_eve }}</p>
+            <div style="text-align: left;">
+              <p><strong>Responsável:</strong> {{ $eventoBanner->guia->nm_guia_gui }}</p>
+              <p><strong>Cidade:</strong> {{ $eventoBanner->local->nm_cidade_cde }}</p>
+              <p><strong>Início:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($eventoBanner->hora_inicio_eve)->format('H:i') }}</p>
+              <p><strong>Término:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_termino_eve)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($eventoBanner->hora_fim_eve)->format('H:i') }}</p>
+              <p class="mb-1"><strong>Valor</strong>: {!! ($evento->valor_eve) ? " R$ ".$evento->valor_eve : '<strong class="text-success">Gratuita</strong>' !!}</p>
+              <p><strong>Contato:</strong> {{ $eventoBanner->ds_fone_contato_eve }}</p>
+            </div>
             <a href="{{ url('eventos/detalhes', $eventoBanner->id_evento_eve) }}" type="button" class="btn btn-outline-info btn-sm">Ver Detalhes</a>
             <a href="{{ url('eventos') }}" class="btn bg-gradient-primary w-100 mb-0">TODOS EVENTOS</a>
           </div>
