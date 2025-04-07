@@ -314,7 +314,7 @@
               <p><strong>Cidade:</strong> {{ $eventoBanner->local->nm_cidade_cde }}</p>
               <p><strong>Início:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($eventoBanner->hora_inicio_eve)->format('H:i') }}</p>
               <p><strong>Término:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_termino_eve)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($eventoBanner->hora_fim_eve)->format('H:i') }}</p>
-              <p class="mb-1"><strong>Valor</strong>: {!! ($evento->valor_eve) ? " R$ ".$evento->valor_eve : '<strong class="text-success">Gratuita</strong>' !!}</p>
+              <p class="mb-1"><strong>Valor</strong>: {!! ($eventoBanner->valor_eve) ? " R$ ".$eventoBanner->valor_eve : '<strong class="text-success">Gratuita</strong>' !!}</p>
               <p><strong>Contato:</strong> {{ $eventoBanner->ds_fone_contato_eve }}</p>
             </div>
             <a href="{{ url('eventos/detalhes', $eventoBanner->id_evento_eve) }}" type="button" class="btn btn-outline-info btn-sm-block">Ver Detalhes</a><br>
@@ -407,7 +407,7 @@
               <p><strong>Cidade:</strong> {{ $eventoBanner->local->nm_cidade_cde }}</p>
               <p><strong>Início:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($eventoBanner->hora_inicio_eve)->format('H:i') }}</p>
               <p><strong>Término:</strong> {{ \Carbon\Carbon::parse($eventoBanner->dt_termino_eve)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($eventoBanner->hora_fim_eve)->format('H:i') }}</p>
-              <p class="mb-1"><strong>Valor</strong>: {!! ($evento->valor_eve) ? " R$ ".$evento->valor_eve : '<strong class="text-success">Gratuita</strong>' !!}</p>
+              <p class="mb-1"><strong>Valor</strong>: {!! ($eventoBanner->valor_eve) ? " R$ ".$eventoBanner->valor_eve : '<strong class="text-success">Gratuita</strong>' !!}</p>
               <p><strong>Contato:</strong> {{ $eventoBanner->ds_fone_contato_eve }}</p>
             </div>
             <a href="{{ url('eventos/detalhes', $eventoBanner->id_evento_eve) }}" type="button" class="btn btn-outline-info btn-sm">Ver Detalhes</a>
