@@ -7,6 +7,7 @@ use DB;
 use URL;
 use App\Tag;
 use App\Trilha;
+use App\Camping;
 use App\Comentario;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
@@ -35,7 +36,9 @@ class CampingController extends Controller
         ->groupBy('cd_cidade_cde')
         ->get();
 
-        return view('camping/index',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping']);
+        $campings = Camping::with('cidade')->get();
+
+        return view('camping/index',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping','campings' => $campings]);
     }
 
     public function anitaGaribaldi()
