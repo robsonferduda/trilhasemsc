@@ -7,9 +7,9 @@
                 <section class="py-5">
                     @if($campings->count() > 0)
                         @if($campings->count() > 1)
-                            <h6 class="mt-4">Foram encontradas {{ $campings->count() }} trilhas </h6>
+                            <h6 class="mt-4">Foram encontradas {{ $campings->count() }} opções de camping </h6>
                         @else
-                            <h6 class="mt-4">Foi encontrada {{ $campings->count() }} trilha </h6>
+                            <h6 class="mt-4">Foi encontrada {{ $campings->count() }} opção de camping </h6>
                         @endif
                                          
                         @foreach($campings as $key => $camping)
