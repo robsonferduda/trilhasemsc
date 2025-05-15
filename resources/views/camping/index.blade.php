@@ -30,7 +30,7 @@
                                         </p>
                                         <div class="row">
                                             <div class="col-lg-3 col-md-3 center">
-                                                <img src="{{ url('img/icon/'.$camping->tipo->ds_img_tic) }}" alt="Ícone indicador de camping {{ ucfirst(trans($camping->tipo->ds_tipo_tic)) }}" class="img w-60">
+                                                <img src="{{ url('img/icon/'.$camping->tipo->ds_img_tic) }}" alt="Ícone indicador de camping {{ ucfirst(trans($camping->tipo->ds_tipo_tic)) }}" class="img w-35">
                                                 <p class="my-auto mx-auto" style="text-align: center; font-weight: bold;">{{ $camping->tipo->ds_tipo_tic }}</p>
                                             </div>
                                         </div>
