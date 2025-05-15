@@ -18,7 +18,7 @@ class EventoController extends Controller
     {
         $this->middleware('auth', ['except' =>
                             [
-                                'eventos','detalhes'
+                                'index','detalhes'
                             ]
                         ]);
     }
