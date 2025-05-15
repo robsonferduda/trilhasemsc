@@ -157,6 +157,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::prefix('trilheiro/privado')->group(function () {
         Route::get('perfil', 'TrilheiroController@perfil');
+        Route::get('eventos', 'TrilheiroController@eventos');
         Route::get('meu-nivel', 'TrilheiroController@score');
         Route::get('eventos/participar/{evento}', 'EventoController@participar');
         Route::post('score', 'TrilheiroController@calcularScore');
