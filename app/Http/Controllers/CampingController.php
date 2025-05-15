@@ -26,6 +26,19 @@ class CampingController extends Controller
        
     }
 
+    public function detalhes($cidade, $nivel, $url)
+    {
+        $camping = Camping::where('ds_url_cam', $url)->first();
+
+        $busca_cidade = Trilha::with('cidade')
+           ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+           ->where('fl_publicacao_tri', 'S')
+           ->groupBy('cd_cidade_cde')
+           ->get()->sortBy('cidade.nm_cidade_cde');
+
+        return view('camping/detalhes',compact('camping','busca_cidade'));
+    }
+
     public function campings()
     {
         $titulo = 'Camping';

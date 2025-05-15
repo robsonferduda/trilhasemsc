@@ -18,6 +18,16 @@ Route::get('home', 'HomeController@index')->name('home');
 Route::get('novo', 'HomeController@novo')->name('novo');
 Route::get('perfil/{id}', 'HomeController@perfil')->name('perfil');
 
+Route::get('camping', 'HomeController@camping');
+Route::get('campings', 'CampingController@campings');
+Route::get('{cidade}/camping/{nivel}/{url}', 'CampingController@detalhes');
+
+//Route::get('laguna/campings/selvagem/camping-mirante-anita-garibaldi', 'CampingController@anitaGaribaldi');
+//Route::get('bom-jardim-da-serra/campings/selvagem/camping-pico-do-rinoceronte', 'CampingController@picoRinoceronte');
+//Route::get('grao-para/campings/estruturado/camping-mirante','CampingController@campingMirante');
+//Route::get('garuva/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
+//Route::get('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista','CampingController@altoBoaVista');
+
 Route::get('rastreio/{codigo}', 'QRCodeController@rastreio');
 
 Route::post('comentario/novo', 'ComentarioController@store');
@@ -52,7 +62,7 @@ Route::get('guia-de-dificuldade-em-trilhas/femerj', 'DificuldadeController@femer
 Route::get('galerias', 'GaleriaController@index');
 Route::get('galerias/{nome}', 'GaleriaController@buscar');
 Route::get('contato', 'HomeController@contato');
-Route::get('camping', 'HomeController@camping');
+
 Route::get('guia', 'HomeController@guia');
 Route::get('sobre-nos', 'HomeController@sobre');
 
@@ -63,12 +73,6 @@ Route::get('praias/florianopolis', 'PraiaController@index');
 Route::get('praias/florianopolis/sul', 'PraiaController@index');
 Route::get('praias/florianopolis/sul/{nome}', 'PraiaController@getPraia');
 
-Route::get('campings', 'CampingController@campings');
-Route::get('laguna/campings/selvagem/camping-mirante-anita-garibaldi', 'CampingController@anitaGaribaldi');
-Route::get('bom-jardim-da-serra/campings/selvagem/camping-pico-do-rinoceronte', 'CampingController@picoRinoceronte');
-Route::get('grao-para/campings/estruturado/camping-mirante','CampingController@campingMirante');
-Route::get('garuva/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
-Route::get('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista','CampingController@altoBoaVista');
 Route::get('trilhas/florianopolis/regioes/leste', 'TrilhaController@trilhasLeste');
 Route::get('trilhas/florianopolis/regioes/norte', 'TrilhaController@trilhasNorte');
 Route::get('trilhas/florianopolis/regioes/sul', 'TrilhaController@trilhasSul');
