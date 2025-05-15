@@ -37,6 +37,7 @@
                 <div class="col-md-12 mt-3">
                     <p class="text-info mb-1"><i class="fa fa-info" aria-hidden="true"></i> Última atualização em 27 de agosto de 2022</p>
                     <p class="text-danger mb-1"><i class="fa fa-trash" aria-hidden="true"></i> Não jogue lixo</p>
+                    <p class="text-warning mb-1"><i class="fa fa-fire" aria-hidden="true"></i> Não faça fogueiras em locais proibidos</p>
                     <p class="text-success"><i class="fa fa-leaf" aria-hidden="true"></i> Proteja a natureza e os animais selvagens</p>
                     <div class="mt-0 conteudo">
                                 <p>

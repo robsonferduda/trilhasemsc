@@ -42,10 +42,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 mt-3">
+                <div class="col-md-12 mt-1">
                     <p class="mb-1">
                         (Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.)
-                    </p>                  
+                    </p> 
+                    <p class="text-info mb-0"><i class="fa fa-info" aria-hidden="true"></i> Última atualização em 27 de agosto de 2022</p>
+                    <p class="text-danger mb-0"><i class="fa fa-trash" aria-hidden="true"></i> Não jogue lixo</p>
+                    <p class="text-warning mb-1"><i class="fa fa-fire" aria-hidden="true"></i> Não faça fogueiras em locais proibidos</p>
+                    <p class="text-success mb-2"><i class="fa fa-leaf" aria-hidden="true"></i> Proteja a natureza e os animais selvagens</p>                 
                     <div class="mt-0 conteudo">
                         {!! nl2br($camping->ds_descricao_cam) !!}                        
                     </div>
