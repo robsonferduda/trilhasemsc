@@ -23,18 +23,29 @@
         </div>
         <div class="row">
             <div class="col-md-9 mt-2">
+                <div class="row">
+                    <div class="col-md-9 mt-3">
+                        <h4 class="mt-2">{{ $camping->ds_nome_cam }}</h4>
+                        <h6>
+                            <i class="ni ni-pin-3 text-danger"></i> {{ $camping->cidade->nm_cidade_cde }} 
+                            <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
+                        </h6>                  
+                    </div> 
+                    <div class="col-md-3 mt-3">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 center">
+                                <img src="{{ url('img/icon/'.$camping->tipo->ds_img_tic) }}" alt="Ícone indicador de camping {{ ucfirst(trans($camping->tipo->ds_tipo_tic)) }}" class="img w-25">
+                            </div>
+                            <div class="col-lg-12 col-md-12 center">
+                                <p class="my-auto mx-auto" style="font-weight: bold;">{{ $camping->tipo->ds_tipo_tic }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-12 mt-3">
-                    <h4 class="mt-2">{{ $camping->ds_nome_cam }}</h4>
-                    <h6>
-                        <i class="ni ni-pin-3 text-danger"></i> {{ $camping->cidade->nm_cidade_cde }} 
-                        <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
-                    </h6>
                     <p class="mb-1">
                         (Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.)
-                    </p>                    
-                </div> 
-               
-                <div class="col-md-12 mt-3">
+                    </p>                  
                     <div class="mt-0 conteudo">
                         {!! nl2br($camping->ds_descricao_cam) !!}                        
                     </div>
