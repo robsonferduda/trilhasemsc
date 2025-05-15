@@ -1,13 +1,13 @@
 @extends('layouts.site')
-@section('pageTitle', 'Camping Mirante do Alto da Boa Vista' )
+@section('pageTitle', '{{ $camping->ds_nome_cam }}' )
 @section('description', "")
 @section('content')
 <header class="position-relative">
     <div class="container">
         <div class="row bg-white shadow mt-n5 border-radius-lg pb-3 p-3 mx-sm-0 mx-1 position-relative">
             <div class="col-md-12 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4 text-center">
-                <h2 class="mt-2">Camping Mirante do Alto da Boa Vista</h2>
-                <h5><i class="ni ni-pin-3 text-danger mb-1"></i> Rancho Queimado</h5>
+                <h2 class="mt-2">{{ $camping->ds_nome_cam }}</h2>
+                <h5><i class="ni ni-pin-3 text-danger mb-1"></i> {{ $camping->cidade->nm_cidade_cde }}</h5>
             </div>
        </div>
     </div>
@@ -17,16 +17,16 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
                 <div class="col-md-12">
-                    <a href="#"><img class="border-radius-xl shadow w-100" src="http://trilhasemsc.localhost/public/img/camping/alto-da-boa-vista/capa.jpg" alt=""></a>
+                    <a href="#"><img class="border-radius-xl shadow w-100" src="{{ $camping->ds_capa_cam }}" alt=""></a>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-9 mt-2">
                 <div class="col-md-12 mt-3">
-                    <h4 class="mt-2">Camping Mirante do Alto da Boa Vista</h4>
+                    <h4 class="mt-2">{{ $camping->ds_nome_cam }}</h4>
                     <h6>
-                        <i class="ni ni-pin-3 text-danger"></i> Rancho Queimado 
+                        <i class="ni ni-pin-3 text-danger"></i> {{ $camping->cidade->nm_cidade_cde }} 
                         <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
                     </h6>
                     <p class="mb-1">

@@ -13,7 +13,8 @@ class Camping extends Model
     protected $primaryKey = 'cd_camping_cam';
     protected $dates = ['deleted_at'];
     protected $fillable = [
-                            'ds_nome_cam'
+                            'ds_nome_cam',
+                            'total_visitas_cam'
                           ];
 
     public $timestamps = true;
