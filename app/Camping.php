@@ -19,6 +19,16 @@ class Camping extends Model
 
     public $timestamps = true;
 
+    public function getCreatedAtAttribute($data)
+    {
+        return date($data);
+    }
+
+    public function getDateFormat()
+    {
+         return 'Y-m-d H:i:s.u';
+    }
+
     public function cidade()
     {
         return $this->hasOne('App\Cidade', 'cd_cidade_cde', 'cd_cidade_cde');
