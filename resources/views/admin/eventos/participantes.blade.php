@@ -19,7 +19,7 @@
                 <div class="header no-padding-bottom">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <h2><i class="fa fa-tags"></i> Meus Eventos</h2>
+                            <h2><i class="fa fa-tags"></i> Meus Eventos / {{ $evento->nm_evento_eve }}</h2>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-primary pull-right"><i class="fa fa-list"></i> Meus Eventos</a>
