@@ -331,7 +331,7 @@
                                     <a href="{{ url('trilheiro/privado/trilhas') }}"><i class="fa fa-thumb-tack"></i> <span>Minhas Trilhas</span></a>
                                 </li>
                                 <li>
-                                  <a href="{{ url('eventos') }}"><i class="fa fa-tags"></i> <span>Eventos</span></a>
+                                  <a href="{{ url('trilheiro/privado/eventos') }}"><i class="fa fa-tags"></i> <span>Meus Eventos</span></a>
                                 </li>
                             @endif
                             <li>

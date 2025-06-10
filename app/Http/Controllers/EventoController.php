@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Session;
 
 class EventoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' =>
+                            [
+                                'index','detalhes'
+                            ]
+                        ]);
+    }
+
     public function index()
     {
         $page_name = "Eventos e Trilhas em Santa Catarina";
@@ -59,18 +68,12 @@ class EventoController extends Controller
 
     public function participar($id_evento)
     {
-        if(Auth::user()){
+        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
 
-            $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
-            $evento = Evento::where('id_evento_eve', $id_evento)->first();
+        $trilheiro->evento()->sync($id_evento);
 
-            $trilheiro->evento()->sync($id_evento);
-
-            return redirect('eventos/detalhes/'.$id_evento);
-
-        }else{
-            return redirect('login');
-        }
+        return redirect('eventos/detalhes/'.$id_evento);
     }
 
     public function cadastro()

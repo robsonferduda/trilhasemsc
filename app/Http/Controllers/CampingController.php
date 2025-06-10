@@ -7,6 +7,7 @@ use DB;
 use URL;
 use App\Tag;
 use App\Trilha;
+use App\Camping;
 use App\Comentario;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
@@ -25,6 +26,22 @@ class CampingController extends Controller
        
     }
 
+    public function detalhes($cidade, $nivel, $url)
+    {
+        $camping = Camping::where('ds_url_cam', $url)->first();
+
+        $camping->total_visitas_cam = $camping->total_visitas_cam + 1;
+        $camping->save();
+
+        $busca_cidade = Trilha::with('cidade')
+           ->select('cd_cidade_cde', DB::raw('count(*) as total'))
+           ->where('fl_publicacao_tri', 'S')
+           ->groupBy('cd_cidade_cde')
+           ->get()->sortBy('cidade.nm_cidade_cde');
+
+        return view('camping/detalhes',compact('camping','busca_cidade'));
+    }
+
     public function campings()
     {
         $titulo = 'Camping';
@@ -35,7 +52,9 @@ class CampingController extends Controller
         ->groupBy('cd_cidade_cde')
         ->get();
 
-        return view('camping/index',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping']);
+        $campings = Camping::with('cidade')->get();
+
+        return view('camping/index',['titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => 'Camping','campings' => $campings]);
     }
 
     public function anitaGaribaldi()

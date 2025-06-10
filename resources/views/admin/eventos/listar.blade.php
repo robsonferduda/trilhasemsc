@@ -40,7 +40,7 @@
                                     <div class="col-12">
                                         <p class="mb-1"><strong>Local</strong>: {{ $evento->local->nm_cidade_cde }}</p>
                                         <p class="mb-1"><strong>Data</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y') }}</p>
-                                        <p class="mb-1"><strong>Valor</strong>: R$ {{ $evento->valor_eve }}</p>
+                                        <p class="mb-1"><strong>Valor</strong>: {{ ($evento->valor_eve) ? "R$ ".$evento->valor_eve : 'Gratuita' }}</p>
                                         <div style="position: absolute; bottom: 1px; right: 10px;">
                                             <a href="{{ url('eventos/detalhes', $evento->id_evento_eve) }}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye"></i> Ver</a>
                                             <a href="{{ url('guia-e-condutores/privado/evento/editar', $evento->id_evento_eve) }}" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i> Editar</a>
