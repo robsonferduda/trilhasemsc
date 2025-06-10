@@ -80,7 +80,7 @@ class EventoController extends Controller
     {
         $evento = Evento::where('id_evento_eve', $id_evento)->first();
 
-        dd($evento()->trilheiros);
+        dd($evento->trilheiros);
 
         return redirect('eventos/detalhes/'.$id_evento);
     }
