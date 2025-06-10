@@ -38,4 +38,9 @@ class Evento extends Model
     {
         return $this->hasOne('App\Guia', 'id_guia_gui', 'id_guia_gui');
     }
+
+    public function trilheiros()
+    {
+        return $this->belongsToMany(Trilheiro::class, 'evento_trilheiro_evt', 'id_evento_eve', 'id_trilheiro_tri');
+    }
 }

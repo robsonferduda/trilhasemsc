@@ -148,6 +148,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'GuiaController@atualizarCadastro');
         Route::get('perfil', 'GuiaController@previaPerfil');
         Route::get('eventos', 'EventoController@eventos');
+        Route::get('eventos/participantes/{id}', 'EventoController@participantes');
         Route::get('evento/novo', 'EventoController@cadastro');
         Route::get('evento/editar/{id}', 'EventoController@editar');
         Route::post('evento/update', 'EventoController@update');

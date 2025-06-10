@@ -76,6 +76,15 @@ class EventoController extends Controller
         return redirect('eventos/detalhes/'.$id_evento);
     }
 
+    public function participantes($id_evento)
+    {
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+
+        dd($evento()->trilheiros);
+
+        return redirect('eventos/detalhes/'.$id_evento);
+    }
+
     public function cadastro()
     {
         $evento = null;

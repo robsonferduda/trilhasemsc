@@ -46,7 +46,7 @@ class Trilheiro extends Model
 
     public function evento()
     {
-        return $this->belongsToMany('App\Evento','evento_trilheiro_evt', 'id_trilheiro_tri','cd_evento_eve')->withTimestamps();
+        return $this->belongsToMany('App\Evento','evento_trilheiro_evt', 'id_trilheiro_tri','id_evento_eve')->withTimestamps();
     }
 
     public function trilhas()
