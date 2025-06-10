@@ -26,7 +26,10 @@ class EventoController extends Controller
     public function index()
     {
         $page_name = "Eventos e Trilhas em Santa Catarina";
-        $eventos = Evento::where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))->orderBy('dt_realizacao_eve','ASC')->get();
+        $eventos = Evento::where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))
+            ->where('fl_ativo_eve',true)
+            ->orderBy('dt_realizacao_eve','ASC')->get();
+
         $cidades = Cidade::whereIn('cd_cidade_cde', Evento::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
 
         return view('eventos/index', ['page_name' => $page_name, 'eventos' => $eventos, 'cidades' => $cidades]);
@@ -61,7 +64,7 @@ class EventoController extends Controller
     public function eventos()
     {
         $guia = Guia::where('id_user', Auth::user()->id)->first();
-        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)->withTrashed()->orderBy('dt_realizacao_eve')->get();
+        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)->where('fl_ativo_eve', true)->orderBy('dt_realizacao_eve')->get();
 
         return view('admin/eventos/listar', compact('guia','eventos'));
     }
@@ -80,7 +83,7 @@ class EventoController extends Controller
     {
         $evento = Evento::where('id_evento_eve', $id_evento)->first();
 
-        dd($evento);
+        dd($evento->trilheiros);
 
         return redirect('eventos/detalhes/'.$id_evento);
     }
