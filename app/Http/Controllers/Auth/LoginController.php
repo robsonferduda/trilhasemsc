@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+use App\UserLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -52,6 +53,17 @@ class LoginController extends Controller
         }
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+
+            $data = \Location::get($request->ip()); 
+            $cidade = ($data) ? $data->cityName : "---";
+            $uf = ($data) ? $data->areaCode : "---";
+
+            UserLog::create([
+                'id_user_usu' => Auth::user()->id,
+                'nu_ip_log' => $request->ip(),
+                'ds_cidade_log' => $cidade,
+                'ds_uf_log' => $uf
+            ]);
 
             switch (trim(Auth::user()->id_role)) {
 
