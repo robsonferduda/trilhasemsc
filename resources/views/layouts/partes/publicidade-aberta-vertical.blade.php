@@ -6,7 +6,7 @@
           </div>
        </div>
        <div class="row box-publicidade">
-            <a href="https://trilhasemsc.com.br/florianopolis/trilhas/semi-pesada/trilha-da-lagoinha-do-leste-via-matadeiro" class="d-block">
+            <a href="{{ url('rastreio/publicidade/skn02') }}" class="d-block">
                 <img src="{{ asset('img/publicidade/banner_lateral.jpg') }}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
             </a>
         </div>
