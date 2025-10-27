@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+use App\User;
 use App\UserLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +13,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Stevebauman\Location\Facades\Location;
-use App\Models\User;
+
 
 class LoginController extends Controller
 {
