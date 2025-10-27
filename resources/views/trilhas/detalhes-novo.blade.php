@@ -157,6 +157,7 @@
                            @endif
                         </select>
                         @include('layouts/partes/publicidade-aberta-vertical')
+                        @include('layouts/partes/publicidade-google')
                 </div>
             </div>         
        </div>
