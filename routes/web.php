@@ -32,8 +32,8 @@ Route::get('rastreio/mostra-dados', 'PublicidadeController@localizacao');
 Route::get('rastreio/{codigo}', 'QRCodeController@rastreio');
 Route::get('rastreio/publicidade/{codigo}', 'PublicidadeController@rastreio');
 
-Route::get('login/{provider}', 'LoginController@redirectToProvider')->name('social.redirect');
-Route::get('login/{provider}/callback', 'LoginController@handleProviderCallback')->name('social.callback');
+Route::get('login/{provider}', 'Auth/LoginController@redirectToProvider')->name('social.redirect');
+Route::get('login/{provider}/callback', 'Auth/LoginController@handleProviderCallback')->name('social.callback');
 
 Route::post('comentario/novo', 'ComentarioController@store');
 
