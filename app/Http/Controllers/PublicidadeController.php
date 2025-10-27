@@ -12,7 +12,10 @@ class PublicidadeController extends Controller
     public function rastreio(Request $request)
     {
     	$ip = '';
-    	
+        $data = \Location::get($request->ip()); 
+        $cidade = ($data) ? $data->cityName : "Não Definido";
+        $uf = ($data) ? $data->areaCode : "Não Definido";
+
         $publicidade = Publicidade::where('ds_codigo_pub',$request->codigo)->first();
         $publicidade->nu_acessos_pub = $publicidade->nu_acessos_pub + 1;
         
