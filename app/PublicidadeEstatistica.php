@@ -12,7 +12,7 @@ class PublicidadeEstatistica extends Model
     protected $table = 'publicidade_estatistica_pue';
     protected $primaryKey = 'id_publicidade_estatistica_pue';
     protected $dates = ['deleted_at'];
-    protected $fillable = ['nu_ip_pue'];
+    protected $fillable = ['id_publicidade_pub','nu_ip_pue'];
 
     public $timestamps = true;
 
