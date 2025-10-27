@@ -18,11 +18,9 @@ class PublicidadeController extends Controller
     {
     	$ip = '';
         
-        /*
         $data = \Location::get($request->ip()); 
-        $cidade = ($data) ? $data->cityName : "Não Definido";
-        $uf = ($data) ? $data->areaCode : "Não Definido";
-        */
+        $cidade = ($data) ? $data->cityName : "---";
+        $uf = ($data) ? $data->areaCode : "---";
 
         $publicidade = Publicidade::where('ds_codigo_pub',$request->codigo)->first();
         $publicidade->nu_acessos_pub = $publicidade->nu_acessos_pub + 1;
@@ -31,7 +29,9 @@ class PublicidadeController extends Controller
 
         	PublicidadeEstatistica::create([
                 'id_publicidade_pub' => $publicidade->id_publicidade_pub,
-                'nu_ip_pue' => $request->ip()
+                'nu_ip_pue' => $request->ip(),
+                'ds_cidade_pue' => $cidade,
+                'ds_uf_pue' => $uf
             ]);
         }
 
@@ -45,7 +45,7 @@ class PublicidadeController extends Controller
         $uf = ($data) ? $data->areaCode : "Não Definido";
 
         print_r($request->ip());
-        
+
         dd($data);
     }
 }
