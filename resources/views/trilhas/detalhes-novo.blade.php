@@ -156,7 +156,7 @@
                               @endforelse
                            @endif
                         </select>
-                        @include('layouts/partes/publicidade-google')
+                        @include('layouts/partes/publicidade-aberta-vertical')
                 </div>
             </div>         
        </div>
