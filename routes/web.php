@@ -28,6 +28,7 @@ Route::get('{cidade}/camping/{nivel}/{url}', 'CampingController@detalhes');
 //Route::get('garuva/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
 //Route::get('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista','CampingController@altoBoaVista');
 
+Route::get('rastreio/mostra-dados', 'PublicidadeController@localizacao');
 Route::get('rastreio/{codigo}', 'QRCodeController@rastreio');
 Route::get('rastreio/publicidade/{codigo}', 'PublicidadeController@rastreio');
 

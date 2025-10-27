@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Session;
 
 class PublicidadeController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth');
+    }
+
     public function rastreio(Request $request)
     {
     	$ip = '';
@@ -31,5 +36,16 @@ class PublicidadeController extends Controller
         }
 
         return redirect($publicidade->ds_link_pub); 
+    }
+
+    public function localizacao(Request $request)
+    {
+        $data = \Location::get($request->ip()); 
+        $cidade = ($data) ? $data->cityName : "Não Definido";
+        $uf = ($data) ? $data->areaCode : "Não Definido";
+
+        print_r($request->ip());
+        
+        dd($data);
     }
 }
