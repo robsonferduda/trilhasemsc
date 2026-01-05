@@ -37,6 +37,7 @@
                     @else
                       <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
                     @endif
+                    <a href="{{ url("guia/perfil/estatistica/perfil", $evento->guia->nm_instagram_gui) }}" target="_blank"><h6 class="mt-2">{{ $evento->guia->nm_guia_gui }}</h6></a>
                 </div>
                 <div class="col-lg-12 col-md-12">
                     <p>
