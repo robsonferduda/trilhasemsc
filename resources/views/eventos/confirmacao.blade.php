@@ -14,8 +14,8 @@
        <!-- Mensagem de Confirmação -->
        <div class="row mb-4">
           <div class="col-md-12">
-             <div class="alert alert-success text-center" role="alert">
-                <h5 class="alert-heading">Sua participação foi registrada!</h5>
+             <div class="alert text-center" role="alert" style="border: 2px solid #28a745; background-color: transparent;">
+                <h5 class="alert-heading text-success">Sua participação foi registrada!</h5>
                 <hr>
                 <p class="mb-0">
                    O guia responsável entrará em contato em breve para confirmar sua participação 
@@ -55,12 +55,13 @@
                     @else
                       <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
                     @endif
+                    <h6>{{ $evento->guia->nm_guia_gui }}</h6>
                 </div>
                 
                 @if($evento->ds_imagem_horizontal_eve)
-                <div class="col-lg-12 col-md-12 mt-3">
-                    <img src="{{ asset('img/eventos/'.$evento->ds_imagem_horizontal_eve) }}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
-                </div>
+                    <div class="col-lg-12 col-md-12 mt-3">
+                        <img src="{{ asset('img/eventos/'.$evento->ds_imagem_horizontal_eve) }}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                    </div>
                 @endif
             </div>
         </div>
