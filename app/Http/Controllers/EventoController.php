@@ -8,9 +8,11 @@ use App\Trilheiro;
 use App\Cidade;
 use App\Guia;
 use App\Estatistica;
+use App\Mail\NovoEventoTrilheiroNotificacao;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class EventoController extends Controller
 {
@@ -73,8 +75,12 @@ class EventoController extends Controller
     {
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
         $evento = Evento::where('id_evento_eve', $id_evento)->first();
+        $usuario = Auth::user();
 
         $trilheiro->evento()->sync($id_evento);
+
+        // Envia email de notificação para o administrador
+        Mail::send(new NovoEventoTrilheiroNotificacao($evento, $trilheiro, $usuario));
 
         return redirect('eventos/detalhes/'.$id_evento);
     }
