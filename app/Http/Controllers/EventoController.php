@@ -93,6 +93,17 @@ class EventoController extends Controller
         return view('eventos/confirmacao', ['page_name' => $page_name, 'evento' => $evento]);
     }
 
+    public function cancelarParticipacao($id_evento)
+    {
+        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+
+        // Remove a participação do trilheiro no evento
+        $trilheiro->evento()->detach($id_evento);
+
+        return redirect('eventos/detalhes/'.$id_evento)->with('success', 'Participação cancelada com sucesso!');
+    }
+
     public function participantes($id_evento)
     {
         $evento = Evento::where('id_evento_eve', $id_evento)->first();

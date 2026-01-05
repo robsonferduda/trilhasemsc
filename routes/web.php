@@ -167,6 +167,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('eventos', 'TrilheiroController@eventos');
         Route::get('meu-nivel', 'TrilheiroController@score');
         Route::get('eventos/participar/{evento}', 'EventoController@participar');
+        Route::get('eventos/cancelar/{evento}', 'EventoController@cancelarParticipacao');
         Route::post('score', 'TrilheiroController@calcularScore');
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'TrilheiroController@atualizarCadastro');      
         Route::match(['GET', 'POST'],'trilhas', 'TrilheiroController@trilhas'); 
