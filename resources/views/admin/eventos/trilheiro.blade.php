@@ -42,7 +42,9 @@
                                         
                                         <div>
                                             <a href="{{ url('eventos/detalhes', $evento->id_evento_eve) }}" class="btn btn-outline-info btn-sm" target="BLANK"><i class="fa fa-eye"></i> Detalhes do Evento</a>
-                                        
+                                            <button type="button" class="btn btn-outline-danger btn-sm btn-cancelar-participacao" data-url="{{ url('trilheiro/privado/eventos/cancelar/'.$evento->id_evento_eve) }}">
+                                                <i class="fa fa-times"></i> Cancelar Participação
+                                            </button>
 
                                         <p class="mb-1" style="float: right">
                                                 @if(is_null($evento->pivot->fl_aceito_guia_evt))
@@ -86,7 +88,30 @@
 @section('script')
     <script>
         $(function() {
-            
+            $('.btn-cancelar-participacao').on('click', function() {
+                const url = $(this).data('url');
+                
+                Swal.fire({
+                    title: 'Cancelar Participação?',
+                    text: "Tem certeza que deseja cancelar sua participação neste evento?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Sim, cancelar',
+                    cancelButtonText: 'Não, manter',
+                    reverseButtons: true,
+                    customClass: {
+                        confirmButton: 'btn btn-danger mx-1',
+                        cancelButton: 'btn btn-secondary mx-1'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url;
+                    }
+                });
+            });
         });
     </script>
 @endsection

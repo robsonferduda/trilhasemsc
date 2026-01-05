@@ -84,10 +84,16 @@
                 text: "Tem certeza que deseja cancelar sua participação neste evento?",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Sim, cancelar!',
-                cancelButtonText: 'Não, manter'
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sim, cancelar',
+                cancelButtonText: 'Não, manter',
+                reverseButtons: true,
+                customClass: {
+                    confirmButton: 'btn btn-danger mx-1',
+                    cancelButton: 'btn btn-secondary mx-1'
+                },
+                buttonsStyling: false
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = url;
