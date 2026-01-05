@@ -58,7 +58,7 @@
             @endif
             @if(Auth::user() and $trilheiro)
                 @if($trilheiro->evento->contains($evento->id_evento_eve))
-                    <button type="button" class="btn btn-outline-success btn-sm mt-3"><i class="fa fa-check"></i> Presença Confirmada</button>
+                    <button type="button" class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> Presença Confirmada</button>
                 @else
                     <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
                 @endif
