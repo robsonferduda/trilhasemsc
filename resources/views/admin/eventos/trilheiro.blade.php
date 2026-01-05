@@ -22,7 +22,7 @@
                             <h2><i class="fa fa-tags"></i> Meus Eventos</h2>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <a href="{{ url('guia-e-condutores/privado/evento/novo') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Novo Evento</a>
+                            
                         </div> 
                     </div>
                 </div>
@@ -42,8 +42,7 @@
                                         <p class="mb-1"><strong>Data</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y') }}</p>
                                         <p class="mb-1"><strong>Valor</strong>: {{ ($evento->valor_eve) ? "R$ ".$evento->valor_eve : 'Gratuita' }}</p>
                                         <div style="position: absolute; bottom: 1px; right: 10px;">
-                                            <a href="{{ url('eventos/detalhes', $evento->id_evento_eve) }}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye"></i> Ver</a>
-                                            <a href="{{ url('guia-e-condutores/privado/evento/editar', $evento->id_evento_eve) }}" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i> Editar</a>
+                                            <a href="{{ url('eventos/detalhes', $evento->id_evento_eve) }}" class="btn btn-outline-info btn-sm" target="BLANK"><i class="fa fa-eye"></i> Ver</a>
                                         </div>
                                     </div>
                                 </div>
@@ -54,8 +53,7 @@
                             <div class="body">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h6>Nenhum evento cadastrado</h6>
-                                        <p class="mb-1">Cadastre novos eventos na opção <a href="{{ url('guia-e-condutores/privado/evento/novo') }}"><strong>Novo Evento</strong></a> e torne-se visível para quem procura aventura</p>
+                                        <h6>Você não está cadastrado em nenhum evento</h6>
                                     </div>
                                 </div>
                             </div>

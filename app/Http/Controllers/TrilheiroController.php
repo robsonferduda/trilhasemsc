@@ -61,14 +61,9 @@ class TrilheiroController extends Controller
     public function eventos()
     {
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
+        $eventos = $trilheiro->evento;
 
-        $eventos = Evento::whereIn('id_evento_eve', function($query) use ($trilheiro) {
-                $query->select('cd_evento_eve')->from('evento_trilheiro_evt')->where('id_trilheiro_tri', $trilheiro->id_trilheiro_tri)->get();
-            })
-            ->orderBy('dt_realizacao_eve', 'DESC')
-            ->get();
-
-        return view('admin/eventos/trilheiro', compact('guia','eventos'));
+        return view('admin/eventos/trilheiro', compact('trilheiro','eventos'));
     }
 
     public function perfil()
