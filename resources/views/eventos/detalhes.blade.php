@@ -63,7 +63,7 @@
                     <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
                 @endif
             @else
-                <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
+                <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
             @endif
             <a href="{{ url('eventos') }}" type="button" class="btn btn-outline-info btn-sm">Todos os Eventos</a>
             <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Início</a>
