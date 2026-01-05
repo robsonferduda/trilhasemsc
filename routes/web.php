@@ -52,6 +52,7 @@ Route::get('trilhas-em-{cidade}', 'TrilhaController@searchTrilhasCidadeDetalhes'
 
 Route::get('eventos', 'EventoController@index');
 Route::get('eventos/detalhes/{id}', 'EventoController@detalhes');
+Route::get('eventos/confirmacao/{id}', 'EventoController@confirmacao');
 
 Route::get('guia/{id}/ativar', 'GuiaController@ativar');
 Route::get('guia/{id}/recusar', 'GuiaController@recusar');

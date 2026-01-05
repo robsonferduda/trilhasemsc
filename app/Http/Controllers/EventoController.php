@@ -82,7 +82,15 @@ class EventoController extends Controller
         // Envia email de notificação para o administrador
         Mail::send(new NovoEventoTrilheiroNotificacao($evento, $trilheiro, $usuario));
 
-        return redirect('eventos/detalhes/'.$id_evento);
+        return redirect('eventos/confirmacao/'.$id_evento);
+    }
+
+    public function confirmacao($id_evento)
+    {
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+        $page_name = "Confirmação de Inscrição - " . $evento->nm_evento_eve;
+
+        return view('eventos/confirmacao', ['page_name' => $page_name, 'evento' => $evento]);
     }
 
     public function participantes($id_evento)
