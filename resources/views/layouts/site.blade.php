@@ -195,6 +195,9 @@
    </script>
  
    <!-- End InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.2) -->
+
+   <!-- SweetAlert2 -->
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    </head>
    <body class="help-center">    
       {{-- <div id="125834-47"><script src="//ads.themoneytizer.com/s/gen.js?type=47"></script><script src="//ads.themoneytizer.com/s/requestform.js?siteId=125834&formatId=47"></script></div>--}}
