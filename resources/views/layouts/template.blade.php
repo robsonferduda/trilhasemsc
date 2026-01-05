@@ -286,7 +286,7 @@
                                     <a href="{{ url('/') }}"><i class="icon-home"></i> <span>Início</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="has-arrow"><i class="fa fa-tickets"></i> <span>Eventos</span></a>
+                                    <a href="#" class="has-arrow"><i class="fa fa-ticket"></i> <span>Eventos</span></a>
                                     <ul>
                                         <li><a href="{{ url('admin/eventos/listar') }}">Listar</a></li>
                                     </ul>
@@ -298,7 +298,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#" class="has-arrow"><i class="fa fa-id-card"></i> <span>Trilheiros</span></a>
+                                    <a href="#" class="has-arrow"><i class="fa fa-users"></i> <span>Trilheiros</span></a>
                                     <ul>
                                         <li><a href="{{ url('admin/trilheiros/listar') }}">Listar</a></li>
                                     </ul>
