@@ -60,7 +60,7 @@
                 @if($trilheiro->evento->contains($evento->id_evento_eve))
                     <button type="button" class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> Presença Confirmada</button>
                 @else
-                    <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
+                    <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
                 @endif
             @else
                 <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
