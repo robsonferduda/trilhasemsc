@@ -55,6 +55,7 @@
                     @else
                       <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
                     @endif
+                    <h6 class="mt-2">{{ $evento->guia->nm_guia_gui }}</h6>
                 </div>
                 
                 @if($evento->ds_imagem_horizontal_eve)

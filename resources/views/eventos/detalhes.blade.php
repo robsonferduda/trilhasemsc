@@ -59,7 +59,7 @@
             @if(Auth::user() and $trilheiro)
                 @if($trilheiro->evento->contains($evento->id_evento_eve))
                     <button type="button" class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> Presença Confirmada</button>
-                    <a href="{{ url('trilheiro/privado/eventos/cancelar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-danger btn-sm" onclick="return confirm('Tem certeza que deseja cancelar sua participação neste evento?')"><i class="fa fa-times"></i> Cancelar Participação</a>
+                    <button type="button" class="btn btn-outline-danger btn-sm" id="btn-cancelar-participacao" data-url="{{ url('trilheiro/privado/eventos/cancelar/'.$evento->id_evento_eve) }}"><i class="fa fa-times"></i> Cancelar Participação</button>
                 @else
                     <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
                 @endif
@@ -71,4 +71,29 @@
         </div>
     </div>
  </section>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#btn-cancelar-participacao').on('click', function() {
+            const url = $(this).data('url');
+            
+            Swal.fire({
+                title: 'Cancelar Participação?',
+                text: "Tem certeza que deseja cancelar sua participação neste evento?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sim, cancelar!',
+                cancelButtonText: 'Não, manter'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        });
+    });
+</script>
 @endsection
