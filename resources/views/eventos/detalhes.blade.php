@@ -73,7 +73,7 @@
  </section>
 @endsection
 
-@section('scripts')
+@section('script')
 <script>
     $(document).ready(function() {
         $('#btn-cancelar-participacao').on('click', function() {
