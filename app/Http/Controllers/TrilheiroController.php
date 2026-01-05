@@ -61,7 +61,7 @@ class TrilheiroController extends Controller
     public function eventos()
     {
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
-        $eventos = $trilheiro->evento;
+        $eventos = $trilheiro->evento()->withPivot('fl_aceito_guia_evt', 'fl_pago_evt')->get();
 
         return view('admin/eventos/trilheiro', compact('trilheiro','eventos'));
     }
