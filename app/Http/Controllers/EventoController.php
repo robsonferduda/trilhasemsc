@@ -9,6 +9,7 @@ use App\Cidade;
 use App\Guia;
 use App\Estatistica;
 use App\Mail\NovoEventoTrilheiroNotificacao;
+use App\Mail\CancelamentoEventoTrilheiroNotificacao;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -97,11 +98,23 @@ class EventoController extends Controller
     {
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
         $evento = Evento::where('id_evento_eve', $id_evento)->first();
+        $usuario = Auth::user();
 
         // Remove a participação do trilheiro no evento
         $trilheiro->evento()->detach($id_evento);
 
-        return redirect('eventos/detalhes/'.$id_evento)->with('success', 'Participação cancelada com sucesso!');
+        // Envia email de notificação para o administrador
+        Mail::send(new CancelamentoEventoTrilheiroNotificacao($evento, $trilheiro, $usuario));
+
+        return redirect('eventos/cancelamento/'.$id_evento);
+    }
+
+    public function confirmacaoCancelamento($id_evento)
+    {
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+        $page_name = "Cancelamento de Inscrição - " . $evento->nm_evento_eve;
+
+        return view('eventos/cancelamento', ['page_name' => $page_name, 'evento' => $evento]);
     }
 
     public function participantes($id_evento)
