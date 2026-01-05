@@ -26,7 +26,10 @@ class EventoController extends Controller
     public function index()
     {
         $page_name = "Eventos e Trilhas em Santa Catarina";
-        $eventos = Evento::where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))->orderBy('dt_realizacao_eve','ASC')->get();
+        $eventos = Evento::where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))
+            ->where('fl_ativo_eve',true)
+            ->orderBy('dt_realizacao_eve','ASC')->get();
+
         $cidades = Cidade::whereIn('cd_cidade_cde', Evento::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
 
         return view('eventos/index', ['page_name' => $page_name, 'eventos' => $eventos, 'cidades' => $cidades]);
@@ -74,6 +77,12 @@ class EventoController extends Controller
         $trilheiro->evento()->sync($id_evento);
 
         return redirect('eventos/detalhes/'.$id_evento);
+    }
+
+    public function participantes($id_evento)
+    {
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+        return view('admin/eventos/participantes', compact('evento'));
     }
 
     public function cadastro()

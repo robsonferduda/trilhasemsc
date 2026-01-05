@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             return app()->environment($environment);
         });
 
-        $evento = Evento::where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))->inRandomOrder()->take(1)->first();
+        $evento = Evento::where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))->where('fl_ativo_eve', true)->inRandomOrder()->take(1)->first();
 
         View::share('eventoBanner', $evento);
 

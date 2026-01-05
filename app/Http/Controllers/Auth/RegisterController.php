@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Trilheiro;
+use App\Mail\NovoTrilheiroNotificacao;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -64,10 +67,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // Cria o trilheiro associado ao usuário
+        $trilheiro = Trilheiro::create([
+            'id_user' => $user->id,
+            'nm_trilheiro_tri' => $user->name,
+        ]);
+
+        // Envia email de notificação para o administrador
+        Mail::send(new NovoTrilheiroNotificacao($trilheiro, $user));
+
+        return $user;
     }
 }

@@ -28,7 +28,12 @@ Route::get('{cidade}/camping/{nivel}/{url}', 'CampingController@detalhes');
 //Route::get('garuva/campings/selvagem/camping-monte-crista', 'CampingController@monteCrista');
 //Route::get('rancho-queimado/campings/estruturado/camping-mirante-do-alto-da-boa-vista','CampingController@altoBoaVista');
 
+Route::get('rastreio/mostra-dados', 'PublicidadeController@localizacao');
 Route::get('rastreio/{codigo}', 'QRCodeController@rastreio');
+Route::get('rastreio/publicidade/{codigo}', 'PublicidadeController@rastreio');
+
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.redirect');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
 
 Route::post('comentario/novo', 'ComentarioController@store');
 
@@ -148,6 +153,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'GuiaController@atualizarCadastro');
         Route::get('perfil', 'GuiaController@previaPerfil');
         Route::get('eventos', 'EventoController@eventos');
+        Route::get('eventos/participantes/{id}', 'EventoController@participantes');
         Route::get('evento/novo', 'EventoController@cadastro');
         Route::get('evento/editar/{id}', 'EventoController@editar');
         Route::post('evento/update', 'EventoController@update');
