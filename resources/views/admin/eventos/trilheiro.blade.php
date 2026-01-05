@@ -102,7 +102,7 @@
                     cancelButtonText: 'Não, manter',
                     reverseButtons: true,
                     customClass: {
-                        confirmButton: 'btn btn-danger mx-1',
+                        confirmButton: 'btn btn-success mx-1',
                         cancelButton: 'btn btn-secondary mx-1'
                     },
                     buttonsStyling: false
