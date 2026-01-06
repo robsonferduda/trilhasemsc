@@ -28,7 +28,8 @@
                                 <div class="row">
                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                         <div class="text" style="font-size: 16px;">{{ $trilheiro->nm_trilheiro_tri }}</div>
-                                        <p class="mt-2 mb-2"><strong>Cidade de Origem</strong>: {!! ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '<span class="text-danger">Não Informada</span>' !!}</p>
+                                        <p class="mt-2 mb-2"><strong>E-mail:</strong> <a href="mailto:{{ $trilheiro->user->email }}">{{ $trilheiro->user->email }}</a></p>
+                                        <p class="mb-2"><strong>Cidade de Origem</strong>: {!! ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '<span class="text-danger">Não Informada</span>' !!}</p>
                                         <p class="mb-2"><strong>Data de Nascimento</strong>: {{ ($trilheiro->dt_nascimento) ? \Carbon\Carbon::parse($trilheiro->dt_nascimento)->format('d/m/Y').' - '.\Carbon\Carbon::parse($trilheiro->dt_nascimento)->age.' Anos' : 'Não Informada' }}</p>
                                         <p class="mb-2">Cadastro realizado em {{ \Carbon\Carbon::parse($trilheiro->created_at)->format('d/m/Y H:i:s') }}</p>
                                     </div>
