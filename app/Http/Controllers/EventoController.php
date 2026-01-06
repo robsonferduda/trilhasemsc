@@ -38,6 +38,14 @@ class EventoController extends Controller
         return view('eventos/index', ['page_name' => $page_name, 'eventos' => $eventos, 'cidades' => $cidades]);
     }
 
+    public function listar()
+    {
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)->orderBy('dt_realizacao_eve')->get();
+
+        return view('admin/eventos/listar', compact('guia','eventos'));
+    }
+
     public function detalhes($id)
     {
         $evento = Evento::find($id);

@@ -75,6 +75,8 @@ Route::get('sobre-nos', 'HomeController@sobre');
 
 Route::get('grupos', 'GrupoController@index');
 
+Route::get('nacional/{regiao}/estado/{estado}/{trilha}', 'NacionalController@trilha');
+
 Route::get('praias', 'PraiaController@index');
 Route::get('praias/florianopolis', 'PraiaController@index');
 Route::get('praias/florianopolis/sul', 'PraiaController@index');
@@ -135,6 +137,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::prefix('admin')->group(function () {
 
         Route::get('dashboard', 'HomeController@dashboard');
+
+        Route::get('eventos/listar', 'EventoController@listar');
 
         Route::get('guias', 'GuiaController@listar');
         Route::get('guias/aprovar', 'GuiaController@aprovar');
