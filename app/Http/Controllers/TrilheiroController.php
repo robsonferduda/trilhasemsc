@@ -192,30 +192,34 @@ class TrilheiroController extends Controller
 
             Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $trilheiro->id_trilheiro_tri.'.jpg']);
 
-            // Envia email de notificação para o administrador se for um novo trilheiro
-            if ($trilheiroNovo) {
-                try {
-                    Mail::send(new \App\Mail\NovoTrilheiroNotificacao($trilheiro, Auth::user()));
-                    
-                    // Log de sucesso
-                    \Log::info('Email de novo trilheiro enviado com sucesso (atualização cadastro)', [
-                        'trilheiro_id' => $trilheiro->id_trilheiro_tri,
-                        'user_id' => Auth::user()->id,
-                        'user_email' => Auth::user()->email,
-                        'user_name' => $nome,
-                        'timestamp' => now()
-                    ]);
-                } catch (\Exception $e) {
-                    // Log do erro mas não interrompe o processo
-                    \Log::error('Erro ao enviar email de notificação de novo trilheiro (atualização cadastro)', [
-                        'error' => $e->getMessage(),
-                        'trilheiro_id' => $trilheiro->id_trilheiro_tri ?? null,
-                        'user_id' => Auth::user()->id,
-                        'user_email' => Auth::user()->email,
-                        'timestamp' => now(),
-                        'trace' => $e->getTraceAsString()
-                    ]);
-                }
+            // Envia email de notificação para o administrador
+            $tipoNotificacao = $trilheiroNovo ? 'Novo Trilheiro' : 'Atualização de Cadastro';
+            
+            try {
+                Mail::send(new \App\Mail\NovoTrilheiroNotificacao($trilheiro, Auth::user()));
+                
+                // Log de sucesso
+                \Log::info('Email de notificação enviado com sucesso', [
+                    'tipo' => $tipoNotificacao,
+                    'trilheiro_id' => $trilheiro->id_trilheiro_tri,
+                    'user_id' => Auth::user()->id,
+                    'user_email' => Auth::user()->email,
+                    'user_name' => $nome,
+                    'cidade' => $cidadeOrigem,
+                    'estado' => $estado,
+                    'timestamp' => now()
+                ]);
+            } catch (\Exception $e) {
+                // Log do erro mas não interrompe o processo
+                \Log::error('Erro ao enviar email de notificação', [
+                    'tipo' => $tipoNotificacao,
+                    'error' => $e->getMessage(),
+                    'trilheiro_id' => $trilheiro->id_trilheiro_tri ?? null,
+                    'user_id' => Auth::user()->id,
+                    'user_email' => Auth::user()->email,
+                    'timestamp' => now(),
+                    'trace' => $e->getTraceAsString()
+                ]);
             }
 
             return redirect('trilheiro/privado/perfil')->withInput();
