@@ -153,21 +153,51 @@ class TrilhaController extends Controller
 
     public function searchTrilha($cidade, $nivel, $trilha)
     {
-        $url = $cidade.'/trilhas/'.$nivel.'/'.$trilha;
+        // Validar e sanitizar parâmetros de entrada
+        $cidade = trim($cidade);
+        $nivel = trim($nivel);
+        $trilhaSlug = trim($trilha);
+        
+        if (empty($cidade) || empty($nivel) || empty($trilhaSlug)) {
+            abort(404, 'Parâmetros inválidos');
+        }
 
-        $trilha = Trilha::with('foto')->with('cidade')->with('user')->with('nivel')->with('complemento')->where('ds_url_tri', $url)->first();
+        $url = $cidade.'/trilhas/'.$nivel.'/'.$trilhaSlug;
 
-        $usuario_logado = (Auth::user()) ? Auth::user()->id : null;
+        // Buscar trilha e verificar se existe
+        $trilhaEncontrada = Trilha::with(['foto', 'cidade', 'user', 'nivel', 'complemento'])
+            ->where('ds_url_tri', $url)
+            ->first();
 
-        $estatistica = array('cd_usuario_usu' => $usuario_logado,
-                            'cd_tipo_monitoramento_tim' => 1,
-                            'cd_monitoramento_esa' => $trilha->id_trilha_tri);              
+        // Verificar se a trilha foi encontrada
+        if (!$trilhaEncontrada) {
+            abort(404, 'Trilha não encontrada');
+        }
 
-        Estatistica::create($estatistica);
+        // Verificar se a cidade existe (relacionamento)
+        if (!$trilhaEncontrada->cidade) {
+            abort(404, 'Cidade da trilha não encontrada');
+        }
 
-        $titulo = $trilha->nm_trilha_tri;
-        $subtitulo = "Trilha em ".$trilha->cidade->nm_cidade_cde;
-        $page_name = $trilha->nm_trilha_tri;
+        // Registrar estatística apenas se tudo estiver OK
+        try {
+            $usuario_logado = Auth::check() ? Auth::user()->id : null;
+
+            $estatistica = array(
+                'cd_usuario_usu' => $usuario_logado,
+                'cd_tipo_monitoramento_tim' => 1,
+                'cd_monitoramento_esa' => $trilhaEncontrada->id_trilha_tri
+            );
+
+            Estatistica::create($estatistica);
+        } catch (\Exception $e) {
+            // Log do erro mas não interrompe a visualização
+            \Log::error('Erro ao criar estatística: ' . $e->getMessage());
+        }
+
+        $titulo = $trilhaEncontrada->nm_trilha_tri;
+        $subtitulo = "Trilha em ".$trilhaEncontrada->cidade->nm_cidade_cde;
+        $page_name = $trilhaEncontrada->nm_trilha_tri;
 
         $busca_cidade = Trilha::with('cidade')
            ->select('cd_cidade_cde', DB::raw('count(*) as total'))
@@ -175,7 +205,7 @@ class TrilhaController extends Controller
            ->groupBy('cd_cidade_cde')
            ->get()->sortBy('cidade.nm_cidade_cde');
 
-        return view('trilhas/detalhes-novo', ['trilha' => $trilha, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => $page_name]);
+        return view('trilhas/detalhes-novo', ['trilha' => $trilhaEncontrada, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => $page_name]);
     }
 
 
