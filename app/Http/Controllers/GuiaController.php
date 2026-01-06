@@ -191,6 +191,32 @@ class GuiaController extends Controller
                                 'id_user' => $usuario->id,
                                 'nm_trilheiro_tri' => $usuario->name
                             ]);
+
+                            // Envia email de notificação para o administrador
+                            try {
+                                Mail::send(new \App\Mail\NovoTrilheiroNotificacao($usuario, $trilheiro));
+                                
+                                // Log de sucesso
+                                \Log::info('Email de novo trilheiro enviado com sucesso (cadastro guia)', [
+                                    'trilheiro_id' => $trilheiro->id_trilheiro_tri,
+                                    'user_id' => $usuario->id,
+                                    'user_email' => $usuario->email,
+                                    'user_name' => $usuario->name,
+                                    'origem' => 'cadastro_guia',
+                                    'timestamp' => now()
+                                ]);
+                            } catch (\Exception $e) {
+                                // Log do erro mas não interrompe o cadastro
+                                \Log::error('Erro ao enviar email de notificação de novo trilheiro (cadastro guia)', [
+                                    'error' => $e->getMessage(),
+                                    'trilheiro_id' => $trilheiro->id_trilheiro_tri ?? null,
+                                    'user_id' => $usuario->id,
+                                    'user_email' => $usuario->email,
+                                    'origem' => 'cadastro_guia',
+                                    'timestamp' => now(),
+                                    'trace' => $e->getTraceAsString()
+                                ]);
+                            }
                         }
                         Flash::success("Usuário cadastrado com sucesso. Deixe seu perfil completo para que os guias possam te encontrar.");
                     }
