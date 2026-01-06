@@ -118,11 +118,15 @@ class TrilheiroController extends Controller
         $usuario = Auth::user();
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
 
+        $trilheiroNovo = false;
+
         if(empty($trilheiro)) {
             $trilheiro = Trilheiro::create([
                 'id_user' => Auth::user()->id,
                 'nm_trilheiro_tri' => Auth::user()->name
             ]);
+            
+            $trilheiroNovo = true;
         }
 
         $estados = Estado::orderBy('nm_estado_est')->get();
@@ -187,6 +191,32 @@ class TrilheiroController extends Controller
             }*/
 
             Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $trilheiro->id_trilheiro_tri.'.jpg']);
+
+            // Envia email de notificação para o administrador se for um novo trilheiro
+            if ($trilheiroNovo) {
+                try {
+                    Mail::send(new \App\Mail\NovoTrilheiroNotificacao($trilheiro, Auth::user()));
+                    
+                    // Log de sucesso
+                    \Log::info('Email de novo trilheiro enviado com sucesso (atualização cadastro)', [
+                        'trilheiro_id' => $trilheiro->id_trilheiro_tri,
+                        'user_id' => Auth::user()->id,
+                        'user_email' => Auth::user()->email,
+                        'user_name' => $nome,
+                        'timestamp' => now()
+                    ]);
+                } catch (\Exception $e) {
+                    // Log do erro mas não interrompe o processo
+                    \Log::error('Erro ao enviar email de notificação de novo trilheiro (atualização cadastro)', [
+                        'error' => $e->getMessage(),
+                        'trilheiro_id' => $trilheiro->id_trilheiro_tri ?? null,
+                        'user_id' => Auth::user()->id,
+                        'user_email' => Auth::user()->email,
+                        'timestamp' => now(),
+                        'trace' => $e->getTraceAsString()
+                    ]);
+                }
+            }
 
             return redirect('trilheiro/privado/perfil')->withInput();
         }

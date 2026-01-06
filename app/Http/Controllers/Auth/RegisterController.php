@@ -80,7 +80,31 @@ class RegisterController extends Controller
         ]);
 
         // Envia email de notificação para o administrador
-        Mail::send(new NovoTrilheiroNotificacao($trilheiro, $user));
+        try {
+            Mail::send(new NovoTrilheiroNotificacao($trilheiro, $user));
+            
+            // Log de sucesso
+            \Log::info('Email de novo trilheiro enviado com sucesso', [
+                'trilheiro_id' => $trilheiro->id,
+                'user_id' => $user->id,
+                'user_email' => $user->email,
+                'user_name' => $user->name,
+                'timestamp' => now()
+            ]);
+        } catch (\Exception $e) {
+            // Log do erro mas não interrompe o cadastro
+            \Log::error('Erro ao enviar email de notificação de novo trilheiro', [
+                'error' => $e->getMessage(),
+                'trilheiro_id' => $trilheiro->id ?? null,
+                'user_id' => $user->id,
+                'user_email' => $user->email,
+                'timestamp' => now(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            // Opcional: notificar admin por outro meio
+            // ou adicionar na fila de emails para reenvio
+        }
 
         return $user;
     }
