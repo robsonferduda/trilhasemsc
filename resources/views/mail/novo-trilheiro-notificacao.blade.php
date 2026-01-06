@@ -352,9 +352,15 @@
                         <h1>Novo Trilheiro Cadastrado</h1>
                         <p>Um novo trilheiro se cadastrou no sistema Trilhas em SC.</p>
                         <hr>
-                        <p><strong>Nome:</strong> {{ $user->name }}</p>
-                        <p><strong>E-mail:</strong> {{ $user->email }}</p>
-                        <p><strong>Data de Cadastro:</strong> {{ $user->created_at->format('d/m/Y H:i:s') }}</p>
+                        <p><strong>Nome:</strong> {{ $usuario->name }}</p>
+                        <p><strong>E-mail:</strong> {{ $usuario->email }}</p>
+                        <p><strong>Data de Cadastro:</strong> {{ $usuario->created_at->format('d/m/Y H:i:s') }}</p>
+                        @if($trilheiro)
+                            <p><strong>ID Trilheiro:</strong> {{ $trilheiro->id_trilheiro_tri }}</p>
+                            @if($trilheiro->cd_cidade_tri)
+                                <p><strong>Cidade:</strong> {{ $trilheiro->cidade->nm_cidade_cde ?? 'N/A' }}</p>
+                            @endif
+                        @endif
                         <hr>
                         <p>O trilheiro já pode começar a utilizar o sistema e completar seu perfil.</p>
                       </td>
