@@ -196,7 +196,7 @@ class TrilheiroController extends Controller
             $tipoNotificacao = $trilheiroNovo ? 'Novo Trilheiro' : 'Atualização de Cadastro';
             
             try {
-                Mail::send(new \App\Mail\NovoTrilheiroNotificacao($trilheiro, Auth::user()));
+                Mail::send(new \App\Mail\NovoTrilheiroNotificacao(Auth::user(), $trilheiro));
                 
                 // Log de sucesso
                 \Log::info('Email de notificação enviado com sucesso', [

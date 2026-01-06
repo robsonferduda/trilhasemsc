@@ -81,7 +81,7 @@ class RegisterController extends Controller
 
         // Envia email de notificação para o administrador
         try {
-            Mail::send(new NovoTrilheiroNotificacao($trilheiro, $user));
+            Mail::send(new NovoTrilheiroNotificacao($user, $trilheiro));
             
             // Log de sucesso
             \Log::info('Email de novo trilheiro enviado com sucesso', [
