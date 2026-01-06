@@ -71,35 +71,40 @@
                                         </div>
                                         <h5 class="mb-2">Pesquisar</h5>
                                         <p class="text-sm text-muted mb-3">Busque o que precisa</p>
-                                        <button onclick="document.getElementById('search-form').scrollIntoView({behavior: 'smooth'})" class="btn btn-sm btn-warning">
-                                            Fazer Busca
-                                        </button>
+                                        <a href="{{ url('trilhas') }}" class="btn btn-sm btn-warning">
+                                            Ver Trilhas
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Formulário de Busca -->
+                        <!-- Links Rápidos -->
                         <div class="card bg-gradient-light mt-4" id="search-form">
                             <div class="card-body p-4">
-                                <h5 class="mb-3">Ou use a busca rápida:</h5>
-                                <form action="{{ url('pesquisar-trilhas') }}" method="POST" class="row g-3">
-                                    @csrf
-                                    <div class="col-md-4">
-                                        <select name="cidade" class="form-control">
-                                            <option value="">Selecione uma cidade</option>
-                                            <!-- Adicione suas cidades aqui -->
-                                        </select>
+                                <h5 class="mb-3">Acesso Rápido:</h5>
+                                <div class="row g-2">
+                                    <div class="col-md-3 col-6">
+                                        <a href="{{ url('trilhas') }}" class="btn btn-outline-primary w-100 btn-sm">
+                                            <i class="fa fa-list me-1"></i> Todas as Trilhas
+                                        </a>
                                     </div>
-                                    <div class="col-md-4">
-                                        <input type="text" name="termo" class="form-control" placeholder="Nome da trilha...">
+                                    <div class="col-md-3 col-6">
+                                        <a href="{{ url('trilhas/regioes') }}" class="btn btn-outline-info w-100 btn-sm">
+                                            <i class="fa fa-map me-1"></i> Por Região
+                                        </a>
                                     </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-primary w-100">
-                                            <i class="fa fa-search me-2"></i>Buscar
-                                        </button>
+                                    <div class="col-md-3 col-6">
+                                        <a href="{{ url('trilhas/brasil') }}" class="btn btn-outline-success w-100 btn-sm">
+                                            <i class="fa fa-flag me-1"></i> Brasil
+                                        </a>
                                     </div>
-                                </form>
+                                    <div class="col-md-3 col-6">
+                                        <a href="{{ url('/') }}" class="btn btn-outline-warning w-100 btn-sm">
+                                            <i class="fa fa-home me-1"></i> Home
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
