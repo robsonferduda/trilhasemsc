@@ -2,11 +2,11 @@
 @section('content')
 <header class="position-relative">
     <div class="container">
-       <div class="row bg-white px-2 py-4 mt-n7 position-relative shadow border-radius-lg mb-2">
+       <div class="row bg-white py-4 mt-n7 position-relative shadow border-radius-lg mb-2" style="margin-left: 0px; margin-right: 0px;">
           <div class="col-lg-2 col-md-5 position-relative my-auto justify-content-center text-center">
                <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/nacional/pantanal/capa.jpeg') }}" alt="Pantanal">
           </div>
-          <div class="col-md-10 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+          <div class="col-md-10 z-index-2 position-relative mt-sm-0 mt-4">
              <h4 class="mb-1">Minha Experiência no Pantanal</h4>
              <p class="text-sm mb-0">Um dia intenso de safari no coração do Pantanal</p>
              <p class="mb-1 mt-2"><i class="fa fa-calendar"></i> Agosto/2025 | <i class="fa fa-map-marker"></i> Porto Jofre - Poconé/MT</p>    
@@ -23,100 +23,11 @@
                 <div class="card shadow-lg">
                     <div class="card-body p-4">
                         <h4 class="text-gradient text-info mb-3">Sobre a Experiência</h4>
-                        <p class="lead">
+                        <p class="">
                             Uma aventura intensa de um dia completo em busca das onças-pintadas no Pantanal! Saindo de <strong>Poconé/MT</strong> às 3h da manhã, 
                             percorremos a famosa <strong>Transpantaneira</strong> até <strong>Porto Jofre</strong>, onde embarcamos para um safari fluvial inesquecível 
                             de 7 horas no rio. O resultado? <strong>9 avistamentos de onças</strong> (7 indivíduos diferentes), além de inúmeras outras espécies da fauna pantaneira. 
                             Guiado pelo especialista <strong>Erivelto Oliveira</strong> (Pantanal Birds), cada momento foi marcado por aprendizado e conexão profunda com a natureza.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Perfil da Empresa -->
-<section class="pt-3 pb-3">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6 mb-3">
-                <div class="card h-100 shadow-lg">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <img src="{{ asset('img/nacional/pantanal/logos/ecotur.jpg') }}" alt="EcoTur Pantanal Logo" class="avatar avatar-md shadow me-3" style="border-radius: 10px;">
-                            <h4 class="mb-0 text-info">Perfil da Empresa</h4>
-                        </div>
-                        <h5 class="font-weight-bold">EcoTur Pantanal</h5>
-                        <p class="text-sm mb-2">
-                            <strong>Responsável:</strong> Domingas
-                        </p>
-                        <p class="text-sm mb-2">
-                            <strong>Especialização:</strong> Ecoturismo e safáris fotográficos no Pantanal
-                        </p>
-                        <p class="text-sm mb-2">
-                            <strong>Diferenciais:</strong>
-                        </p>
-                        <ul class="text-sm">
-                            <li>Guias especializados em fauna e flora local</li>
-                            <li>Infraestrutura completa e confortável</li>
-                            <li>Compromisso com turismo sustentável</li>
-                            <li>Roteiros personalizados</li>
-                            <li>Conhecimento profundo da região pantaneira</li>
-                        </ul>
-                        <p class="text-sm mb-2">
-                            <strong>Contato:</strong><br>
-                            <i class="fa fa-instagram"></i> <a href="https://www.instagram.com/ecoturpantanal/" target="_blank" class="text-info">@ecoturpantanal</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Perfil do Guia -->
-            <div class="col-md-6 mb-3">
-                <div class="card h-100 shadow-lg">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="icon icon-shape bg-gradient-success shadow text-center border-radius-md me-3">
-                                <i class="fa fa-user text-lg opacity-10" aria-hidden="true"></i>
-                            </div>
-                            <h4 class="mb-0 text-success">Perfil do Guia</h4>
-                        </div>
-                        <div class="text-center mb-3">
-                            <img class="avatar avatar-xl shadow rounded-circle" src="{{ asset('img/nacional/pantanal/logos/pantanalbirds.jpg') }}" alt="Erivelto Oliveira">
-                        </div>
-                        <h5 class="font-weight-bold text-center">Erivelto Oliveira</h5>
-                        <p class="text-center text-sm text-muted mb-2">Pantanal Birds</p>
-                        <p class="text-center text-sm mb-3">
-                            <a href="https://www.instagram.com/pantanalbirds/" target="_blank" class="text-success me-2">
-                                <i class="fa fa-instagram"></i> @pantanalbirds
-                            </a>
-                            <a href="https://www.youtube.com/channel/UCvttpCyOxnJ1jViipOLnNJw" target="_blank" class="text-danger">
-                                <i class="fa fa-youtube-play"></i> YouTube
-                            </a>
-                        </p>
-                        <p class="text-sm mb-2">
-                            <strong>Formação:</strong> Engenharia Ambiental 🌱
-                        </p>
-                        <p class="text-sm mb-2">
-                            <strong>Atuação:</strong>
-                        </p>
-                        <ul class="text-sm mb-3">
-                            <li>Guia de turismo profissional em natureza 🐆</li>
-                            <li>Educador Ambiental ♻️</li>
-                        </ul>
-                        <p class="text-sm mb-2">
-                            <strong>Especialidades:</strong>
-                        </p>
-                        <ul class="text-sm">
-                            <li>Observação de aves (birdwatching) - Especialista</li>
-                            <li>Identificação de mamíferos</li>
-                            <li>Fotografia de natureza</li>
-                            <li>Conhecimento profundo sobre ecossistema pantaneiro</li>
-                            <li>Safáris fotográficos especializados</li>
-                        </ul>
-                        <p class="text-sm mt-3 fst-italic">
-                            <em>"O conhecimento e a paixão do Erivelto pela região e especialmente pelas aves fizeram toda a diferença na experiência!"</em>
                         </p>
                     </div>
                 </div>
@@ -240,11 +151,11 @@
                                 <h5 class="text-gradient text-dark">🦜 Fauna Avistada</h5>
                                 
                                 <!-- Destaque Onças -->
-                                <div class="card bg-gradient-warning shadow mb-3">
-                                    <div class="card-body p-3 text-white">
-                                        <h6 class="text-white mb-2"><i class="fa fa-star"></i> Destaque do Passeio</h6>
-                                        <h5 class="text-white mb-1">🐆 9 Avistamentos de Onças!</h5>
-                                        <p class="text-sm text-white mb-0">7 onças diferentes (2 vistas duas vezes)</p>
+                                <div class="card shadow mb-3" style="background: #f5f5f5;">
+                                    <div class="card-body p-3">
+                                        <h6 class="mb-2"><i class="fa fa-star text-warning"></i> Destaque do Passeio</h6>
+                                        <h5 class="mb-1">🐆 9 Avistamentos de Onças!</h5>
+                                        <p class="text-sm mb-0">7 onças diferentes (2 vistas duas vezes)</p>
                                     </div>
                                 </div>
 
@@ -307,6 +218,97 @@
         </div>
     </div>
 </section>
+
+<!-- Perfil da Empresa -->
+<section class="pt-3 pb-3">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ asset('img/nacional/pantanal/logos/ecotur.jpg') }}" alt="EcoTur Pantanal Logo" class="avatar avatar-md shadow me-3" style="border-radius: 10px;">
+                            <h4 class="mb-0 text-info">Perfil da Empresa</h4>
+                        </div>
+                        <h5 class="font-weight-bold">EcoTur Pantanal</h5>
+                        <p class="text-sm mb-2">
+                            <strong>Responsável:</strong> Domingas
+                        </p>
+                        <p class="text-sm mb-2">
+                            <strong>Especialização:</strong> Ecoturismo e safáris fotográficos no Pantanal
+                        </p>
+                        <p class="text-sm mb-2">
+                            <strong>Diferenciais:</strong>
+                        </p>
+                        <ul class="text-sm">
+                            <li>Guias especializados em fauna e flora local</li>
+                            <li>Infraestrutura completa e confortável</li>
+                            <li>Compromisso com turismo sustentável</li>
+                            <li>Roteiros personalizados</li>
+                            <li>Conhecimento profundo da região pantaneira</li>
+                        </ul>
+                        <p class="text-sm mb-2">
+                            <strong>Contato:</strong><br>
+                            <i class="fa fa-instagram"></i> <a href="https://www.instagram.com/ecoturpantanal/" target="_blank" class="text-info">@ecoturpantanal</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perfil do Guia -->
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="icon icon-shape bg-gradient-success shadow text-center border-radius-md me-3">
+                                <i class="fa fa-user text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
+                            <h4 class="mb-0 text-success">Perfil do Guia</h4>
+                        </div>
+                        <div class="text-center mb-3">
+                            <img class="avatar avatar-xl shadow rounded-circle" src="{{ asset('img/nacional/pantanal/logos/pantanalbirds.jpg') }}" alt="Erivelto Oliveira">
+                        </div>
+                        <h5 class="font-weight-bold text-center">Erivelto Oliveira</h5>
+                        <p class="text-center text-sm text-muted mb-2">Pantanal Birds</p>
+                        <p class="text-center text-sm mb-3">
+                            <a href="https://www.instagram.com/pantanalbirds/" target="_blank" class="text-success me-2">
+                                <i class="fa fa-instagram"></i> @pantanalbirds
+                            </a>
+                            <a href="https://www.youtube.com/channel/UCvttpCyOxnJ1jViipOLnNJw" target="_blank" class="text-danger">
+                                <i class="fa fa-youtube-play"></i> YouTube
+                            </a>
+                        </p>
+                        <p class="text-sm mb-2">
+                            <strong>Formação:</strong> Engenharia Ambiental 🌱
+                        </p>
+                        <p class="text-sm mb-2">
+                            <strong>Atuação:</strong>
+                        </p>
+                        <ul class="text-sm mb-3">
+                            <li>Guia de turismo profissional em natureza 🐆</li>
+                            <li>Educador Ambiental ♻️</li>
+                        </ul>
+                        <p class="text-sm mb-2">
+                            <strong>Especialidades:</strong>
+                        </p>
+                        <ul class="text-sm">
+                            <li>Observação de aves (birdwatching) - Especialista</li>
+                            <li>Identificação de mamíferos</li>
+                            <li>Fotografia de natureza</li>
+                            <li>Conhecimento profundo sobre ecossistema pantaneiro</li>
+                            <li>Safáris fotográficos especializados</li>
+                        </ul>
+                        <p class="text-sm mt-3 fst-italic">
+                            <em>"O conhecimento e a paixão do Erivelto pela região e especialmente pelas aves fizeram toda a diferença na experiência!"</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 
 <!-- Galeria de Fotos -->
 <section class="pt-3 pb-3">
