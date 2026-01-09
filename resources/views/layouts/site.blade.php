@@ -296,11 +296,14 @@
                   <p class="lead mb-0">Compartilhe em suas redes sociais</p>
                </div>
                <div class="col-lg-5 me-lg-auto my-lg-auto text-lg-end mt-5">
-                  <a href="https://twitter.com/intent/tweet?text=Quer conhecer as melhores trilhas de Santa Catarina? Acesse http://trilhasemsc.com.br @trilhasemsc" class="btn btn-twitter mb-0 me-2" target="_blank">
-                  <i class="fab fa-twitter me-1" aria-hidden="true"></i> Twitter
+                  <a href="https://www.instagram.com/trilhasemsc/" class="btn mb-0 me-2" target="_blank" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; border: none;">
+                  <i class="fa fa-instagram me-1" aria-hidden="true"></i> Instagram
+                  </a>
+                  <a href="https://www.threads.com/@trilhasemsc" class="btn mb-0 me-2" target="_blank" style="background-color: #000000; color: white; border: none;">
+                  <i class="fa fa-at me-1" aria-hidden="true"></i> Threads
                   </a>
                   <a href="https://www.facebook.com/sharer/sharer.php?u=http://trilhasemsc.com.br" class="btn btn-facebook mb-0 me-2" target="_blank">
-                  <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Facebook
+                  <i class="fa fa-facebook-square me-1" aria-hidden="true"></i> Facebook
                   </a>
                </div>
             </div>
@@ -342,7 +345,10 @@
                     Desde 2020, o site. Trilhas fazemos desde sempre!
                   </p>
                   <a href="https://www.instagram.com/trilhasemsc" target="_blank" class="text-white me-xl-4 me-4 opacity-5">
-                    <span class="fab fa-instagram"></span>
+                    <span class="fa fa-instagram"></span>
+                  </a>
+                  <a href="https://www.threads.com/@trilhasemsc" target="_blank" class="text-white me-xl-4 me-4 opacity-5">
+                    <span class="fa fa-at"></span>
                   </a>
                   <a href="mailto:trilhasemsc@gmail.com?subject=Contato Site" target="_blank" class="text-white me-xl-4 me-4 opacity-5">
                   <span class="fa fa-envelope"></span>
