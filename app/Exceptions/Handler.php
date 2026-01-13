@@ -89,7 +89,7 @@ class Handler extends ExceptionHandler
 
         // Reportar apenas em ambiente de produção ou quando configurado
         // Você pode comentar a linha abaixo se quiser receber notificações em todos os ambientes
-        // return app()->environment('production');
+        return app()->environment('production');
 
         return true;
     }
