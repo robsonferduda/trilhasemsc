@@ -92,11 +92,12 @@ class GerarSlugsEventos extends Command
         }
         
         $bar->finish();
-        $this->newLine(2);
+        $this->line('');
+        $this->line('');
         $this->info("✓ Slugs gerados com sucesso para {$contador} eventos!");
         
         // Mostra alguns exemplos
-        $this->newLine();
+        $this->line('');
         $this->info('Exemplos de URLs geradas:');
         $exemplos = Evento::with('guia')->whereNotNull('slug_eve')->limit(5)->get();
         
@@ -110,7 +111,7 @@ class GerarSlugsEventos extends Command
             }
             $this->line("    Antiga: " . url('eventos/detalhes/' . $exemplo->id_evento_eve));
             $this->line("    Nova:   " . url('eventos/' . $exemplo->slug_eve));
-            $this->newLine();
+            $this->line('');
         }
     }
 }
