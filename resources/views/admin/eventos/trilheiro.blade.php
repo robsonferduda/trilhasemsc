@@ -41,7 +41,7 @@
                                         <p class="mb-1"><strong>Valor</strong>: {{ ($evento->valor_eve) ? "R$ ".$evento->valor_eve : 'Gratuita' }}</p>
                                         
                                         <div>
-                                            <a href="{{ url('eventos/detalhes', $evento->id_evento_eve) }}" class="btn btn-outline-info btn-sm" target="BLANK"><i class="fa fa-eye"></i> Detalhes do Evento</a>
+                                            <a href="{{ url('eventos/' . ($evento->slug_eve ?: $evento->id_evento_eve)) }}" class="btn btn-outline-info btn-sm" target="BLANK"><i class="fa fa-eye"></i> Detalhes do Evento</a>
                                             <button type="button" class="btn btn-outline-danger btn-sm btn-cancelar-participacao" data-url="{{ url('trilheiro/privado/eventos/cancelar/'.$evento->id_evento_eve) }}">
                                                 <i class="fa fa-times"></i> Cancelar Participação
                                             </button>

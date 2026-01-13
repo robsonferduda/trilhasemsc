@@ -42,7 +42,7 @@
 
                     <div class="col-lg-12 col-md-12">
                         <div class="center">
-                            <a href="{{ url('eventos/detalhes', $evento->id_evento_eve) }}" type="button" class="btn btn-outline-info btn-sm">Ver Detalhes</a>
+                            <a href="{{ url('eventos/' . ($evento->slug_eve ?: $evento->id_evento_eve)) }}" type="button" class="btn btn-outline-info btn-sm">Ver Detalhes</a>
                         </div>
                     </div>
                 </div>  

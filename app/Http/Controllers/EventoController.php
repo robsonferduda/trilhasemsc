@@ -46,14 +46,26 @@ class EventoController extends Controller
         return view('admin/eventos/listar', compact('guia','eventos'));
     }
 
-    public function detalhes($id)
+    public function detalhes($slugOrId)
     {
-        $evento = Evento::find($id);
+        // Busca evento por slug ou ID (mantém compatibilidade)
+        $evento = Evento::findBySlugOrId($slugOrId);
+        
+        // Se não encontrar, retorna 404
+        if (!$evento) {
+            abort(404, 'Evento não encontrado');
+        }
+        
+        // Se foi acessado pelo ID antigo, redireciona para a URL com slug (SEO)
+        if (is_numeric($slugOrId) && $evento->slug_eve) {
+            return redirect()->route('evento.detalhes', ['slugOrId' => $evento->slug_eve], 301);
+        }
+        
         $page_name = "Eventos e Trilhas em Santa Catarina - ".$evento->nm_evento_eve;
         $cidades = Cidade::whereIn('cd_cidade_cde', Evento::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
         
         $dados = array('id_tipo_interacao_tin' => 5,
-                       'id_guia_gui' => $id);
+                       'id_guia_gui' => $evento->id_evento_eve);
 
         $usuario_logado = (Auth::user()) ? Auth::user()->id : null;
 
@@ -65,7 +77,7 @@ class EventoController extends Controller
 
         $estatistica = array('cd_usuario_usu' => $usuario_logado,
                             'cd_tipo_monitoramento_tim' => 2,
-                            'cd_monitoramento_esa' => $id);              
+                            'cd_monitoramento_esa' => $evento->id_evento_eve);              
 
         Estatistica::create($estatistica);
 

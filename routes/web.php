@@ -51,7 +51,12 @@ Route::get('trilhas/tag/{tag}', 'TrilhaController@searchTrilhasTag');
 Route::get('trilhas-em-{cidade}', 'TrilhaController@searchTrilhasCidadeDetalhes');
 
 Route::get('eventos', 'EventoController@index');
-Route::get('eventos/detalhes/{id}', 'EventoController@detalhes');
+// Nova rota com slug (aceita tanto slug quanto ID)
+Route::get('eventos/{slugOrId}', 'EventoController@detalhes')
+    ->where('slugOrId', '[a-zA-Z0-9\-]+')
+    ->name('evento.detalhes');
+// Rota antiga mantida para compatibilidade
+Route::get('eventos/detalhes/{id}', 'EventoController@detalhes')->where('id', '[0-9]+');
 Route::get('eventos/confirmacao/{id}', 'EventoController@confirmacao');
 Route::get('eventos/cancelamento/{id}', 'EventoController@confirmacaoCancelamento');
 
