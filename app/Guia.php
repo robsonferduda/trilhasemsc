@@ -21,8 +21,10 @@ class Guia extends Model
         'dc_biografia_gui',
         'fl_perfil_completo_gui',
         'fl_ativo_gui',
-        'nu_cadastur_gui'
+        'nu_cadastur_gui',
+        'obs_gui'
         ];
+        
     public $timestamps = true;
 
     public function origem()
