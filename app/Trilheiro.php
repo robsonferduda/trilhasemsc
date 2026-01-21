@@ -23,7 +23,8 @@ class Trilheiro extends Model
         'dt_nascimento',
         'cd_sexo_sex',
         'ds_objetivos_tri',
-        'nu_pontos_experiencia_tri'
+        'nu_pontos_experiencia_tri',
+        'fl_newsletter_tri'
         ];
 
     public $timestamps = true;
@@ -52,5 +53,43 @@ class Trilheiro extends Model
     public function trilhas()
     {
         return $this->belongsToMany('App\Trilha','trilheiro_trilha_ttr', 'id_trilheiro_tri','id_trilha_tri')->withTimestamps();
+    }
+
+    /**
+     * Gera um token seguro para descadastro da newsletter
+     * 
+     * @return string
+     */
+    public function getUnsubscribeToken()
+    {
+        return hash_hmac('sha256', $this->id_trilheiro_tri . '|' . $this->user->email, config('app.key'));
+    }
+
+    /**
+     * Valida um token de descadastro
+     * 
+     * @param int $trilheiroId
+     * @param string $token
+     * @return bool
+     */
+    public static function validateUnsubscribeToken($trilheiroId, $token)
+    {
+        $trilheiro = self::find($trilheiroId);
+        
+        if (!$trilheiro) {
+            return false;
+        }
+        
+        return hash_equals($trilheiro->getUnsubscribeToken(), $token);
+    }
+
+    /**
+     * Gera a URL completa de descadastro da newsletter
+     * 
+     * @return string
+     */
+    public function getUnsubscribeUrl()
+    {
+        return url('newsletter/descadastrar/' . $this->id_trilheiro_tri . '/' . $this->getUnsubscribeToken());
     }
 }

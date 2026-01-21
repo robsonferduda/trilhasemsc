@@ -13,6 +13,20 @@
         </div>           
     </div>
 </div>
+
+@if(session('flash_message'))
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-{{ session('flash_level', 'info') }} alert-dismissible fade show" role="alert">
+            <strong>{{ session('flash_message') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+@endif
+
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12">
         <div class="row clearfix">
@@ -41,6 +55,14 @@
                                                 <span class="text-warning">Nenhum login registrado</span>
                                             @endif
                                         </p>
+                                        <div class="mt-3">
+                                            <form action="{{ route('admin.trilheiro.enviar-email', $trilheiro->id_trilheiro_tri) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-info" title="Enviar email de boas-vindas para teste">
+                                                    <i class="fa fa-envelope"></i> Enviar Email de Teste
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

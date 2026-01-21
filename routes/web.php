@@ -35,6 +35,11 @@ Route::get('rastreio/publicidade/{codigo}', 'PublicidadeController@rastreio');
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.redirect');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
 
+// Newsletter - Descadastro
+Route::get('newsletter/descadastrar/{trilheiro}/{token}', 'NewsletterController@showUnsubscribe')->name('newsletter.show-unsubscribe');
+Route::post('newsletter/descadastrar/{trilheiro}/{token}', 'NewsletterController@unsubscribe')->name('newsletter.unsubscribe');
+Route::get('newsletter/reinscrever/{trilheiro}/{token}', 'NewsletterController@resubscribe')->name('newsletter.resubscribe');
+
 Route::post('comentario/novo', 'ComentarioController@store');
 
 Route::post('estado/{estado}/cidades', 'HomeController@getCidades');
@@ -151,6 +156,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('trilheiros/listar', 'TrilheiroController@listar');
         Route::get('trilheiro/perfil/{id}', 'TrilheiroController@show');
+        Route::post('trilheiro/{id}/enviar-email-boas-vindas', 'TrilheiroController@enviarEmailBoasVindas')->name('admin.trilheiro.enviar-email');
 
         Route::get('listar-trilhas', 'TrilhaController@index');
         Route::get('editar-trilha/{id}', 'TrilhaController@editar');

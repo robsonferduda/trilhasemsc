@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Trilheiro;
 use App\Mail\NovoTrilheiroNotificacao;
+use App\Mail\BoasVindasTrilheiro;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -78,6 +79,26 @@ class RegisterController extends Controller
             'id_user' => $user->id,
             'nm_trilheiro_tri' => $user->name,
         ]);
+
+        // Carrega o relacionamento user para uso no email
+        $trilheiro->load('user');
+
+        // Envia email de boas-vindas para o trilheiro
+        try {
+            Mail::to($user->email)->send(new BoasVindasTrilheiro($trilheiro));
+            
+            \Log::info('Email de boas-vindas enviado com sucesso', [
+                'trilheiro_id' => $trilheiro->id_trilheiro_tri,
+                'user_email' => $user->email,
+                'timestamp' => now()
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Erro ao enviar email de boas-vindas', [
+                'error' => $e->getMessage(),
+                'trilheiro_id' => $trilheiro->id_trilheiro_tri,
+                'user_email' => $user->email,
+            ]);
+        }
 
         // Envia email de notificação para o administrador
         try {
