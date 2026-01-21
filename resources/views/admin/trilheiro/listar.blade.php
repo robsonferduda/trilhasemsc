@@ -32,6 +32,15 @@
                                         <p class="mb-2"><strong>Cidade de Origem</strong>: {!! ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '<span class="text-danger">Não Informada</span>' !!}</p>
                                         <p class="mb-2"><strong>Data de Nascimento</strong>: {{ ($trilheiro->dt_nascimento) ? \Carbon\Carbon::parse($trilheiro->dt_nascimento)->format('d/m/Y').' - '.\Carbon\Carbon::parse($trilheiro->dt_nascimento)->age.' Anos' : 'Não Informada' }}</p>
                                         <p class="mb-2">Cadastro realizado em {{ \Carbon\Carbon::parse($trilheiro->created_at)->format('d/m/Y H:i:s') }}</p>
+                                        <p class="mb-2">
+                                            <strong>Último Login:</strong> 
+                                            @if($trilheiro->user->dt_last_login)
+                                                {{ \Carbon\Carbon::parse($trilheiro->user->dt_last_login)->format('d/m/Y H:i:s') }} 
+                                                <span class="text-muted">({{ \Carbon\Carbon::parse($trilheiro->user->dt_last_login)->diffForHumans() }})</span>
+                                            @else
+                                                <span class="text-warning">Nenhum login registrado</span>
+                                            @endif
+                                        </p>
                                     </div>
                                 </div>
                             </div>

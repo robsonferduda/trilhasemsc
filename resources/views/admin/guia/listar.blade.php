@@ -31,7 +31,7 @@
                                         <p class="mb-1"><strong>Cidades de Origem</strong>: {{ ($guia->origem) ? $guia->origem->nm_cidade_cde : 'Santa Catarina' }}</p>
                                         <p class="mb-1"><strong>Cidades de Atuação</strong>: {{ count($guia->cidadesAtuacao) > 0 ? implode(', ',$guia->cidadesAtuacao->pluck('nm_cidade_cde')->toArray()) : $guia->ds_atuacao_gui }}</p>
                                         @if($guia->obs_gui != '' && $guia->obs_gui != null)
-                                            <p class="mb-1"><strong>Observações</strong>: {{ $guia->obs_gui }}</p>
+                                            <p class="mb-1 text-danger"><strong class="text-dark">Observações</strong>: {{ $guia->obs_gui }}</p>
                                         @endif
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12">

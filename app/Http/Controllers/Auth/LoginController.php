@@ -59,6 +59,9 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
 
+            // Atualiza a data do último login
+            Auth::user()->update(['dt_last_login' => now()]);
+
             $data = \Location::get($request->ip()); 
             $cidade = ($data) ? $data->cityName : "---";
             $uf = ($data) ? $data->areaCode : "---";
@@ -146,6 +149,9 @@ class LoginController extends Controller
 
         // Autentica (com "remember" opcional)
         Auth::login($user, true);
+
+        // Atualiza a data do último login
+        $user->update(['dt_last_login' => now()]);
 
         // ===== Registro do LOG de localização/IP (sem travar o login) =====
         try {

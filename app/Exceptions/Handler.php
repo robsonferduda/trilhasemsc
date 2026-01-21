@@ -105,7 +105,7 @@ class Handler extends ExceptionHandler
         try {
             // Email(s) para onde as notificações devem ser enviadas
             // Você pode configurar isso no arquivo .env com uma variável ERROR_NOTIFICATION_EMAIL
-            $notificationEmail = env('ERROR_NOTIFICATION_EMAIL', 'admin@trilhasemsc.com.br');
+            $notificationEmail = env('ERROR_NOTIFICATION_EMAIL', 'robsonferduda@gmail.com');
             
             // Suporte a múltiplos emails separados por vírgula
             $emails = array_map('trim', explode(',', $notificationEmail));
