@@ -124,14 +124,13 @@ $(document).ready(function() {
     });
     
     function carregarTrilheiros(url) {
-        url = url || '{{ route("admin.trilheiros.listar") }}';
+        url = url || '{{ route("admin.trilheiros.ajax") }}';
         
         $('#loading').show();
         $('#lista-trilheiros').html('');
         
-        // Adiciona parâmetro ajax=1 para identificar requisição AJAX
+        // Serializa os dados do formulário
         var dados = $('#form-filtros').serialize();
-        dados += dados ? '&ajax=1' : 'ajax=1';
         
         console.log('URL:', url);
         console.log('Dados:', dados);
@@ -140,34 +139,33 @@ $(document).ready(function() {
             url: url,
             type: 'GET',
             data: dados,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Accept': 'application/json'
-            },
             dataType: 'json',
             success: function(response) {
                 console.log('Sucesso!', response);
                 $('#loading').hide();
-                $('#lista-trilheiros').html(response.html);
-                $('#paginacao').html(response.pagination);
+                
+                if(response.success) {
+                    $('#lista-trilheiros').html(response.html);
+                    $('#paginacao').html(response.pagination);
+                } else {
+                    alert('Erro: ' + (response.message || 'Resposta inválida'));
+                }
             },
             error: function(xhr) {
                 $('#loading').hide();
                 console.error('Erro completo:', xhr);
                 console.error('Status:', xhr.status);
                 console.error('Response:', xhr.responseText);
-                console.error('Response JSON:', xhr.responseJSON);
                 
                 // Tenta mostrar a mensagem de erro real
                 try {
-                    var errorMsg = xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText;
-                    alert('Erro: ' + errorMsg);
-                } catch(e) {
-                    if (xhr.status === 500) {
-                        alert('Erro no servidor. Verifique os logs do Laravel.');
+                    if(xhr.responseJSON) {
+                        alert('Erro: ' + xhr.responseJSON.message);
                     } else {
                         alert('Erro ao carregar trilheiros. Status: ' + xhr.status);
                     }
+                } catch(e) {
+                    alert('Erro ao carregar trilheiros. Verifique o console.');
                 }
             }
         });
