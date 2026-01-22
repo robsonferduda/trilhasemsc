@@ -41,10 +41,19 @@
                                 <div class="mt-3">
                                     <form action="{{ route('admin.trilheiro.enviar-email', $trilheiro->id_trilheiro_tri) }}" method="POST" style="display: inline;">
                                         @csrf
-                                        <button type="submit" class="btn btn-sm btn-info" title="Enviar email de boas-vindas para teste">
-                                            <i class="fa fa-envelope"></i> Enviar Email de Teste
+                                        <button type="submit" class="btn btn-sm btn-info" title="Enviar email de boas-vindas">
+                                            <i class="fa fa-envelope"></i> Boas-Vindas
                                         </button>
                                     </form>
+                                    
+                                    @if(!$trilheiro->nr_score_tri || $trilheiro->nr_score_tri == 0)
+                                        <form action="{{ route('admin.trilheiro.enviar-email-questionario', $trilheiro->id_trilheiro_tri) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-warning" title="Enviar convite para responder questionário">
+                                                <i class="fa fa-clipboard-list"></i> Questionário
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>

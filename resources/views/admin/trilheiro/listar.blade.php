@@ -78,6 +78,23 @@
     </div>
 </div>
 
+<!-- Botão de Envio em Massa -->
+<div class="row clearfix mb-3">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="{{ route('admin.trilheiros.enviar-email-questionario-massa') }}" method="POST" onsubmit="return confirm('Tem certeza que deseja enviar emails para todos os trilheiros sem score? Esta ação não pode ser desfeita.');">
+                    @csrf
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fa fa-paper-plane"></i> Enviar Convite de Questionário para Todos sem Score
+                    </button>
+                    <small class="text-muted ml-2">Será enviado um email para todos os trilheiros que ainda não possuem score.</small>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Lista de Trilheiros -->
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12">
