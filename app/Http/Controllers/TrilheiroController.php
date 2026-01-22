@@ -145,7 +145,7 @@ class TrilheiroController extends Controller
             return response()->json([
                 'success' => true,
                 'html' => view('admin/trilheiro/partials/lista', compact('trilheiros'))->render(),
-                'pagination' => $trilheiros->links('vendor.pagination.bootstrap-4')->render()
+                'pagination' => $trilheiros->links()->render()
             ]);
         } catch (\Exception $e) {
             \Log::error('Erro ao carregar trilheiros AJAX', [
