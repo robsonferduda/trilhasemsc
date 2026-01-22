@@ -130,6 +130,9 @@ $(document).ready(function() {
             url: url,
             type: 'GET',
             data: $('#form-filtros').serialize(),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
             dataType: 'json',
             success: function(response) {
                 $('#loading').hide();
@@ -138,8 +141,12 @@ $(document).ready(function() {
             },
             error: function(xhr) {
                 $('#loading').hide();
-                alert('Erro ao carregar trilheiros. Tente novamente.');
-                console.error(xhr);
+                console.error('Erro:', xhr);
+                if (xhr.status === 500) {
+                    alert('Erro no servidor. Verifique os logs.');
+                } else {
+                    alert('Erro ao carregar trilheiros. Tente novamente.');
+                }
             }
         });
     }
