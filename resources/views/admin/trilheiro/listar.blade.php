@@ -126,12 +126,17 @@ $(document).ready(function() {
         $('#loading').show();
         $('#lista-trilheiros').html('');
         
+        // Adiciona parâmetro ajax=1 para identificar requisição AJAX
+        var dados = $('#form-filtros').serialize();
+        dados += dados ? '&ajax=1' : 'ajax=1';
+        
         $.ajax({
             url: url,
             type: 'GET',
-            data: $('#form-filtros').serialize(),
+            data: dados,
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
             },
             dataType: 'json',
             success: function(response) {
@@ -141,7 +146,9 @@ $(document).ready(function() {
             },
             error: function(xhr) {
                 $('#loading').hide();
-                console.error('Erro:', xhr);
+                console.error('Erro completo:', xhr);
+                console.error('Status:', xhr.status);
+                console.error('Response:', xhr.responseText);
                 if (xhr.status === 500) {
                     alert('Erro no servidor. Verifique os logs.');
                 } else {
