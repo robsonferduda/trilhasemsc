@@ -258,4 +258,38 @@ class EventoController extends Controller
 
         return redirect('guia-e-condutores/privado/eventos');
     }
+    
+    /**
+     * Clona um evento existente
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function clonar($id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != "GUIA") {
+            return redirect("login");
+        }
+        
+        $guia = Guia::where("id_user", Auth::user()->id)->first();
+        $evento = Evento::where("id_evento_eve", $id)
+                        ->where("id_guia_gui", $guia->id_guia_gui)
+                        ->first();
+
+        if (!$evento) {
+            Flash::error("Evento não encontrado ou você não tem permissão para cloná-lo.");
+            return redirect("guia-e-condutores/privado/eventos");
+        }
+
+        try {
+            $novoEvento = $evento->clonar();
+            
+            Flash::success("Evento clonado com sucesso! Edite as informações necessárias.");
+            return redirect("guia-e-condutores/privado/evento/editar/" . $novoEvento->id_evento_eve);
+            
+        } catch (\Exception $e) {
+            Flash::error("Erro ao clonar evento: " . $e->getMessage());
+            return redirect("guia-e-condutores/privado/eventos");
+        }
+    }
 }

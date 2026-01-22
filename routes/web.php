@@ -178,6 +178,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('evento/editar/{id}', 'EventoController@editar');
         Route::post('evento/update', 'EventoController@update');
         Route::post('evento/cadastrar', 'EventoController@cadastrar');
+        Route::post('evento/clonar/{id}', 'EventoController@clonar')->name('evento.clonar');
         Route::match(['GET', 'POST'],'trilhas', 'GuiaController@trilhas');
     });
 

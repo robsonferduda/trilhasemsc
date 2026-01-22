@@ -28,7 +28,8 @@ class Evento extends Model
                             'fl_ativo_eve',
                             'hora_inicio_eve',
                             'hora_fim_eve',
-                            'fl_privado_eve'];
+                            'fl_privado_eve',
+                            'id_unico_eve'];
                             
     public $timestamps = true;
 
@@ -43,6 +44,14 @@ class Evento extends Model
         static::creating(function ($evento) {
             if (empty($evento->slug_eve)) {
                 $evento->slug_eve = $evento->generateUniqueSlug($evento->nm_evento_eve);
+            }
+        });
+
+        // Define id_unico_eve após criar o evento (se não foi definido manualmente)
+        static::created(function ($evento) {
+            if (empty($evento->id_unico_eve)) {
+                $evento->id_unico_eve = $evento->id_evento_eve;
+                $evento->save();
             }
         });
 
@@ -139,5 +148,60 @@ class Evento extends Model
     public function trilheiros()
     {
         return $this->belongsToMany(Trilheiro::class, 'evento_trilheiro_evt', 'id_evento_eve', 'id_trilheiro_tri');
+    }
+
+    /**
+     * Clona o evento atual criando uma nova cópia
+     * O novo evento mantém o id_unico_eve do evento original
+     * 
+     * @return Evento
+     */
+    public function clonar()
+    {
+        // Cria uma cópia do evento
+        $novoEvento = $this->replicate();
+        
+        // Reseta campos que não devem ser copiados
+        $novoEvento->slug_eve = null; // Será gerado automaticamente
+        $novoEvento->fl_ativo_eve = null; // Novo evento inicia como inativo (aguardando aprovação)
+        
+        // Mantém o id_unico_eve do evento original
+        $novoEvento->id_unico_eve = $this->id_unico_eve ?: $this->id_evento_eve;
+        
+        // Adiciona sufixo ao nome para identificar como cópia
+        $novoEvento->nm_evento_eve = $this->nm_evento_eve . " (Cópia)";
+        
+        // Salva o novo evento
+        $novoEvento->save();
+        
+        return $novoEvento;
+    }
+
+    /**
+     * Retorna o evento original (primeiro da série)
+     * 
+     * @return Evento|null
+     */
+    public function eventoOriginal()
+    {
+        if ($this->id_unico_eve && $this->id_unico_eve != $this->id_evento_eve) {
+            return static::find($this->id_unico_eve);
+        }
+        
+        return null;
+    }
+
+    /**
+     * Retorna todos os eventos clonados a partir deste
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function eventosClonados()
+    {
+        $idBase = $this->id_unico_eve ?: $this->id_evento_eve;
+        
+        return static::where("id_unico_eve", $idBase)
+            ->where("id_evento_eve", "!=", $this->id_evento_eve)
+            ->get();
     }
 }

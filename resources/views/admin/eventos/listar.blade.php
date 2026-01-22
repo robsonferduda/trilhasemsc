@@ -45,6 +45,12 @@
                                             <a href="{{ url('guia-e-condutores/privado/eventos/participantes', $evento->id_evento_eve) }}" class="btn btn-outline-danger btn-sm"><i class="fa fa-users"></i> Participantes</a>
                                             <a href="{{ url('eventos/' . ($evento->slug_eve ?: $evento->id_evento_eve)) }}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye"></i> Ver</a>
                                             <a href="{{ url('guia-e-condutores/privado/evento/editar', $evento->id_evento_eve) }}" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i> Editar</a>
+                                            <form action="{{ route('evento.clonar', $evento->id_evento_eve) }}" method="POST" style="display: inline;" onsubmit="return confirm('Deseja realmente clonar este evento?');">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-success btn-sm" title="Clonar este evento">
+                                                    <i class="fa fa-copy"></i> Clonar
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
