@@ -380,7 +380,7 @@ class GuiaController extends Controller
         $page_name = "Guias e Condutores em Santa Catarina";
         $titulo = 'Guias e Condutores';
         
-        $guias = Guia::all();
+        $guias = Guia::with('user')->get();
 
         return view('admin/guia/listar', ['page_name' => $page_name, 'guias' => $guias]);
     }
