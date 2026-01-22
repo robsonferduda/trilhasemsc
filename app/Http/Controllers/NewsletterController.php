@@ -73,7 +73,7 @@ class NewsletterController extends Controller
         $this->notifyAdmins($trilheiro, $request->input('motivo'));
 
         return view('newsletter.sucesso', [
-            'mensagem' => 'Você foi descadastrado com sucesso de nossa newsletter.',
+            'mensagem' => 'Cancelamento de notificações realizado com sucesso.',
             'trilheiro' => $trilheiro
         ]);
     }
