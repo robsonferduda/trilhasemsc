@@ -98,6 +98,9 @@
 @section('script')
 <script>
 $(document).ready(function() {
+    // Limpa formulário ao carregar a página
+    $('#form-filtros')[0].reset();
+    
     // Carrega dados iniciais
     carregarTrilheiros();
     
@@ -130,6 +133,9 @@ $(document).ready(function() {
         var dados = $('#form-filtros').serialize();
         dados += dados ? '&ajax=1' : 'ajax=1';
         
+        console.log('URL:', url);
+        console.log('Dados:', dados);
+        
         $.ajax({
             url: url,
             type: 'GET',
@@ -140,6 +146,7 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
+                console.log('Sucesso!', response);
                 $('#loading').hide();
                 $('#lista-trilheiros').html(response.html);
                 $('#paginacao').html(response.pagination);
@@ -149,10 +156,18 @@ $(document).ready(function() {
                 console.error('Erro completo:', xhr);
                 console.error('Status:', xhr.status);
                 console.error('Response:', xhr.responseText);
-                if (xhr.status === 500) {
-                    alert('Erro no servidor. Verifique os logs.');
-                } else {
-                    alert('Erro ao carregar trilheiros. Tente novamente.');
+                console.error('Response JSON:', xhr.responseJSON);
+                
+                // Tenta mostrar a mensagem de erro real
+                try {
+                    var errorMsg = xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText;
+                    alert('Erro: ' + errorMsg);
+                } catch(e) {
+                    if (xhr.status === 500) {
+                        alert('Erro no servidor. Verifique os logs do Laravel.');
+                    } else {
+                        alert('Erro ao carregar trilheiros. Status: ' + xhr.status);
+                    }
                 }
             }
         });
