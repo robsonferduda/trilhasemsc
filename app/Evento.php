@@ -153,6 +153,8 @@ class Evento extends Model
     /**
      * Clona o evento atual criando uma nova cópia
      * O novo evento mantém o id_unico_eve do evento original
+     * Se este evento já é um clone, usa seu id_unico_eve (que aponta para o original)
+     * Se este evento é o original, usa seu próprio id_evento_eve
      * 
      * @return Evento
      */
@@ -165,8 +167,10 @@ class Evento extends Model
         $novoEvento->slug_eve = null; // Será gerado automaticamente
         $novoEvento->fl_ativo_eve = null; // Novo evento inicia como inativo (aguardando aprovação)
         
-        // Mantém o id_unico_eve do evento original
-        $novoEvento->id_unico_eve = $this->id_unico_eve ?: $this->id_evento_eve;
+        // Define o id_unico_eve: 
+        // Se este evento já tem id_unico_eve (é um clone), usa esse valor para manter a referência ao original
+        // Caso contrário, usa o id deste evento (que será o primeiro da série)
+        $novoEvento->id_unico_eve = !empty($this->id_unico_eve) ? $this->id_unico_eve : $this->id_evento_eve;
         
         // Adiciona sufixo ao nome para identificar como cópia
         $novoEvento->nm_evento_eve = $this->nm_evento_eve . " (Cópia)";
