@@ -76,10 +76,10 @@ class Evento extends Model
             }
         }
         
-        // Inclui a data no slug (formato: dia-mes-ano ou apenas dia-mes)
+        // Inclui a data no slug (formato: dia-mes-ano)
         if ($this->dt_realizacao_eve) {
-            $data = date('d-M', strtotime($this->dt_realizacao_eve));
-            $slug = $slug . '-' . strtolower($data);
+            $data = date('d-m-Y', strtotime($this->dt_realizacao_eve));
+            $slug = $slug . '-' . $data;
         }
         
         $originalSlug = $slug;
