@@ -119,28 +119,39 @@ class TrilheiroController extends Controller
         try {
             $query = Trilheiro::with(['user', 'origem', 'indice']);
             
+            $temFiltros = false;
+            
             // Filtros de busca
             if ($request->has('nome') && $request->nome) {
                 $query->where('nm_trilheiro_tri', 'ILIKE', '%' . $request->nome . '%');
+                $temFiltros = true;
             }
             
             if ($request->has('email') && $request->email) {
                 $query->whereHas('user', function($q) use ($request) {
                     $q->where('email', 'ILIKE', '%' . $request->email . '%');
                 });
+                $temFiltros = true;
             }
             
             if ($request->has('cidade') && $request->cidade) {
                 $query->whereHas('origem', function($q) use ($request) {
                     $q->where('nm_cidade_cde', 'ILIKE', '%' . $request->cidade . '%');
                 });
+                $temFiltros = true;
             }
             
             if ($request->has('newsletter') && $request->newsletter !== '') {
                 $query->where('fl_newsletter_tri', $request->newsletter == '1');
+                $temFiltros = true;
             }
             
-            $trilheiros = $query->orderBy('created_at','DESC')->paginate(10);
+            // Se não houver filtros, limita aos 10 últimos cadastrados
+            if (!$temFiltros) {
+                $trilheiros = $query->orderBy('created_at','DESC')->limit(10)->paginate(10);
+            } else {
+                $trilheiros = $query->orderBy('created_at','DESC')->paginate(10);
+            }
             
             return response()->json([
                 'success' => true,
