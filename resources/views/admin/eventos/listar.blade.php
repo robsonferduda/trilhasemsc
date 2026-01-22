@@ -45,9 +45,9 @@
                                             <a href="{{ url('guia-e-condutores/privado/eventos/participantes', $evento->id_evento_eve) }}" class="btn btn-outline-danger btn-sm"><i class="fa fa-users"></i> Participantes</a>
                                             <a href="{{ url('eventos/' . ($evento->slug_eve ?: $evento->id_evento_eve)) }}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye"></i> Ver</a>
                                             <a href="{{ url('guia-e-condutores/privado/evento/editar', $evento->id_evento_eve) }}" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i> Editar</a>
-                                            <form action="{{ route('evento.clonar', $evento->id_evento_eve) }}" method="POST" style="display: inline;" onsubmit="return confirm('Deseja realmente clonar este evento?');">
+                                            <form id="form-clonar-{{ $evento->id_evento_eve }}" action="{{ route('evento.clonar', $evento->id_evento_eve) }}" method="POST" style="display: inline;">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-success btn-sm" title="Clonar este evento">
+                                                <button type="button" class="btn btn-outline-success btn-sm btn-clonar" data-evento-id="{{ $evento->id_evento_eve }}" data-evento-nome="{{ $evento->nm_evento_eve }}" title="Clonar este evento">
                                                     <i class="fa fa-copy"></i> Clonar
                                                 </button>
                                             </form>
@@ -77,6 +77,29 @@
     <script>
         $(function() {
             
+        });
+        
+        // SweetAlert para clonar eventos
+        $('.btn-clonar').on('click', function(e) {
+            e.preventDefault();
+            const eventoId = $(this).data('evento-id');
+            const eventoNome = $(this).data('evento-nome');
+            
+            Swal.fire({
+                title: 'Clonar Evento',
+                html: `Deseja realmente clonar o evento:<br><strong>"${eventoNome}"</strong>?`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: '<i class="fa fa-copy"></i> Sim, clonar!',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#form-clonar-' + eventoId).submit();
+                }
+            });
         });
     </script>
 @endsection
