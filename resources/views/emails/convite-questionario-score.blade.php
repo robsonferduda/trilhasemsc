@@ -152,7 +152,7 @@
         <div class="cta-section">
             <p style="font-size: 18px; margin-bottom: 15px;"><strong>⏱️ Leva apenas 3 minutos!</strong></p>
             <p>Responda agora e descubra seu score:</p>
-            <a href="https://trilhasemsc.com.br/questionario" class="button">📝 Responder Questionário</a>
+            <a href="https://trilhasemsc.com.br/trilheiro/privado/meu-nivel" class="button">📝 Responder Questionário</a>
         </div>
 
         <div class="section">
