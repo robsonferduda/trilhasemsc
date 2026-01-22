@@ -98,6 +98,18 @@
                                     <input type="text" name="total_participantes_eve" id="total_participantes_eve" value="{{ ($evento) ? $evento->total_participantes_eve : old('total_participantes_eve') }}" placeholder="" class="form-control" >
                                 </div>
                             </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label for="fl_privado_eve">Visibilidade</label>
+                                    <div class="fancy-checkbox mt-2">
+                                        <label>
+                                            <input type="checkbox" name="fl_privado_eve" id="fl_privado_eve" value="1" {{ ($evento and $evento->fl_privado_eve) ? 'checked' : '' }}>
+                                            <span>Evento Privado</span>
+                                        </label>
+                                    </div>
+                                    <small class="form-text text-muted">Se marcado, o evento não será exibido publicamente</small>
+                                </div>
+                            </div>
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">

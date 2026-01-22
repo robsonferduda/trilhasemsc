@@ -27,7 +27,8 @@ class Evento extends Model
                             'ds_imagem_horizontal_eve',
                             'fl_ativo_eve',
                             'hora_inicio_eve',
-                            'hora_fim_eve'];
+                            'hora_fim_eve',
+                            'fl_privado_eve'];
                             
     public $timestamps = true;
 

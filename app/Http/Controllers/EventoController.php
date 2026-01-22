@@ -31,6 +31,10 @@ class EventoController extends Controller
         $page_name = "Eventos e Trilhas em Santa Catarina";
         $eventos = Evento::where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))
             ->where('fl_ativo_eve',true)
+            ->where(function($query) {
+                $query->where('fl_privado_eve', false)
+                      ->orWhereNull('fl_privado_eve');
+            })
             ->orderBy('dt_realizacao_eve','ASC')->get();
 
         $cidades = Cidade::whereIn('cd_cidade_cde', Evento::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
@@ -182,6 +186,7 @@ class EventoController extends Controller
                         'total_participantes_eve' => $request->total_participantes_eve,
                         'descricao' => $request->descricao,                           
                         'fl_ativo_eve' => null,
+                        'fl_privado_eve' => $request->has('fl_privado_eve') ? true : false,
                         'hora_inicio_eve' => $request->hora_inicio_eve,
                         'hora_fim_eve' => $request->hora_fim_eve);
 
@@ -230,6 +235,7 @@ class EventoController extends Controller
         $evento->total_participantes_eve = $request->total_participantes_eve;
         $evento->descricao = $request->descricao;                           
         $evento->fl_ativo_eve = null;
+        $evento->fl_privado_eve = $request->has('fl_privado_eve') ? true : false;
         $evento->hora_inicio_eve = $request->hora_inicio_eve;
         $evento->hora_fim_eve = $request->hora_fim_eve;
 

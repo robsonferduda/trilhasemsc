@@ -59,7 +59,7 @@
                                             <form action="{{ route('admin.trilheiro.enviar-email', $trilheiro->id_trilheiro_tri) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-info" title="Enviar email de boas-vindas para teste">
-                                                    <i class="fa fa-envelope"></i> Enviar Email de Teste
+                                                    <i class="fa fa-envelope"></i> Enviar Email Boas-Vindas
                                                 </button>
                                             </form>
                                         </div>
