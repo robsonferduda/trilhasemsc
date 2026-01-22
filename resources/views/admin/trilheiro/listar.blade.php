@@ -95,7 +95,7 @@
 </div>
 @endsection
 
-@section('scripts')
+@section('script')
 <script>
 $(document).ready(function() {
     // Carrega dados iniciais
