@@ -22,12 +22,12 @@
                     
                     @if(isset($trilheiro) && !$trilheiro->fl_newsletter_tri)
                         <p class="text-muted mb-4">
-                            Você não receberá mais nossos emails. Se mudar de ideia, você pode se reinscrever.
+                            Você não receberá mais nossos emails. Se mudar de ideia, você pode se reativar as notificações.
                         </p>
                         
                         <div class="d-grid gap-2">
                             <a href="{{ route('newsletter.resubscribe', ['trilheiro' => $trilheiro->id_trilheiro_tri, 'token' => $trilheiro->getUnsubscribeToken()]) }}" class="btn btn-success btn-lg mb-2">
-                                <i class="fa fa-envelope"></i> Reinscrever-me na newsletter
+                                <i class="fa fa-envelope"></i> Reativar Notificações
                             </a>
                             <a href="{{ url('/') }}" class="btn btn-outline-secondary btn-lg">
                                 <i class="fa fa-home"></i> Voltar ao site

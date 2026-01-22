@@ -96,7 +96,7 @@ class TrilheiroController extends Controller
         return view('trilheiro/score', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'elevacoes' => $elevacoes, 'distancias' => $distancias, 'questionario' => $questionario, 'corridas' => $corridas]);
     }
 
-    public function listar()
+    public function listar(Request $request)
     {
         if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
             return redirect('login');
@@ -105,9 +105,70 @@ class TrilheiroController extends Controller
         $page_name = "Guias e Condutores em Santa Catarina";
         $titulo = 'Guias e Condutores';
         
-        $trilheiros = Trilheiro::orderBy('created_at','DESC')->get();
+        // Primeira carga - apenas estrutura
+        $trilheiros = collect();
 
         return view('admin/trilheiro/listar', ['page_name' => $page_name, 'trilheiros' => $trilheiros]);
+    }
+
+    public function listarAjax(Request $request)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        try {
+            $query = Trilheiro::with(['user', 'origem', 'indice']);
+            
+            $temFiltros = false;
+            
+            // Filtros de busca
+            if ($request->has('nome') && $request->nome) {
+                $query->where('nm_trilheiro_tri', 'ILIKE', '%' . $request->nome . '%');
+                $temFiltros = true;
+            }
+            
+            if ($request->has('email') && $request->email) {
+                $query->whereHas('user', function($q) use ($request) {
+                    $q->where('email', 'ILIKE', '%' . $request->email . '%');
+                });
+                $temFiltros = true;
+            }
+            
+            if ($request->has('cidade') && $request->cidade) {
+                $query->whereHas('origem', function($q) use ($request) {
+                    $q->where('nm_cidade_cde', 'ILIKE', '%' . $request->cidade . '%');
+                });
+                $temFiltros = true;
+            }
+            
+            if ($request->filled('newsletter')) {
+                $query->where('fl_newsletter_tri', $request->newsletter == '1');
+                $temFiltros = true;
+            }
+            
+            // Se não houver filtros, limita aos 10 últimos cadastrados
+            if (!$temFiltros) {
+                $trilheiros = $query->orderBy('created_at','DESC')->limit(10)->paginate(10);
+            } else {
+                $trilheiros = $query->orderBy('created_at','DESC')->paginate(10);
+            }
+            
+            return response()->json([
+                'success' => true,
+                'html' => view('admin/trilheiro/partials/lista', compact('trilheiros'))->render()
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Erro ao carregar trilheiros AJAX', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function atualizarCadastro(Request $request)
@@ -126,7 +187,7 @@ class TrilheiroController extends Controller
                 'id_user' => Auth::user()->id,
                 'nm_trilheiro_tri' => Auth::user()->name
             ]);
-            
+
             // Carrega o relacionamento user
             $trilheiro->load('user');
             
@@ -441,12 +502,6 @@ class TrilheiroController extends Controller
         return view('trilheiro/trilhas', compact('cidades', 'trilhasTrilheiro', 'trilheiro'));
     }
 
-    /**
-     * Envia email de boas-vindas para teste (área administrativa)
-     * 
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function enviarEmailBoasVindas($id)
     {
         try {
@@ -481,4 +536,93 @@ class TrilheiroController extends Controller
         return redirect()->back();
     }
 
+    public function enviarEmailQuestionario($id)
+    {
+        try {
+            $trilheiro = Trilheiro::with("user")->findOrFail($id);
+            
+            if (!$trilheiro->user) {
+                Flash::error("Trilheiro não possui usuário associado.");
+                return redirect()->back();
+            }
+
+            Mail::to($trilheiro->user->email)->send(new \App\Mail\ConviteQuestionarioScore($trilheiro));
+            
+            \Log::info("Email de convite ao questionário enviado via admin", [
+                "trilheiro_id" => $trilheiro->id_trilheiro_tri,
+                "user_email" => $trilheiro->user->email,
+                "admin_user_id" => Auth::user()->id,
+                "timestamp" => now()
+            ]);
+            
+            Flash::success("Email de convite ao questionário enviado com sucesso para " . $trilheiro->user->email);
+            
+        } catch (\Exception $e) {
+            \Log::error("Erro ao enviar email de convite ao questionário via admin", [
+                "error" => $e->getMessage(),
+                "trilheiro_id" => $id,
+                "admin_user_id" => Auth::user()->id,
+            ]);
+            
+            Flash::error("Erro ao enviar email: " . $e->getMessage());
+        }
+        
+        return redirect()->back();
+    }
+
+    public function enviarEmailQuestionarioEmMassa()
+    {
+        try {
+            // Busca trilheiros sem score (null ou 0) e com usuário associado
+            $trilheiros = Trilheiro::with('user')
+                ->whereHas('user')
+                ->where(function($query) {
+                    $query->whereNull('nr_score_tri')
+                          ->orWhere('nr_score_tri', 0);
+                })
+                ->get();
+            
+            if ($trilheiros->isEmpty()) {
+                Flash::warning("Não há trilheiros sem score para enviar emails.");
+                return redirect()->back();
+            }
+
+            $enviados = 0;
+            $erros = 0;
+
+            foreach ($trilheiros as $trilheiro) {
+                try {
+                    Mail::to($trilheiro->user->email)->send(new \App\Mail\ConviteQuestionarioScore($trilheiro));
+                    $enviados++;
+                    
+                    \Log::info("Email de convite ao questionário enviado em massa", [
+                        "trilheiro_id" => $trilheiro->id_trilheiro_tri,
+                        "user_email" => $trilheiro->user->email
+                    ]);
+                } catch (\Exception $e) {
+                    $erros++;
+                    \Log::error("Erro ao enviar email em massa", [
+                        "trilheiro_id" => $trilheiro->id_trilheiro_tri,
+                        "error" => $e->getMessage()
+                    ]);
+                }
+            }
+            
+            if ($erros > 0) {
+                Flash::warning("Emails enviados: {$enviados}. Erros: {$erros}. Verifique os logs para mais detalhes.");
+            } else {
+                Flash::success("Emails enviados com sucesso para {$enviados} trilheiro(s) sem score!");
+            }
+            
+        } catch (\Exception $e) {
+            \Log::error("Erro geral no envio em massa de emails de questionário", [
+                "error" => $e->getMessage(),
+                "admin_user_id" => Auth::user()->id,
+            ]);
+            
+            Flash::error("Erro ao enviar emails: " . $e->getMessage());
+        }
+        
+        return redirect()->back();
+    }
 }

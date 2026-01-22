@@ -33,6 +33,15 @@
                                         @if($guia->obs_gui != '' && $guia->obs_gui != null)
                                             <p class="mb-1 text-danger"><strong class="text-dark">Observações</strong>: {{ $guia->obs_gui }}</p>
                                         @endif
+                                        <p class="mb-1">
+                                            <strong>Último Login:</strong> 
+                                            @if($guia->user && $guia->user->dt_last_login)
+                                                {{ \Carbon\Carbon::parse($guia->user->dt_last_login)->format('d/m/Y H:i:s') }} 
+                                                <span class="text-muted">({{ \Carbon\Carbon::parse($guia->user->dt_last_login)->diffForHumans() }})</span>
+                                            @else
+                                                <span class="text-warning">Nenhum login registrado</span>
+                                            @endif
+                                        </p>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                         <div style="position: absolute; right: 0;">

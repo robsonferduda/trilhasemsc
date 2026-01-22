@@ -154,9 +154,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('guias/aprovar', 'GuiaController@aprovar');
         Route::get('guias/listar', 'GuiaController@listar');
 
-        Route::get('trilheiros/listar', 'TrilheiroController@listar');
+        Route::get('trilheiros/listar', 'TrilheiroController@listar')->name('admin.trilheiros.listar');
+        Route::get('trilheiros/ajax', 'TrilheiroController@listarAjax')->name('admin.trilheiros.ajax');
         Route::get('trilheiro/perfil/{id}', 'TrilheiroController@show');
         Route::post('trilheiro/{id}/enviar-email-boas-vindas', 'TrilheiroController@enviarEmailBoasVindas')->name('admin.trilheiro.enviar-email');
+        Route::post('trilheiro/{id}/enviar-email-questionario', 'TrilheiroController@enviarEmailQuestionario')->name('admin.trilheiro.enviar-email-questionario');
+        Route::post('trilheiros/enviar-email-questionario-massa', 'TrilheiroController@enviarEmailQuestionarioEmMassa')->name('admin.trilheiros.enviar-email-questionario-massa');
 
         Route::get('listar-trilhas', 'TrilhaController@index');
         Route::get('editar-trilha/{id}', 'TrilhaController@editar');

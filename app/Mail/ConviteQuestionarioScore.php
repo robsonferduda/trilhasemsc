@@ -7,24 +7,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewsletterUnsubscribeNotification extends Mailable
+class ConviteQuestionarioScore extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $trilheiro;
-    public $motivoDescadastro;
 
     /**
      * Create a new message instance.
      *
      * @param Trilheiro $trilheiro
-     * @param string|null $motivoDescadastro
      * @return void
      */
-    public function __construct(Trilheiro $trilheiro, $motivoDescadastro = null)
+    public function __construct(Trilheiro $trilheiro)
     {
         $this->trilheiro = $trilheiro;
-        $this->motivoDescadastro = $motivoDescadastro;
     }
 
     /**
@@ -34,7 +31,7 @@ class NewsletterUnsubscribeNotification extends Mailable
      */
     public function build()
     {
-        return $this->subject('🔔 Cancelamento de Notificações - ' . $this->trilheiro->nm_trilheiro_tri)
-                    ->view('emails.admin.newsletter-unsubscribe-notification');
+        return $this->subject('🎯 Descubra seu nível de trilheiro - Responda nosso questionário!')
+                    ->view('emails.convite-questionario-score');
     }
 }

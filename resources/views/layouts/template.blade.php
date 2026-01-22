@@ -439,7 +439,16 @@
     <script src="{{ asset('bundles/mainscripts.bundle.js') }}"></script>
     <script src="{{ asset('js/pages/tables/jquery-datatable.js') }}"></script>
     <script src="{{ asset('js/pages/forms/dropify.js') }}"></script>
-    <script src="{{ asset('js/pages/forms/editors.js') }}"></script>
+    
+    <script>
+        // Carrega CKEditor apenas se houver textarea com classe 'ckeditor'
+        $(document).ready(function() {
+            if ($('textarea.ckeditor').length > 0) {
+                $.getScript("{{ asset('js/pages/forms/editors.js') }}");
+            }
+        });
+    </script>
+    
     <script src="{{ asset('js/jquery.maskMoney.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
 

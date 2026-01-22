@@ -149,7 +149,7 @@
 
         <div class="unsubscribe">
             <p>Você está recebendo este email porque se cadastrou em nossa plataforma.</p>
-            <p>Se você não deseja mais receber nossos emails, <a href="{{ $trilheiro->getUnsubscribeUrl() }}">clique aqui para descadastrar</a>.</p>
+            <p>Se você não deseja mais receber nossos emails, <a href="{{ $trilheiro->getUnsubscribeUrl() }}">clique aqui para cancelar as comunicações</a> (Sua conta não será removida, apenas deixará de receber comunicações).</p>
             <p style="color: #999; margin-top: 10px;">Trilhas em Santa Catarina © {{ date('Y') }} - Todos os direitos reservados</p>
         </div>
     </div>

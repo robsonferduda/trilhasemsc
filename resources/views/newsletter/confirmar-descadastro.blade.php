@@ -5,8 +5,8 @@
     <span class="mask bg-gradient-dark"></span>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 mx-auto text-white text-center">
-                <h2 class="text-white">Cancelar assinatura da Newsletter</h2>
+            <div class="col-lg-8 mt -3 mx-auto text-white text-center">
+                <h2 class="text-white">Cancelar Notificações</h2>
                 <p class="lead">Sentiremos sua falta! 😢</p>
             </div>
         </div>
@@ -39,7 +39,7 @@
                     </ul>
                     
                     <div class="alert alert-info text-center">
-                        <small><i class="fa fa-info-circle"></i> Você pode se reinscrever a qualquer momento acessando seu perfil.</small>
+                        <small><i class="fa fa-info-circle"></i> Você pode habilitar as notificações a qualquer momento acessando seu perfil.</small>
                     </div>
                     
                     <form action="{{ route('newsletter.unsubscribe', ['trilheiro' => $trilheiro->id_trilheiro_tri, 'token' => $token]) }}" method="POST">
