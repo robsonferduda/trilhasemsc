@@ -142,7 +142,7 @@ class TrilheiroController extends Controller
                 $temFiltros = true;
             }
             
-            if ($request->has('newsletter') && $request->newsletter !== '') {
+            if ($request->filled('newsletter')) {
                 $query->where('fl_newsletter_tri', $request->newsletter == '1');
                 $temFiltros = true;
             }
