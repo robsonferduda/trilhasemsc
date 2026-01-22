@@ -46,7 +46,18 @@ class EventoController extends Controller
     public function listar()
     {
         $guia = Guia::where('id_user', Auth::user()->id)->first();
-        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)->orderBy('dt_realizacao_eve')->get();
+        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)
+            ->withCount('eventoTrilheiros as participantes_count')
+            ->orderBy('dt_realizacao_eve')
+            ->get();
+
+        // Adiciona contagem de vezes que cada evento foi oferecido
+        foreach ($eventos as $evento) {
+            $idBase = $evento->id_unico_eve ?: $evento->id_evento_eve;
+            $evento->vezes_oferecido = Evento::where('id_unico_eve', $idBase)
+                ->where('id_guia_gui', $guia->id_guia_gui)
+                ->count();
+        }
 
         return view('admin/eventos/listar', compact('guia','eventos'));
     }
@@ -258,7 +269,7 @@ class EventoController extends Controller
 
         return redirect('guia-e-condutores/privado/eventos');
     }
-    
+
     /**
      * Clona um evento existente
      * 

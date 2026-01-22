@@ -41,6 +41,13 @@
                                         <p class="mb-1"><strong>Local</strong>: {{ $evento->local->nm_cidade_cde }}</p>
                                         <p class="mb-1"><strong>Data</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y') }}</p>
                                         <p class="mb-1"><strong>Valor</strong>: {{ ($evento->valor_eve) ? "R$ ".$evento->valor_eve : 'Gratuita' }}</p>
+                                        <p class="mb-1">
+                                            <strong>Participantes</strong>: 
+                                            <span class="badge badge-info">{{ $evento->participantes_count }}</span>
+                                            &nbsp;|&nbsp;
+                                            <strong>Vezes oferecido</strong>: 
+                                            <span class="badge badge-success">{{ $evento->vezes_oferecido }}x</span>
+                                        </p>
                                         <div style="position: absolute; bottom: 1px; right: 10px;">
                                             <a href="{{ url('guia-e-condutores/privado/eventos/participantes', $evento->id_evento_eve) }}" class="btn btn-outline-danger btn-sm"><i class="fa fa-users"></i> Participantes</a>
                                             <a href="{{ url('eventos/' . ($evento->slug_eve ?: $evento->id_evento_eve)) }}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye"></i> Ver</a>
