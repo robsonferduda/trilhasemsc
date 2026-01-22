@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-3 col-sm-12 center">
-                                <h2 class="mb-0">{{ $trilheiro->nr_score_tri }}</h2>
+                                <h2 class="mb-0 mt-5">{{ $trilheiro->nr_score_tri }}</h2>
                                 <span>{{ $trilheiro->indice->ds_indice_ind }}</span>
                                 <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Foto de Perfil">
                             </div>
