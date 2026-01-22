@@ -43,10 +43,10 @@
                                         <p class="mb-1"><strong>Valor</strong>: {{ ($evento->valor_eve) ? "R$ ".$evento->valor_eve : 'Gratuita' }}</p>
                                         <p class="mb-1">
                                             <strong>Participantes</strong>: 
-                                            <span class="badge badge-info">{{ $evento->participantes_count }}</span>
+                                            <span class="badge badge-info">{{ $evento->participantes_count ?? 0 }}</span>
                                             &nbsp;|&nbsp;
                                             <strong>Vezes oferecido</strong>: 
-                                            <span class="badge badge-success">{{ $evento->vezes_oferecido }}x</span>
+                                            <span class="badge badge-success">{{ $evento->vezes_oferecido ?? 1 }}x</span>
                                         </p>
                                         <div style="position: absolute; bottom: 1px; right: 10px;">
                                             <a href="{{ url('guia-e-condutores/privado/eventos/participantes', $evento->id_evento_eve) }}" class="btn btn-outline-danger btn-sm"><i class="fa fa-users"></i> Participantes</a>

@@ -53,8 +53,14 @@ class EventoController extends Controller
 
         // Adiciona contagem de vezes que cada evento foi oferecido
         foreach ($eventos as $evento) {
-            $idBase = $evento->id_unico_eve ?: $evento->id_evento_eve;
-            $evento->vezes_oferecido = Evento::where('id_unico_eve', $idBase)
+            // Define o ID base para buscar eventos relacionados
+            $idBase = !empty($evento->id_unico_eve) ? $evento->id_unico_eve : $evento->id_evento_eve;
+            
+            // Conta quantos eventos compartilham o mesmo id_unico_eve
+            $evento->vezes_oferecido = Evento::where(function($query) use ($idBase) {
+                    $query->where('id_unico_eve', $idBase)
+                          ->orWhere('id_evento_eve', $idBase);
+                })
                 ->where('id_guia_gui', $guia->id_guia_gui)
                 ->count();
         }
