@@ -88,9 +88,6 @@
         <div id="lista-trilheiros">
             <!-- Conteúdo carregado via AJAX -->
         </div>
-        <div id="paginacao" class="text-center mt-3">
-            <!-- Paginação carregada via AJAX -->
-        </div>
     </div>       
 </div>
 @endsection
@@ -117,7 +114,7 @@ $(document).ready(function() {
     });
     
     // Paginação
-    $(document).on('click', '#paginacao .pagination a', function(e) {
+    $(document).on('click', '#lista-trilheiros .pagination a', function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
         carregarTrilheiros(url);
@@ -146,7 +143,6 @@ $(document).ready(function() {
                 
                 if(response.success) {
                     $('#lista-trilheiros').html(response.html);
-                    $('#paginacao').html(response.pagination);
                 } else {
                     alert('Erro: ' + (response.message || 'Resposta inválida'));
                 }

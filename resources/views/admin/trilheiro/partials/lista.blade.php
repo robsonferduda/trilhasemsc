@@ -1,3 +1,10 @@
+<!-- Paginação superior -->
+<div class="row mb-3">
+    <div class="col-12 text-center">
+        {{ $trilheiros->links() }}
+    </div>
+</div>
+
 <div class="row clearfix">
     @forelse($trilheiros as $trilheiro)
         <div class="col-lg-12 col-md-12 col-sm-12">
@@ -59,4 +66,11 @@
             </div>
         </div>
     @endforelse
+</div>
+
+<!-- Paginação inferior -->
+<div class="row mt-3">
+    <div class="col-12 text-center">
+        {{ $trilheiros->links() }}
+    </div>
 </div>
