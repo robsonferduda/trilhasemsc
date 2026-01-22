@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notificação de Descadastro</title>
+    <title>Notificação de Cancelamento de Notificações</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -81,10 +81,10 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔔 Notificação de Descadastro</h1>
+            <h1>🔔 Notificação de Cancelamento de Notificações</h1>
         </div>
 
-        <p style="font-size: 16px; margin-bottom: 20px;">Um trilheiro se descadastrou da newsletter.</p>
+        <p style="font-size: 16px; margin-bottom: 20px;">Um trilheiro cancelou as notificações.</p>
 
         <h2 style="color: #333; font-size: 18px; margin-top: 25px;">Dados do Trilheiro</h2>
         
@@ -106,7 +106,7 @@
                 {{ \Carbon\Carbon::parse($trilheiro->created_at)->format('d/m/Y H:i') }}
             </div>
             <div class="info-row">
-                <span class="info-label">Descadastrado em:</span>
+                <span class="info-label">Cancelado em:</span>
                 {{ now()->format('d/m/Y H:i') }}
             </div>
             @if($trilheiro->user->dt_last_login)

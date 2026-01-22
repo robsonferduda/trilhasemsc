@@ -34,7 +34,7 @@ class NewsletterUnsubscribeNotification extends Mailable
      */
     public function build()
     {
-        return $this->subject('🔔 Descadastro de Newsletter - ' . $this->trilheiro->nm_trilheiro_tri)
+        return $this->subject('🔔 Cancelamento de Notificações - ' . $this->trilheiro->nm_trilheiro_tri)
                     ->view('emails.admin.newsletter-unsubscribe-notification');
     }
 }
