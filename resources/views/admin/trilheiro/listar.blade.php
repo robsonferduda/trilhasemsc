@@ -39,9 +39,9 @@
                                 <p class="mb-2 text-center mt-2 mb-0"><i class="fa fa-star text-warning" aria-hidden="true"></i> <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong> XP</p>
                                 <p class="text-center mb-0">
                                     @if($trilheiro->fl_newsletter_tri)
-                                        <i class="fa fa-bell text-success" aria-hidden="true" title="Newsletter ativa"></i>
+                                        <i class="fa fa-bell text-success" aria-hidden="true" title="Newsletter ativa"> Ativadas</i>
                                     @else
-                                        <i class="fa fa-bell-slash text-muted" aria-hidden="true" title="Newsletter inativa"></i>
+                                        <i class="fa fa-bell-slash text-muted" aria-hidden="true" title="Newsletter inativa"> Desativadas</i>
                                     @endif
                                 </p>
                             </div>
