@@ -17,7 +17,6 @@ use App\Questionario;
 use App\Mail\GuiaConfirmacao;
 use App\UnidadeConservacao;
 use App\Mail\GuiaModeracao;
-use App\Mail\BoasVindasTrilheiro;
 use App\TrilheiroTrilha;
 use App\User;
 use Auth;
@@ -96,7 +95,7 @@ class TrilheiroController extends Controller
         return view('trilheiro/score', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'elevacoes' => $elevacoes, 'distancias' => $distancias, 'questionario' => $questionario, 'corridas' => $corridas]);
     }
 
-    public function listar()
+    public function listar(Request $request)
     {
         if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
             return redirect('login');
@@ -105,9 +104,60 @@ class TrilheiroController extends Controller
         $page_name = "Guias e Condutores em Santa Catarina";
         $titulo = 'Guias e Condutores';
         
-        $trilheiros = Trilheiro::orderBy('created_at','DESC')->get();
+        // Primeira carga - apenas estrutura
+        $trilheiros = collect();
 
         return view('admin/trilheiro/listar', ['page_name' => $page_name, 'trilheiros' => $trilheiros]);
+    }
+
+    public function listarAjax(Request $request)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        try {
+            $query = Trilheiro::with(['user', 'origem', 'indice']);
+            
+            // Filtros de busca
+            if ($request->has('nome') && $request->nome) {
+                $query->where('nm_trilheiro_tri', 'ILIKE', '%' . $request->nome . '%');
+            }
+            
+            if ($request->has('email') && $request->email) {
+                $query->whereHas('user', function($q) use ($request) {
+                    $q->where('email', 'ILIKE', '%' . $request->email . '%');
+                });
+            }
+            
+            if ($request->has('cidade') && $request->cidade) {
+                $query->whereHas('origem', function($q) use ($request) {
+                    $q->where('nm_cidade_cde', 'ILIKE', '%' . $request->cidade . '%');
+                });
+            }
+            
+            if ($request->has('newsletter') && $request->newsletter !== '') {
+                $query->where('fl_newsletter_tri', $request->newsletter == '1');
+            }
+            
+            $trilheiros = $query->orderBy('created_at','DESC')->paginate(10);
+            
+            return response()->json([
+                'success' => true,
+                'html' => view('admin/trilheiro/partials/lista', compact('trilheiros'))->render(),
+                'pagination' => $trilheiros->links('vendor.pagination.bootstrap-4')->render()
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Erro ao carregar trilheiros AJAX', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function atualizarCadastro(Request $request)
@@ -126,9 +176,6 @@ class TrilheiroController extends Controller
                 'id_user' => Auth::user()->id,
                 'nm_trilheiro_tri' => Auth::user()->name
             ]);
-            
-            // Carrega o relacionamento user
-            $trilheiro->load('user');
             
             $trilheiroNovo = true;
         }
@@ -195,25 +242,6 @@ class TrilheiroController extends Controller
             }*/
 
             Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $trilheiro->id_trilheiro_tri.'.jpg']);
-
-            // Envia email de boas-vindas se for um novo trilheiro
-            if ($trilheiroNovo) {
-                try {
-                    Mail::to(Auth::user()->email)->send(new BoasVindasTrilheiro($trilheiro));
-                    
-                    \Log::info('Email de boas-vindas enviado com sucesso', [
-                        'trilheiro_id' => $trilheiro->id_trilheiro_tri,
-                        'user_email' => Auth::user()->email,
-                        'timestamp' => now()
-                    ]);
-                } catch (\Exception $e) {
-                    \Log::error('Erro ao enviar email de boas-vindas', [
-                        'error' => $e->getMessage(),
-                        'trilheiro_id' => $trilheiro->id_trilheiro_tri,
-                        'user_email' => Auth::user()->email,
-                    ]);
-                }
-            }
 
             // Envia email de notificação para o administrador
             $tipoNotificacao = $trilheiroNovo ? 'Novo Trilheiro' : 'Atualização de Cadastro';
@@ -439,46 +467,6 @@ class TrilheiroController extends Controller
         }])->orderBy('nm_cidade_cde')->get();
       
         return view('trilheiro/trilhas', compact('cidades', 'trilhasTrilheiro', 'trilheiro'));
-    }
-
-    /**
-     * Envia email de boas-vindas para teste (área administrativa)
-     * 
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function enviarEmailBoasVindas($id)
-    {
-        try {
-            $trilheiro = Trilheiro::with("user")->findOrFail($id);
-            
-            if (!$trilheiro->user) {
-                Flash::error("Trilheiro não possui usuário associado.");
-                return redirect()->back();
-            }
-
-            Mail::to($trilheiro->user->email)->send(new BoasVindasTrilheiro($trilheiro));
-            
-            \Log::info("Email de boas-vindas enviado via admin", [
-                "trilheiro_id" => $trilheiro->id_trilheiro_tri,
-                "user_email" => $trilheiro->user->email,
-                "admin_user_id" => Auth::user()->id,
-                "timestamp" => now()
-            ]);
-            
-            Flash::success("Email de boas-vindas enviado com sucesso para " . $trilheiro->user->email);
-            
-        } catch (\Exception $e) {
-            \Log::error("Erro ao enviar email de boas-vindas via admin", [
-                "error" => $e->getMessage(),
-                "trilheiro_id" => $id,
-                "admin_user_id" => Auth::user()->id,
-            ]);
-            
-            Flash::error("Erro ao enviar email: " . $e->getMessage());
-        }
-        
-        return redirect()->back();
     }
 
 }
