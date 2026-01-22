@@ -31,6 +31,7 @@ class EventoController extends Controller
         $page_name = "Eventos e Trilhas em Santa Catarina";
         $eventos = Evento::where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))
             ->where('fl_ativo_eve',true)
+            ->where('fl_privado_eve', false)
             ->where(function($query) {
                 $query->where('fl_privado_eve', false)
                       ->orWhereNull('fl_privado_eve');
