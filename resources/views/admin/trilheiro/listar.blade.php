@@ -34,11 +34,18 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="row p-3">
-                            <div class="col-lg-1 col-md-2 col-sm-12">
+                            <div class="col-lg-2 col-md-3 col-sm-12">
                                 <a href="{{ url('admin/trilheiro/perfil/'.$trilheiro->id_trilheiro_tri) }}"><img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('images/user.png') }}" class="rounded-circle user-photo w-100" alt="Foto de Perfil"></a>
                                 <p class="mb-2 text-center mt-2 mb-0"><i class="fa fa-star text-warning" aria-hidden="true"></i> <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong> XP</p>
+                                <p class="text-center mb-0">
+                                    @if($trilheiro->fl_newsletter_tri)
+                                        <i class="fa fa-bell text-success" aria-hidden="true" title="Newsletter ativa"></i>
+                                    @else
+                                        <i class="fa fa-bell-slash text-muted" aria-hidden="true" title="Newsletter inativa"></i>
+                                    @endif
+                                </p>
                             </div>
-                            <div class="col-lg-10 col-md-8 col-sm-12">
+                            <div class="col-lg-8 col-md-9 col-sm-12">
                                 <div class="row">
                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                         <div class="text" style="font-size: 16px;">{{ $trilheiro->nm_trilheiro_tri }}</div>
@@ -66,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-2 col-sm-12 center">
+                            <div class="col-lg-2 col-md-3 col-sm-12 center">
                                 <h2 class="mb-0">{{ $trilheiro->nr_score_tri }}</h2>
                                 <span>{{ $trilheiro->indice->ds_indice_ind }}</span>
                                 <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Foto de Perfil">
