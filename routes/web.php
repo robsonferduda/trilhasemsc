@@ -154,7 +154,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('guias/aprovar', 'GuiaController@aprovar');
         Route::get('guias/listar', 'GuiaController@listar');
 
-        Route::get('trilheiros/listar', 'TrilheiroController@listar');
+        Route::get('trilheiros/listar', 'TrilheiroController@listar')->name('admin.trilheiros.listar');
         Route::get('trilheiro/perfil/{id}', 'TrilheiroController@show');
         Route::post('trilheiro/{id}/enviar-email-boas-vindas', 'TrilheiroController@enviarEmailBoasVindas')->name('admin.trilheiro.enviar-email');
 

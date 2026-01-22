@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
- <div class="block-header">
+<div class="block-header">
     <div class="row">
         <div class="col-lg-5 col-md-8 col-sm-12">                        
             <h2 class="mb-2"><i class="fa fa-dashboard"></i> Dashboard</h2>
@@ -27,64 +27,122 @@
 </div>
 @endif
 
-<div class="row clearfix">
-    <div class="col-lg-12 col-md-12">
-        <div class="row clearfix">
-            @forelse($trilheiros as $trilheiro)
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="row p-3">
-                            <div class="col-lg-2 col-md-3 col-sm-12">
-                                <a href="{{ url('admin/trilheiro/perfil/'.$trilheiro->id_trilheiro_tri) }}"><img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('images/user.png') }}" class="rounded-circle user-photo w-100" alt="Foto de Perfil"></a>
-                                <p class="mb-2 text-center mt-2 mb-0"><i class="fa fa-star text-warning" aria-hidden="true"></i> <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong> XP</p>
-                                <p class="text-center mb-0">
-                                    @if($trilheiro->fl_newsletter_tri)
-                                        <i class="fa fa-bell text-success" aria-hidden="true" title="Newsletter ativa"> Ativadas</i>
-                                    @else
-                                        <i class="fa fa-bell-slash text-muted" aria-hidden="true" title="Newsletter inativa"> Desativadas</i>
-                                    @endif
-                                </p>
+<!-- Filtros de Busca -->
+<div class="row clearfix mb-3">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title"><i class="fa fa-filter"></i> Filtros de Busca</h6>
+            </div>
+            <div class="card-body">
+                <form id="form-filtros">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" class="form-control" name="nome" id="filtro-nome" placeholder="Nome do trilheiro">
                             </div>
-                            <div class="col-lg-8 col-md-9 col-sm-12">
-                                <div class="row">
-                                    <div class="col-lg-9 col-md-9 col-sm-12">
-                                        <div class="text" style="font-size: 16px;">{{ $trilheiro->nm_trilheiro_tri }}</div>
-                                        <p class="mt-2 mb-2"><strong>E-mail:</strong> <a href="mailto:{{ $trilheiro->user->email }}">{{ $trilheiro->user->email }}</a></p>
-                                        <p class="mb-2"><strong>Cidade de Origem</strong>: {!! ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '<span class="text-danger">Não Informada</span>' !!}</p>
-                                        <p class="mb-2"><strong>Data de Nascimento</strong>: {{ ($trilheiro->dt_nascimento) ? \Carbon\Carbon::parse($trilheiro->dt_nascimento)->format('d/m/Y').' - '.\Carbon\Carbon::parse($trilheiro->dt_nascimento)->age.' Anos' : 'Não Informada' }}</p>
-                                        <p class="mb-2">Cadastro realizado em {{ \Carbon\Carbon::parse($trilheiro->created_at)->format('d/m/Y H:i:s') }}</p>
-                                        <p class="mb-2">
-                                            <strong>Último Login:</strong> 
-                                            @if($trilheiro->user->dt_last_login)
-                                                {{ \Carbon\Carbon::parse($trilheiro->user->dt_last_login)->format('d/m/Y H:i:s') }} 
-                                                <span class="text-muted">({{ \Carbon\Carbon::parse($trilheiro->user->dt_last_login)->diffForHumans() }})</span>
-                                            @else
-                                                <span class="text-warning">Nenhum login registrado</span>
-                                            @endif
-                                        </p>
-                                        <div class="mt-3">
-                                            <form action="{{ route('admin.trilheiro.enviar-email', $trilheiro->id_trilheiro_tri) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-info" title="Enviar email de boas-vindas para teste">
-                                                    <i class="fa fa-envelope"></i> Enviar Email de Teste
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>E-mail</label>
+                                <input type="text" class="form-control" name="email" id="filtro-email" placeholder="E-mail">
                             </div>
-                            <div class="col-lg-2 col-md-3 col-sm-12 center">
-                                <h2 class="mb-0 mt-5">{{ $trilheiro->nr_score_tri }}</h2>
-                                <span>{{ $trilheiro->indice->ds_indice_ind }}</span>
-                                <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Foto de Perfil">
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Cidade</label>
+                                <input type="text" class="form-control" name="cidade" id="filtro-cidade" placeholder="Cidade">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Newsletter</label>
+                                <select class="form-control" name="newsletter" id="filtro-newsletter">
+                                    <option value="">Todas</option>
+                                    <option value="1">Ativas</option>
+                                    <option value="0">Inativas</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                </div>
-            @empty
-                <h6 class="text-danger">Nenhum trilheiro cadastrado</h6>
-            @endforelse
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                            <button type="button" class="btn btn-warning" id="btn-limpar"><i class="fa fa-refresh"></i> Limpar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-	</div>       
+    </div>
 </div>
+
+<!-- Lista de Trilheiros -->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12">
+        <div id="loading" class="text-center" style="display: none;">
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
+            <p>Carregando...</p>
+        </div>
+        <div id="lista-trilheiros">
+            <!-- Conteúdo carregado via AJAX -->
+        </div>
+        <div id="paginacao" class="text-center mt-3">
+            <!-- Paginação carregada via AJAX -->
+        </div>
+    </div>       
+</div>
+@endsection
+
+@section('scripts')
+<script>
+$(document).ready(function() {
+    // Carrega dados iniciais
+    carregarTrilheiros();
+    
+    // Buscar ao submeter formulário
+    $('#form-filtros').on('submit', function(e) {
+        e.preventDefault();
+        carregarTrilheiros();
+    });
+    
+    // Limpar filtros
+    $('#btn-limpar').on('click', function() {
+        $('#form-filtros')[0].reset();
+        carregarTrilheiros();
+    });
+    
+    // Paginação
+    $(document).on('click', '#paginacao .pagination a', function(e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        carregarTrilheiros(url);
+    });
+    
+    function carregarTrilheiros(url) {
+        url = url || '{{ route("admin.trilheiros.listar") }}';
+        
+        $('#loading').show();
+        $('#lista-trilheiros').html('');
+        
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: $('#form-filtros').serialize(),
+            dataType: 'json',
+            success: function(response) {
+                $('#loading').hide();
+                $('#lista-trilheiros').html(response.html);
+                $('#paginacao').html(response.pagination);
+            },
+            error: function(xhr) {
+                $('#loading').hide();
+                alert('Erro ao carregar trilheiros. Tente novamente.');
+                console.error(xhr);
+            }
+        });
+    }
+});
+</script>
 @endsection
