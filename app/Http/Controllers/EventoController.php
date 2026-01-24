@@ -47,12 +47,15 @@ class EventoController extends Controller
     {
         $guia = Guia::where('id_user', Auth::user()->id)->first();
         $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)
-            ->withCount('eventoTrilheiros as participantes_count')
+            ->with(['eventoTrilheiros', 'trilheiros'])
             ->orderBy('dt_realizacao_eve')
             ->get();
 
-        // Adiciona contagem de vezes que cada evento foi oferecido
+        // Adiciona contagem de participantes e vezes oferecido para cada evento
         foreach ($eventos as $evento) {
+            // Conta participantes deste evento específico
+            $evento->participantes_count = $evento->eventoTrilheiros->count();
+            
             // Define o ID base para buscar eventos relacionados
             $idBase = !empty($evento->id_unico_eve) ? $evento->id_unico_eve : $evento->id_evento_eve;
             
