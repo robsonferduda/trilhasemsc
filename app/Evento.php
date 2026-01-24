@@ -47,14 +47,6 @@ class Evento extends Model
             }
         });
 
-        // Define id_unico_eve após criar o evento (se não foi definido manualmente)
-        static::created(function ($evento) {
-            if (empty($evento->id_unico_eve)) {
-                $evento->id_unico_eve = $evento->id_evento_eve;
-                $evento->save();
-            }
-        });
-
         // Atualiza slug se o nome do evento mudar
         static::updating(function ($evento) {
             if ($evento->isDirty('nm_evento_eve')) {

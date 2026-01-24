@@ -56,16 +56,19 @@ class EventoController extends Controller
             // Conta participantes deste evento específico
             $evento->participantes_count = $evento->eventoTrilheiros->count();
             
-            // Define o ID base para buscar eventos relacionados
-            $idBase = !empty($evento->id_unico_eve) ? $evento->id_unico_eve : $evento->id_evento_eve;
-            
-            // Conta quantos eventos compartilham o mesmo id_unico_eve
-            $evento->vezes_oferecido = Evento::where(function($query) use ($idBase) {
-                    $query->where('id_unico_eve', $idBase)
-                          ->orWhere('id_evento_eve', $idBase);
-                })
-                ->where('id_guia_gui', $guia->id_guia_gui)
-                ->count();
+            // Verifica se este evento é original (sem id_unico_eve) ou clone (com id_unico_eve)
+            if (empty($evento->id_unico_eve)) {
+                // Evento original: conta ele mesmo (1) + todos os clones que apontam para ele
+                $evento->vezes_oferecido = 1 + Evento::where('id_guia_gui', $guia->id_guia_gui)
+                    ->where('id_unico_eve', $evento->id_evento_eve)
+                    ->count();
+            } else {
+                // Evento clonado: conta o original + todos os clones (incluindo este)
+                $evento->vezes_oferecido = 1 + Evento::where('id_guia_gui', $guia->id_guia_gui)
+                    ->where('id_unico_eve', $evento->id_unico_eve)
+                    ->where('id_evento_eve', '!=', $evento->id_evento_eve)
+                    ->count();
+            }
         }
 
         return view('admin/eventos/listar', compact('guia','eventos'));
