@@ -96,6 +96,8 @@ class GuiaController extends Controller
                        'id_guia_gui' => $guia->id_guia_gui);
 
         Interacao::create($dados);
+        
+        Flash::warning('Você está sendo redirecionado...');
 
         return redirect($url);
     }
