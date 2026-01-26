@@ -70,6 +70,8 @@ class GuiaController extends Controller
             $guia = Guia::where('nm_instagram_gui', $identificador)->first();
 
         if(!$guia){
+            Flash::warning('Perfil não encontrado.');
+
             return redirect('guias-e-condutores');
         }
 
