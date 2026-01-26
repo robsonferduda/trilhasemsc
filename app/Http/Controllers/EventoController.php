@@ -31,6 +31,11 @@ class EventoController extends Controller
         $page_name = "Eventos e Trilhas em Santa Catarina";
         $eventos = Evento::where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))
             ->where('fl_ativo_eve',true)
+            ->where('fl_privado_eve', false)
+            ->where(function($query) {
+                $query->where('fl_privado_eve', false)
+                      ->orWhereNull('fl_privado_eve');
+            })
             ->orderBy('dt_realizacao_eve','ASC')->get();
 
         $cidades = Cidade::whereIn('cd_cidade_cde', Evento::select('cd_cidade_cde')->get())->orderBy('nm_cidade_cde')->select('cd_cidade_cde', 'nm_cidade_cde')->get();
@@ -41,7 +46,30 @@ class EventoController extends Controller
     public function listar()
     {
         $guia = Guia::where('id_user', Auth::user()->id)->first();
-        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)->orderBy('dt_realizacao_eve')->get();
+        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)
+            ->with(['eventoTrilheiros', 'trilheiros'])
+            ->orderBy('dt_realizacao_eve')
+            ->get();
+
+        // Adiciona contagem de participantes e vezes oferecido para cada evento
+        foreach ($eventos as $evento) {
+            // Conta participantes deste evento específico
+            $evento->participantes_count = $evento->eventoTrilheiros->count();
+            
+            // Verifica se este evento é original (sem id_unico_eve) ou clone (com id_unico_eve)
+            if (empty($evento->id_unico_eve)) {
+                // Evento original: conta ele mesmo (1) + todos os clones que apontam para ele
+                $evento->vezes_oferecido = 1 + Evento::where('id_guia_gui', $guia->id_guia_gui)
+                    ->where('id_unico_eve', $evento->id_evento_eve)
+                    ->count();
+            } else {
+                // Evento clonado: conta o original + todos os clones (incluindo este)
+                $evento->vezes_oferecido = 1 + Evento::where('id_guia_gui', $guia->id_guia_gui)
+                    ->where('id_unico_eve', $evento->id_unico_eve)
+                    ->where('id_evento_eve', '!=', $evento->id_evento_eve)
+                    ->count();
+            }
+        }
 
         return view('admin/eventos/listar', compact('guia','eventos'));
     }
@@ -182,6 +210,7 @@ class EventoController extends Controller
                         'total_participantes_eve' => $request->total_participantes_eve,
                         'descricao' => $request->descricao,                           
                         'fl_ativo_eve' => null,
+                        'fl_privado_eve' => $request->has('fl_privado_eve') ? true : false,
                         'hora_inicio_eve' => $request->hora_inicio_eve,
                         'hora_fim_eve' => $request->hora_fim_eve);
 
@@ -230,6 +259,7 @@ class EventoController extends Controller
         $evento->total_participantes_eve = $request->total_participantes_eve;
         $evento->descricao = $request->descricao;                           
         $evento->fl_ativo_eve = null;
+        $evento->fl_privado_eve = $request->has('fl_privado_eve') ? true : false;
         $evento->hora_inicio_eve = $request->hora_inicio_eve;
         $evento->hora_fim_eve = $request->hora_fim_eve;
 
@@ -250,5 +280,39 @@ class EventoController extends Controller
         $evento->save();
 
         return redirect('guia-e-condutores/privado/eventos');
+    }
+
+    /**
+     * Clona um evento existente
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function clonar($id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != "GUIA") {
+            return redirect("login");
+        }
+        
+        $guia = Guia::where("id_user", Auth::user()->id)->first();
+        $evento = Evento::where("id_evento_eve", $id)
+                        ->where("id_guia_gui", $guia->id_guia_gui)
+                        ->first();
+
+        if (!$evento) {
+            Flash::error("Evento não encontrado ou você não tem permissão para cloná-lo.");
+            return redirect("guia-e-condutores/privado/eventos");
+        }
+
+        try {
+            $novoEvento = $evento->clonar();
+            
+            Flash::success("Evento clonado com sucesso! Edite as informações necessárias.");
+            return redirect("guia-e-condutores/privado/evento/editar/" . $novoEvento->id_evento_eve);
+            
+        } catch (\Exception $e) {
+            Flash::error("Erro ao clonar evento: " . $e->getMessage());
+            return redirect("guia-e-condutores/privado/eventos");
+        }
     }
 }

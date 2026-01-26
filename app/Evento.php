@@ -27,7 +27,9 @@ class Evento extends Model
                             'ds_imagem_horizontal_eve',
                             'fl_ativo_eve',
                             'hora_inicio_eve',
-                            'hora_fim_eve'];
+                            'hora_fim_eve',
+                            'fl_privado_eve',
+                            'id_unico_eve'];
                             
     public $timestamps = true;
 
@@ -75,10 +77,10 @@ class Evento extends Model
             }
         }
         
-        // Inclui a data no slug (formato: dia-mes-ano ou apenas dia-mes)
+        // Inclui a data no slug (formato: dia-mes-ano)
         if ($this->dt_realizacao_eve) {
-            $data = date('d-M', strtotime($this->dt_realizacao_eve));
-            $slug = $slug . '-' . strtolower($data);
+            $data = date('d-m-Y', strtotime($this->dt_realizacao_eve));
+            $slug = $slug . '-' . $data;
         }
         
         $originalSlug = $slug;
@@ -138,5 +140,64 @@ class Evento extends Model
     public function trilheiros()
     {
         return $this->belongsToMany(Trilheiro::class, 'evento_trilheiro_evt', 'id_evento_eve', 'id_trilheiro_tri');
+    }
+
+    /**
+     * Clona o evento atual criando uma nova cópia
+     * O novo evento mantém o id_unico_eve do evento original
+     * Se este evento já é um clone, usa seu id_unico_eve (que aponta para o original)
+     * Se este evento é o original, usa seu próprio id_evento_eve
+     * 
+     * @return Evento
+     */
+    public function clonar()
+    {
+        // Cria uma cópia do evento
+        $novoEvento = $this->replicate();
+        
+        // Reseta campos que não devem ser copiados
+        $novoEvento->slug_eve = null; // Será gerado automaticamente
+        $novoEvento->fl_ativo_eve = null; // Novo evento inicia como inativo (aguardando aprovação)
+        
+        // Define o id_unico_eve: 
+        // Se este evento já tem id_unico_eve (é um clone), usa esse valor para manter a referência ao original
+        // Caso contrário, usa o id deste evento (que será o primeiro da série)
+        $novoEvento->id_unico_eve = !empty($this->id_unico_eve) ? $this->id_unico_eve : $this->id_evento_eve;
+        
+        // Adiciona sufixo ao nome para identificar como cópia
+        $novoEvento->nm_evento_eve = $this->nm_evento_eve . " (Cópia)";
+        
+        // Salva o novo evento
+        $novoEvento->save();
+        
+        return $novoEvento;
+    }
+
+    /**
+     * Retorna o evento original (primeiro da série)
+     * 
+     * @return Evento|null
+     */
+    public function eventoOriginal()
+    {
+        if ($this->id_unico_eve && $this->id_unico_eve != $this->id_evento_eve) {
+            return static::find($this->id_unico_eve);
+        }
+        
+        return null;
+    }
+
+    /**
+     * Retorna todos os eventos clonados a partir deste
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function eventosClonados()
+    {
+        $idBase = $this->id_unico_eve ?: $this->id_evento_eve;
+        
+        return static::where("id_unico_eve", $idBase)
+            ->where("id_evento_eve", "!=", $this->id_evento_eve)
+            ->get();
     }
 }
