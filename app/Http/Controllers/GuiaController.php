@@ -69,6 +69,10 @@ class GuiaController extends Controller
         else
             $guia = Guia::where('nm_instagram_gui', $identificador)->first();
 
+        if(!$guia){
+            return redirect('guias-e-condutores');
+        }
+
         $fone = ($guia->fone) ? preg_replace('/[(\)\-\" "]+/', '', $guia->fone->nu_fone_fon) : '';
 
         switch ($tipo) {
