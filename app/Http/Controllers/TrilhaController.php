@@ -267,6 +267,11 @@ class TrilhaController extends Controller
         if (!empty($cidade)) {
 
             $objCidade = Cidade::whereRaw("unaccent(replace(lower(nm_cidade_cde),' ','-')) = '".$cidade."'")->where('cd_estado_est', 42)->first();
+            
+            if (!$objCidade) {
+                abort(404, 'Cidade não encontrada');
+            }
+
             $idCidade = $objCidade->cd_cidade_cde;
 
             $page_name = "Trilhas em ".$objCidade->nm_cidade_cde;
