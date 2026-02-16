@@ -62,7 +62,7 @@
                 @if($evento->trilheiros && $evento->trilheiros->count())
                     <div class="col-lg-12 col-md-12 mt-3">
                         <h5 class="text-left mb-3">Participantes</h5>
-                        <div class="d-flex flex-wrap justify-content-start align-items-start">
+                        <div class="d-flex flex-wrap justify-content-start align-items-start" style="margin-right: 10px;">
                             @foreach($evento->trilheiros as $participante)
                                 @php
                                     $fotoPerfil = $participante->nm_path_foto_tri ?: optional($participante->user)->dc_foto_perfil;
