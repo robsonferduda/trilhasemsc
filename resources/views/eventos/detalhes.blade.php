@@ -61,19 +61,23 @@
 
                 @if($evento->trilheiros && $evento->trilheiros->count())
                     <div class="col-lg-12 col-md-12 mt-3">
-                        <h5 class="text-center">Participantes</h5>
-                        <div class="d-flex flex-wrap justify-content-center align-items-center">
+                        <h5 class="text-left mb-3">Participantes</h5>
+                        <div class="d-flex flex-wrap justify-content-start align-items-start">
                             @foreach($evento->trilheiros as $participante)
                                 @php
                                     $fotoPerfil = $participante->nm_path_foto_tri ?: optional($participante->user)->dc_foto_perfil;
+                                    $primeiroNome = explode(' ', trim($participante->nm_trilheiro_tri))[0];
                                 @endphp
 
                                 @if($fotoPerfil)
-                                    <img
-                                        class="avatar avatar-lg shadow rounded-circle m-1"
-                                        src="{{ asset('img/trilheiros/'.$fotoPerfil) }}"
-                                        alt="Foto de perfil"
-                                    >
+                                    <div class="text-center mr-3 mb-3">
+                                        <img
+                                            class="avatar avatar-lg shadow rounded-circle"
+                                            src="{{ asset('img/trilheiros/'.$fotoPerfil) }}"
+                                            alt="Foto de perfil {{ $primeiroNome }}"
+                                        >
+                                        <div class="mt-1">{{ $primeiroNome }}</div>
+                                    </div>
                                 @endif
                             @endforeach
                         </div>
