@@ -62,17 +62,18 @@
                 @if($evento->trilheiros && $evento->trilheiros->count())
                     <div class="col-lg-12 col-md-12 mt-3">
                         <h5 class="text-left mb-3">Participantes</h5>
-                        <div class="d-flex flex-wrap justify-content-start align-items-start" style="margin-right: 10px;">
+                        <div class="d-flex flex-wrap justify-content-start align-items-start">
                             @foreach($evento->trilheiros as $participante)
                                 @php
                                     $fotoPerfil = $participante->nm_path_foto_tri ?: optional($participante->user)->dc_foto_perfil;
-                                    $fotoPerfilUrl = $fotoPerfil
+                                    $caminhoFotoPerfil = $fotoPerfil ? public_path('img/trilheiros/'.$fotoPerfil) : null;
+                                    $fotoPerfilUrl = ($caminhoFotoPerfil && file_exists($caminhoFotoPerfil))
                                         ? asset('img/trilheiros/'.$fotoPerfil)
                                         : asset('img/usuarios/perfil.png');
                                     $primeiroNome = explode(' ', trim($participante->nm_trilheiro_tri))[0];
                                 @endphp
 
-                                <div class="text-center mr-3 mb-3">
+                                <div class="text-center mr-3 mb-3" style="margin-right: 10px;">
                                     <img
                                         class="avatar avatar-lg shadow rounded-circle"
                                         src="{{ $fotoPerfilUrl }}"
