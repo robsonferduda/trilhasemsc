@@ -66,19 +66,20 @@
                             @foreach($evento->trilheiros as $participante)
                                 @php
                                     $fotoPerfil = $participante->nm_path_foto_tri ?: optional($participante->user)->dc_foto_perfil;
+                                    $fotoPerfilUrl = $fotoPerfil
+                                        ? asset('img/trilheiros/'.$fotoPerfil)
+                                        : asset('img/usuarios/perfil.png');
                                     $primeiroNome = explode(' ', trim($participante->nm_trilheiro_tri))[0];
                                 @endphp
 
-                                @if($fotoPerfil)
-                                    <div class="text-center mr-3 mb-3">
-                                        <img
-                                            class="avatar avatar-lg shadow rounded-circle"
-                                            src="{{ asset('img/trilheiros/'.$fotoPerfil) }}"
-                                            alt="Foto de perfil {{ $primeiroNome }}"
-                                        >
-                                        <div class="mt-1">{{ $primeiroNome }}</div>
-                                    </div>
-                                @endif
+                                <div class="text-center mr-3 mb-3">
+                                    <img
+                                        class="avatar avatar-lg shadow rounded-circle"
+                                        src="{{ $fotoPerfilUrl }}"
+                                        alt="Foto de perfil {{ $primeiroNome }}"
+                                    >
+                                    <div class="mt-1">{{ $primeiroNome }}</div>
+                                </div>
                             @endforeach
                         </div>
                     </div>
