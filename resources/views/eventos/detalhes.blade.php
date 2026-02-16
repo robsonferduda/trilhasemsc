@@ -39,6 +39,27 @@
                     @endif
                     <a href="{{ url("guia/perfil/estatistica/perfil", $evento->guia->nm_instagram_gui) }}" target="_blank"><h6 class="mt-2">{{ $evento->guia->nm_guia_gui }}</h6></a>
                 </div>
+
+                <div class="col-lg-12 col-md-12 mt-4 text-center">
+                    @if(Auth::user())
+                        @if(trim(Auth::user()->id_role) == 'GUIA')
+                            <a href="{{ url('guia-e-condutores/privado/eventos') }}" type="button" class="btn btn-outline-danger btn-sm">Meus Eventos</a>
+                        @endif
+                    @endif
+                    @if(Auth::user() and $trilheiro)
+                        @if($trilheiro->evento->contains($evento->id_evento_eve))
+                            <button type="button" class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> Presença Confirmada</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm" id="btn-cancelar-participacao" data-url="{{ url('trilheiro/privado/eventos/cancelar/'.$evento->id_evento_eve) }}"><i class="fa fa-times"></i> Cancelar Participação</button>
+                        @else
+                            <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
+                        @endif
+                    @else
+                        <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
+                    @endif
+                    <a href="{{ url('eventos') }}" type="button" class="btn btn-outline-info btn-sm">Todos os Eventos</a>
+                    <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Início</a>
+                </div>
+
                 <div class="col-lg-12 col-md-12">
                     <p>
                         <strong>Detalhes</strong>: {!! nl2br($evento->descricao) !!}
