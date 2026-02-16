@@ -69,6 +69,12 @@ class GuiaController extends Controller
         else
             $guia = Guia::where('nm_instagram_gui', $identificador)->first();
 
+        if(!$guia){
+            Flash::warning('Perfil não encontrado.');
+
+            return redirect('guias-e-condutores');
+        }
+
         $fone = ($guia->fone) ? preg_replace('/[(\)\-\" "]+/', '', $guia->fone->nu_fone_fon) : '';
 
         switch ($tipo) {
@@ -92,6 +98,8 @@ class GuiaController extends Controller
                        'id_guia_gui' => $guia->id_guia_gui);
 
         Interacao::create($dados);
+        
+        Flash::warning('Você está sendo redirecionado...');
 
         return redirect($url);
     }
