@@ -47,6 +47,11 @@
                         <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
                     </h6>
                     <p class="mb-1">
+                        <time datetime="{{ \Carbon\Carbon::parse($trilha->updated_at)->toDateString() }}" itemprop="dateModified" class="text-info">
+                            Data da trilha: {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}
+                        </time>
+                    </p>
+                    <p class="mb-1">
                         <span class="text-info">Trilha cadastrada em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }} com última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
                     </p>
                     <p class="mb-1">
