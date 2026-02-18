@@ -122,9 +122,24 @@ class EventoController extends Controller
 
     public function participar($id_evento)
     {
-        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
-        $evento = Evento::where('id_evento_eve', $id_evento)->first();
         $usuario = Auth::user();
+
+        if (trim($usuario->id_role) === 'GUIA') {
+            Flash::error('Apenas trilheiros podem participar de eventos.');
+            return redirect('guia-e-condutores/privado/perfil');
+        }
+
+        $trilheiro = Trilheiro::where('id_user', $usuario->id)->first();
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+
+        if (!$trilheiro) {
+            Flash::error('Seu usuário não possui perfil de trilheiro. Complete seu cadastro para participar de eventos.');
+            return redirect('cadastro/privado/escolher-perfil');
+        }
+
+        if (!$evento) {
+            abort(404, 'Evento não encontrado');
+        }
 
         $trilheiro->evento()->sync($id_evento);
 
@@ -144,9 +159,24 @@ class EventoController extends Controller
 
     public function cancelarParticipacao($id_evento)
     {
-        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
-        $evento = Evento::where('id_evento_eve', $id_evento)->first();
         $usuario = Auth::user();
+
+        if (trim($usuario->id_role) === 'GUIA') {
+            Flash::error('Apenas trilheiros podem cancelar participação em eventos.');
+            return redirect('guia-e-condutores/privado/perfil');
+        }
+
+        $trilheiro = Trilheiro::where('id_user', $usuario->id)->first();
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+
+        if (!$trilheiro) {
+            Flash::error('Seu usuário não possui perfil de trilheiro. Complete seu cadastro para gerenciar participações.');
+            return redirect('cadastro/privado/escolher-perfil');
+        }
+
+        if (!$evento) {
+            abort(404, 'Evento não encontrado');
+        }
 
         // Remove a participação do trilheiro no evento
         $trilheiro->evento()->detach($id_evento);
