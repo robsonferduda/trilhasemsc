@@ -42,6 +42,10 @@
             <div class="col-md-9 mt-2">
                 <div class="col-md-12 mt-3">
                     <h4 class="mt-2">{{ $trilha->nm_trilha_tri }}</h4>
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="{{ asset('img/usuarios/' . ($trilha->usuario->foto ?? 'padrao.jpg')) }}" alt="Foto do usuário {{ $trilha->usuario->nome ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                            <span class="text-secondary">Registrada por {{ $trilha->usuario->nome ?? 'Usuário desconhecido' }}</span>
+                        </div>
                     <h6>
                         <i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }} 
                         <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
