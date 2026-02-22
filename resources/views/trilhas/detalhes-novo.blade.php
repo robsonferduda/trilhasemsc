@@ -43,7 +43,7 @@
                 <div class="col-md-12 mt-3">
                     <h4 class="mt-2">{{ $trilha->nm_trilha_tri }}</h4>
                         <div class="d-flex align-items-center mb-2">
-                            <img src="{{ asset('img/usuarios/' . ($trilha->user->foto ?? 'padrao.jpg')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                            <img src="{{ asset('img/trilheiros/' . ($trilha->user->dc_foto_perfil ?? 'padrao.jpg')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
                             <span class="text-secondary">Registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }}</span>
                         </div>
                     <h6>
