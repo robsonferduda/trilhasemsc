@@ -98,7 +98,7 @@
                                     <!-- Área de upload (visível quando não há recorte em andamento) -->
                                     <div id="upload-area" style="border: 2px dashed #ccc; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; background: #fafafa; position: relative;">
                                         <img id="foto-preview"
-                                            src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('img/trilheiros/default.png') }}"
+                                            src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri).'?v='.($trilheiro->updated_at ? $trilheiro->updated_at->timestamp : time()) : asset('img/trilheiros/default.png') }}"
                                             style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 12px;">
                                         <p class="mb-1" style="color: #555;"><i class="fa fa-camera"></i> Toque ou clique para selecionar uma foto</p>
                                         <p class="text-muted" style="font-size: 12px;">JPG, PNG — máx. 5 MB</p>

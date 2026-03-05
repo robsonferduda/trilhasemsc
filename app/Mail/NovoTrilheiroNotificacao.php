@@ -15,16 +15,18 @@ class NovoTrilheiroNotificacao extends Mailable
 
     public $trilheiro;
     public $usuario;
+    public $tipoNotificacao;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $usuario, Trilheiro $trilheiro = null)
+    public function __construct(User $usuario, Trilheiro $trilheiro = null, $tipoNotificacao = null)
     {
         $this->usuario = $usuario;
         $this->trilheiro = $trilheiro;
+        $this->tipoNotificacao = $tipoNotificacao;
     }
 
     /**
@@ -34,7 +36,9 @@ class NovoTrilheiroNotificacao extends Mailable
      */
     public function build()
     {
-        $this->subject('Novo Trilheiro Cadastrado - ' . $this->usuario->name);
+        $subjectPrefix = $this->tipoNotificacao === 'atualizacao' ? 'Atualização de Cadastro - ' : 'Novo Trilheiro Cadastrado - ';
+
+        $this->subject($subjectPrefix . $this->usuario->name);
         $this->to('robsonferduda@gmail.com', 'Administrador');
         return $this->view('mail.novo-trilheiro-notificacao', [
             'usuario' => $this->usuario,
