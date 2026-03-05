@@ -227,14 +227,34 @@ class TrilheiroController extends Controller
 
             $base64Image = $request->input('cropped_image');
 
+            \Log::info('foto_debug', [
+                'cropped_image_recebido' => !empty($base64Image),
+                'cropped_image_tamanho'  => strlen($base64Image ?? ''),
+                'imagem_deletada'        => $imagem_deletada,
+                'trilheiro_id'           => $trilheiro->id_trilheiro_tri,
+            ]);
+
             if ($base64Image) {
                 // Remove o prefixo data:image/...;base64, e corrige espaços (+ vira espaço em POST multipart)
                 $base64Data = preg_replace('/^data:image\/\w+;base64,/', '', $base64Image);
                 $base64Data = str_replace(' ', '+', $base64Data);
                 $imageData  = base64_decode($base64Data);
 
+                \Log::info('foto_debug_decode', [
+                    'base64_apos_strip_tamanho' => strlen($base64Data),
+                    'imageData_tamanho'          => strlen($imageData),
+                    'imageData_valido'           => ($imageData !== false && strlen($imageData) > 0),
+                ]);
+
                 $filename = $trilheiro->id_trilheiro_tri . '.jpg';
-                Storage::disk('trilheiros')->put($filename, $imageData);
+                $result = Storage::disk('trilheiros')->put($filename, $imageData);
+
+                \Log::info('foto_debug_storage', [
+                    'filename' => $filename,
+                    'put_result' => $result,
+                    'path_completo' => public_path('img/trilheiros/' . $filename),
+                    'arquivo_existe' => file_exists(public_path('img/trilheiros/' . $filename)),
+                ]);
 
                 $trilheiro->update(['nm_path_foto_tri' => $filename]);
                 Auth::user()->update(['name' => $nome, 'dc_foto_perfil' => $filename]);
@@ -296,7 +316,7 @@ class TrilheiroController extends Controller
                 ]);
             }
 
-            return redirect('trilheiro/privado/perfil')->withInput();
+            return redirect('trilheiro/privado/perfil');
         }
 
         return view('trilheiro/atualizar-cadastro', compact('estados', 'cidades','trilheiro','usuario'));
