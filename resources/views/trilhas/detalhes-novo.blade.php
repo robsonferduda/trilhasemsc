@@ -46,14 +46,14 @@
                         <span><i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }}</span>
                         <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> trilhasemsc</a></span>
                         <span title="Popularidade baseada no total de acessos" class="d-flex align-items-center ms-auto" style="gap: 2px;">
+                            <span class="text-muted ms-1" style="font-size: 0.75rem;">{{ number_format($totalAcessosTrilha, 0, ',', '.') }} acessos</span>
                             @for($i = 1; $i <= 5; $i++)
                                 @if($i <= $chamasPreenchidas)
                                     <span style="font-size: 1rem; color: #ff5722;">&#x1F525;</span>
                                 @else
                                     <span style="font-size: 1rem; filter: grayscale(1); opacity: 0.3;">&#x1F525;</span>
                                 @endif
-                            @endfor
-                            <span class="text-muted ms-1" style="font-size: 0.75rem;">{{ number_format($totalAcessosTrilha, 0, ',', '.') }} acessos</span>
+                            @endfor                            
                         </span>
                     </h6>
                     <div class="d-flex align-items-center mb-2">
