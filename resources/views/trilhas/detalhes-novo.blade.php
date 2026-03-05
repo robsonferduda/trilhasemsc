@@ -42,20 +42,20 @@
             <div class="col-md-9 mt-2">
                 <div class="col-md-12 mt-3">
                     <h4 class="mt-2">{{ $trilha->nm_trilha_tri }}</h4>
-                    <h6>
-                        <i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }} 
-                        <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> trilhasemsc</a></span>
+                    <h6 class="d-flex align-items-center flex-wrap gap-2">
+                        <span><i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }}</span>
+                        <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> trilhasemsc</a></span>
+                        <span title="Popularidade baseada no total de acessos" class="d-flex align-items-center" style="gap: 2px;">
+                            @for($i = 1; $i <= 5; $i++)
+                                @if($i <= $chamasPreenchidas)
+                                    <span style="font-size: 1rem; color: #ff5722;">&#x1F525;</span>
+                                @else
+                                    <span style="font-size: 1rem; filter: grayscale(1); opacity: 0.3;">&#x1F525;</span>
+                                @endif
+                            @endfor
+                            <span class="text-muted ms-1" style="font-size: 0.75rem;">{{ number_format($totalAcessosTrilha, 0, ',', '.') }} acessos</span>
+                        </span>
                     </h6>
-                    <div class="d-flex align-items-center mb-2" title="Popularidade baseada no total de acessos">
-                        @for($i = 1; $i <= 5; $i++)
-                            @if($i <= $chamasPreenchidas)
-                                <span style="font-size: 1.4rem; color: #ff5722;">&#x1F525;</span>
-                            @else
-                                <span style="font-size: 1.4rem; filter: grayscale(1); opacity: 0.3;">&#x1F525;</span>
-                            @endif
-                        @endfor
-                        <span class="text-muted ms-2" style="font-size: 0.8rem;">{{ number_format($totalAcessosTrilha, 0, ',', '.') }} acessos</span>
-                    </div>
                     <div class="d-flex align-items-center mb-2">
                         <img src="{{ asset('img/trilheiros/' . ($trilha->user->dc_foto_perfil ?? 'perfil.png')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
                         <span class="text-secondary">Trilha registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }}</span>
