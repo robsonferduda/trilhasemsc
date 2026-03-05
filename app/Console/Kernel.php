@@ -24,8 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('trilhas:atualizar-total-acessos')
+                 ->dailyAt('00:00')
+                 ->appendOutputTo(storage_path('logs/total-acessos-trilhas.log'));
     }
 
     /**
