@@ -38,7 +38,7 @@ class NovoTrilheiroNotificacao extends Mailable
     {
         $subjectPrefix = $this->tipoNotificacao;
 
-        $this->subject($subjectPrefix . $this->usuario->name);
+        $this->subject($subjectPrefix .' - '. $this->usuario->name);
         $this->to('robsonferduda@gmail.com', 'Administrador');
         return $this->view('mail.novo-trilheiro-notificacao', [
             'usuario' => $this->usuario,
