@@ -36,10 +36,10 @@
                                                 <img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri).'?v='.(@filemtime(public_path('img/trilheiros/'.$trilheiro->nm_path_foto_tri)) ?: time()) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
                                                 @break
                                             @case('GUIA')
-                                                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
+                                                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil).'?v='.(@filemtime(public_path('img/guias/'.Auth::user()->dc_foto_perfil)) ?: time()) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
                                                 @break
                                             @case('TRILHEIRO')
-                                                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/trilheiros/'.Auth::user()->dc_foto_perfil).'?v='.(Auth::user()->updated_at ? Auth::user()->updated_at->timestamp : time()) : asset('images/user.png') }}" class="rounded-circle w-50" alt="Foto de Perfil">
+                                                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/trilheiros/'.Auth::user()->dc_foto_perfil).'?v='.(@filemtime(public_path('img/trilheiros/'.Auth::user()->dc_foto_perfil)) ?: time()) : asset('images/user.png') }}" class="rounded-circle w-50" alt="Foto de Perfil">
                                                 @break
                                             @default
                                                 <img src="{{ asset('images/user.png') }}" class="rounded-circle o" alt="Foto de Perfil">
