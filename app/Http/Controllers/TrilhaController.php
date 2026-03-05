@@ -205,7 +205,13 @@ class TrilhaController extends Controller
            ->groupBy('cd_cidade_cde')
            ->get()->sortBy('cidade.nm_cidade_cde');
 
-        return view('trilhas/detalhes-novo', ['trilha' => $trilhaEncontrada, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => $page_name]);
+        // Calcula chamas de popularidade (1 a 5) com base nos acessos totais da trilha
+        $maxAcessos = \App\TotalAcessosTrilhas::max('total_acessos_tat') ?? 1;
+        $acessosTrilha = \App\TotalAcessosTrilhas::where('id_trilha_tri', $trilhaEncontrada->id_trilha_tri)->value('total_acessos_tat') ?? 0;
+        $chamasPreenchidas = $maxAcessos > 0 ? (int) round(($acessosTrilha / $maxAcessos) * 5) : 0;
+        $chamasPreenchidas = max(1, min(5, $chamasPreenchidas)); // garante entre 1 e 5
+
+        return view('trilhas/detalhes-novo', ['trilha' => $trilhaEncontrada, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => $page_name, 'chamasPreenchidas' => $chamasPreenchidas, 'totalAcessosTrilha' => $acessosTrilha]);
     }
 
 
