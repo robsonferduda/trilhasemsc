@@ -94,6 +94,8 @@
                                 <div class="form-group">
                                     <input type="hidden" id="cropped-image" name="cropped_image" />
                                     <label>Foto de Perfil</label><span class="text-info"> Preferencialmente quadrada</span>
+
+                                    <!-- Área de upload (visível quando não há recorte em andamento) -->
                                     <div id="upload-area" style="border: 2px dashed #ccc; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; background: #fafafa; position: relative;">
                                         <img id="foto-preview"
                                             src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('img/trilheiros/default.png') }}"
@@ -102,6 +104,22 @@
                                         <p class="text-muted" style="font-size: 12px;">JPG, PNG — máx. 5 MB</p>
                                         <input name="imagem" type="file" id="input-imagem" accept="image/*" style="position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;">
                                     </div>
+
+                                    <!-- Cropper inline (oculto por padrão) -->
+                                    <div id="cropper-container" style="display: none; margin-top: 12px;">
+                                        <div style="max-height: 400px; overflow: hidden; background: #000; border-radius: 8px;">
+                                            <img id="image-to-crop" src="" style="max-width: 100%; display: block;">
+                                        </div>
+                                        <div class="mt-2 d-flex gap-2" style="gap: 8px;">
+                                            <button type="button" class="btn btn-success btn-sm" id="btn-confirmar-recorte">
+                                                <i class="fa fa-check"></i> Confirmar recorte
+                                            </button>
+                                            <button type="button" class="btn btn-secondary btn-sm" id="btn-cancelar-recorte">
+                                                <i class="fa fa-times"></i> Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+
                                     <div class="mt-2" id="btn-remover-foto" style="{{ $trilheiro->nm_path_foto_tri ? '' : 'display:none;' }}">
                                         <button type="button" class="btn btn-sm btn-outline-danger" id="remover-foto">
                                             <i class="fa fa-trash"></i> Remover foto atual
@@ -119,28 +137,6 @@
             </div>
         </div>
     </div>
-    <!-- Modal para recorte de imagem -->
-    <div class="modal fade" id="cropperModal" tabindex="-1" role="dialog" aria-labelledby="cropperModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cropperModalLabel">Recortar Imagem</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="img-container">
-                        <img id="image" src="">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="cropButton">Recortar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('script')
     <script>
@@ -154,7 +150,41 @@
             $('.data').mask('99/99/9999');
 
             var cropper = null;
-            var image = document.getElementById('image');
+            var imageToCrop = document.getElementById('image-to-crop');
+
+            function abrirCropper(dataUrl) {
+                // Destrói instância anterior se existir
+                if (cropper) {
+                    cropper.destroy();
+                    cropper = null;
+                }
+
+                imageToCrop.src = dataUrl;
+                $('#cropper-container').show();
+                $('#upload-area').hide();
+                $('#btn-remover-foto').hide();
+
+                // Pequeno delay para garantir que a imagem carregou no DOM
+                setTimeout(function() {
+                    cropper = new Cropper(imageToCrop, {
+                        aspectRatio: 1,
+                        viewMode: 1,
+                        autoCropArea: 0.9,
+                        responsive: true,
+                        movable: true,
+                        zoomable: true,
+                    });
+                }, 100);
+            }
+
+            function fecharCropper() {
+                if (cropper) {
+                    cropper.destroy();
+                    cropper = null;
+                }
+                $('#cropper-container').hide();
+                $('#upload-area').show();
+            }
 
             // Selecionar foto
             $('#input-imagem').on('change', function() {
@@ -169,53 +199,41 @@
 
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    image.src = e.target.result;
-                    $('#cropperModal').modal('show');
+                    abrirCropper(e.target.result);
                 };
                 reader.readAsDataURL(file);
             });
 
-            // Inicializar Cropper ao abrir o modal
-            $('#cropperModal').on('shown.bs.modal', function() {
-                cropper = new Cropper(image, {
-                    aspectRatio: 1,
-                    viewMode: 1,
-                    autoCropArea: 0.9,
-                    responsive: true,
-                    movable: true,
-                    zoomable: true,
-                });
-            }).on('hidden.bs.modal', function() {
-                if (cropper) {
-                    cropper.destroy();
-                    cropper = null;
-                }
-                // Se não confirmou o recorte, limpa o input
-                if (!$('#cropped-image').val() && !$('#imagem_deletada').val() === 'true') {
-                    $('#input-imagem').val('');
-                }
-            });
-
             // Confirmar recorte
-            $('#cropButton').on('click', function() {
+            $('#btn-confirmar-recorte').on('click', function() {
                 if (!cropper) return;
 
                 try {
                     var canvas = cropper.getCroppedCanvas({ width: 300, height: 300 });
                     var croppedDataUrl = canvas.toDataURL('image/jpeg', 0.9);
 
-                    // Atualiza preview
+                    // Atualiza preview circular
                     $('#foto-preview').attr('src', croppedDataUrl);
 
-                    // Salva o valor para envio
+                    // Armazena para envio com o formulário
                     $('#cropped-image').val(croppedDataUrl);
                     $('#imagem_deletada').val('false');
-                    $('#btn-remover-foto').show();
 
-                    $('#cropperModal').modal('hide');
+                    fecharCropper();
+                    $('#btn-remover-foto').show();
                 } catch (e) {
                     alert('Erro ao recortar a imagem. Tente novamente.');
                     console.error(e);
+                }
+            });
+
+            // Cancelar recorte
+            $('#btn-cancelar-recorte').on('click', function() {
+                fecharCropper();
+                $('#input-imagem').val('');
+                // Mostra botão remover só se há foto existente confirmada
+                if ($('#cropped-image').val() || '{{ $trilheiro->nm_path_foto_tri }}') {
+                    $('#btn-remover-foto').show();
                 }
             });
 
