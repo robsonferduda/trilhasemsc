@@ -36,7 +36,7 @@ class NovoTrilheiroNotificacao extends Mailable
      */
     public function build()
     {
-        $subjectPrefix = $this->tipoNotificacao === 'atualizacao' ? 'Atualização de Cadastro - ' : 'Novo Trilheiro Cadastrado - ';
+        $subjectPrefix = $this->tipoNotificacao;
 
         $this->subject($subjectPrefix . $this->usuario->name);
         $this->to('robsonferduda@gmail.com', 'Administrador');
