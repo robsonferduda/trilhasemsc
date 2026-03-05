@@ -45,7 +45,7 @@
                     <h6 class="d-flex align-items-center flex-wrap gap-2">
                         <span><i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }}</span>
                         <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> trilhasemsc</a></span>
-                        <span title="Popularidade baseada no total de acessos" class="d-flex align-items-center" style="gap: 2px;">
+                        <span title="Popularidade baseada no total de acessos" class="d-flex align-items-center ms-auto" style="gap: 2px;">
                             @for($i = 1; $i <= 5; $i++)
                                 @if($i <= $chamasPreenchidas)
                                     <span style="font-size: 1rem; color: #ff5722;">&#x1F525;</span>
