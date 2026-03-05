@@ -183,6 +183,7 @@ class TrilheiroController extends Controller
         $trilheiroNovo = false;
 
         if(empty($trilheiro)) {
+
             $trilheiro = Trilheiro::create([
                 'id_user' => Auth::user()->id,
                 'nm_trilheiro_tri' => Auth::user()->name
@@ -224,38 +225,27 @@ class TrilheiroController extends Controller
                 'ds_objetivos_tri' => $objetivos
             ]);
 
-            $imagem = null;
-
             $base64Image = $request->input('cropped_image');
 
             if ($base64Image) {
-                $base64Image = preg_replace('/^data:image\/\w+;base64,/', '', $base64Image);
-                $base64Image = base64_decode($base64Image);
+                // Remove o prefixo data:image/...;base64, e corrige espaços (+ vira espaço em POST multipart)
+                $base64Data = preg_replace('/^data:image\/\w+;base64,/', '', $base64Image);
+                $base64Data = str_replace(' ', '+', $base64Data);
+                $imageData  = base64_decode($base64Data);
 
-                $croppedPath = Storage::disk('trilheiros')->put($trilheiro->id_trilheiro_tri.'.jpg', $base64Image);
+                $filename = $trilheiro->id_trilheiro_tri . '.jpg';
+                Storage::disk('trilheiros')->put($filename, $imageData);
 
-                $trilheiro->update(['nm_path_foto_tri' => $trilheiro->id_trilheiro_tri.'.jpg']);
-            }
+                $trilheiro->update(['nm_path_foto_tri' => $filename]);
+                Auth::user()->update(['name' => $nome, 'dc_foto_perfil' => $filename]);
 
-            /*
-            if ($request->hasFile('imagem')) {
-                $extension = $request->file('imagem')->getClientOriginalExtension();
-                $filename = $trilheiro->id_trilheiro_tri . '.' . $extension;
-                $imagem = $request->imagem->storeAs('', $filename, 'trilheiros');
-            }else{
-                $imagem = $trilheiro->nm_path_foto_tri;
-            }
+            } elseif ($imagem_deletada === 'true') {
+                $trilheiro->update(['nm_path_foto_tri' => null]);
+                Auth::user()->update(['name' => $nome, 'dc_foto_perfil' => null]);
 
-            if($request->hasFile('imagem')) {
-                $trilheiro->update(['nm_path_foto_tri' => $imagem]);
             } else {
-
-                if($imagem_deletada == "true") {
-                    $trilheiro->update(['nm_path_foto_tri' => null]);
-                }
-            }*/
-
-            Auth::user()->update(['name' =>  $nome, 'dc_foto_perfil' => $trilheiro->id_trilheiro_tri.'.jpg']);
+                Auth::user()->update(['name' => $nome]);
+            }
 
             // Envia email de boas-vindas se for um novo trilheiro
             if ($trilheiroNovo) {
