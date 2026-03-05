@@ -93,11 +93,21 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <input type="hidden" id="cropped-image" name="cropped_image" />
-                                    <label for="dropify-event">Faça aqui o upload da sua foto de perfil</label><span class="text-info"> Preferencialmente foto em formato quadrado, com medidas proporcionais</span>
-                                    <p class="text-danger"><strong>Atenção!</strong> Ao usar fotos em formato diferente do sugerido, sua imagem de perfil pode ficar desproporcional ou sua foto pouco nítida.</p>
-                                    <input name="imagem" type="file" id="dropify-event"  
-                                    data-default-file="{{  $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('img/trilheiros/default.png') }}">
-                                    <input name="imagem_deletada" id="imagem_deletada" type="hidden" value='false' >
+                                    <label>Foto de Perfil</label><span class="text-info"> Preferencialmente quadrada</span>
+                                    <div id="upload-area" style="border: 2px dashed #ccc; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; background: #fafafa; position: relative;">
+                                        <img id="foto-preview"
+                                            src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri) : asset('img/trilheiros/default.png') }}"
+                                            style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 12px;">
+                                        <p class="mb-1" style="color: #555;"><i class="fa fa-camera"></i> Toque ou clique para selecionar uma foto</p>
+                                        <p class="text-muted" style="font-size: 12px;">JPG, PNG — máx. 5 MB</p>
+                                        <input name="imagem" type="file" id="input-imagem" accept="image/*" style="position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;">
+                                    </div>
+                                    <div class="mt-2" id="btn-remover-foto" style="{{ $trilheiro->nm_path_foto_tri ? '' : 'display:none;' }}">
+                                        <button type="button" class="btn btn-sm btn-outline-danger" id="remover-foto">
+                                            <i class="fa fa-trash"></i> Remover foto atual
+                                        </button>
+                                    </div>
+                                    <input name="imagem_deletada" id="imagem_deletada" type="hidden" value="false">
                                 </div>
                             </div>
                         </div>
@@ -143,27 +153,17 @@
             $('.phone').mask('(99) 999-999999');
             $('.data').mask('99/99/9999');
 
-            var drEvent = $('#dropify-event').dropify();
-
-            var cropper;
+            var cropper = null;
             var image = document.getElementById('image');
-            
-            /*
-            drEvent.on('dropify.fileReady', function(event, element) {
-               var reader = new FileReader();
-                reader.onload = function(e) {
-                    image.src = $('#dropify-event').attr('data-default-file');
-                    $('#cropperModal').modal('show');
-                };
-                reader.readAsDataURL($('#dropify-event').attr('data-default-file'));
-            });*/
 
-            drEvent.on('dropify.fileReady', function(event, element) {
+            // Selecionar foto
+            $('#input-imagem').on('change', function() {
+                var file = this.files[0];
+                if (!file) return;
 
-                var file = event.target.files[0];
-
-                if (!file) {
-                    console.error('No file selected');
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('A imagem deve ter no máximo 5 MB.');
+                    this.value = '';
                     return;
                 }
 
@@ -175,90 +175,71 @@
                 reader.readAsDataURL(file);
             });
 
+            // Inicializar Cropper ao abrir o modal
             $('#cropperModal').on('shown.bs.modal', function() {
                 cropper = new Cropper(image, {
                     aspectRatio: 1,
                     viewMode: 1,
-                    autoCropArea: 1,
+                    autoCropArea: 0.9,
+                    responsive: true,
+                    movable: true,
+                    zoomable: true,
                 });
             }).on('hidden.bs.modal', function() {
-                cropper.destroy();
-                cropper = null;
+                if (cropper) {
+                    cropper.destroy();
+                    cropper = null;
+                }
+                // Se não confirmou o recorte, limpa o input
+                if (!$('#cropped-image').val() && !$('#imagem_deletada').val() === 'true') {
+                    $('#input-imagem').val('');
+                }
             });
 
+            // Confirmar recorte
             $('#cropButton').on('click', function() {
-                
-                var canvas = cropper.getCroppedCanvas({
-                    width: 300,
-                    height: 300,
-                });
+                if (!cropper) return;
 
-                const croppedCanvas = cropper.getCroppedCanvas();
-                const croppedImage = croppedCanvas.toDataURL('image/jpeg');
-                
-                $('#dropify-event').attr('data-default-file', croppedImage);
+                try {
+                    var canvas = cropper.getCroppedCanvas({ width: 300, height: 300 });
+                    var croppedDataUrl = canvas.toDataURL('image/jpeg', 0.9);
 
-                canvas.toBlob(function(blob) {
-                    
-                    var url = URL.createObjectURL(blob);
-                    var reader = new FileReader();
-                    reader.readAsDataURL(blob);
-                    reader.onloadend = function() {
+                    // Atualiza preview
+                    $('#foto-preview').attr('src', croppedDataUrl);
 
-                        $('#dropify-event').dropify('destroy');
-                        $('#dropify-event')[0].value = '';
+                    // Salva o valor para envio
+                    $('#cropped-image').val(croppedDataUrl);
+                    $('#imagem_deletada').val('false');
+                    $('#btn-remover-foto').show();
 
-                        $('#cropped-image').val(croppedImage);
-
-                        $('#dropify-event').dropify({
-                            defaultFile: croppedImage
-                        });
-
-                        // Força a atualização manual da visualização
-                        setTimeout(() => {
-                            const dropifyWrapper = $('.dropify-wrapper');
-                            const previewImage = dropifyWrapper.find('.dropify-preview');
-                            const imageElement = previewImage.find('img');
-
-                            // Atualiza a imagem no DOM diretamente
-                            if (imageElement.length > 0) {
-                                imageElement.attr('src', croppedImage);
-                            } else {
-                                // Cria uma nova tag <img> se não existir
-                                previewImage.append(`<img src="${croppedImage}" />`);
-                            }
-
-                            // Exibe a área de pré-visualização
-                            previewImage.show();
-                            dropifyWrapper.addClass('has-preview');
-                        }, 100); // Pequeno atraso para garantir que o Dropify esteja pronto
-
-                        $('#cropperModal').modal('hide');
-                    };
-                }, 'image/jpeg');
+                    $('#cropperModal').modal('hide');
+                } catch (e) {
+                    alert('Erro ao recortar a imagem. Tente novamente.');
+                    console.error(e);
+                }
             });
 
-            
-
-            drEvent.on('dropify.afterClear', function(event, element) {
-                $('#imagem_deletada').val(true);
+            // Remover foto
+            $('#remover-foto').on('click', function() {
+                $('#foto-preview').attr('src', '{{ asset("img/trilheiros/default.png") }}');
+                $('#cropped-image').val('');
+                $('#input-imagem').val('');
+                $('#imagem_deletada').val('true');
+                $('#btn-remover-foto').hide();
             });
 
+            // Cidades por estado
             $(document).ready(function(){
-
                 $("#estado_origem").trigger('change');
-
             });
 
             $(document).on('change', '#estado_origem', function() {
-
                 var estado = $(this).val();
-                var cd_cidade = $("#cidade_origem").val();
                 var cidade_selecionada = $("#cidade_selecionada").val();
 
                 $('#cidade_origem').find('option').remove().end();
 
-                if($(this).val() == '') {
+                if ($(this).val() == '') {
                     $('#cidade_origem').attr('disabled', true);
                     $('#cidade_origem').append('<option value="">Selecione</option>').val('');
                     return;
@@ -273,28 +254,20 @@
                         "_token": $('meta[name="csrf-token"]').attr('content'),
                         "estado": $(this).val(),
                     },
-                    beforeSend: function() {
-                        
-                    },
                     success: function(data) {
-                        if(!data) {
-                           
-                        }
                         $('#cidade_origem').attr('disabled', false);
                         $('#cidade_origem').find('option').remove().end();
                         $('#cidade_origem').append('<option value="" selected>Selecione uma cidade</option>').val('');
 
-                        data.forEach(element => {
+                        data.forEach(function(element) {
                             let option = new Option(element.nm_cidade_cde, element.cd_cidade_cde);
                             $('#cidade_origem').append(option);
-
-                            if(cidade_selecionada == element.cd_cidade_cde)
+                            if (cidade_selecionada == element.cd_cidade_cde)
                                 $('#cidade_origem').val(cidade_selecionada);
                         });
-
                     },
-                    complete: function(){
-                        
+                    error: function() {
+                        alert('Erro ao carregar cidades. Tente novamente.');
                     }
                 });
             });
