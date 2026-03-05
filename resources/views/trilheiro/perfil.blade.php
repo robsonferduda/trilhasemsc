@@ -33,7 +33,7 @@
                                     <div class="profile-image center mb-4">
                                         @switch(trim(Auth::user()->id_role))
                                             @case('ADMIN')
-                                                <img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri).'?v='.($trilheiro->updated_at ? $trilheiro->updated_at->timestamp : time()) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
+                                                <img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri).'?v='.(@filemtime(public_path('img/trilheiros/'.$trilheiro->nm_path_foto_tri)) ?: time()) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
                                                 @break
                                             @case('GUIA')
                                                 <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
