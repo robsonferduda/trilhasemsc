@@ -143,6 +143,7 @@ class LoginController extends Controller
             ['email' => $email],
             [
                 'name'     => $socialUser->getName() ?: ($socialUser->getNickname() ?: 'Usuário'),
+                'id_role'  => 'SOCIAL',
                 'password' => bcrypt(Str::random(24)),
             ]
         );
