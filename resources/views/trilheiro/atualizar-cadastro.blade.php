@@ -130,13 +130,23 @@
                             </div>
                         </div>
                         <div style="text-align: center; margin-top:15px; ">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
+                            <button type="submit" id="btn-salvar" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Overlay de carregamento -->
+    <div id="loading-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9999; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+        <div style="width:56px; height:56px; border:5px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 0.8s linear infinite;"></div>
+        <span style="color:#fff; font-size:1rem; font-weight:500;">Salvando seus dados...</span>
+    </div>
+    <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+
 @endsection
 @section('script')
     <script>
@@ -145,6 +155,14 @@
             var host = $('meta[name="base-url"]').attr('content');
 
             $('#form-trilheiro').parsley();
+
+            // Exibe loading ao submeter o formulário
+            $('#form-trilheiro').on('submit', function() {
+                if ($(this).parsley().isValid()) {
+                    $('#loading-overlay').css('display', 'flex');
+                    $('#btn-salvar').prop('disabled', true);
+                }
+            });
 
             $('.phone').mask('(99) 999-999999');
             $('.data').mask('99/99/9999');
