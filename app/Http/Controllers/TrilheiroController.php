@@ -30,6 +30,11 @@ use Laracasts\Flash\Flash;
 
 class TrilheiroController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         $page_name = "Guias e Condutores em Santa Catarina";
@@ -69,6 +74,10 @@ class TrilheiroController extends Controller
 
     public function perfil()
     {
+        if (Auth::guest()) {
+            return redirect('login');
+        }
+
         $titulo = 'Guias e Condutores';
         $subtitulo = "Perfil";
         $page_name = "Perfil";

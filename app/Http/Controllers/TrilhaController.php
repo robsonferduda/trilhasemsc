@@ -23,7 +23,7 @@ class TrilhaController extends Controller
 {
     public function __construct()
     {
-        //
+        $this->middleware('auth')->only(['index', 'editar', 'novo', 'update', 'create', 'insertFoto']);
     }
 
     public function index()
