@@ -1,12 +1,33 @@
-@extends('layouts.site')
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Aventura Peru 2026 — Salkantay, Machu Picchu e Circuito Huayhuash">
+    <title>Peru 2026 — Nossa Aventura</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('css/template.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+</head>
+<body style="font-family: 'Montserrat', sans-serif; background: #080e18; color: #fff; margin: 0;">
 
-@section('content')
+{{-- Imagem de fundo fixada em toda a página --}}
+<div style="position: fixed; inset: 0; z-index: 0;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Huayhuash_Cordillera.jpg/1280px-Huayhuash_Cordillera.jpg') center/cover no-repeat;
+    opacity: .22;">
+</div>
+{{-- Overlay escuro sobre a imagem --}}
+<div style="position: fixed; inset: 0; z-index: 0; background: linear-gradient(160deg, rgba(8,14,24,.82) 0%, rgba(12,22,45,.78) 50%, rgba(20,8,30,.80) 100%);"></div>
+
+<div style="position: relative; z-index: 1;">
+
 
 {{-- Hero: Coming Soon + Countdown --}}
 <section class="py-0">
     <div class="container-fluid px-0">
-        <div class="peru-hero d-flex align-items-center justify-content-center flex-column text-center text-white position-relative" style="min-height: 90vh; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #533483 100%);">
-            <div class="position-absolute w-100 h-100" style="top:0;left:0;background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Machu_Picchu_2014.jpg/1280px-Machu_Picchu_2014.jpg') center/cover no-repeat; opacity: 0.18;"></div>
+        <div class="peru-hero d-flex align-items-center justify-content-center flex-column text-center text-white position-relative" style="min-height: 100vh;">
             <div class="position-relative z-index-1 px-3">
                 <p class="text-warning text-uppercase fw-bold letter-spacing-2 mb-2" style="letter-spacing: 4px; font-size: .85rem;">Trilhas em SC Apresenta</p>
                 <h1 class="display-3 fw-bolder mb-0" style="text-shadow: 0 4px 24px rgba(0,0,0,.6);">
@@ -44,7 +65,7 @@
 </section>
 
 {{-- Infos de altitude --}}
-<section class="py-5 bg-dark text-white">
+<section class="py-5 text-white">
     <div class="container">
         <div class="row text-center g-4">
             <div class="col-md-4">
@@ -76,7 +97,7 @@
 </section>
 
 {{-- Info trilhas --}}
-<section class="py-5" style="background: #0d1b2a; color: #ccc;">
+<section class="py-5" style="color: #ccc;">
     <div class="container">
         <div class="row g-4">
             <div class="col-md-6">
@@ -102,7 +123,7 @@
 </section>
 
 {{-- Cronograma --}}
-<section id="cronograma" class="py-6" style="background: #111827;">
+<section id="cronograma" class="py-6">
     <div class="container">
         <div class="text-center mb-5">
             <p class="text-warning text-uppercase fw-bold" style="letter-spacing: 3px; font-size: .8rem;">Itinerário completo</p>
@@ -258,9 +279,9 @@
     </div>
 </section>
 
-@endsection
+</div>{{-- /z-index wrapper --}}
 
-@section('script')
+<script src="{{ asset('js/core/bootstrap.min.js') }}" type="text/javascript"></script>
 <script>
     (function () {
         var target = new Date('2026-08-15T00:00:00');
@@ -321,5 +342,9 @@
     .timeline-dot { position: absolute; left: -27px; }
     .gap-3 { gap: 1rem !important; }
     .py-6 { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+    /* Remove seções com fundo sólido escuro para deixar o bg global aparecer */
+    section { background: transparent !important; }
 </style>
-@endsection
+
+</body>
+</html>
