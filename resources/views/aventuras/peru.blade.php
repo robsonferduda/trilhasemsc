@@ -357,12 +357,18 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
+            background: #f5a623; /* fallback */
         }
+        .timeline-dot[data-color="#0dcaf0"] { background: #0dcaf0; }
+        .timeline-dot[data-color="#198754"] { background: #198754; }
     }
     .gap-3 { gap: 1rem !important; }
     .py-6 { padding-top: 5rem !important; padding-bottom: 5rem !important; }
     /* Remove seções com fundo sólido escuro para deixar o bg global aparecer */
     section { background: transparent !important; }
+    @media (max-width: 575px) {
+        .timeline::before { display: none !important; }
+    }
 </style>
 
 </body>
