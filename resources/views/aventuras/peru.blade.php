@@ -56,7 +56,7 @@
                         <span class="countdown-lbl">segundos</span>
                     </div>
                 </div>
-                <p class="text-white-50 mt-3" style="font-size: .9rem;">até a decolagem — <strong class="text-white">15 de agosto de 2026</strong></p>
+                <p class="text-white-50 mt-3" style="font-size: .9rem;">para iniiciar a aventura <strong class="text-white">15 de agosto de 2026</strong></p>
 
                 <a href="#cronograma" class="btn btn-outline-warning btn-lg mt-4 px-5 rounded-pill">Ver o itinerário</a>
             </div>
@@ -337,12 +337,23 @@
         margin-top: 4px;
     }
     .timeline {
-        border-left: 2px solid rgba(255,255,255,.1);
-        padding-left: 20px;
-        margin-left: 70px;
+        padding-left: 0;
+        margin-left: 0;
     }
     .timeline-item { position: relative; }
-    .timeline-dot { position: absolute; left: -27px; }
+    .timeline-dot { display: none; }
+    @media (min-width: 576px) {
+        .timeline {
+            border-left: 2px solid rgba(255,255,255,.1);
+            padding-left: 20px;
+            margin-left: 70px;
+        }
+        .timeline-dot {
+            display: block;
+            position: absolute;
+            left: -27px;
+        }
+    }
     .gap-3 { gap: 1rem !important; }
     .py-6 { padding-top: 5rem !important; padding-bottom: 5rem !important; }
     /* Remove seções com fundo sólido escuro para deixar o bg global aparecer */
