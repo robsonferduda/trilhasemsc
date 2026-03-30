@@ -56,7 +56,7 @@
                         <span class="countdown-lbl">segundos</span>
                     </div>
                 </div>
-                <p class="text-white-50 mt-3" style="font-size: .9rem;">para iniiciar a aventura <strong class="text-white">15 de agosto de 2026</strong></p>
+                <p class="text-white-50 mt-3" style="font-size: .9rem;">para iniciar a aventura - <strong class="text-white">15 de agosto de 2026</strong></p>
 
                 <a href="#cronograma" class="btn btn-outline-warning btn-lg mt-4 px-5 rounded-pill">Ver o itinerário</a>
             </div>
@@ -147,7 +147,7 @@
                             <span class="fw-bold text-warning d-block" style="font-size: 1.1rem; min-width: 60px;">{{ $dia[0] }}</span>
                             <span class="text-white-50 small">{{ $dia[1] }}</span>
                         </div>
-                        <div class="timeline-dot flex-shrink-0 mt-1" style="width: 12px; height: 12px; border-radius: 50%; background: #f5a623; margin-top: 6px;"></div>
+                        <div class="timeline-dot" data-color="#f5a623"></div>
                         <div class="timeline-body text-white">
                             <strong>{{ $dia[2] }}</strong>
                             @if($dia[3])
@@ -179,7 +179,7 @@
                             <span class="fw-bold text-info d-block" style="font-size: 1.1rem; min-width: 60px;">{{ $dia[0] }}</span>
                             <span class="text-white-50 small">{{ $dia[1] }}</span>
                         </div>
-                        <div class="timeline-dot flex-shrink-0 mt-1" style="width: 12px; height: 12px; border-radius: 50%; background: #0dcaf0; margin-top: 6px;"></div>
+                        <div class="timeline-dot" data-color="#0dcaf0"></div>
                         <div class="timeline-body text-white">
                             <strong>{{ $dia[2] }}</strong>
                             @if($dia[3])
@@ -207,7 +207,7 @@
                             <span class="fw-bold text-success d-block" style="font-size: 1.1rem; min-width: 60px;">{{ $dia[0] }}</span>
                             <span class="text-white-50 small">{{ $dia[1] }}</span>
                         </div>
-                        <div class="timeline-dot flex-shrink-0 mt-1" style="width: 12px; height: 12px; border-radius: 50%; background: #198754; margin-top: 6px;"></div>
+                        <div class="timeline-dot" data-color="#198754"></div>
                         <div class="timeline-body text-white">
                             <strong>{{ $dia[2] }}</strong>
                             @if($dia[3])
@@ -264,7 +264,7 @@
                             <span class="fw-bold text-warning d-block" style="font-size: 1.1rem; min-width: 60px;">{{ $dia[0] }}</span>
                             <span class="text-white-50 small">{{ $dia[1] }}</span>
                         </div>
-                        <div class="timeline-dot flex-shrink-0 mt-1" style="width: 12px; height: 12px; border-radius: 50%; background: #f5a623; margin-top: 6px;"></div>
+                        <div class="timeline-dot" data-color="#f5a623"></div>
                         <div class="timeline-body text-white">
                             <strong>{{ $dia[2] }}</strong>
                             @if($dia[3])
@@ -337,21 +337,26 @@
         margin-top: 4px;
     }
     .timeline {
+        border-left: none !important;
         padding-left: 0;
         margin-left: 0;
     }
     .timeline-item { position: relative; }
-    .timeline-dot { display: none; }
+    .timeline-dot { display: none !important; }
     @media (min-width: 576px) {
         .timeline {
-            border-left: 2px solid rgba(255,255,255,.1);
-            padding-left: 20px;
-            margin-left: 70px;
+            border-left: 2px solid rgba(255,255,255,.12) !important;
+            padding-left: 24px;
+            margin-left: 74px;
         }
         .timeline-dot {
-            display: block;
+            display: block !important;
             position: absolute;
-            left: -27px;
+            left: -29px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
     }
     .gap-3 { gap: 1rem !important; }
