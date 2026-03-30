@@ -38,7 +38,7 @@
                 </p>
 
                 {{-- Countdown --}}
-                <div class="d-flex justify-content-center gap-3 flex-wrap mt-4 mb-2" id="countdown-wrap">
+                <div class="d-flex justify-content-center mt-4 mb-2" id="countdown-wrap" style="gap: clamp(6px, 2vw, 16px); flex-wrap: nowrap;">
                     <div class="countdown-box">
                         <span class="countdown-num" id="cnt-days">--</span>
                         <span class="countdown-lbl">dias</span>
@@ -314,22 +314,25 @@
         background: rgba(255,255,255,.08);
         border: 1px solid rgba(255,255,255,.18);
         border-radius: 12px;
-        padding: 18px 24px;
-        min-width: 90px;
+        padding: clamp(10px, 2.5vw, 18px) clamp(10px, 3vw, 24px);
+        min-width: 0;
+        flex: 1 1 0;
+        max-width: 110px;
         backdrop-filter: blur(6px);
+        text-align: center;
     }
     .countdown-num {
         display: block;
-        font-size: 2.8rem;
+        font-size: clamp(1.6rem, 7vw, 2.8rem);
         font-weight: 800;
         color: #f5a623;
         line-height: 1;
     }
     .countdown-lbl {
         display: block;
-        font-size: .75rem;
+        font-size: clamp(.55rem, 2vw, .75rem);
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
         color: rgba(255,255,255,.55);
         margin-top: 4px;
     }
