@@ -22,6 +22,8 @@ Route::get('camping', 'HomeController@camping');
 Route::get('campings', 'CampingController@campings');
 Route::get('{cidade}/camping/{nivel}/{url}', 'CampingController@detalhes');
 
+Route::get('aventuras/peru-2026', 'AventuraController@peru');
+
 //Route::get('laguna/campings/selvagem/camping-mirante-anita-garibaldi', 'CampingController@anitaGaribaldi');
 //Route::get('bom-jardim-da-serra/campings/selvagem/camping-pico-do-rinoceronte', 'CampingController@picoRinoceronte');
 //Route::get('grao-para/campings/estruturado/camping-mirante','CampingController@campingMirante');
