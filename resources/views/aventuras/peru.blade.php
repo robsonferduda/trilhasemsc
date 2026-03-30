@@ -15,7 +15,7 @@
 
 {{-- Imagem de fundo fixada em toda a página --}}
 <div style="position: fixed; inset: 0; z-index: 0;
-    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Huayhuash_Cordillera.jpg/1280px-Huayhuash_Cordillera.jpg') center/cover no-repeat;
+    background: url('{{ asset('img/aventuras/cordillera-huayhuash.jpg') }}') center/cover no-repeat;
     opacity: .22;">
 </div>
 {{-- Overlay escuro sobre a imagem --}}
