@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Aventura Peru 2026 — Salkantay, Machu Picchu e Circuito Huayhuash">
     <title>Peru 2026 — Nossa Aventura</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://trilhasemsc.com.br/public/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://trilhasemsc.com.br/public/img/favicon/favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
@@ -137,8 +139,8 @@
                 @php
                 $cusco = [
                     ['15/08', 'SÁB', 'Chegada a Cusco', ''],
-                    ['16/08', 'DOM', 'Cusco — City Tour', ''],
-                    ['17/08', 'SEG', 'Cusco — Aclimatação', ''],
+                    ['16/08', 'DOM', 'Cusco - City Tour', 'Caminhada em Cusco para aclimatação leve. Visitar principais pontos turísticos.'],
+                    ['17/08', 'SEG', 'Cusco - Aclimatação', ''],
                 ];
                 @endphp
                 @foreach($cusco as $dia)
@@ -165,12 +167,12 @@
             <div class="timeline">
                 @php
                 $salkantay = [
-                    ['18/08', 'TER', 'Salkantay — Dia 1', ''],
-                    ['19/08', 'QUA', 'Salkantay — Dia 2', ''],
-                    ['20/08', 'QUI', 'Salkantay — Dia 3', ''],
-                    ['21/08', 'SEX', 'Salkantay — Dia 4', ''],
-                    ['22/08', 'SÁB', 'Salkantay — Dia 5 · Machu Picchu · Águas Calientes', 'Retorno para Cusco. Comprar ingressos Machu Picchu antecipado.'],
-                    ['23/08', 'DOM', 'Cusco — Montanhas Coloridas', ''],
+                    ['18/08', 'TER', 'Salkantay - Dia 1', ''],
+                    ['19/08', 'QUA', 'Salkantay - Dia 2', ''],
+                    ['20/08', 'QUI', 'Salkantay - Dia 3', ''],
+                    ['21/08', 'SEX', 'Salkantay - Dia 4', ''],
+                    ['22/08', 'SÁB', 'Salkantay - Dia 5 · Machu Picchu · Águas Calientes', 'Retorno para Cusco. Comprar ingressos Machu Picchu antecipado.'],
+                    ['23/08', 'DOM', 'Cusco - Montanhas Coloridas', ''],
                 ];
                 @endphp
                 @foreach($salkantay as $dia)
@@ -197,8 +199,8 @@
             <div class="timeline">
                 @php
                 $huaraz = [
-                    ['24/08', 'SEG', 'Translado Cusco — Huaráz', 'Aclimatação'],
-                    ['25/08', 'TER', 'Huaráz — Aclimatação', 'Aclimatação e organização final para o circuito'],
+                    ['24/08', 'SEG', 'Translado Cusco - Huaráz', 'Aclimatação'],
+                    ['25/08', 'TER', 'Huaráz - Aclimatação', 'Aclimatação e organização final para o circuito'],
                 ];
                 @endphp
                 @foreach($huaraz as $dia)
@@ -225,14 +227,14 @@
             <div class="row g-3">
                 @php
                 $huayhuash = [
-                    ['26/08', 'QUA', 'Huayhuash — Dia 1'],
-                    ['27/08', 'QUI', 'Huayhuash — Dia 2'],
-                    ['28/08', 'SEX', 'Huayhuash — Dia 3'],
-                    ['29/08', 'SÁB', 'Huayhuash — Dia 4'],
-                    ['30/08', 'DOM', 'Huayhuash — Dia 5'],
-                    ['31/08', 'SEG', 'Huayhuash — Dia 6'],
-                    ['01/09', 'TER', 'Huayhuash — Dia 7'],
-                    ['02/09', 'QUA', 'Huayhuash — Dia 8 · Fim da caminhada'],
+                    ['26/08', 'QUA', 'Huayhuash - Dia 1'],
+                    ['27/08', 'QUI', 'Huayhuash - Dia 2'],
+                    ['28/08', 'SEX', 'Huayhuash - Dia 3'],
+                    ['29/08', 'SÁB', 'Huayhuash - Dia 4'],
+                    ['30/08', 'DOM', 'Huayhuash - Dia 5'],
+                    ['31/08', 'SEG', 'Huayhuash - Dia 6'],
+                    ['01/09', 'TER', 'Huayhuash - Dia 7'],
+                    ['02/09', 'QUA', 'Huayhuash - Dia 8 · Fim da caminhada'],
                 ];
                 @endphp
                 @foreach($huayhuash as $dia)
@@ -254,8 +256,9 @@
             <div class="timeline">
                 @php
                 $retorno = [
-                    ['03/09', 'QUI', 'Huaráz — Translado Lima', 'Conhecer Lima no último dia de viagem'],
-                    ['04/09', 'SEX', 'Retorno a Florianópolis', 'Fim de viagem 😢'],
+                    ['03/09', 'QUI', 'Huaráz - Translado Lima', 'Chegada em Lima e City Tour'],
+                    ['04/09', 'SEX', 'Explorar Lima', 'Conhecer os principais pontos turísticos e culinária local'],
+                    ['05/09', 'SÁB', 'Retorno ao Brasil', 'Fim de viagem 😢'],
                 ];
                 @endphp
                 @foreach($retorno as $dia)
