@@ -356,7 +356,7 @@
         .timeline-dot {
             display: block !important;
             position: absolute;
-            left: -29px;
+            left: -30px;
             top: 6px;
             width: 12px;
             height: 12px;
