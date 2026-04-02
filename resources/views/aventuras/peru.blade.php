@@ -344,6 +344,7 @@
         padding-left: 0;
         margin-left: 0;
     }
+    .timeline::before { display: none !important; }
     .timeline-item { position: relative; }
     .timeline-dot { display: none !important; }
     @media (min-width: 576px) {
