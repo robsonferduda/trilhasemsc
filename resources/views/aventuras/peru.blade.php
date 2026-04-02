@@ -171,7 +171,7 @@
                     ['19/08', 'QUA', 'Salkantay - Dia 2', ''],
                     ['20/08', 'QUI', 'Salkantay - Dia 3', ''],
                     ['21/08', 'SEX', 'Salkantay - Dia 4', ''],
-                    ['22/08', 'SÁB', 'Salkantay - Dia 5 · Machu Picchu · Águas Calientes', 'Retorno para Cusco. Comprar ingressos Machu Picchu antecipado.'],
+                    ['22/08', 'SÁB', 'Salkantay - Dia 5 · Machu Picchu · Águas Calientes', 'Retorno para Cusco.'],
                     ['23/08', 'DOM', 'Cusco - Montanhas Coloridas', ''],
                 ];
                 @endphp
