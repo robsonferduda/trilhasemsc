@@ -105,7 +105,7 @@
             <div class="col-md-6">
                 <div class="p-4 rounded-3 h-100" style="background: rgba(255,255,255,.04); border-left: 4px solid #f5a623;">
                     <h5 class="text-warning mb-3">Trilha Salkantay</h5>
-                    <p class="mb-1">Ponto mais alto: <strong class="text-white">Passo Salkantay — 4.650 m</strong></p>
+                    <p class="mb-1">Ponto mais alto: <strong class="text-white">Passo Salkantay - 4.650 m</strong></p>
                     <p class="mb-1">Laguna Humantay: <strong class="text-white">~4.200 m</strong></p>
                     <p class="mb-0">Collpapampa (descida para floresta): <strong class="text-white">~3.850 m</strong></p>
                     <p class="mt-3 text-white-50 small">A trilha passa por mudanças significativas de altitude, com clima progressivamente mais quente na descida para a floresta nublada.</p>
@@ -115,7 +115,7 @@
                 <div class="p-4 rounded-3 h-100" style="background: rgba(255,255,255,.04); border-left: 4px solid #e64980;">
                     <h5 class="text-danger mb-3">Circuito Huayhuash</h5>
                     <p class="mb-1">Altitude máxima nas trilhas: <strong class="text-white">~5.000 m</strong></p>
-                    <p class="mb-1">Pico mais alto: <strong class="text-white">Yerupajá — 6.635 m</strong></p>
+                    <p class="mb-1">Pico mais alto: <strong class="text-white">Yerupajá - 6.635 m</strong></p>
                     <p class="mb-0">Trekking de 8 dias pelo circuito completo</p>
                     <p class="mt-3 text-white-50 small">A Cordilheira Huayhuash possui altitudes que ultrapassam os 6.000 metros. Exige aclimatação prévia em Huaráz.</p>
                 </div>
@@ -199,8 +199,8 @@
             <div class="timeline">
                 @php
                 $huaraz = [
-                    ['24/08', 'SEG', 'Translado Cusco - Huaráz', 'Aclimatação'],
-                    ['25/08', 'TER', 'Huaráz - Aclimatação', 'Aclimatação e organização final para o circuito'],
+                    ['24/08', 'SEG', 'Translado Cusco - Huaráz', 'Saída 05:00 de Cusco - Chegada, descanso e caminhada leve na cidade'],
+                    ['25/08', 'TER', 'Laguna Wilcacocha', ' Aclimatação clássica com vistas da Cordilheira Branca e organização final para o circuito'],
                 ];
                 @endphp
                 @foreach($huaraz as $dia)
