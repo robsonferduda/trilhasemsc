@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="timeline-block mb-3">
                                         <span class="timeline-step bg-gradient-warning">
-                                            <i class="fas fa-utensils text-white"></i>
+                                            <i class="fa fa-cutlery text-white"></i>
                                         </span>
                                         <div class="timeline-content">
                                             <h6 class="text-dark text-sm font-weight-bold mb-0">12:00 - Almoço no Barco</h6>
@@ -120,7 +120,7 @@
                                     </div>
                                     <div class="timeline-block mb-3">
                                         <span class="timeline-step bg-gradient-success">
-                                            <i class="fas fa-camera text-white"></i>
+                                            <i class="fa fa-camera text-white"></i>
                                         </span>
                                         <div class="timeline-content">
                                             <h6 class="text-dark text-sm font-weight-bold mb-0">13:00-15:00 - Safari Continua</h6>
@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="timeline-block mb-3">
                                         <span class="timeline-step bg-gradient-info">
-                                            <i class="fas fa-house text-white"></i>
+                                            <i class="fa fa-home text-white"></i>
                                         </span>
                                         <div class="timeline-content">
                                             <h6 class="text-dark text-sm font-weight-bold mb-0">15:00 - Retorno</h6>
