@@ -106,7 +106,7 @@
                                         </div>
                                     </div>
                                     <div class="timeline-block mb-3">
-                                        <span class="timeline-step bg-gradient-warning">
+                                        <span class="timeline-step bg-warning">
                                             <i class="fa fa-cutlery text-white"></i>
                                         </span>
                                         <div class="timeline-content">
@@ -119,7 +119,7 @@
                                         </div>
                                     </div>
                                     <div class="timeline-block mb-3">
-                                        <span class="timeline-step bg-gradient-success">
+                                        <span class="timeline-step bg-success">
                                             <i class="fa fa-camera text-white"></i>
                                         </span>
                                         <div class="timeline-content">
@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
                                     <div class="timeline-block mb-3">
-                                        <span class="timeline-step bg-gradient-info">
+                                        <span class="timeline-step bg-info">
                                             <i class="fa fa-home text-white"></i>
                                         </span>
                                         <div class="timeline-content">
