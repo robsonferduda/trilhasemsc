@@ -2,7 +2,7 @@
     <div class="container">
        <div class="row mb-2">
            <div class="col-md-7">
-              <h3 class="text-primary">Destaques</h3>
+              <h3 class="text-primary">Principais Trilhas</h3>
            </div>
         </div>
        <div class="row">
