@@ -110,6 +110,18 @@
                                     <small class="form-text text-muted">Se marcado, o evento não será exibido publicamente</small>
                                 </div>
                             </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="id_trilha_tri">Trilha Vinculada</label><span class="text-primary"> Opcional</span>
+                                    <select name="id_trilha_tri" id="id_trilha_tri" class="form-control select2">
+                                        <option value="">Nenhuma trilha vinculada</option>
+                                        @foreach($trilhas as $trilha)
+                                            <option value="{{ $trilha->id_trilha_tri }}" {{ ($evento and $evento->id_trilha_tri == $trilha->id_trilha_tri) ? 'selected' : '' }}>{{ $trilha->nm_trilha_tri }}</option>
+                                        @endforeach
+                                    </select>
+                                    <small class="form-text text-muted">Vincule uma trilha cadastrada a este evento</small>
+                                </div>
+                            </div>
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">

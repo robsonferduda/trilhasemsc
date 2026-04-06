@@ -29,6 +29,7 @@ class Evento extends Model
                             'hora_inicio_eve',
                             'hora_fim_eve',
                             'fl_privado_eve',
+                            'id_trilha_tri',
                             'id_unico_eve'];
                             
     public $timestamps = true;

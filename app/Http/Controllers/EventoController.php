@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Evento;
+use App\Trilha;
 use App\Trilheiro;
 use App\Cidade;
 use App\Guia;
@@ -206,8 +207,13 @@ class EventoController extends Controller
         $evento = null;
         $guia = Guia::where('id_user', Auth::user()->id)->first();
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
+        $trilhas = Trilha::join('guia_trilha_gut as gut', 'trilha_tri.id_trilha_tri', '=', 'gut.id_trilha_tri')
+            ->where('gut.id_guia_gui', $guia->id_guia_gui)
+            ->orderBy('nm_trilha_tri')
+            ->select('trilha_tri.id_trilha_tri', 'trilha_tri.nm_trilha_tri')
+            ->get();
 
-        return view('admin/eventos/cadastro', compact('guia','cidades','evento'));
+        return view('admin/eventos/cadastro', compact('guia','cidades','evento','trilhas'));
     }
 
     public function editar($id)
@@ -215,8 +221,13 @@ class EventoController extends Controller
         $guia = Guia::where('id_user', Auth::user()->id)->first();
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
         $evento = Evento::where('id_evento_eve', $id)->first();
+        $trilhas = Trilha::join('guia_trilha_gut as gut', 'trilha_tri.id_trilha_tri', '=', 'gut.id_trilha_tri')
+            ->where('gut.id_guia_gui', $guia->id_guia_gui)
+            ->orderBy('nm_trilha_tri')
+            ->select('trilha_tri.id_trilha_tri', 'trilha_tri.nm_trilha_tri')
+            ->get();
 
-        return view('admin/eventos/cadastro', compact('guia','cidades','evento'));
+        return view('admin/eventos/cadastro', compact('guia','cidades','evento','trilhas'));
     }
 
     public function cadastrar(Request $request)
@@ -242,7 +253,8 @@ class EventoController extends Controller
                         'fl_ativo_eve' => null,
                         'fl_privado_eve' => $request->has('fl_privado_eve') ? true : false,
                         'hora_inicio_eve' => $request->hora_inicio_eve,
-                        'hora_fim_eve' => $request->hora_fim_eve);
+                        'hora_fim_eve' => $request->hora_fim_eve,
+                        'id_trilha_tri' => $request->id_trilha_tri ?: null);
 
         if($request->hasFile('img_instagram')) {
             $extension = $request->file('img_instagram')->getClientOriginalExtension();
@@ -292,6 +304,7 @@ class EventoController extends Controller
         $evento->fl_privado_eve = $request->has('fl_privado_eve') ? true : false;
         $evento->hora_inicio_eve = $request->hora_inicio_eve;
         $evento->hora_fim_eve = $request->hora_fim_eve;
+        $evento->id_trilha_tri = $request->id_trilha_tri ?: null;
 
         if($request->hasFile('img_instagram')) {
             $extension = $request->file('img_instagram')->getClientOriginalExtension();
