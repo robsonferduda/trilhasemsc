@@ -93,6 +93,33 @@
                 @else
                     <h6>Acesse <a class="font-italic text-decoration-underline" href="{{ url("guias-e-condutores") }}">aqui</a> os guais e condutores cadastrados em nossa plataforma. </h6>
                 @endif
+
+                @if(isset($proximosEventos) && $proximosEventos->count())
+                <div class="col-md-12 mt-3 mb-2">
+                    <h6><i class="fa fa-calendar text-success mr-1"></i> Próximos Eventos</h6>
+                    <div class="d-flex flex-wrap mt-2" style="gap: 12px;">
+                        @foreach($proximosEventos as $ev)
+                        <a href="{{ $ev->url }}" class="text-decoration-none">
+                            <div class="text-center rounded shadow-sm p-2" style="min-width:80px; border:1px solid #e0e0e0; background:#f8f9fa;">
+                                <div class="rounded-top text-white font-weight-bold py-1 px-2" style="background:#28a745; font-size:.75rem; letter-spacing:.5px;">
+                                    {{ \Carbon\Carbon::parse($ev->dt_realizacao_eve)->format('M') }}
+                                </div>
+                                <div style="font-size:1.6rem; font-weight:700; line-height:1.1; color:#2d2d2d;">
+                                    {{ \Carbon\Carbon::parse($ev->dt_realizacao_eve)->format('d') }}
+                                </div>
+                                <div style="font-size:.7rem; color:#666;">
+                                    {{ \Carbon\Carbon::parse($ev->dt_realizacao_eve)->format('Y') }}
+                                </div>
+                                <div class="mt-1" style="font-size:.7rem; color:#333; max-width:80px; word-break:break-word; white-space:normal; line-height:1.2;">
+                                    {{ \Illuminate\Support\Str::limit($ev->nm_evento_eve, 30) }}
+                                </div>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+
                 <div class="col-md-12 mt-3">
                     <div class="mt-0 conteudo">
                         {!! $trilha->ds_trilha_tri !!}

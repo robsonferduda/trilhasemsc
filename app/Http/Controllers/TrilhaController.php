@@ -8,6 +8,7 @@ use Auth;
 use App\User;
 use App\Tag;
 use App\Trilha;
+use App\Evento;
 use App\Cidade;
 use App\Nivel;
 use App\Foto;
@@ -205,6 +206,15 @@ class TrilhaController extends Controller
            ->groupBy('cd_cidade_cde')
            ->get()->sortBy('cidade.nm_cidade_cde');
 
+        $proximosEventos = Evento::where('id_trilha_tri', $trilhaEncontrada->id_trilha_tri)
+            ->where('dt_realizacao_eve', '>=', date('Y-m-d'))
+            ->where('fl_ativo_eve', true)
+            ->where(function($q) {
+                $q->where('fl_privado_eve', false)->orWhereNull('fl_privado_eve');
+            })
+            ->orderBy('dt_realizacao_eve', 'ASC')
+            ->get();
+
         // Calcula chamas de popularidade (1 a 5) usando escala logarítmica
         // Isso evita que trilhas com poucos acessos fiquem todas com 1 chama
         // quando há outliers com acessos muito altos (escala linear seria injusta)
@@ -215,7 +225,7 @@ class TrilhaController extends Controller
             : 1;
         $chamasPreenchidas = max(1, min(5, $chamasPreenchidas)); // garante entre 1 e 5
 
-        return view('trilhas/detalhes-novo', ['trilha' => $trilhaEncontrada, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => $page_name, 'chamasPreenchidas' => $chamasPreenchidas, 'totalAcessosTrilha' => $acessosTrilha]);
+        return view('trilhas/detalhes-novo', ['trilha' => $trilhaEncontrada, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => $page_name, 'chamasPreenchidas' => $chamasPreenchidas, 'totalAcessosTrilha' => $acessosTrilha, 'proximosEventos' => $proximosEventos]);
     }
 
 
