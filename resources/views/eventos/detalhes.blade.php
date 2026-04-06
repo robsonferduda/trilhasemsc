@@ -79,10 +79,10 @@
                                 </div>
                             @endif
                         </div>
-                        <div>
+                        <div style="margin-left: 10px;">
                             <p class="mb-1 font-weight-bold">
-                                <small class="text-muted text-uppercase" style="font-size:0.7rem;">Trilha vinculada</small><br>
-                                <a href="{{ url($trilhaVinculada->ds_url_tri) }}" class="text-dark">
+                                <small class="text-muted text-uppercase" style="font-size:0.7rem;">Trilha Relacionada</small><br>
+                                <a href="{{ url($trilhaVinculada->ds_url_tri) }}" target="_blank" class="text-dark">
                                     {{ $trilhaVinculada->nm_trilha_tri }}
                                 </a>
                             </p>
