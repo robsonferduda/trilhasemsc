@@ -37,7 +37,7 @@
                       <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
                     @endif
                 </div>
-                <div class="col-lg-10 col-md-10">
+                <div class="col-lg-9 col-md-9">
                     <h4>
                         <a href="" class="text-danger text-decoration-underline-none">{{ $evento->nm_evento_eve }}</a>
                     </h4>
@@ -49,7 +49,7 @@
                     <p class="mb-1"><strong>Contato</strong>: {{ $evento->ds_fone_contato_eve }}</p>
                 </div>
 
-                <div class="col-lg-2 col-md-2 position-relative text-center d-none d-md-block">
+                <div class="col-lg-3 col-md-3 position-relative text-center d-none d-md-block">
                     <h5>Guia Responsável</h5>
                     @if($evento->guia->nm_path_logo_gui)
                       <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$evento->guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
