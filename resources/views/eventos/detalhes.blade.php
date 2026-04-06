@@ -59,6 +59,44 @@
                     <a href="{{ url("guia/perfil/estatistica/perfil", $evento->guia->nm_instagram_gui) }}" target="_blank"><h6 class="mt-2">{{ $evento->guia->nm_guia_gui }}</h6></a>
                 </div>
 
+                @if($evento->id_trilha_tri && $evento->trilha)
+                @php
+                    $trilhaVinculada = $evento->trilha;
+                    $fotoTrilhaVinculada = $trilhaVinculada->foto->where('id_tipo_foto_tfo', 1)->first();
+                @endphp
+                <div class="col-md-12 mt-3 mb-2">
+                    <div class="d-flex align-items-center p-3 rounded" style="background:#f8f9fa; border:1px solid #e0e0e0;">
+                        <div class="mr-3 flex-shrink-0">
+                            @if($fotoTrilhaVinculada)
+                                <img src="{{ asset('img/trilhas/busca/'.$fotoTrilhaVinculada->nm_path_fot) }}"
+                                     alt="{{ $trilhaVinculada->nm_trilha_tri }}"
+                                     class="rounded"
+                                     style="width:64px; height:64px; object-fit:cover;">
+                            @else
+                                <div class="rounded d-flex align-items-center justify-content-center bg-secondary"
+                                     style="width:64px; height:64px;">
+                                    <i class="fa fa-map-signs fa-2x text-white"></i>
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            <p class="mb-1 font-weight-bold">
+                                <small class="text-muted text-uppercase" style="font-size:0.7rem;">Trilha vinculada</small><br>
+                                <a href="{{ url($trilhaVinculada->ds_url_tri) }}" class="text-dark">
+                                    {{ $trilhaVinculada->nm_trilha_tri }}
+                                </a>
+                            </p>
+                            @if($trilhaVinculada->nivel)
+                                <span class="badge badge-secondary"
+                                      style="background:{{ $trilhaVinculada->nivel->dc_color_nivel_niv }}; color:#fff;">
+                                    {{ $trilhaVinculada->nivel->dc_nivel_niv }}{{ $trilhaVinculada->complemento ? ' - '.$trilhaVinculada->complemento->nm_complemento_nivel_con : '' }}
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endif
+
                 @if($evento->trilheiros && $evento->trilheiros->count())
                     <div class="col-lg-12 col-md-12 mt-3">
                         <h5 class="text-left mb-3">Participantes</h5>

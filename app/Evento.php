@@ -128,6 +128,11 @@ class Evento extends Model
         return $this->hasOne('App\Cidade', 'cd_cidade_cde', 'cd_cidade_cde');
     }
 
+    public function trilha()
+    {
+        return $this->hasOne('App\Trilha', 'id_trilha_tri', 'id_trilha_tri');
+    }
+
     public function guia()
     {
         return $this->hasOne('App\Guia', 'id_guia_gui', 'id_guia_gui');
