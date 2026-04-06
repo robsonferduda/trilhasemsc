@@ -66,15 +66,15 @@
                 @endphp
                 <div class="col-md-12 mt-3 mb-2">
                     <div class="d-flex align-items-center p-3 rounded" style="background:#f8f9fa; border:1px solid #e0e0e0;">
-                        <div class="mr-3 flex-shrink-0">
+                        <div class="mr-4 flex-shrink-0">
                             @if($fotoTrilhaVinculada)
                                 <img src="{{ asset('img/trilhas/busca/'.$fotoTrilhaVinculada->nm_path_fot) }}"
                                      alt="{{ $trilhaVinculada->nm_trilha_tri }}"
                                      class="rounded"
-                                     style="width:64px; height:64px; object-fit:cover;">
+                                     style="width:120px; height:72px; object-fit:cover;">
                             @else
                                 <div class="rounded d-flex align-items-center justify-content-center bg-secondary"
-                                     style="width:64px; height:64px;">
+                                     style="width:120px; height:72px;">
                                     <i class="fa fa-map-signs fa-2x text-white"></i>
                                 </div>
                             @endif
