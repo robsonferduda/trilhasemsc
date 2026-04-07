@@ -46,7 +46,7 @@
                         <span><i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }}</span>
                         <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> trilhasemsc</a></span>
                         <time datetime="{{ \Carbon\Carbon::parse($trilha->updated_at)->toDateString() }}" itemprop="dateModified" class="text-black">
-                            Trilha publicada em: {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}
+                            - Trilha publicada em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}
                         </time>
                         <span title="Popularidade baseada no total de acessos" class="d-flex align-items-center ms-auto" style="gap: 2px;">
                             <span class="text-muted ms-1" style="font-size: 0.75rem; margin-right: 5px; margin-top: 5px;">{{ number_format($totalAcessosTrilha, 0, ',', '.') }} acessos</span>
@@ -58,11 +58,7 @@
                                 @endif
                             @endfor                            
                         </span>
-                    </h6>
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="{{ asset('img/trilheiros/' . ($trilha->user->dc_foto_perfil ?? 'perfil.png')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
-                        <span class="text-secondary">Trilha registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }} em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}, com última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
-                    </div>                
+                    </h6>            
                 </div> 
                 @if(count($trilha->guias))
                     <div class="col-md-12 mt-1">
@@ -114,6 +110,10 @@
 
                 <div class="col-md-12 mt-5">
                     <h6>Detalhes da Aventura</h6>
+                    <div class="d-flex align-items-center mb-2">
+                        <img src="{{ asset('img/trilheiros/' . ($trilha->user->dc_foto_perfil ?? 'perfil.png')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                        <span class="text-secondary">Trilha registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }} em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}, com última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
+                    </div>    
                     <p class="mb-1 text-danger" style="font-size: 85%;">
                         (Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.)
                     </p>  
