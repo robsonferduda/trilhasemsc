@@ -58,19 +58,13 @@
                     </h6>
                     <div class="d-flex align-items-center mb-2">
                         <img src="{{ asset('img/trilheiros/' . ($trilha->user->dc_foto_perfil ?? 'perfil.png')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
-                        <span class="text-secondary">Trilha registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }}</span>
+                        <span class="text-secondary">Trilha registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }} em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}, com última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
                     </div>
                     <p class="mb-1">
                         <time datetime="{{ \Carbon\Carbon::parse($trilha->updated_at)->toDateString() }}" itemprop="dateModified" class="text-black">
                             Data da publicação: {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}
                         </time>
-                    </p>
-                    <p class="mb-1">
-                        <span class="text-danger">Trilha cadastrada em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }} com última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
-                    </p>
-                    <p class="mb-1">
-                        (Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.)
-                    </p>                    
+                    </p>                  
                 </div> 
                 @if(count($trilha->guias))
                     <div class="col-md-12 mt-1">
@@ -95,7 +89,7 @@
                 @endif
 
                 @if(isset($proximosEventos) && $proximosEventos->count())
-                <div class="col-md-12 mt-3 mb-2">
+                <div class="col-md-12 mt-3 mb-0">
                     <h6><i class="fa fa-calendar text-success mr-1"></i> Próximos Eventos</h6>
                     <div class="d-flex flex-wrap mt-2" style="gap: 12px;">
                         @foreach($proximosEventos as $ev)
@@ -122,6 +116,9 @@
 
                 <div class="col-md-12 mt-5">
                     <h6>Detalhes da Aventura</h6>
+                    <p class="mb-1 text-danger" style="font-size: 85%;">
+                        (Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.)
+                    </p>  
                     <div class="mt-0 conteudo">
                         {!! $trilha->ds_trilha_tri !!}
                     </div>
