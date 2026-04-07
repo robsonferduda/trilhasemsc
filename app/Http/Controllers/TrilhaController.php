@@ -209,9 +209,6 @@ class TrilhaController extends Controller
         $proximosEventos = Evento::where('id_trilha_tri', $trilhaEncontrada->id_trilha_tri)
             ->where('dt_realizacao_eve', '>=', date('Y-m-d'))
             ->where('fl_ativo_eve', true)
-            ->where(function($q) {
-                $q->where('fl_privado_eve', false)->orWhereNull('fl_privado_eve');
-            })
             ->orderBy('dt_realizacao_eve', 'ASC')
             ->get();
 

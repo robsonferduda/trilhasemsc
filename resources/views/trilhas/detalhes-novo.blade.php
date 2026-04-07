@@ -120,8 +120,8 @@
                 </div>
                 @endif
 
-                <div class="col-md-12 mt-3">
-                    <h6><i class="fa fa-calendar text-success mr-1"></i> Detalhes da Aventura</h6>
+                <div class="col-md-12 mt-5">
+                    <h6>Detalhes da Aventura</h6>
                     <div class="mt-0 conteudo">
                         {!! $trilha->ds_trilha_tri !!}
                     </div>
