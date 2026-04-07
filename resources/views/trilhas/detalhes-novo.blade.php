@@ -45,7 +45,7 @@
                     <h6 class="d-flex align-items-center flex-wrap gap-2">
                         <span><i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }}</span>
                         <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> trilhasemsc</a></span>
-                        <time datetime="{{ \Carbon\Carbon::parse($trilha->updated_at)->toDateString() }}" itemprop="dateModified" class="text-black">
+                        <time datetime="{{ \Carbon\Carbon::parse($trilha->updated_at)->toDateString() }}" itemprop="dateModified" class="text-black" style="font-weight: 500;">
                             - Trilha publicada em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}
                         </time>
                         <span title="Popularidade baseada no total de acessos" class="d-flex align-items-center ms-auto" style="gap: 2px;">
@@ -83,39 +83,39 @@
                 @endif
 
                 @if(isset($proximosEventos) && $proximosEventos->count())
-                <div class="col-md-12 mt-3 mb-0">
-                    <h6><i class="fa fa-calendar text-success mr-1"></i> Próximos Eventos</h6>
-                    <div class="d-flex flex-wrap mt-2" style="gap: 12px;">
-                        @foreach($proximosEventos as $ev)
-                        <a href="{{ $ev->url }}" class="text-decoration-none">
-                            <div class="text-center rounded shadow-sm p-2" style="min-width:80px; border:1px solid #e0e0e0; background:#f8f9fa;">
-                                <div class="rounded-top text-white font-weight-bold py-1 px-2" style="background:#28a745; font-size:.75rem; letter-spacing:.5px;">
-                                    {{ strtoupper(\Carbon\Carbon::parse($ev->dt_realizacao_eve)->locale('pt_BR')->isoFormat('MMM')) }}
+                    <div class="col-md-12 mt-3 mb-0">
+                        <h6><i class="fa fa-calendar text-success mr-1"></i> Próximos Eventos</h6>
+                        <div class="d-flex flex-wrap mt-2" style="gap: 12px;">
+                            @foreach($proximosEventos as $ev)
+                            <a href="{{ $ev->url }}" class="text-decoration-none">
+                                <div class="text-center rounded shadow-sm p-2" style="min-width:80px; border:1px solid #e0e0e0; background:#f8f9fa;">
+                                    <div class="rounded-top text-white font-weight-bold py-1 px-2" style="background:#28a745; font-size:.75rem; letter-spacing:.5px;">
+                                        {{ strtoupper(\Carbon\Carbon::parse($ev->dt_realizacao_eve)->locale('pt_BR')->isoFormat('MMM')) }}
+                                    </div>
+                                    <div style="font-size:1.6rem; font-weight:700; line-height:1.1; color:#2d2d2d;">
+                                        {{ \Carbon\Carbon::parse($ev->dt_realizacao_eve)->format('d') }}
+                                    </div>
+                                    <div style="font-size:.7rem; color:#666;">
+                                        {{ \Carbon\Carbon::parse($ev->dt_realizacao_eve)->format('Y') }}
+                                    </div>
+                                    <div class="mt-1" style="font-size:.7rem; color:#333; max-width:80px; word-break:break-word; white-space:normal; line-height:1.2;">
+                                        {{ \Illuminate\Support\Str::limit($ev->nm_evento_eve, 30) }}
+                                    </div>
                                 </div>
-                                <div style="font-size:1.6rem; font-weight:700; line-height:1.1; color:#2d2d2d;">
-                                    {{ \Carbon\Carbon::parse($ev->dt_realizacao_eve)->format('d') }}
-                                </div>
-                                <div style="font-size:.7rem; color:#666;">
-                                    {{ \Carbon\Carbon::parse($ev->dt_realizacao_eve)->format('Y') }}
-                                </div>
-                                <div class="mt-1" style="font-size:.7rem; color:#333; max-width:80px; word-break:break-word; white-space:normal; line-height:1.2;">
-                                    {{ \Illuminate\Support\Str::limit($ev->nm_evento_eve, 30) }}
-                                </div>
-                            </div>
-                        </a>
-                        @endforeach
+                            </a>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
                 @endif
 
-                <div class="col-md-12 mt-5">
+                <div class="col-md-12 mt-2">
                     <h6>Detalhes da Aventura</h6>
                     <div class="d-flex align-items-center mb-2">
                         <img src="{{ asset('img/trilheiros/' . ($trilha->user->dc_foto_perfil ?? 'perfil.png')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
                         <span class="text-secondary">Trilha registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }} em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}, com última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
                     </div>    
                     <p class="mb-1 text-danger" style="font-size: 85%;">
-                        (Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.)
+                        Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.
                     </p>  
                     <div class="mt-0 conteudo">
                         {!! $trilha->ds_trilha_tri !!}
