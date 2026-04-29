@@ -148,7 +148,8 @@
                             </div>   
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Tem experiência em <i>trekking</i>?</label><span class="text-info"> atividades de longa duração em ambiente natural, que envolvem percursos extensos e, em muitos casos, pernoites durante o trajeto.</span>
+                                    <label>Tem experiência em <i>trekking</i>?</label>
+                                    <br><small class="text-info"><i class="fa fa-info-circle"></i> Atividades de longa duração em ambiente natural, que envolvem percursos extensos e, em muitos casos, pernoites durante o trajeto.</small>
                                     <br>
                                     <label class="fancy-radio">
                                         <input type="radio" name="fl_trekking" value="true" {{ ($questionario and $questionario->fl_trekking_que) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-trekking" data-parsley-multiple="fl_trekking">
@@ -163,7 +164,8 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Tem experiência em <i>hiking</i>?</label><span class="text-info"> atividades de caminhada em trilhas e caminhos naturais, geralmente de curta a média duração, sem pernoites.</span>
+                                    <label>Tem experiência em <i>hiking</i>?</label>
+                                    <br><small class="text-info"><i class="fa fa-info-circle"></i> Atividades de caminhada em trilhas e caminhos naturais, geralmente de curta a média duração, sem pernoites.</small>
                                     <br>
                                     <label class="fancy-radio">
                                         <input type="radio" name="fl_hiking" value="true" {{ ($questionario and $questionario->fl_hiking_que) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-hiking" data-parsley-multiple="fl_hiking">
@@ -178,7 +180,8 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Experiência em caminhada em cost&otilde;es rochosos</label><span class="text-danger"> Obrigatório</span><span class="text-info"> atividades de caminhada em terrenos íngremes e rochosos, que exigem cuidado e atenção redobrada.</span>
+                                    <label>Experiência em caminhada em cost&otilde;es rochosos?</label><span class="text-danger"> Obrigatório</span>
+                                    <br><small class="text-info"><i class="fa fa-info-circle"></i> Atividades de caminhada em terrenos íngremes e rochosos, que exigem cuidado e atenção redobrada.</small>
                                     <br>
                                     <label class="fancy-radio">
                                         <input type="radio" name="nu_costao" value="0" {{ ($questionario and isset($questionario->nu_costao_que) and $questionario->nu_costao_que == 0) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-costao" data-parsley-multiple="nu_costao">
