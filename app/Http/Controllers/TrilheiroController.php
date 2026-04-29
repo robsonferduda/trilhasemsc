@@ -523,23 +523,42 @@ class TrilheiroController extends Controller
     public function recalcularScoreTodos()
     {
         if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
-            return redirect('login');
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         $atualizados = 0;
         $erros = 0;
+        $detalhes = [];
 
         $trilheiros = Trilheiro::whereHas('questionario')->with('questionario')->get();
 
         foreach ($trilheiros as $trilheiro) {
             try {
                 $questionario = $trilheiro->questionario;
+                $scoreAntes = $trilheiro->nr_score_tri;
+                $indiceAntes = $trilheiro->id_indice_ind;
+
                 $score = $this->calculaScore($trilheiro, $questionario);
-                $trilheiro->id_indice_ind = $this->calculaIndice($score);
+                $indice = $this->calculaIndice($score);
+                $trilheiro->id_indice_ind = $indice;
                 $trilheiro->save();
+
                 $atualizados++;
+                $detalhes[] = [
+                    'id' => $trilheiro->id_trilheiro_tri,
+                    'nome' => $trilheiro->nm_trilheiro_tri,
+                    'score_antes' => $scoreAntes,
+                    'score_depois' => $score,
+                    'indice_antes' => $indiceAntes,
+                    'indice_depois' => $indice,
+                ];
             } catch (\Exception $e) {
                 $erros++;
+                $detalhes[] = [
+                    'id' => $trilheiro->id_trilheiro_tri,
+                    'nome' => $trilheiro->nm_trilheiro_tri,
+                    'erro' => $e->getMessage(),
+                ];
                 \Log::error('Erro ao recalcular score do trilheiro', [
                     'trilheiro_id' => $trilheiro->id_trilheiro_tri,
                     'error' => $e->getMessage(),
@@ -547,13 +566,12 @@ class TrilheiroController extends Controller
             }
         }
 
-        if ($erros > 0) {
-            Flash::warning("Scores recalculados: {$atualizados}. Erros: {$erros}. Verifique os logs para mais detalhes.");
-        } else {
-            Flash::success("Score recalculado com sucesso para {$atualizados} trilheiro(s).");
-        }
-
-        return redirect()->back();
+        return response()->json([
+            'total_encontrados' => $trilheiros->count(),
+            'atualizados' => $atualizados,
+            'erros' => $erros,
+            'detalhes' => $detalhes,
+        ]);
     }
 
     public function enviarEmailBoasVindas($id)
