@@ -178,7 +178,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Experiência em caminhada em cost&otilde;es rochosos 🪨</label><span class="text-danger"> Obrigatório</span>
+                                    <label>Experiência em caminhada em cost&otilde;es rochosos</label><span class="text-danger"> Obrigatório</span>
                                     <br>
                                     <label class="fancy-radio">
                                         <input type="radio" name="nu_costao" value="0" {{ ($questionario and isset($questionario->nu_costao_que) and $questionario->nu_costao_que == 0) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-costao" data-parsley-multiple="nu_costao">
@@ -197,7 +197,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Tem experiência em Via Ferrata ou escalada? 🧗</label><span class="text-danger"> Obrigatório</span>
+                                    <label>Tem experiência em via ferrata ou escalaminhada? </label><span class="text-danger"> Obrigatório</span>
                                     <br>
                                     <label class="fancy-radio">
                                         <input type="radio" name="fl_ferrata" value="true" {{ ($questionario and $questionario->fl_ferrata_que) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-ferrata" data-parsley-multiple="fl_ferrata">
@@ -212,7 +212,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Tem experiência em acampamento ou bivaque? ⛺</label><span class="text-danger"> Obrigatório</span>
+                                    <label>Tem experiência em acampamento ou bivaque? </label><span class="text-danger"> Obrigatório</span>
                                     <br>
                                     <label class="fancy-radio">
                                         <input type="radio" name="fl_acampamento" value="true" {{ ($questionario and $questionario->fl_acampamento_que) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-acampamento" data-parsley-multiple="fl_acampamento">
