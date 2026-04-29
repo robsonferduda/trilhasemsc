@@ -55,7 +55,7 @@ class GuiaController extends Controller
         if($guia){
             $eventos_futuros = $guia->eventos()
                 ->where('fl_ativo_eve', true)
-                ->where('fl_privado_eve', false)
+                //->where('fl_privado_eve', false)
                 ->where('dt_realizacao_eve', '>=', now()->toDateString())
                 ->orderBy('dt_realizacao_eve')
                 ->get();
