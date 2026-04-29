@@ -26,7 +26,8 @@ class Trilheiro extends Model
         'nu_pontos_experiencia_tri',
         'fl_newsletter_tri',
         'nr_score_tri',
-        'id_indice_ind'
+        'id_indice_ind',
+        'nu_costao_que'
         ];
 
     public $timestamps = true;
