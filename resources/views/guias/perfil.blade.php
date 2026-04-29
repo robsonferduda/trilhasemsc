@@ -49,7 +49,7 @@
                </div>
 
                {{-- Card do evento --}}
-               <div class="card flex-fill shadow-sm" style="border-left:4px solid #17a2b8;border-top:none;border-right:none;border-bottom:none;border-radius:6px;">
+               <div class="card flex-fill shadow-sm" style="border-left:4px solid #17a2b8;border-top:none;border-right:none;border-bottom:none;border-radius:6px; margin-left: 10px;">
                   @if($evento->ds_imagem_horizontal_eve)
                   <img src="{{ asset('storage/eventos/'.$evento->ds_imagem_horizontal_eve) }}"
                        alt="{{ $evento->nm_evento_eve }}"
