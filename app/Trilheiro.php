@@ -24,7 +24,9 @@ class Trilheiro extends Model
         'cd_sexo_sex',
         'ds_objetivos_tri',
         'nu_pontos_experiencia_tri',
-        'fl_newsletter_tri'
+        'fl_newsletter_tri',
+        'nr_score_tri',
+        'id_indice_ind'
         ];
 
     public $timestamps = true;
