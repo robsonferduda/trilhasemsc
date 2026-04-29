@@ -70,6 +70,10 @@
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                             <button type="button" class="btn btn-warning" id="btn-limpar"><i class="fa fa-refresh"></i> Limpar</button>
+                            <form action="{{ route('admin.trilheiros.recalcular-score') }}" method="POST" class="d-inline" onsubmit="return confirm('Recalcular o score de todos os trilheiros com questionário respondido?')">
+                                @csrf
+                                <button type="submit" class="btn btn-info"><i class="fa fa-calculator"></i> Recalcular Score de Todos</button>
+                            </form>
                         </div>
                     </div>
                 </form>

@@ -324,6 +324,10 @@ class TrilheiroController extends Controller
                         'fl_travessia_que' => $request->fl_travessia,
                         'fl_trilhas_que' => $request->fl_trilhas,
                         'fl_trekking_que' => $request->fl_trekking,
+                        'fl_hiking_que' => $request->fl_hiking,
+                        'nu_costao_que' => $request->nu_costao,
+                        'fl_ferrata_que' => $request->fl_ferrata,
+                        'fl_acampamento_que' => $request->fl_acampamento,
                         'fl_areia_que' => $request->fl_areia,
                         'fl_altura_que' => !$request->fl_altura,
                         'nu_distancia_que' => $request->nu_distancia,
@@ -349,14 +353,14 @@ class TrilheiroController extends Controller
         
         $score = 0;
 
-        $score += $this->calculaIMC($questionario->nu_altura_que, $questionario->nu_peso_que); //150
+        $score += $this->calculaIMC($questionario->nu_altura_que, $questionario->nu_peso_que); //100
         $score += $this->calculaDistancia($questionario->nu_distancia_que); //60
         $score += $questionario->distancia->nu_score_dis; //200
         $score += $questionario->elevacao->nu_score_ele; //200
-        $score += $questionario->corrida->nu_score_cor; //100
+        $score += $questionario->corrida->nu_score_cor; //50
 
         if($questionario->fl_musculacao_que){
-            $score += 100;
+            $score += 40;
         }
 
         if($questionario->fl_areia_que){
@@ -372,7 +376,23 @@ class TrilheiroController extends Controller
         }
 
         if($questionario->fl_trekking_que){
-            $score += 100;
+            $score += 60;
+        }
+
+        if($questionario->fl_hiking_que){
+            $score += 40;
+        }
+
+        if($questionario->nu_costao_que){
+            $score += (int) $questionario->nu_costao_que;
+        }
+
+        if($questionario->fl_ferrata_que){
+            $score += 50;
+        }
+
+        if($questionario->fl_acampamento_que){
+            $score += 50;
         }
 
         $trilheiro->nr_score_tri = $score;
@@ -431,12 +451,12 @@ class TrilheiroController extends Controller
         $imc = $peso / ($altura * 2);
 
         $dicionario = [
-            "18.5" => 135,
-            "24.9" => 150,
-            "29.9" => 135,
-            "34.9" => 120,
-            "39.9" => 100,
-            "40.0" => 80
+            "18.5" => 85,
+            "24.9" => 100,
+            "29.9" => 85,
+            "34.9" => 75,
+            "39.9" => 60,
+            "40.0" => 40
         ];
 
         foreach($dicionario as $key => $value){
@@ -499,6 +519,42 @@ class TrilheiroController extends Controller
         }])->orderBy('nm_cidade_cde')->get();
       
         return view('trilheiro/trilhas', compact('cidades', 'trilhasTrilheiro', 'trilheiro'));
+    }
+
+    public function recalcularScoreTodos()
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $atualizados = 0;
+        $erros = 0;
+
+        $trilheiros = Trilheiro::whereHas('questionario')->with('questionario')->get();
+
+        foreach ($trilheiros as $trilheiro) {
+            try {
+                $questionario = $trilheiro->questionario;
+                $score = $this->calculaScore($trilheiro, $questionario);
+                $trilheiro->id_indice_ind = $this->calculaIndice($score);
+                $trilheiro->save();
+                $atualizados++;
+            } catch (\Exception $e) {
+                $erros++;
+                \Log::error('Erro ao recalcular score do trilheiro', [
+                    'trilheiro_id' => $trilheiro->id_trilheiro_tri,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        if ($erros > 0) {
+            Flash::warning("Scores recalculados: {$atualizados}. Erros: {$erros}. Verifique os logs para mais detalhes.");
+        } else {
+            Flash::success("Score recalculado com sucesso para {$atualizados} trilheiro(s).");
+        }
+
+        return redirect()->back();
     }
 
     public function enviarEmailBoasVindas($id)

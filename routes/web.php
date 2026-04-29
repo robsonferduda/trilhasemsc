@@ -150,6 +150,8 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('dashboard', 'HomeController@dashboard');
 
+        Route::post('trilheiros/recalcular-score', 'TrilheiroController@recalcularScoreTodos')->name('admin.trilheiros.recalcular-score');
+
         Route::get('eventos/listar', 'EventoController@listar');
 
         Route::get('guias', 'GuiaController@listar');

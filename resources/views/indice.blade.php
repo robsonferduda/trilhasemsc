@@ -29,47 +29,47 @@
                                 <tr class="zebra">
                                     <td rowspan="6">IMC</td>
                                     <td>Abaixo do Peso</td>
-                                    <td class="center">135</td>
-                                    <td rowspan="6">150</td>
+                                    <td class="center">85</td>
+                                    <td rowspan="6">100</td>
                                 </tr>
                                 <tr class="zebra">
                                     <td>Peso Normal</td>
-                                    <td class="center">150</td>
-                                </tr>
-                                <tr class="zebra">
-                                    <td>Sobrepeso</td>
-                                    <td class="center">135</td>
-                                </tr>
-                                <tr class="zebra">
-                                    <td>Obesidade Grau I</td>
-                                    <td class="center">120</td>
-                                </tr>
-                                <tr class="zebra">
-                                    <td>Obesidade Grau II</td>
                                     <td class="center">100</td>
                                 </tr>
                                 <tr class="zebra">
+                                    <td>Sobrepeso</td>
+                                    <td class="center">85</td>
+                                </tr>
+                                <tr class="zebra">
+                                    <td>Obesidade Grau I</td>
+                                    <td class="center">75</td>
+                                </tr>
+                                <tr class="zebra">
+                                    <td>Obesidade Grau II</td>
+                                    <td class="center">60</td>
+                                </tr>
+                                <tr class="zebra">
                                     <td>Obesidade Grau III</td>
-                                    <td class="center">80</td>
+                                    <td class="center">40</td>
                                 </tr>
                             
                                 <tr>
                                     <td rowspan="4">Corrida ou Caminhada</td>
                                     <td>Não</td>
                                     <td class="center">0</td>
-                                    <td rowspan="4">100</td>
+                                    <td rowspan="4">50</td>
                                 </tr>
                                 <tr>
                                     <td>Sim, somente uma vez por semana</td>
-                                    <td class="center">50</td>
+                                    <td class="center">15</td>
                                 </tr>
                                 <tr>
                                     <td>Sim, até três vezes por semana</td>
-                                    <td class="center">80</td>
+                                    <td class="center">30</td>
                                 </tr>
                                 <tr>
                                     <td>Sim, mais de três vezes por semana</td>
-                                    <td class="center">100</td>
+                                    <td class="center">50</td>
                                 </tr>
                             
                                 <tr class="zebra">
@@ -95,11 +95,11 @@
                                     <td rowspan="2">Musculação</td>
                                     <td>Não</td>
                                     <td class="center">0</td>
-                                    <td rowspan="2">100</td>
+                                    <td rowspan="2">40</td>
                                 </tr>
                                 <tr>
                                     <td>Sim</td>
-                                    <td class="center">100</td>
+                                    <td class="center">40</td>
                                 </tr>
                             
                                 <tr class="zebra">
@@ -139,40 +139,100 @@
                                     <td rowspan="2">Experiência em Trekking</td>
                                     <td>Não</td>
                                     <td class="center">0</td>
-                                    <td rowspan="2">100</td>
+                                    <td rowspan="2">60</td>
                                 </tr>
                                 <tr>
                                     <td>Sim</td>
-                                    <td class="center">100</td>
+                                    <td class="center">60</td>
+                                </tr>
+
+                                <tr class="zebra">
+                                    <td rowspan="2">Experiência em Hiking</td>
+                                    <td>Não</td>
+                                    <td class="center">0</td>
+                                    <td rowspan="2">40</td>
+                                </tr>
+                                <tr class="zebra">
+                                    <td>Sim</td>
+                                    <td class="center">40</td>
                                 </tr>
                             
+                                <tr>
+                                    <td rowspan="3">Costões Rochosos</td>
+                                    <td>Nenhuma experiência</td>
+                                    <td class="center">0</td>
+                                    <td rowspan="3">60</td>
+                                </tr>
+                                <tr>
+                                    <td>Já caminhou com cautela, trechos curtos</td>
+                                    <td class="center">60</td>
+                                </tr>
+                                <tr>
+                                    <td>Costões longos, molhados ou expostos</td>
+                                    <td class="center">60</td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="2">Via Ferrata / Escalada</td>
+                                    <td>Não</td>
+                                    <td class="center">0</td>
+                                    <td rowspan="2">50</td>
+                                </tr>
+                                <tr>
+                                    <td>Sim</td>
+                                    <td class="center">50</td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="2">Acampamento / Bivaque</td>
+                                    <td>Não</td>
+                                    <td class="center">0</td>
+                                    <td rowspan="2">50</td>
+                                </tr>
+                                <tr>
+                                    <td>Sim</td>
+                                    <td class="center">50</td>
+                                </tr>
+
                                 <tr class="zebra">
-                                    <td rowspan="4">Distância Percurso</td>
+                                    <td rowspan="6">Distância Percurso</td>
                                     <td>Já fez trilhas de até 3km?</td>
-                                    <td class="center">100</td>
-                                    <td rowspan="4">200</td>
+                                    <td class="center">50</td>
+                                    <td rowspan="6">200</td>
                                 </tr>
                                 <tr class="zebra">
                                     <td>Já fez trilhas de até 5km?</td>
-                                    <td class="center">120</td>
+                                    <td class="center">100</td>
                                 </tr>
                                 <tr class="zebra">
                                     <td>Já fez trilhas de até 10km?</td>
-                                    <td class="center">150</td>
+                                    <td class="center">130</td>
                                 </tr>
                                 <tr class="zebra">
-                                    <td>Já fez trilhas superiores a 10km?</td>
+                                    <td>Já fez trilhas de até 15km?</td>
+                                    <td class="center">170</td>
+                                </tr>
+                                <tr class="zebra">
+                                    <td>Já fez trilhas de até 20km?</td>
+                                    <td class="center">180</td>
+                                </tr>
+                                <tr class="zebra">
+                                    <td>Já fez trilhas superiores a 20km?</td>
                                     <td class="center">200</td>
                                 </tr>
                             
                                 <tr>
-                                    <td rowspan="4">Elevação</td>
+                                    <td rowspan="5">Elevação</td>
                                     <td>Já fez trilhas com elevação de até 300 metros?</td>
-                                    <td class="center">100</td>
-                                    <td rowspan="4">200</td>
+                                    <td class="center">80</td>
+                                    <td rowspan="5">200</td>
                                 </tr>
                                 <tr>
                                     <td>Já fez trilhas com elevação de até 500 metros?</td>
+                                    <td class="center">100</td>
+                                </tr>
+                                <tr>
+                                    <td>Já fez trilhas com elevação de até 800 metros?</td>
                                     <td class="center">120</td>
                                 </tr>
                                 <tr>

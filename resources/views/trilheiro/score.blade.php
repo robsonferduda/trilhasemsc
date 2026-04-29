@@ -160,7 +160,71 @@
                                     </label>
                                     <p id="error-radio-trekking"></p>
                                 </div>
-                            </div>  
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Tem experiência em <i>hiking</i>?</label>
+                                    <br>
+                                    <label class="fancy-radio">
+                                        <input type="radio" name="fl_hiking" value="true" {{ ($questionario and $questionario->fl_hiking_que) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-hiking" data-parsley-multiple="fl_hiking">
+                                        <span><i></i>Sim</span>
+                                    </label>
+                                    <label class="fancy-radio">
+                                        <input type="radio" name="fl_hiking" value="false" {{ ($questionario and isset($questionario->fl_hiking_que) and !$questionario->fl_hiking_que) ? 'checked' : '' }} data-parsley-multiple="fl_hiking">
+                                        <span><i></i>Não</span>
+                                    </label>
+                                    <p id="error-radio-hiking"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Experiência em caminhada em cost&otilde;es rochosos 🪨</label><span class="text-danger"> Obrigatório</span>
+                                    <br>
+                                    <label class="fancy-radio">
+                                        <input type="radio" name="nu_costao" value="0" {{ ($questionario and isset($questionario->nu_costao_que) and $questionario->nu_costao_que == 0) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-costao" data-parsley-multiple="nu_costao">
+                                        <span><i></i>Nenhuma experiência</span>
+                                    </label>
+                                    <label class="fancy-radio">
+                                        <input type="radio" name="nu_costao" value="60" {{ ($questionario and isset($questionario->nu_costao_que) and $questionario->nu_costao_que == 60) ? 'checked' : '' }} data-parsley-multiple="nu_costao">
+                                        <span><i></i>Já caminhou com cautela, trechos curtos</span>
+                                    </label>
+                                    <label class="fancy-radio">
+                                        <input type="radio" name="nu_costao" value="60" {{ ($questionario and isset($questionario->nu_costao_que) and $questionario->nu_costao_que == 60) ? 'checked' : '' }} data-parsley-multiple="nu_costao">
+                                        <span><i></i>Cost&otilde;es longos, molhados ou expostos</span>
+                                    </label>
+                                    <p id="error-radio-costao"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Tem experiência em Via Ferrata ou escalada? 🧗</label><span class="text-danger"> Obrigatório</span>
+                                    <br>
+                                    <label class="fancy-radio">
+                                        <input type="radio" name="fl_ferrata" value="true" {{ ($questionario and $questionario->fl_ferrata_que) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-ferrata" data-parsley-multiple="fl_ferrata">
+                                        <span><i></i>Sim</span>
+                                    </label>
+                                    <label class="fancy-radio">
+                                        <input type="radio" name="fl_ferrata" value="false" {{ ($questionario and isset($questionario->fl_ferrata_que) and !$questionario->fl_ferrata_que) ? 'checked' : '' }} data-parsley-multiple="fl_ferrata">
+                                        <span><i></i>Não</span>
+                                    </label>
+                                    <p id="error-radio-ferrata"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Tem experiência em acampamento ou bivaque? ⛺</label><span class="text-danger"> Obrigatório</span>
+                                    <br>
+                                    <label class="fancy-radio">
+                                        <input type="radio" name="fl_acampamento" value="true" {{ ($questionario and $questionario->fl_acampamento_que) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-acampamento" data-parsley-multiple="fl_acampamento">
+                                        <span><i></i>Sim</span>
+                                    </label>
+                                    <label class="fancy-radio">
+                                        <input type="radio" name="fl_acampamento" value="false" {{ ($questionario and isset($questionario->fl_acampamento_que) and !$questionario->fl_acampamento_que) ? 'checked' : '' }} data-parsley-multiple="fl_acampamento">
+                                        <span><i></i>Não</span>
+                                    </label>
+                                    <p id="error-radio-acampamento"></p>
+                                </div>
+                            </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="email">Em relação à distância das trilhas</label><span class="text-danger"> Obrigatório</span>

@@ -55,6 +55,11 @@ class Trilheiro extends Model
         return $this->belongsToMany('App\Trilha','trilheiro_trilha_ttr', 'id_trilheiro_tri','id_trilha_tri')->withTimestamps();
     }
 
+    public function questionario()
+    {
+        return $this->hasOne('App\Questionario', 'cd_trilheiro_tri', 'id_trilheiro_tri');
+    }
+
     /**
      * Gera um token seguro para descadastro da newsletter
      * 
