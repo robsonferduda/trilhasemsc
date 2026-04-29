@@ -427,13 +427,13 @@ class TrilheiroController extends Controller
 
     public function calculaIndice($score){
         
-        $indice = 1;
+        $indice = 2; // mínimo após preencher o questionário é Iniciante
 
         $dicionario = [
-            580 => 2,
-            665 => 3,
-            785 => 4,
-            945 => 5
+            580 => 3,
+            665 => 4,
+            785 => 5,
+            945 => 6
         ];
 
         foreach($dicionario as $key => $value){
