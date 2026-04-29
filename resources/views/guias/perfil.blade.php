@@ -63,7 +63,7 @@
                         @endif
                      </p>
                      @endif
-                     <a href="{{ route('evento.detalhes', $evento->slug_eve) }}" class="btn btn-outline-info btn-sm">
+                     <a href="{{ route('evento.detalhes', $evento->slug_eve) }}" class="btn btn-outline-info mt-3">
                         <i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes
                      </a>
                   </div>
