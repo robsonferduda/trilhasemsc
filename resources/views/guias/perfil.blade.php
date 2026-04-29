@@ -58,7 +58,7 @@
                   @endif
                   <div class="card-body py-2 px-3">
                      <div class="d-flex align-items-start justify-content-between flex-wrap">
-                        <h6 class="card-title mb-1 font-weight-bold" style="font-size:1rem;">{{ $evento->nm_evento_eve }}</h6>
+                        <h6 class="card-title mb-1" style="font-size:1rem;">{{ $evento->nm_evento_eve }}</h6>
                         @if(isset($evento->valor_eve))
                            @if($evento->valor_eve > 0)
                            <span class="badge badge-info ml-2" style="white-space:nowrap;">R$ {{ number_format($evento->valor_eve, 2, ',', '.') }}</span>
