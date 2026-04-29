@@ -53,7 +53,14 @@ class GuiaController extends Controller
             $guia = Guia::where('nm_instagram_gui', $identificador)->first();
 
         if($guia){
-            return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+            $eventos_futuros = $guia->eventos()
+                ->where('fl_ativo_eve', true)
+                ->where('fl_privado_eve', false)
+                ->where('dt_realizacao_eve', '>=', now()->toDateString())
+                ->orderBy('dt_realizacao_eve')
+                ->get();
+
+            return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'eventos_futuros' => $eventos_futuros]);
         }else{
             return view('guias/guia-not-found', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
         }        

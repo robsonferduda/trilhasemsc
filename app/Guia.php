@@ -56,4 +56,9 @@ class Guia extends Model
     {
         return $this->hasOne('App\User', 'id', 'id_user');
     }
+
+    public function eventos()
+    {
+        return $this->hasMany('App\Evento', 'id_guia_gui', 'id_guia_gui');
+    }
 }

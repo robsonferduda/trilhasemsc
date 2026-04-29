@@ -39,7 +39,59 @@
             <a class="btn btn-success" href="{{ url("guia/perfil/estatistica/telefone", $guia->nm_instagram_gui) }}"><i class="fa fa-whatsapp" aria-hidden="true"></i> Enviar Mensagem</a>
             <a class="btn btn-primary mr-2 ml-3" href="{{ url("guias-e-condutores") }}"><i class="fa fa-users" aria-hidden="true"></i> Todos os Guias</a>
          </div> 
-         @include('layouts/partes/publicidade-google')         
+         @include('layouts/partes/publicidade-google')
+
+         @if(isset($eventos_futuros) && $eventos_futuros->count() > 0)
+         <div class="row mt-4 mb-2">
+            <div class="col-md-12">
+               <h3 class="text-info"><i class="fa fa-calendar" aria-hidden="true"></i> Agenda</h3>
+               <hr>
+            </div>
+            @foreach($eventos_futuros as $evento)
+            <div class="col-md-6 mb-3">
+               <div class="card border-info h-100">
+                  @if($evento->ds_imagem_horizontal_eve)
+                  <img class="card-img-top" src="{{ asset('storage/eventos/'.$evento->ds_imagem_horizontal_eve) }}" alt="{{ $evento->nm_evento_eve }}" style="max-height:160px; object-fit:cover;">
+                  @endif
+                  <div class="card-body">
+                     <h5 class="card-title">{{ $evento->nm_evento_eve }}</h5>
+                     <p class="card-text text-muted mb-1">
+                        <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                        <strong>{{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y') }}</strong>
+                        @if($evento->hora_inicio_eve)
+                           &nbsp;<i class="fa fa-clock-o" aria-hidden="true"></i> {{ substr($evento->hora_inicio_eve, 0, 5) }}
+                           @if($evento->hora_fim_eve)
+                              &nbsp;às {{ substr($evento->hora_fim_eve, 0, 5) }}
+                           @endif
+                        @endif
+                     </p>
+                     @if($evento->dt_termino_eve && $evento->dt_termino_eve != $evento->dt_realizacao_eve)
+                     <p class="card-text text-muted mb-1">
+                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Término: {{ \Carbon\Carbon::parse($evento->dt_termino_eve)->format('d/m/Y') }}
+                     </p>
+                     @endif
+                     @if($evento->valor_eve)
+                     <p class="card-text mb-1">
+                        <i class="fa fa-ticket" aria-hidden="true"></i>
+                        @if($evento->valor_eve > 0)
+                           R$ {{ number_format($evento->valor_eve, 2, ',', '.') }}
+                        @else
+                           <span class="text-success">Gratuito</span>
+                        @endif
+                     </p>
+                     @endif
+                  </div>
+                  <div class="card-footer bg-transparent border-0">
+                     <a href="{{ route('evento.detalhes', $evento->slug_eve) }}" class="btn btn-outline-info btn-sm">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes
+                     </a>
+                  </div>
+               </div>
+            </div>
+            @endforeach
+         </div>
+         @endif
+         
        </div>
     </div>
  </section>
