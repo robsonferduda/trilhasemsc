@@ -352,11 +352,11 @@
                            </tr>
                            <tr class="pontuacao">
                               <td>Pontuação Mínima</td>
-                              <td>280</td>
-                              <td>410</td>
-                              <td>810</td>
-                              <td>935</td>
-                              <td>1000</td>
+                              <td>—</td>
+                              <td>580</td>
+                              <td>665</td>
+                              <td>785</td>
+                              <td>945</td>
                            </tr>
                         </tbody>
                      </table>

@@ -430,11 +430,10 @@ class TrilheiroController extends Controller
         $indice = 1;
 
         $dicionario = [
-            280 => 2,
-            410 => 3,
-            810 => 4,
-            935 => 5,
-            1000 => 6
+            580 => 2,
+            665 => 3,
+            785 => 4,
+            945 => 5
         ];
 
         foreach($dicionario as $key => $value){
