@@ -63,8 +63,6 @@
                         @endif
                      </p>
                      @endif
-                  </div>
-                  <div class="card-footer bg-transparent border-0">
                      <a href="{{ route('evento.detalhes', $evento->slug_eve) }}" class="btn btn-outline-info btn-sm">
                         <i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes
                      </a>
