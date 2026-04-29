@@ -150,7 +150,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('dashboard', 'HomeController@dashboard');
 
-        Route::match(['get', 'post'], 'trilheiros/recalcular-score', 'TrilheiroController@recalcularScoreTodos')->name('admin.trilheiros.recalcular-score');
+        Route::post('trilheiros/recalcular-score', 'TrilheiroController@recalcularScoreTodos')->name('admin.trilheiros.recalcular-score');
 
         Route::get('eventos/listar', 'EventoController@listar');
 
