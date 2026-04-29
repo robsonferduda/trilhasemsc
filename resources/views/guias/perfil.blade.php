@@ -25,8 +25,8 @@
          </div>
 
          @if(isset($eventos_futuros) && $eventos_futuros->count() > 0)
-         <div class="col-md-12 mt-5 mb-2">
-            <h3 class="text-info mb-0"><i class="fa fa-calendar" aria-hidden="true"></i> Agenda</h3>
+         <div class="col-md-12 mt-2 mb-2">
+            <h4 class="text-info mb-0"><i class="fa fa-calendar" aria-hidden="true"></i> Agenda</h4>
             <div style="height:3px;background:linear-gradient(90deg,#17a2b8 0%,transparent 100%);border-radius:2px;" class="mt-1 mb-4"></div>
 
             @foreach($eventos_futuros as $evento)
