@@ -183,18 +183,12 @@
                                     <label>Experiência em caminhada em cost&otilde;es rochosos?</label><span class="text-danger"> Obrigatório</span>
                                     <br><small class="text-info"><i class="fa fa-info-circle"></i> Atividades de caminhada em terrenos íngremes e rochosos, que exigem cuidado e atenção redobrada.</small>
                                     <br>
-                                    <label class="fancy-radio">
-                                        <input type="radio" name="nu_costao" value="0" {{ ($questionario and isset($questionario->nu_costao_que) and $questionario->nu_costao_que == 0) ? 'checked' : '' }} required data-parsley-errors-container="#error-radio-costao" data-parsley-multiple="nu_costao">
-                                        <span><i></i>Nenhuma experiência</span>
-                                    </label>
-                                    <label class="fancy-radio">
-                                        <input type="radio" name="nu_costao" value="60" {{ ($questionario and isset($questionario->nu_costao_que) and $questionario->nu_costao_que == 60) ? 'checked' : '' }} data-parsley-multiple="nu_costao">
-                                        <span><i></i>Já caminhou com cautela, trechos curtos</span>
-                                    </label>
-                                    <label class="fancy-radio">
-                                        <input type="radio" name="nu_costao" value="60" {{ ($questionario and isset($questionario->nu_costao_que) and $questionario->nu_costao_que == 60) ? 'checked' : '' }} data-parsley-multiple="nu_costao">
-                                        <span><i></i>Cost&otilde;es longos, molhados ou expostos</span>
-                                    </label>
+                                    <select name="nu_costao" id="nu_costao" class="form-control" required data-parsley-errors-container="#error-radio-costao">
+                                        <option value="">Selecione uma opção</option>
+                                        <option value="0" {{ ($questionario && isset($questionario->nu_costao_que) && $questionario->nu_costao_que == 0) ? 'selected' : '' }}>Nenhuma experiência</option>
+                                        <option value="30" {{ ($questionario && isset($questionario->nu_costao_que) && $questionario->nu_costao_que == 30 && isset($questionario->nu_costao_que_label) && $questionario->nu_costao_que_label == 'curtos') ? 'selected' : '' }}>Já caminhou com cautela, trechos curtos</option>
+                                        <option value="60" {{ ($questionario && isset($questionario->nu_costao_que) && $questionario->nu_costao_que == 60 && isset($questionario->nu_costao_que_label) && $questionario->nu_costao_que_label == 'longos') ? 'selected' : '' }}>Cost&otilde;es longos, molhados ou expostos</option>
+                                    </select>
                                     <p id="error-radio-costao"></p>
                                 </div>
                             </div>
