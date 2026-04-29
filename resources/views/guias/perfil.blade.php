@@ -25,49 +25,70 @@
          </div>
 
          @if(isset($eventos_futuros) && $eventos_futuros->count() > 0)
-         <div class="row mt-4 mb-2">
-            <div class="col-md-12">
-               <h3 class="text-info"><i class="fa fa-calendar" aria-hidden="true"></i> Agenda</h3>
-               <hr>
-            </div>
+         <div class="col-md-12 mt-5 mb-2">
+            <h3 class="text-info mb-0"><i class="fa fa-calendar" aria-hidden="true"></i> Agenda</h3>
+            <div style="height:3px;background:linear-gradient(90deg,#17a2b8 0%,transparent 100%);border-radius:2px;" class="mt-1 mb-4"></div>
+
             @foreach($eventos_futuros as $evento)
-            <div class="col-md-12 mb-3">
-               <div class="card border-info h-100">
-                  @if($evento->ds_imagem_horizontal_eve)
-                  <img class="card-img-top" src="{{ asset('storage/eventos/'.$evento->ds_imagem_horizontal_eve) }}" alt="{{ $evento->nm_evento_eve }}" style="max-height:160px; object-fit:cover;">
+            @php $data = \Carbon\Carbon::parse($evento->dt_realizacao_eve); @endphp
+            <div class="d-flex mb-4" style="gap:0;">
+
+               {{-- Bloco da data --}}
+               <div class="d-flex flex-column align-items-center justify-content-start mr-3" style="min-width:62px;">
+                  <div class="rounded text-white text-center" style="background:#17a2b8;width:62px;">
+                     <div class="py-1" style="font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;background:rgba(0,0,0,.15);border-radius:4px 4px 0 0;">
+                        {{ $data->translatedFormat('M') }}
+                     </div>
+                     <div style="font-size:1.8rem;font-weight:700;line-height:1.1;">{{ $data->format('d') }}</div>
+                     <div class="pb-1" style="font-size:0.7rem;opacity:.85;">{{ $data->translatedFormat('D') }}</div>
+                  </div>
+                  {{-- linha vertical conectando eventos --}}
+                  @if(!$loop->last)
+                  <div style="flex:1;width:2px;background:#dee2e6;min-height:20px;margin-top:4px;"></div>
                   @endif
-                  <div class="card-body">
-                     <h5 class="card-title">{{ $evento->nm_evento_eve }}</h5>
-                     <p class="card-text text-muted mb-1">
-                        <i class="fa fa-calendar-o" aria-hidden="true"></i>
-                        <strong>{{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y') }}</strong>
-                        @if($evento->hora_inicio_eve)
-                           &nbsp;<i class="fa fa-clock-o" aria-hidden="true"></i> {{ substr($evento->hora_inicio_eve, 0, 5) }}
-                           @if($evento->hora_fim_eve)
-                              &nbsp;às {{ substr($evento->hora_fim_eve, 0, 5) }}
+               </div>
+
+               {{-- Card do evento --}}
+               <div class="card flex-fill shadow-sm" style="border-left:4px solid #17a2b8;border-top:none;border-right:none;border-bottom:none;border-radius:6px;">
+                  @if($evento->ds_imagem_horizontal_eve)
+                  <img src="{{ asset('storage/eventos/'.$evento->ds_imagem_horizontal_eve) }}"
+                       alt="{{ $evento->nm_evento_eve }}"
+                       class="card-img-top"
+                       style="max-height:140px;object-fit:cover;border-radius:0 6px 0 0;">
+                  @endif
+                  <div class="card-body py-2 px-3">
+                     <div class="d-flex align-items-start justify-content-between flex-wrap">
+                        <h6 class="card-title mb-1 font-weight-bold" style="font-size:1rem;">{{ $evento->nm_evento_eve }}</h6>
+                        @if(isset($evento->valor_eve))
+                           @if($evento->valor_eve > 0)
+                           <span class="badge badge-info ml-2" style="white-space:nowrap;">R$ {{ number_format($evento->valor_eve, 2, ',', '.') }}</span>
+                           @else
+                           <span class="badge badge-success ml-2">Gratuito</span>
                            @endif
                         @endif
-                     </p>
-                     @if($evento->dt_termino_eve && $evento->dt_termino_eve != $evento->dt_realizacao_eve)
-                     <p class="card-text text-muted mb-1">
-                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Término: {{ \Carbon\Carbon::parse($evento->dt_termino_eve)->format('d/m/Y') }}
-                     </p>
-                     @endif
-                     @if($evento->valor_eve)
-                     <p class="card-text mb-1">
-                        <i class="fa fa-ticket" aria-hidden="true"></i>
-                        @if($evento->valor_eve > 0)
-                           R$ {{ number_format($evento->valor_eve, 2, ',', '.') }}
-                        @else
-                           <span class="text-success">Gratuito</span>
+                     </div>
+                     <div class="text-muted" style="font-size:.85rem;">
+                        @if($evento->hora_inicio_eve)
+                        <span class="mr-3"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                           {{ substr($evento->hora_inicio_eve, 0, 5) }}
+                           @if($evento->hora_fim_eve)&nbsp;às {{ substr($evento->hora_fim_eve, 0, 5) }}@endif
+                        </span>
                         @endif
-                     </p>
-                     @endif
-                     <a href="{{ route('evento.detalhes', $evento->slug_eve) }}" class="btn btn-outline-info mt-3">
-                        <i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes
+                        @if($evento->dt_termino_eve && $evento->dt_termino_eve != $evento->dt_realizacao_eve)
+                        <span><i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                           até {{ \Carbon\Carbon::parse($evento->dt_termino_eve)->format('d/m/Y') }}
+                        </span>
+                        @endif
+                     </div>
+                  </div>
+                  <div class="card-footer bg-transparent border-0 pt-0 pb-2 px-3">
+                     <a href="{{ route('evento.detalhes', $evento->slug_eve) }}"
+                        class="btn btn-outline-info btn-sm">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i> Ver evento
                      </a>
                   </div>
                </div>
+
             </div>
             @endforeach
          </div>
