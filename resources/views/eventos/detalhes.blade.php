@@ -65,35 +65,45 @@
                     $fotoTrilhaVinculada = $trilhaVinculada->foto->where('id_tipo_foto_tfo', 1)->first();
                 @endphp
                 <div class="col-md-12 mt-3 mb-2">
-                    <div class="d-flex align-items-center p-3 rounded" style="background:#f8f9fa; border:1px solid #e0e0e0;">
-                        <div class="mr-4 flex-shrink-0">
-                            @if($fotoTrilhaVinculada)
-                                <img src="{{ asset('img/trilhas/busca/'.$fotoTrilhaVinculada->nm_path_fot) }}"
-                                     alt="{{ $trilhaVinculada->nm_trilha_tri }}"
-                                     class="rounded"
-                                     style="width:120px; height:72px; object-fit:cover;">
-                            @else
-                                <div class="rounded d-flex align-items-center justify-content-center bg-secondary"
-                                     style="width:120px; height:72px;">
-                                    <i class="fa fa-map-signs fa-2x text-white"></i>
+                    <a href="{{ url($trilhaVinculada->ds_url_tri) }}" target="_blank" class="text-decoration-none d-block">
+                        <div class="rounded overflow-hidden"
+                             style="border:1px solid #e3e3e3; background:#fff; transition:box-shadow 0.2s;"
+                             onmouseover="this.style.boxShadow='0 4px 18px rgba(0,0,0,0.10)'"
+                             onmouseout="this.style.boxShadow='none'">
+                            <div class="d-flex align-items-stretch">
+                                <div class="flex-shrink-0" style="width:130px; min-height:88px;">
+                                    @if($fotoTrilhaVinculada)
+                                        <img src="{{ asset('img/trilhas/busca/'.$fotoTrilhaVinculada->nm_path_fot) }}"
+                                             alt="{{ $trilhaVinculada->nm_trilha_tri }}"
+                                             style="width:130px; height:100%; min-height:88px; object-fit:cover; display:block;">
+                                    @else
+                                        <div class="d-flex align-items-center justify-content-center bg-secondary"
+                                             style="width:130px; min-height:88px; height:100%;">
+                                            <i class="fa fa-map-signs fa-2x text-white"></i>
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
+                                <div class="px-3 py-2 flex-grow-1 d-flex flex-column justify-content-center">
+                                    <small class="font-weight-bold text-uppercase text-muted"
+                                           style="font-size:0.62rem; letter-spacing:0.09em;">Trilha Relacionada</small>
+                                    <p class="mb-1 mt-1 font-weight-bold text-dark" style="font-size:0.95rem; line-height:1.3;">
+                                        {{ $trilhaVinculada->nm_trilha_tri }}
+                                    </p>
+                                    @if($trilhaVinculada->nivel)
+                                        <div>
+                                            <span class="badge"
+                                                  style="background:{{ $trilhaVinculada->nivel->dc_color_nivel_niv }}; color:#fff; font-size:0.7rem; padding:3px 8px; border-radius:20px;">
+                                                {{ $trilhaVinculada->nivel->dc_nivel_niv }}{{ $trilhaVinculada->complemento ? ' — '.$trilhaVinculada->complemento->nm_complemento_nivel_con : '' }}
+                                            </span>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="d-flex align-items-center pr-3 text-muted">
+                                    <i class="fa fa-chevron-right" style="font-size:0.8rem;"></i>
+                                </div>
+                            </div>
                         </div>
-                        <div style="margin-left: 10px;">
-                            <p class="mb-1 font-weight-bold">
-                                <small class="text-muted text-uppercase" style="font-size:0.7rem;">Trilha Relacionada</small><br>
-                                <a href="{{ url($trilhaVinculada->ds_url_tri) }}" target="_blank" class="text-dark">
-                                    {{ $trilhaVinculada->nm_trilha_tri }}
-                                </a>
-                            </p>
-                            @if($trilhaVinculada->nivel)
-                                <span class="badge badge-secondary"
-                                      style="background:{{ $trilhaVinculada->nivel->dc_color_nivel_niv }}; color:#fff;">
-                                    {{ $trilhaVinculada->nivel->dc_nivel_niv }}{{ $trilhaVinculada->complemento ? ' - '.$trilhaVinculada->complemento->nm_complemento_nivel_con : '' }}
-                                </span>
-                            @endif
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 @endif
 
