@@ -62,7 +62,7 @@
                 @if($evento->id_trilha_tri && $evento->trilha)
                 @php
                     $trilhaVinculada = $evento->trilha;
-                    $fotoTrilhaVinculada = $trilhaVinculada->foto->where('id_tipo_foto_tfo', 1)->first();
+                    $fotoTrilhaVinculada = $trilhaVinculada->foto->where('id_tipo_foto_tfo', 5)->first();
                 @endphp
                 <div class="col-md-12 mt-3 mb-2">
                     <a href="{{ url($trilhaVinculada->ds_url_tri) }}" target="_blank" class="text-decoration-none d-block">
