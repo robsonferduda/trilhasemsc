@@ -29,7 +29,8 @@ class GoogleController extends Controller
                 $dados = array('name' =>  $userGoogle->getName(),
                                'email' => $userGoogle->getEmail(),
                                'fl_google' => 'S',
-                               'id_role' => 'SOCIAL',
+                               'fl_social_usu' => true,
+                               'id_role' => 'TRILHEIRO',
                                'password' => \Hash::make(rand(1, 10000)));
                 
                 $user = User::create($dados);
@@ -37,7 +38,7 @@ class GoogleController extends Controller
 
             Auth::login($user);
 
-            if($user->id_role == 'SOCIAL') {
+            if($user->fl_social_usu) {
                 return redirect('cadastro/privado/escolher-perfil');
             }
 

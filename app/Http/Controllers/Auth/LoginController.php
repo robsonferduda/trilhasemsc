@@ -82,7 +82,7 @@ class LoginController extends Controller
                     return redirect('guia-e-condutores/privado/atualizar-cadastro');
                     break;
                 case 'TRILHEIRO':
-                    return redirect('trilheiro/privado/perfil');
+                    return redirect()->intended('trilheiro/privado/perfil');
                     break;
                 case 'SOCIAL':
                     return redirect('cadastro/privado/escolher-perfil');
