@@ -125,6 +125,7 @@
                 @endif
 
                 <div class="col-lg-12 col-md-12">
+                    <h5 class="text-left mb-3">Descrição da Aventura</h5>
                     {!! nl2br($evento->descricao) !!}
                 </div>
                 <div class="col-lg-12 col-md-12">
