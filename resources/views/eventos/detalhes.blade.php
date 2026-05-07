@@ -93,13 +93,13 @@
                                         <div>
                                             <span class="badge"
                                                   style="background:{{ $trilhaVinculada->nivel->dc_color_nivel_niv }}; color:#fff; font-size:0.7rem; padding:3px 8px; border-radius:20px;">
-                                                {{ $trilhaVinculada->nivel->dc_nivel_niv }}{{ $trilhaVinculada->complemento ? ' — '.$trilhaVinculada->complemento->nm_complemento_nivel_con : '' }}
+                                                {{ $trilhaVinculada->nivel->dc_nivel_niv }}{{ $trilhaVinculada->complemento ? ' - '.$trilhaVinculada->complemento->nm_complemento_nivel_con : '' }}
                                             </span>
                                         </div>
                                     @endif
                                 </div>
                                 <div class="d-flex align-items-center pr-3 text-muted">
-                                    <i class="fa fa-chevron-right" style="font-size:0.8rem;"></i>
+                                    <i class="fa fa-chevron-right" style="font-size:0.8rem; margin-right:5px;"></i>
                                 </div>
                             </div>
                         </div>
