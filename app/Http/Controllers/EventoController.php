@@ -207,10 +207,8 @@ class EventoController extends Controller
         $evento = null;
         $guia = Guia::where('id_user', Auth::user()->id)->first();
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
-        $trilhas = Trilha::join('guia_trilha_gut as gut', 'trilha_tri.id_trilha_tri', '=', 'gut.id_trilha_tri')
-            ->where('gut.id_guia_gui', $guia->id_guia_gui)
-            ->orderBy('nm_trilha_tri')
-            ->select('trilha_tri.id_trilha_tri', 'trilha_tri.nm_trilha_tri')
+        $trilhas = Trilha::orderBy('nm_trilha_tri')
+            ->select('id_trilha_tri', 'nm_trilha_tri')
             ->get();
 
         return view('admin/eventos/cadastro', compact('guia','cidades','evento','trilhas'));
@@ -221,8 +219,8 @@ class EventoController extends Controller
         $guia = Guia::where('id_user', Auth::user()->id)->first();
         $cidades = Cidade::where('cd_estado_est', 42)->orderBy('nm_cidade_cde')->get();
         $evento = Evento::where('id_evento_eve', $id)->first();
-        $trilhas = Trilha::join('guia_trilha_gut as gut', 'trilha_tri.id_trilha_tri', '=', 'gut.id_trilha_tri')
-            ->where('gut.id_guia_gui', $guia->id_guia_gui)
+        $trilhas = Trilha::orderBy('nm_trilha_tri')
+            ->select('id_trilha_tri', 'nm_trilha_tri')
             ->orderBy('nm_trilha_tri')
             ->select('trilha_tri.id_trilha_tri', 'trilha_tri.nm_trilha_tri')
             ->get();
