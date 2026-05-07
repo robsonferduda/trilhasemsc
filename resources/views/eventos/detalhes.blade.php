@@ -109,7 +109,7 @@
 
                 @if($evento->trilheiros && $evento->trilheiros->count() && Auth::check() && trim(Auth::user()->id_role) == 'GUIA' && $evento->guia->id_user == Auth::user()->id)
                     <div class="col-lg-12 col-md-12 mt-3">
-                        <h5 class="text-left mb-3">Participantes</h5>
+                        <h5 class="text-left mb-3">Participantes ({{ $evento->trilheiros->count() }}/{{ $evento->total_participantes_eve }})</h5>
                         <div class="d-flex flex-wrap justify-content-start align-items-start">
                             @foreach($evento->trilheiros as $participante)
                                 @php
