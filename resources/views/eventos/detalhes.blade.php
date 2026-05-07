@@ -73,7 +73,7 @@
                             <div class="d-flex align-items-stretch">
                                 <div class="flex-shrink-0" style="width:130px; min-height:88px;">
                                     @if($fotoTrilhaVinculada)
-                                        <img src="{{ asset('img/trilhas/busca/'.$fotoTrilhaVinculada->nm_path_fot) }}"
+                                        <img src="{{ asset('img/trilhas/detalhes-principal/'.$fotoTrilhaVinculada->nm_path_fot) }}"
                                              alt="{{ $trilhaVinculada->nm_trilha_tri }}"
                                              style="width:130px; height:100%; min-height:88px; object-fit:cover; display:block;">
                                     @else
