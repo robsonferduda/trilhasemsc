@@ -97,7 +97,7 @@
                 </div>
                 @endif
 
-                @if($evento->trilheiros && $evento->trilheiros->count())
+                @if($evento->trilheiros && $evento->trilheiros->count() && Auth::check() && trim(Auth::user()->id_role) == 'GUIA' && $evento->guia->id_user == Auth::user()->id)
                     <div class="col-lg-12 col-md-12 mt-3">
                         <h5 class="text-left mb-3">Participantes</h5>
                         <div class="d-flex flex-wrap justify-content-start align-items-start">
@@ -125,9 +125,7 @@
                 @endif
 
                 <div class="col-lg-12 col-md-12">
-                    <p>
-                        <strong>Detalhes</strong>: {!! nl2br($evento->descricao) !!}
-                    </p>
+                    {!! nl2br($evento->descricao) !!}
                 </div>
                 <div class="col-lg-12 col-md-12">
                     @if($evento->ds_imagem_horizontal_eve)
