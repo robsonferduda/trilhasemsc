@@ -116,7 +116,7 @@ class EventoController extends Controller
     public function eventos()
     {
         $guia = Guia::where('id_user', Auth::user()->id)->first();
-        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)->orderBy('dt_realizacao_eve')->get();
+        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)->orderBy('dt_realizacao_eve','DESC')->get();
 
         return view('admin/eventos/listar', compact('guia','eventos'));
     }
