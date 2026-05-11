@@ -38,6 +38,9 @@
                                         <h6 class="title">{{ $evento->nm_evento_eve }} <small class="float-right text-muted">{{ \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i') }} - {{ \Carbon\Carbon::parse($evento->hora_fim_eve )->format('H:i') }} </small></h6>
                                     </div>
                                     <div class="col-12">
+                                        @if(trim(Auth::user()->id_role) == 'ADMIN')
+                                        <p class="mb-1"><strong>Guia</strong>: {{ $evento->guia->nm_guia_gui ?? '—' }}</p>
+                                        @endif
                                         <p class="mb-1"><strong>Local</strong>: {{ $evento->local->nm_cidade_cde }}</p>
                                         <p class="mb-1"><strong>Data</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y') }}</p>
                                         <p class="mb-1"><strong>Valor</strong>: {{ ($evento->valor_eve) ? "R$ ".$evento->valor_eve : 'Gratuita' }}</p>

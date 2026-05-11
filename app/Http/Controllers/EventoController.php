@@ -50,7 +50,7 @@ class EventoController extends Controller
 
         if ($isAdmin) {
             $guia = null;
-            $eventos = Evento::with(['eventoTrilheiros', 'trilheiros'])
+            $eventos = Evento::with(['eventoTrilheiros', 'trilheiros', 'guia'])
                 ->orderBy('dt_realizacao_eve','DESC')
                 ->get();
         } else {
