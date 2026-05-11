@@ -153,6 +153,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('trilheiros/recalcular-score', 'TrilheiroController@recalcularScoreTodos')->name('admin.trilheiros.recalcular-score');
 
         Route::get('eventos/listar', 'EventoController@listar');
+        Route::get('eventos/{id}/visualizacoes', 'EventoController@visualizacoesPorDia')->name('admin.evento.visualizacoes');
 
         Route::get('guias', 'GuiaController@listar');
         Route::get('guias/aprovar', 'GuiaController@aprovar');

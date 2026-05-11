@@ -52,7 +52,7 @@
                                             <span class="badge badge-success">{{ $evento->vezes_oferecido ?? 1 }}x</span>
                                             &nbsp;|&nbsp;
                                             <strong>Visualizações</strong>: 
-                                            <span class="badge badge-warning">{{ $evento->visualizacoes_count ?? 0 }}</span>
+                                            <span class="badge badge-warning badge-visualizacoes" style="cursor:pointer;" data-id="{{ $evento->id_evento_eve }}" data-nome="{{ $evento->nm_evento_eve }}">{{ $evento->visualizacoes_count ?? 0 }}</span>
                                         </p>
                                         <div style="position: absolute; bottom: 1px; right: 10px;">
                                             <a href="{{ url('guia-e-condutores/privado/eventos/participantes', $evento->id_evento_eve) }}" class="btn btn-outline-danger btn-sm"><i class="fa fa-users"></i> Participantes</a>
@@ -86,10 +86,51 @@
         </div>
     </div>
 @endsection
+
+{{-- Modal visualizações por dia --}}
+<div class="modal fade" id="modalVisualizacoes" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-eye"></i> Visualizações por dia</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted mb-3" id="modal-evento-nome"></p>
+                <div id="modal-visualizacoes-body">
+                    <div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section('script')
     <script>
         $(function() {
-            
+            $(document).on('click', '.badge-visualizacoes', function () {
+                var id   = $(this).data('id');
+                var nome = $(this).data('nome');
+                $('#modal-evento-nome').text(nome);
+                $('#modal-visualizacoes-body').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+                $('#modalVisualizacoes').modal('show');
+
+                $.getJSON('{{ url("admin/eventos") }}/' + id + '/visualizacoes', function (dados) {
+                    if (!dados.length) {
+                        $('#modal-visualizacoes-body').html('<p class="text-muted text-center">Nenhuma visualização registrada.</p>');
+                        return;
+                    }
+                    var html = '<table class="table table-sm table-hover mb-0">';
+                    html += '<thead><tr><th>Data</th><th class="text-right">Visualizações</th></tr></thead><tbody>';
+                    dados.forEach(function (row) {
+                        var partes = row.dia.split('-');
+                        var dataFmt = partes[2] + '/' + partes[1] + '/' + partes[0];
+                        html += '<tr><td>' + dataFmt + '</td><td class="text-right"><span class="badge badge-warning">' + row.total + '</span></td></tr>';
+                    });
+                    html += '</tbody></table>';
+                    $('#modal-visualizacoes-body').html(html);
+                });
+            });
         });
         
         // SweetAlert para clonar eventos

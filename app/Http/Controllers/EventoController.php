@@ -95,6 +95,18 @@ class EventoController extends Controller
         return view('admin/eventos/listar', compact('guia','eventos'));
     }
 
+    public function visualizacoesPorDia($id)
+    {
+        $dados = Estatistica::where('cd_monitoramento_esa', $id)
+            ->where('cd_tipo_monitoramento_tim', 2)
+            ->selectRaw('DATE(created_at) as dia, count(*) as total')
+            ->groupBy('dia')
+            ->orderBy('dia', 'DESC')
+            ->get();
+
+        return response()->json($dados);
+    }
+
     public function detalhes($slugOrId)
     {
         // Busca evento por slug ou ID (mantém compatibilidade)
