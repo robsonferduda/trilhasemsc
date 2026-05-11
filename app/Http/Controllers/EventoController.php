@@ -46,26 +46,35 @@ class EventoController extends Controller
 
     public function listar()
     {
-        $guia = Guia::where('id_user', Auth::user()->id)->first();
-        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)
-            ->with(['eventoTrilheiros', 'trilheiros'])
-            ->orderBy('dt_realizacao_eve')
-            ->get();
+        $isAdmin = trim(Auth::user()->id_role) === 'ADMIN';
+
+        if ($isAdmin) {
+            $guia = null;
+            $eventos = Evento::with(['eventoTrilheiros', 'trilheiros'])
+                ->orderBy('dt_realizacao_eve')
+                ->get();
+        } else {
+            $guia = Guia::where('id_user', Auth::user()->id)->first();
+            $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)
+                ->with(['eventoTrilheiros', 'trilheiros'])
+                ->orderBy('dt_realizacao_eve')
+                ->get();
+        }
 
         // Adiciona contagem de participantes e vezes oferecido para cada evento
         foreach ($eventos as $evento) {
             // Conta participantes deste evento específico
             $evento->participantes_count = $evento->eventoTrilheiros->count();
-            
+
             // Verifica se este evento é original (sem id_unico_eve) ou clone (com id_unico_eve)
             if (empty($evento->id_unico_eve)) {
                 // Evento original: conta ele mesmo (1) + todos os clones que apontam para ele
-                $evento->vezes_oferecido = 1 + Evento::where('id_guia_gui', $guia->id_guia_gui)
+                $evento->vezes_oferecido = 1 + Evento::where('id_guia_gui', $evento->id_guia_gui)
                     ->where('id_unico_eve', $evento->id_evento_eve)
                     ->count();
             } else {
                 // Evento clonado: conta o original + todos os clones (incluindo este)
-                $evento->vezes_oferecido = 1 + Evento::where('id_guia_gui', $guia->id_guia_gui)
+                $evento->vezes_oferecido = 1 + Evento::where('id_guia_gui', $evento->id_guia_gui)
                     ->where('id_unico_eve', $evento->id_unico_eve)
                     ->where('id_evento_eve', '!=', $evento->id_evento_eve)
                     ->count();
