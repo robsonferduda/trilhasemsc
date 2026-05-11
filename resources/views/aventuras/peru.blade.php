@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Aventura Peru 2026 — Salkantay, Machu Picchu e Circuito Huayhuash">
-    <title>Peru 2026 — Nossa Aventura</title>
+    <title>Peru 2026</title>
     <link rel="icon" type="image/png" sizes="32x32" href="https://trilhasemsc.com.br/public/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://trilhasemsc.com.br/public/img/favicon/favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -301,7 +301,7 @@
             var m = Math.floor((diff % 3600000) / 60000);
             var s = Math.floor((diff % 60000) / 1000);
 
-            document.getElementById('cnt-days').textContent  = String(d).padStart(3, '0');
+            document.getElementById('cnt-days').textContent  = d < 100 ? String(d).padStart(2, '0') : String(d).padStart(3, '0');
             document.getElementById('cnt-hours').textContent = String(h).padStart(2, '0');
             document.getElementById('cnt-mins').textContent  = String(m).padStart(2, '0');
             document.getElementById('cnt-secs').textContent  = String(s).padStart(2, '0');
