@@ -47,6 +47,9 @@
                                             &nbsp;|&nbsp;
                                             <strong>Vezes oferecido</strong>: 
                                             <span class="badge badge-success">{{ $evento->vezes_oferecido ?? 1 }}x</span>
+                                            &nbsp;|&nbsp;
+                                            <strong>Visualizações</strong>: 
+                                            <span class="badge badge-warning">{{ $evento->visualizacoes_count ?? 0 }}</span>
                                         </p>
                                         <div style="position: absolute; bottom: 1px; right: 10px;">
                                             <a href="{{ url('guia-e-condutores/privado/eventos/participantes', $evento->id_evento_eve) }}" class="btn btn-outline-danger btn-sm"><i class="fa fa-users"></i> Participantes</a>

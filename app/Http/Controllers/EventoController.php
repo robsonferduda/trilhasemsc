@@ -61,10 +61,21 @@ class EventoController extends Controller
                 ->get();
         }
 
-        // Adiciona contagem de participantes e vezes oferecido para cada evento
+        // Pré-carrega contagem de visualizações de todos os eventos de uma vez
+        $ids = $eventos->pluck('id_evento_eve');
+        $visualizacoes = Estatistica::whereIn('cd_monitoramento_esa', $ids)
+            ->where('cd_tipo_monitoramento_tim', 2)
+            ->groupBy('cd_monitoramento_esa')
+            ->selectRaw('cd_monitoramento_esa, count(*) as total')
+            ->pluck('total', 'cd_monitoramento_esa');
+
+        // Adiciona contagem de participantes, vezes oferecido e visualizações para cada evento
         foreach ($eventos as $evento) {
             // Conta participantes deste evento específico
             $evento->participantes_count = $evento->eventoTrilheiros->count();
+
+            // Contagem de visualizações da página do evento
+            $evento->visualizacoes_count = $visualizacoes->get($evento->id_evento_eve, 0);
 
             // Verifica se este evento é original (sem id_unico_eve) ou clone (com id_unico_eve)
             if (empty($evento->id_unico_eve)) {
