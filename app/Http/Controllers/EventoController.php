@@ -51,7 +51,7 @@ class EventoController extends Controller
         if ($isAdmin) {
             $guia = null;
             $eventos = Evento::with(['eventoTrilheiros', 'trilheiros'])
-                ->orderBy('dt_realizacao_eve')
+                ->orderBy('dt_realizacao_eve','DESC')
                 ->get();
         } else {
             $guia = Guia::where('id_user', Auth::user()->id)->first();
