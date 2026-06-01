@@ -79,7 +79,7 @@
                         @endforeach
                     </div>
                 @else
-                    <h6>Acesse <a class="font-italic text-decoration-underline" href="{{ url("guias-e-condutores") }}">aqui</a> os guais e condutores cadastrados em nossa plataforma. </h6>
+                    <h6>Acesse <a class="text-decoration-underline" href="{{ url("guias-e-condutores") }}">aqui</a> os guais e condutores cadastrados em nossa plataforma. </h6>
                 @endif
 
                 @if(isset($proximosEventos) && $proximosEventos->count())
