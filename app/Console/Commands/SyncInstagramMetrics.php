@@ -35,11 +35,14 @@ class SyncInstagramMetrics extends Command
         $accessToken = config('services.instagram.access_token');
         $graphUrl = rtrim(config('services.instagram.graph_url'), '/');
         $metrics = config('services.instagram.metrics', 'reach,views,profile_views,website_clicks,follower_count');
+        $normalizedMetrics = $this->normalizeMetrics($metrics);
 
         if (empty($accountId) || empty($accessToken)) {
             $this->error('Defina INSTAGRAM_IG_USER_ID e INSTAGRAM_ACCESS_TOKEN antes de executar a sincronização.');
             return 1;
         }
+
+        $this->info('Metricas solicitadas: ' . implode(',', $normalizedMetrics));
 
         $startDate = $this->option('date')
             ? Carbon::parse($this->option('date'))->startOfDay()
@@ -61,7 +64,11 @@ class SyncInstagramMetrics extends Command
             $date = (clone $startDate)->subDays($offset);
 
             try {
-                $dailyData = $this->fetchDailyInsights($client, $accountId, $accessToken, $metrics, $date);
+                $dailyData = $this->fetchDailyInsights($client, $accountId, $accessToken, implode(',', $normalizedMetrics), $date);
+
+                if (!array_key_exists('views', Arr::get($dailyData, 'raw.metrics_found', []))) {
+                    $this->warn(sprintf('A API nao retornou a metrica views para %s.', $date->toDateString()));
+                }
 
                 InstagramMetricSnapshot::updateOrCreate(
                     [
@@ -121,7 +128,7 @@ class SyncInstagramMetrics extends Command
      */
     private function fetchDailyInsights(Client $client, $accountId, $accessToken, $metrics, Carbon $date)
     {
-        $requestedMetrics = array_filter(array_map('trim', explode(',', (string) $metrics)));
+        $requestedMetrics = $this->normalizeMetrics($metrics);
         $totalValueMetrics = ['views', 'profile_views', 'website_clicks'];
         $regularMetrics = array_values(array_diff($requestedMetrics, $totalValueMetrics));
         $specialMetrics = array_values(array_intersect($requestedMetrics, $totalValueMetrics));
@@ -131,6 +138,13 @@ class SyncInstagramMetrics extends Command
 
         $payload = [
             'data' => [],
+            'request' => [
+                'requested_metrics' => $requestedMetrics,
+                'regular_metrics' => $regularMetrics,
+                'special_metrics' => $specialMetrics,
+                'since' => $since,
+                'until' => $until,
+            ],
         ];
 
         if (!empty($regularMetrics)) {
@@ -182,7 +196,31 @@ class SyncInstagramMetrics extends Command
             }
         }
 
+        $payload['metrics_found'] = array_values(array_unique(array_filter(array_map(function ($metric) {
+            return Arr::get($metric, 'name');
+        }, (array) Arr::get($payload, 'data', [])))));
+
+        $result['raw'] = $payload;
+
         return $result;
+    }
+
+    /**
+     * @param string $metrics
+     * @return array
+     */
+    private function normalizeMetrics($metrics)
+    {
+        $parsed = array_filter(array_map('trim', explode(',', (string) $metrics)));
+
+        // Garante metricas obrigatorias para o dashboard basico.
+        foreach (['reach', 'views', 'profile_views', 'website_clicks', 'follower_count'] as $required) {
+            if (!in_array($required, $parsed, true)) {
+                $parsed[] = $required;
+            }
+        }
+
+        return array_values(array_unique($parsed));
     }
 
     /**
