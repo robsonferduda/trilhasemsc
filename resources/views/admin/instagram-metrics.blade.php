@@ -76,6 +76,101 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="header">
+                <h2>Comparativo com o período anterior</h2>
+                <small>Baseado nos mesmos dias anteriores aos selecionados no filtro.</small>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="text-muted">Seguidores</div>
+                                <h4 class="mb-0">{{ number_format($comparison['followers_count']['current'], 0, ',', '.') }}</h4>
+                                <small>
+                                    @if($comparison['followers_count']['percent'] !== null)
+                                        {{ $comparison['followers_count']['delta'] >= 0 ? '+' : '' }}{{ number_format($comparison['followers_count']['delta'], 0, ',', '.') }}
+                                        ({{ $comparison['followers_count']['percent'] >= 0 ? '+' : '' }}{{ number_format($comparison['followers_count']['percent'], 1, ',', '.') }}%)
+                                    @else
+                                        sem base anterior suficiente
+                                    @endif
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="text-muted">Alcance</div>
+                                <h4 class="mb-0">{{ number_format($comparison['reach']['current'], 0, ',', '.') }}</h4>
+                                <small>
+                                    @if($comparison['reach']['percent'] !== null)
+                                        {{ $comparison['reach']['delta'] >= 0 ? '+' : '' }}{{ number_format($comparison['reach']['delta'], 0, ',', '.') }}
+                                        ({{ $comparison['reach']['percent'] >= 0 ? '+' : '' }}{{ number_format($comparison['reach']['percent'], 1, ',', '.') }}%)
+                                    @else
+                                        sem base anterior suficiente
+                                    @endif
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="text-muted">Visualizações</div>
+                                <h4 class="mb-0">{{ number_format($comparison['views']['current'], 0, ',', '.') }}</h4>
+                                <small>
+                                    @if($comparison['views']['percent'] !== null)
+                                        {{ $comparison['views']['delta'] >= 0 ? '+' : '' }}{{ number_format($comparison['views']['delta'], 0, ',', '.') }}
+                                        ({{ $comparison['views']['percent'] >= 0 ? '+' : '' }}{{ number_format($comparison['views']['percent'], 1, ',', '.') }}%)
+                                    @else
+                                        sem base anterior suficiente
+                                    @endif
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="text-muted">Visitas no perfil</div>
+                                <h4 class="mb-0">{{ number_format($comparison['profile_views']['current'], 0, ',', '.') }}</h4>
+                                <small>
+                                    @if($comparison['profile_views']['percent'] !== null)
+                                        {{ $comparison['profile_views']['delta'] >= 0 ? '+' : '' }}{{ number_format($comparison['profile_views']['delta'], 0, ',', '.') }}
+                                        ({{ $comparison['profile_views']['percent'] >= 0 ? '+' : '' }}{{ number_format($comparison['profile_views']['percent'], 1, ',', '.') }}%)
+                                    @else
+                                        sem base anterior suficiente
+                                    @endif
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="text-muted">Cliques no site</div>
+                                <h4 class="mb-0">{{ number_format($comparison['website_clicks']['current'], 0, ',', '.') }}</h4>
+                                <small>
+                                    @if($comparison['website_clicks']['percent'] !== null)
+                                        {{ $comparison['website_clicks']['delta'] >= 0 ? '+' : '' }}{{ number_format($comparison['website_clicks']['delta'], 0, ',', '.') }}
+                                        ({{ $comparison['website_clicks']['percent'] >= 0 ? '+' : '' }}{{ number_format($comparison['website_clicks']['percent'], 1, ',', '.') }}%)
+                                    @else
+                                        sem base anterior suficiente
+                                    @endif
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="header">
                 <h2>Últimos snapshots coletados</h2>
                 <small>
                     Conta: {{ $accountId ?: 'não configurada' }}
