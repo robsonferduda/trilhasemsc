@@ -121,20 +121,49 @@ class SyncInstagramMetrics extends Command
      */
     private function fetchDailyInsights(Client $client, $accountId, $accessToken, $metrics, Carbon $date)
     {
+        $requestedMetrics = array_filter(array_map('trim', explode(',', (string) $metrics)));
+        $totalValueMetrics = ['profile_views', 'website_clicks'];
+        $regularMetrics = array_values(array_diff($requestedMetrics, $totalValueMetrics));
+        $specialMetrics = array_values(array_intersect($requestedMetrics, $totalValueMetrics));
+
         $since = (clone $date)->startOfDay()->timestamp;
         $until = (clone $date)->addDay()->startOfDay()->timestamp;
 
-        $response = $client->get($accountId . '/insights', [
-            'query' => [
-                'metric' => $metrics,
-                'period' => 'day',
-                'since' => $since,
-                'until' => $until,
-                'access_token' => $accessToken,
-            ],
-        ]);
+        $payload = [
+            'data' => [],
+        ];
 
-        $payload = json_decode($response->getBody()->getContents(), true);
+        if (!empty($regularMetrics)) {
+            $regularPayload = $this->requestInsights(
+                $client,
+                $accountId,
+                $accessToken,
+                implode(',', $regularMetrics),
+                $since,
+                $until
+            );
+
+            $payload['data'] = array_merge($payload['data'], (array) Arr::get($regularPayload, 'data', []));
+        }
+
+        if (!empty($specialMetrics)) {
+            try {
+                $specialPayload = $this->requestInsights(
+                    $client,
+                    $accountId,
+                    $accessToken,
+                    implode(',', $specialMetrics),
+                    $since,
+                    $until,
+                    ['metric_type' => 'total_value']
+                );
+
+                $payload['data'] = array_merge($payload['data'], (array) Arr::get($specialPayload, 'data', []));
+            } catch (\Throwable $exception) {
+                $this->warn('Nao foi possivel coletar profile_views/website_clicks nesta execucao: ' . $exception->getMessage());
+            }
+        }
+
         $result = [
             'raw' => $payload,
             'reach' => null,
@@ -154,5 +183,32 @@ class SyncInstagramMetrics extends Command
         }
 
         return $result;
+    }
+
+    /**
+     * @param Client $client
+     * @param string $accountId
+     * @param string $accessToken
+     * @param string $metrics
+     * @param int $since
+     * @param int $until
+     * @param array $extraQuery
+     * @return array
+     */
+    private function requestInsights(Client $client, $accountId, $accessToken, $metrics, $since, $until, array $extraQuery = [])
+    {
+        $query = array_merge([
+            'metric' => $metrics,
+            'period' => 'day',
+            'since' => $since,
+            'until' => $until,
+            'access_token' => $accessToken,
+        ], $extraQuery);
+
+        $response = $client->get($accountId . '/insights', [
+            'query' => $query,
+        ]);
+
+        return json_decode($response->getBody()->getContents(), true);
     }
 }
