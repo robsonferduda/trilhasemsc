@@ -53,8 +53,8 @@
             <div class="body">
                 <div class="icon"><i class="fa fa-eye" style="color: #fb8c00;"></i></div>
                 <div class="content">
-                    <div class="text">Impressões ({{ $days }}d)</div>
-                    <h5 class="number">{{ $totalImpressions !== null ? number_format($totalImpressions, 0, ',', '.') : '-' }}</h5>
+                    <div class="text">Visualizações ({{ $days }}d)</div>
+                    <h5 class="number">{{ $totalViews !== null ? number_format($totalViews, 0, ',', '.') : '-' }}</h5>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                                 <th>Data</th>
                                 <th>Seguidores</th>
                                 <th>Alcance</th>
-                                <th>Impressões</th>
+                                <th>Visualizações</th>
                                 <th>Visitas no Perfil</th>
                                 <th>Cliques no Site</th>
                             </tr>
@@ -107,7 +107,7 @@
                                     <td>{{ $snapshot->metric_date->format('d/m/Y') }}</td>
                                     <td>{{ $snapshot->followers_count !== null ? number_format((int) $snapshot->followers_count, 0, ',', '.') : '-' }}</td>
                                     <td>{{ $snapshot->reach !== null ? number_format((int) $snapshot->reach, 0, ',', '.') : '-' }}</td>
-                                    <td>{{ $snapshot->impressions !== null ? number_format((int) $snapshot->impressions, 0, ',', '.') : '-' }}</td>
+                                    <td>{{ $snapshot->views !== null ? number_format((int) $snapshot->views, 0, ',', '.') : '-' }}</td>
                                     <td>{{ $snapshot->profile_views !== null ? number_format((int) $snapshot->profile_views, 0, ',', '.') : '-' }}</td>
                                     <td>{{ $snapshot->website_clicks !== null ? number_format((int) $snapshot->website_clicks, 0, ',', '.') : '-' }}</td>
                                 </tr>

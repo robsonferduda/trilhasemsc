@@ -45,7 +45,7 @@ return [
         'graph_url' => env('INSTAGRAM_GRAPH_URL', 'https://graph.facebook.com/v20.0'),
         'access_token' => env('INSTAGRAM_ACCESS_TOKEN'),
         'account_id' => env('INSTAGRAM_IG_USER_ID'),
-        'metrics' => env('INSTAGRAM_DAILY_METRICS', 'reach,impressions,profile_views,website_clicks,follower_count'),
+        'metrics' => env('INSTAGRAM_DAILY_METRICS', 'reach,views,profile_views,website_clicks,follower_count'),
     ],
 
 ];

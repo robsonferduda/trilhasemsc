@@ -34,7 +34,7 @@ class SyncInstagramMetrics extends Command
         $accountId = config('services.instagram.account_id');
         $accessToken = config('services.instagram.access_token');
         $graphUrl = rtrim(config('services.instagram.graph_url'), '/');
-        $metrics = config('services.instagram.metrics', 'reach,profile_views,website_clicks,follower_count');
+        $metrics = config('services.instagram.metrics', 'reach,views,profile_views,website_clicks,follower_count');
 
         if (empty($accountId) || empty($accessToken)) {
             $this->error('Defina INSTAGRAM_IG_USER_ID e INSTAGRAM_ACCESS_TOKEN antes de executar a sincronização.');
@@ -71,7 +71,7 @@ class SyncInstagramMetrics extends Command
                     [
                         'followers_count' => $followersCount ?: Arr::get($dailyData, 'follower_count'),
                         'reach' => Arr::get($dailyData, 'reach'),
-                        'impressions' => Arr::get($dailyData, 'impressions'),
+                        'views' => Arr::get($dailyData, 'views'),
                         'profile_views' => Arr::get($dailyData, 'profile_views'),
                         'website_clicks' => Arr::get($dailyData, 'website_clicks'),
                         'raw_payload' => json_encode($dailyData['raw']),
@@ -167,7 +167,7 @@ class SyncInstagramMetrics extends Command
         $result = [
             'raw' => $payload,
             'reach' => null,
-            'impressions' => null,
+            'views' => null,
             'profile_views' => null,
             'website_clicks' => null,
             'follower_count' => null,

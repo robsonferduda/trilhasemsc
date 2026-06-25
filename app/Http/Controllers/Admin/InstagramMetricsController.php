@@ -36,8 +36,8 @@ class InstagramMetricsController extends Controller
         $latest = $snapshots->first();
 
         $totalReach = (int) $snapshots->sum('reach');
-        $hasImpressions = $snapshots->whereNotNull('impressions')->isNotEmpty();
-        $totalImpressions = $hasImpressions ? (int) $snapshots->sum('impressions') : null;
+        $hasViews = $snapshots->whereNotNull('views')->isNotEmpty();
+        $totalViews = $hasViews ? (int) $snapshots->sum('views') : null;
 
         $profileViewsAvgRaw = $snapshots->whereNotNull('profile_views')->avg('profile_views');
         $avgProfileViews = $profileViewsAvgRaw !== null ? (int) round($profileViewsAvgRaw) : null;
@@ -51,7 +51,7 @@ class InstagramMetricsController extends Controller
             'snapshots',
             'latest',
             'totalReach',
-            'totalImpressions',
+            'totalViews',
             'avgProfileViews',
             'avgWebsiteClicks'
         ));
