@@ -174,6 +174,54 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="header">
+                <h2>Melhores horários por alcance</h2>
+                @if($bestHour)
+                    <small>
+                        Melhor faixa atual: {{ $bestHour['range_label'] }}
+                        | Média de alcance: {{ number_format($bestHour['avg_reach'], 0, ',', '.') }}
+                        | Publicações analisadas: {{ $bestHour['posts_count'] }}
+                    </small>
+                @endif
+            </div>
+            <div class="body table-responsive">
+                @if($topHours->isEmpty())
+                    <div class="alert alert-warning mb-0">
+                        Ainda não há dados suficientes por publicação para sugerir horários.
+                        Execute <strong>php artisan instagram:sync-media-metrics --days=60 --limit=100</strong>.
+                    </div>
+                @else
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Posição</th>
+                                <th>Faixa de horário</th>
+                                <th>Publicações</th>
+                                <th>Alcance total</th>
+                                <th>Alcance médio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($topHours as $index => $hour)
+                                <tr>
+                                    <td>#{{ $index + 1 }}</td>
+                                    <td>{{ $hour['range_label'] }}</td>
+                                    <td>{{ $hour['posts_count'] }}</td>
+                                    <td>{{ number_format($hour['total_reach'], 0, ',', '.') }}</td>
+                                    <td>{{ number_format($hour['avg_reach'], 0, ',', '.') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="header">
                 <h2>Comparativo com o período anterior</h2>
                 <small>Baseado nos mesmos dias anteriores aos selecionados no filtro.</small>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\InstagramMediaMetric;
 use App\InstagramMetricSnapshot;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -98,6 +99,38 @@ class InstagramMetricsController extends Controller
 
         $latestScore = $scoreRows->first();
 
+        $mediaMetrics = InstagramMediaMetric::query()
+            ->when($accountId, function ($query) use ($accountId) {
+                return $query->where('instagram_account_id', $accountId);
+            })
+            ->whereBetween('published_at', [
+                (clone $startDate)->startOfDay()->toDateTimeString(),
+                (clone $endDate)->endOfDay()->toDateTimeString(),
+            ])
+            ->whereNotNull('published_hour')
+            ->whereNotNull('reach')
+            ->get();
+
+        $topHours = $mediaMetrics
+            ->groupBy('published_hour')
+            ->map(function ($items, $hour) {
+                $postsCount = $items->count();
+                $totalReachByHour = (int) $items->sum('reach');
+
+                return [
+                    'hour' => (int) $hour,
+                    'range_label' => sprintf('%02d:00 - %02d:59', (int) $hour, (int) $hour),
+                    'posts_count' => $postsCount,
+                    'total_reach' => $totalReachByHour,
+                    'avg_reach' => $postsCount > 0 ? (int) round($totalReachByHour / $postsCount) : 0,
+                ];
+            })
+            ->sortByDesc('avg_reach')
+            ->take(5)
+            ->values();
+
+        $bestHour = $topHours->first();
+
         $comparison = [
             'reach' => $this->buildComparison($snapshots, $previousSnapshots, 'reach'),
             'views' => $this->buildComparison($snapshots, $previousSnapshots, 'views'),
@@ -119,7 +152,9 @@ class InstagramMetricsController extends Controller
             'scoreRows',
             'scoreAverage',
             'statusSummary',
-            'latestScore'
+            'latestScore',
+            'topHours',
+            'bestHour'
         ) + ['comparison' => $comparison]);
     }
 
