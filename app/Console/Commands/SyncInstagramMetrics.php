@@ -122,7 +122,7 @@ class SyncInstagramMetrics extends Command
     private function fetchDailyInsights(Client $client, $accountId, $accessToken, $metrics, Carbon $date)
     {
         $requestedMetrics = array_filter(array_map('trim', explode(',', (string) $metrics)));
-        $totalValueMetrics = ['profile_views', 'website_clicks'];
+        $totalValueMetrics = ['views', 'profile_views', 'website_clicks'];
         $regularMetrics = array_values(array_diff($requestedMetrics, $totalValueMetrics));
         $specialMetrics = array_values(array_intersect($requestedMetrics, $totalValueMetrics));
 
@@ -160,7 +160,7 @@ class SyncInstagramMetrics extends Command
 
                 $payload['data'] = array_merge($payload['data'], (array) Arr::get($specialPayload, 'data', []));
             } catch (\Throwable $exception) {
-                $this->warn('Nao foi possivel coletar profile_views/website_clicks nesta execucao: ' . $exception->getMessage());
+                $this->warn('Nao foi possivel coletar views/profile_views/website_clicks nesta execucao: ' . $exception->getMessage());
             }
         }
 
