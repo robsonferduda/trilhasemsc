@@ -73,6 +73,104 @@
 </div>
 
 <div class="row clearfix">
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card top_counter">
+            <div class="body">
+                <div class="icon"><i class="fa fa-line-chart" style="color: #1565c0;"></i></div>
+                <div class="content">
+                    <div class="text">Score médio</div>
+                    <h5 class="number">{{ number_format($scoreAverage, 0, ',', '.') }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card top_counter">
+            <div class="body">
+                <div class="icon"><i class="fa fa-arrow-up" style="color: #2e7d32;"></i></div>
+                <div class="content">
+                    <div class="text">Dias acima do esperado</div>
+                    <h5 class="number">{{ $statusSummary['above'] }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card top_counter">
+            <div class="body">
+                <div class="icon"><i class="fa fa-minus" style="color: #616161;"></i></div>
+                <div class="content">
+                    <div class="text">Dias normais</div>
+                    <h5 class="number">{{ $statusSummary['normal'] }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card top_counter">
+            <div class="body">
+                <div class="icon"><i class="fa fa-arrow-down" style="color: #c62828;"></i></div>
+                <div class="content">
+                    <div class="text">Dias abaixo do esperado</div>
+                    <h5 class="number">{{ $statusSummary['below'] }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="header">
+                <h2>Leitura inteligente do período</h2>
+                @if($latestScore)
+                    <small>
+                        Último dia: {{ $latestScore['date']->format('d/m/Y') }}
+                        | Score: {{ number_format($latestScore['score'], 0, ',', '.') }}
+                        | Status: {{ $latestScore['status'] === 'above' ? 'acima do esperado' : ($latestScore['status'] === 'below' ? 'abaixo do esperado' : 'normal') }}
+                    </small>
+                @endif
+            </div>
+            <div class="body table-responsive">
+                @if($scoreRows->isEmpty())
+                    <div class="alert alert-warning mb-0">Sem dados suficientes para analise de score.</div>
+                @else
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                                <th>Recomendação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($scoreRows as $row)
+                                <tr>
+                                    <td>{{ $row['date']->format('d/m/Y') }}</td>
+                                    <td>{{ number_format($row['score'], 0, ',', '.') }}</td>
+                                    <td>
+                                        @if($row['status'] === 'above')
+                                            <span class="badge badge-success">Acima</span>
+                                        @elseif($row['status'] === 'below')
+                                            <span class="badge badge-danger">Abaixo</span>
+                                        @else
+                                            <span class="badge badge-secondary">Normal</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $row['recommendation'] }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix">
     <div class="col-lg-12">
         <div class="card">
             <div class="header">

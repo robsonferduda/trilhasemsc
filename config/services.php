@@ -46,6 +46,12 @@ return [
         'access_token' => env('INSTAGRAM_ACCESS_TOKEN'),
         'account_id' => env('INSTAGRAM_IG_USER_ID'),
         'metrics' => env('INSTAGRAM_DAILY_METRICS', 'reach,views,profile_views,website_clicks,follower_count'),
+        'score_weights' => [
+            'reach' => env('INSTAGRAM_SCORE_WEIGHT_REACH', 1),
+            'views' => env('INSTAGRAM_SCORE_WEIGHT_VIEWS', 0.5),
+            'profile_views' => env('INSTAGRAM_SCORE_WEIGHT_PROFILE_VIEWS', 5),
+            'website_clicks' => env('INSTAGRAM_SCORE_WEIGHT_WEBSITE_CLICKS', 20),
+        ],
     ],
 
 ];

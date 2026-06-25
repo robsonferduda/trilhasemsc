@@ -56,6 +56,48 @@ class InstagramMetricsController extends Controller
         $websiteClicksAvgRaw = $snapshots->whereNotNull('website_clicks')->avg('website_clicks');
         $avgWebsiteClicks = $websiteClicksAvgRaw !== null ? (int) round($websiteClicksAvgRaw) : null;
 
+        $weights = [
+            'reach' => (float) config('services.instagram.score_weights.reach', 1),
+            'views' => (float) config('services.instagram.score_weights.views', 0.5),
+            'profile_views' => (float) config('services.instagram.score_weights.profile_views', 5),
+            'website_clicks' => (float) config('services.instagram.score_weights.website_clicks', 20),
+        ];
+
+        $scoreRows = $snapshots->map(function ($snapshot) use ($weights) {
+            $score =
+                ((int) ($snapshot->reach ?: 0) * $weights['reach']) +
+                ((int) ($snapshot->views ?: 0) * $weights['views']) +
+                ((int) ($snapshot->profile_views ?: 0) * $weights['profile_views']) +
+                ((int) ($snapshot->website_clicks ?: 0) * $weights['website_clicks']);
+
+            return [
+                'date' => $snapshot->metric_date,
+                'score' => (int) round($score),
+                'reach' => $snapshot->reach,
+                'views' => $snapshot->views,
+                'profile_views' => $snapshot->profile_views,
+                'website_clicks' => $snapshot->website_clicks,
+            ];
+        })->values();
+
+        $scoreAverage = $scoreRows->count() > 0 ? (float) $scoreRows->avg('score') : 0.0;
+        $scoreRows = collect($scoreRows)->map(function ($row) use ($scoreAverage) {
+            $status = $this->classifyScore($row['score'], $scoreAverage);
+
+            return $row + [
+                'status' => $status,
+                'recommendation' => $this->buildRecommendation($row, $status),
+            ];
+        });
+
+        $statusSummary = [
+            'above' => $scoreRows->where('status', 'above')->count(),
+            'normal' => $scoreRows->where('status', 'normal')->count(),
+            'below' => $scoreRows->where('status', 'below')->count(),
+        ];
+
+        $latestScore = $scoreRows->first();
+
         $comparison = [
             'reach' => $this->buildComparison($snapshots, $previousSnapshots, 'reach'),
             'views' => $this->buildComparison($snapshots, $previousSnapshots, 'views'),
@@ -73,8 +115,59 @@ class InstagramMetricsController extends Controller
             'totalReach',
             'totalViews',
             'avgProfileViews',
-            'avgWebsiteClicks'
+            'avgWebsiteClicks',
+            'scoreRows',
+            'scoreAverage',
+            'statusSummary',
+            'latestScore'
         ) + ['comparison' => $comparison]);
+    }
+
+    /**
+     * @param int|float $score
+     * @param int|float $average
+     * @return string
+     */
+    private function classifyScore($score, $average)
+    {
+        if ((float) $average <= 0.0) {
+            return 'normal';
+        }
+
+        $upperLimit = $average * 1.15;
+        $lowerLimit = $average * 0.85;
+
+        if ($score >= $upperLimit) {
+            return 'above';
+        }
+
+        if ($score <= $lowerLimit) {
+            return 'below';
+        }
+
+        return 'normal';
+    }
+
+    /**
+     * @param array $row
+     * @param string $status
+     * @return string
+     */
+    private function buildRecommendation(array $row, $status)
+    {
+        if ($status === 'above') {
+            return 'Replicar formato/tema deste dia nas proximas publicacoes.';
+        }
+
+        if ($status === 'below') {
+            if ((int) $row['website_clicks'] === 0) {
+                return 'Testar CTA direto para link na bio e reforcar chamada no criativo.';
+            }
+
+            return 'Ajustar horario e variar gancho inicial para recuperar alcance.';
+        }
+
+        return 'Manter consistencia e testar pequenas variacoes de titulo e CTA.';
     }
 
     /**
