@@ -13,7 +13,7 @@ Defina as variáveis abaixo no arquivo .env:
 INSTAGRAM_GRAPH_URL=https://graph.facebook.com/v20.0
 INSTAGRAM_ACCESS_TOKEN=SEU_TOKEN_DE_LONGA_DURACAO
 INSTAGRAM_IG_USER_ID=SEU_INSTAGRAM_USER_ID
-INSTAGRAM_DAILY_METRICS=reach,impressions,profile_views,website_clicks
+INSTAGRAM_DAILY_METRICS=reach,profile_views,website_clicks,follower_count
 
 # Banco PostgreSQL dedicado para métricas
 INSTAGRAM_DB_HOST=127.0.0.1
