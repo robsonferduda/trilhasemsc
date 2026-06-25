@@ -59,6 +59,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card top_counter">
+                    <div class="body">
+                        <div class="icon"><i class="fa fa-instagram" style="color: #e1306c;"></i> </div>
+                        <div class="content">
+                            <div class="text">Instagram Métricas</div>
+                            <h5 class="number"><a href="{{ route('admin.instagram.metricas') }}">Acessar</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 	</div>       
 </div>

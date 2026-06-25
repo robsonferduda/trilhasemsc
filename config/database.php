@@ -78,6 +78,20 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'instagram_pgsql' => [
+            'driver' => 'pgsql',
+            'host' => env('INSTAGRAM_DB_HOST', env('DB_HOST', '127.0.0.1')),
+            'port' => env('INSTAGRAM_DB_PORT', env('DB_PORT', '5432')),
+            'database' => env('INSTAGRAM_DB_DATABASE', env('DB_DATABASE', 'forge')),
+            'username' => env('INSTAGRAM_DB_USERNAME', env('DB_USERNAME', 'forge')),
+            'password' => env('INSTAGRAM_DB_PASSWORD', env('DB_PASSWORD', '')),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'schema' => env('INSTAGRAM_DB_SCHEMA', 'public'),
+            'sslmode' => env('INSTAGRAM_DB_SSLMODE', 'prefer'),
+        ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
