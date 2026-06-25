@@ -36,9 +36,14 @@ class InstagramMetricsController extends Controller
         $latest = $snapshots->first();
 
         $totalReach = (int) $snapshots->sum('reach');
-        $totalImpressions = (int) $snapshots->sum('impressions');
-        $avgProfileViews = (int) round($snapshots->avg('profile_views') ?: 0);
-        $avgWebsiteClicks = (int) round($snapshots->avg('website_clicks') ?: 0);
+        $hasImpressions = $snapshots->whereNotNull('impressions')->isNotEmpty();
+        $totalImpressions = $hasImpressions ? (int) $snapshots->sum('impressions') : null;
+
+        $profileViewsAvgRaw = $snapshots->whereNotNull('profile_views')->avg('profile_views');
+        $avgProfileViews = $profileViewsAvgRaw !== null ? (int) round($profileViewsAvgRaw) : null;
+
+        $websiteClicksAvgRaw = $snapshots->whereNotNull('website_clicks')->avg('website_clicks');
+        $avgWebsiteClicks = $websiteClicksAvgRaw !== null ? (int) round($websiteClicksAvgRaw) : null;
 
         return view('admin.instagram-metrics', compact(
             'days',

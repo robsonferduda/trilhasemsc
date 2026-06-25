@@ -54,7 +54,7 @@
                 <div class="icon"><i class="fa fa-eye" style="color: #fb8c00;"></i></div>
                 <div class="content">
                     <div class="text">Impressões ({{ $days }}d)</div>
-                    <h5 class="number">{{ number_format($totalImpressions, 0, ',', '.') }}</h5>
+                    <h5 class="number">{{ $totalImpressions !== null ? number_format($totalImpressions, 0, ',', '.') : '-' }}</h5>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                 <div class="icon"><i class="fa fa-link" style="color: #8e24aa;"></i></div>
                 <div class="content">
                     <div class="text">Cliques médios no site</div>
-                    <h5 class="number">{{ number_format($avgWebsiteClicks, 0, ',', '.') }}</h5>
+                    <h5 class="number">{{ $avgWebsiteClicks !== null ? number_format($avgWebsiteClicks, 0, ',', '.') : '-' }}</h5>
                 </div>
             </div>
         </div>
@@ -105,11 +105,11 @@
                             @foreach($snapshots as $snapshot)
                                 <tr>
                                     <td>{{ $snapshot->metric_date->format('d/m/Y') }}</td>
-                                    <td>{{ number_format((int) $snapshot->followers_count, 0, ',', '.') }}</td>
-                                    <td>{{ number_format((int) $snapshot->reach, 0, ',', '.') }}</td>
-                                    <td>{{ number_format((int) $snapshot->impressions, 0, ',', '.') }}</td>
-                                    <td>{{ number_format((int) $snapshot->profile_views, 0, ',', '.') }}</td>
-                                    <td>{{ number_format((int) $snapshot->website_clicks, 0, ',', '.') }}</td>
+                                    <td>{{ $snapshot->followers_count !== null ? number_format((int) $snapshot->followers_count, 0, ',', '.') : '-' }}</td>
+                                    <td>{{ $snapshot->reach !== null ? number_format((int) $snapshot->reach, 0, ',', '.') : '-' }}</td>
+                                    <td>{{ $snapshot->impressions !== null ? number_format((int) $snapshot->impressions, 0, ',', '.') : '-' }}</td>
+                                    <td>{{ $snapshot->profile_views !== null ? number_format((int) $snapshot->profile_views, 0, ',', '.') : '-' }}</td>
+                                    <td>{{ $snapshot->website_clicks !== null ? number_format((int) $snapshot->website_clicks, 0, ',', '.') : '-' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

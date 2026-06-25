@@ -175,7 +175,7 @@ class SyncInstagramMetrics extends Command
 
         foreach ((array) Arr::get($payload, 'data', []) as $metric) {
             $name = Arr::get($metric, 'name');
-            $value = Arr::get($metric, 'values.0.value');
+            $value = $this->extractMetricValue($metric);
 
             if (array_key_exists($name, $result)) {
                 $result[$name] = is_numeric($value) ? (int) $value : null;
@@ -210,5 +210,31 @@ class SyncInstagramMetrics extends Command
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * Extrai valor de métricas em formatos diferentes da API.
+     *
+     * @param array $metric
+     * @return mixed|null
+     */
+    private function extractMetricValue(array $metric)
+    {
+        $value = Arr::get($metric, 'values.0.value');
+
+        if ($value !== null) {
+            return $value;
+        }
+
+        $totalValue = Arr::get($metric, 'total_value');
+
+        if (is_array($totalValue)) {
+            $nested = Arr::get($totalValue, 'value');
+            if ($nested !== null) {
+                return $nested;
+            }
+        }
+
+        return $totalValue;
     }
 }
