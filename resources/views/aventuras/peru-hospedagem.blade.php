@@ -46,9 +46,9 @@
                 <p class="text-white-50 fs-5 mb-0">Nenhuma hospedagem cadastrada no momento.</p>
             </div>
         @else
-            <div class="d-none d-lg-block">
+            <div class="d-none d-xl-block">
                 <div class="table-responsive rounded-3 overflow-hidden" style="background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);">
-                    <table class="table table-dark table-hover mb-0 hospedagem-table">
+                    <table class="table table-dark table-hover table-sm mb-0 hospedagem-table">
                         <thead>
                             <tr>
                                 <th>Cidade</th>
@@ -58,8 +58,8 @@
                                 <th>Saída</th>
                                 <th class="text-center">Hóspedes</th>
                                 <th class="text-end">Valor total</th>
-                                <th class="text-end">Valor / pessoa</th>
-                                <th class="text-end">Valor / pessoa (S/)</th>
+                                <th class="text-end">Por pessoa</th>
+                                <th class="text-end">Por pessoa (S/)</th>
                                 <th class="text-center">Link</th>
                             </tr>
                         </thead>
@@ -128,7 +128,7 @@
                 </div>
             </div>
 
-            <div class="d-lg-none">
+            <div class="d-xl-none">
                 @foreach($hospedagens as $hospedagem)
                     <div class="hospedagem-card p-4 rounded-3 mb-3">
                         <h5 class="text-warning fw-bold mb-3">{{ $hospedagem->ds_cidade_hos ?? '—' }}</h5>
@@ -226,16 +226,18 @@
     .hospedagem-table thead th {
         background: rgba(245, 166, 35, .15);
         color: #f5a623;
-        font-size: .8rem;
+        font-size: .72rem;
         text-transform: uppercase;
         letter-spacing: 1px;
         border-bottom: 1px solid rgba(255,255,255,.12);
         white-space: nowrap;
+        padding: .75rem .5rem;
     }
     .hospedagem-table td {
         vertical-align: middle;
         border-color: rgba(255,255,255,.08);
-        font-size: .92rem;
+        font-size: .82rem;
+        padding: .7rem .5rem;
     }
     .hospedagem-table tbody tr:hover {
         background: rgba(255,255,255,.04);
@@ -247,6 +249,13 @@
     .hospedagem-card {
         background: rgba(255,255,255,.05);
         border: 1px solid rgba(255,255,255,.1);
+    }
+    .hospedagem-table td:nth-child(1) {
+        min-width: 110px;
+    }
+    .hospedagem-table td:nth-child(2) {
+        min-width: 180px;
+        white-space: normal;
     }
 </style>
 
