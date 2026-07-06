@@ -36,6 +36,9 @@
             <p class="text-white-50 lead mb-0" style="max-width: 560px; margin: auto;">
                 Reservas e valores da expedição, organizados por data de chegada.
             </p>
+            <p class="text-white-50 small mt-2 mb-0">
+                Câmbio de referência: <strong class="text-white">1 sol = R$ {{ number_format($cambioSoles, 2, ',', '.') }}</strong>
+            </p>
         </div>
 
         @if($hospedagens->isEmpty())
@@ -56,6 +59,7 @@
                                 <th class="text-center">Hóspedes</th>
                                 <th class="text-end">Valor total</th>
                                 <th class="text-end">Valor / pessoa</th>
+                                <th class="text-end">Valor / pessoa (S/)</th>
                                 <th class="text-center">Link</th>
                             </tr>
                         </thead>
@@ -78,6 +82,13 @@
                                     <td class="text-end">
                                         @if(!is_null($hospedagem->valor_calculado_por_pessoa_hos))
                                             R$ {{ number_format($hospedagem->valor_calculado_por_pessoa_hos, 2, ',', '.') }}
+                                        @else
+                                            —
+                                        @endif
+                                    </td>
+                                    <td class="text-end">
+                                        @if(!is_null($hospedagem->valor_calculado_por_pessoa_soles_hos))
+                                            S/ {{ number_format($hospedagem->valor_calculado_por_pessoa_soles_hos, 2, ',', '.') }}
                                         @else
                                             —
                                         @endif
@@ -106,6 +117,9 @@
                                 </td>
                                 <td class="text-end fw-bold">
                                     R$ {{ number_format($totais['valor_individual'], 2, ',', '.') }}
+                                </td>
+                                <td class="text-end fw-bold">
+                                    S/ {{ number_format($totais['valor_individual_soles'], 2, ',', '.') }}
                                 </td>
                                 <td></td>
                             </tr>
@@ -159,6 +173,16 @@
                                     @endif
                                 </strong>
                             </div>
+                            <div class="col-6">
+                                <span class="text-white-50 d-block">Valor / pessoa (S/)</span>
+                                <strong>
+                                    @if(!is_null($hospedagem->valor_calculado_por_pessoa_soles_hos))
+                                        S/ {{ number_format($hospedagem->valor_calculado_por_pessoa_soles_hos, 2, ',', '.') }}
+                                    @else
+                                        —
+                                    @endif
+                                </strong>
+                            </div>
                         </div>
                         @if($hospedagem->ds_url_hos)
                             <a href="{{ $hospedagem->ds_url_hos }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-warning btn-sm rounded-pill mt-3">
@@ -179,8 +203,12 @@
                             <strong class="text-warning fs-5">R$ {{ number_format($totais['valor_total'], 2, ',', '.') }}</strong>
                         </div>
                         <div class="col-12 mt-2">
-                            <span class="text-white-50 d-block small">Soma valor individual</span>
+                            <span class="text-white-50 d-block small">Soma valor individual (R$)</span>
                             <strong class="fs-5">R$ {{ number_format($totais['valor_individual'], 2, ',', '.') }}</strong>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <span class="text-white-50 d-block small">Soma valor individual (S/)</span>
+                            <strong class="fs-5">S/ {{ number_format($totais['valor_individual_soles'], 2, ',', '.') }}</strong>
                         </div>
                     </div>
                 </div>
