@@ -60,7 +60,8 @@
                 </div>
                 <p class="text-white-50 mt-3" style="font-size: .9rem;">para iniciar a aventura - <strong class="text-white">15 de agosto de 2026</strong></p>
 
-                <a href="#cronograma" class="btn btn-outline-warning btn-lg mt-4 px-5 rounded-pill">Ver o itinerário</a>
+                <a href="#cronograma" class="btn btn-outline-warning btn-lg mt-4 px-5 rounded-pill me-2">Ver o itinerário</a>
+                <a href="{{ url('aventuras/peru-2026/hospedagem') }}" class="btn btn-warning btn-lg mt-4 px-5 rounded-pill">Hospedagem</a>
             </div>
         </div>
     </div>

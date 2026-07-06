@@ -22,6 +22,7 @@ Route::get('camping', 'HomeController@camping');
 Route::get('campings', 'CampingController@campings');
 Route::get('{cidade}/camping/{nivel}/{url}', 'CampingController@detalhes');
 
+Route::get('aventuras/peru-2026/hospedagem', 'AventuraController@peruHospedagem')->name('aventura.peru.hospedagem');
 Route::get('aventuras/peru-2026', 'AventuraController@peru');
 
 //Route::get('laguna/campings/selvagem/camping-mirante-anita-garibaldi', 'CampingController@anitaGaribaldi');
