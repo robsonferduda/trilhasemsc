@@ -15,6 +15,7 @@ class Hospedagem extends Model
     protected $fillable = [
         'cd_expedicao_exp',
         'nm_hospedagem_hos',
+        'ds_cidade_hos',
         'nu_dias_hos',
         'dt_chegada_hos',
         'dt_saida_hos',

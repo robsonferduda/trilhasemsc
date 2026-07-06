@@ -49,6 +49,7 @@
                         <thead>
                             <tr>
                                 <th>Hospedagem</th>
+                                <th>Cidade</th>
                                 <th class="text-center">Dias</th>
                                 <th>Chegada</th>
                                 <th>Saída</th>
@@ -62,6 +63,7 @@
                             @foreach($hospedagens as $hospedagem)
                                 <tr>
                                     <td class="fw-semibold">{{ $hospedagem->nm_hospedagem_hos }}</td>
+                                    <td>{{ $hospedagem->ds_cidade_hos ?? '—' }}</td>
                                     <td class="text-center">{{ $hospedagem->nu_dias_hos ?? '—' }}</td>
                                     <td>{{ $hospedagem->dt_chegada_hos ? $hospedagem->dt_chegada_hos->format('d/m/Y') : '—' }}</td>
                                     <td>{{ $hospedagem->dt_saida_hos ? $hospedagem->dt_saida_hos->format('d/m/Y') : '—' }}</td>
@@ -74,8 +76,8 @@
                                         @endif
                                     </td>
                                     <td class="text-end">
-                                        @if(!is_null($hospedagem->valor_individual_hos))
-                                            R$ {{ number_format($hospedagem->valor_individual_hos, 2, ',', '.') }}
+                                        @if(!is_null($hospedagem->valor_calculado_por_pessoa_hos))
+                                            R$ {{ number_format($hospedagem->valor_calculado_por_pessoa_hos, 2, ',', '.') }}
                                         @else
                                             —
                                         @endif
@@ -95,6 +97,7 @@
                         <tfoot>
                             <tr class="totais-row">
                                 <td class="fw-bold text-warning">Totais</td>
+                                <td></td>
                                 <td class="text-center fw-bold">{{ $totais['dias'] }}</td>
                                 <td colspan="2"></td>
                                 <td></td>
@@ -116,6 +119,10 @@
                     <div class="hospedagem-card p-4 rounded-3 mb-3">
                         <h5 class="text-warning fw-bold mb-3">{{ $hospedagem->nm_hospedagem_hos }}</h5>
                         <div class="row g-2 small">
+                            <div class="col-12">
+                                <span class="text-white-50 d-block">Cidade</span>
+                                <strong>{{ $hospedagem->ds_cidade_hos ?? '—' }}</strong>
+                            </div>
                             <div class="col-6">
                                 <span class="text-white-50 d-block">Dias</span>
                                 <strong>{{ $hospedagem->nu_dias_hos ?? '—' }}</strong>
@@ -145,8 +152,8 @@
                             <div class="col-6">
                                 <span class="text-white-50 d-block">Valor / pessoa</span>
                                 <strong>
-                                    @if(!is_null($hospedagem->valor_individual_hos))
-                                        R$ {{ number_format($hospedagem->valor_individual_hos, 2, ',', '.') }}
+                                    @if(!is_null($hospedagem->valor_calculado_por_pessoa_hos))
+                                        R$ {{ number_format($hospedagem->valor_calculado_por_pessoa_hos, 2, ',', '.') }}
                                     @else
                                         —
                                     @endif
