@@ -41,4 +41,19 @@ return [
         'redirect' => env('APP_URL').'/login/google/callback',
     ],
 
+    'instagram' => [
+        'graph_url' => env('INSTAGRAM_GRAPH_URL', 'https://graph.facebook.com/v20.0'),
+        'access_token' => env('INSTAGRAM_ACCESS_TOKEN'),
+        'account_id' => env('INSTAGRAM_IG_USER_ID'),
+        'metrics' => env('INSTAGRAM_DAILY_METRICS', 'reach,views,profile_views,website_clicks,follower_count'),
+        'media_fields' => env('INSTAGRAM_MEDIA_FIELDS', 'id,caption,media_type,permalink,timestamp'),
+        'media_metrics' => env('INSTAGRAM_MEDIA_METRICS', 'reach,views,likes,comments,shares,saves,total_interactions'),
+        'score_weights' => [
+            'reach' => env('INSTAGRAM_SCORE_WEIGHT_REACH', 1),
+            'views' => env('INSTAGRAM_SCORE_WEIGHT_VIEWS', 0.5),
+            'profile_views' => env('INSTAGRAM_SCORE_WEIGHT_PROFILE_VIEWS', 5),
+            'website_clicks' => env('INSTAGRAM_SCORE_WEIGHT_WEBSITE_CLICKS', 20),
+        ],
+    ],
+
 ];

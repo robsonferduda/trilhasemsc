@@ -309,6 +309,9 @@
                                         <li><a href="{{ url('admin/listar-trilhas') }}">Listar</a></li>
                                     </ul>
                                 </li>
+                                <li>
+                                  <a href="{{ route('admin.instagram.metricas') }}"><i class="fa fa-instagram"></i> <span>Instagram Métricas</span></a>
+                                </li>
                                 
                             @endif
                             @if(trim(Auth::user()->id_role) == 'GUIA')

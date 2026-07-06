@@ -150,6 +150,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::prefix('admin')->group(function () {
 
         Route::get('dashboard', 'HomeController@dashboard');
+        Route::get('instagram/metricas', 'Admin\\InstagramMetricsController@index')->name('admin.instagram.metricas');
 
         Route::post('trilheiros/recalcular-score', 'TrilheiroController@recalcularScoreTodos')->name('admin.trilheiros.recalcular-score');
 
