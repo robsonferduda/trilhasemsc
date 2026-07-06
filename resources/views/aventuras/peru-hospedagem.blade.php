@@ -48,8 +48,8 @@
                     <table class="table table-dark table-hover mb-0 hospedagem-table">
                         <thead>
                             <tr>
-                                <th>Hospedagem</th>
                                 <th>Cidade</th>
+                                <th>Hospedagem</th>
                                 <th class="text-center">Dias</th>
                                 <th>Chegada</th>
                                 <th>Saída</th>
@@ -62,8 +62,8 @@
                         <tbody>
                             @foreach($hospedagens as $hospedagem)
                                 <tr>
-                                    <td class="fw-semibold">{{ $hospedagem->nm_hospedagem_hos }}</td>
                                     <td>{{ $hospedagem->ds_cidade_hos ?? '—' }}</td>
+                                    <td class="fw-semibold">{{ $hospedagem->nm_hospedagem_hos }}</td>
                                     <td class="text-center">{{ $hospedagem->nu_dias_hos ?? '—' }}</td>
                                     <td>{{ $hospedagem->dt_chegada_hos ? $hospedagem->dt_chegada_hos->format('d/m/Y') : '—' }}</td>
                                     <td>{{ $hospedagem->dt_saida_hos ? $hospedagem->dt_saida_hos->format('d/m/Y') : '—' }}</td>
@@ -117,11 +117,11 @@
             <div class="d-lg-none">
                 @foreach($hospedagens as $hospedagem)
                     <div class="hospedagem-card p-4 rounded-3 mb-3">
-                        <h5 class="text-warning fw-bold mb-3">{{ $hospedagem->nm_hospedagem_hos }}</h5>
+                        <h5 class="text-warning fw-bold mb-3">{{ $hospedagem->ds_cidade_hos ?? '—' }}</h5>
                         <div class="row g-2 small">
                             <div class="col-12">
-                                <span class="text-white-50 d-block">Cidade</span>
-                                <strong>{{ $hospedagem->ds_cidade_hos ?? '—' }}</strong>
+                                <span class="text-white-50 d-block">Hospedagem</span>
+                                <strong>{{ $hospedagem->nm_hospedagem_hos }}</strong>
                             </div>
                             <div class="col-6">
                                 <span class="text-white-50 d-block">Dias</span>
