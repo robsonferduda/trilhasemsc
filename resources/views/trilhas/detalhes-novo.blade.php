@@ -9,6 +9,8 @@
         ? $trilha->nm_trilha_tri . ' - ' . $cidadeSeo . ' | Trilhas em Santa Catarina'
         : $trilha->nm_trilha_tri . ' | Trilhas em Santa Catarina';
     $metaImageUrl = asset('img/trilhas/detalhes-principal/'.$img);
+    $homeUrl = url('/');
+    $trilhasUrl = url('trilhas');
 @endphp
 @section('pageTitle', $pageTitleSeo)
 @section('description', $descricaoSeo)
@@ -40,6 +42,32 @@
         'logo' => [
             '@type' => 'ImageObject',
             'url' => asset('img/apple-icon.png'),
+        ],
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        [
+            '@type' => 'ListItem',
+            'position' => 1,
+            'name' => 'Início',
+            'item' => $homeUrl,
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 2,
+            'name' => 'Trilhas',
+            'item' => $trilhasUrl,
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 3,
+            'name' => $trilha->nm_trilha_tri,
+            'item' => url()->current(),
         ],
     ],
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
@@ -81,18 +109,18 @@
         <div class="row">
             <div class="col-md-9 mt-2">
                 <div class="col-md-12 mt-3">
-                    <h4 class="mt-2">{{ $trilha->nm_trilha_tri }}</h4>
-                    <h6 class="d-flex align-items-center flex-wrap gap-2">
+                    <h2 class="mt-2 h4">{{ $trilha->nm_trilha_tri }}</h2>
+                    <p class="h6 d-flex align-items-center flex-wrap gap-2 mb-0">
                         <span><i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }}</span>
                         <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_blank" rel="noopener noreferrer" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> trilhasemsc</a></span>
                         <time datetime="{{ \Carbon\Carbon::parse($trilha->updated_at)->toDateString() }}" itemprop="dateModified" class="text-black" style="font-weight: 500;">
                             - Trilha publicada em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}
                         </time>
-                    </h6>            
+                    </p>
                 </div> 
                 @if(count($trilha->guias))
                     <div class="col-md-12 mt-1">
-                        <h6>Quem faz esta trilha?</h6>
+                        <h2 class="h6">Quem faz esta trilha?</h2>
                     </div>                    
                     <div class="row mt-0 mb-0">
                         @foreach($trilha->guias as $key => $guia)
@@ -109,12 +137,12 @@
                         @endforeach
                     </div>
                 @else
-                    <h6>Acesse <a class="text-decoration-underline" href="{{ url("guias-e-condutores") }}">aqui</a> os guias e condutores cadastrados em nossa plataforma. </h6>
+                    <p class="h6">Acesse <a class="text-decoration-underline" href="{{ url("guias-e-condutores") }}">aqui</a> os guias e condutores cadastrados em nossa plataforma.</p>
                 @endif
 
                 @if(isset($proximosEventos) && $proximosEventos->count())
                     <div class="col-md-12 mt-3 mb-0">
-                        <h6><i class="fa fa-calendar text-success mr-1"></i> Próximos Eventos</h6>
+                        <h2 class="h6"><i class="fa fa-calendar text-success mr-1"></i> Próximos Eventos</h2>
                         <div class="d-flex flex-wrap mt-2" style="gap: 12px;">
                             @foreach($proximosEventos as $ev)
                             <a href="{{ $ev->url }}" class="text-decoration-none">
@@ -139,7 +167,7 @@
                 @endif
 
                 <div class="col-md-12 mt-2">
-                    <h6>Detalhes da Aventura</h6>
+                    <h2 class="h6">Detalhes da Aventura</h2>
                     <div class="d-flex align-items-center mb-2">
                         <img src="{{ asset('img/trilheiros/' . ($trilha->user->dc_foto_perfil ?? 'perfil.png')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
                         <span class="text-secondary">Trilha registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }} em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}, com última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
@@ -181,9 +209,9 @@
                     </div>
                 </div>
                 <div class="col-md-12 mt-2 mb-3">
-                    <h4 class="text-success">
+                    <h2 class="text-success h4">
                         Use o Wikiloc
-                    </h4>
+                    </h2>
                     <div class="geolocalizao">
                         {!! $trilha->url_geolocalizacao_tri !!}
                     </div>
@@ -215,7 +243,7 @@
             </div>
             <div class="col-md-3">            
                 <div class="col-lg-12 mt-4">
-                    <h4 class="mt-0">Busca por Cidade</h4>                    
+                    <h2 class="mt-0 h4">Busca por Cidade</h2>
                         <label class="" style="font-size: 100%; margin: 0px;">Selecione a cidade</label>
                         <p class="mt-0 text-danger" style="font-size: 85%;">São mostradas somente cidades que possuem alguma trilha cadastrada.</p>
                         <select class="form-control mb-0" name="cidade" id="list-cidade">
