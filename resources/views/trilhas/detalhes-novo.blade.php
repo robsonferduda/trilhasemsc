@@ -53,7 +53,7 @@
             @if($trilha->detalhes)
                 <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
                     <div class="col-md-12">
-                        <a href="#"><img class="border-radius-xl shadow w-100" src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}"></a>
+                        <img class="border-radius-xl shadow w-100" src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}" loading="eager" fetchpriority="high">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 mt-2">
@@ -73,7 +73,7 @@
             @else
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
                     <div class="col-md-12">
-                        <a href="#"><img class="border-radius-xl shadow w-100" src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}"></a>
+                        <img class="border-radius-xl shadow w-100" src="{{ asset('img/trilhas/detalhes-principal/'.$img) }}" alt="{{ $alt }}" loading="eager" fetchpriority="high">
                     </div>
                 </div>
             @endif
@@ -84,7 +84,7 @@
                     <h4 class="mt-2">{{ $trilha->nm_trilha_tri }}</h4>
                     <h6 class="d-flex align-items-center flex-wrap gap-2">
                         <span><i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }}</span>
-                        <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> trilhasemsc</a></span>
+                        <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_blank" rel="noopener noreferrer" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> trilhasemsc</a></span>
                         <time datetime="{{ \Carbon\Carbon::parse($trilha->updated_at)->toDateString() }}" itemprop="dateModified" class="text-black" style="font-weight: 500;">
                             - Trilha publicada em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}
                         </time>
@@ -109,7 +109,7 @@
                         @endforeach
                     </div>
                 @else
-                    <h6>Acesse <a class="text-decoration-underline" href="{{ url("guias-e-condutores") }}">aqui</a> os guais e condutores cadastrados em nossa plataforma. </h6>
+                    <h6>Acesse <a class="text-decoration-underline" href="{{ url("guias-e-condutores") }}">aqui</a> os guias e condutores cadastrados em nossa plataforma. </h6>
                 @endif
 
                 @if(isset($proximosEventos) && $proximosEventos->count())
