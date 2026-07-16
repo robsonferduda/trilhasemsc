@@ -11,6 +11,9 @@
     $metaImageUrl = asset('img/trilhas/detalhes-principal/'.$img);
     $homeUrl = url('/');
     $trilhasUrl = url('trilhas');
+    $cidadeTrilhasUrl = $cidadeSeo ? url(stringToStringSeo($cidadeSeo).'/trilhas/#lista') : $trilhasUrl;
+    $guiasUrl = url('guias-e-condutores');
+    $eventosUrl = url('eventos');
 @endphp
 @section('pageTitle', $pageTitleSeo)
 @section('description', $descricaoSeo)
@@ -72,6 +75,22 @@
     ],
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
 </script>
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'TouristAttraction',
+    'name' => $trilha->nm_trilha_tri,
+    'description' => $descricaoSeo,
+    'url' => url()->current(),
+    'image' => [$metaImageUrl],
+    'touristType' => 'Ecoturismo e trilha',
+    'isAccessibleForFree' => true,
+    'containedInPlace' => [
+        '@type' => 'Place',
+        'name' => $cidadeSeo ?: 'Santa Catarina',
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
 @endsection
 @section('content')
 @include('layouts/partes/header-trilhas-detalhes')
@@ -116,6 +135,24 @@
                         <time datetime="{{ \Carbon\Carbon::parse($trilha->updated_at)->toDateString() }}" itemprop="dateModified" class="text-black" style="font-weight: 500;">
                             - Trilha publicada em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}
                         </time>
+                    </p>
+                    <p class="small text-secondary mt-2 mb-1">
+                        Guia da trilha {{ $trilha->nm_trilha_tri }}
+                        @if($cidadeSeo)
+                            em {{ $cidadeSeo }}
+                        @endif
+                        @if($trilha->detalhes)
+                            com distância de {{ $trilha->detalhes->nu_distancia_trd }} km, duração estimada de {{ \Carbon\Carbon::parse($trilha->detalhes->duracao_trd)->format('H:i') }} (somente ida), além de informações de exposição, esforço e orientação.
+                        @else
+                            com descrição completa do percurso, nível e recomendações para planejar a aventura.
+                        @endif
+                    </p>
+                    <p class="small mb-0">
+                        Explore também:
+                        <a href="{{ $cidadeTrilhasUrl }}" class="text-decoration-underline">outras trilhas{{ $cidadeSeo ? ' em ' . $cidadeSeo : '' }}</a>,
+                        <a href="{{ $guiasUrl }}" class="text-decoration-underline">guias e condutores locais</a>
+                        e a agenda de
+                        <a href="{{ $eventosUrl }}" class="text-decoration-underline">eventos de trilha</a>.
                     </p>
                 </div> 
                 @if(count($trilha->guias))
