@@ -48,16 +48,6 @@
                         <time datetime="{{ \Carbon\Carbon::parse($trilha->updated_at)->toDateString() }}" itemprop="dateModified" class="text-black" style="font-weight: 500;">
                             - Trilha publicada em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}
                         </time>
-                        <span title="Popularidade baseada no total de acessos" class="d-flex align-items-center ms-auto" style="gap: 2px;">
-                            <span class="text-muted ms-1" style="font-size: 0.75rem; margin-right: 5px; margin-top: 5px;">{{ number_format($totalAcessosTrilha, 0, ',', '.') }} acessos</span>
-                            @for($i = 1; $i <= 5; $i++)
-                                @if($i <= $chamasPreenchidas)
-                                    <span style="font-size: 1rem; color: #ff5722;">&#x1F525;</span>
-                                @else
-                                    <span style="font-size: 1rem; filter: grayscale(1); opacity: 0.3;">&#x1F525;</span>
-                                @endif
-                            @endfor                            
-                        </span>
                     </h6>            
                 </div> 
                 @if(count($trilha->guias))
