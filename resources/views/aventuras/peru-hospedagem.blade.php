@@ -60,6 +60,7 @@
                                 <th class="text-end">Valor total</th>
                                 <th class="text-end">Por pessoa</th>
                                 <th class="text-end">Por pessoa (S/)</th>
+                                <th class="text-center">Quartos</th>
                                 <th class="text-center">Link</th>
                             </tr>
                         </thead>
@@ -94,6 +95,22 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
+                                        @if($hospedagem->quartos->isNotEmpty())
+                                            <button
+                                                class="btn btn-sm btn-outline-light rounded-pill px-3"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#quartos-{{ $hospedagem->cd_hospedagem_hos }}"
+                                                aria-expanded="false"
+                                                aria-controls="quartos-{{ $hospedagem->cd_hospedagem_hos }}"
+                                            >
+                                                {{ $hospedagem->quartos->count() }}
+                                            </button>
+                                        @else
+                                            —
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
                                         @if($hospedagem->ds_url_hos)
                                             <a href="{{ $hospedagem->ds_url_hos }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-warning rounded-pill px-3">
                                                 Ver
@@ -103,6 +120,30 @@
                                         @endif
                                     </td>
                                 </tr>
+                                @if($hospedagem->quartos->isNotEmpty())
+                                    <tr class="quartos-detail-row">
+                                        <td colspan="11" class="p-0 border-0">
+                                            <div class="collapse" id="quartos-{{ $hospedagem->cd_hospedagem_hos }}">
+                                                <div class="quartos-box px-3 py-2">
+                                                    <div class="small text-white-50 text-uppercase fw-bold mb-2" style="letter-spacing: 1px;">Detalhamento de quartos</div>
+                                                    @foreach($hospedagem->quartos as $quarto)
+                                                        <div class="quarto-item mb-2">
+                                                            <div class="d-flex flex-wrap gap-2 align-items-center">
+                                                                <span class="badge rounded-pill bg-warning text-dark">{{ $quarto->ds_quarto_hoq ?: 'Quarto sem descrição' }}</span>
+                                                                <span class="badge rounded-pill bg-secondary">{{ $quarto->nu_pessoas_hoq ?? 0 }} pessoa(s)</span>
+                                                                <span class="badge rounded-pill {{ $quarto->fl_banheiro_hoq ? 'bg-success' : 'bg-dark border border-light' }}">Banheiro: {{ $quarto->fl_banheiro_hoq ? 'Sim' : 'Não' }}</span>
+                                                                <span class="badge rounded-pill {{ $quarto->fl_cafe_hoq ? 'bg-success' : 'bg-dark border border-light' }}">Café: {{ $quarto->fl_cafe_hoq ? 'Sim' : 'Não' }}</span>
+                                                            </div>
+                                                            @if($quarto->obs_hoq)
+                                                                <div class="small text-white-50 mt-1">Obs: {{ $quarto->obs_hoq }}</div>
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                         <tfoot>
@@ -121,6 +162,7 @@
                                 <td class="text-end fw-bold">
                                     S/ {{ number_format($totais['valor_individual_soles'], 2, ',', '.') }}
                                 </td>
+                                <td></td>
                                 <td></td>
                             </tr>
                         </tfoot>
@@ -184,6 +226,35 @@
                                 </strong>
                             </div>
                         </div>
+
+                        @if($hospedagem->quartos->isNotEmpty())
+                            <button
+                                class="btn btn-outline-light btn-sm rounded-pill mt-3"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#quartos-mobile-{{ $hospedagem->cd_hospedagem_hos }}"
+                                aria-expanded="false"
+                                aria-controls="quartos-mobile-{{ $hospedagem->cd_hospedagem_hos }}"
+                            >
+                                Ver quartos ({{ $hospedagem->quartos->count() }})
+                            </button>
+
+                            <div class="collapse mt-3" id="quartos-mobile-{{ $hospedagem->cd_hospedagem_hos }}">
+                                <div class="quartos-box p-3 rounded-3">
+                                    @foreach($hospedagem->quartos as $quarto)
+                                        <div class="quarto-item mb-2">
+                                            <div class="fw-semibold">{{ $quarto->ds_quarto_hoq ?: 'Quarto sem descrição' }}</div>
+                                            <div class="small text-white-50">{{ $quarto->nu_pessoas_hoq ?? 0 }} pessoa(s)</div>
+                                            <div class="small text-white-50">Banheiro: {{ $quarto->fl_banheiro_hoq ? 'Sim' : 'Não' }} · Café: {{ $quarto->fl_cafe_hoq ? 'Sim' : 'Não' }}</div>
+                                            @if($quarto->obs_hoq)
+                                                <div class="small text-white-50 mt-1">Obs: {{ $quarto->obs_hoq }}</div>
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
                         @if($hospedagem->ds_url_hos)
                             <a href="{{ $hospedagem->ds_url_hos }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-warning btn-sm rounded-pill mt-3">
                                 Ver hospedagem
@@ -249,6 +320,16 @@
     .hospedagem-card {
         background: rgba(255,255,255,.05);
         border: 1px solid rgba(255,255,255,.1);
+    }
+    .quartos-box {
+        background: rgba(255,255,255,.03);
+        border-top: 1px dashed rgba(255,255,255,.14);
+    }
+    .quarto-item:last-child {
+        margin-bottom: 0 !important;
+    }
+    .quartos-detail-row td {
+        background: transparent;
     }
     .hospedagem-table td:nth-child(1) {
         min-width: 110px;

@@ -40,4 +40,10 @@ class Hospedagem extends Model
     {
         return $query->orderBy('dt_chegada_hos');
     }
+
+    public function quartos()
+    {
+        return $this->hasMany(HospedagemQuarto::class, 'cd_hospedagem_hos', 'cd_hospedagem_hos')
+            ->orderBy('cd_hospedagem_quarto_hoq');
+    }
 }

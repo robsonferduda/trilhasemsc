@@ -24,6 +24,7 @@ class AventuraController extends Controller
         $cambioSoles = (float) config('aventuras.peru_2026.cambio_soles_brl', 1.52);
 
         $hospedagens = Hospedagem::daExpedicao($expedicaoId)
+            ->with('quartos')
             ->ordenadasPorChegada()
             ->get();
 
