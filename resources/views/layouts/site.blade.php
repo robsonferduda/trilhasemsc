@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
    <head>
+    @php
+      $defaultTitle = isset($page_name) ? $page_name : 'Trilhas em Santa Catarina';
+      $defaultDescription = 'Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil';
+      $metaTitle = trim($__env->yieldContent('pageTitle')) ?: $defaultTitle;
+      $metaDescription = trim($__env->yieldContent('description')) ?: $defaultDescription;
+      $metaCanonical = trim($__env->yieldContent('canonical')) ?: url()->current();
+      $metaImage = trim($__env->yieldContent('metaImage')) ?: asset('img/apple-icon.png');
+      $metaRobots = trim($__env->yieldContent('robots')) ?: 'index,follow';
+      $metaKeywords = trim($__env->yieldContent('keywords')) ?: 'trilhas em sc, camping em sc, trilhas em santa catarina';
+      $ogType = trim($__env->yieldContent('ogType')) ?: 'website';
+    @endphp
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil">
-      <meta name="keywords" content="trilhas em sc, camping em sc, trilhas em santa catarina"> 
-      <title>
-         {{ (isset($page_name)) ? $page_name : 'Trilhas em Santa Catarina' }}
-      </title>
+    <meta name="description" content="{{ $metaDescription }}">
+    <meta name="keywords" content="{{ $metaKeywords }}">
+    <meta name="robots" content="{{ $metaRobots }}">
+    <link rel="canonical" href="{{ $metaCanonical }}">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:type" content="{{ $ogType }}">
+    <meta property="og:title" content="{{ $metaTitle }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:url" content="{{ $metaCanonical }}">
+    <meta property="og:image" content="{{ $metaImage }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $metaTitle }}">
+    <meta name="twitter:description" content="{{ $metaDescription }}">
+    <meta name="twitter:image" content="{{ $metaImage }}">
+    <title>{{ $metaTitle }}</title>
+    @yield('structuredData')
       <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
       <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">      

@@ -1,11 +1,51 @@
 @extends('layouts.site')
-@section('pageTitle', $trilha->nm_trilha_tri )
-@section('description', strip_tags(html_entity_decode(substr($trilha->ds_trilha_tri, 0, strpos($trilha->ds_trilha_tri, chr(10) ) - 1))) )
-@section('content')
 @php 
     $img = ($trilha->foto->where('id_tipo_foto_tfo',5)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',5)->first()->nm_path_fot : 'padrao.jpg';
     $alt = ($trilha->foto->where('id_tipo_foto_tfo',5)->first()) ? $trilha->foto->where('id_tipo_foto_tfo',5)->first()->dc_alt_fot : 'Foto Principal da Trilha';
+    $descricaoBase = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($trilha->ds_trilha_tri ?? ''))));
+    $descricaoSeo = \Illuminate\Support\Str::limit($descricaoBase, 160, '...');
+    $cidadeSeo = optional($trilha->cidade)->nm_cidade_cde;
+    $pageTitleSeo = $cidadeSeo
+        ? $trilha->nm_trilha_tri . ' - ' . $cidadeSeo . ' | Trilhas em Santa Catarina'
+        : $trilha->nm_trilha_tri . ' | Trilhas em Santa Catarina';
+    $metaImageUrl = asset('img/trilhas/detalhes-principal/'.$img);
 @endphp
+@section('pageTitle', $pageTitleSeo)
+@section('description', $descricaoSeo)
+@section('canonical', url()->current())
+@section('metaImage', $metaImageUrl)
+@section('ogType', 'article')
+@section('keywords', 'trilha, aventura, ' . ($cidadeSeo ? strtolower($cidadeSeo) . ', ' : '') . 'santa catarina, trilhas em sc')
+@section('structuredData')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'Article',
+    'headline' => $trilha->nm_trilha_tri,
+    'description' => $descricaoSeo,
+    'datePublished' => optional($trilha->created_at)->toAtomString(),
+    'dateModified' => optional($trilha->updated_at)->toAtomString(),
+    'mainEntityOfPage' => [
+        '@type' => 'WebPage',
+        '@id' => url()->current(),
+    ],
+    'image' => [$metaImageUrl],
+    'author' => [
+        '@type' => 'Person',
+        'name' => optional($trilha->user)->name ?: 'Trilhas em Santa Catarina',
+    ],
+    'publisher' => [
+        '@type' => 'Organization',
+        'name' => 'Trilhas em Santa Catarina',
+        'logo' => [
+            '@type' => 'ImageObject',
+            'url' => asset('img/apple-icon.png'),
+        ],
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@endsection
+@section('content')
 @include('layouts/partes/header-trilhas-detalhes')
 <section class="pt-1 pb-0 mt-3 mb-5">
     <div class="container">
