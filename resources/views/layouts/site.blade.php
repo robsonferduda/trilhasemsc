@@ -30,6 +30,7 @@
     <meta name="twitter:image" content="{{ $metaImage }}">
     <title>{{ $metaTitle }}</title>
     @yield('structuredData')
+    @yield('headExtra')
       <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
       <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">      

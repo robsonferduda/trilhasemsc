@@ -21,6 +21,9 @@
 @section('metaImage', $metaImageUrl)
 @section('ogType', 'article')
 @section('keywords', 'trilha, aventura, ' . ($cidadeSeo ? strtolower($cidadeSeo) . ', ' : '') . 'santa catarina, trilhas em sc')
+@section('headExtra')
+<link rel="preload" as="image" href="{{ $metaImageUrl }}" fetchpriority="high">
+@endsection
 @section('structuredData')
 <script type="application/ld+json">
 {!! json_encode([
@@ -162,14 +165,14 @@
                     <div class="row mt-0 mb-0">
                         @foreach($trilha->guias as $key => $guia)
                             <div class="col col-xs-1 col-sm-1 d-sm-block d-md-none mb-3">
-                                <a href="{{ url("guia/perfil/estatistica/perfil", $guia->nm_instagram_gui) }}"><img class="avatar avatar-xl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $guia->nm_guia_gui }}"></a>
+                                <a href="{{ url("guia/perfil/estatistica/perfil", $guia->nm_instagram_gui) }}"><img class="avatar avatar-xl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $guia->nm_guia_gui }}" loading="lazy" decoding="async"></a>
                             </div>
                         @endforeach
                     </div>
                     <div class="row">
                         @foreach($trilha->guias as $key => $guia)
                             <div class="col-sm-1 col-md-2 col-lg-2 d-none d-md-block">
-                                <a href="{{ url("guia/perfil/estatistica/perfil", $guia->nm_instagram_gui) }}"><img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $guia->nm_guia_gui }}"></a>
+                                <a href="{{ url("guia/perfil/estatistica/perfil", $guia->nm_instagram_gui) }}"><img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $guia->nm_guia_gui }}" loading="lazy" decoding="async"></a>
                             </div>
                         @endforeach
                     </div>
@@ -206,7 +209,7 @@
                 <div class="col-md-12 mt-2">
                     <h2 class="h6">Detalhes da Aventura</h2>
                     <div class="d-flex align-items-center mb-2">
-                        <img src="{{ asset('img/trilheiros/' . ($trilha->user->dc_foto_perfil ?? 'perfil.png')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                        <img src="{{ asset('img/trilheiros/' . ($trilha->user->dc_foto_perfil ?? 'perfil.png')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;" width="40" height="40" loading="lazy" decoding="async">
                         <span class="text-secondary">Trilha registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }} em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}, com última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
                     </div>    
                     <p class="mb-1 text-danger" style="font-size: 85%;">
@@ -219,7 +222,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-12 position-relative my-auto justify-content-center text-center">
-                            <img class="mx-auto" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
+                            <img class="mx-auto" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}" loading="lazy" decoding="async">
                             <span style="color: white; background: {{ ($trilha->nivel) ? $trilha->nivel->dc_color_nivel_niv : '#989898' }};" class="badge badge-secondary">{{ $trilha->nivel->dc_nivel_niv }} {{ ($trilha->complemento) ? " - ".$trilha->complemento->nm_complemento_nivel_con : '' }}</span>
                             <p class="mt-3"><a href="{{ url('guia-de-dificuldade-em-trilhas/abnt') }}">Clique e entenda as medidas</a></p>
                         </div>
@@ -231,7 +234,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center">
                             <h5 class="mb-2 mt-2">Também pode ser um PIX</h5>   
                             <p class="mb-2">Chave: trilhasemsc@gmail.com</p>     
-                            <img class="mx-auto" src="{{ asset('img/qrcode.png') }}" style="width: 80%;" alt="PIX TrilhasemSC">                                              
+                            <img class="mx-auto" src="{{ asset('img/qrcode.png') }}" style="width: 80%;" alt="PIX TrilhasemSC" loading="lazy" decoding="async">                                              
                         </div>
                         <!--
                             <div class="col-lg-12 col-md-12 mt-5">
