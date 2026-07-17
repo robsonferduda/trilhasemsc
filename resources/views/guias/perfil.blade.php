@@ -1,16 +1,101 @@
 @extends('layouts.site')
+@php
+    $cidadeOrigem = optional($guia->origem)->nm_cidade_cde;
+    $cidadesAtuacao = $guia->cidadesAtuacao->pluck('nm_cidade_cde')->filter()->values();
+    $atuacaoTexto = $cidadesAtuacao->count()
+        ? $cidadesAtuacao->implode(', ')
+        : ($guia->ds_atuacao_gui ?: $cidadeOrigem);
+    $descricaoBase = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($guia->dc_biografia_gui ?? ''))));
+    $descricaoSeo = $descricaoBase
+        ? \Illuminate\Support\Str::limit($descricaoBase, 160, '...')
+        : ('Perfil de ' . $guia->nm_guia_gui . ', guia e condutor' . ($atuacaoTexto ? ' com atuação em ' . $atuacaoTexto : '') . ' | Trilhas em Santa Catarina');
+    $pageTitleSeo = $guia->nm_guia_gui . ' - Guia e Condutor | Trilhas em Santa Catarina';
+    $canonicalUrl = $guia->nm_instagram_gui
+        ? url('guia/perfil/' . $guia->nm_instagram_gui)
+        : url('guia/perfil/' . $guia->id_guia_gui);
+    $metaImageUrl = $guia->nm_path_logo_gui
+        ? asset('img/guias/'.$guia->nm_path_logo_gui)
+        : asset('img/guias/default.png');
+    $homeUrl = url('/');
+    $guiasUrl = url('guias-e-condutores');
+    $eventosUrl = url('eventos');
+@endphp
+@section('pageTitle', $pageTitleSeo)
+@section('description', $descricaoSeo)
+@section('canonical', $canonicalUrl)
+@section('metaImage', $metaImageUrl)
+@section('ogType', 'profile')
+@section('keywords', 'guia de trilha, condutor, ' . strtolower($guia->nm_guia_gui) . ', ' . ($cidadeOrigem ? strtolower($cidadeOrigem) . ', ' : '') . 'santa catarina, trilhas em sc')
+@section('headExtra')
+<link rel="preload" as="image" href="{{ $metaImageUrl }}" fetchpriority="high">
+@endsection
+@section('structuredData')
+<script type="application/ld+json">
+{!! json_encode(array_filter([
+    '@context' => 'https://schema.org',
+    '@type' => 'Person',
+    'name' => $guia->nm_guia_gui,
+    'description' => $descricaoSeo,
+    'url' => $canonicalUrl,
+    'image' => $metaImageUrl,
+    'jobTitle' => 'Guia e Condutor de Trilhas',
+    'worksFor' => [
+        '@type' => 'Organization',
+        'name' => 'Trilhas em Santa Catarina',
+        'url' => $homeUrl,
+    ],
+    'address' => $cidadeOrigem ? [
+        '@type' => 'PostalAddress',
+        'addressLocality' => $cidadeOrigem,
+        'addressRegion' => 'SC',
+        'addressCountry' => 'BR',
+    ] : null,
+    'sameAs' => $guia->nm_instagram_gui
+        ? ['https://www.instagram.com/' . ltrim($guia->nm_instagram_gui, '@')]
+        : null,
+], function ($value) {
+    return !is_null($value);
+}), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        [
+            '@type' => 'ListItem',
+            'position' => 1,
+            'name' => 'Início',
+            'item' => $homeUrl,
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 2,
+            'name' => 'Guias e Condutores',
+            'item' => $guiasUrl,
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 3,
+            'name' => $guia->nm_guia_gui,
+            'item' => $canonicalUrl,
+        ],
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@endsection
 @section('content')
 @include('layouts/partes/header-condutores-perfil')
 <section class="pt-1 pb-0 mt-3 mb-5">
     <div class="container">
        <div class="row mb-2">
           <div class="col-md-7">
-             <h3 class="text-info">Mais Informações</h3>
+             <h2 class="text-info h3">Mais Informações</h2>
           </div>
        </div>
        <div class="row">
          <div class="col-md-12">
-            <h4>{{ $guia->nm_guia_gui }}</h4>
+            <h2 class="h4">{{ $guia->nm_guia_gui }}</h2>
             <p><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/estatistica/instagram", $guia->nm_instagram_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
             @if($guia->nu_cadastur_gui)
                <p><strong>Cadastur</strong>: {{ $guia->nu_cadastur_gui }} </p>
@@ -18,15 +103,21 @@
             @if(count($guia->unidadesConservacao) > 0)
                <p><strong>Unidades de Conservação</strong>: {{ count($guia->unidadesConservacao) > 0 ? implode(', ',$guia->unidadesConservacao->pluck('nome_unc')->toArray()) : ''}}</p>
             @endif
-            <p><strong>Cidades de Atuação</strong>: {{ count($guia->cidadesAtuacao) > 0 ? implode(', ',$guia->cidadesAtuacao->pluck('nm_cidade_cde')->toArray()) : $guia->ds_atuacao_gui }}</p>
+            <p><strong>Cidades de Atuação</strong>: {{ $atuacaoTexto }}</p>
             <p>
                 {{ $guia->dc_biografia_gui }}
+            </p>
+            <p class="small mb-0">
+                Explore também:
+                <a href="{{ $guiasUrl }}" class="text-decoration-underline">outros guias e condutores</a>
+                e a agenda de
+                <a href="{{ $eventosUrl }}" class="text-decoration-underline">eventos de trilha</a>.
             </p>
          </div>
 
          @if(isset($eventos_futuros) && $eventos_futuros->count() > 0)
          <div class="col-md-12 mt-2 mb-2">
-            <h4 class="text-info mb-0"><i class="fa fa-calendar" aria-hidden="true"></i> Agenda</h4>
+            <h2 class="text-info mb-0 h4"><i class="fa fa-calendar" aria-hidden="true"></i> Agenda</h2>
             <div style="height:3px;background:linear-gradient(90deg,#17a2b8 0%,transparent 100%);border-radius:2px;" class="mt-1 mb-4"></div>
 
             @foreach($eventos_futuros as $evento)
@@ -51,14 +142,16 @@
                {{-- Card do evento --}}
                <div class="card flex-fill shadow-sm" style="border-left:4px solid #17a2b8;border-top:none;border-right:none;border-bottom:none;border-radius:6px; margin-left: 10px;">
                   @if($evento->ds_imagem_horizontal_eve)
-                  <img src="{{ asset('storage/eventos/'.$evento->ds_imagem_horizontal_eve) }}"
+                  <img src="{{ asset('img/eventos/'.$evento->ds_imagem_horizontal_eve) }}"
                        alt="{{ $evento->nm_evento_eve }}"
                        class="card-img-top"
-                       style="max-height:140px;object-fit:cover;border-radius:0 6px 0 0;">
+                       style="max-height:140px;object-fit:cover;border-radius:0 6px 0 0;"
+                       loading="lazy"
+                       decoding="async">
                   @endif
                   <div class="card-body py-2 px-3">
                      <div class="d-flex align-items-start justify-content-between flex-wrap">
-                        <h6 class="card-title mb-1" style="font-size:1rem;">{{ $evento->nm_evento_eve }}</h6>
+                        <h3 class="card-title mb-1 h6" style="font-size:1rem;">{{ $evento->nm_evento_eve }}</h3>
                         @if(isset($evento->valor_eve))
                            @if($evento->valor_eve > 0)
                            <span class="badge badge-info ml-2" style="white-space:nowrap;">R$ {{ number_format($evento->valor_eve, 2, ',', '.') }}</span>
@@ -99,7 +192,7 @@
                @forelse ($guia->unidadesConservacao as $key => $uc)
                   <div class="col col-xl-2 col-md-2 mb-3 mt-3 center">
                      <p class="center"><strong>{{ Str::upper($uc->sigla_unc) }}</strong></p>
-                     <img class="img-fluid w-75" src=" {{ asset('img/logos-uc/'.$uc->logo_unc) }}" alt="Logo {{ $uc->nome_uc }}">
+                     <img class="img-fluid w-75" src=" {{ asset('img/logos-uc/'.$uc->logo_unc) }}" alt="Logo {{ $uc->nome_uc }}" loading="lazy" decoding="async">
                   </div>
                @empty
                

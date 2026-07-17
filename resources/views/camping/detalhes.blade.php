@@ -1,13 +1,83 @@
 @extends('layouts.site')
-@section('pageTitle', '{{ $camping->ds_nome_cam }}' )
-@section('description', "")
+@php
+    $cidadeSeo = optional($camping->cidade)->nm_cidade_cde;
+    $tipoSeo = optional($camping->tipo)->ds_tipo_tic;
+    $descricaoBase = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($camping->ds_descricao_cam ?? ''))));
+    $descricaoSeo = $descricaoBase
+        ? \Illuminate\Support\Str::limit($descricaoBase, 160, '...')
+        : ('Camping ' . $camping->ds_nome_cam . ($cidadeSeo ? ' em ' . $cidadeSeo : '') . ($tipoSeo ? ' (' . $tipoSeo . ')' : '') . ' | Trilhas em Santa Catarina');
+    $pageTitleSeo = $cidadeSeo
+        ? $camping->ds_nome_cam . ' - ' . $cidadeSeo . ' | Trilhas em Santa Catarina'
+        : $camping->ds_nome_cam . ' | Trilhas em Santa Catarina';
+    $canonicalUrl = url()->current();
+    $metaImageUrl = $camping->ds_capa_cam
+        ? (preg_match('#^https?://#i', $camping->ds_capa_cam) ? $camping->ds_capa_cam : asset(ltrim($camping->ds_capa_cam, '/')))
+        : asset('img/apple-icon.png');
+    $homeUrl = url('/');
+    $campingsUrl = url('campings');
+    $guiasUrl = url('guias-e-condutores');
+    $cidadeTrilhasUrl = $cidadeSeo ? url(stringToStringSeo($cidadeSeo).'/trilhas/#lista') : url('trilhas');
+@endphp
+@section('pageTitle', $pageTitleSeo)
+@section('description', $descricaoSeo)
+@section('canonical', $canonicalUrl)
+@section('metaImage', $metaImageUrl)
+@section('ogType', 'article')
+@section('keywords', 'camping, ' . ($cidadeSeo ? strtolower($cidadeSeo) . ', ' : '') . ($tipoSeo ? strtolower($tipoSeo) . ', ' : '') . 'santa catarina, camping em sc, trilhas em sc')
+@section('headExtra')
+<link rel="preload" as="image" href="{{ $metaImageUrl }}" fetchpriority="high">
+@endsection
+@section('structuredData')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'Campground',
+    'name' => $camping->ds_nome_cam,
+    'description' => $descricaoSeo,
+    'url' => $canonicalUrl,
+    'image' => [$metaImageUrl],
+    'address' => [
+        '@type' => 'PostalAddress',
+        'addressLocality' => $cidadeSeo ?: 'Santa Catarina',
+        'addressRegion' => 'SC',
+        'addressCountry' => 'BR',
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        [
+            '@type' => 'ListItem',
+            'position' => 1,
+            'name' => 'Início',
+            'item' => $homeUrl,
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 2,
+            'name' => 'Campings',
+            'item' => $campingsUrl,
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 3,
+            'name' => $camping->ds_nome_cam,
+            'item' => $canonicalUrl,
+        ],
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@endsection
 @section('content')
 <header class="position-relative">
     <div class="container">
         <div class="row bg-white shadow mt-n5 border-radius-lg pb-3 p-3 mx-sm-0 mx-1 position-relative">
             <div class="col-md-12 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4 text-center">
-                <h2 class="mt-2">{{ $camping->ds_nome_cam }}</h2>
-                <h5><i class="ni ni-pin-3 text-danger mb-1"></i> {{ $camping->cidade->nm_cidade_cde }}</h5>
+                <h1 class="mt-2 h2">{{ $camping->ds_nome_cam }}</h1>
+                <h2 class="h5"><i class="ni ni-pin-3 text-danger mb-1"></i> {{ $camping->cidade->nm_cidade_cde }}</h2>
             </div>
        </div>
     </div>
@@ -17,7 +87,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
                 <div class="col-md-12">
-                    <a href="#"><img class="border-radius-xl shadow w-100" src="{{ $camping->ds_capa_cam }}" alt=""></a>
+                    <img class="border-radius-xl shadow w-100" src="{{ $camping->ds_capa_cam }}" alt="{{ $camping->ds_nome_cam }}" loading="eager" fetchpriority="high">
                 </div>
             </div>
         </div>
@@ -25,16 +95,23 @@
             <div class="col-md-9 mt-2">
                 <div class="row">
                     <div class="col-md-9 mt-3">
-                        <h4 class="mt-2">{{ $camping->ds_nome_cam }}</h4>
-                        <h6>
-                            <i class="ni ni-pin-3 text-danger"></i> {{ $camping->cidade->nm_cidade_cde }} 
-                            <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_BLANK" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
-                        </h6>                  
-                    </div> 
+                        <h2 class="mt-2 h4">{{ $camping->ds_nome_cam }}</h2>
+                        <p class="h6 mb-0">
+                            <i class="ni ni-pin-3 text-danger"></i> {{ $camping->cidade->nm_cidade_cde }}
+                            <span class=""><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_blank" rel="noopener noreferrer" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> @trilhasemsc</a></span>
+                        </p>
+                        <p class="small mb-0 mt-2">
+                            Explore também:
+                            <a href="{{ $campingsUrl }}" class="text-decoration-underline">outros campings</a>,
+                            <a href="{{ $cidadeTrilhasUrl }}" class="text-decoration-underline">trilhas{{ $cidadeSeo ? ' em ' . $cidadeSeo : '' }}</a>
+                            e
+                            <a href="{{ $guiasUrl }}" class="text-decoration-underline">guias e condutores</a>.
+                        </p>
+                    </div>
                     <div class="col-md-3 mt-3">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 center">
-                                <img src="{{ url('img/icon/'.$camping->tipo->ds_img_tic) }}" alt="Ícone indicador de camping {{ ucfirst(trans($camping->tipo->ds_tipo_tic)) }}" class="img w-25">
+                                <img src="{{ url('img/icon/'.$camping->tipo->ds_img_tic) }}" alt="Ícone indicador de camping {{ ucfirst(trans($camping->tipo->ds_tipo_tic)) }}" class="img w-25" loading="lazy" decoding="async">
                             </div>
                             <div class="col-lg-12 col-md-12 center">
                                 <p class="my-auto mx-auto" style="font-weight: bold;">{{ $camping->tipo->ds_tipo_tic }}</p>
@@ -64,7 +141,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center">
                             <h5 class="mb-2 mt-2">Também pode ser um PIX</h5>   
                             <p class="mb-2">Chave: trilhasemsc@gmail.com</p>     
-                            <img class="mx-auto" src="{{ asset('img/qrcode.png') }}" style="width: 80%;" alt="PIX TrilhasemSC">                                              
+                            <img class="mx-auto" src="{{ asset('img/qrcode.png') }}" style="width: 80%;" alt="PIX TrilhasemSC" loading="lazy" decoding="async">                                              
                         </div>
                         <!--
                             <div class="col-lg-12 col-md-12 mt-5">
@@ -106,7 +183,7 @@
             </div>
             <div class="col-md-3">            
                 <div class="col-lg-12 mt-4">
-                    <h4 class="mt-0">Busca por Cidade</h4>                    
+                    <h2 class="mt-0 h4">Busca por Cidade</h2>                    
                         <label class="" style="font-size: 100%; margin: 0px;">Selecione a cidade</label>
                         <p class="mt-0 text-danger" style="font-size: 85%;">São mostradas somente cidades que possuem alguma trilha cadastrada.</p>
                         <select class="form-control mb-0" name="cidade" id="list-cidade">
