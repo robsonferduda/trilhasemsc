@@ -131,6 +131,68 @@
                         </div>
                     </form>
 
+                    <div class="row clearfix" style="margin-top: 30px;">
+                        <div class="col-lg-12">
+                            <div class="card" style="border: 1px solid #e9ecef; box-shadow: none;">
+                                <div class="header">
+                                    <h2><i class="fa fa-envelope"></i> Convites por email</h2>
+                                    <small class="text-muted">Envie um teste para o admin antes do disparo em massa.</small>
+                                </div>
+                                <div class="body">
+                                    <div class="row">
+                                        <div class="col-md-6" style="margin-bottom: 20px;">
+                                            <h5 class="text-success">Trilheiros</h5>
+                                            <p class="mb-2">
+                                                Convida a conhecer a aventura com detalhes da trilha.
+                                            </p>
+                                            <p class="text-muted mb-3">
+                                                Destinatários: <strong>{{ $totalTrilheirosNewsletter ?? 0 }}</strong> trilheiro(s) com newsletter ativa.
+                                            </p>
+                                            <form action="{{ route('admin.trilha.email-teste-convite', $trilha->id_trilha_tri) }}" method="post" style="display:inline-block; margin-right: 6px;">
+                                                @csrf
+                                                <input type="hidden" name="tipo" value="trilheiro">
+                                                <button type="submit" class="btn btn-outline-warning btn-sm">
+                                                    <i class="fa fa-flask"></i> Enviar teste
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('admin.trilha.email-convite-trilheiros', $trilha->id_trilha_tri) }}" method="post" style="display:inline-block;" onsubmit="return confirm('Enviar convite desta trilha para {{ $totalTrilheirosNewsletter ?? 0 }} trilheiro(s)?');">
+                                                @csrf
+                                                <button type="submit" class="btn btn-success btn-sm" {{ empty($totalTrilheirosNewsletter) ? 'disabled' : '' }}>
+                                                    <i class="fa fa-paper-plane"></i> Enviar para trilheiros
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-6" style="margin-bottom: 20px;">
+                                            <h5 class="text-info">Guias e Condutores</h5>
+                                            <p class="mb-2">
+                                                Convida a se cadastrar como executor desta trilha.
+                                            </p>
+                                            <p class="text-muted mb-3">
+                                                Destinatários: <strong>{{ $totalGuiasAtivos ?? 0 }}</strong> guia(s) ativo(s).
+                                            </p>
+                                            <form action="{{ route('admin.trilha.email-teste-convite', $trilha->id_trilha_tri) }}" method="post" style="display:inline-block; margin-right: 6px;">
+                                                @csrf
+                                                <input type="hidden" name="tipo" value="guia">
+                                                <button type="submit" class="btn btn-outline-warning btn-sm">
+                                                    <i class="fa fa-flask"></i> Enviar teste
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('admin.trilha.email-convite-guias', $trilha->id_trilha_tri) }}" method="post" style="display:inline-block;" onsubmit="return confirm('Enviar convite desta trilha para {{ $totalGuiasAtivos ?? 0 }} guia(s)?');">
+                                                @csrf
+                                                <button type="submit" class="btn btn-info btn-sm" {{ empty($totalGuiasAtivos) ? 'disabled' : '' }}>
+                                                    <i class="fa fa-paper-plane"></i> Enviar para guias
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <p class="small text-muted mb-0">
+                                        O email de teste é enviado para <strong>{{ Auth::user()->email }}</strong>.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <form action="{{ url('admin/insert-foto') }}" method="post" enctype="multipart/form-data">
                         @csrf
                             <h4>Dados da Foto</h4>
