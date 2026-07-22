@@ -119,9 +119,10 @@
                                     <label for="id_nivel_niv">Geolocalização (Wikiloc, Strava, Relive)</label>
                                     <textarea name="url_geolocalizacao_tri" id="url_geolocalizacao_tri" rows="6" style="width: 100%;">{{ $trilha->url_geolocalizacao_tri }}</textarea>  
                                 </div>
-                                <textarea name="ds_trilha_tri" id="ckeditor" rows="15" style="width: 100%;">
-                                    {{ $trilha->ds_trilha_tri }}
-                                </textarea> 
+                                <div class="form-group">
+                                    <label for="ds_trilha_tri">Descrição</label>
+                                    <textarea name="ds_trilha_tri" id="ckeditor" class="ckeditor form-control" rows="15">{{ $trilha->ds_trilha_tri }}</textarea>
+                                </div> 
                             </div> 
                         </div>
                         <div style="text-align: center; margin-top:15px; ">

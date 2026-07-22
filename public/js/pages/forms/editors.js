@@ -1,40 +1,31 @@
 $(function () {
-    //CKEditor
-    CKEDITOR.replace('ckeditor');
-    CKEDITOR.config.height = 300;
+    if (typeof CKEDITOR === 'undefined') {
+        return;
+    }
 
-    CKEDITOR.editorConfig = function( config ) {
-        // Define changes to default configuration here.
-        // For complete reference see:
-        // http://docs.ckeditor.com/#!/api/CKEDITOR.config
-    
-        // The toolbar groups arrangement, optimized for two toolbar rows.
-        config.toolbarGroups = [
-            { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-            { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-            { name: 'links' },
-            { name: 'insert' },
-            { name: 'forms' },
-            { name: 'tools' },
-            { name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
-            { name: 'others' },
-            '/',
-            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-            { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-            { name: 'styles' },
-            { name: 'colors' },
-            { name: 'about' }
-        ];
-    
-        // Remove some buttons provided by the standard plugins, which are
-        // not needed in the Standard(s) toolbar.
-        config.removeButtons = 'Underline,Subscript,Superscript';
-    
-        // Set the most common block elements.
-        config.format_tags = 'p;h1;h2;h3;pre';
-    
-        // Simplify the dialog windows.
-        config.removeDialogTabs = 'image:advanced;link:advanced';
-    };
-  
+    // Desativa o Advanced Content Filter (ACF):
+    // sem isso, o CKEditor remove tags/atributos que não estão na whitelist dele.
+    CKEDITOR.config.allowedContent = true;
+    CKEDITOR.config.extraAllowedContent = '*(*);*{*}';
+    CKEDITOR.config.pasteFilter = null;
+
+    CKEDITOR.replace('ckeditor', {
+        height: 320,
+        language: 'pt-br',
+        removePlugins: 'elementspath',
+        // Mantém HTML livre: div, style, class, span, etc.
+        allowedContent: true,
+        extraAllowedContent: '*(*);*{*}',
+        pasteFilter: null,
+        // Toolbar enxuta + Source para colar/editar HTML livremente
+        toolbar: [
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'RemoveFormat'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+            { name: 'links', items: ['Link', 'Unlink'] },
+            { name: 'clipboard', items: ['Undo', 'Redo'] },
+            { name: 'document', items: ['Source'] }
+        ],
+        enterMode: CKEDITOR.ENTER_P,
+        shiftEnterMode: CKEDITOR.ENTER_BR
+    });
 });
