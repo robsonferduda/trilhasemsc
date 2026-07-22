@@ -18,8 +18,8 @@
                 <div class="header no-padding-bottom">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <h2>Escolha 5 trilhas de sua preferência:</h2>
-                            <span class="text-info">Seu perfil aparecerá de forma randômica nas trilhas selecionadas. </span>                           
+                            <h2>Escolha as trilhas de sua preferência:</h2>
+                            <span class="text-info">Seu perfil aparecerá de forma randômica nas trilhas selecionadas.</span>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,6 @@
                                 @endforeach
                             </div>   
                             <div style="text-align: center; margin-top:15px; ">
-    {{--                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>--}}
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
                             </div>
                         </form>
@@ -54,27 +53,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('script')
-    <script>
-        $(function() {      
-            let check_trilha = document.getElementsByClassName('check_trilha');
-            Array.from(check_trilha).forEach(function(element) {
-	            element.addEventListener('change', function() {
-	            
-	                if (this.checked) {
-
-                        var checkboxes = document.querySelectorAll('input[name="trilhas[]"]:checked')
-                        if(checkboxes.length > 5) {
-                            swal("Excedido o limite de 5 trilhas selecionadas!");                            
-	                        this.checked = false;
-                        }
-                        
-	                } 
-
-	            });
-	        });
-            
-        });
-    </script>
 @endsection
