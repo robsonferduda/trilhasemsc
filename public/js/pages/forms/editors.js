@@ -19,12 +19,14 @@ $(function () {
         pasteFilter: null,
         // Toolbar enxuta + Source para colar/editar HTML livremente
         toolbar: [
+            { name: 'styles', items: ['Format'] },
             { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'RemoveFormat'] },
             { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
             { name: 'links', items: ['Link', 'Unlink'] },
             { name: 'clipboard', items: ['Undo', 'Redo'] },
             { name: 'document', items: ['Source'] }
         ],
+        format_tags: 'p;h1;h2;h3;h4;pre',
         enterMode: CKEDITOR.ENTER_P,
         shiftEnterMode: CKEDITOR.ENTER_BR
     });
