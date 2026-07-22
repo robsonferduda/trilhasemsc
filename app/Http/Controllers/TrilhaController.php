@@ -16,6 +16,7 @@ use App\Estatistica;
 use App\Categoria;
 use App\Complemento;
 use App\TipoFoto;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
@@ -145,8 +146,10 @@ class TrilhaController extends Controller
             if (!empty($request->tags)) {
                 $trilha->tags()->sync($request->tags);
             }
-            
-            return redirect(URL::previous());
+
+            Flash::success('<i class="fa fa-check"></i> Trilha atualizada com sucesso');
+
+            return redirect('admin/editar-trilha/'.$trilha->id_trilha_tri);
         } else {
             dd("Erro");
         }
