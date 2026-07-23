@@ -65,6 +65,21 @@ class TrilheiroController extends Controller
         return view('trilheiro/perfil', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
     }
 
+    public function verQuestionario($id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $trilheiro = Trilheiro::with(['indice', 'origem', 'user', 'questionario.corrida', 'questionario.distancia', 'questionario.elevacao'])
+            ->where('id_trilheiro_tri', $id)
+            ->firstOrFail();
+
+        $questionario = $trilheiro->questionario;
+
+        return view('admin/trilheiro/questionario', compact('trilheiro', 'questionario'));
+    }
+
     public function eventos()
     {
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
