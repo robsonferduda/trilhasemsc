@@ -27,10 +27,39 @@
 	        </div>
 	        <div class="body">
                 @include('layouts.mensagens')
+
+                <form method="GET" action="{{ url('admin/listar-trilhas') }}" class="mb-4">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-12 mb-2">
+                            <label for="nome" class="mb-1">Nome da trilha</label>
+                            <input
+                                type="text"
+                                name="nome"
+                                id="nome"
+                                class="form-control"
+                                placeholder="Digite o nome"
+                                value="{{ $filtroNome ?? '' }}"
+                            >
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 mb-2">
+                            <label for="publicado" class="mb-1">Publicado</label>
+                            <select name="publicado" id="publicado" class="form-control">
+                                <option value="">Todos</option>
+                                <option value="S" {{ ($filtroPublicado ?? '') === 'S' ? 'selected' : '' }}>Sim</option>
+                                <option value="N" {{ ($filtroPublicado ?? '') === 'N' ? 'selected' : '' }}>Não</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 mb-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-search"></i> Filtrar</button>
+                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-outline-secondary">Limpar</a>
+                        </div>
+                    </div>
+                </form>
+
 	            @if($trilhas->count())
                     <div class="row clearfix">
                         @foreach($trilhas as $trilha)
-                            <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="card mb-3">
                                     <div class="body">
                                         <div class="d-flex align-items-center">
