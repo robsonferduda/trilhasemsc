@@ -33,7 +33,18 @@ class TrilhaController extends Controller
             return redirect('login');
         }
 
-        $trilhas = Trilha::all();
+        $visitasSubquery = DB::table('total_acessos_trilhas_tat')
+            ->select('id_trilha_tri', DB::raw('MAX(total_acessos_tat) as total_visitas'))
+            ->groupBy('id_trilha_tri');
+
+        $trilhas = Trilha::with('nivel')
+            ->leftJoinSub($visitasSubquery, 'tat', function ($join) {
+                $join->on('trilha_tri.id_trilha_tri', '=', 'tat.id_trilha_tri');
+            })
+            ->select('trilha_tri.*', DB::raw('COALESCE(tat.total_visitas, 0) as total_visitas'))
+            ->orderBy('nm_trilha_tri')
+            ->paginate(12);
+
         return view('admin/trilha/index', ['trilhas' => $trilhas]);
     }
 
