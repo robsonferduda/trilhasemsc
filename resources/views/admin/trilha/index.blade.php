@@ -61,7 +61,7 @@
                         @foreach($trilhas as $trilha)
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="card mb-3">
-                                    <div class="body">
+                                    <div class="body" style="position: relative; padding-bottom: 72px;">
                                         <div class="d-flex align-items-center">
                                             <div class="mr-3 text-center" style="min-width: 90px;">
                                                 <img width="58" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Nível {{ $trilha->nivel->dc_nivel_niv }}"><br>
@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="mt-2">
+                                        <div style="position: absolute; left: 20px; bottom: 16px;">
                                             <a class="btn btn-warning" href="{{ url('https://trilhasemsc.com.br/'.$trilha->ds_url_tri) }}" target="_blank" rel="noopener">
                                                 <i class="fa fa-search"></i> Ver trilha
                                             </a>
