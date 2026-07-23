@@ -1,10 +1,292 @@
-.conteudo > p >  img {
-	width: 100% !important;
-	border-radius: 1rem;
+/* Conteúdo HTML das trilhas (CKEditor) */
+.conteudo {
+	color: #383838;
+	font-size: 1rem;
+	line-height: 1.75;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
-.conteudo > p {
+.conteudo > *:first-child {
+	margin-top: 0 !important;
+}
+
+.conteudo > *:last-child {
+	margin-bottom: 0 !important;
+}
+
+.conteudo p {
 	color: #383838 !important;
+	margin: 0 0 1.1rem;
+	line-height: 1.75;
+}
+
+.conteudo h1,
+.conteudo h2,
+.conteudo h3,
+.conteudo h4,
+.conteudo h5,
+.conteudo h6 {
+	color: #212529;
+	font-weight: 700;
+	line-height: 1.3;
+	margin: 1.75rem 0 .85rem;
+}
+
+.conteudo h1 { font-size: 1.75rem; }
+.conteudo h2 { font-size: 1.45rem; }
+.conteudo h3 { font-size: 1.25rem; }
+.conteudo h4 { font-size: 1.1rem; }
+.conteudo h5,
+.conteudo h6 { font-size: 1rem; }
+
+.conteudo ul,
+.conteudo ol {
+	margin: 0 0 1.1rem;
+	padding-left: 1.4rem;
+}
+
+.conteudo li {
+	margin-bottom: .4rem;
+	line-height: 1.65;
+}
+
+.conteudo a {
+	color: #0d6efd;
+	text-decoration: underline;
+}
+
+.conteudo a:hover {
+	color: #0a58ca;
+}
+
+.conteudo strong,
+.conteudo b {
+	font-weight: 700;
+	color: #212529;
+}
+
+.conteudo em,
+.conteudo i {
+	font-style: italic;
+}
+
+.conteudo blockquote {
+	margin: 1.25rem 0;
+	padding: .75rem 1rem;
+	border-left: 4px solid #f5a623;
+	background: rgba(245, 166, 35, .08);
+	color: #555;
+}
+
+.conteudo pre,
+.conteudo code {
+	font-family: Consolas, Monaco, monospace;
+	font-size: .92em;
+}
+
+.conteudo pre {
+	display: block;
+	margin: 1rem 0;
+	padding: .85rem 1rem;
+	overflow-x: auto;
+	background: #f4f6f8;
+	border-radius: .5rem;
+}
+
+.conteudo img {
+	max-width: 100% !important;
+	height: auto !important;
+	width: 100% !important;
+	border-radius: 1rem;
+	display: block;
+	margin: 1rem auto;
+}
+
+.conteudo figure {
+	margin: 1.25rem 0;
+}
+
+.conteudo figcaption {
+	font-size: .875rem;
+	color: #6c757d;
+	text-align: center;
+	margin-top: .4rem;
+}
+
+.conteudo div {
+	margin-bottom: 1rem;
+}
+
+/* Boxes de destaque no texto da trilha */
+.conteudo .box-destaque {
+	margin: 1.5rem 0;
+	padding: 1rem 1.15rem;
+	border-radius: .85rem;
+	background: #faf7f8;
+	border: 1px solid rgba(231, 49, 119, .18);
+	border-left: 4px solid #e73177;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+}
+
+.conteudo .box-destaque p {
+	margin: 0 0 .55rem;
+	color: #383838 !important;
+	line-height: 1.55;
+}
+
+.conteudo .box-destaque p:last-child {
+	margin-bottom: 0;
+}
+
+.conteudo .box-destaque .box-titulo {
+	margin: 0 0 .75rem;
+	font-size: .78rem;
+	font-weight: 700;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+	color: #e73177;
+}
+
+/* Cards de perfis Instagram */
+.conteudo .box-instagram {
+	margin: 1.75rem 0;
+	padding: 1.15rem;
+	border-radius: 1rem;
+	background: linear-gradient(160deg, #fff 0%, #fff8fb 55%, #f7f4ff 100%);
+	border: 1px solid rgba(231, 49, 119, .16);
+	box-shadow: 0 8px 24px rgba(88, 28, 54, .08);
+}
+
+.conteudo .box-instagram .box-titulo {
+	margin: 0 0 1rem;
+	font-size: .75rem;
+	font-weight: 700;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: #e73177;
+}
+
+.conteudo .box-instagram .ig-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: .75rem;
+	margin: 0;
+}
+
+@media (min-width: 576px) {
+	.conteudo .box-instagram .ig-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.conteudo .box-instagram .ig-card {
+	display: flex;
+	align-items: center;
+	gap: .85rem;
+	margin: 0;
+	padding: .85rem;
+	border-radius: .85rem;
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, .06);
+	text-decoration: none !important;
+	transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.conteudo .box-instagram .ig-card:hover {
+	transform: translateY(-2px);
+	border-color: rgba(231, 49, 119, .35);
+	box-shadow: 0 10px 20px rgba(231, 49, 119, .12);
+	text-decoration: none !important;
+}
+
+.conteudo .box-instagram .ig-avatar-wrap {
+	flex-shrink: 0;
+	width: 58px;
+	height: 58px;
+	padding: 2px;
+	border-radius: 50%;
+	background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+}
+
+.conteudo .box-instagram .ig-avatar {
+	width: 100% !important;
+	height: 100% !important;
+	max-width: none !important;
+	border-radius: 50% !important;
+	object-fit: cover;
+	border: 2px solid #fff;
+	margin: 0 !important;
+	display: block;
+}
+
+.conteudo .box-instagram .ig-meta {
+	min-width: 0;
+}
+
+.conteudo .box-instagram .ig-handle {
+	display: block;
+	font-weight: 700;
+	color: #212529;
+	line-height: 1.2;
+	margin-bottom: .2rem;
+}
+
+.conteudo .box-instagram .ig-card:hover .ig-handle {
+	color: #e73177;
+}
+
+.conteudo .box-instagram .ig-desc {
+	display: block;
+	font-size: .84rem;
+	line-height: 1.35;
+	color: #6c757d;
+	font-weight: 400;
+}
+
+.conteudo .box-instagram .ig-cta {
+	display: inline-block;
+	margin-top: .35rem;
+	font-size: .72rem;
+	font-weight: 700;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+	color: #e73177;
+}
+
+.conteudo hr {
+	margin: 1.75rem 0;
+	border: 0;
+	border-top: 1px solid rgba(0, 0, 0, .12);
+}
+
+.conteudo table {
+	width: 100%;
+	margin: 1rem 0;
+	border-collapse: collapse;
+}
+
+.conteudo table th,
+.conteudo table td {
+	border: 1px solid #dee2e6;
+	padding: .5rem .75rem;
+	text-align: left;
+}
+
+.conteudo table th {
+	background: #f8f9fa;
+	font-weight: 600;
+}
+
+@media (max-width: 575.98px) {
+	.conteudo {
+		font-size: .95rem;
+		line-height: 1.7;
+	}
+
+	.conteudo h1 { font-size: 1.45rem; }
+	.conteudo h2 { font-size: 1.28rem; }
+	.conteudo h3 { font-size: 1.12rem; }
 }
 
 .geolocalizao{

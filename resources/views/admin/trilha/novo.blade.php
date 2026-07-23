@@ -119,7 +119,10 @@
                                     
                                     </textarea>  
                                 </div>
-                                <textarea name="ds_trilha_tri" id="ckeditor" rows="15" style="width: 100%;"></textarea>                                  
+                                <div class="form-group">
+                                    <label for="ds_trilha_tri">Descrição</label>
+                                    <textarea name="ds_trilha_tri" id="ckeditor" class="ckeditor form-control" rows="15"></textarea>
+                                </div>                                  
                             </div> 
                         </div>
                         <div style="text-align: center; margin-top:15px; ">

@@ -1,11 +1,115 @@
 @extends('layouts.site')
+@php
+    $cidadeSeo = optional($evento->local)->nm_cidade_cde;
+    $guiaSeo = optional($evento->guia)->nm_guia_gui;
+    $descricaoBase = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($evento->descricao ?? ''))));
+    $descricaoSeo = $descricaoBase
+        ? \Illuminate\Support\Str::limit($descricaoBase, 160, '...')
+        : ('Evento de trilha ' . $evento->nm_evento_eve . ($cidadeSeo ? ' em ' . $cidadeSeo : '') . ($guiaSeo ? ' com ' . $guiaSeo : '') . ' | Trilhas em Santa Catarina');
+    $pageTitleSeo = $cidadeSeo
+        ? $evento->nm_evento_eve . ' - ' . $cidadeSeo . ' | Trilhas em Santa Catarina'
+        : $evento->nm_evento_eve . ' | Trilhas em Santa Catarina';
+    $canonicalUrl = $evento->url ?: url()->current();
+    if ($evento->ds_imagem_horizontal_eve) {
+        $metaImageUrl = asset('img/eventos/'.$evento->ds_imagem_horizontal_eve);
+    } elseif (optional($evento->guia)->nm_path_logo_gui) {
+        $metaImageUrl = asset('img/guias/'.$evento->guia->nm_path_logo_gui);
+    } else {
+        $metaImageUrl = asset('img/apple-icon.png');
+    }
+    $homeUrl = url('/');
+    $eventosUrl = url('eventos');
+    $guiasUrl = url('guias-e-condutores');
+    $guiaPerfilUrl = optional($evento->guia)->nm_instagram_gui
+        ? url('guia/perfil/'. $evento->guia->nm_instagram_gui)
+        : $guiasUrl;
+    $startDateIso = $evento->dt_realizacao_eve
+        ? \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('Y-m-d') . ($evento->hora_inicio_eve ? 'T' . \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i:s') : '')
+        : null;
+    $endDateIso = $evento->dt_termino_eve
+        ? \Carbon\Carbon::parse($evento->dt_termino_eve)->format('Y-m-d') . ($evento->hora_fim_eve ? 'T' . \Carbon\Carbon::parse($evento->hora_fim_eve)->format('H:i:s') : '')
+        : null;
+@endphp
+@section('pageTitle', $pageTitleSeo)
+@section('description', $descricaoSeo)
+@section('canonical', $canonicalUrl)
+@section('metaImage', $metaImageUrl)
+@section('ogType', 'article')
+@section('keywords', 'evento de trilha, ' . ($cidadeSeo ? strtolower($cidadeSeo) . ', ' : '') . 'guias, aventura, santa catarina, trilhas em sc')
+@section('headExtra')
+<link rel="preload" as="image" href="{{ $metaImageUrl }}" fetchpriority="high">
+@endsection
+@section('structuredData')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'Event',
+    'name' => $evento->nm_evento_eve,
+    'description' => $descricaoSeo,
+    'url' => $canonicalUrl,
+    'image' => [$metaImageUrl],
+    'startDate' => $startDateIso,
+    'endDate' => $endDateIso,
+    'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+    'eventStatus' => 'https://schema.org/EventScheduled',
+    'location' => [
+        '@type' => 'Place',
+        'name' => $cidadeSeo ?: 'Santa Catarina',
+        'address' => [
+            '@type' => 'PostalAddress',
+            'addressLocality' => $cidadeSeo ?: 'Santa Catarina',
+            'addressRegion' => 'SC',
+            'addressCountry' => 'BR',
+        ],
+    ],
+    'organizer' => [
+        '@type' => 'Person',
+        'name' => $guiaSeo ?: 'Trilhas em Santa Catarina',
+        'url' => $guiaPerfilUrl,
+    ],
+    'offers' => [
+        '@type' => 'Offer',
+        'price' => $evento->valor_eve ? (float) $evento->valor_eve : 0,
+        'priceCurrency' => 'BRL',
+        'availability' => 'https://schema.org/InStock',
+        'url' => $canonicalUrl,
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        [
+            '@type' => 'ListItem',
+            'position' => 1,
+            'name' => 'Início',
+            'item' => $homeUrl,
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 2,
+            'name' => 'Eventos',
+            'item' => $eventosUrl,
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 3,
+            'name' => $evento->nm_evento_eve,
+            'item' => $canonicalUrl,
+        ],
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@endsection
 @section('content')
 @include('layouts/partes/header-eventos')
 <section class="pt-1 pb-0 mt-3 mb-5">
     <div class="container">
        <div class="row mb-2">
           <div class="col-md-7">
-             <h3 class="text-success">Eventos e Trilhas em Santa Catarina</h3>
+             <h2 class="text-success h3">Eventos e Trilhas em Santa Catarina</h2>
           </div>
        </div>
        <div class="card card-plain card-blog ml-2 mr-2">
@@ -30,33 +134,38 @@
                     <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Início</a>
                 </div>
                 <div class="col-lg-2 col-md-2 mt-2 mb-4 position-relative text-center d-xs-block d-sm-block d-md-none">
-                    <h5>Guia Responsável</h5>
+                    <h2 class="h5">Guia Responsável</h2>
                     @if($evento->guia->nm_path_logo_gui)
-                      <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$evento->guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
+                      <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$evento->guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}" loading="lazy" decoding="async">
                     @else
-                      <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
+                      <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}" loading="lazy" decoding="async">
                     @endif
                 </div>
                 <div class="col-lg-9 col-md-9">
-                    <h4>
-                        <a href="" class="text-danger text-decoration-underline-none">{{ $evento->nm_evento_eve }}</a>
-                    </h4>
+                    <h1 class="h4 text-danger">{{ $evento->nm_evento_eve }}</h1>
                     <p class="mb-1"><strong>Responsável</strong>: <a href="{{ url("guia/perfil/estatistica/perfil", $evento->guia->nm_instagram_gui) }}">{{ $evento->guia->nm_guia_gui }}</a></p>
                     <p class="mb-1"><strong>Cidade</strong>: {{ $evento->local->nm_cidade_cde }}</p>
                     <p class="mb-1"><strong>Data/Horário Início</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i') }}</p>
                     <p class="mb-1"><strong>Data/Horário Término</strong>: {{ \Carbon\Carbon::parse($evento->dt_termino_eve)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($evento->hora_fim_eve)->format('H:i') }}</p>
                     <p class="mb-1"><strong>Valor</strong>: {!! ($evento->valor_eve) ? "R$ ".$evento->valor_eve : '<strong class="text-success">Gratuita</strong>' !!}</p>
                     <p class="mb-1"><strong>Contato</strong>: {{ $evento->ds_fone_contato_eve }}</p>
+                    <p class="small mb-0 mt-2">
+                        Explore também:
+                        <a href="{{ $eventosUrl }}" class="text-decoration-underline">outros eventos</a>,
+                        <a href="{{ $guiaPerfilUrl }}" class="text-decoration-underline">perfil do guia</a>
+                        e a lista de
+                        <a href="{{ $guiasUrl }}" class="text-decoration-underline">guias e condutores</a>.
+                    </p>
                 </div>
 
                 <div class="col-lg-3 col-md-3 position-relative text-center d-none d-md-block">
-                    <h5>Guia Responsável</h5>
+                    <h2 class="h5">Guia Responsável</h2>
                     @if($evento->guia->nm_path_logo_gui)
-                      <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$evento->guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
+                      <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$evento->guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}" loading="lazy" decoding="async">
                     @else
-                      <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}">
+                      <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/default.png') }}" alt="Logo Guia {{ $evento->guia->nm_guia_gui }}" loading="lazy" decoding="async">
                     @endif
-                    <a href="{{ url("guia/perfil/estatistica/perfil", $evento->guia->nm_instagram_gui) }}" target="_blank"><h6 class="mt-2">{{ $evento->guia->nm_guia_gui }}</h6></a>
+                    <a href="{{ url("guia/perfil/estatistica/perfil", $evento->guia->nm_instagram_gui) }}" target="_blank" rel="noopener noreferrer"><h2 class="h6 mt-2">{{ $evento->guia->nm_guia_gui }}</h2></a>
                 </div>
 
                 @if($evento->id_trilha_tri && $evento->trilha)
@@ -135,12 +244,12 @@
                 @endif
 
                 <div class="col-lg-12 col-md-12">
-                    <h5 class="text-left mb-3">Descrição da Aventura</h5>
+                    <h2 class="h5 text-left mb-3">Descrição da Aventura</h2>
                     {!! nl2br($evento->descricao) !!}
                 </div>
                 <div class="col-lg-12 col-md-12">
                     @if($evento->ds_imagem_horizontal_eve)
-                        <img src="{{ asset('img/eventos/'.$evento->ds_imagem_horizontal_eve) }}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                        <img src="{{ asset('img/eventos/'.$evento->ds_imagem_horizontal_eve) }}" alt="{{ $evento->nm_evento_eve }}" class="img-fluid shadow border-radius-lg" loading="lazy" decoding="async">
                     @endif
                 </div>
             </div>

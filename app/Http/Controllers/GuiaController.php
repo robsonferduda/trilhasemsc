@@ -437,23 +437,18 @@ class GuiaController extends Controller
         $guia = Guia::where('id_user', Auth::user()->id)->first();
 
         if($request->isMethod('post')) {
+            GuiaTrilha::where('id_guia_gui',$guia->id_guia_gui)->delete();
 
-            if(isset($request->trilhas) == false || count($request->trilhas) < 6) {
-                GuiaTrilha::where('id_guia_gui',$guia->id_guia_gui)->delete();
-
-                if(isset($request->trilhas)) {            
-                    foreach($request->trilhas as $id){
-                        GuiaTrilha::create([
-                            'id_trilha_tri' => $id,
-                            'id_guia_gui' => $guia->id_guia_gui
-                        ]);
-                    }
+            if(isset($request->trilhas)) {
+                foreach($request->trilhas as $id){
+                    GuiaTrilha::create([
+                        'id_trilha_tri' => $id,
+                        'id_guia_gui' => $guia->id_guia_gui
+                    ]);
                 }
-            } else {
-                
-                Flash::error('Limite de trilhas excedido!');                
             }
-                             
+
+            Flash::success('Trilhas atualizadas com sucesso!');
         }
 
         $cidades = Cidade::has('trilhas')->with(['trilhas' => function($query){

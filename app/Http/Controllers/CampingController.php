@@ -30,8 +30,9 @@ class CampingController extends Controller
     {
         $camping = Camping::where('ds_url_cam', $url)->first();
 
-        $camping->total_visitas_cam = $camping->total_visitas_cam + 1;
-        $camping->save();
+        if (!$camping) {
+            abort(404);
+        }
 
         $busca_cidade = Trilha::with('cidade')
            ->select('cd_cidade_cde', DB::raw('count(*) as total'))

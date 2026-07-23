@@ -174,8 +174,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('update-trilha', 'TrilhaController@update');
         Route::post('create-trilha', 'TrilhaController@create');
         Route::post('insert-foto', 'TrilhaController@insertFoto');
-    });
-    
+        Route::post('trilha/{id}/email-teste-convite', 'TrilhaController@enviarEmailTesteConvite')->name('admin.trilha.email-teste-convite');
+        Route::post('trilha/{id}/email-convite-trilheiros', 'TrilhaController@enviarEmailConviteTrilheiros')->name('admin.trilha.email-convite-trilheiros');
+        Route::post('trilha/{id}/email-convite-guias', 'TrilhaController@enviarEmailConviteGuias')->name('admin.trilha.email-convite-guias');
+    });    
     Route::prefix('guia-e-condutores/privado')->group(function () {
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'GuiaController@atualizarCadastro');
         Route::get('perfil', 'GuiaController@previaPerfil');
