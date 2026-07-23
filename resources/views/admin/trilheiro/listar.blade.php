@@ -49,13 +49,26 @@
                                 <input type="text" class="form-control" name="email" id="filtro-email" placeholder="E-mail">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label>Cidade</label>
                                 <input type="text" class="form-control" name="cidade" id="filtro-cidade" placeholder="Cidade">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Índice (IET)</label>
+                                <select class="form-control" name="indice" id="filtro-indice">
+                                    <option value="">Todos</option>
+                                    @foreach($indices as $indice)
+                                        <option value="{{ $indice->id_indice_ind }}">
+                                            @if($indice->ds_sigla_ind){{ $indice->ds_sigla_ind }} — @endif{{ $indice->ds_indice_ind }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label>Newsletter</label>
                                 <select class="form-control" name="newsletter" id="filtro-newsletter">

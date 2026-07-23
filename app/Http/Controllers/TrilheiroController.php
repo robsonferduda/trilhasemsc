@@ -19,6 +19,7 @@ use App\UnidadeConservacao;
 use App\Mail\GuiaModeracao;
 use App\Mail\BoasVindasTrilheiro;
 use App\TrilheiroTrilha;
+use App\Indice;
 use App\User;
 use Auth;
 use Storage;
@@ -116,8 +117,13 @@ class TrilheiroController extends Controller
         
         // Primeira carga - apenas estrutura
         $trilheiros = collect();
+        $indices = Indice::orderBy('id_indice_ind')->get();
 
-        return view('admin/trilheiro/listar', ['page_name' => $page_name, 'trilheiros' => $trilheiros]);
+        return view('admin/trilheiro/listar', [
+            'page_name' => $page_name,
+            'trilheiros' => $trilheiros,
+            'indices' => $indices,
+        ]);
     }
 
     public function listarAjax(Request $request)
@@ -153,6 +159,11 @@ class TrilheiroController extends Controller
             
             if ($request->filled('newsletter')) {
                 $query->where('fl_newsletter_tri', $request->newsletter == '1');
+                $temFiltros = true;
+            }
+
+            if ($request->filled('indice')) {
+                $query->where('id_indice_ind', (int) $request->indice);
                 $temFiltros = true;
             }
             
