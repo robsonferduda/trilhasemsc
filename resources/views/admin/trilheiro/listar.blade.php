@@ -27,6 +27,154 @@
 </div>
 @endif
 
+<!-- Resumo fixo de conclusão de cadastro -->
+@if(isset($resumo))
+<div class="row clearfix mb-3">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                <h6 class="card-title mb-0"><i class="fa fa-bar-chart"></i> Resumo de cadastros</h6>
+                <small class="text-muted">Atualizado ao abrir a página · funil de onboarding do trilheiro</small>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning mb-3 py-2">
+                    <i class="fa fa-exclamation-triangle"></i>
+                    Cerca de <strong>{{ $resumo['sem_score_pct'] }}%</strong> dos trilheiros estão sem score/questionário.
+                    O registro por e-mail cria a conta e leva à home pública, sem obrigar perfil ou IET.
+                </div>
+
+                <div class="row clearfix">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card top_counter mb-3">
+                            <div class="body">
+                                <div class="icon"><i class="fa fa-users" style="color:#607d8b;"></i></div>
+                                <div class="content">
+                                    <div class="text">Total</div>
+                                    <h5 class="number">{{ $resumo['total'] }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card top_counter mb-3">
+                            <div class="body">
+                                <div class="icon"><i class="fa fa-warning" style="color:#f0ad4e;"></i></div>
+                                <div class="content">
+                                    <div class="text">Sem score / questionário</div>
+                                    <h5 class="number">{{ $resumo['sem_score'] }} <small class="text-muted">({{ $resumo['sem_score_pct'] }}%)</small></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card top_counter mb-3">
+                            <div class="body">
+                                <div class="icon"><i class="fa fa-check" style="color:#5cb85c;"></i></div>
+                                <div class="content">
+                                    <div class="text">Completos*</div>
+                                    <h5 class="number">{{ $resumo['completo'] }} <small class="text-muted">({{ $resumo['completo_pct'] }}%)</small></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card top_counter mb-3">
+                            <div class="body">
+                                <div class="icon"><i class="fa fa-calendar" style="color:#d9534f;"></i></div>
+                                <div class="content">
+                                    <div class="text">Incompletos (90 dias)</div>
+                                    <h5 class="number">{{ $resumo['incompletos_90'] }}/{{ $resumo['novos_90'] }} <small class="text-muted">({{ $resumo['incompletos_90_pct'] }}%)</small></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-1">
+                    <div class="col-lg-6 col-md-12 mb-3 mb-lg-0">
+                        <h6 class="text-muted mb-2">Funil</h6>
+                        <table class="table table-sm table-bordered mb-0">
+                            <tbody>
+                                <tr>
+                                    <td>Conta criada (trilheiro)</td>
+                                    <td class="text-right"><strong>{{ $resumo['total'] }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Com cidade</td>
+                                    <td class="text-right"><strong>{{ $resumo['com_cidade'] }}</strong> <span class="text-muted">({{ $resumo['com_cidade_pct'] }}%)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Cadastro básico (cidade + nascimento)</td>
+                                    <td class="text-right"><strong>{{ $resumo['basico_ok'] }}</strong> <span class="text-muted">({{ $resumo['basico_ok_pct'] }}%)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Com questionário</td>
+                                    <td class="text-right"><strong>{{ $resumo['com_questionario'] }}</strong> <span class="text-muted">({{ $resumo['com_questionario_pct'] }}%)</span></td>
+                                </tr>
+                                <tr class="table-success">
+                                    <td>Completo*</td>
+                                    <td class="text-right"><strong>{{ $resumo['completo'] }}</strong> <span class="text-muted">({{ $resumo['completo_pct'] }}%)</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <small class="text-muted">*Completo = cidade + nascimento + questionário com score &gt; 0</small>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <h6 class="text-muted mb-2">Lacunas</h6>
+                        <table class="table table-sm table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Critério</th>
+                                    <th class="text-right">Qtd</th>
+                                    <th class="text-right">%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Sem cidade</td>
+                                    <td class="text-right">{{ $resumo['sem_cidade'] }}</td>
+                                    <td class="text-right">{{ $resumo['sem_cidade_pct'] }}%</td>
+                                </tr>
+                                <tr>
+                                    <td>Sem score / score 0</td>
+                                    <td class="text-right">{{ $resumo['sem_score'] }}</td>
+                                    <td class="text-right">{{ $resumo['sem_score_pct'] }}%</td>
+                                </tr>
+                                <tr>
+                                    <td>Sem questionário</td>
+                                    <td class="text-right">{{ $resumo['sem_questionario'] }}</td>
+                                    <td class="text-right">{{ $resumo['sem_questionario_pct'] }}%</td>
+                                </tr>
+                                <tr>
+                                    <td>Índice Não Definido</td>
+                                    <td class="text-right">{{ $resumo['nao_definido'] }}</td>
+                                    <td class="text-right">{{ $resumo['nao_definido_pct'] }}%</td>
+                                </tr>
+                                <tr>
+                                    <td>Sem foto</td>
+                                    <td class="text-right">{{ $resumo['sem_foto'] }}</td>
+                                    <td class="text-right">{{ $resumo['sem_foto_pct'] }}%</td>
+                                </tr>
+                                <tr>
+                                    <td>Sem data de nascimento</td>
+                                    <td class="text-right">{{ $resumo['sem_nascimento'] }}</td>
+                                    <td class="text-right">{{ $resumo['sem_nascimento_pct'] }}%</td>
+                                </tr>
+                                <tr>
+                                    <td>Sem cidade <em>e</em> sem score</td>
+                                    <td class="text-right">{{ $resumo['sem_cidade_e_score'] }}</td>
+                                    <td class="text-right">{{ $resumo['sem_cidade_e_score_pct'] }}%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
 <!-- Filtros de Busca -->
 <div class="row clearfix mb-3">
     <div class="col-lg-12">

@@ -118,12 +118,88 @@ class TrilheiroController extends Controller
         // Primeira carga - apenas estrutura
         $trilheiros = collect();
         $indices = Indice::orderBy('id_indice_ind')->get();
+        $resumo = $this->resumoCadastrosTrilheiros();
 
         return view('admin/trilheiro/listar', [
             'page_name' => $page_name,
             'trilheiros' => $trilheiros,
             'indices' => $indices,
+            'resumo' => $resumo,
         ]);
+    }
+
+    /**
+     * Indicadores fixos de conclusão de cadastro / questionário IET.
+     */
+    private function resumoCadastrosTrilheiros()
+    {
+        $total = Trilheiro::count();
+        $pct = function ($n) use ($total) {
+            return $total > 0 ? round(($n / $total) * 100, 1) : 0;
+        };
+
+        $semCidade = Trilheiro::whereNull('cd_cidade_tri')->count();
+        $comCidade = $total - $semCidade;
+        $semScore = Trilheiro::where(function ($q) {
+            $q->whereNull('nr_score_tri')->orWhere('nr_score_tri', 0);
+        })->count();
+        $semQuestionario = Trilheiro::whereDoesntHave('questionario')->count();
+        $comQuestionario = Trilheiro::whereHas('questionario')->count();
+        $naoDefinido = Trilheiro::where(function ($q) {
+            $q->whereNull('id_indice_ind')->orWhere('id_indice_ind', 1);
+        })->count();
+        $semFoto = Trilheiro::whereNull('nm_path_foto_tri')->count();
+        $semNascimento = Trilheiro::whereNull('dt_nascimento')->count();
+        $basicoOk = Trilheiro::whereNotNull('cd_cidade_tri')
+            ->whereNotNull('dt_nascimento')
+            ->count();
+        $completo = Trilheiro::whereNotNull('cd_cidade_tri')
+            ->whereNotNull('dt_nascimento')
+            ->whereHas('questionario')
+            ->where('nr_score_tri', '>', 0)
+            ->count();
+        $semCidadeEScore = Trilheiro::whereNull('cd_cidade_tri')
+            ->where(function ($q) {
+                $q->whereNull('nr_score_tri')->orWhere('nr_score_tri', 0);
+            })
+            ->count();
+
+        $desde90 = now()->subDays(90);
+        $novos90 = Trilheiro::where('created_at', '>=', $desde90)->count();
+        $incompletos90 = Trilheiro::where('created_at', '>=', $desde90)
+            ->where(function ($q) {
+                $q->whereNull('nr_score_tri')->orWhere('nr_score_tri', 0);
+            })
+            ->count();
+
+        return [
+            'total' => $total,
+            'sem_cidade' => $semCidade,
+            'sem_cidade_pct' => $pct($semCidade),
+            'com_cidade' => $comCidade,
+            'com_cidade_pct' => $pct($comCidade),
+            'sem_score' => $semScore,
+            'sem_score_pct' => $pct($semScore),
+            'sem_questionario' => $semQuestionario,
+            'sem_questionario_pct' => $pct($semQuestionario),
+            'com_questionario' => $comQuestionario,
+            'com_questionario_pct' => $pct($comQuestionario),
+            'nao_definido' => $naoDefinido,
+            'nao_definido_pct' => $pct($naoDefinido),
+            'sem_foto' => $semFoto,
+            'sem_foto_pct' => $pct($semFoto),
+            'sem_nascimento' => $semNascimento,
+            'sem_nascimento_pct' => $pct($semNascimento),
+            'basico_ok' => $basicoOk,
+            'basico_ok_pct' => $pct($basicoOk),
+            'completo' => $completo,
+            'completo_pct' => $pct($completo),
+            'sem_cidade_e_score' => $semCidadeEScore,
+            'sem_cidade_e_score_pct' => $pct($semCidadeEScore),
+            'novos_90' => $novos90,
+            'incompletos_90' => $incompletos90,
+            'incompletos_90_pct' => $novos90 > 0 ? round(($incompletos90 / $novos90) * 100, 1) : 0,
+        ];
     }
 
     public function listarAjax(Request $request)
