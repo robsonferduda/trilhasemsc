@@ -77,7 +77,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="dt_nascimento">Data de Nascimento</label><span class="text-danger"> Obrigatório</span>
-                                    <input type="text" name="dt_nascimento" id="dt_nascimento" value="{{ ($trilheiro) ? \Carbon\Carbon::parse($trilheiro->dt_nascimento)->format('d/m/Y') : old('dt_nascimento') }}" class="form-control data" placeholder="__/__/____" required>
+                                    <input type="text" name="dt_nascimento" id="dt_nascimento" value="{{ ($trilheiro && $trilheiro->dt_nascimento) ? \Carbon\Carbon::parse($trilheiro->dt_nascimento)->format('d/m/Y') : old('dt_nascimento') }}" class="form-control data" placeholder="__/__/____" required>
                                 </div>
                             </div>                            
                         </div>

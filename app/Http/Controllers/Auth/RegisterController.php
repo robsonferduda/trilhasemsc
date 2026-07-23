@@ -9,9 +9,11 @@ use App\Trilheiro;
 use App\Mail\NovoTrilheiroNotificacao;
 use App\Mail\BoasVindasTrilheiro;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Laracasts\Flash\Flash;
 
 class RegisterController extends Controller
 {
@@ -33,7 +35,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/trilheiro/privado/atualizar-cadastro';
 
     /**
      * Create a new controller instance.
@@ -43,6 +45,16 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Após o registro, envia o trilheiro para completar o cadastro básico.
+     */
+    protected function registered(Request $request, $user)
+    {
+        Flash::success('Cadastro realizado! Complete seu perfil para continuar.');
+
+        return redirect('trilheiro/privado/atualizar-cadastro');
     }
 
     /**

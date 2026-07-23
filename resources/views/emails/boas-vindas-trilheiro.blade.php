@@ -133,9 +133,12 @@
         </div>
 
         <div class="section">
-            <div class="section-title">👤 Mantenha seu perfil atualizado</div>
-            <p>Para aproveitar ao máximo, acesse seu perfil e mantenha suas informações atualizadas:</p>
-            <a href="https://trilhasemsc.com.br/login" class="button button-secondary">Acessar Meu Perfil</a>
+            <div class="section-title">👤 Próximo passo: complete seu perfil</div>
+            <p>Para aproveitar ao máximo a plataforma, complete seus dados e depois descubra seu Índice de Experiência em Trilhas:</p>
+            <a href="{{ url('trilheiro/privado/atualizar-cadastro') }}" class="button button-secondary">Completar Meu Cadastro</a>
+            <p style="margin-top: 15px;">
+                <a href="{{ url('trilheiro/privado/meu-nivel') }}" class="button">Calcular Meu Índice</a>
+            </p>
         </div>
 
         <p style="margin-top: 30px;">Em breve, você receberá novidades sobre trilhas, eventos e oportunidades de aventura no estado.</p>

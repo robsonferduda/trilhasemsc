@@ -238,7 +238,7 @@ class GuiaController extends Controller
 
                     Auth::login($usuario);
                     
-                    return redirect('trilheiro/privado/perfil');
+                    return redirect('trilheiro/privado/atualizar-cadastro');
 
                     break;
                 default:

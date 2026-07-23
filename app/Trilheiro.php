@@ -63,6 +63,60 @@ class Trilheiro extends Model
     }
 
     /**
+     * Cadastro básico mínimo para usar a área privada (cidade, estado, sexo, nascimento).
+     * Foto e questionário IET ficam fora deste gate.
+     */
+    public function perfilBasicoCompleto()
+    {
+        return !empty($this->cd_cidade_tri)
+            && !empty($this->cd_estado_est)
+            && !empty($this->cd_sexo_sex)
+            && !empty($this->dt_nascimento);
+    }
+
+    public function possuiScore()
+    {
+        return !empty($this->nr_score_tri) && (float) $this->nr_score_tri > 0;
+    }
+
+    /**
+     * Destino pós-autenticação / onboarding para o trilheiro autenticado.
+     */
+    public function destinoOnboarding()
+    {
+        if (!$this->perfilBasicoCompleto()) {
+            return 'trilheiro/privado/atualizar-cadastro';
+        }
+
+        return 'trilheiro/privado/perfil';
+    }
+
+    /**
+     * Redireciona o usuário autenticado conforme o papel e o estado do cadastro.
+     */
+    public static function redirectAutenticado($user)
+    {
+        $role = trim((string) $user->id_role);
+
+        switch ($role) {
+            case 'ADMIN':
+                return redirect('admin/dashboard');
+            case 'GUIA':
+                return redirect('guia-e-condutores/privado/atualizar-cadastro');
+            case 'SOCIAL':
+                return redirect('cadastro/privado/escolher-perfil');
+            case 'TRILHEIRO':
+                $trilheiro = self::where('id_user', $user->id)->first();
+                if (!$trilheiro) {
+                    return redirect('trilheiro/privado/atualizar-cadastro');
+                }
+                return redirect($trilheiro->destinoOnboarding());
+            default:
+                return redirect('/');
+        }
+    }
+
+    /**
      * Gera um token seguro para descadastro da newsletter
      * 
      * @return string

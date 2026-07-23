@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\User;
+use App\Trilheiro;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
 class GoogleController extends Controller
@@ -17,34 +17,44 @@ class GoogleController extends Controller
 
     public function handleProviderCallback(Request $request)
     {
-        $request->tipo = 'guia';
-
         try {
             $userGoogle = Socialite::driver('google')->stateless()->user();
             $email = $userGoogle->getEmail();
 
+            if (empty($email)) {
+                return redirect('login')->withErrors([
+                    'email' => 'Não recebemos seu email do Google. Verifique as permissões do perfil.',
+                ]);
+            }
+
             $user = User::where('email', $email)->first();
 
             if (!$user) {
-                $dados = array('name' =>  $userGoogle->getName(),
-                               'email' => $userGoogle->getEmail(),
-                               'fl_google' => 'S',
-                               'fl_social_usu' => true,
-                               'id_role' => 'TRILHEIRO',
-                               'password' => \Hash::make(rand(1, 10000)));
-                
-                $user = User::create($dados);
+                // SOCIAL: passa por escolher-perfil (trilheiro ou guia), igual ao Facebook
+                $user = User::create([
+                    'name' => $userGoogle->getName(),
+                    'email' => $email,
+                    'fl_google' => 'S',
+                    'fl_social_usu' => true,
+                    'id_role' => 'SOCIAL',
+                    'password' => \Hash::make(rand(1, 10000)),
+                ]);
+            } else {
+                $user->update([
+                    'fl_google' => 'S',
+                    'fl_social_usu' => true,
+                ]);
             }
 
             Auth::login($user);
 
-            if($user->fl_social_usu) {
-                return redirect('cadastro/privado/escolher-perfil');
-            }
+            return Trilheiro::redirectAutenticado($user);
+        } catch (\Exception $e) {
+            \Log::error('Erro no login Google', ['error' => $e->getMessage()]);
 
-            return redirect('login');
-        } catch (Exception $e) {
-            var_dump($e->getMessage());
+            return redirect('login')->withErrors([
+                'social' => 'Falha ao autenticar com Google. Tente novamente.',
+            ]);
         }
     }
 }

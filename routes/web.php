@@ -196,7 +196,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::match(['GET', 'POST'],'trilhas', 'GuiaController@trilhas');
     });
 
-    Route::prefix('trilheiro/privado')->group(function () {
+    Route::prefix('trilheiro/privado')->middleware('trilheiro.perfil')->group(function () {
         Route::get('perfil', 'TrilheiroController@perfil');
         Route::get('eventos', 'TrilheiroController@eventos');
         Route::get('meu-nivel', 'TrilheiroController@score');

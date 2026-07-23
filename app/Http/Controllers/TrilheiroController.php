@@ -97,9 +97,9 @@ class TrilheiroController extends Controller
         $page_name = "Guias e Condutores em Santa Catarina";
         $titulo = 'Guias e Condutores';
         
-        $corridas = Corrida::all();
-        $elevacoes = Elevacao::all();
-        $distancias = Distancia::all();
+        $corridas = Corrida::orderBy('nu_score_cor')->get();
+        $elevacoes = Elevacao::orderBy('nu_score_ele')->get();
+        $distancias = Distancia::orderBy('nu_score_dis')->get();
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
         $questionario = Questionario::where('cd_trilheiro_tri', $trilheiro->id_trilheiro_tri)->first();
 
@@ -299,8 +299,18 @@ class TrilheiroController extends Controller
 
             $validated = $request->validate([
                 'nome' => 'required',
-                'email' => 'required',
-                'cidade_origem' => 'required'
+                'email' => 'required|email',
+                'sexo' => 'required',
+                'estado_origem' => 'required',
+                'cidade_origem' => 'required',
+                'dt_nascimento' => 'required',
+            ], [
+                'nome.required' => 'O campo Nome é obrigatório.',
+                'email.required' => 'O campo E-mail é obrigatório.',
+                'sexo.required' => 'O campo Sexo é obrigatório.',
+                'estado_origem.required' => 'O campo Estado é obrigatório.',
+                'cidade_origem.required' => 'O campo Cidade é obrigatório.',
+                'dt_nascimento.required' => 'O campo Data de Nascimento é obrigatório.',
             ]);
 
             $nome = $request->nome;
@@ -390,6 +400,11 @@ class TrilheiroController extends Controller
                     'timestamp' => now(),
                     'trace' => $e->getTraceAsString()
                 ]);
+            }
+
+            if (!$trilheiro->possuiScore()) {
+                Flash::success('Perfil atualizado! Agora responda o questionário para calcular seu Índice de Experiência em Trilhas.');
+                return redirect('trilheiro/privado/meu-nivel');
             }
 
             return redirect('trilheiro/privado/perfil');
