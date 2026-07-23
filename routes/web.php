@@ -173,6 +173,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('trilheiros/enviar-email-questionario-massa', 'TrilheiroController@enviarEmailQuestionarioEmMassa')->name('admin.trilheiros.enviar-email-questionario-massa');
 
         Route::get('listar-trilhas', 'TrilhaController@index');
+        Route::get('detalhes-trilha/{id}', 'TrilhaController@detalhes')->name('admin.trilha.detalhes');
         Route::get('editar-trilha/{id}', 'TrilhaController@editar');
         Route::get('nova-trilha', 'TrilhaController@novo');
         Route::post('update-trilha', 'TrilhaController@update');
