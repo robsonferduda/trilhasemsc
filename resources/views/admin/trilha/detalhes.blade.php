@@ -88,7 +88,11 @@
                     </div>
                 </form>
 
-                <canvas id="acessosChart" height="110"></canvas>
+                <div class="trilha-chart-wrapper">
+                    <div class="trilha-chart-scroll">
+                        <canvas id="acessosChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -152,6 +156,28 @@
 @endsection
 
 @section('script')
+<style>
+    .trilha-chart-wrapper {
+        position: relative;
+        width: 100%;
+        height: 320px;
+    }
+
+    .trilha-chart-scroll {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    @media (max-width: 767.98px) {
+        .trilha-chart-wrapper {
+            height: 220px;
+        }
+    }
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
     $(function () {
@@ -164,7 +190,12 @@
         }
 
         const ctx = canvas.getContext('2d');
-        new Chart(ctx, {
+
+        if (window.adminTrilhaAcessosChart) {
+            window.adminTrilhaAcessosChart.destroy();
+        }
+
+        window.adminTrilhaAcessosChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
@@ -183,6 +214,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: false,
                 scales: {
                     y: {
                         beginAtZero: true,
