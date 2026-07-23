@@ -115,7 +115,11 @@ Route::get('dicas-de-seguranca', function () {
 })->name('dicas-de-seguranca');
 
 Route::get('indice-experiencia-trilhas', function () {
-    return view('indice');
+    $indices = \App\Indice::whereNotNull('ds_sigla_ind')
+        ->orderBy('id_indice_ind')
+        ->get();
+
+    return view('indice', compact('indices'));
 })->name('indice');
 
 Route::get('politica-de-privacidade', function () {

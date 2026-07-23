@@ -1,21 +1,88 @@
 @extends('layouts.site')
+@section('pageTitle', 'Índice de Experiência em Trilhas | Trilhas em Santa Catarina')
+@section('description', 'Entenda o Índice de Experiência em Trilhas (IET): critérios de pontuação e as categorias Iniciante, Aventureiro, Explorador, Montanhista e Expedicionário.')
 @section('content')
     @include('layouts/partes/header')
     <section class="pt-1 pb-0 mt-3 mb-5">
         <div class="container">
            <div class="row mb-2">
               <div class="col-md-12">
-                 <h3 class="text-dark"><i class="fa fa-tachometer" aria-hidden="true"></i> Índice de Experiência em Trilhas</h3>
+                 <h1 class="h3 text-dark"><i class="fa fa-tachometer" aria-hidden="true"></i> Índice de Experiência em Trilhas</h1>
                  <p>O índice de experiência em trilhas foi criado com base na observação de participantes de atividades em trilhas e os fatores que impactavam em seu desempenho 
                     e em uma boa experiência na realização destas atividades.
                  </p>
-                 <p>Para seu cálculo, foram autilizados critérios físicos dos praticantes, seu condicionamento físico e sua experiência em trilhas. 
-                    Para cada grupo de critérios, foram especificados níveis de pontuação para compor um valor final para o íncide de experiência.
+                 <p>Para seu cálculo, foram utilizados critérios físicos dos praticantes, seu condicionamento físico e sua experiência em trilhas. 
+                    Para cada grupo de critérios, foram especificados níveis de pontuação para compor um valor final para o índice de experiência.
                 </p>
-                <p>Os critérios e níveis são pontuados de acordo com a tabela abaixo:</p>
               </div>
             </div>
+
+            @if(isset($indices) && $indices->count())
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <h2 class="h4 text-dark mb-2">Conheça os níveis do Índice</h2>
+                    <p class="text-secondary mb-4">
+                        Cada trilheiro recebe uma classificação com base no questionário de experiência.
+                        Confira abaixo o significado de cada nível:
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-5">
+                @foreach($indices as $indice)
+                    <div class="col-12 mb-3">
+                        <div class="d-flex flex-column flex-sm-row align-items-start border rounded p-3 p-md-4 h-100"
+                             style="background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.05); gap:1rem;">
+                            @if($indice->img_indice_ind)
+                                <div class="flex-shrink-0 text-center" style="min-width:88px;">
+                                    <img src="{{ asset('img/nivel/'.$indice->img_indice_ind) }}"
+                                         alt="{{ $indice->ds_indice_ind }}"
+                                         style="width:80px; height:auto;">
+                                </div>
+                            @endif
+                            <div class="flex-grow-1">
+                                <div class="d-flex flex-wrap align-items-center mb-2" style="gap:.5rem;">
+                                    @if($indice->ds_sigla_ind)
+                                        <span class="badge badge-info">{{ $indice->ds_sigla_ind }}</span>
+                                    @endif
+                                    <h3 class="h4 mb-0">{{ $indice->ds_indice_ind }}</h3>
+                                </div>
+                                @if($indice->descricao_ind)
+                                    <p class="mb-0 text-secondary" style="line-height:1.65;">{{ $indice->descricao_ind }}</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="border rounded p-3 p-md-4" style="background:#f8faf8;">
+                        <p class="mb-2"><strong>Quer descobrir o seu nível?</strong></p>
+                        <p class="mb-3 text-secondary">
+                            Responda o questionário na área do trilheiro e veja seu Índice de Experiência em Trilhas.
+                        </p>
+                        @auth
+                            @if(trim(Auth::user()->id_role) == 'TRILHEIRO')
+                                <a href="{{ url('trilheiro/privado/meu-nivel') }}" class="btn btn-success btn-sm">
+                                    Responder questionário
+                                </a>
+                            @else
+                                <a href="{{ url('login') }}" class="btn btn-outline-success btn-sm">Acessar minha conta</a>
+                            @endif
+                        @else
+                            <a href="{{ url('login') }}" class="btn btn-success btn-sm">Entrar / Cadastrar</a>
+                        @endauth
+                    </div>
+                </div>
+            </div>
+            @endif
+
             <div class="row">
+                <div class="col-md-12 mb-2">
+                    <h2 class="h5 text-dark">Como a pontuação é calculada</h2>
+                    <p>Os critérios e níveis são pontuados de acordo com a tabela abaixo:</p>
+                </div>
                 <div class="col-md-12 mb-md-0 mt-2">
                     <div class="table-responsive">
                             <table class="table align-items-center tabela-criterios mb-0">
@@ -253,7 +320,7 @@
                     </div>
                </div>
                <div class="col-md-12 mb-md-0 mb-4 mt-4">
-                    <p>De acordo com o somatório da pontuação parcial obtida em cada nível é calculada a pontuação final do trilheiro e determinado a categoria, de acordo com a tabela abaixo: </p>
+                    <p>De acordo com o somatório da pontuação parcial obtida em cada nível é calculada a pontuação final do trilheiro e determinada a categoria, de acordo com a tabela abaixo:</p>
                </div>
 
                <div class="col-md-12 mb-md-0 mt-2">
@@ -262,11 +329,11 @@
                         <thead>
                            <tr>
                               <th class="text-left text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Critérios</th>
-                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Iniciante</th>
-                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Intermediário</th>
-                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Avançado</th>
-                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Profissional</th>
-                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Especialista</th>
+                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Iniciante<br><small>IE-1</small></th>
+                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Aventureiro<br><small>IE-2</small></th>
+                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Explorador<br><small>IE-3</small></th>
+                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Montanhista<br><small>IE-4</small></th>
+                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Expedicionário<br><small>IE-5</small></th>
                            </tr>
                         </thead>
                         <tbody>
@@ -352,7 +419,11 @@
                            </tr>
                            <tr class="pontuacao">
                               <td>Pontuação Mínima</td>
-                              <td>—</td>\n                              <td>580</td>\n                              <td>665</td>\n                              <td>785</td>\n                              <td>945</td>
+                              <td>—</td>
+                              <td>580</td>
+                              <td>665</td>
+                              <td>785</td>
+                              <td>945</td>
                            </tr>
                         </tbody>
                      </table>
