@@ -30,7 +30,7 @@
 
                 <form method="GET" action="{{ url('admin/listar-trilhas') }}" class="mb-4">
                     <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-12 mb-2">
+                        <div class="col-lg-8 col-md-8 col-sm-12 mb-2">
                             <label for="nome" class="mb-1">Nome da trilha</label>
                             <input
                                 type="text"
@@ -41,7 +41,7 @@
                                 value="{{ $filtroNome ?? '' }}"
                             >
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12 mb-2">
+                        <div class="col-lg-2 col-md-2 col-sm-12 mb-2">
                             <label for="publicado" class="mb-1">Publicado</label>
                             <select name="publicado" id="publicado" class="form-control">
                                 <option value="">Todos</option>
@@ -49,9 +49,9 @@
                                 <option value="N" {{ ($filtroPublicado ?? '') === 'N' ? 'selected' : '' }}>Não</option>
                             </select>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12 mb-2 d-flex align-items-end">
-                            <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-search"></i> Filtrar</button>
-                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-outline-secondary">Limpar</a>
+                        <div class="col-lg-2 col-md-2 col-sm-12 mb-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary mr-2 w-50"><i class="fa fa-search"></i> Filtrar</button>
+                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-outline-secondary w-50">Limpar</a>
                         </div>
                     </div>
                 </form>
