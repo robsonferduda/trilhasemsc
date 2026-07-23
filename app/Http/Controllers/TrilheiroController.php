@@ -320,16 +320,17 @@ class TrilheiroController extends Controller
         $dados = array('cd_distancia_dis' => $request->escala_distancia,
                        'cd_elevacao_ele' => $request->escala_elevacao,
                         'cd_corrida_cor' => $request->escala_corrida,
-                        'fl_musculacao_que' => $request->fl_musculacao_que,
-                        'fl_travessia_que' => $request->fl_travessia,
-                        'fl_trilhas_que' => $request->fl_trilhas,
-                        'fl_trekking_que' => $request->fl_trekking,
-                        'fl_hiking_que' => $request->fl_hiking,
-                        'nu_costao_que' => $request->nu_costao,
-                        'fl_ferrata_que' => $request->fl_ferrata,
-                        'fl_acampamento_que' => $request->fl_acampamento,
-                        'fl_areia_que' => $request->fl_areia,
-                        'fl_altura_que' => !$request->fl_altura,
+                        'fl_musculacao_que' => filter_var($request->fl_musculacao_que, FILTER_VALIDATE_BOOLEAN),
+                        'fl_travessia_que' => filter_var($request->fl_travessia, FILTER_VALIDATE_BOOLEAN),
+                        'fl_trilhas_que' => filter_var($request->fl_trilhas, FILTER_VALIDATE_BOOLEAN),
+                        'fl_trekking_que' => filter_var($request->fl_trekking, FILTER_VALIDATE_BOOLEAN),
+                        'fl_hiking_que' => filter_var($request->fl_hiking, FILTER_VALIDATE_BOOLEAN),
+                        'nu_costao_que' => (int) $request->nu_costao,
+                        'fl_ferrata_que' => filter_var($request->fl_ferrata, FILTER_VALIDATE_BOOLEAN),
+                        'fl_acampamento_que' => filter_var($request->fl_acampamento, FILTER_VALIDATE_BOOLEAN),
+                        'fl_areia_que' => filter_var($request->fl_areia, FILTER_VALIDATE_BOOLEAN),
+                        // true = tem medo/fobia (mesma semântica do formulário); pontua quem NÃO tem
+                        'fl_altura_que' => filter_var($request->fl_altura, FILTER_VALIDATE_BOOLEAN),
                         'nu_distancia_que' => $request->nu_distancia,
                         'nu_altura_que' => $request->altura,
                         'nu_peso_que' => $request->peso);
@@ -447,7 +448,14 @@ class TrilheiroController extends Controller
 
     public function calculaIMC($altura, $peso){
 
-        $imc = $peso / ($altura * 2);
+        $altura = (float) $altura;
+        $peso = (float) $peso;
+
+        if ($altura <= 0) {
+            return 40;
+        }
+
+        $imc = $peso / ($altura * $altura);
 
         $dicionario = [
             "18.5" => 85,
@@ -463,7 +471,6 @@ class TrilheiroController extends Controller
             if((float) $key < 40.0){
                 if($imc <= (float) $key){
                     return $value;
-                    break;
                 }
             }else{ 
                 return $value;

@@ -81,7 +81,7 @@
             <div class="row">
                 <div class="col-md-12 mb-2">
                     <h2 class="h5 text-dark">Como a pontuação é calculada</h2>
-                    <p>Os critérios e níveis são pontuados de acordo com a tabela abaixo:</p>
+                    <p>Os critérios abaixo são os mesmos do questionário do trilheiro e são pontuados conforme a tabela:</p>
                 </div>
                 <div class="col-md-12 mb-md-0 mt-2">
                     <div class="table-responsive">
@@ -128,7 +128,7 @@
                                 </tr>
                                 <tr>
                                     <td>Sim, somente uma vez por semana</td>
-                                    <td class="center">15</td>
+                                    <td class="center">10</td>
                                 </tr>
                                 <tr>
                                     <td>Sim, até três vezes por semana</td>
@@ -140,17 +140,17 @@
                                 </tr>
                             
                                 <tr class="zebra">
-                                    <td rowspan="4">Distância</td>
+                                    <td rowspan="4">Distância semanal</td>
                                     <td>0 km</td>
                                     <td class="center">0</td>
                                     <td rowspan="4">60</td>
                                 </tr>
                                 <tr class="zebra">
-                                    <td>5 km</td>
+                                    <td>Até 5 km</td>
                                     <td class="center">20</td>
                                 </tr>
                                 <tr class="zebra">
-                                    <td>10 km</td>
+                                    <td>Até 10 km</td>
                                     <td class="center">40</td>
                                 </tr>
                                 <tr class="zebra">
@@ -232,7 +232,7 @@
                                 </tr>
                                 <tr>
                                     <td>Já caminhou com cautela, trechos curtos</td>
-                                    <td class="center">60</td>
+                                    <td class="center">30</td>
                                 </tr>
                                 <tr>
                                     <td>Costões longos, molhados ou expostos</td>
@@ -262,52 +262,52 @@
                                 </tr>
 
                                 <tr class="zebra">
-                                    <td rowspan="6">Distância Percurso</td>
-                                    <td>Já fez trilhas de até 3km?</td>
+                                    <td rowspan="6">Distância do percurso</td>
+                                    <td>Já fez trilhas de até 3km</td>
                                     <td class="center">50</td>
                                     <td rowspan="6">200</td>
                                 </tr>
                                 <tr class="zebra">
-                                    <td>Já fez trilhas de até 5km?</td>
+                                    <td>Já fez trilhas de até 5km</td>
                                     <td class="center">100</td>
                                 </tr>
                                 <tr class="zebra">
-                                    <td>Já fez trilhas de até 10km?</td>
+                                    <td>Já fez trilhas de até 10km</td>
                                     <td class="center">130</td>
                                 </tr>
                                 <tr class="zebra">
-                                    <td>Já fez trilhas de até 15km?</td>
+                                    <td>Já fez trilhas de até 15km</td>
                                     <td class="center">170</td>
                                 </tr>
                                 <tr class="zebra">
-                                    <td>Já fez trilhas de até 20km?</td>
+                                    <td>Já fez trilhas de até 20km</td>
                                     <td class="center">180</td>
                                 </tr>
                                 <tr class="zebra">
-                                    <td>Já fez trilhas superiores a 20km?</td>
+                                    <td>Já fez trilhas superiores a 20km</td>
                                     <td class="center">200</td>
                                 </tr>
                             
                                 <tr>
                                     <td rowspan="5">Elevação</td>
-                                    <td>Já fez trilhas com elevação de até 300 metros?</td>
+                                    <td>Já fez trilhas com elevação de até 300 metros</td>
                                     <td class="center">80</td>
                                     <td rowspan="5">200</td>
                                 </tr>
                                 <tr>
-                                    <td>Já fez trilhas com elevação de até 500 metros?</td>
+                                    <td>Já fez trilhas com elevação de até 500 metros</td>
                                     <td class="center">100</td>
                                 </tr>
                                 <tr>
-                                    <td>Já fez trilhas com elevação de até 800 metros?</td>
+                                    <td>Já fez trilhas com elevação de até 800 metros</td>
                                     <td class="center">120</td>
                                 </tr>
                                 <tr>
-                                    <td>Já fez trilhas com elevação de até 1000 metros?</td>
+                                    <td>Já fez trilhas com elevação de até 1000 metros</td>
                                     <td class="center">150</td>
                                 </tr>
                                 <tr>
-                                    <td>Já fez trilhas com elevação superior a 1000 metros?</td>
+                                    <td>Já fez trilhas com elevação superior a 1000 metros</td>
                                     <td class="center">200</td>
                                 </tr>
                                 
@@ -320,7 +320,10 @@
                     </div>
                </div>
                <div class="col-md-12 mb-md-0 mb-4 mt-4">
-                    <p>De acordo com o somatório da pontuação parcial obtida em cada nível é calculada a pontuação final do trilheiro e determinada a categoria, de acordo com a tabela abaixo:</p>
+                    <p>
+                        A pontuação final é a soma dos critérios acima (máximo 1000).
+                        Com esse total, o trilheiro é classificado em um dos níveis:
+                    </p>
                </div>
 
                <div class="col-md-12 mb-md-0 mt-2">
@@ -328,102 +331,36 @@
                     <table class="table align-items-center tabela-niveis mb-0">
                         <thead>
                            <tr>
-                              <th class="text-left text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Critérios</th>
-                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Iniciante<br><small>IE-1</small></th>
-                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Aventureiro<br><small>IE-2</small></th>
-                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Explorador<br><small>IE-3</small></th>
-                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Montanhista<br><small>IE-4</small></th>
-                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Expedicionário<br><small>IE-5</small></th>
+                              <th class="text-left text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Nível</th>
+                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Sigla</th>
+                              <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Pontuação mínima</th>
                            </tr>
                         </thead>
                         <tbody>
                            <tr>
-                              <td>IMC</td>
-                              <td>80</td>
-                              <td>100</td>
-                              <td>120</td>
-                              <td>135</td>
-                              <td>150</td>
+                              <td>Iniciante</td>
+                              <td class="center">IE-1</td>
+                              <td class="center">—</td>
                            </tr>
                            <tr>
-                              <td>Corrida</td>
-                              <td>0</td>
-                              <td>50</td>
-                              <td>80</td>
-                              <td>100</td>
-                              <td>100</td>
+                              <td>Aventureiro</td>
+                              <td class="center">IE-2</td>
+                              <td class="center">580</td>
                            </tr>
                            <tr>
-                              <td>Distância</td>
-                              <td>0</td>
-                              <td>20</td>
-                              <td>40</td>
-                              <td>30</td>
-                              <td>60</td>
+                              <td>Explorador</td>
+                              <td class="center">IE-3</td>
+                              <td class="center">665</td>
                            </tr>
                            <tr>
-                              <td>Musculação</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>100</td>
-                              <td>100</td>
-                              <td>100</td>
-                           </tr>
-                           <tr>
-                              <td>Areia</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>30</td>
-                              <td>30</td>
-                              <td>30</td>
-                           </tr>
-                           <tr>
-                              <td>Travessia Rio</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>30</td>
-                              <td>30</td>
-                              <td>30</td>
-                           </tr>
-                           <tr>
-                              <td>Fobia</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>30</td>
-                              <td>30</td>
-                              <td>30</td>
-                           </tr>
-                           <tr>
-                              <td>Trekking</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>80</td>
-                              <td>80</td>
-                              <td>100</td>
-                           </tr>
-                           <tr>
-                              <td>Distância</td>
-                              <td>100</td>
-                              <td>120</td>
-                              <td>150</td>
-                              <td>200</td>
-                              <td>200</td>
-                           </tr>
-                           <tr>
-                              <td>Elevação</td>
-                              <td>100</td>
-                              <td>120</td>
-                              <td>150</td>
-                              <td>200</td>
-                              <td>200</td>
+                              <td>Montanhista</td>
+                              <td class="center">IE-4</td>
+                              <td class="center">785</td>
                            </tr>
                            <tr class="pontuacao">
-                              <td>Pontuação Mínima</td>
-                              <td>—</td>
-                              <td>580</td>
-                              <td>665</td>
-                              <td>785</td>
-                              <td>945</td>
+                              <td>Expedicionário</td>
+                              <td class="center">IE-5</td>
+                              <td class="center">945</td>
                            </tr>
                         </tbody>
                      </table>
