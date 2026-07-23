@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
 
-                                        <div style="position: absolute; left: 20px; bottom: 16px;">
+                                        <div style="position: absolute; right: 20px; bottom: 16px;">
                                             <a class="btn btn-warning" href="{{ url('https://trilhasemsc.com.br/'.$trilha->ds_url_tri) }}" target="_blank" rel="noopener">
                                                 <i class="fa fa-search"></i> Ver trilha
                                             </a>
