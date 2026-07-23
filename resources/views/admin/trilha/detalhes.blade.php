@@ -152,6 +152,55 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="header">
+                <h2><i class="fa fa-history"></i> Histórico de envios</h2>
+                <small class="text-muted">Registros de disparos de convite por email para esta trilha.</small>
+            </div>
+            <div class="body">
+                @if(($historicoEnvios ?? collect())->count())
+                    <div class="table-responsive">
+                        <table class="table table-hover table-custom mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Tipo de envio</th>
+                                    <th>Total enviado</th>
+                                    <th>Data do envio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($historicoEnvios as $envio)
+                                    <tr>
+                                        <td>
+                                            @if((int) $envio->cd_tipo_envio_tie === 1)
+                                                <span class="badge badge-success">Trilheiros</span>
+                                            @elseif((int) $envio->cd_tipo_envio_tie === 2)
+                                                <span class="badge badge-info">Guias</span>
+                                            @else
+                                                <span class="badge badge-secondary">Tipo {{ $envio->cd_tipo_envio_tie }}</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ number_format((int) $envio->nu_total_envios_loe, 0, ',', '.') }}</td>
+                                        <td>
+                                            @if($envio->dt_envio_loe)
+                                                {{ \Carbon\Carbon::parse($envio->dt_envio_loe)->format('d/m/Y H:i') }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="alert alert-info mb-0">Nenhum envio registrado para esta trilha.</div>
+                @endif
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 

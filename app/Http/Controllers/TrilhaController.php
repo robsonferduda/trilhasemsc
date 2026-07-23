@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use URL;
 use Auth;
+use Flash;
 use App\User;
 use App\Tag;
 use App\Trilha;
@@ -13,12 +14,16 @@ use App\Evento;
 use App\Cidade;
 use App\Nivel;
 use App\Foto;
+use App\LogEmail;
 use App\Trilheiro;
 use App\Estatistica;
 use App\Categoria;
 use App\Complemento;
 use App\TipoFoto;
+use App\Mail\ConviteTrilhaGuia;
+use App\Mail\ConviteTrilhaTrilheiro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 
@@ -26,7 +31,7 @@ class TrilhaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['index', 'detalhes', 'editar', 'novo', 'update', 'create', 'insertFoto']);
+        $this->middleware('auth')->only(['index', 'detalhes', 'editar', 'novo', 'update', 'create', 'insertFoto', 'enviarEmailTesteConvite', 'enviarEmailConviteTrilheiros', 'enviarEmailConviteGuias']);
     }
 
     public function index(Request $request)
@@ -138,6 +143,10 @@ class TrilhaController extends Controller
 
         $totalTrilheirosNewsletter = Trilheiro::where('fl_newsletter_tri', true)->count();
         $totalGuiasAtivos = Guia::where('fl_ativo_gui', true)->count();
+        $historicoEnvios = LogEmail::where('id_trilha_tri', $trilha->id_trilha_tri)
+            ->orderBy('dt_envio_loe', 'desc')
+            ->orderBy('cd_log_email_loe', 'desc')
+            ->get();
 
         return view('admin/trilha/detalhes', [
             'trilha' => $trilha,
@@ -149,6 +158,7 @@ class TrilhaController extends Controller
             'valoresAcessos' => $valoresAcessos,
             'totalTrilheirosNewsletter' => $totalTrilheirosNewsletter,
             'totalGuiasAtivos' => $totalGuiasAtivos,
+            'historicoEnvios' => $historicoEnvios,
         ]);
     }
 
@@ -243,6 +253,187 @@ class TrilhaController extends Controller
         } else {
             dd("Erro");
         }
+    }
+
+    public function enviarEmailTesteConvite(Request $request, $id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $tipo = trim((string) $request->input('tipo', 'trilheiro'));
+
+        if (!in_array($tipo, ['trilheiro', 'guia'])) {
+            Flash::error('Tipo de teste inválido.');
+            return redirect()->back();
+        }
+
+        try {
+            $trilha = Trilha::with('foto')->findOrFail($id);
+            $emailDestino = Auth::user()->email;
+            $nomeDestino = Auth::user()->name ?: 'Administrador';
+
+            if ($tipo === 'guia') {
+                Mail::to($emailDestino)->send(new ConviteTrilhaGuia($trilha, $nomeDestino, true));
+            } else {
+                Mail::to($emailDestino)->send(new ConviteTrilhaTrilheiro($trilha, $nomeDestino, true));
+            }
+
+            Flash::success('Email de teste enviado com sucesso para ' . $emailDestino . '.');
+        } catch (\Exception $e) {
+            \Log::error('Erro ao enviar email de teste de convite de trilha', [
+                'trilha_id' => $id,
+                'tipo' => $tipo,
+                'admin_user_id' => Auth::id(),
+                'error' => $e->getMessage(),
+            ]);
+
+            Flash::error('Erro ao enviar email de teste: ' . $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
+
+    public function enviarEmailConviteTrilheiros($id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        try {
+            $trilha = Trilha::with('foto')->findOrFail($id);
+
+            $trilheiros = Trilheiro::with('user')
+                ->where('fl_newsletter_tri', true)
+                ->whereHas('user')
+                ->get();
+
+            if ($trilheiros->isEmpty()) {
+                Flash::warning('Nenhum trilheiro com newsletter ativa foi encontrado para envio.');
+                return redirect()->back();
+            }
+
+            $enviados = 0;
+            $erros = 0;
+
+            foreach ($trilheiros as $trilheiro) {
+                try {
+                    $email = optional($trilheiro->user)->email;
+
+                    if (empty($email)) {
+                        $erros++;
+                        continue;
+                    }
+
+                    $nome = $trilheiro->nm_trilheiro_tri ?: optional($trilheiro->user)->name;
+                    Mail::to($email)->send(new ConviteTrilhaTrilheiro($trilha, $nome, false));
+                    $enviados++;
+                } catch (\Exception $e) {
+                    $erros++;
+                    \Log::error('Erro ao enviar convite de trilha para trilheiro', [
+                        'trilha_id' => $id,
+                        'trilheiro_id' => $trilheiro->id_trilheiro_tri,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+            }
+
+            if ($enviados > 0) {
+                $this->registrarLogEmail($id, 1, $enviados);
+            }
+
+            if ($erros > 0) {
+                Flash::warning("Convites para trilheiros enviados: {$enviados}. Erros: {$erros}.");
+            } else {
+                Flash::success("Convites para trilheiros enviados com sucesso: {$enviados}.");
+            }
+        } catch (\Exception $e) {
+            \Log::error('Erro geral ao enviar convite de trilha para trilheiros', [
+                'trilha_id' => $id,
+                'admin_user_id' => Auth::id(),
+                'error' => $e->getMessage(),
+            ]);
+
+            Flash::error('Erro ao enviar convites para trilheiros: ' . $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
+
+    public function enviarEmailConviteGuias($id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        try {
+            $trilha = Trilha::with('foto')->findOrFail($id);
+
+            $guias = Guia::with('user')
+                ->where('fl_ativo_gui', true)
+                ->whereHas('user')
+                ->get();
+
+            if ($guias->isEmpty()) {
+                Flash::warning('Nenhum guia ativo foi encontrado para envio.');
+                return redirect()->back();
+            }
+
+            $enviados = 0;
+            $erros = 0;
+
+            foreach ($guias as $guia) {
+                try {
+                    $email = optional($guia->user)->email;
+
+                    if (empty($email)) {
+                        $erros++;
+                        continue;
+                    }
+
+                    $nome = $guia->nm_guia_gui ?: optional($guia->user)->name;
+                    Mail::to($email)->send(new ConviteTrilhaGuia($trilha, $nome, false));
+                    $enviados++;
+                } catch (\Exception $e) {
+                    $erros++;
+                    \Log::error('Erro ao enviar convite de trilha para guia', [
+                        'trilha_id' => $id,
+                        'guia_id' => $guia->id_guia_gui,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+            }
+
+            if ($enviados > 0) {
+                $this->registrarLogEmail($id, 2, $enviados);
+            }
+
+            if ($erros > 0) {
+                Flash::warning("Convites para guias enviados: {$enviados}. Erros: {$erros}.");
+            } else {
+                Flash::success("Convites para guias enviados com sucesso: {$enviados}.");
+            }
+        } catch (\Exception $e) {
+            \Log::error('Erro geral ao enviar convite de trilha para guias', [
+                'trilha_id' => $id,
+                'admin_user_id' => Auth::id(),
+                'error' => $e->getMessage(),
+            ]);
+
+            Flash::error('Erro ao enviar convites para guias: ' . $e->getMessage());
+        }
+
+        return redirect()->back();
+    }
+
+    private function registrarLogEmail($idTrilha, $tipoEnvio, $totalEnvios)
+    {
+        LogEmail::create([
+            'id_trilha_tri' => $idTrilha,
+            'cd_tipo_envio_tie' => $tipoEnvio,
+            'nu_total_envios_loe' => $totalEnvios,
+            'dt_envio_loe' => now(),
+        ]);
     }
 
     public function searchTrilha($cidade, $nivel, $trilha)
