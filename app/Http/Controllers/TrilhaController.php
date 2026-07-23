@@ -8,10 +8,12 @@ use Auth;
 use App\User;
 use App\Tag;
 use App\Trilha;
+use App\Guia;
 use App\Evento;
 use App\Cidade;
 use App\Nivel;
 use App\Foto;
+use App\Trilheiro;
 use App\Estatistica;
 use App\Categoria;
 use App\Complemento;
@@ -24,7 +26,7 @@ class TrilhaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['index', 'editar', 'novo', 'update', 'create', 'insertFoto']);
+        $this->middleware('auth')->only(['index', 'detalhes', 'editar', 'novo', 'update', 'create', 'insertFoto']);
     }
 
     public function index(Request $request)
@@ -83,6 +85,71 @@ class TrilhaController extends Controller
         $tags   = Tag::orderBy('ds_tag_tag')->get();
 
         return view('admin/trilha/editar', compact('trilha', 'niveis', 'cidades', 'complementos', 'categorias', 'usuarios', 'tags'));
+    }
+
+    public function detalhes(Request $request, $id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $periodo = (int) $request->input('periodo', 30);
+        $periodosValidos = [7, 30, 90, 180, 365];
+
+        if (!in_array($periodo, $periodosValidos)) {
+            $periodo = 30;
+        }
+
+        $trilha = Trilha::with(['nivel', 'cidade', 'categoria', 'complemento', 'user'])->findOrFail($id);
+
+        $totalAcessos = (int) DB::table('total_acessos_trilhas_tat')
+            ->where('id_trilha_tri', $trilha->id_trilha_tri)
+            ->max('total_acessos_tat');
+
+        $inicioPeriodo = now()->subDays($periodo - 1)->startOfDay();
+
+        $acessosAgrupados = Estatistica::query()
+            ->select(DB::raw('DATE(created_at) as dia'), DB::raw('COUNT(*) as total'))
+            ->where('cd_tipo_monitoramento_tim', 1)
+            ->where('cd_monitoramento_esa', $trilha->id_trilha_tri)
+            ->where('created_at', '>=', $inicioPeriodo)
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->orderBy(DB::raw('DATE(created_at)'))
+            ->get();
+
+        $mapaAcessos = [];
+        foreach ($acessosAgrupados as $acesso) {
+            $mapaAcessos[$acesso->dia] = (int) $acesso->total;
+        }
+
+        $labelsAcessos = [];
+        $valoresAcessos = [];
+        $totalPeriodo = 0;
+
+        for ($i = 0; $i < $periodo; $i++) {
+            $data = $inicioPeriodo->copy()->addDays($i);
+            $dataIso = $data->format('Y-m-d');
+            $valorDia = $mapaAcessos[$dataIso] ?? 0;
+
+            $labelsAcessos[] = $data->format('d/m');
+            $valoresAcessos[] = $valorDia;
+            $totalPeriodo += $valorDia;
+        }
+
+        $totalTrilheirosNewsletter = Trilheiro::where('fl_newsletter_tri', true)->count();
+        $totalGuiasAtivos = Guia::where('fl_ativo_gui', true)->count();
+
+        return view('admin/trilha/detalhes', [
+            'trilha' => $trilha,
+            'periodo' => $periodo,
+            'periodosValidos' => $periodosValidos,
+            'totalAcessos' => $totalAcessos,
+            'totalPeriodo' => $totalPeriodo,
+            'labelsAcessos' => $labelsAcessos,
+            'valoresAcessos' => $valoresAcessos,
+            'totalTrilheirosNewsletter' => $totalTrilheirosNewsletter,
+            'totalGuiasAtivos' => $totalGuiasAtivos,
+        ]);
     }
 
     public function novo()

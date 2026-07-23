@@ -87,6 +87,9 @@
                                             <a class="btn btn-warning" href="{{ url('https://trilhasemsc.com.br/'.$trilha->ds_url_tri) }}" target="_blank" rel="noopener">
                                                 <i class="fa fa-search"></i> Ver trilha
                                             </a>
+                                            <a class="btn btn-info" href="{{ route('admin.trilha.detalhes', $trilha->id_trilha_tri) }}">
+                                                <i class="fa fa-bar-chart"></i> Detalhes
+                                            </a>
                                             <a class="btn btn-primary" href="{{ url('admin/editar-trilha/'.$trilha->id_trilha_tri) }}">
                                                 <i class="fa fa-edit"></i> Editar
                                             </a>
