@@ -63,14 +63,37 @@ return [
             ]) : [],
         ],
 
+        /*
+         * Destino da migração Postgres → MySQL.
+         * Não alterar o DB_CONNECTION default enquanto a migração não estiver concluída.
+         */
+        'mysql_novo' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_NOVO', '127.0.0.1'),
+            'port' => env('DB_PORT_NOVO', '3306'),
+            'database' => env('DB_DATABASE_NOVO', 'forge'),
+            'username' => env('DB_USERNAME_NOVO', 'forge'),
+            'password' => env('DB_PASSWORD_NOVO', ''),
+            'unix_socket' => env('DB_SOCKET_NOVO', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => 'InnoDB',
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST_PG', env('DB_HOST', '127.0.0.1')),
+            'port' => env('DB_PORT_PG', env('DB_PORT', '5432')),
+            'database' => env('DB_DATABASE_PG', env('DB_DATABASE', 'forge')),
+            'username' => env('DB_USERNAME_PG', env('DB_USERNAME', 'forge')),
+            'password' => env('DB_PASSWORD_PG', env('DB_PASSWORD', '')),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
@@ -80,11 +103,11 @@ return [
 
         'instagram_pgsql' => [
             'driver' => 'pgsql',
-            'host' => env('INSTAGRAM_DB_HOST', env('DB_HOST', '127.0.0.1')),
-            'port' => env('INSTAGRAM_DB_PORT', env('DB_PORT', '5432')),
-            'database' => env('INSTAGRAM_DB_DATABASE', env('DB_DATABASE', 'forge')),
-            'username' => env('INSTAGRAM_DB_USERNAME', env('DB_USERNAME', 'forge')),
-            'password' => env('INSTAGRAM_DB_PASSWORD', env('DB_PASSWORD', '')),
+            'host' => env('INSTAGRAM_DB_HOST', env('DB_HOST_PG', '127.0.0.1')),
+            'port' => env('INSTAGRAM_DB_PORT', env('DB_PORT_PG', '5432')),
+            'database' => env('INSTAGRAM_DB_DATABASE', env('DB_DATABASE_PG', 'forge')),
+            'username' => env('INSTAGRAM_DB_USERNAME', env('DB_USERNAME_PG', 'forge')),
+            'password' => env('INSTAGRAM_DB_PASSWORD', env('DB_PASSWORD_PG', '')),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

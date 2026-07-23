@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class InstagramMetricSnapshot extends Model
 {
-    protected $connection = 'instagram_pgsql';
-
     protected $table = 'instagram_metric_snapshots';
 
     protected $fillable = [

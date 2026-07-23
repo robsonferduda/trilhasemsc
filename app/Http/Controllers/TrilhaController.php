@@ -53,7 +53,7 @@ class TrilhaController extends Controller
                 $join->on('trilha_tri.id_trilha_tri', '=', 'tat.id_trilha_tri');
             })
             ->when($nome !== '', function ($query) use ($nome) {
-                $query->where('trilha_tri.nm_trilha_tri', 'ILIKE', '%'.$nome.'%');
+                $query->where('trilha_tri.nm_trilha_tri', 'like', '%'.$nome.'%');
             })
             ->when(in_array($publicado, ['S', 'N']), function ($query) use ($publicado) {
                 $query->where('trilha_tri.fl_publicacao_tri', $publicado);
@@ -555,7 +555,7 @@ class TrilhaController extends Controller
                               $query->where('cd_cidade_cde', $idCidade);
                           })
                           ->when($termo, function ($query) use ($termo) {
-                              $query->where('nm_trilha_tri', 'ILIKE', '%'.trim($termo).'%');
+                              $query->where('nm_trilha_tri', 'like', '%'.trim($termo).'%');
                           })
                           ->when($tag, function ($query) use ($tag) {
                               $query->whereHas('tags', function ($query) use ($tag) {

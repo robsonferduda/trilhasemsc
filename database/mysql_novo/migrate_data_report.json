@@ -1,0 +1,348 @@
+{
+    "generated_at": "2026-07-23T18:47:48-03:00",
+    "summary": {
+        "camping_cam": {
+            "pg": 6,
+            "mysql": 6,
+            "sec": 3.11,
+            "ok": true
+        },
+        "categoria_cat": {
+            "pg": 2,
+            "mysql": 2,
+            "sec": 1.83,
+            "ok": true
+        },
+        "categoria_uc_cau": {
+            "pg": 5,
+            "mysql": 5,
+            "sec": 2.27,
+            "ok": true
+        },
+        "cidade_cde": {
+            "pg": 5570,
+            "mysql": 5570,
+            "sec": 20.83,
+            "ok": true
+        },
+        "comentario_com": {
+            "pg": 2,
+            "mysql": 2,
+            "sec": 2.42,
+            "ok": true
+        },
+        "complemento_nivel_con": {
+            "pg": 11,
+            "mysql": 11,
+            "sec": 2.57,
+            "ok": true
+        },
+        "corrida_cor": {
+            "pg": 4,
+            "mysql": 4,
+            "sec": 2.51,
+            "ok": true
+        },
+        "distancia_dis": {
+            "pg": 6,
+            "mysql": 6,
+            "sec": 2.63,
+            "ok": true
+        },
+        "elevacao_ele": {
+            "pg": 5,
+            "mysql": 5,
+            "sec": 2.4,
+            "ok": true
+        },
+        "estado_est": {
+            "pg": 27,
+            "mysql": 27,
+            "sec": 2.11,
+            "ok": true
+        },
+        "estatistica_acesso_esa": {
+            "pg": 647934,
+            "mysql": 647969,
+            "sec": 2380.84,
+            "ok": false
+        },
+        "evento_eve": {
+            "pg": 25,
+            "mysql": 25,
+            "sec": 5.44,
+            "ok": true
+        },
+        "evento_trilheiro_evt": {
+            "pg": 18,
+            "mysql": 18,
+            "sec": 2.37,
+            "ok": true
+        },
+        "failed_jobs": {
+            "pg": 0,
+            "mysql": 0,
+            "sec": 0.92
+        },
+        "fone_fon": {
+            "pg": 66,
+            "mysql": 66,
+            "sec": 2.9,
+            "ok": true
+        },
+        "foto_fot": {
+            "pg": 1172,
+            "mysql": 1172,
+            "sec": 14.04,
+            "ok": true
+        },
+        "galeria_fotos_gaf": {
+            "pg": 4,
+            "mysql": 4,
+            "sec": 3.37,
+            "ok": true
+        },
+        "galeria_gal": {
+            "pg": 4,
+            "mysql": 4,
+            "sec": 2.83,
+            "ok": true
+        },
+        "guia_cidade_atuacao_gca": {
+            "pg": 133,
+            "mysql": 133,
+            "sec": 2.66,
+            "ok": true
+        },
+        "guia_gui": {
+            "pg": 41,
+            "mysql": 41,
+            "sec": 3.93,
+            "ok": true
+        },
+        "guia_interacao_gin": {
+            "pg": 12516,
+            "mysql": 12516,
+            "sec": 44.26,
+            "ok": true
+        },
+        "guia_trilha_gut": {
+            "pg": 43,
+            "mysql": 43,
+            "sec": 2.53,
+            "ok": true
+        },
+        "guia_unidade_conservacao_guc": {
+            "pg": 34,
+            "mysql": 34,
+            "sec": 3.14,
+            "ok": true
+        },
+        "hospedagem_hos": {
+            "pg": 9,
+            "mysql": 9,
+            "sec": 2.87,
+            "ok": true
+        },
+        "hospedagem_quarto_hoq": {
+            "pg": 20,
+            "mysql": 20,
+            "sec": 2.84,
+            "ok": true
+        },
+        "indice_ind": {
+            "pg": 6,
+            "mysql": 6,
+            "sec": 3.12,
+            "ok": true
+        },
+        "instagram_media_metrics": {
+            "pg": 18,
+            "mysql": 18,
+            "sec": 5.02,
+            "ok": true
+        },
+        "instagram_metric_snapshots": {
+            "pg": 48,
+            "mysql": 48,
+            "sec": 6.02,
+            "ok": true
+        },
+        "jobs": {
+            "pg": 0,
+            "mysql": 0,
+            "sec": 0.92
+        },
+        "log_email_loe": {
+            "pg": 2,
+            "mysql": 2,
+            "sec": 2.59,
+            "ok": true
+        },
+        "nivel_niv": {
+            "pg": 6,
+            "mysql": 6,
+            "sec": 2.73,
+            "ok": true
+        },
+        "pais_pai": {
+            "pg": 1,
+            "mysql": 1,
+            "sec": 2.3,
+            "ok": true
+        },
+        "password_resets": {
+            "pg": 4,
+            "mysql": 4,
+            "sec": 2.11,
+            "ok": true
+        },
+        "praia_pra": {
+            "pg": 1,
+            "mysql": 1,
+            "sec": 1.99,
+            "ok": true
+        },
+        "publicidade_estatistica_pue": {
+            "pg": 578,
+            "mysql": 578,
+            "sec": 4.19,
+            "ok": true
+        },
+        "publicidade_pub": {
+            "pg": 2,
+            "mysql": 2,
+            "sec": 2.31,
+            "ok": true
+        },
+        "qrcode_qrc": {
+            "pg": 2,
+            "mysql": 2,
+            "sec": 2.29,
+            "ok": true
+        },
+        "questionario_score_que": {
+            "pg": 59,
+            "mysql": 59,
+            "sec": 2.83,
+            "ok": true
+        },
+        "regiao_reg": {
+            "pg": 3,
+            "mysql": 3,
+            "sec": 2.01,
+            "ok": true
+        },
+        "tag_tag": {
+            "pg": 27,
+            "mysql": 27,
+            "sec": 2.5,
+            "ok": true
+        },
+        "tipo_camping_tic": {
+            "pg": 3,
+            "mysql": 3,
+            "sec": 2.43,
+            "ok": true
+        },
+        "tipo_fone_tif": {
+            "pg": 2,
+            "mysql": 2,
+            "sec": 1.94,
+            "ok": true
+        },
+        "tipo_foto_tfo": {
+            "pg": 10,
+            "mysql": 10,
+            "sec": 2.75,
+            "ok": true
+        },
+        "tipo_interacao_tin": {
+            "pg": 6,
+            "mysql": 6,
+            "sec": 2.18,
+            "ok": true
+        },
+        "tipo_monitoramento_tim": {
+            "pg": 3,
+            "mysql": 3,
+            "sec": 2.7,
+            "ok": true
+        },
+        "tipo_trilha_tit": {
+            "pg": 3,
+            "mysql": 3,
+            "sec": 2.56,
+            "ok": true
+        },
+        "total_acessos_trilhas_tat": {
+            "pg": 90,
+            "mysql": 90,
+            "sec": 3.17,
+            "ok": true
+        },
+        "trilha_detalhes_trd": {
+            "pg": 1,
+            "mysql": 1,
+            "sec": 2.68,
+            "ok": true
+        },
+        "trilha_tag_trt": {
+            "pg": 131,
+            "mysql": 131,
+            "sec": 2.75,
+            "ok": true
+        },
+        "trilha_tri": {
+            "pg": 91,
+            "mysql": 91,
+            "sec": 20.57,
+            "ok": true
+        },
+        "trilheiro_tri": {
+            "pg": 124,
+            "mysql": 124,
+            "sec": 4.13,
+            "ok": true
+        },
+        "trilheiro_trilha_ttr": {
+            "pg": 496,
+            "mysql": 496,
+            "sec": 4.46,
+            "ok": true
+        },
+        "unidade_conservacao_cidade_ucc": {
+            "pg": 0,
+            "mysql": 0,
+            "sec": 1.13
+        },
+        "unidade_conservacao_instancia_uci": {
+            "pg": 3,
+            "mysql": 3,
+            "sec": 2.63,
+            "ok": true
+        },
+        "unidade_conservacao_unc": {
+            "pg": 16,
+            "mysql": 16,
+            "sec": 2.77,
+            "ok": true
+        },
+        "users": {
+            "pg": 220,
+            "mysql": 218,
+            "sec": 41.92,
+            "ok": false
+        },
+        "users_log": {
+            "pg": 163,
+            "mysql": 163,
+            "sec": 3.62,
+            "ok": true
+        }
+    },
+    "errors": [
+        "users: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'annycbm30@gmail.com' for key 'users_email_unique'",
+        "users: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'luizamandrolisboa@gmail.com' for key 'users_email_unique'"
+    ]
+}

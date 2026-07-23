@@ -230,20 +230,20 @@ class TrilheiroController extends Controller
             
             // Filtros de busca
             if ($request->has('nome') && $request->nome) {
-                $query->where('nm_trilheiro_tri', 'ILIKE', '%' . $request->nome . '%');
+                $query->where('nm_trilheiro_tri', 'like', '%' . $request->nome . '%');
                 $temFiltros = true;
             }
             
             if ($request->has('email') && $request->email) {
                 $query->whereHas('user', function($q) use ($request) {
-                    $q->where('email', 'ILIKE', '%' . $request->email . '%');
+                    $q->where('email', 'like', '%' . $request->email . '%');
                 });
                 $temFiltros = true;
             }
             
             if ($request->has('cidade') && $request->cidade) {
                 $query->whereHas('origem', function($q) use ($request) {
-                    $q->where('nm_cidade_cde', 'ILIKE', '%' . $request->cidade . '%');
+                    $q->where('nm_cidade_cde', 'like', '%' . $request->cidade . '%');
                 });
                 $temFiltros = true;
             }
