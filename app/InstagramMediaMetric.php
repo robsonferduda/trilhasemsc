@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class InstagramMediaMetric extends Model
 {
-    protected $connection = 'instagram_pgsql';
-
     protected $table = 'instagram_media_metrics';
 
     protected $fillable = [

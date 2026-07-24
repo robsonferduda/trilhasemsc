@@ -26,6 +26,21 @@
                 </div>               
                 <div class="body">
                     @include('layouts.mensagens')
+                    @if($trilheiro && !$trilheiro->perfilBasicoCompleto())
+                        <div class="alert alert-warning">
+                            <i class="fa fa-exclamation-triangle"></i>
+                            Seu cadastro está incompleto.
+                            <a href="{{ url('trilheiro/privado/atualizar-cadastro') }}" class="alert-link">Complete seus dados</a>
+                            para continuar.
+                        </div>
+                    @elseif($trilheiro && !$trilheiro->possuiScore())
+                        <div class="alert alert-info">
+                            <i class="fa fa-tachometer"></i>
+                            Você ainda não calculou seu Índice de Experiência em Trilhas.
+                            <a href="{{ url('trilheiro/privado/meu-nivel') }}" class="alert-link">Responder questionário agora</a>
+                            (leva poucos minutos).
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-12">
                             <div class="card profile-header">

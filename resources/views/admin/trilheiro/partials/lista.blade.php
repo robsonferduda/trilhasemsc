@@ -59,11 +59,14 @@
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-12 center">
-                        <h2 class="mb-0 mt-5">{{ $trilheiro->nr_score_tri ?? 0 }}</h2>
-                        <span>{{ $trilheiro->indice ? $trilheiro->indice->ds_indice_ind : 'N/A' }}</span>
-                        @if($trilheiro->indice && $trilheiro->indice->img_indice_ind)
-                            <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Nível">
-                        @endif
+                        <a href="{{ route('admin.trilheiro.questionario', $trilheiro->id_trilheiro_tri) }}" class="d-block text-dark" title="Ver respostas do questionário" style="text-decoration:none;">
+                            <h2 class="mb-0 mt-5">{{ $trilheiro->nr_score_tri ?? 0 }}</h2>
+                            <span>{{ $trilheiro->indice ? $trilheiro->indice->ds_indice_ind : 'N/A' }}</span>
+                            @if($trilheiro->indice && $trilheiro->indice->img_indice_ind)
+                                <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Nível">
+                            @endif
+                            <small class="d-block text-primary mt-1"><i class="fa fa-clipboard-list"></i> Ver questionário</small>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -115,7 +115,11 @@ Route::get('dicas-de-seguranca', function () {
 })->name('dicas-de-seguranca');
 
 Route::get('indice-experiencia-trilhas', function () {
-    return view('indice');
+    $indices = \App\Indice::whereNotNull('ds_sigla_ind')
+        ->orderBy('id_indice_ind')
+        ->get();
+
+    return view('indice', compact('indices'));
 })->name('indice');
 
 Route::get('politica-de-privacidade', function () {
@@ -164,6 +168,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('trilheiros/listar', 'TrilheiroController@listar')->name('admin.trilheiros.listar');
         Route::get('trilheiros/ajax', 'TrilheiroController@listarAjax')->name('admin.trilheiros.ajax');
         Route::get('trilheiro/perfil/{id}', 'TrilheiroController@show');
+        Route::get('trilheiro/{id}/questionario', 'TrilheiroController@verQuestionario')->name('admin.trilheiro.questionario');
         Route::post('trilheiro/{id}/enviar-email-boas-vindas', 'TrilheiroController@enviarEmailBoasVindas')->name('admin.trilheiro.enviar-email');
         Route::post('trilheiro/{id}/enviar-email-questionario', 'TrilheiroController@enviarEmailQuestionario')->name('admin.trilheiro.enviar-email-questionario');
         Route::post('trilheiros/enviar-email-questionario-massa', 'TrilheiroController@enviarEmailQuestionarioEmMassa')->name('admin.trilheiros.enviar-email-questionario-massa');
@@ -192,7 +197,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::match(['GET', 'POST'],'trilhas', 'GuiaController@trilhas');
     });
 
-    Route::prefix('trilheiro/privado')->group(function () {
+    Route::prefix('trilheiro/privado')->middleware('trilheiro.perfil')->group(function () {
         Route::get('perfil', 'TrilheiroController@perfil');
         Route::get('eventos', 'TrilheiroController@eventos');
         Route::get('meu-nivel', 'TrilheiroController@score');

@@ -19,6 +19,7 @@ use App\UnidadeConservacao;
 use App\Mail\GuiaModeracao;
 use App\Mail\BoasVindasTrilheiro;
 use App\TrilheiroTrilha;
+use App\Indice;
 use App\User;
 use Auth;
 use Storage;
@@ -64,6 +65,21 @@ class TrilheiroController extends Controller
         return view('trilheiro/perfil', ['page_name' => $page_name, 'trilheiro' => $trilheiro, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
     }
 
+    public function verQuestionario($id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $trilheiro = Trilheiro::with(['indice', 'origem', 'user', 'questionario.corrida', 'questionario.distancia', 'questionario.elevacao'])
+            ->where('id_trilheiro_tri', $id)
+            ->firstOrFail();
+
+        $questionario = $trilheiro->questionario;
+
+        return view('admin/trilheiro/questionario', compact('trilheiro', 'questionario'));
+    }
+
     public function eventos()
     {
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
@@ -96,9 +112,9 @@ class TrilheiroController extends Controller
         $page_name = "Guias e Condutores em Santa Catarina";
         $titulo = 'Guias e Condutores';
         
-        $corridas = Corrida::all();
-        $elevacoes = Elevacao::all();
-        $distancias = Distancia::all();
+        $corridas = Corrida::orderBy('nu_score_cor')->get();
+        $elevacoes = Elevacao::orderBy('nu_score_ele')->get();
+        $distancias = Distancia::orderBy('nu_score_dis')->get();
         $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
         $questionario = Questionario::where('cd_trilheiro_tri', $trilheiro->id_trilheiro_tri)->first();
 
@@ -116,8 +132,89 @@ class TrilheiroController extends Controller
         
         // Primeira carga - apenas estrutura
         $trilheiros = collect();
+        $indices = Indice::orderBy('id_indice_ind')->get();
+        $resumo = $this->resumoCadastrosTrilheiros();
 
-        return view('admin/trilheiro/listar', ['page_name' => $page_name, 'trilheiros' => $trilheiros]);
+        return view('admin/trilheiro/listar', [
+            'page_name' => $page_name,
+            'trilheiros' => $trilheiros,
+            'indices' => $indices,
+            'resumo' => $resumo,
+        ]);
+    }
+
+    /**
+     * Indicadores fixos de conclusão de cadastro / questionário IET.
+     */
+    private function resumoCadastrosTrilheiros()
+    {
+        $total = Trilheiro::count();
+        $pct = function ($n) use ($total) {
+            return $total > 0 ? round(($n / $total) * 100, 1) : 0;
+        };
+
+        $semCidade = Trilheiro::whereNull('cd_cidade_tri')->count();
+        $comCidade = $total - $semCidade;
+        $semScore = Trilheiro::where(function ($q) {
+            $q->whereNull('nr_score_tri')->orWhere('nr_score_tri', 0);
+        })->count();
+        $semQuestionario = Trilheiro::whereDoesntHave('questionario')->count();
+        $comQuestionario = Trilheiro::whereHas('questionario')->count();
+        $naoDefinido = Trilheiro::where(function ($q) {
+            $q->whereNull('id_indice_ind')->orWhere('id_indice_ind', 1);
+        })->count();
+        $semFoto = Trilheiro::whereNull('nm_path_foto_tri')->count();
+        $semNascimento = Trilheiro::whereNull('dt_nascimento')->count();
+        $basicoOk = Trilheiro::whereNotNull('cd_cidade_tri')
+            ->whereNotNull('dt_nascimento')
+            ->count();
+        $completo = Trilheiro::whereNotNull('cd_cidade_tri')
+            ->whereNotNull('dt_nascimento')
+            ->whereHas('questionario')
+            ->where('nr_score_tri', '>', 0)
+            ->count();
+        $semCidadeEScore = Trilheiro::whereNull('cd_cidade_tri')
+            ->where(function ($q) {
+                $q->whereNull('nr_score_tri')->orWhere('nr_score_tri', 0);
+            })
+            ->count();
+
+        $desde90 = now()->subDays(90);
+        $novos90 = Trilheiro::where('created_at', '>=', $desde90)->count();
+        $incompletos90 = Trilheiro::where('created_at', '>=', $desde90)
+            ->where(function ($q) {
+                $q->whereNull('nr_score_tri')->orWhere('nr_score_tri', 0);
+            })
+            ->count();
+
+        return [
+            'total' => $total,
+            'sem_cidade' => $semCidade,
+            'sem_cidade_pct' => $pct($semCidade),
+            'com_cidade' => $comCidade,
+            'com_cidade_pct' => $pct($comCidade),
+            'sem_score' => $semScore,
+            'sem_score_pct' => $pct($semScore),
+            'sem_questionario' => $semQuestionario,
+            'sem_questionario_pct' => $pct($semQuestionario),
+            'com_questionario' => $comQuestionario,
+            'com_questionario_pct' => $pct($comQuestionario),
+            'nao_definido' => $naoDefinido,
+            'nao_definido_pct' => $pct($naoDefinido),
+            'sem_foto' => $semFoto,
+            'sem_foto_pct' => $pct($semFoto),
+            'sem_nascimento' => $semNascimento,
+            'sem_nascimento_pct' => $pct($semNascimento),
+            'basico_ok' => $basicoOk,
+            'basico_ok_pct' => $pct($basicoOk),
+            'completo' => $completo,
+            'completo_pct' => $pct($completo),
+            'sem_cidade_e_score' => $semCidadeEScore,
+            'sem_cidade_e_score_pct' => $pct($semCidadeEScore),
+            'novos_90' => $novos90,
+            'incompletos_90' => $incompletos90,
+            'incompletos_90_pct' => $novos90 > 0 ? round(($incompletos90 / $novos90) * 100, 1) : 0,
+        ];
     }
 
     public function listarAjax(Request $request)
@@ -133,26 +230,31 @@ class TrilheiroController extends Controller
             
             // Filtros de busca
             if ($request->has('nome') && $request->nome) {
-                $query->where('nm_trilheiro_tri', 'ILIKE', '%' . $request->nome . '%');
+                $query->where('nm_trilheiro_tri', 'like', '%' . $request->nome . '%');
                 $temFiltros = true;
             }
             
             if ($request->has('email') && $request->email) {
                 $query->whereHas('user', function($q) use ($request) {
-                    $q->where('email', 'ILIKE', '%' . $request->email . '%');
+                    $q->where('email', 'like', '%' . $request->email . '%');
                 });
                 $temFiltros = true;
             }
             
             if ($request->has('cidade') && $request->cidade) {
                 $query->whereHas('origem', function($q) use ($request) {
-                    $q->where('nm_cidade_cde', 'ILIKE', '%' . $request->cidade . '%');
+                    $q->where('nm_cidade_cde', 'like', '%' . $request->cidade . '%');
                 });
                 $temFiltros = true;
             }
             
             if ($request->filled('newsletter')) {
                 $query->where('fl_newsletter_tri', $request->newsletter == '1');
+                $temFiltros = true;
+            }
+
+            if ($request->filled('indice')) {
+                $query->where('id_indice_ind', (int) $request->indice);
                 $temFiltros = true;
             }
             
@@ -212,8 +314,18 @@ class TrilheiroController extends Controller
 
             $validated = $request->validate([
                 'nome' => 'required',
-                'email' => 'required',
-                'cidade_origem' => 'required'
+                'email' => 'required|email',
+                'sexo' => 'required',
+                'estado_origem' => 'required',
+                'cidade_origem' => 'required',
+                'dt_nascimento' => 'required',
+            ], [
+                'nome.required' => 'O campo Nome é obrigatório.',
+                'email.required' => 'O campo E-mail é obrigatório.',
+                'sexo.required' => 'O campo Sexo é obrigatório.',
+                'estado_origem.required' => 'O campo Estado é obrigatório.',
+                'cidade_origem.required' => 'O campo Cidade é obrigatório.',
+                'dt_nascimento.required' => 'O campo Data de Nascimento é obrigatório.',
             ]);
 
             $nome = $request->nome;
@@ -305,6 +417,11 @@ class TrilheiroController extends Controller
                 ]);
             }
 
+            if (!$trilheiro->possuiScore()) {
+                Flash::success('Perfil atualizado! Agora responda o questionário para calcular seu Índice de Experiência em Trilhas.');
+                return redirect('trilheiro/privado/meu-nivel');
+            }
+
             return redirect('trilheiro/privado/perfil');
         }
 
@@ -320,16 +437,17 @@ class TrilheiroController extends Controller
         $dados = array('cd_distancia_dis' => $request->escala_distancia,
                        'cd_elevacao_ele' => $request->escala_elevacao,
                         'cd_corrida_cor' => $request->escala_corrida,
-                        'fl_musculacao_que' => $request->fl_musculacao_que,
-                        'fl_travessia_que' => $request->fl_travessia,
-                        'fl_trilhas_que' => $request->fl_trilhas,
-                        'fl_trekking_que' => $request->fl_trekking,
-                        'fl_hiking_que' => $request->fl_hiking,
-                        'nu_costao_que' => $request->nu_costao,
-                        'fl_ferrata_que' => $request->fl_ferrata,
-                        'fl_acampamento_que' => $request->fl_acampamento,
-                        'fl_areia_que' => $request->fl_areia,
-                        'fl_altura_que' => !$request->fl_altura,
+                        'fl_musculacao_que' => filter_var($request->fl_musculacao_que, FILTER_VALIDATE_BOOLEAN),
+                        'fl_travessia_que' => filter_var($request->fl_travessia, FILTER_VALIDATE_BOOLEAN),
+                        'fl_trilhas_que' => filter_var($request->fl_trilhas, FILTER_VALIDATE_BOOLEAN),
+                        'fl_trekking_que' => filter_var($request->fl_trekking, FILTER_VALIDATE_BOOLEAN),
+                        'fl_hiking_que' => filter_var($request->fl_hiking, FILTER_VALIDATE_BOOLEAN),
+                        'nu_costao_que' => (int) $request->nu_costao,
+                        'fl_ferrata_que' => filter_var($request->fl_ferrata, FILTER_VALIDATE_BOOLEAN),
+                        'fl_acampamento_que' => filter_var($request->fl_acampamento, FILTER_VALIDATE_BOOLEAN),
+                        'fl_areia_que' => filter_var($request->fl_areia, FILTER_VALIDATE_BOOLEAN),
+                        // true = tem medo/fobia (mesma semântica do formulário); pontua quem NÃO tem
+                        'fl_altura_que' => filter_var($request->fl_altura, FILTER_VALIDATE_BOOLEAN),
                         'nu_distancia_que' => $request->nu_distancia,
                         'nu_altura_que' => $request->altura,
                         'nu_peso_que' => $request->peso);
@@ -447,7 +565,14 @@ class TrilheiroController extends Controller
 
     public function calculaIMC($altura, $peso){
 
-        $imc = $peso / ($altura * 2);
+        $altura = (float) $altura;
+        $peso = (float) $peso;
+
+        if ($altura <= 0) {
+            return 40;
+        }
+
+        $imc = $peso / ($altura * $altura);
 
         $dicionario = [
             "18.5" => 85,
@@ -463,7 +588,6 @@ class TrilheiroController extends Controller
             if((float) $key < 40.0){
                 if($imc <= (float) $key){
                     return $value;
-                    break;
                 }
             }else{ 
                 return $value;

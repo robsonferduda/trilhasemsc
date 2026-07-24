@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use App\User;
+use App\Trilheiro;
 use App\UserLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -82,6 +83,10 @@ class LoginController extends Controller
                     return redirect('guia-e-condutores/privado/atualizar-cadastro');
                     break;
                 case 'TRILHEIRO':
+                    $trilheiro = Trilheiro::where('id_user', Auth::id())->first();
+                    if (!$trilheiro || !$trilheiro->perfilBasicoCompleto()) {
+                        return redirect('trilheiro/privado/atualizar-cadastro');
+                    }
                     return redirect()->intended('trilheiro/privado/perfil');
                     break;
                 case 'SOCIAL':
@@ -184,8 +189,8 @@ class LoginController extends Controller
         }
         // ===== /log =====
 
-        // Redireciona ao destino original ou fallback
-        return redirect()->intended('/dashboard');
+        // Redireciona conforme papel / onboarding (evita /dashboard inexistente)
+        return Trilheiro::redirectAutenticado($user);
     }
 
 }
