@@ -173,7 +173,7 @@
                     ['20/08', 'QUI', 'Salkantay - Dia 3', ''],
                     ['21/08', 'SEX', 'Salkantay - Dia 4', ''],
                     ['22/08', 'SÁB', 'Salkantay - Dia 5 · Machu Picchu · Águas Calientes', 'Retorno para Cusco.'],
-                    ['23/08', 'DOM', 'Cusco - Montanhas Coloridas', ''],
+                    ['23/08', 'DOM', 'Cusco', ''],
                 ];
                 @endphp
                 @foreach($salkantay as $dia)
