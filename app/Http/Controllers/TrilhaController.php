@@ -673,12 +673,8 @@ class TrilhaController extends Controller
         })->values();
 
         $niveis = Nivel::orderBy('ordem_niv')->orderBy('id_nivel_niv')->get();
-        $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())
-            ->orderBy('nm_cidade_cde')
-            ->select('cd_cidade_cde', 'nm_cidade_cde')
-            ->get();
 
-        return view('trilhas.mapa', compact('marcadores', 'niveis', 'cidades'));
+        return view('trilhas.mapa', compact('marcadores', 'niveis'));
     }
 
     public function searchTrilhas(Request $request)

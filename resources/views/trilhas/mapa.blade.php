@@ -119,11 +119,9 @@
     }
 </style>
 
-@include('layouts/partes/header')
-
-<section class="pt-1 pb-5 mt-2">
-    <div class="container mt-n6 position-relative">
-        <div class="row mt-sm-0 mt-5">
+<section class="pb-5">
+    <div class="container position-relative">
+        <div class="row">
             <div class="col-12">
                 <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6 mb-4">
                     <div class="row align-items-center">
@@ -155,7 +153,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row px-3 px-md-4">
             <div class="col-12">
                 <div id="mapa-trilhas" class="shadow-sm"></div>
                 @if($marcadores->isEmpty())
