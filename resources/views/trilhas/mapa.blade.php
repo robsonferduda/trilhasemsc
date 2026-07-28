@@ -223,18 +223,26 @@
     function montarPopup(item) {
         var cor = item.cor || '#989898';
         var badgeTextColor = isLightColor(cor) ? '#1a1a1a' : '#ffffff';
+        var distanciaHtml = '';
+
+        if (item.distancia !== null && item.distancia !== undefined && item.distancia !== '') {
+            var km = Number(item.distancia);
+            var kmLabel = Number.isInteger(km) ? String(km) : km.toFixed(1).replace(/\.0$/, '');
+            distanciaHtml = '<p class="mapa-popup-meta">Distância: ' + escapeHtml(kmLabel) + ' km</p>';
+        }
 
         return '<div class="mapa-popup">'
-            + '<a href="' + escapeHtml(item.url) + '">'
+            + '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener noreferrer">'
             + '<img class="mapa-popup-img" src="' + escapeHtml(item.imagem) + '" alt="' + escapeHtml(item.imagemAlt || item.nome) + '" loading="lazy">'
             + '</a>'
             + '<div class="mapa-popup-body">'
             + '<p class="mapa-popup-title">' + escapeHtml(item.nome) + '</p>'
             + (item.cidade ? '<p class="mapa-popup-meta">' + escapeHtml(item.cidade) + '</p>' : '')
+            + distanciaHtml
             + (item.nivel
                 ? '<span class="mapa-popup-badge" style="background:' + escapeHtml(cor) + ';color:' + badgeTextColor + ';">' + escapeHtml(item.nivel) + '</span><br>'
                 : '')
-            + '<a href="' + escapeHtml(item.url) + '" class="mapa-popup-btn">Ver trilha</a>'
+            + '<a href="' + escapeHtml(item.url) + '" class="mapa-popup-btn" target="_blank" rel="noopener noreferrer">Ver trilha</a>'
             + '</div></div>';
     }
 

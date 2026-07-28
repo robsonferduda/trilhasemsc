@@ -612,7 +612,7 @@ class TrilhaController extends Controller
 
     public function mapa()
     {
-        $trilhas = Trilha::with(['nivel', 'cidade', 'foto'])
+        $trilhas = Trilha::with(['nivel', 'cidade', 'foto', 'detalhes'])
             ->where('fl_publicacao_tri', 'S')
             ->where(function ($query) {
                 $query->where(function ($q) {
@@ -627,6 +627,7 @@ class TrilhaController extends Controller
             $foto = $trilha->foto->where('id_tipo_foto_tfo', 5)->first();
             $img = !empty($foto->nm_path_fot) ? $foto->nm_path_fot : 'padrao.jpg';
             $alt = !empty($foto->dc_alt_fot) ? $foto->dc_alt_fot : 'Foto principal da trilha';
+            $distancia = optional($trilha->detalhes)->nu_distancia_trd;
 
             return [
                 'id' => $trilha->id_trilha_tri,
@@ -640,6 +641,7 @@ class TrilhaController extends Controller
                 'imagem' => asset('img/trilhas/detalhes-principal/' . $img),
                 'imagemAlt' => $alt,
                 'gpx' => $trilha->url_gpx,
+                'distancia' => $distancia !== null && $distancia !== '' ? (float) $distancia : null,
             ];
         })->values();
 
