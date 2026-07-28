@@ -20,6 +20,7 @@ use App\Estatistica;
 use App\Categoria;
 use App\Complemento;
 use App\TipoFoto;
+use App\Detalhe;
 use App\Jobs\EnviarConviteTrilhaLoteJob;
 use App\Mail\ConviteTrilhaGuia;
 use App\Mail\ConviteTrilhaTrilheiro;
@@ -81,6 +82,7 @@ class TrilhaController extends Controller
                           ->with(array('foto' => function ($q) {
                               $q->with('tipo');
                           }))
+                          ->with('detalhes')
                           ->first();
 
         $usuarios = User::where("id_role","ADMIN")->orderBy("name")->get();
@@ -185,7 +187,7 @@ class TrilhaController extends Controller
             return redirect('login');
         }
 
-        $dados = $request->except(['arquivo_gpx', 'tags', '_token']);
+        $dados = $request->except(['arquivo_gpx', 'tags', '_token', 'remover_gpx', 'nu_distancia_trd']);
         $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
         $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
 
@@ -196,6 +198,7 @@ class TrilhaController extends Controller
             }
 
             $this->salvarArquivoGpx($request, $trilha);
+            $this->salvarDetalhesTrilha($request, $trilha);
 
             return redirect('admin/listar-trilhas');
         } else {
@@ -251,7 +254,7 @@ class TrilhaController extends Controller
 
         $trilha = Trilha::where('id_trilha_tri', $request->id_trilha_tri)->first();
 
-        $dados = $request->except(['arquivo_gpx', 'tags', '_token', 'remover_gpx']);
+        $dados = $request->except(['arquivo_gpx', 'tags', '_token', 'remover_gpx', 'nu_distancia_trd']);
         $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
         $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
 
@@ -266,6 +269,7 @@ class TrilhaController extends Controller
             }
 
             $this->salvarArquivoGpx($request, $trilha->fresh());
+            $this->salvarDetalhesTrilha($request, $trilha->fresh());
 
             return redirect(URL::previous());
         } else {
@@ -391,6 +395,29 @@ class TrilhaController extends Controller
         }
 
         return ['lat' => $lat, 'lng' => $lng];
+    }
+
+    private function salvarDetalhesTrilha(Request $request, Trilha $trilha)
+    {
+        $distanciaRaw = $request->input('nu_distancia_trd');
+        $distancia = null;
+
+        if ($distanciaRaw !== null && trim((string) $distanciaRaw) !== '') {
+            $distanciaNormalizada = str_replace(',', '.', trim((string) $distanciaRaw));
+            if (is_numeric($distanciaNormalizada)) {
+                $distancia = (float) $distanciaNormalizada;
+            }
+        }
+
+        $detalhe = Detalhe::withTrashed()->firstOrNew(['id_trilha_tri' => $trilha->id_trilha_tri]);
+
+        if ($detalhe->trashed()) {
+            $detalhe->restore();
+        }
+
+        $detalhe->id_trilha_tri = $trilha->id_trilha_tri;
+        $detalhe->nu_distancia_trd = $distancia;
+        $detalhe->save();
     }
 
     public function enviarEmailTesteConvite(Request $request, $id)

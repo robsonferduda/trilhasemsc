@@ -12,8 +12,14 @@ class Detalhe extends Model
     protected $table = 'trilha_detalhes_trd';
     protected $primaryKey = 'cd_trilha_detalhes_trd';
     protected $dates = ['deleted_at'];
-    protected $fillable = [''];
+    protected $fillable = [
+        'id_trilha_tri',
+        'nu_distancia_trd',
+        'duracao_trd',
+        'ds_exposicao_trd',
+        'ds_esforco_trd',
+        'ds_orientacao_trd',
+    ];
 
     public $timestamps = true;
-
 }

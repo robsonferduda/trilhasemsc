@@ -130,6 +130,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="nu_distancia_trd">Distância (km)</label>
+                                    <input type="number" step="0.1" min="0" name="nu_distancia_trd" id="nu_distancia_trd" class="form-control" placeholder="Ex: 5.0" value="{{ optional($trilha->detalhes)->nu_distancia_trd }}">
+                                    <small class="form-text text-muted">Aparece no mapa e na página de detalhes da trilha.</small>
+                                </div>
+                                <div class="form-group">
                                     <label for="arquivo_gpx">Arquivo GPX (trajeto da trilha)</label>
                                     <input type="file" name="arquivo_gpx" id="arquivo_gpx" class="form-control" accept=".gpx,application/gpx+xml,application/xml,text/xml">
                                     <small class="form-text text-muted">
