@@ -169,12 +169,12 @@
             <div class="timeline">
                 @php
                 $salkantay = [
-                    ['18/08', 'TER', 'Salkantay - Dia 1 - Soraypampa à Laguna Humantay', 'Tracklog do trajeto', 'https://loc.wiki/t/182583542?wa=sc'],
-                    ['19/08', 'QUA', 'Salkantay - Dia 2 - De Soraypampa até Chaullay (Colcapampa)', 'Tracklog do trajeto', 'https://loc.wiki/t/182699595?wa=sc'],
-                    ['20/08', 'QUI', 'Salkantay - Dia 3', '', ''],
-                    ['21/08', 'SEX', 'Salkantay - Dia 4', '', ''],
-                    ['22/08', 'SÁB', 'Salkantay - Dia 5 · Machu Picchu · Águas Calientes', 'Retorno para Cusco.', ''],
-                    ['23/08', 'DOM', 'Cusco', '', ''],
+                    ['18/08', 'TER', 'Salkantay - Dia 1 - Soraypampa à Laguna Humantay', '', 'Tracklog do trajeto', 'https://loc.wiki/t/182583542?wa=sc'],
+                    ['19/08', 'QUA', 'Salkantay - Dia 2 - De Soraypampa até Chaullay (Colcapampa)', '', 'Tracklog do trajeto', 'https://loc.wiki/t/182699595?wa=sc'],
+                    ['20/08', 'QUI', 'Salkantay - Dia 3 - De Chaullay (Colcapampa) à Lucmabamba', '', 'Tracklog do trajeto', ''],
+                    ['21/08', 'SEX', 'Salkantay - Dia 4 - De Lucmabamba à Macchu Picchu Pueblo (Aguas Calientes)', '', 'Tracklog do trajeto', ''],
+                    ['22/08', 'SÁB', 'Salkantay - Dia 5 - Machu Picchu', 'Retorno para Cusco. Visita ao Machu Picchu.', '', ''],
+                    ['23/08', 'DOM', 'Cusco', '', '', ''],
                 ];
                 @endphp
                 @foreach($salkantay as $dia)
@@ -188,11 +188,12 @@
                             <strong>{{ $dia[2] }}</strong>
                             @if(!empty($dia[3]))
                                 <p class="text-white-50 small mb-0 mt-1">
-                                    @if(!empty($dia[4]))
-                                        <a href="{{ $dia[4] }}" target="_blank" rel="noopener noreferrer" class="text-info text-decoration-underline">{{ $dia[3] }}</a>
-                                    @else
-                                        {{ $dia[3] }}
-                                    @endif
+                                    {{ $dia[3] }}
+                                </p>
+                            @endif
+                            @if(!empty($dia[4]) && !empty($dia[5]))
+                                <p class="small mb-0 mt-1">
+                                    <a href="{{ $dia[5] }}" target="_blank" rel="noopener noreferrer" class="text-info text-decoration-underline">{{ $dia[4] }}</a>
                                 </p>
                             @endif
                         </div>
