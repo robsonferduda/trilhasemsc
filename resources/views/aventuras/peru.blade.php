@@ -171,8 +171,8 @@
                 $salkantay = [
                     ['18/08', 'TER', 'Salkantay - Dia 1 - Soraypampa à Laguna Humantay', '', 'Tracklog do trajeto', 'https://loc.wiki/t/182583542?wa=sc'],
                     ['19/08', 'QUA', 'Salkantay - Dia 2 - De Soraypampa até Chaullay (Colcapampa)', '', 'Tracklog do trajeto', 'https://loc.wiki/t/182699595?wa=sc'],
-                    ['20/08', 'QUI', 'Salkantay - Dia 3 - De Chaullay (Colcapampa) à Lucmabamba', '', 'Tracklog do trajeto', ''],
-                    ['21/08', 'SEX', 'Salkantay - Dia 4 - De Lucmabamba à Macchu Picchu Pueblo (Aguas Calientes)', '', 'Tracklog do trajeto', ''],
+                    ['20/08', 'QUI', 'Salkantay - Dia 3 - De Chaullay (Colcapampa) à Lucmabamba', '', 'Tracklog do trajeto', 'https://loc.wiki/t/182813083?wa=sc'],
+                    ['21/08', 'SEX', 'Salkantay - Dia 4 - De Lucmabamba à Macchu Picchu Pueblo (Aguas Calientes)', '', 'Tracklog do trajeto', 'https://loc.wiki/t/182950022?wa=sc'],
                     ['22/08', 'SÁB', 'Salkantay - Dia 5 - Machu Picchu', 'Retorno para Cusco. Visita ao Machu Picchu.', '', ''],
                     ['23/08', 'DOM', 'Cusco', '', '', ''],
                 ];
