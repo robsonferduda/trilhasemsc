@@ -36,26 +36,86 @@
         box-shadow: 0 0 0 1px rgba(0,0,0,.25);
         flex-shrink: 0;
     }
+    .mapa-pin {
+        background: transparent;
+        border: none;
+    }
+    .mapa-pin-inner {
+        width: 30px;
+        height: 42px;
+        position: relative;
+        filter: drop-shadow(0 3px 4px rgba(0,0,0,.35));
+        transition: transform .15s ease;
+    }
+    .mapa-pin-inner:hover,
+    .mapa-pin-inner.is-active {
+        transform: scale(1.12);
+    }
+    .mapa-pin-inner svg {
+        display: block;
+        width: 30px;
+        height: 42px;
+    }
+    .leaflet-popup-content-wrapper {
+        border-radius: 12px;
+        padding: 0;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    }
+    .leaflet-popup-content {
+        margin: 0;
+        min-width: 240px;
+        max-width: 280px;
+    }
+    .leaflet-popup-tip {
+        box-shadow: none;
+    }
+    .mapa-popup {
+        font-family: inherit;
+    }
+    .mapa-popup-img {
+        display: block;
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        background: #e9ecef;
+    }
+    .mapa-popup-body {
+        padding: 0.85rem 1rem 1rem;
+    }
     .mapa-popup-title {
         font-weight: 700;
-        margin: 0 0 0.35rem;
+        margin: 0 0 0.25rem;
         font-size: 0.95rem;
+        line-height: 1.3;
+        color: #344767;
     }
     .mapa-popup-meta {
-        margin: 0 0 0.5rem;
+        margin: 0 0 0.55rem;
         font-size: 0.8rem;
         color: #67748e;
     }
     .mapa-popup-badge {
         display: inline-block;
-        color: #fff;
         font-size: 0.7rem;
-        padding: 2px 8px;
+        font-weight: 600;
+        padding: 3px 9px;
         border-radius: 20px;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.65rem;
     }
-    .leaflet-popup-content-wrapper {
-        border-radius: 10px;
+    .mapa-popup-btn {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.4rem 0.85rem;
+        border-radius: 0.5rem;
+        color: #fff !important;
+        background: #e91e63;
+        text-decoration: none !important;
+    }
+    .mapa-popup-btn:hover {
+        opacity: .9;
+        color: #fff !important;
     }
 </style>
 
@@ -125,36 +185,91 @@
         return;
     }
 
+    function escapeHtml(text) {
+        if (!text) return '';
+        return String(text)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    function isLightColor(hex) {
+        var c = (hex || '').replace('#', '').toLowerCase();
+        if (c.length !== 6) return false;
+        var r = parseInt(c.substr(0, 2), 16);
+        var g = parseInt(c.substr(2, 2), 16);
+        var b = parseInt(c.substr(4, 2), 16);
+        return ((r * 299) + (g * 587) + (b * 114)) / 1000 > 160;
+    }
+
+    function criarIcone(cor) {
+        var svg = ''
+            + '<svg viewBox="0 0 30 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+            + '<path d="M15 0C6.7 0 0 6.7 0 15c0 11.2 15 27 15 27s15-15.8 15-27C30 6.7 23.3 0 15 0z" fill="' + cor + '" stroke="#ffffff" stroke-width="2"/>'
+            + '<circle cx="15" cy="15" r="5.5" fill="#ffffff"/>'
+            + '</svg>';
+
+        return L.divIcon({
+            className: 'mapa-pin',
+            html: '<div class="mapa-pin-inner">' + svg + '</div>',
+            iconSize: [30, 42],
+            iconAnchor: [15, 42],
+            popupAnchor: [0, -38]
+        });
+    }
+
     var grupo = L.featureGroup();
 
     marcadores.forEach(function (item) {
         var cor = item.cor || '#989898';
-        var marker = L.circleMarker([item.lat, item.lng], {
-            radius: 9,
-            color: '#ffffff',
-            weight: 2,
-            fillColor: cor,
-            fillOpacity: 0.95
+        var marker = L.marker([item.lat, item.lng], {
+            icon: criarIcone(cor),
+            title: item.nome || ''
         });
 
-        var badgeTextColor = cor.toLowerCase() === '#f9a825' || cor.toLowerCase() === '#ffe000' || cor.toLowerCase() === '#b9bb15'
-            ? '#1a1a1a'
-            : '#ffffff';
+        var badgeTextColor = isLightColor(cor) ? '#1a1a1a' : '#ffffff';
 
-        var html = ''
-            + '<p class="mapa-popup-title">' + item.nome + '</p>'
-            + (item.cidade ? '<p class="mapa-popup-meta">' + item.cidade + '</p>' : '')
+        var html = '<div class="mapa-popup">'
+            + '<a href="' + escapeHtml(item.url) + '">'
+            + '<img class="mapa-popup-img" src="' + escapeHtml(item.imagem) + '" alt="' + escapeHtml(item.imagemAlt || item.nome) + '" loading="lazy">'
+            + '</a>'
+            + '<div class="mapa-popup-body">'
+            + '<p class="mapa-popup-title">' + escapeHtml(item.nome) + '</p>'
+            + (item.cidade ? '<p class="mapa-popup-meta">' + escapeHtml(item.cidade) + '</p>' : '')
             + (item.nivel
-                ? '<span class="mapa-popup-badge" style="background:' + cor + ';color:' + badgeTextColor + ';">' + item.nivel + '</span><br>'
+                ? '<span class="mapa-popup-badge" style="background:' + escapeHtml(cor) + ';color:' + badgeTextColor + ';">' + escapeHtml(item.nivel) + '</span><br>'
                 : '')
-            + '<a href="' + item.url + '" class="btn btn-sm bg-gradient-primary mb-0 mt-1">Ver trilha</a>';
+            + '<a href="' + escapeHtml(item.url) + '" class="mapa-popup-btn">Ver trilha</a>'
+            + '</div></div>';
 
-        marker.bindPopup(html);
+        marker.bindPopup(html, {
+            maxWidth: 280,
+            minWidth: 240,
+            className: 'mapa-popup-leaflet'
+        });
+
+        marker.on('popupopen', function () {
+            var el = marker.getElement();
+            if (el) {
+                var inner = el.querySelector('.mapa-pin-inner');
+                if (inner) inner.classList.add('is-active');
+            }
+        });
+        marker.on('popupclose', function () {
+            var el = marker.getElement();
+            if (el) {
+                var inner = el.querySelector('.mapa-pin-inner');
+                if (inner) inner.classList.remove('is-active');
+            }
+        });
+
         grupo.addLayer(marker);
     });
 
     grupo.addTo(mapa);
-    mapa.fitBounds(grupo.getBounds().pad(0.2));
+    mapa.fitBounds(grupo.getBounds().pad(0.25));
 })();
 </script>
 @endsection

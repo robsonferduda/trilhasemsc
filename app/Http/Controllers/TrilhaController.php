@@ -502,7 +502,7 @@ class TrilhaController extends Controller
 
     public function mapa()
     {
-        $trilhas = Trilha::with(['nivel', 'cidade'])
+        $trilhas = Trilha::with(['nivel', 'cidade', 'foto'])
             ->where('fl_publicacao_tri', 'S')
             ->whereNotNull('nu_latitude_tri')
             ->whereNotNull('nu_longitude_tri')
@@ -510,6 +510,10 @@ class TrilhaController extends Controller
             ->get();
 
         $marcadores = $trilhas->map(function ($trilha) {
+            $foto = $trilha->foto->where('id_tipo_foto_tfo', 5)->first();
+            $img = !empty($foto->nm_path_fot) ? $foto->nm_path_fot : 'padrao.jpg';
+            $alt = !empty($foto->dc_alt_fot) ? $foto->dc_alt_fot : 'Foto principal da trilha';
+
             return [
                 'id' => $trilha->id_trilha_tri,
                 'nome' => $trilha->nm_trilha_tri,
@@ -519,6 +523,8 @@ class TrilhaController extends Controller
                 'cidade' => optional($trilha->cidade)->nm_cidade_cde,
                 'nivel' => optional($trilha->nivel)->dc_nivel_niv,
                 'cor' => optional($trilha->nivel)->dc_color_nivel_niv ?: '#989898',
+                'imagem' => asset('img/trilhas/detalhes-principal/' . $img),
+                'imagemAlt' => $alt,
             ];
         })->values();
 
