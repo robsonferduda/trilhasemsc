@@ -130,7 +130,7 @@
                         <div class="col-lg-7">
                             <h3 class="mb-1">Mapa de Trilhas</h3>
                             <p class="mb-0 text-sm text-secondary">
-                                Pins coloridos por nível de dificuldade.
+                                Pins e trajetos (GPX) coloridos por nível de dificuldade.
                                 @if($marcadores->count() === 1)
                                     {{ $marcadores->count() }} trilha no mapa.
                                 @else
@@ -220,18 +220,11 @@
         });
     }
 
-    var grupo = L.featureGroup();
-
-    marcadores.forEach(function (item) {
+    function montarPopup(item) {
         var cor = item.cor || '#989898';
-        var marker = L.marker([item.lat, item.lng], {
-            icon: criarIcone(cor),
-            title: item.nome || ''
-        });
-
         var badgeTextColor = isLightColor(cor) ? '#1a1a1a' : '#ffffff';
 
-        var html = '<div class="mapa-popup">'
+        return '<div class="mapa-popup">'
             + '<a href="' + escapeHtml(item.url) + '">'
             + '<img class="mapa-popup-img" src="' + escapeHtml(item.imagem) + '" alt="' + escapeHtml(item.imagemAlt || item.nome) + '" loading="lazy">'
             + '</a>'
@@ -243,8 +236,45 @@
                 : '')
             + '<a href="' + escapeHtml(item.url) + '" class="mapa-popup-btn">Ver trilha</a>'
             + '</div></div>';
+    }
 
-        marker.bindPopup(html, {
+    function parseGpxPontos(xmlText) {
+        var doc = new DOMParser().parseFromString(xmlText, 'application/xml');
+        if (doc.querySelector('parsererror')) {
+            return [];
+        }
+
+        var nodes = doc.getElementsByTagName('trkpt');
+        if (!nodes.length) {
+            nodes = doc.getElementsByTagName('rtept');
+        }
+        if (!nodes.length) {
+            nodes = doc.getElementsByTagName('wpt');
+        }
+
+        var pontos = [];
+        for (var i = 0; i < nodes.length; i++) {
+            var lat = parseFloat(nodes[i].getAttribute('lat'));
+            var lon = parseFloat(nodes[i].getAttribute('lon'));
+            if (!isNaN(lat) && !isNaN(lon)) {
+                pontos.push([lat, lon]);
+            }
+        }
+        return pontos;
+    }
+
+    function adicionarPin(item, grupo) {
+        if (item.lat === null || item.lng === null) {
+            return null;
+        }
+
+        var cor = item.cor || '#989898';
+        var marker = L.marker([item.lat, item.lng], {
+            icon: criarIcone(cor),
+            title: item.nome || ''
+        });
+
+        marker.bindPopup(montarPopup(item), {
             maxWidth: 280,
             minWidth: 240,
             className: 'mapa-popup-leaflet'
@@ -266,10 +296,69 @@
         });
 
         grupo.addLayer(marker);
+        return marker;
+    }
+
+    var grupo = L.featureGroup().addTo(mapa);
+    var carregamentos = [];
+
+    marcadores.forEach(function (item) {
+        adicionarPin(item, grupo);
+
+        if (!item.gpx) {
+            return;
+        }
+
+        carregamentos.push(
+            fetch(item.gpx)
+                .then(function (res) {
+                    if (!res.ok) {
+                        throw new Error('Falha ao carregar GPX');
+                    }
+                    return res.text();
+                })
+                .then(function (xmlText) {
+                    var pontos = parseGpxPontos(xmlText);
+                    if (pontos.length < 2) {
+                        return;
+                    }
+
+                    var linha = L.polyline(pontos, {
+                        color: item.cor || '#989898',
+                        weight: 5,
+                        opacity: 0.9,
+                        lineJoin: 'round',
+                        lineCap: 'round'
+                    });
+
+                    linha.bindPopup(montarPopup(item), {
+                        maxWidth: 280,
+                        minWidth: 240,
+                        className: 'mapa-popup-leaflet'
+                    });
+
+                    grupo.addLayer(linha);
+
+                    if ((item.lat === null || item.lng === null) && pontos.length) {
+                        item.lat = pontos[0][0];
+                        item.lng = pontos[0][1];
+                        adicionarPin(item, grupo);
+                    }
+                })
+                .catch(function () {
+                    // GPX inválido/indisponível: mantém apenas o pin
+                })
+        );
     });
 
-    grupo.addTo(mapa);
-    mapa.fitBounds(grupo.getBounds().pad(0.25));
+    function ajustarMapa() {
+        if (grupo.getLayers().length) {
+            mapa.fitBounds(grupo.getBounds().pad(0.25));
+        }
+    }
+
+    ajustarMapa();
+    Promise.all(carregamentos).then(ajustarMapa);
 })();
 </script>
 @endsection

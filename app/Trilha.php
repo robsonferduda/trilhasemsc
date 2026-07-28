@@ -24,8 +24,18 @@ class Trilha extends Model
                             'url_geolocalizacao_tri',
                             'nu_latitude_tri',
                             'nu_longitude_tri',
+                            'nm_arquivo_gpx_tri',
                             'fl_publicacao_tri'
                           ];
+
+    public function getUrlGpxAttribute()
+    {
+        if (empty($this->nm_arquivo_gpx_tri)) {
+            return null;
+        }
+
+        return asset('gpx/trilhas/' . $this->nm_arquivo_gpx_tri);
+    }
 
     public $timestamps = true;
 

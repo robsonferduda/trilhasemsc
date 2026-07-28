@@ -185,7 +185,7 @@ class TrilhaController extends Controller
             return redirect('login');
         }
 
-        $dados = $request->all();
+        $dados = $request->except(['arquivo_gpx', 'tags', '_token']);
         $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
         $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
 
@@ -194,6 +194,8 @@ class TrilhaController extends Controller
             if (!empty($request->tags)) {
                 $trilha->tags()->sync($request->tags);
             }
+
+            $this->salvarArquivoGpx($request, $trilha);
 
             return redirect('admin/listar-trilhas');
         } else {
@@ -249,15 +251,22 @@ class TrilhaController extends Controller
 
         $trilha = Trilha::where('id_trilha_tri', $request->id_trilha_tri)->first();
 
-        $dados = $request->all();
+        $dados = $request->except(['arquivo_gpx', 'tags', '_token', 'remover_gpx']);
         $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
         $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
+
+        if ($request->filled('remover_gpx') && $request->input('remover_gpx') == '1') {
+            $this->removerArquivoGpx($trilha);
+            $dados['nm_arquivo_gpx_tri'] = null;
+        }
 
         if ($trilha->update($dados)) {
             if (!empty($request->tags)) {
                 $trilha->tags()->sync($request->tags);
             }
-            
+
+            $this->salvarArquivoGpx($request, $trilha->fresh());
+
             return redirect(URL::previous());
         } else {
             dd("Erro");
@@ -281,6 +290,107 @@ class TrilhaController extends Controller
         $valor = str_replace(',', '.', $valor);
 
         return is_numeric($valor) ? $valor : null;
+    }
+
+    private function salvarArquivoGpx(Request $request, Trilha $trilha)
+    {
+        if (!$request->hasFile('arquivo_gpx')) {
+            return;
+        }
+
+        $arquivo = $request->file('arquivo_gpx');
+        $extensao = strtolower($arquivo->getClientOriginalExtension());
+
+        if ($extensao !== 'gpx') {
+            Flash::error('O arquivo de trajeto deve estar no formato .gpx');
+            return;
+        }
+
+        if ($arquivo->getSize() > 10 * 1024 * 1024) {
+            Flash::error('O arquivo GPX deve ter no máximo 10 MB.');
+            return;
+        }
+
+        $dir = public_path('gpx/trilhas');
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $nomeBase = pathinfo($arquivo->getClientOriginalName(), PATHINFO_FILENAME);
+        $nomeBase = preg_replace('/[^a-zA-Z0-9\-_]+/', '-', $nomeBase);
+        $nomeBase = trim($nomeBase, '-') ?: 'trilha';
+        $fileName = $trilha->id_trilha_tri . '-' . strtolower($nomeBase) . '.gpx';
+
+        if (!empty($trilha->nm_arquivo_gpx_tri) && $trilha->nm_arquivo_gpx_tri !== $fileName) {
+            $this->removerArquivoGpx($trilha);
+        }
+
+        $arquivo->move($dir, $fileName);
+
+        $caminho = $dir . DIRECTORY_SEPARATOR . $fileName;
+        $ponto = $this->extrairPrimeiroPontoGpx($caminho);
+
+        $update = ['nm_arquivo_gpx_tri' => $fileName];
+        if ($ponto) {
+            if (empty($trilha->nu_latitude_tri)) {
+                $update['nu_latitude_tri'] = $ponto['lat'];
+            }
+            if (empty($trilha->nu_longitude_tri)) {
+                $update['nu_longitude_tri'] = $ponto['lng'];
+            }
+        }
+
+        $trilha->update($update);
+        Flash::success('Arquivo GPX salvo com sucesso.');
+    }
+
+    private function removerArquivoGpx(Trilha $trilha)
+    {
+        if (empty($trilha->nm_arquivo_gpx_tri)) {
+            return;
+        }
+
+        $caminho = public_path('gpx/trilhas/' . $trilha->nm_arquivo_gpx_tri);
+        if (is_file($caminho)) {
+            @unlink($caminho);
+        }
+    }
+
+    private function extrairPrimeiroPontoGpx($caminho)
+    {
+        if (!is_file($caminho)) {
+            return null;
+        }
+
+        $xml = @simplexml_load_file($caminho);
+        if ($xml === false) {
+            return null;
+        }
+
+        $xml->registerXPathNamespace('g', 'http://www.topografix.com/GPX/1/1');
+
+        $pontos = $xml->xpath('//g:trkpt');
+        if (empty($pontos)) {
+            $pontos = $xml->xpath('//trkpt');
+        }
+        if (empty($pontos)) {
+            $pontos = $xml->xpath('//g:rtept') ?: $xml->xpath('//rtept');
+        }
+        if (empty($pontos)) {
+            $pontos = $xml->xpath('//g:wpt') ?: $xml->xpath('//wpt');
+        }
+        if (empty($pontos)) {
+            return null;
+        }
+
+        $lat = (string) $pontos[0]['lat'];
+        $lng = (string) $pontos[0]['lon'];
+
+        if (!is_numeric($lat) || !is_numeric($lng)) {
+            return null;
+        }
+
+        return ['lat' => $lat, 'lng' => $lng];
     }
 
     public function enviarEmailTesteConvite(Request $request, $id)
@@ -504,8 +614,12 @@ class TrilhaController extends Controller
     {
         $trilhas = Trilha::with(['nivel', 'cidade', 'foto'])
             ->where('fl_publicacao_tri', 'S')
-            ->whereNotNull('nu_latitude_tri')
-            ->whereNotNull('nu_longitude_tri')
+            ->where(function ($query) {
+                $query->where(function ($q) {
+                    $q->whereNotNull('nu_latitude_tri')
+                      ->whereNotNull('nu_longitude_tri');
+                })->orWhereNotNull('nm_arquivo_gpx_tri');
+            })
             ->orderBy('nm_trilha_tri')
             ->get();
 
@@ -517,14 +631,15 @@ class TrilhaController extends Controller
             return [
                 'id' => $trilha->id_trilha_tri,
                 'nome' => $trilha->nm_trilha_tri,
-                'lat' => (float) $trilha->nu_latitude_tri,
-                'lng' => (float) $trilha->nu_longitude_tri,
+                'lat' => $trilha->nu_latitude_tri !== null ? (float) $trilha->nu_latitude_tri : null,
+                'lng' => $trilha->nu_longitude_tri !== null ? (float) $trilha->nu_longitude_tri : null,
                 'url' => url($trilha->ds_url_tri),
                 'cidade' => optional($trilha->cidade)->nm_cidade_cde,
                 'nivel' => optional($trilha->nivel)->dc_nivel_niv,
                 'cor' => optional($trilha->nivel)->dc_color_nivel_niv ?: '#989898',
                 'imagem' => asset('img/trilhas/detalhes-principal/' . $img),
                 'imagemAlt' => $alt,
+                'gpx' => $trilha->url_gpx,
             ];
         })->values();
 

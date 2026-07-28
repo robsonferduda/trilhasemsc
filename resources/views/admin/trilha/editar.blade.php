@@ -28,7 +28,7 @@
 	        </div>
 	        <div class="body">
                 @include('layouts.mensagens')
-                    <form action="{{ url('admin/update-trilha') }}" method="post">
+                    <form action="{{ url('admin/update-trilha') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -128,6 +128,23 @@
                                             <input type="text" name="nu_longitude_tri" id="nu_longitude_tri" class="form-control" placeholder="-48.496013" value="{{ $trilha->nu_longitude_tri }}">
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="arquivo_gpx">Arquivo GPX (trajeto da trilha)</label>
+                                    <input type="file" name="arquivo_gpx" id="arquivo_gpx" class="form-control" accept=".gpx,application/gpx+xml,application/xml,text/xml">
+                                    <small class="form-text text-muted">
+                                        Aceita .gpx (máx. 10 MB). Se latitude/longitude estiverem vazias, o início do track preenche automaticamente.
+                                    </small>
+                                    @if(!empty($trilha->nm_arquivo_gpx_tri))
+                                        <div class="mt-2">
+                                            <a href="{{ asset('gpx/trilhas/'.$trilha->nm_arquivo_gpx_tri) }}" target="_blank" class="btn btn-sm btn-info">
+                                                <i class="fa fa-download"></i> {{ $trilha->nm_arquivo_gpx_tri }}
+                                            </a>
+                                            <label class="ml-3" style="font-weight: normal;">
+                                                <input type="checkbox" name="remover_gpx" value="1"> Remover GPX atual
+                                            </label>
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="url_geolocalizacao_tri">Geolocalização (Wikiloc, Strava, Relive)</label>

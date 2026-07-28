@@ -27,7 +27,7 @@
 	        </div>
 	        <div class="body">
                 @include('layouts.mensagens')
-                    <form action="{{ url('admin/create-trilha') }}" method="post">
+                    <form action="{{ url('admin/create-trilha') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -126,6 +126,13 @@
                                             <input type="text" name="nu_longitude_tri" id="nu_longitude_tri" class="form-control" placeholder="-48.496013" value="{{ old('nu_longitude_tri') }}">
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="arquivo_gpx">Arquivo GPX (trajeto da trilha)</label>
+                                    <input type="file" name="arquivo_gpx" id="arquivo_gpx" class="form-control" accept=".gpx,application/gpx+xml,application/xml,text/xml">
+                                    <small class="form-text text-muted">
+                                        Aceita .gpx (máx. 10 MB). Se latitude/longitude estiverem vazias, o início do track preenche automaticamente.
+                                    </small>
                                 </div>
                                 <div class="form-group">
                                     <label for="url_geolocalizacao_tri">Geolocalização (Wikiloc, Strava, Relive)</label>

@@ -61,6 +61,12 @@ return [
             'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],
+        'gpx' => [
+            'driver' => 'local',
+            'root' => public_path('gpx/trilhas'),
+            'url' => env('APP_URL').'/gpx/trilhas',
+            'visibility' => 'public',
+        ],
         'eventos' => [
             'driver' => 'local',
             'root' => public_path('img/eventos'),
