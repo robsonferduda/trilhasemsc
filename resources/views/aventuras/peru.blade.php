@@ -142,7 +142,7 @@
                     ['14/08', 'SEX', 'Saída de Florianópolis', '23:15 - Partida de Florianópolis para Cusco'],
                     ['15/08', 'SÁB', 'Chegada a Cusco', '12:05 - Chegada a Cusco. Check-in no hotel.'],
                     ['16/08', 'DOM', 'Cusco - City Tour', 'Caminhada em Cusco para aclimatação leve. Visitar principais pontos turísticos.'],
-                    ['17/08', 'SEG', 'Cusco - Aclimatação', ''],
+                    ['17/08', 'SEG', 'Cusco - Montanha Colorida', 'Passeio para a Montanha Colorida (Vinicunca). Trajeto de aprox. 3h de carro até o local da trilha, sendo cerca de 3 km de subida (6 km ida e volta). O trajeto leva de 1h30 a 2 horas e parte de uma elevação de 4.600 metros até chegar ao topo a 5.200 metros.'],
                 ];
                 @endphp
                 @foreach($cusco as $dia)
@@ -174,7 +174,7 @@
                     ['20/08', 'QUI', 'Salkantay - Dia 3', ''],
                     ['21/08', 'SEX', 'Salkantay - Dia 4', ''],
                     ['22/08', 'SÁB', 'Salkantay - Dia 5 · Machu Picchu · Águas Calientes', 'Retorno para Cusco.'],
-                    ['23/08', 'DOM', 'Cusco - Montanhas Coloridas', ''],
+                    ['23/08', 'DOM', 'Cusco', ''],
                 ];
                 @endphp
                 @foreach($salkantay as $dia)
