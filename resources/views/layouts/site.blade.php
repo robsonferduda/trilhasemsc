@@ -249,6 +249,11 @@
                      </a>
                  </li>
                   <li class="nav-item dropdown dropdown-hover mx-2">
+                     <a href="{{ url('mapa') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
+                        Mapa
+                     </a>
+                 </li>
+                  <li class="nav-item dropdown dropdown-hover mx-2">
                     <a href="{{ url('campings') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
                     Camping
                     </a>

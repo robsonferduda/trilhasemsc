@@ -500,6 +500,37 @@ class TrilhaController extends Controller
     }
 
 
+    public function mapa()
+    {
+        $trilhas = Trilha::with(['nivel', 'cidade'])
+            ->where('fl_publicacao_tri', 'S')
+            ->whereNotNull('nu_latitude_tri')
+            ->whereNotNull('nu_longitude_tri')
+            ->orderBy('nm_trilha_tri')
+            ->get();
+
+        $marcadores = $trilhas->map(function ($trilha) {
+            return [
+                'id' => $trilha->id_trilha_tri,
+                'nome' => $trilha->nm_trilha_tri,
+                'lat' => (float) $trilha->nu_latitude_tri,
+                'lng' => (float) $trilha->nu_longitude_tri,
+                'url' => url($trilha->ds_url_tri),
+                'cidade' => optional($trilha->cidade)->nm_cidade_cde,
+                'nivel' => optional($trilha->nivel)->dc_nivel_niv,
+                'cor' => optional($trilha->nivel)->dc_color_nivel_niv ?: '#989898',
+            ];
+        })->values();
+
+        $niveis = Nivel::orderBy('ordem_niv')->orderBy('id_nivel_niv')->get();
+        $cidades = Cidade::whereIn('cd_cidade_cde', Trilha::select('cd_cidade_cde')->get())
+            ->orderBy('nm_cidade_cde')
+            ->select('cd_cidade_cde', 'nm_cidade_cde')
+            ->get();
+
+        return view('trilhas.mapa', compact('marcadores', 'niveis', 'cidades'));
+    }
+
     public function searchTrilhas(Request $request)
     {
         return $this->search($request->cidade, $request->nivel, $request->termo);

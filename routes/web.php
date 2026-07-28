@@ -47,6 +47,7 @@ Route::post('comentario/novo', 'ComentarioController@store');
 
 Route::post('estado/{estado}/cidades', 'HomeController@getCidades');
 
+Route::get('mapa', 'TrilhaController@mapa')->name('mapa');
 Route::get('trilhas/brasil', 'TrilhaController@brasil');
 Route::get('trilhas/regioes', 'TrilhaController@regioes');
 Route::get('trilha/add-tags', 'TrilhaController@addTags');
