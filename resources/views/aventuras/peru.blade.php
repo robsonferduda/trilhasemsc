@@ -169,7 +169,7 @@
             <div class="timeline">
                 @php
                 $salkantay = [
-                    ['18/08', 'TER', 'Salkantay - Dia 1', ''],
+                    ['18/08', 'TER', 'Salkantay - Dia 1 - Soraypampa à Laguna Humantay', 'Tracklog - https://loc.wiki/t/182583542?wa=sc'],
                     ['19/08', 'QUA', 'Salkantay - Dia 2', ''],
                     ['20/08', 'QUI', 'Salkantay - Dia 3', ''],
                     ['21/08', 'SEX', 'Salkantay - Dia 4', ''],
