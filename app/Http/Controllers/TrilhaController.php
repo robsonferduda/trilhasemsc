@@ -185,7 +185,11 @@ class TrilhaController extends Controller
             return redirect('login');
         }
 
-        $trilha = Trilha::create($request->all());
+        $dados = $request->all();
+        $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
+        $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
+
+        $trilha = Trilha::create($dados);
         if ($trilha) {
             if (!empty($request->tags)) {
                 $trilha->tags()->sync($request->tags);
@@ -245,7 +249,11 @@ class TrilhaController extends Controller
 
         $trilha = Trilha::where('id_trilha_tri', $request->id_trilha_tri)->first();
 
-        if ($trilha->update($request->all())) {
+        $dados = $request->all();
+        $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
+        $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
+
+        if ($trilha->update($dados)) {
             if (!empty($request->tags)) {
                 $trilha->tags()->sync($request->tags);
             }
@@ -254,6 +262,25 @@ class TrilhaController extends Controller
         } else {
             dd("Erro");
         }
+    }
+
+    /**
+     * Aceita "-27.757661" ou vazio; normaliza vírgula decimal e retorna null se em branco.
+     */
+    private function normalizeCoordenada($valor)
+    {
+        if ($valor === null) {
+            return null;
+        }
+
+        $valor = trim((string) $valor);
+        if ($valor === '') {
+            return null;
+        }
+
+        $valor = str_replace(',', '.', $valor);
+
+        return is_numeric($valor) ? $valor : null;
     }
 
     public function enviarEmailTesteConvite(Request $request, $id)

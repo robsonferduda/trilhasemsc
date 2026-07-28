@@ -22,6 +22,8 @@ class Trilha extends Model
                             'id_complemento_nivel_con',
                             'id_user_usu',
                             'url_geolocalizacao_tri',
+                            'nu_latitude_tri',
+                            'nu_longitude_tri',
                             'fl_publicacao_tri'
                           ];
 

@@ -113,11 +113,23 @@
                                         @endforeach
                                     </select> 
                                 </div>                               
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nu_latitude_tri">Latitude (início)</label>
+                                            <input type="text" name="nu_latitude_tri" id="nu_latitude_tri" class="form-control" placeholder="-27.757661" value="{{ old('nu_latitude_tri') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nu_longitude_tri">Longitude (início)</label>
+                                            <input type="text" name="nu_longitude_tri" id="nu_longitude_tri" class="form-control" placeholder="-48.496013" value="{{ old('nu_longitude_tri') }}">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
-                                    <label for="id_nivel_niv">Geolocalização (Wikiloc, Strava, Relive)</label>
-                                    <textarea name="url_geolocalizacao_tri" id="url_geolocalizacao_tri" rows="6" style="width: 100%;">
-                                    
-                                    </textarea>  
+                                    <label for="url_geolocalizacao_tri">Geolocalização (Wikiloc, Strava, Relive)</label>
+                                    <textarea name="url_geolocalizacao_tri" id="url_geolocalizacao_tri" rows="6" style="width: 100%;">{{ old('url_geolocalizacao_tri') }}</textarea>  
                                 </div>
                                 <div class="form-group">
                                     <label for="ds_trilha_tri">Descrição</label>
