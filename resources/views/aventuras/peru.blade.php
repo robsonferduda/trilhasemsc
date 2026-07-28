@@ -139,7 +139,8 @@
             <div class="timeline">
                 @php
                 $cusco = [
-                    ['15/08', 'SÁB', 'Chegada a Cusco', ''],
+                    ['14/08', 'SEX', 'Saída de Florianópolis', '23:15 - Partida de Florianópolis para Cusco'],
+                    ['15/08', 'SÁB', 'Chegada a Cusco', '12:05 - Chegada a Cusco. Check-in no hotel.'],
                     ['16/08', 'DOM', 'Cusco - City Tour', 'Caminhada em Cusco para aclimatação leve. Visitar principais pontos turísticos.'],
                     ['17/08', 'SEG', 'Cusco - Aclimatação', ''],
                 ];
