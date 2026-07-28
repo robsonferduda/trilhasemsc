@@ -289,7 +289,7 @@
 <script src="{{ asset('js/core/bootstrap.min.js') }}" type="text/javascript"></script>
 <script>
     (function () {
-        var target = new Date('2026-08-15T00:00:00');
+        var target = new Date('2026-08-14T23:15:00');
 
         function update() {
             var now = new Date();
