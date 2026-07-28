@@ -173,7 +173,7 @@
                     ['19/08', 'QUA', 'Salkantay - Dia 2 - De Soraypampa até Chaullay (Colcapampa)', '20km, sendo o dia mais difícil, onde chegamos aos 4.600 metros de altitude. São 6km de subida e 14km de descida, rumo a Chaullay. Hospedagem em Hostel Samana Wasi Chaullay.', 'Tracklog do trajeto', 'https://loc.wiki/t/182699595?wa=sc'],
                     ['20/08', 'QUI', 'Salkantay - Dia 3 - De Chaullay (Colcapampa) à Lucmabamba', '20km, sendo praticamente descidas, com perda de 800 metros de altitude. Hospedagem em Lucmabamba Lodge.', 'Tracklog do trajeto', 'https://loc.wiki/t/182813083?wa=sc'],
                     ['21/08', 'SEX', 'Salkantay - Dia 4 - De Lucmabamba à Macchu Picchu Pueblo (Aguas Calientes)', '23km, sendo 6km de subida e 17km de descida, pasando por pontos como a Hidroelétrica e chegando em Aguas Calientes. Hospedagem em Samananchis Machupicchu.', 'Tracklog do trajeto', 'https://loc.wiki/t/182950022?wa=sc'],
-                    ['22/08', 'SÁB', 'Salkantay - Dia 5 - Machu Picchu', 'Retorno para Cusco. Visita ao Machu Picchu.', '', ''],
+                    ['22/08', 'SÁB', 'Salkantay - Dia 5 - Machu Picchu', 'Visita ao Machu Picchu logo pela manhã. Depois retornamos para Cusco.', '', ''],
                     ['23/08', 'DOM', 'Cusco', '', '', ''],
                 ];
                 @endphp
