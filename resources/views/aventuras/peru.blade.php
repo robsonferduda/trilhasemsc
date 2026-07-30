@@ -266,7 +266,7 @@
                             @endif
                             @if(!empty($dia[4]) && !empty($dia[5]))
                                 <p class="small mb-0 mt-1">
-                                    <a href="{{ $dia[5] }}" target="_blank" rel="noopener noreferrer" class="text-info text-decoration-underline">{{ $dia[4] }}</a>
+                                    <a href="{{ $dia[5] }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-info btn-sm rounded-pill px-3 py-1 trail-link-btn">{{ $dia[4] }}</a>
                                 </p>
                             @endif
                         </div>
@@ -316,6 +316,7 @@
             <p class="text-white-50 small mb-3">Baseado no itinerário da agência Caleb Expeditions:
                 <a href="https://calebexpeditions.com/huayhuash-trek-8-days-2nd-option/" target="_blank" rel="noopener noreferrer" class="text-danger text-decoration-underline">ver roteiro original</a>
             </p>
+            <a href="https://calebexpeditions.com/huayhuash-trek-8-days-2nd-option/" target="_blank" rel="noopener noreferrer" class="btn btn-outline-danger btn-sm rounded-pill px-3 mb-3 trail-link-btn">Link da trilha</a>
             <div class="row g-3">
                 @php
                 $huayhuash = [
@@ -601,6 +602,11 @@
         font-size: .8rem;
         color: rgba(255,255,255,.78);
         margin-top: 2px;
+    }
+    .trail-link-btn {
+        border-width: 1.5px;
+        font-weight: 700;
+        letter-spacing: .02em;
     }
     .timeline {
         border-left: none !important;
