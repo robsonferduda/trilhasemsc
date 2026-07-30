@@ -101,7 +101,9 @@
         <div class="card" style="border: 1px solid #e9ecef; box-shadow: none;">
             <div class="header">
                 <h2><i class="fa fa-envelope"></i> Convites por email</h2>
-                <small class="text-muted">Envie um teste para o admin antes do disparo em massa.</small>
+                <small class="text-muted">
+                    Envie um teste antes do disparo em massa. O envio ocorre em pequenos lotes pelo navegador, sem depender de queue worker.
+                </small>
             </div>
             <div class="body">
                 <div class="row">
@@ -118,12 +120,14 @@
                                 <i class="fa fa-flask"></i> Enviar teste
                             </button>
                         </form>
-                        <form action="{{ route('admin.trilha.email-convite-trilheiros', $trilha->id_trilha_tri) }}" method="post" style="display:inline-block;" onsubmit="return confirm('Enviar convite desta trilha para {{ $totalTrilheirosNewsletter ?? 0 }} trilheiro(s)?');">
-                            @csrf
-                            <button type="submit" class="btn btn-success btn-sm" {{ empty($totalTrilheirosNewsletter) ? 'disabled' : '' }}>
+                        <button type="button"
+                                class="btn btn-success btn-sm js-enviar-convites"
+                                data-url="{{ route('admin.trilha.email-convite-trilheiros', $trilha->id_trilha_tri) }}"
+                                data-total="{{ $totalTrilheirosNewsletter ?? 0 }}"
+                                data-publico="trilheiro(s)"
+                                {{ empty($totalTrilheirosNewsletter) ? 'disabled' : '' }}>
                                 <i class="fa fa-paper-plane"></i> Enviar para trilheiros
-                            </button>
-                        </form>
+                        </button>
                     </div>
                     <div class="col-md-6" style="margin-bottom: 20px;">
                         <h5 class="text-info">Guias e Condutores</h5>
@@ -138,17 +142,29 @@
                                 <i class="fa fa-flask"></i> Enviar teste
                             </button>
                         </form>
-                        <form action="{{ route('admin.trilha.email-convite-guias', $trilha->id_trilha_tri) }}" method="post" style="display:inline-block;" onsubmit="return confirm('Enviar convite desta trilha para {{ $totalGuiasAtivos ?? 0 }} guia(s)?');">
-                            @csrf
-                            <button type="submit" class="btn btn-info btn-sm" {{ empty($totalGuiasAtivos) ? 'disabled' : '' }}>
+                        <button type="button"
+                                class="btn btn-info btn-sm js-enviar-convites"
+                                data-url="{{ route('admin.trilha.email-convite-guias', $trilha->id_trilha_tri) }}"
+                                data-total="{{ $totalGuiasAtivos ?? 0 }}"
+                                data-publico="guia(s)"
+                                {{ empty($totalGuiasAtivos) ? 'disabled' : '' }}>
                                 <i class="fa fa-paper-plane"></i> Enviar para guias
-                            </button>
-                        </form>
+                        </button>
                     </div>
                 </div>
                 <p class="small text-muted mb-0">
                     O email de teste é enviado para <strong>{{ Auth::user()->email }}</strong>.
                 </p>
+                <div id="progresso-envio-convites" class="mt-3" style="display:none;">
+                    <div class="progress" style="height: 22px;">
+                        <div id="barra-envio-convites"
+                             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                             role="progressbar"
+                             style="width:0%;">0%</div>
+                    </div>
+                    <p id="status-envio-convites" class="small mt-2 mb-0"></p>
+                    <div id="erro-envio-convites" class="alert alert-danger mt-2 mb-0" style="display:none;"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -230,6 +246,92 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
     $(function () {
+        var envioAtivo = null;
+        var $botoesEnvio = $('.js-enviar-convites');
+        var $progresso = $('#progresso-envio-convites');
+        var $barra = $('#barra-envio-convites');
+        var $status = $('#status-envio-convites');
+        var $erro = $('#erro-envio-convites');
+
+        function atualizarProgresso(data) {
+            var total = parseInt(data.total || 0, 10);
+            var processados = parseInt(data.processados || 0, 10);
+            var percentual = total > 0 ? Math.min(100, Math.round((processados / total) * 100)) : 100;
+
+            $barra.css('width', percentual + '%').text(percentual + '%');
+            $status.text(
+                processados + ' de ' + total + ' processado(s) — ' +
+                data.enviados + ' enviado(s), ' + data.falhas + ' falha(s). ' +
+                data.message
+            );
+        }
+
+        function processarLote(reiniciar) {
+            $erro.hide().empty();
+
+            $.ajax({
+                url: envioAtivo.url,
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    cursor: envioAtivo.cursor,
+                    reiniciar: reiniciar ? 1 : 0
+                }
+            }).done(function (data) {
+                envioAtivo.cursor = parseInt(data.cursor || 0, 10);
+                atualizarProgresso(data);
+
+                if (data.concluido) {
+                    $barra.removeClass('progress-bar-animated').css('width', '100%').text('100%');
+                    $status.append(' Atualizando o histórico...');
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1200);
+                    return;
+                }
+
+                setTimeout(function () {
+                    processarLote(false);
+                }, 500);
+            }).fail(function (xhr) {
+                var mensagem = xhr.responseJSON && xhr.responseJSON.message
+                    ? xhr.responseJSON.message
+                    : 'Não foi possível concluir este lote.';
+
+                $erro.empty()
+                    .append(document.createTextNode(mensagem + ' '))
+                    .append(
+                        $('<button type="button" class="btn btn-danger btn-sm ml-2">Tentar novamente</button>')
+                            .on('click', function () {
+                                processarLote(false);
+                            })
+                    )
+                    .show();
+            });
+        }
+
+        $botoesEnvio.on('click', function () {
+            var $botao = $(this);
+            var total = parseInt($botao.data('total') || 0, 10);
+            var publico = $botao.data('publico');
+
+            if (!confirm('Enviar convite desta trilha para ' + total + ' ' + publico + '? A tela deverá permanecer aberta até a conclusão.')) {
+                return;
+            }
+
+            envioAtivo = {
+                url: $botao.data('url'),
+                cursor: 0
+            };
+
+            $botoesEnvio.prop('disabled', true);
+            $barra.addClass('progress-bar-animated').css('width', '0%').text('0%');
+            $status.text('Preparando o envio...');
+            $progresso.show();
+            processarLote(true);
+        });
+
         const labels = @json($labelsAcessos);
         const values = @json($valoresAcessos);
 
