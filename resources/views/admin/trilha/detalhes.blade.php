@@ -16,6 +16,15 @@
             </ul>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 text-right">
+            @php
+                $linkTrilha = $trilha->ds_url_tri ?? '';
+                $hrefTrilha = preg_match('/^https?:\/\//i', $linkTrilha) ? $linkTrilha : url($linkTrilha);
+            @endphp
+            @if(!empty($linkTrilha))
+                <a href="{{ $hrefTrilha }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-info mr-2">
+                    <i class="fa fa-external-link"></i> Link da trilha
+                </a>
+            @endif
             <a href="{{ url('admin/editar-trilha/'.$trilha->id_trilha_tri) }}" class="btn btn-primary"><i class="fa fa-edit"></i> Editar trilha</a>
         </div>
     </div>
