@@ -21,7 +21,6 @@ use App\Categoria;
 use App\Complemento;
 use App\TipoFoto;
 use App\Detalhe;
-use App\Jobs\EnviarConviteTrilhaLoteJob;
 use App\Mail\ConviteTrilhaGuia;
 use App\Mail\ConviteTrilhaTrilheiro;
 use Illuminate\Http\Request;
@@ -459,98 +458,156 @@ class TrilhaController extends Controller
         return redirect()->back();
     }
 
-    public function enviarEmailConviteTrilheiros($id)
+    public function enviarEmailConviteTrilheiros(Request $request, $id)
     {
-        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
-            return redirect('login');
-        }
-
-        if (config('queue.default') === 'sync') {
-            Flash::error('Envio em lote requer fila assíncrona. Configure QUEUE_CONNECTION=database e execute php artisan queue:work.');
-            return redirect()->back();
-        }
-
-        try {
-            Trilha::findOrFail($id);
-
-            $trilheirosIds = Trilheiro::query()
-                ->where('fl_newsletter_tri', true)
-                ->whereHas('user')
-                ->orderBy('id_trilheiro_tri')
-                ->pluck('id_trilheiro_tri')
-                ->toArray();
-
-            if (empty($trilheirosIds)) {
-                Flash::warning('Nenhum trilheiro com newsletter ativa foi encontrado para envio.');
-                return redirect()->back();
-            }
-
-            $tamanhoLote = 50;
-            $lotes = array_chunk($trilheirosIds, $tamanhoLote);
-
-            foreach ($lotes as $loteIds) {
-                EnviarConviteTrilhaLoteJob::dispatch($id, 1, $loteIds)->onQueue('emails');
-            }
-
-            Flash::success('Envio em lote para trilheiros iniciado: '.count($trilheirosIds).' destinatário(s) em '.count($lotes).' lote(s).');
-        } catch (\Exception $e) {
-            \Log::error('Erro ao iniciar envio em lote para trilheiros', [
-                'trilha_id' => $id,
-                'admin_user_id' => Auth::id(),
-                'error' => $e->getMessage(),
-            ]);
-
-            Flash::error('Erro ao iniciar envio para trilheiros: ' . $e->getMessage());
-        }
-
-        return redirect()->back();
+        return $this->enviarConvitesEmLotesHttp($request, $id, 1);
     }
 
-    public function enviarEmailConviteGuias($id)
+    public function enviarEmailConviteGuias(Request $request, $id)
     {
-        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
-            return redirect('login');
-        }
+        return $this->enviarConvitesEmLotesHttp($request, $id, 2);
+    }
 
-        if (config('queue.default') === 'sync') {
-            Flash::error('Envio em lote requer fila assíncrona. Configure QUEUE_CONNECTION=database e execute php artisan queue:work.');
-            return redirect()->back();
+    /**
+     * Envia poucos emails por requisição para funcionar sem queue worker.
+     * O navegador chama este endpoint repetidamente e mantém a tela aberta.
+     */
+    private function enviarConvitesEmLotesHttp(Request $request, $idTrilha, $tipoEnvio)
+    {
+        if (Auth::guest() || trim(Auth::user()->id_role) !== 'ADMIN') {
+            return response()->json(['message' => 'Acesso não autorizado.'], 403);
         }
 
         try {
-            Trilha::findOrFail($id);
+            $trilha = Trilha::with('foto')->findOrFail($idTrilha);
+            $tipoEnvio = (int) $tipoEnvio;
+            $cursorInformado = max(0, (int) $request->input('cursor', 0));
+            $chaveSessao = 'envio_convite_trilha_'.$idTrilha.'_'.$tipoEnvio.'_'.Auth::id();
 
-            $guiasIds = Guia::query()
-                ->where('fl_ativo_gui', true)
-                ->whereHas('user')
-                ->orderBy('id_guia_gui')
-                ->pluck('id_guia_gui')
-                ->toArray();
-
-            if (empty($guiasIds)) {
-                Flash::warning('Nenhum guia ativo foi encontrado para envio.');
-                return redirect()->back();
+            if ($request->boolean('reiniciar')) {
+                Session::forget($chaveSessao);
             }
 
-            $tamanhoLote = 50;
-            $lotes = array_chunk($guiasIds, $tamanhoLote);
+            $estado = Session::get($chaveSessao);
+            if (!$estado) {
+                if ($cursorInformado !== 0) {
+                    return response()->json([
+                        'message' => 'A sessão do envio expirou. Inicie novamente.',
+                    ], 409);
+                }
 
-            foreach ($lotes as $loteIds) {
-                EnviarConviteTrilhaLoteJob::dispatch($id, 2, $loteIds)->onQueue('emails');
+                $total = $this->queryDestinatariosConvite($tipoEnvio)->count();
+                $estado = [
+                    'cursor' => 0,
+                    'total' => $total,
+                    'processados' => 0,
+                    'enviados' => 0,
+                    'falhas' => 0,
+                    'concluido' => false,
+                    'log_registrado' => false,
+                ];
+                Session::put($chaveSessao, $estado);
             }
 
-            Flash::success('Envio em lote para guias iniciado: '.count($guiasIds).' destinatário(s) em '.count($lotes).' lote(s).');
+            if (!empty($estado['concluido'])) {
+                return response()->json(array_merge($estado, [
+                    'message' => 'Envio concluído.',
+                ]));
+            }
+
+            // Evita reenvio quando o navegador repetir uma requisição já concluída.
+            if ($cursorInformado !== (int) $estado['cursor']) {
+                return response()->json(array_merge($estado, [
+                    'message' => 'Continuando do último lote confirmado.',
+                ]));
+            }
+
+            $chavePrimaria = $tipoEnvio === 1 ? 'id_trilheiro_tri' : 'id_guia_gui';
+            $destinatarios = $this->queryDestinatariosConvite($tipoEnvio)
+                ->where($chavePrimaria, '>', $estado['cursor'])
+                ->orderBy($chavePrimaria)
+                ->take(3)
+                ->get();
+
+            foreach ($destinatarios as $destinatario) {
+                $estado['cursor'] = (int) $destinatario->{$chavePrimaria};
+                $estado['processados']++;
+
+                try {
+                    $email = optional($destinatario->user)->email;
+                    if (empty($email)) {
+                        $estado['falhas']++;
+                        continue;
+                    }
+
+                    if ($tipoEnvio === 1) {
+                        $nome = $destinatario->nm_trilheiro_tri ?: optional($destinatario->user)->name;
+                        Mail::to($email)->send(new ConviteTrilhaTrilheiro($trilha, $nome, false));
+                    } else {
+                        $nome = $destinatario->nm_guia_gui ?: optional($destinatario->user)->name;
+                        Mail::to($email)->send(new ConviteTrilhaGuia($trilha, $nome, false));
+                    }
+
+                    $estado['enviados']++;
+                } catch (\Exception $e) {
+                    $estado['falhas']++;
+                    \Log::error('Erro no envio HTTP de convite de trilha', [
+                        'trilha_id' => $idTrilha,
+                        'tipo_envio' => $tipoEnvio,
+                        'destinatario_id' => $estado['cursor'],
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+            }
+
+            $temProximo = $this->queryDestinatariosConvite($tipoEnvio)
+                ->where($chavePrimaria, '>', $estado['cursor'])
+                ->exists();
+            $concluido = !$temProximo;
+
+            if ($concluido) {
+                $estado['concluido'] = true;
+                if ($estado['enviados'] > 0 && empty($estado['log_registrado'])) {
+                    $this->registrarLogEmail($idTrilha, $tipoEnvio, $estado['enviados']);
+                    $estado['log_registrado'] = true;
+                }
+            }
+            Session::put($chaveSessao, $estado);
+
+            return response()->json(array_merge($estado, [
+                'message' => $concluido
+                    ? 'Envio concluído.'
+                    : 'Lote enviado. Preparando o próximo...',
+            ]));
         } catch (\Exception $e) {
-            \Log::error('Erro ao iniciar envio em lote para guias', [
-                'trilha_id' => $id,
+            \Log::error('Erro ao processar envio HTTP de convites', [
+                'trilha_id' => $idTrilha,
+                'tipo_envio' => $tipoEnvio,
                 'admin_user_id' => Auth::id(),
                 'error' => $e->getMessage(),
             ]);
 
-            Flash::error('Erro ao iniciar envio para guias: ' . $e->getMessage());
+            return response()->json([
+                'message' => 'Erro ao enviar o lote: '.$e->getMessage(),
+            ], 500);
+        }
+    }
+
+    private function queryDestinatariosConvite($tipoEnvio)
+    {
+        if ((int) $tipoEnvio === 1) {
+            return Trilheiro::with('user')
+                ->where('fl_newsletter_tri', true)
+                ->whereHas('user', function ($query) {
+                    $query->whereNotNull('email')->where('email', '<>', '');
+                });
         }
 
-        return redirect()->back();
+        return Guia::with('user')
+            ->where('fl_ativo_gui', true)
+            ->whereHas('user', function ($query) {
+                $query->whereNotNull('email')->where('email', '<>', '');
+            });
     }
 
     private function registrarLogEmail($idTrilha, $tipoEnvio, $totalEnvios)
