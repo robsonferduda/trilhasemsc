@@ -18,6 +18,7 @@ body.pa-admin {
     background: var(--pa-bg);
     color: var(--pa-text);
     font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    overflow-x: hidden;
 }
 
 .pa-sidebar {
@@ -156,6 +157,7 @@ body.pa-admin {
 .pa-search {
     flex: 1;
     max-width: 560px;
+    min-width: 0;
     margin: 0 auto;
     position: relative;
 }
@@ -170,6 +172,7 @@ body.pa-admin {
 
 .pa-search input {
     width: 100%;
+    min-width: 0;
     height: 40px;
     border: 1px solid var(--pa-border);
     background: #f8fafc;
@@ -401,6 +404,38 @@ body.pa-admin {
         display: none;
     }
 
+    .pa-header {
+        gap: 6px;
+        padding: 0 10px;
+    }
+
+    .pa-main {
+        padding: calc(var(--pa-header) + 16px) 12px 32px;
+        max-width: 100%;
+    }
+
+    .pa-main .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .pa-main .row > [class*="col"] {
+        padding-left: 0;
+        padding-right: 0;
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .trilha-admin-novo {
+        text-align: left;
+        margin-top: 8px;
+    }
+
+    .trilha-admin-acoes .btn {
+        flex: 1 1 100%;
+    }
+
     body.pa-sidebar-open .pa-overlay {
         display: block;
         position: fixed;
@@ -408,6 +443,66 @@ body.pa-admin {
         background: rgb(15 23 42 / 0.45);
         z-index: 1035;
     }
+}
+
+@media (min-width: 992px) {
+    .trilha-admin-novo {
+        text-align: right;
+    }
+}
+
+.trilha-admin-filtros {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 100%;
+}
+
+.trilha-admin-filtros .btn {
+    flex: 1 1 0;
+}
+
+.trilha-admin-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.trilha-admin-nivel {
+    flex: 0 0 72px;
+    text-align: center;
+}
+
+.trilha-admin-nivel img {
+    width: 58px;
+    height: auto;
+}
+
+.trilha-admin-nivel small {
+    display: block;
+    margin-top: 4px;
+}
+
+.trilha-admin-texto {
+    min-width: 0;
+    flex: 1;
+}
+
+.trilha-admin-url {
+    overflow-wrap: anywhere;
+}
+
+.trilha-admin-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.trilha-admin-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
 }
 
 .pa-main h2,

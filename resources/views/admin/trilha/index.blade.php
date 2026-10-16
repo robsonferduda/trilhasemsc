@@ -20,8 +20,8 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <h2>Trilhas</h2>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <a href="{{ url('admin/nova-trilha') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Novo</a>
+                    <div class="col-lg-6 col-md-6 col-sm-12 trilha-admin-novo">
+                        <a href="{{ url('admin/nova-trilha') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Novo</a>
                     </div> 
                 </div>
 	        </div>
@@ -49,9 +49,9 @@
                                 <option value="N" {{ ($filtroPublicado ?? '') === 'N' ? 'selected' : '' }}>Não</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-12 mb-2 d-flex align-items-end">
-                            <button type="submit" class="btn btn-primary mr-2 w-50"><i class="fa fa-search"></i> Filtrar</button>
-                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-outline-secondary w-50">Limpar</a>
+                        <div class="col-lg-2 col-md-2 col-12 mb-2 trilha-admin-filtros">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Filtrar</button>
+                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-outline-secondary">Limpar</a>
                         </div>
                     </div>
                 </form>
@@ -60,30 +60,30 @@
                     <div class="row clearfix">
                         @foreach($trilhas as $trilha)
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="card mb-3">
-                                    <div class="body" style="position: relative; padding-bottom: 72px;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="mr-3 text-center" style="min-width: 90px;">
-                                                <img width="58" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Nível {{ $trilha->nivel->dc_nivel_niv }}"><br>
+                                <div class="card mb-3 trilha-admin-item">
+                                    <div class="body">
+                                        <div class="trilha-admin-info">
+                                            <div class="trilha-admin-nivel">
+                                                <img width="58" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Nível {{ $trilha->nivel->dc_nivel_niv }}">
                                                 <small class="text-muted">{{ $trilha->nivel->dc_nivel_niv }}</small>
                                             </div>
 
-                                            <div class="flex-grow-1">
+                                            <div class="trilha-admin-texto">
                                                 <h5 class="mb-1">{{ $trilha->nm_trilha_tri }}</h5>
-                                                <p class="mb-2 text-muted">{{ $trilha->ds_url_tri }}</p>
+                                                <p class="mb-2 text-muted trilha-admin-url">{{ $trilha->ds_url_tri }}</p>
 
-                                                <div class="mb-2">
+                                                <div class="trilha-admin-badges">
                                                     @if($trilha->fl_publicacao_tri == 'S')
                                                         <span class="badge badge-success">Publicado: SIM</span>
                                                     @else
                                                         <span class="badge badge-danger">Publicado: NÃO</span>
                                                     @endif
-                                                    <span class="badge badge-info ml-1"><i class="fa fa-eye"></i> {{ number_format($trilha->total_visitas ?? 0, 0, ',', '.') }} visitas</span>
+                                                    <span class="badge badge-info"><i class="fa fa-eye"></i> {{ number_format($trilha->total_visitas ?? 0, 0, ',', '.') }} visitas</span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div style="position: absolute; right: 20px; bottom: 16px;">
+                                        <div class="trilha-admin-acoes">
                                             <a class="btn btn-warning" href="{{ url('https://trilhasemsc.com.br/'.$trilha->ds_url_tri) }}" target="_blank" rel="noopener">
                                                 <i class="fa fa-search"></i> Ver trilha
                                             </a>
