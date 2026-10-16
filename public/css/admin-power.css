@@ -752,3 +752,50 @@ body.pa-admin {
 .pr-2 { padding-right: 0.5rem !important; }
 .pl-1 { padding-left: 0.25rem !important; }
 .pl-2 { padding-left: 0.5rem !important; }
+
+.pa-perfil-foto {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.pa-perfil-indice {
+    display: block;
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.perfil-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.trilheiro-evento-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.trilheiro-trilhas {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+@media (max-width: 991.98px) {
+    .perfil-acoes {
+        justify-content: flex-start;
+        margin-top: 8px;
+    }
+
+    .perfil-acoes .btn,
+    .trilheiro-evento-acoes .btn {
+        flex: 1 1 100%;
+    }
+}

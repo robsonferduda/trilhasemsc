@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.admin')
 @section('content')
     <div class="block-header">
         <div class="row">

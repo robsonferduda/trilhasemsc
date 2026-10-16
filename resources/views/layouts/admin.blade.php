@@ -14,6 +14,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/dropify/css/dropify.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <link rel="stylesheet" href="{{ asset('css/admin-power.css') }}?v={{ date('YmdHis') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -21,43 +23,64 @@
 @php
     $primeiroNome = Auth::user() ? explode(' ', trim(Auth::user()->name))[0] : 'Admin';
     $inicial = mb_strtoupper(mb_substr($primeiroNome, 0, 1));
+    $papel = Auth::user() ? trim(Auth::user()->id_role) : '';
+    $papelLabel = $papel === 'TRILHEIRO' ? 'Trilheiro' : ($papel === 'GUIA' ? 'Guia' : 'Administrador');
 @endphp
 
     <aside class="pa-sidebar" id="pa-sidebar">
-        <a href="{{ url('admin/dashboard') }}" class="pa-brand">
+        <a href="{{ $papel === 'TRILHEIRO' ? url('trilheiro/privado/perfil') : url('admin/dashboard') }}" class="pa-brand">
             <span class="pa-logo"><i class="bi bi-lightning-charge-fill"></i></span>
             <span class="pa-brand-text">Trilhas em SC</span>
         </a>
         <nav class="pa-nav">
-            <p class="pa-nav-label">Painel</p>
-            <a class="pa-nav-link {{ request()->is('admin/dashboard') ? 'is-active' : '' }}" href="{{ url('admin/dashboard') }}">
-                <i class="bi bi-speedometer2"></i><span>Dashboard</span>
-            </a>
+            @if($papel === 'TRILHEIRO')
+                <p class="pa-nav-label">Minha conta</p>
+                <a class="pa-nav-link {{ request()->is('trilheiro/privado/perfil') ? 'is-active' : '' }}" href="{{ url('trilheiro/privado/perfil') }}">
+                    <i class="bi bi-person"></i><span>Meu perfil</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('trilheiro/privado/atualizar-cadastro') ? 'is-active' : '' }}" href="{{ url('trilheiro/privado/atualizar-cadastro') }}">
+                    <i class="bi bi-pencil"></i><span>Editar dados</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('trilheiro/privado/meu-nivel') ? 'is-active' : '' }}" href="{{ url('trilheiro/privado/meu-nivel') }}">
+                    <i class="bi bi-speedometer2"></i><span>Meu nível</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('trilheiro/privado/trilhas') ? 'is-active' : '' }}" href="{{ url('trilheiro/privado/trilhas') }}">
+                    <i class="bi bi-map"></i><span>Minhas trilhas</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('trilheiro/privado/eventos*') ? 'is-active' : '' }}" href="{{ url('trilheiro/privado/eventos') }}">
+                    <i class="bi bi-calendar-event"></i><span>Meus eventos</span>
+                </a>
+            @else
+                <p class="pa-nav-label">Painel</p>
+                <a class="pa-nav-link {{ request()->is('admin/dashboard') ? 'is-active' : '' }}" href="{{ url('admin/dashboard') }}">
+                    <i class="bi bi-speedometer2"></i><span>Dashboard</span>
+                </a>
 
-            <p class="pa-nav-label">Conteúdo</p>
-            <a class="pa-nav-link {{ request()->is('admin/listar-trilhas', 'admin/editar-trilha/*', 'admin/detalhes-trilha/*') ? 'is-active' : '' }}" href="{{ url('admin/listar-trilhas') }}">
-                <i class="bi bi-map"></i><span>Trilhas</span>
-            </a>
-            <a class="pa-nav-link {{ request()->is('admin/nova-trilha') ? 'is-active' : '' }}" href="{{ url('admin/nova-trilha') }}">
-                <i class="bi bi-plus-circle"></i><span>Nova trilha</span>
-            </a>
-            <a class="pa-nav-link {{ request()->is('admin/eventos*') ? 'is-active' : '' }}" href="{{ url('admin/eventos/listar') }}">
-                <i class="bi bi-calendar-event"></i><span>Eventos</span>
-            </a>
-            <a class="pa-nav-link {{ request()->is('admin/instagram*') ? 'is-active' : '' }}" href="{{ route('admin.instagram.metricas') }}">
-                <i class="bi bi-instagram"></i><span>Instagram</span>
-            </a>
+                <p class="pa-nav-label">Conteúdo</p>
+                <a class="pa-nav-link {{ request()->is('admin/listar-trilhas', 'admin/editar-trilha/*', 'admin/detalhes-trilha/*') ? 'is-active' : '' }}" href="{{ url('admin/listar-trilhas') }}">
+                    <i class="bi bi-map"></i><span>Trilhas</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('admin/nova-trilha') ? 'is-active' : '' }}" href="{{ url('admin/nova-trilha') }}">
+                    <i class="bi bi-plus-circle"></i><span>Nova trilha</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('admin/eventos*') ? 'is-active' : '' }}" href="{{ url('admin/eventos/listar') }}">
+                    <i class="bi bi-calendar-event"></i><span>Eventos</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('admin/instagram*') ? 'is-active' : '' }}" href="{{ route('admin.instagram.metricas') }}">
+                    <i class="bi bi-instagram"></i><span>Instagram</span>
+                </a>
 
-            <p class="pa-nav-label">Pessoas</p>
-            <a class="pa-nav-link {{ request()->is('admin/guias', 'admin/guias/listar') ? 'is-active' : '' }}" href="{{ url('admin/guias/listar') }}">
-                <i class="bi bi-person-badge"></i><span>Guias</span>
-            </a>
-            <a class="pa-nav-link {{ request()->is('admin/guias/aprovar') ? 'is-active' : '' }}" href="{{ url('admin/guias/aprovar') }}">
-                <i class="bi bi-hourglass-split"></i><span>Guias pendentes</span>
-            </a>
-            <a class="pa-nav-link {{ request()->is('admin/trilheiros*', 'admin/trilheiro/*') ? 'is-active' : '' }}" href="{{ url('admin/trilheiros/listar') }}">
-                <i class="bi bi-people"></i><span>Trilheiros</span>
-            </a>
+                <p class="pa-nav-label">Pessoas</p>
+                <a class="pa-nav-link {{ request()->is('admin/guias', 'admin/guias/listar') ? 'is-active' : '' }}" href="{{ url('admin/guias/listar') }}">
+                    <i class="bi bi-person-badge"></i><span>Guias</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('admin/guias/aprovar') ? 'is-active' : '' }}" href="{{ url('admin/guias/aprovar') }}">
+                    <i class="bi bi-hourglass-split"></i><span>Guias pendentes</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('admin/trilheiros*', 'admin/trilheiro/*') ? 'is-active' : '' }}" href="{{ url('admin/trilheiros/listar') }}">
+                    <i class="bi bi-people"></i><span>Trilheiros</span>
+                </a>
+            @endif
         </nav>
         <div class="pa-nav-bottom">
             <a class="pa-nav-link" href="{{ url('/') }}">
@@ -80,21 +103,32 @@
             </button>
             <div class="dropdown-menu pa-menu">
                 <div class="pa-apps">
-                    <a class="pa-app" href="{{ url('admin/dashboard') }}"><i class="bi bi-grid"></i>Painel</a>
-                    <a class="pa-app" href="{{ url('admin/listar-trilhas') }}"><i class="bi bi-signpost-2"></i>Trilhas</a>
-                    <a class="pa-app" href="{{ url('admin/guias/listar') }}"><i class="bi bi-person-badge"></i>Guias</a>
-                    <a class="pa-app" href="{{ url('admin/trilheiros/listar') }}"><i class="bi bi-people"></i>Trilheiros</a>
-                    <a class="pa-app" href="{{ url('admin/eventos/listar') }}"><i class="bi bi-calendar-event"></i>Eventos</a>
-                    <a class="pa-app" href="{{ route('admin.instagram.metricas') }}"><i class="bi bi-instagram"></i>Instagram</a>
+                    @if($papel === 'TRILHEIRO')
+                        <a class="pa-app" href="{{ url('trilheiro/privado/perfil') }}"><i class="bi bi-person"></i>Perfil</a>
+                        <a class="pa-app" href="{{ url('trilheiro/privado/atualizar-cadastro') }}"><i class="bi bi-pencil"></i>Dados</a>
+                        <a class="pa-app" href="{{ url('trilheiro/privado/meu-nivel') }}"><i class="bi bi-speedometer2"></i>Nível</a>
+                        <a class="pa-app" href="{{ url('trilheiro/privado/trilhas') }}"><i class="bi bi-map"></i>Trilhas</a>
+                        <a class="pa-app" href="{{ url('trilheiro/privado/eventos') }}"><i class="bi bi-calendar-event"></i>Eventos</a>
+                        <a class="pa-app" href="{{ url('/') }}"><i class="bi bi-globe"></i>Site</a>
+                    @else
+                        <a class="pa-app" href="{{ url('admin/dashboard') }}"><i class="bi bi-grid"></i>Painel</a>
+                        <a class="pa-app" href="{{ url('admin/listar-trilhas') }}"><i class="bi bi-signpost-2"></i>Trilhas</a>
+                        <a class="pa-app" href="{{ url('admin/guias/listar') }}"><i class="bi bi-person-badge"></i>Guias</a>
+                        <a class="pa-app" href="{{ url('admin/trilheiros/listar') }}"><i class="bi bi-people"></i>Trilheiros</a>
+                        <a class="pa-app" href="{{ url('admin/eventos/listar') }}"><i class="bi bi-calendar-event"></i>Eventos</a>
+                        <a class="pa-app" href="{{ route('admin.instagram.metricas') }}"><i class="bi bi-instagram"></i>Instagram</a>
+                    @endif
                 </div>
             </div>
         </div>
 
+        @if($papel !== 'TRILHEIRO')
         <form class="pa-search" method="GET" action="{{ url('admin/listar-trilhas') }}">
             <i class="bi bi-search"></i>
             <input type="search" name="nome" placeholder="Buscar trilha..." value="{{ request()->is('admin/listar-trilhas') ? request('nome') : '' }}" autocomplete="off">
             <kbd>/</kbd>
         </form>
+        @endif
 
         <div class="pa-header-right">
             <a href="{{ url('/') }}" class="pa-icon-btn d-none d-md-inline-flex" title="Ver o site"><i class="bi bi-box-arrow-up-right"></i></a>
@@ -103,7 +137,7 @@
                     <span class="pa-avatar">{{ $inicial }}</span>
                     <span class="pa-user-meta">
                         <span class="pa-user-name">{{ $primeiroNome }}</span>
-                        <span class="pa-user-role">Administrador</span>
+                        <span class="pa-user-role">{{ $papelLabel }}</span>
                     </span>
                     <i class="bi bi-chevron-down pa-user-meta"></i>
                 </button>
@@ -127,6 +161,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('vendor/parsleyjs/js/parsley.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="{{ asset('vendor/dropify/js/dropify.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script>
         $.ajaxSetup({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }

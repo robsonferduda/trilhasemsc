@@ -1,5 +1,9 @@
-@extends('layouts.template')
+@extends('layouts.admin')
 @section('content')
+@php
+    $ehDono = Auth::user() && (int) $trilheiro->id_user === (int) Auth::user()->id;
+    $ehAdmin = Auth::user() && trim(Auth::user()->id_role) === 'ADMIN';
+@endphp
     <div class="block-header">
         <div class="row">
             <div class="col-lg-5 col-md-8 col-sm-12">
@@ -19,21 +23,26 @@
                         <div class="col col-lg-6 col-md-6 col-sm-4">
                             <h2>Dados do Trilheiro</h2>
                         </div>
-                        <div class="col col-lg-6 col-md-6 col-sm-4 text-right">
-                            <h2><a href="{{ url('/trilheiro/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> Editar Dados</a></h2>
+                        <div class="col col-lg-6 col-md-6 col-sm-12 perfil-acoes">
+                            @if($ehDono)
+                                <a href="{{ url('trilheiro/privado/atualizar-cadastro') }}" class="btn btn-primary"><i class="fa fa-edit"></i> Editar dados</a>
+                            @elseif($ehAdmin)
+                                <a href="{{ url('admin/trilheiros/listar') }}" class="btn btn-default">Voltar</a>
+                                <a href="{{ route('admin.trilheiro.questionario', $trilheiro->id_trilheiro_tri) }}" class="btn btn-primary"><i class="fa fa-clipboard"></i> Questionário</a>
+                            @endif
                         </div>
                     </div>
                 </div>               
                 <div class="body">
                     @include('layouts.mensagens')
-                    @if($trilheiro && !$trilheiro->perfilBasicoCompleto())
+                    @if($ehDono && $trilheiro && !$trilheiro->perfilBasicoCompleto())
                         <div class="alert alert-warning">
                             <i class="fa fa-exclamation-triangle"></i>
                             Seu cadastro está incompleto.
                             <a href="{{ url('trilheiro/privado/atualizar-cadastro') }}" class="alert-link">Complete seus dados</a>
                             para continuar.
                         </div>
-                    @elseif($trilheiro && !$trilheiro->possuiScore())
+                    @elseif($ehDono && $trilheiro && !$trilheiro->possuiScore())
                         <div class="alert alert-info">
                             <i class="fa fa-tachometer"></i>
                             Você ainda não calculou seu Índice de Experiência em Trilhas.
@@ -48,13 +57,13 @@
                                     <div class="profile-image center mb-4">
                                         @switch(trim(Auth::user()->id_role))
                                             @case('ADMIN')
-                                                <img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri).'?v='.(@filemtime(public_path('img/trilheiros/'.$trilheiro->nm_path_foto_tri)) ?: time()) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
+                                                <img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri).'?v='.(@filemtime(public_path('img/trilheiros/'.$trilheiro->nm_path_foto_tri)) ?: time()) : asset('images/user.png') }}" class="rounded-circle pa-perfil-foto" alt="Foto de Perfil">
                                                 @break
                                             @case('GUIA')
-                                                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil).'?v='.(@filemtime(public_path('img/guias/'.Auth::user()->dc_foto_perfil)) ?: time()) : asset('images/user.png') }}" class="rounded-circle w-50 " alt="Foto de Perfil">
+                                                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil).'?v='.(@filemtime(public_path('img/guias/'.Auth::user()->dc_foto_perfil)) ?: time()) : asset('images/user.png') }}" class="rounded-circle pa-perfil-foto" alt="Foto de Perfil">
                                                 @break
                                             @case('TRILHEIRO')
-                                                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/trilheiros/'.Auth::user()->dc_foto_perfil).'?v='.(@filemtime(public_path('img/trilheiros/'.Auth::user()->dc_foto_perfil)) ?: time()) : asset('images/user.png') }}" class="rounded-circle w-50" alt="Foto de Perfil">
+                                                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/trilheiros/'.Auth::user()->dc_foto_perfil).'?v='.(@filemtime(public_path('img/trilheiros/'.Auth::user()->dc_foto_perfil)) ?: time()) : asset('images/user.png') }}" class="rounded-circle pa-perfil-foto" alt="Foto de Perfil">
                                                 @break
                                             @default
                                                 <img src="{{ asset('images/user.png') }}" class="rounded-circle o" alt="Foto de Perfil">
@@ -64,13 +73,13 @@
                                         <h5 class="m-b-0">{{ $trilheiro->nm_trilheiro_tri }}</h5>
                                         <span>{{ ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '' }}</span>
                                         <h2 class="mb-0">{{ $trilheiro->nr_score_tri }}</h2>
-                                        @if(!$trilheiro->nr_score_tri)
+                                        @if($ehDono && !$trilheiro->nr_score_tri)
                                             <p class="mb-0"><a href="{{ url('trilheiro/privado/meu-nivel') }}">Clique para calcular</a></p>
                                         @endif
                                         <span>{{ $trilheiro->indice->ds_indice_ind }}</span>
-                                        <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="w-100" alt="Índice de Experiência em Trilhas">
+                                        <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="pa-perfil-indice" alt="Índice de Experiência em Trilhas">
                                         <strong>Índice de Experiência em Trilhas</strong>
-                                        @if($trilheiro->nr_score_tri)
+                                        @if($ehDono && $trilheiro->nr_score_tri)
                                             <p class="mt-2 mb-2"><a href="{{ url('trilheiro/privado/meu-nivel') }}">Atualizar Índice</a></p>
                                         @endif
                                         <p class="mt-0 mb-0 text-danger"><a href="{{ url('indice-experiencia-trilhas') }}" class="text-danger" target="BLANK">Entenda o Índice</a></p>
@@ -87,7 +96,9 @@
                                         @else
                                             <p class="mb-2"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
                                         @endif
-                                        <p class="mt-2"><a href="{{ url('trilheiro/privado/trilhas') }}" style="position: absolute; right: 10px; top: 15px;">Clique aqui para selecionar suas trilhas</a></p>
+                                        @if($ehDono)
+                                            <p class="mt-2 mb-3"><a href="{{ url('trilheiro/privado/trilhas') }}">Selecionar trilhas</a></p>
+                                        @endif
                                     </div>
                                     <div class="d-block center d-md-none">
                                         @if($trilheiro->nu_pontos_experiencia_tri)
@@ -95,7 +106,9 @@
                                         @else
                                             <p class="mb-2"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
                                         @endif
-                                        <p class="mt-2 center"><a href="{{ url('trilheiro/privado/trilhas') }}">Clique aqui para selecionar suas trilhas</a></p>
+                                        @if($ehDono)
+                                            <p class="mt-2 center"><a href="{{ url('trilheiro/privado/trilhas') }}">Selecionar trilhas</a></p>
+                                        @endif
                                     </div>
                                     @foreach($trilheiro->trilhas as $key => $trilha)
                                         <div class="row mb-3 mt-3">
@@ -134,15 +147,19 @@
 @section('script')
     <script>
         $(function() {
-            $('#form-guia').parsley();
+            if ($.fn.parsley && $('#form-guia').length) {
+                $('#form-guia').parsley();
+            }
 
-            $('.phone').mask('(99) 999-999999');
+            if ($.fn.mask) {
+                $('.phone').mask('(99) 999-999999');
+            }
 
-            var drEvent = $('#dropify-event').dropify();
-
-            drEvent.on('dropify.afterClear', function(event, element) {
-                $('#imagem_deletada').val(true);
-            });
+            if ($.fn.dropify && $('#dropify-event').length) {
+                $('#dropify-event').dropify().on('dropify.afterClear', function() {
+                    $('#imagem_deletada').val(true);
+                });
+            }
         });
     </script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.admin')
 
 @section('content')
     <div class="block-header">
@@ -40,30 +40,25 @@
                                         <p class="mb-1"><strong>Início/Término</strong>: {{ \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i') }} - {{ \Carbon\Carbon::parse($evento->hora_fim_eve )->format('H:i') }}</p>
                                         <p class="mb-1"><strong>Valor</strong>: {{ ($evento->valor_eve) ? "R$ ".$evento->valor_eve : 'Gratuita' }}</p>
                                         
-                                        <div>
-                                            <a href="{{ url('eventos/' . ($evento->slug_eve ?: $evento->id_evento_eve)) }}" class="btn btn-outline-info btn-sm" target="BLANK"><i class="fa fa-eye"></i> Detalhes do Evento</a>
+                                        <div class="trilheiro-evento-acoes">
+                                            <a href="{{ url('eventos/' . ($evento->slug_eve ?: $evento->id_evento_eve)) }}" class="btn btn-outline-info btn-sm" target="_blank"><i class="fa fa-eye"></i> Detalhes do Evento</a>
                                             <button type="button" class="btn btn-outline-danger btn-sm btn-cancelar-participacao" data-url="{{ url('trilheiro/privado/eventos/cancelar/'.$evento->id_evento_eve) }}">
                                                 <i class="fa fa-times"></i> Cancelar Participação
                                             </button>
-
-                                        <p class="mb-1" style="float: right">
-                                                @if(is_null($evento->pivot->fl_aceito_guia_evt))
-                                                    <span class="badge badge-warning">Pedido pendente</span>
-                                                @elseif($evento->pivot->fl_aceito_guia_evt)
-                                                    <span class="badge badge-success">Pedido Aceito</span>
-                                                @else
-                                                    <span class="badge badge-danger">Pedido recusado</span>
-                                                @endif
-                                            </p>
-                                            <p class="mb-1"  style="float: right">
-                                                @if(is_null($evento->pivot->fl_pago_evt))
-                                                    <span class="badge badge-warning">Pagamento Pendente</span>
-                                                @elseif($evento->pivot->fl_pago_evt)
-                                                    <span class="badge badge-success">Pago</span>
-                                                @else
-                                                    <span class="badge badge-danger">Não Pago</span>
-                                                @endif
-                                        </p>
+                                            @if(is_null($evento->pivot->fl_aceito_guia_evt))
+                                                <span class="badge badge-warning">Pedido pendente</span>
+                                            @elseif($evento->pivot->fl_aceito_guia_evt)
+                                                <span class="badge badge-success">Pedido Aceito</span>
+                                            @else
+                                                <span class="badge badge-danger">Pedido recusado</span>
+                                            @endif
+                                            @if(is_null($evento->pivot->fl_pago_evt))
+                                                <span class="badge badge-warning">Pagamento Pendente</span>
+                                            @elseif($evento->pivot->fl_pago_evt)
+                                                <span class="badge badge-success">Pago</span>
+                                            @else
+                                                <span class="badge badge-danger">Não Pago</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

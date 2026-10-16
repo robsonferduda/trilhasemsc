@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.admin')
 
 @section('content')
     <div class="block-header">
@@ -19,7 +19,7 @@
                     @include('layouts.mensagens')                   
                         <form action="{{ url('trilheiro/privado/trilhas') }}" enctype="multipart/form-data" method="post" id="form-trilheiro">
                             @csrf
-                            <div class="row clearfix" style="margin-left: 20px">
+                            <div class="row clearfix trilheiro-trilhas">
                                 @foreach($cidades as $cidade) 
                                     <h5>{{ $cidade->nm_cidade_cde }}</h5>
                                     @foreach($cidade->trilhas as $trilha)
