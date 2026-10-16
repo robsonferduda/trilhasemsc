@@ -753,18 +753,93 @@ body.pa-admin {
 .pl-1 { padding-left: 0.25rem !important; }
 .pl-2 { padding-left: 0.5rem !important; }
 
+.pa-perfil-identidade {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+    border: 1px solid var(--pa-border);
+    border-radius: 16px;
+    padding: 28px 18px 20px;
+}
+
 .pa-perfil-foto {
-    width: 120px;
-    height: 120px;
+    width: 112px;
+    height: 112px;
     object-fit: cover;
+    border: 4px solid var(--pa-accent-soft);
+    box-shadow: 0 0 0 1px #f3d7c2;
+}
+
+.pa-perfil-nome {
+    margin: 16px 0 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--pa-heading);
+}
+
+.pa-perfil-cidade {
+    margin: 2px 0 0;
+    color: #718096;
+    font-size: 0.92rem;
+}
+
+.pa-perfil-score {
+    margin: 14px 0 0;
+    font-size: 2.15rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--pa-heading);
+}
+
+.pa-perfil-calcular {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.pa-perfil-nivel {
+    margin: 6px 0 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.pa-perfil-iet {
+    width: 100%;
+    max-width: 220px;
+    margin: 16px 0 0;
 }
 
 .pa-perfil-indice {
     display: block;
     width: 100%;
-    max-width: 180px;
     height: auto;
     margin: 0 auto;
+}
+
+.pa-perfil-iet figcaption {
+    margin-top: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #4a5568;
+}
+
+.pa-perfil-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 220px;
+    margin-top: 16px;
+}
+
+.pa-perfil-links .btn {
+    width: 100%;
 }
 
 .perfil-acoes {

@@ -52,38 +52,40 @@
                     @endif
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-12">
-                            <div class="card profile-header">
-                                <div class="body">
-                                    <div class="profile-image center mb-4">
-                                        @switch(trim(Auth::user()->id_role))
-                                            @case('ADMIN')
-                                                <img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri).'?v='.(@filemtime(public_path('img/trilheiros/'.$trilheiro->nm_path_foto_tri)) ?: time()) : asset('images/user.png') }}" class="rounded-circle pa-perfil-foto" alt="Foto de Perfil">
-                                                @break
-                                            @case('GUIA')
-                                                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil).'?v='.(@filemtime(public_path('img/guias/'.Auth::user()->dc_foto_perfil)) ?: time()) : asset('images/user.png') }}" class="rounded-circle pa-perfil-foto" alt="Foto de Perfil">
-                                                @break
-                                            @case('TRILHEIRO')
-                                                <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/trilheiros/'.Auth::user()->dc_foto_perfil).'?v='.(@filemtime(public_path('img/trilheiros/'.Auth::user()->dc_foto_perfil)) ?: time()) : asset('images/user.png') }}" class="rounded-circle pa-perfil-foto" alt="Foto de Perfil">
-                                                @break
-                                            @default
-                                                <img src="{{ asset('images/user.png') }}" class="rounded-circle o" alt="Foto de Perfil">
-                                        @endswitch
-                                    </div>
-                                    <div class="center">
-                                        <h5 class="m-b-0">{{ $trilheiro->nm_trilheiro_tri }}</h5>
-                                        <span>{{ ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '' }}</span>
-                                        <h2 class="mb-0">{{ $trilheiro->nr_score_tri }}</h2>
-                                        @if($ehDono && !$trilheiro->nr_score_tri)
-                                            <p class="mb-0"><a href="{{ url('trilheiro/privado/meu-nivel') }}">Clique para calcular</a></p>
-                                        @endif
-                                        <span>{{ $trilheiro->indice->ds_indice_ind }}</span>
-                                        <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="pa-perfil-indice" alt="Índice de Experiência em Trilhas">
-                                        <strong>Índice de Experiência em Trilhas</strong>
-                                        @if($ehDono && $trilheiro->nr_score_tri)
-                                            <p class="mt-2 mb-2"><a href="{{ url('trilheiro/privado/meu-nivel') }}">Atualizar Índice</a></p>
-                                        @endif
-                                        <p class="mt-0 mb-0 text-danger"><a href="{{ url('indice-experiencia-trilhas') }}" class="text-danger" target="BLANK">Entenda o Índice</a></p>
-                                    </div>                       
+                            <div class="pa-perfil-identidade">
+                                @switch(trim(Auth::user()->id_role))
+                                    @case('ADMIN')
+                                        <img src="{{ $trilheiro->nm_path_foto_tri ? asset('img/trilheiros/'.$trilheiro->nm_path_foto_tri).'?v='.(@filemtime(public_path('img/trilheiros/'.$trilheiro->nm_path_foto_tri)) ?: time()) : asset('images/user.png') }}" class="rounded-circle pa-perfil-foto" alt="Foto de {{ $trilheiro->nm_trilheiro_tri }}">
+                                        @break
+                                    @case('GUIA')
+                                        <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/guias/'.Auth::user()->dc_foto_perfil).'?v='.(@filemtime(public_path('img/guias/'.Auth::user()->dc_foto_perfil)) ?: time()) : asset('images/user.png') }}" class="rounded-circle pa-perfil-foto" alt="Foto de {{ $trilheiro->nm_trilheiro_tri }}">
+                                        @break
+                                    @case('TRILHEIRO')
+                                        <img src="{{ Auth::user()->dc_foto_perfil ? asset('img/trilheiros/'.Auth::user()->dc_foto_perfil).'?v='.(@filemtime(public_path('img/trilheiros/'.Auth::user()->dc_foto_perfil)) ?: time()) : asset('images/user.png') }}" class="rounded-circle pa-perfil-foto" alt="Foto de {{ $trilheiro->nm_trilheiro_tri }}">
+                                        @break
+                                    @default
+                                        <img src="{{ asset('images/user.png') }}" class="rounded-circle pa-perfil-foto" alt="Foto de perfil">
+                                @endswitch
+                                <h3 class="pa-perfil-nome">{{ $trilheiro->nm_trilheiro_tri }}</h3>
+                                @if($trilheiro->origem)
+                                    <p class="pa-perfil-cidade">{{ $trilheiro->origem->nm_cidade_cde }}</p>
+                                @endif
+                                <p class="pa-perfil-score">{{ $trilheiro->nr_score_tri ?: '—' }}</p>
+                                @if($ehDono && !$trilheiro->nr_score_tri)
+                                    <a class="pa-perfil-calcular" href="{{ url('trilheiro/privado/meu-nivel') }}">Clique para calcular</a>
+                                @endif
+                                @if($trilheiro->indice)
+                                    <p class="pa-perfil-nivel">{{ $trilheiro->indice->ds_indice_ind }}</p>
+                                    <figure class="pa-perfil-iet">
+                                        <img src="{{ asset('img/nivel/'.$trilheiro->indice->img_indice_ind) }}" class="pa-perfil-indice" alt="">
+                                        <figcaption>Índice de Experiência em Trilhas</figcaption>
+                                    </figure>
+                                @endif
+                                <div class="pa-perfil-links">
+                                    @if($ehDono && $trilheiro->nr_score_tri)
+                                        <a class="btn btn-primary btn-sm" href="{{ url('trilheiro/privado/meu-nivel') }}">Atualizar Índice</a>
+                                    @endif
+                                    <a class="btn btn-default btn-sm" href="{{ url('indice-experiencia-trilhas') }}" target="_blank" rel="noopener">Entenda o Índice</a>
                                 </div>
                             </div>
                         </div>
