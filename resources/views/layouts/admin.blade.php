@@ -1,117 +1,166 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="noindex,nofollow">
     <title>@yield('pageTitle', 'Área administrativa | Trilhas em SC')</title>
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">
-    <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,200|Open+Sans+Condensed:700" rel="stylesheet">
-    <link id="pagestyle" href="{{ asset('css/template.css') }}" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}?v={{ date('YmdHis') }}">
     <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin-compat.css') }}?v={{ date('YmdHis') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin-power.css') }}?v={{ date('YmdHis') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body class="help-center admin-area">
-    @php
-        $primeiroNome = Auth::user() ? explode(' ', Auth::user()->name)[0] : '';
-    @endphp
-    <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent">
-        <div class="container">
-            <button class="navbar-toggler shadow-none ms-md-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Abrir menu">
-                <span class="navbar-toggler-icon mt-2">
-                    <span class="navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </span>
+<body class="pa-admin">
+@php
+    $primeiroNome = Auth::user() ? explode(' ', trim(Auth::user()->name))[0] : 'Admin';
+    $inicial = mb_strtoupper(mb_substr($primeiroNome, 0, 1));
+    $secao = 'painel';
+    if (request()->is('admin/listar-trilhas', 'admin/nova-trilha', 'admin/editar-trilha/*', 'admin/detalhes-trilha/*')) {
+        $secao = 'trilhas';
+    } elseif (request()->is('admin/guias*', 'admin/trilheiros*', 'admin/trilheiro/*')) {
+        $secao = 'pessoas';
+    } elseif (request()->is('admin/eventos*')) {
+        $secao = 'eventos';
+    } elseif (request()->is('admin/instagram*')) {
+        $secao = 'instagram';
+    }
+@endphp
+
+    <aside class="pa-sidebar" id="pa-sidebar">
+        <div class="pa-strip">
+            <a href="{{ url('admin/dashboard') }}" class="pa-logo" title="Trilhas em SC">
+                <i class="bi bi-lightning-charge-fill"></i>
+            </a>
+            <nav class="pa-strip-nav">
+                <button type="button" class="pa-strip-item {{ $secao === 'painel' ? 'is-active' : '' }}" data-panel="painel" title="Painel"><i class="bi bi-grid"></i></button>
+                <button type="button" class="pa-strip-item {{ $secao === 'trilhas' ? 'is-active' : '' }}" data-panel="trilhas" title="Trilhas"><i class="bi bi-signpost-2"></i></button>
+                <button type="button" class="pa-strip-item {{ $secao === 'pessoas' ? 'is-active' : '' }}" data-panel="pessoas" title="Pessoas"><i class="bi bi-people"></i></button>
+                <button type="button" class="pa-strip-item {{ $secao === 'eventos' ? 'is-active' : '' }}" data-panel="eventos" title="Eventos"><i class="bi bi-calendar-event"></i></button>
+                <button type="button" class="pa-strip-item {{ $secao === 'instagram' ? 'is-active' : '' }}" data-panel="instagram" title="Instagram"><i class="bi bi-instagram"></i></button>
+            </nav>
+            <div class="pa-strip-bottom">
+                <a href="{{ url('/') }}" class="pa-strip-item" title="Ver o site"><i class="bi bi-globe"></i></a>
+                <a href="{{ url('logout') }}" class="pa-strip-item" title="Sair" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <div class="pa-panel">
+            <div class="pa-panel-section {{ $secao === 'painel' ? 'is-active' : '' }}" data-section="painel">
+                <div class="pa-panel-header">
+                    <h6>Painel</h6>
+                    <button type="button" class="pa-panel-close" title="Recolher"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <ul class="pa-panel-nav">
+                    <li><a class="pa-panel-link {{ request()->is('admin/dashboard') ? 'is-active' : '' }}" href="{{ url('admin/dashboard') }}">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="pa-panel-section {{ $secao === 'trilhas' ? 'is-active' : '' }}" data-section="trilhas">
+                <div class="pa-panel-header">
+                    <h6>Trilhas</h6>
+                    <button type="button" class="pa-panel-close" title="Recolher"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <ul class="pa-panel-nav">
+                    <li><a class="pa-panel-link {{ request()->is('admin/listar-trilhas', 'admin/detalhes-trilha/*') ? 'is-active' : '' }}" href="{{ url('admin/listar-trilhas') }}">Listar</a></li>
+                    <li><a class="pa-panel-link {{ request()->is('admin/nova-trilha') ? 'is-active' : '' }}" href="{{ url('admin/nova-trilha') }}">Nova trilha</a></li>
+                </ul>
+            </div>
+            <div class="pa-panel-section {{ $secao === 'pessoas' ? 'is-active' : '' }}" data-section="pessoas">
+                <div class="pa-panel-header">
+                    <h6>Pessoas</h6>
+                    <button type="button" class="pa-panel-close" title="Recolher"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <ul class="pa-panel-nav">
+                    <li><a class="pa-panel-link {{ request()->is('admin/guias', 'admin/guias/listar') ? 'is-active' : '' }}" href="{{ url('admin/guias/listar') }}">Guias</a></li>
+                    <li><a class="pa-panel-link {{ request()->is('admin/guias/aprovar') ? 'is-active' : '' }}" href="{{ url('admin/guias/aprovar') }}">Guias pendentes</a></li>
+                    <li><a class="pa-panel-link {{ request()->is('admin/trilheiros*', 'admin/trilheiro/*') ? 'is-active' : '' }}" href="{{ url('admin/trilheiros/listar') }}">Trilheiros</a></li>
+                </ul>
+            </div>
+            <div class="pa-panel-section {{ $secao === 'eventos' ? 'is-active' : '' }}" data-section="eventos">
+                <div class="pa-panel-header">
+                    <h6>Eventos</h6>
+                    <button type="button" class="pa-panel-close" title="Recolher"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <ul class="pa-panel-nav">
+                    <li><a class="pa-panel-link {{ request()->is('admin/eventos*') ? 'is-active' : '' }}" href="{{ url('admin/eventos/listar') }}">Listar</a></li>
+                </ul>
+            </div>
+            <div class="pa-panel-section {{ $secao === 'instagram' ? 'is-active' : '' }}" data-section="instagram">
+                <div class="pa-panel-header">
+                    <h6>Instagram</h6>
+                    <button type="button" class="pa-panel-close" title="Recolher"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <ul class="pa-panel-nav">
+                    <li><a class="pa-panel-link {{ request()->is('admin/instagram*') ? 'is-active' : '' }}" href="{{ route('admin.instagram.metricas') }}">Métricas</a></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <div class="pa-overlay" id="pa-overlay"></div>
+
+    <header class="pa-header">
+        <button type="button" class="pa-icon-btn" id="pa-toggle" title="Menu">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="dropdown">
+            <button class="pa-icon-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Atalhos">
+                <i class="bi bi-grid-3x3-gap"></i>
             </button>
-            <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
-                <ul class="navbar-nav navbar-nav-hover mx-auto">
-                    <li class="nav-item mx-2">
-                        <a href="{{ url('admin/dashboard') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center {{ request()->is('admin/dashboard') ? 'is-active' : '' }}">Início</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a href="{{ url('admin/listar-trilhas') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center {{ request()->is('admin/listar-trilhas', 'admin/nova-trilha', 'admin/editar-trilha/*', 'admin/detalhes-trilha/*') ? 'is-active' : '' }}">Trilhas</a>
-                    </li>
-                    <li class="nav-item dropdown dropdown-hover mx-2">
-                        <a href="#" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center {{ request()->is('admin/guias*') ? 'is-active' : '' }}" data-bs-toggle="dropdown" aria-expanded="false">
-                            Guias
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item {{ request()->is('admin/guias', 'admin/guias/listar') ? 'is-active' : '' }}" href="{{ url('admin/guias/listar') }}">Listar</a></li>
-                            <li><a class="dropdown-item {{ request()->is('admin/guias/aprovar') ? 'is-active' : '' }}" href="{{ url('admin/guias/aprovar') }}">Pendentes</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a href="{{ url('admin/trilheiros/listar') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center {{ request()->is('admin/trilheiros*', 'admin/trilheiro/*') ? 'is-active' : '' }}">Trilheiros</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a href="{{ url('admin/eventos/listar') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center {{ request()->is('admin/eventos*') ? 'is-active' : '' }}">Eventos</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a href="{{ route('admin.instagram.metricas') }}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center {{ request()->is('admin/instagram*') ? 'is-active' : '' }}">Instagram</a>
-                    </li>
+            <div class="dropdown-menu pa-menu">
+                <div class="pa-apps">
+                    <a class="pa-app" href="{{ url('admin/dashboard') }}"><i class="bi bi-grid"></i>Painel</a>
+                    <a class="pa-app" href="{{ url('admin/listar-trilhas') }}"><i class="bi bi-signpost-2"></i>Trilhas</a>
+                    <a class="pa-app" href="{{ url('admin/guias/listar') }}"><i class="bi bi-person-badge"></i>Guias</a>
+                    <a class="pa-app" href="{{ url('admin/trilheiros/listar') }}"><i class="bi bi-people"></i>Trilheiros</a>
+                    <a class="pa-app" href="{{ url('admin/eventos/listar') }}"><i class="bi bi-calendar-event"></i>Eventos</a>
+                    <a class="pa-app" href="{{ route('admin.instagram.metricas') }}"><i class="bi bi-instagram"></i>Instagram</a>
+                </div>
+            </div>
+        </div>
+
+        <form class="pa-search" method="GET" action="{{ url('admin/listar-trilhas') }}">
+            <i class="bi bi-search"></i>
+            <input type="search" name="nome" placeholder="Buscar trilha..." value="{{ request()->is('admin/listar-trilhas') ? request('nome') : '' }}" autocomplete="off">
+            <kbd>/</kbd>
+        </form>
+
+        <div class="pa-header-right">
+            <a href="{{ url('/') }}" class="pa-icon-btn d-none d-md-inline-flex" title="Ver o site"><i class="bi bi-box-arrow-up-right"></i></a>
+            <div class="dropdown">
+                <button class="pa-user-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="pa-avatar">{{ $inicial }}</span>
+                    <span class="pa-user-meta">
+                        <span class="pa-user-name">{{ $primeiroNome }}</span>
+                        <span class="pa-user-role">Administrador</span>
+                    </span>
+                    <i class="bi bi-chevron-down pa-user-meta"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end pa-menu">
+                    <li><a class="dropdown-item" href="{{ url('/') }}"><i class="bi bi-globe me-2"></i>Ver o site</a></li>
+                    <li><a class="dropdown-item" href="{{ url('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
                 </ul>
-                <ul class="navbar-nav d-lg-block">
-                    <li class="nav-item">
-                        <a href="{{ url('/') }}" class="btn btn-sm bg-gradient-warning btn-round mb-0 me-1">VER O SITE</a>
-                        <a href="{{ url('logout') }}" class="btn btn-sm bg-gradient-danger btn-round mb-0 me-1" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SAIR</a>
-                    </li>
-                </ul>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <div class="page-header min-vh-35" style="background-image: url('{{ asset('img/bg/lagoinha-do-leste.jpg') }}');">
-        <span class="mask bg-gradient-dark opacity-6"></span>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-sm-10 text-center mx-auto">
-                    <h2 class="text-white mb-2">@yield('adminTitle', 'Área administrativa')</h2>
-                    <p class="lead text-white mb-0">@yield('adminLead', $primeiroNome ? 'Olá, '.$primeiroNome : 'Trilhas em Santa Catarina')</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 
-    <section class="admin-content pt-5 pb-5">
-        <div class="container-fluid px-lg-5">
-            @yield('content')
-        </div>
-    </section>
-
-    <footer class="footer py-5 bg-dark position-relative overflow-hidden">
-        <div class="container position-relative z-index-1">
-            <div class="row">
-                <div class="col-lg-6 me-auto mb-lg-0 mb-4 text-lg-start text-start">
-                    <h6 class="text-white font-weight-bolder text-uppercase mb-lg-4 mb-3">Trilhas em SC</h6>
-                    <ul class="nav flex-row ms-n3 justify-content-lg-start justify-content-start mb-4 mt-sm-0">
-                        <li class="nav-item"><a class="nav-link text-white opacity-8" href="{{ url('/') }}">Site</a></li>
-                        <li class="nav-item"><a class="nav-link text-white opacity-8" href="{{ url('admin/dashboard') }}">Administração</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-6 ms-auto text-lg-end text-start">
-                    <p class="mb-0 text-lg text-white font-weight-bold">Área administrativa</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <main class="pa-main">
+        @yield('content')
+    </main>
 
     <script src="{{ asset('vendor/jquery/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('js/core/bootstrap.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('vendor/parsleyjs/js/parsley.min.js') }}"></script>
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script>
         $.ajaxSetup({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
@@ -127,6 +176,68 @@
                 });
             };
         }
+
+        (function () {
+            var body = document.body;
+            var desktop = function () { return window.innerWidth >= 992; };
+
+            if (desktop() && localStorage.getItem('pa-sidebar') === 'collapsed') {
+                body.classList.add('pa-collapsed');
+            }
+
+            function showPanel(name) {
+                document.querySelectorAll('.pa-strip-item[data-panel]').forEach(function (item) {
+                    item.classList.toggle('is-active', item.getAttribute('data-panel') === name);
+                });
+                document.querySelectorAll('.pa-panel-section').forEach(function (section) {
+                    section.classList.toggle('is-active', section.getAttribute('data-section') === name);
+                });
+            }
+
+            document.getElementById('pa-toggle').addEventListener('click', function () {
+                if (desktop()) {
+                    body.classList.toggle('pa-collapsed');
+                    localStorage.setItem('pa-sidebar', body.classList.contains('pa-collapsed') ? 'collapsed' : 'open');
+                } else {
+                    body.classList.toggle('pa-sidebar-open');
+                }
+            });
+
+            document.getElementById('pa-overlay').addEventListener('click', function () {
+                body.classList.remove('pa-sidebar-open');
+            });
+
+            document.querySelectorAll('.pa-strip-item[data-panel]').forEach(function (item) {
+                item.addEventListener('click', function () {
+                    showPanel(item.getAttribute('data-panel'));
+                    if (desktop() && body.classList.contains('pa-collapsed')) {
+                        body.classList.remove('pa-collapsed');
+                        localStorage.setItem('pa-sidebar', 'open');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.pa-panel-close').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    if (desktop()) {
+                        body.classList.add('pa-collapsed');
+                        localStorage.setItem('pa-sidebar', 'collapsed');
+                    } else {
+                        body.classList.remove('pa-sidebar-open');
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === '/' && document.activeElement && !/input|textarea|select/i.test(document.activeElement.tagName)) {
+                    var field = document.querySelector('.pa-search input');
+                    if (field) {
+                        event.preventDefault();
+                        field.focus();
+                    }
+                }
+            });
+        })();
 
         $(function () {
             $(document).on('click', '[data-dismiss="modal"]', function () {
