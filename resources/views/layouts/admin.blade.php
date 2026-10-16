@@ -21,85 +21,51 @@
 @php
     $primeiroNome = Auth::user() ? explode(' ', trim(Auth::user()->name))[0] : 'Admin';
     $inicial = mb_strtoupper(mb_substr($primeiroNome, 0, 1));
-    $secao = 'painel';
-    if (request()->is('admin/listar-trilhas', 'admin/nova-trilha', 'admin/editar-trilha/*', 'admin/detalhes-trilha/*')) {
-        $secao = 'trilhas';
-    } elseif (request()->is('admin/guias*', 'admin/trilheiros*', 'admin/trilheiro/*')) {
-        $secao = 'pessoas';
-    } elseif (request()->is('admin/eventos*')) {
-        $secao = 'eventos';
-    } elseif (request()->is('admin/instagram*')) {
-        $secao = 'instagram';
-    }
 @endphp
 
     <aside class="pa-sidebar" id="pa-sidebar">
-        <div class="pa-strip">
-            <a href="{{ url('admin/dashboard') }}" class="pa-logo" title="Trilhas em SC">
-                <i class="bi bi-lightning-charge-fill"></i>
+        <a href="{{ url('admin/dashboard') }}" class="pa-brand">
+            <span class="pa-logo"><i class="bi bi-lightning-charge-fill"></i></span>
+            <span class="pa-brand-text">Trilhas em SC</span>
+        </a>
+        <nav class="pa-nav">
+            <p class="pa-nav-label">Painel</p>
+            <a class="pa-nav-link {{ request()->is('admin/dashboard') ? 'is-active' : '' }}" href="{{ url('admin/dashboard') }}">
+                <i class="bi bi-speedometer2"></i><span>Dashboard</span>
             </a>
-            <nav class="pa-strip-nav">
-                <button type="button" class="pa-strip-item {{ $secao === 'painel' ? 'is-active' : '' }}" data-panel="painel" title="Painel"><i class="bi bi-grid"></i></button>
-                <button type="button" class="pa-strip-item {{ $secao === 'trilhas' ? 'is-active' : '' }}" data-panel="trilhas" title="Trilhas"><i class="bi bi-signpost-2"></i></button>
-                <button type="button" class="pa-strip-item {{ $secao === 'pessoas' ? 'is-active' : '' }}" data-panel="pessoas" title="Pessoas"><i class="bi bi-people"></i></button>
-                <button type="button" class="pa-strip-item {{ $secao === 'eventos' ? 'is-active' : '' }}" data-panel="eventos" title="Eventos"><i class="bi bi-calendar-event"></i></button>
-                <button type="button" class="pa-strip-item {{ $secao === 'instagram' ? 'is-active' : '' }}" data-panel="instagram" title="Instagram"><i class="bi bi-instagram"></i></button>
-            </nav>
-            <div class="pa-strip-bottom">
-                <a href="{{ url('/') }}" class="pa-strip-item" title="Ver o site"><i class="bi bi-globe"></i></a>
-                <a href="{{ url('logout') }}" class="pa-strip-item" title="Sair" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i></a>
-            </div>
-        </div>
 
-        <div class="pa-panel">
-            <div class="pa-panel-section {{ $secao === 'painel' ? 'is-active' : '' }}" data-section="painel">
-                <div class="pa-panel-header">
-                    <h6>Painel</h6>
-                    <button type="button" class="pa-panel-close" title="Recolher"><i class="bi bi-x-lg"></i></button>
-                </div>
-                <ul class="pa-panel-nav">
-                    <li><a class="pa-panel-link {{ request()->is('admin/dashboard') ? 'is-active' : '' }}" href="{{ url('admin/dashboard') }}">Dashboard</a></li>
-                </ul>
-            </div>
-            <div class="pa-panel-section {{ $secao === 'trilhas' ? 'is-active' : '' }}" data-section="trilhas">
-                <div class="pa-panel-header">
-                    <h6>Trilhas</h6>
-                    <button type="button" class="pa-panel-close" title="Recolher"><i class="bi bi-x-lg"></i></button>
-                </div>
-                <ul class="pa-panel-nav">
-                    <li><a class="pa-panel-link {{ request()->is('admin/listar-trilhas', 'admin/detalhes-trilha/*') ? 'is-active' : '' }}" href="{{ url('admin/listar-trilhas') }}">Listar</a></li>
-                    <li><a class="pa-panel-link {{ request()->is('admin/nova-trilha') ? 'is-active' : '' }}" href="{{ url('admin/nova-trilha') }}">Nova trilha</a></li>
-                </ul>
-            </div>
-            <div class="pa-panel-section {{ $secao === 'pessoas' ? 'is-active' : '' }}" data-section="pessoas">
-                <div class="pa-panel-header">
-                    <h6>Pessoas</h6>
-                    <button type="button" class="pa-panel-close" title="Recolher"><i class="bi bi-x-lg"></i></button>
-                </div>
-                <ul class="pa-panel-nav">
-                    <li><a class="pa-panel-link {{ request()->is('admin/guias', 'admin/guias/listar') ? 'is-active' : '' }}" href="{{ url('admin/guias/listar') }}">Guias</a></li>
-                    <li><a class="pa-panel-link {{ request()->is('admin/guias/aprovar') ? 'is-active' : '' }}" href="{{ url('admin/guias/aprovar') }}">Guias pendentes</a></li>
-                    <li><a class="pa-panel-link {{ request()->is('admin/trilheiros*', 'admin/trilheiro/*') ? 'is-active' : '' }}" href="{{ url('admin/trilheiros/listar') }}">Trilheiros</a></li>
-                </ul>
-            </div>
-            <div class="pa-panel-section {{ $secao === 'eventos' ? 'is-active' : '' }}" data-section="eventos">
-                <div class="pa-panel-header">
-                    <h6>Eventos</h6>
-                    <button type="button" class="pa-panel-close" title="Recolher"><i class="bi bi-x-lg"></i></button>
-                </div>
-                <ul class="pa-panel-nav">
-                    <li><a class="pa-panel-link {{ request()->is('admin/eventos*') ? 'is-active' : '' }}" href="{{ url('admin/eventos/listar') }}">Listar</a></li>
-                </ul>
-            </div>
-            <div class="pa-panel-section {{ $secao === 'instagram' ? 'is-active' : '' }}" data-section="instagram">
-                <div class="pa-panel-header">
-                    <h6>Instagram</h6>
-                    <button type="button" class="pa-panel-close" title="Recolher"><i class="bi bi-x-lg"></i></button>
-                </div>
-                <ul class="pa-panel-nav">
-                    <li><a class="pa-panel-link {{ request()->is('admin/instagram*') ? 'is-active' : '' }}" href="{{ route('admin.instagram.metricas') }}">Métricas</a></li>
-                </ul>
-            </div>
+            <p class="pa-nav-label">Conteúdo</p>
+            <a class="pa-nav-link {{ request()->is('admin/listar-trilhas', 'admin/editar-trilha/*', 'admin/detalhes-trilha/*') ? 'is-active' : '' }}" href="{{ url('admin/listar-trilhas') }}">
+                <i class="bi bi-map"></i><span>Trilhas</span>
+            </a>
+            <a class="pa-nav-link {{ request()->is('admin/nova-trilha') ? 'is-active' : '' }}" href="{{ url('admin/nova-trilha') }}">
+                <i class="bi bi-plus-circle"></i><span>Nova trilha</span>
+            </a>
+            <a class="pa-nav-link {{ request()->is('admin/eventos*') ? 'is-active' : '' }}" href="{{ url('admin/eventos/listar') }}">
+                <i class="bi bi-calendar-event"></i><span>Eventos</span>
+            </a>
+            <a class="pa-nav-link {{ request()->is('admin/instagram*') ? 'is-active' : '' }}" href="{{ route('admin.instagram.metricas') }}">
+                <i class="bi bi-instagram"></i><span>Instagram</span>
+            </a>
+
+            <p class="pa-nav-label">Pessoas</p>
+            <a class="pa-nav-link {{ request()->is('admin/guias', 'admin/guias/listar') ? 'is-active' : '' }}" href="{{ url('admin/guias/listar') }}">
+                <i class="bi bi-person-badge"></i><span>Guias</span>
+            </a>
+            <a class="pa-nav-link {{ request()->is('admin/guias/aprovar') ? 'is-active' : '' }}" href="{{ url('admin/guias/aprovar') }}">
+                <i class="bi bi-hourglass-split"></i><span>Guias pendentes</span>
+            </a>
+            <a class="pa-nav-link {{ request()->is('admin/trilheiros*', 'admin/trilheiro/*') ? 'is-active' : '' }}" href="{{ url('admin/trilheiros/listar') }}">
+                <i class="bi bi-people"></i><span>Trilheiros</span>
+            </a>
+        </nav>
+        <div class="pa-nav-bottom">
+            <a class="pa-nav-link" href="{{ url('/') }}">
+                <i class="bi bi-globe"></i><span>Ver o site</span>
+            </a>
+            <a class="pa-nav-link" href="{{ url('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="bi bi-box-arrow-right"></i><span>Sair</span>
+            </a>
         </div>
     </aside>
     <div class="pa-overlay" id="pa-overlay"></div>
@@ -185,15 +151,6 @@
                 body.classList.add('pa-collapsed');
             }
 
-            function showPanel(name) {
-                document.querySelectorAll('.pa-strip-item[data-panel]').forEach(function (item) {
-                    item.classList.toggle('is-active', item.getAttribute('data-panel') === name);
-                });
-                document.querySelectorAll('.pa-panel-section').forEach(function (section) {
-                    section.classList.toggle('is-active', section.getAttribute('data-section') === name);
-                });
-            }
-
             document.getElementById('pa-toggle').addEventListener('click', function () {
                 if (desktop()) {
                     body.classList.toggle('pa-collapsed');
@@ -207,22 +164,9 @@
                 body.classList.remove('pa-sidebar-open');
             });
 
-            document.querySelectorAll('.pa-strip-item[data-panel]').forEach(function (item) {
-                item.addEventListener('click', function () {
-                    showPanel(item.getAttribute('data-panel'));
-                    if (desktop() && body.classList.contains('pa-collapsed')) {
-                        body.classList.remove('pa-collapsed');
-                        localStorage.setItem('pa-sidebar', 'open');
-                    }
-                });
-            });
-
-            document.querySelectorAll('.pa-panel-close').forEach(function (button) {
-                button.addEventListener('click', function () {
-                    if (desktop()) {
-                        body.classList.add('pa-collapsed');
-                        localStorage.setItem('pa-sidebar', 'collapsed');
-                    } else {
+            document.querySelectorAll('.pa-nav-link').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    if (!desktop()) {
                         body.classList.remove('pa-sidebar-open');
                     }
                 });
