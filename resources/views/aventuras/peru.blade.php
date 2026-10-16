@@ -320,23 +320,29 @@
             <div class="row g-3">
                 @php
                 $huayhuash = [
-                    ['26/08', 'QUA', 'Huayhuash - Dia 1', 'Matacancha (4.200 m) até Mitucocha. 11 km, ~5h. Ponto alto: Cacananpunta (4.680 m).'],
-                    ['27/08', 'QUI', 'Huayhuash - Dia 2', 'Rota alpina alternativa, fósseis marinhos e mirante das Três Lagunas. Chegada em Carhuacocha (4.100 m). 13 km, ~7h.'],
-                    ['28/08', 'SEX', 'Huayhuash - Dia 3', 'Trecho até o acampamento Huayhuash (4.350 m), com passagem por lagoa e mirante de geleira. ~8h de caminhada.'],
-                    ['29/08', 'SÁB', 'Huayhuash - Dia 4', 'Subida ao Paso Trapecio (5.041 m). Opcional até geleira (40 min) e/ou Paso San Antonio (5.100 m). Descida para Cuyoc (4.400 m).'],
-                    ['30/08', 'DOM', 'Huayhuash - Dia 5', 'Paso Santa Rosa com vista do Siula Grande. 19 km, ~9h. Acampamento em Huayllapa (3.487 m).'],
-                    ['31/08', 'SEG', 'Huayhuash - Dia 6', 'Subida ao Paso Tapush (4.800 m) e descida ao acampamento (4.400 m). 13 km, ~7h.'],
-                    ['01/09', 'TER', 'Huayhuash - Dia 7', 'Rumo ao Paso Yaucha (4.800 m). Opcional: mirador com duas lagunas. Acampamento em ~4.000 m.'],
-                    ['02/09', 'QUA', 'Huayhuash - Dia 8 · Fim da caminhada', '16 km (~5h) até Llamac, em trecho plano/descida. Retorno de veículo para Huaráz (~4h).'],
+                    ['26/08', 'QUA', 'Dia 1 · Huaraz -> Matacancha -> Mitucocha', 'Saída de Huaraz às 03:00 e deslocamento (~5h) até Matacancha (4.200 m). Trek de 11 km (~5h) via Paso Cacananpunta (4.680 m), ponto mais alto do dia.', 'Wikiloc - Dia 1', 'https://pt.wikiloc.com/trilhas-montanhismo/huayhuash-1-matacancha-cacananpunta-lago-mitucocha-40074430', '', ''],
+                    ['27/08', 'QUI', 'Dia 2 · Mitucocha -> Carhuacocha', 'Saída às 07:00 por rota alpina com fósseis marinhos e mirante das Três Lagoas. Descida até Carhuacocha (4.100 m). Distância: ~13 km. Duração: ~7h (4h subida / 3h descida).', 'Wikiloc - Dia 2', 'https://pt.wikiloc.com/trilhas-montanhismo/huayhuash-2-lago-mitucocha-carhuac-lago-carhuacocha-40074477', '', ''],
+                    ['28/08', 'SEX', 'Dia 3 · Carhuacocha -> Paso Siula -> Huayhuash', 'Dia muito cênico, com mirante em frente à geleira e chance de ver avalanches naturais. Travessia até o acampamento Huayhuash (4.350 m). Duração: ~8h.', 'Wikiloc - Dia 3', 'https://pt.wikiloc.com/trilhas-montanhismo/huayhuash-3-lago-carhuacocha-siula-huayhuash-40074493', '', ''],
+                    ['29/08', 'SÁB', 'Dia 4 · Huayhuash -> Paso Trapecio -> Cuyoc', 'Subida ao Paso Trapecio (5.041 m). Opcional: extensão até geleira (+40 min) ou Paso San Antonio (5.100 m, +2h). Descida por lagoas até Cuyocpampa (~4.400 m). Duração: 6 a 7h.', 'Wikiloc - Dia 4', 'https://ca.wikiloc.com/rutes-senderisme/trek-huayhuash-e4-huayhuash-pas-trapecio-llacuna-huanacpatay-cuyocpampa-185467625', '', ''],
+                    ['30/08', 'DOM', 'Dia 5 · Cuyoc -> Paso Santa Rosa -> Huayllapa', 'Um dos dias mais exigentes e icônicos. Vista para o Siula Grande desde o Paso Santa Rosa. Distância: ~19 km. Duração: ~9h. Acampamento em Huayllapa (3.487 m).', 'Wikiloc - Dia 5', 'https://ca.wikiloc.com/rutes-senderisme/campo-cuyoc-paso-santa-rosa-cutatambo-huayyapa-135720832', '', ''],
+                    ['31/08', 'SEG', 'Dia 6 · Huayllapa -> Paso Tapush -> Gashpapampa', 'Subida constante ao Paso Tapush (4.800 m) em 4 a 5h, seguida de descida ao acampamento. Distância: ~13 km. Duração total: ~7h.', 'Wikiloc - Dia 6', 'https://pt.wikiloc.com/trilhas-trekking/trek-huayhuash-e6-huayllapa-pas-tapush-gashpapampa-185810058', '', ''],
+                    ['01/09', 'TER', 'Dia 7 · Gashpapampa -> Paso Yaucha -> Jahuacocha', 'Subida ao Paso Yaucha (4.800 m) em cerca de 1h30. Opcional para mirante de duas lagoas. Descida para região de Jahuacocha (~4.000 m).', 'Wikiloc - Dia 7 (rota 1)', 'https://www.wikiloc.com/hiking-trails/trek-huayhuash-e7-gashpapampa-pas-yaucha-jahuacocha-185808070', 'Wikiloc - Dia 7 (rota 2)', 'https://pt.wikiloc.com/trilhas-montanhismo/huayhuash-8-gashcapampa-diablo-mudo-laguna-jahuacocha-40074594'],
+                    ['02/09', 'QUA', 'Dia 8 · Jahuacocha -> Llamac -> Huaraz', 'Último dia com 16 km em trajeto majoritariamente de descida até Llamac. Depois, retorno de carro para Huaraz (~4h).', 'Wikiloc - Dia 8', 'https://pt.wikiloc.com/trilhas-montanhismo/huayhuash-9-lago-jahuacocha-llamac-40074633', '', ''],
                 ];
                 @endphp
                 @foreach($huayhuash as $dia)
                     <div class="col-md-6 col-lg-3">
-                        <div class="p-3 rounded-3 text-center h-100" style="background: rgba(220,53,69,.12); border: 1px solid rgba(220,53,69,.35);">
+                        <div class="p-3 rounded-3 text-start h-100" style="background: rgba(220,53,69,.12); border: 1px solid rgba(220,53,69,.35);">
                             <span class="fw-bold text-danger d-block fs-5">{{ $dia[0] }}</span>
                             <span class="text-white-50 small d-block mb-2">{{ $dia[1] }}</span>
                             <p class="text-white mb-1 small fw-bold">{{ $dia[2] }}</p>
-                            <p class="text-white-50 mb-0 small">{{ $dia[3] }}</p>
+                            <p class="text-white-50 mb-2 small">{{ $dia[3] }}</p>
+                            @if(!empty($dia[4]) && !empty($dia[5]))
+                                <a href="{{ $dia[5] }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-danger btn-sm rounded-pill px-3 py-1 trail-link-btn mb-1">{{ $dia[4] }}</a>
+                            @endif
+                            @if(!empty($dia[6]) && !empty($dia[7]))
+                                <a href="{{ $dia[7] }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-danger btn-sm rounded-pill px-3 py-1 trail-link-btn">{{ $dia[6] }}</a>
+                            @endif
                         </div>
                     </div>
                 @endforeach
