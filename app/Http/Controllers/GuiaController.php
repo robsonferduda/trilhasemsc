@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Cidade;
+use App\Exceptions\CadasturIndisponivelException;
 use App\Fone;
 use App\Guia;
 use App\GuiaTrilha;
 use App\Trilheiro;
 use App\Trilha;
 use App\Interacao;
+use App\Jobs\VerificarCadasturGuiaJob;
 use App\Mail\GuiaConfirmacao;
+use App\Services\CadasturService;
 use App\UnidadeConservacao;
 use App\Mail\GuiaModeracao;
 use App\User;
@@ -157,7 +160,7 @@ class GuiaController extends Controller
                             $guia = Guia::create([
                                 'id_user' => $usuario->id,
                                 'nm_guia_gui' => $usuario->name,
-                                'cadastur' => $request->cadastur
+                                'nu_cadastur_gui' => $request->cadastur
                             ]);
                         }
 
@@ -290,6 +293,8 @@ class GuiaController extends Controller
             $whatsap = $request->whatsap;
             $imagem_deletada = $request->imagem_deletada;
             $cadastur = $request->cadastur;
+            $cadasturAlterado = CadasturService::somenteDigitos($cadastur) !== CadasturService::somenteDigitos($guia->nu_cadastur_gui);
+            $verificarCadastur = $cadasturAlterado || $guia->sg_cadastur_situacao_gui === null;
 
             $guia->update([
                 'cd_cidade_origem_gui' => $cidadeOrigem,
@@ -305,6 +310,16 @@ class GuiaController extends Controller
 
             $guia->cidadesAtuacao()->sync($cidadesAtuacao);
             $guia->unidadesConservacao()->sync($unidades_conservacao);
+
+            $servicoCadastur = app(CadasturService::class);
+
+            if ($cadasturAlterado) {
+                $servicoCadastur->reiniciar($guia);
+            }
+
+            if ($verificarCadastur && $servicoCadastur->habilitado()) {
+                VerificarCadasturGuiaJob::dispatch($guia->id_guia_gui);
+            }
 
             $imagem = null;
 
@@ -382,8 +397,47 @@ class GuiaController extends Controller
         }
 
         $guias_pendentes = Guia::where('fl_perfil_moderado_gui', false)->where('fl_perfil_recusado_gui', false)->get();
+        $cadasturApi = app(CadasturService::class)->habilitado();
 
-        return view('admin/guia/aprovar', compact('guias_pendentes'));
+        return view('admin/guia/aprovar', compact('guias_pendentes', 'cadasturApi'));
+    }
+
+    public function conferirCadastur(Request $request, CadasturService $cadastur, $id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $guia = Guia::with('user')->findOrFail($id);
+
+        if ($request->acao === 'reconsultar') {
+            if (!$cadastur->habilitado()) {
+                Flash::error('API do Cadastur não configurada.');
+                return redirect()->back();
+            }
+
+            try {
+                $cadastur->verificar($guia);
+                Flash::success('Cadastur de ' . e($guia->nm_guia_gui) . ' consultado: ' . str_replace('_', ' ', $guia->sg_cadastur_situacao_gui) . '.');
+            } catch (CadasturIndisponivelException $e) {
+                Flash::error('API do Cadastur indisponível: ' . e($e->getMessage()));
+            }
+
+            return redirect()->back();
+        }
+
+        $request->validate([
+            'situacao' => 'nullable|in:' . implode(',', CadasturService::SITUACOES_OFICIAIS),
+            'validade' => 'nullable|date|required_if:situacao,Regular,Vencido',
+        ], [
+            'validade.required_if' => 'Informe a validade do certificado para a situação ":value".',
+        ]);
+
+        $cadastur->aplicarManual($guia, $request->situacao, $request->validade, $request->has('titular_confere'));
+
+        Flash::success('Conferência do Cadastur de ' . e($guia->nm_guia_gui) . ' salva: ' . str_replace('_', ' ', $guia->sg_cadastur_situacao_gui) . '.');
+
+        return redirect()->back();
     }
 
     public function listar()
@@ -396,8 +450,9 @@ class GuiaController extends Controller
         $titulo = 'Guias e Condutores';
         
         $guias = Guia::with('user')->get();
+        $cadasturApi = app(CadasturService::class)->habilitado();
 
-        return view('admin/guia/listar', ['page_name' => $page_name, 'guias' => $guias]);
+        return view('admin/guia/listar', ['page_name' => $page_name, 'guias' => $guias, 'cadasturApi' => $cadasturApi]);
     }
 
     public function ativar($guia_id)

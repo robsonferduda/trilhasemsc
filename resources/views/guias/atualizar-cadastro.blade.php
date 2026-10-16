@@ -41,6 +41,7 @@
                                 <div class="form-group">
                                     <label for="nome">Número do Cadastur</label><span class="text-danger"> Obrigatório</span>
                                     <input type="text" name="cadastur" id="cadastur" value="{{ $guia->nu_cadastur_gui }}" class="form-control" required>
+                                    @include('guias.partes.situacao-cadastur', ['guia' => $guia])
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">

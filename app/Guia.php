@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\CadasturService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,7 +12,16 @@ class Guia extends Model
     
     protected $table = 'guia_gui';
     protected $primaryKey = 'id_guia_gui';
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at',
+        'dt_cadastur_emissao_gui',
+        'dt_cadastur_validade_gui',
+        'dt_cadastur_consulta_gui',
+        'dt_cadastur_aviso_validade_gui',
+    ];
+    protected $casts = [
+        'fl_cadastur_nome_confere_gui' => 'boolean',
+    ];
     protected $fillable = ['id_user',
         'cd_cidade_origem_gui',
         'nm_guia_gui',
@@ -26,6 +36,29 @@ class Guia extends Model
         ];
         
     public $timestamps = true;
+
+    /**
+     * 'valido', 'vencido', 'informado' ou null (número ausente ou reprovado na conferência).
+     */
+    public function getSeloCadasturAttribute()
+    {
+        $situacao = $this->sg_cadastur_situacao_gui;
+        $validade = $this->dt_cadastur_validade_gui;
+
+        if ($situacao === CadasturService::CONFERIDO && $validade && $validade->gte(today())) {
+            return 'valido';
+        }
+
+        if (in_array($situacao, [CadasturService::CONFERIDO, CadasturService::VENCIDO], true) && $validade) {
+            return 'vencido';
+        }
+
+        if (in_array($situacao, [null, CadasturService::PENDENTE], true) && trim((string) $this->nu_cadastur_gui) !== '') {
+            return 'informado';
+        }
+
+        return null;
+    }
 
     public function origem()
     {

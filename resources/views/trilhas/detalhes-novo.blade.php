@@ -166,6 +166,7 @@
                         @foreach($trilha->guias as $key => $guia)
                             <div class="col col-xs-1 col-sm-1 d-sm-block d-md-none mb-3">
                                 <a href="{{ url("guia/perfil/estatistica/perfil", $guia->nm_instagram_gui) }}"><img class="avatar avatar-xl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $guia->nm_guia_gui }}" loading="lazy" decoding="async"></a>
+                                <div class="text-center">@include('guias.partes.selo-cadastur', ['guia' => $guia, 'compacto' => true])</div>
                             </div>
                         @endforeach
                     </div>
@@ -173,6 +174,7 @@
                         @foreach($trilha->guias as $key => $guia)
                             <div class="col-sm-1 col-md-2 col-lg-2 d-none d-md-block">
                                 <a href="{{ url("guia/perfil/estatistica/perfil", $guia->nm_instagram_gui) }}"><img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $guia->nm_guia_gui }}" loading="lazy" decoding="async"></a>
+                                <div class="text-center">@include('guias.partes.selo-cadastur', ['guia' => $guia, 'compacto' => true])</div>
                             </div>
                         @endforeach
                     </div>

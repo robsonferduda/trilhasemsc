@@ -97,9 +97,7 @@
          <div class="col-md-12">
             <h2 class="h4">{{ $guia->nm_guia_gui }}</h2>
             <p><i class="fa fa-instagram"></i> <a href="{{ url("guia/perfil/estatistica/instagram", $guia->nm_instagram_gui) }}">{{ $guia->nm_instagram_gui }}</a></p>
-            @if($guia->nu_cadastur_gui)
-               <p><strong>Cadastur</strong>: {{ $guia->nu_cadastur_gui }} </p>
-            @endif
+            @include('guias.partes.selo-cadastur', ['guia' => $guia])
             @if(count($guia->unidadesConservacao) > 0)
                <p><strong>Unidades de Conservação</strong>: {{ count($guia->unidadesConservacao) > 0 ? implode(', ',$guia->unidadesConservacao->pluck('nome_unc')->toArray()) : ''}}</p>
             @endif

@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.admin')
 
 @section('content')
  <div class="block-header">
@@ -15,6 +15,7 @@
 </div>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12">
+        @include('layouts.mensagens')
         <div class="row clearfix">
             @forelse($guias_pendentes as $guia)
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -31,6 +32,7 @@
                                         <p><strong>Cidades de Origem</strong>: {{ ($guia->origem) ? $guia->origem->nm_cidade_cde : 'Santa Catarina' }}</p>
                                         <p><strong>Cidades de Atuação</strong>: {{ count($guia->cidadesAtuacao) > 0 ? implode(', ',$guia->cidadesAtuacao->pluck('nm_cidade_cde')->toArray()) : $guia->ds_atuacao_gui }}</p>
                                         <p><strong>Bibliografia</strong>{{ $guia->dc_biografia_gui }}</p>
+                                        @include('admin.guia.partes.cadastur', ['guia' => $guia])
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                         <div style="position: absolute; right: 0;">

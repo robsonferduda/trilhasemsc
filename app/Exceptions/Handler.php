@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\ServerErrorNotification;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Session\TokenMismatchException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 
 class Handler extends ExceptionHandler
 {
@@ -19,7 +22,9 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        TokenMismatchException::class,
+        ThrottleRequestsException::class,
+        MethodNotAllowedHttpException::class,
     ];
 
     /**
@@ -61,6 +66,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // CSRF expirado / token inválido: comum em abas antigas, bots e sessões longas.
+        // Não é falha do servidor — devolve o usuário ao formulário com mensagem clara.
+        if ($exception instanceof TokenMismatchException) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Sua sessão expirou. Recarregue a página e tente novamente.',
+                ], 419);
+            }
+
+            return redirect()
+                ->back()
+                ->withInput($request->except($this->dontFlash))
+                ->withErrors([
+                    '_token' => 'Sua sessão expirou. Por favor, tente novamente.',
+                ]);
+        }
+
         return parent::render($request, $exception);
     }
 
@@ -72,10 +94,13 @@ class Handler extends ExceptionHandler
      */
     protected function shouldReportError($exception)
     {
-        // Não reportar erros 404, 401, 403 e erros de validação
+        // Não reportar erros esperados do cliente / autenticação / validação
         if ($exception instanceof NotFoundHttpException ||
             $exception instanceof AuthenticationException ||
-            $exception instanceof ValidationException) {
+            $exception instanceof ValidationException ||
+            $exception instanceof TokenMismatchException ||
+            $exception instanceof ThrottleRequestsException ||
+            $exception instanceof MethodNotAllowedHttpException) {
             return false;
         }
 
@@ -87,11 +112,8 @@ class Handler extends ExceptionHandler
             }
         }
 
-        // Reportar apenas em ambiente de produção ou quando configurado
-        // Você pode comentar a linha abaixo se quiser receber notificações em todos os ambientes
+        // Reportar apenas em ambiente de produção
         return app()->environment('production');
-
-        return true;
     }
 
     /**

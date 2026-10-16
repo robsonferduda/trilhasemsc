@@ -56,4 +56,13 @@ return [
         ],
     ],
 
+    'cadastur' => [
+        'base_url' => env('CADASTUR_BASE_URL', 'https://apigateway.conectagov.estaleiro.serpro.gov.br/api-cadastur/v1'),
+        'token_url' => env('CADASTUR_TOKEN_URL', 'https://apigateway.conectagov.estaleiro.serpro.gov.br/oauth2/jwt-token'),
+        'client_id' => env('CADASTUR_CLIENT_ID'),
+        'client_secret' => env('CADASTUR_CLIENT_SECRET'),
+        'cpf_usuario' => env('CADASTUR_CPF_USUARIO'),
+        'timeout' => env('CADASTUR_TIMEOUT', 15),
+    ],
+
 ];

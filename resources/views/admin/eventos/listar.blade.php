@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends(request()->is('admin/*') ? 'layouts.admin' : 'layouts.template')
 
 @section('content')
     <div class="block-header">

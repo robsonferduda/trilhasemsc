@@ -18,6 +18,7 @@
                        <img class="avatar avatar-xxl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}">
                      </a>
                    <h6 class="mb-0 mt-2">{{ $guia->nm_guia_gui }}</h6>
+                   @include('guias.partes.selo-cadastur', ['guia' => $guia, 'compacto' => true])
                    <p>{{ ($guia->origem) ? $guia->origem->nm_cidade_cde : 'Santa Catarina' }}</p>
                    <div class="row justify-content-center text-center" style="position: absolute; bottom: 1px;">
                      <div class="col-lg-4 col-4">

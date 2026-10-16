@@ -28,6 +28,10 @@ class Kernel extends ConsoleKernel
                  ->dailyAt('00:00')
                  ->appendOutputTo(storage_path('logs/total-acessos-trilhas.log'));
 
+        $schedule->command('guias:verificar-cadastur')
+                 ->dailyAt('05:00')
+                 ->appendOutputTo(storage_path('logs/cadastur-verificacao.log'));
+
         $schedule->command('instagram:sync-metrics --days=1')
                  ->dailyAt('06:00')
                  ->appendOutputTo(storage_path('logs/instagram-metrics-sync.log'));
