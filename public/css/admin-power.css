@@ -850,6 +850,123 @@ body.pa-admin {
     align-items: center;
 }
 
+.pa-xp-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.pa-xp-total {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.pa-xp-total > i {
+    flex: 0 0 auto;
+    color: #d69e2e;
+    font-size: 1.2rem;
+}
+
+.pa-xp-total strong {
+    display: block;
+    font-size: 1.45rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--pa-heading);
+}
+
+.pa-xp-total span {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #718096;
+}
+
+.pa-xp-vazio {
+    margin: 0;
+    color: #4a5568;
+}
+
+.pa-xp-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pa-xp-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid var(--pa-border);
+    border-radius: 14px;
+}
+
+.pa-xp-icone {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+
+.pa-xp-texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.pa-xp-texto strong,
+.pa-xp-texto span {
+    display: block;
+}
+
+.pa-xp-texto strong {
+    color: var(--pa-heading);
+    font-size: 0.95rem;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.pa-xp-texto span {
+    margin-top: 2px;
+    color: #718096;
+    font-size: 0.8rem;
+    line-height: 1.35;
+}
+
+.pa-xp-texto em {
+    margin-left: 6px;
+    font-style: normal;
+}
+
+.pa-xp-texto em::before {
+    content: "·";
+    margin-right: 6px;
+}
+
+.pa-xp-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 4px;
+    border-radius: 50%;
+    vertical-align: baseline;
+}
+
+.pa-xp-pontos {
+    flex: 0 0 auto;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--pa-accent);
+    white-space: nowrap;
+}
+
 .trilheiro-evento-acoes {
     display: flex;
     flex-wrap: wrap;
@@ -861,6 +978,27 @@ body.pa-admin {
 .trilheiro-trilhas {
     margin-left: 0;
     margin-right: 0;
+}
+
+@media (max-width: 767.98px) {
+    .pa-xp-topo {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pa-xp-topo .btn {
+        width: 100%;
+    }
+
+    .pa-xp-item {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .pa-xp-icone {
+        width: 36px;
+        height: 36px;
+    }
 }
 
 @media (max-width: 991.98px) {

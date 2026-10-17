@@ -51,7 +51,7 @@
                         </div>
                     @endif
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-12">
+                        <div class="col-12 col-lg-3 col-md-3">
                             <div class="pa-perfil-identidade">
                                 @switch(trim(Auth::user()->id_role))
                                     @case('ADMIN')
@@ -89,54 +89,49 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-9">
+                        <div class="col-12 col-lg-9 col-md-9">
                             <div class="card profile-header">
                                 <div class="body">
-                                    <div class="d-none d-md-block">
-                                        @if($trilheiro->nu_pontos_experiencia_tri)
-                                            <h6 class="mb-2"><i class="fa fa-star text-warning" aria-hidden="true"></i> <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong> Pontos de Experiência</h6>
-                                        @else
-                                            <p class="mb-2"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
-                                        @endif
-                                        @if($ehDono)
-                                            <p class="mt-2 mb-3"><a href="{{ url('trilheiro/privado/trilhas') }}">Selecionar trilhas</a></p>
-                                        @endif
-                                    </div>
-                                    <div class="d-block center d-md-none">
-                                        @if($trilheiro->nu_pontos_experiencia_tri)
-                                            <h6 class="mb-2"><i class="fa fa-star text-warning" aria-hidden="true"></i> <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong> Pontos de Experiência</h6>
-                                        @else
-                                            <p class="mb-2"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
-                                        @endif
-                                        @if($ehDono)
-                                            <p class="mt-2 center"><a href="{{ url('trilheiro/privado/trilhas') }}">Selecionar trilhas</a></p>
-                                        @endif
-                                    </div>
-                                    @foreach($trilheiro->trilhas as $key => $trilha)
-                                        <div class="row mb-3 mt-3">
-                                            <div class="col-lg-1 col-md-1 mr-0 ml-0 px-2 d-none d-sm-none d-md-block">
-                                                <img class="img-fluid mt-2" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
-                                            </div>
-                                            <div class="col-lg-9 col-md-9 d-none d-md-block">
-                                                <h6>{{ $trilha->nm_trilha_tri }}</h6>
-                                                <p>{{ $trilha->nivel->dc_nivel_niv }} - {{ $trilha->complemento->nm_complemento_nivel_con }} </p>
-                                            </div>
-                                            <div class="col-lg-2 col-md-2 d-none d-md-block">
-                                                <h5 class="float-right mt-2">+{{ $trilha->complemento->nu_pontos_con }}</h5>
-                                            </div>
-
-                                            <div class="col-sm-12 mr-0 ml-0 px-2 d-block d-md-none center">
-                                                <img class="img-fluid mt-2 w-50" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
-                                            </div>
-                                            <div class="col-sm-12 d-block d-md-none center mb-0">
-                                                <h6 class="mt-2">{{ $trilha->nm_trilha_tri }}</h6>
-                                                <p class="mb-0">{{ $trilha->nivel->dc_nivel_niv }} - {{ $trilha->complemento->nm_complemento_nivel_con }} </p>
-                                            </div>
-                                            <div class="col-sm-12 col-md-2 mt-0 d-block d-md-none center">
-                                                <h6 class="center mt-0">+{{ $trilha->complemento->nu_pontos_con }}</h6>
-                                            </div>
+                                    <div class="pa-xp">
+                                        <div class="pa-xp-topo">
+                                            @if($trilheiro->nu_pontos_experiencia_tri)
+                                                <div class="pa-xp-total">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <div>
+                                                        <strong>{{ $trilheiro->nu_pontos_experiencia_tri }}</strong>
+                                                        <span>Pontos de Experiência</span>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <p class="pa-xp-vazio"><i class="fa fa-star" aria-hidden="true"></i> Você não possui nenhum ponto por experiência em trilhas.</p>
+                                            @endif
+                                            @if($ehDono)
+                                                <a class="btn btn-primary btn-sm" href="{{ url('trilheiro/privado/trilhas') }}">Selecionar trilhas</a>
+                                            @endif
                                         </div>
-                                    @endforeach
+                                        @if($trilheiro->trilhas->count())
+                                            <div class="pa-xp-lista">
+                                                @foreach($trilheiro->trilhas as $trilha)
+                                                    <article class="pa-xp-item">
+                                                        <img class="pa-xp-icone" src="{{ asset('img/trilhas/nivel/'.$trilha->nivel->dc_icone_niv) }}" alt="Grau de dificuldade da trilha {{ $trilha->nivel->dc_nivel_niv }}">
+                                                        <div class="pa-xp-texto">
+                                                            <strong>{{ $trilha->nm_trilha_tri }}</strong>
+                                                            <span>
+                                                                @if($trilha->nivel->dc_color_nivel_niv)
+                                                                    <i class="pa-xp-dot" style="background: {{ $trilha->nivel->dc_color_nivel_niv }}"></i>
+                                                                @endif
+                                                                {{ $trilha->nivel->dc_nivel_niv }}
+                                                                @if($trilha->complemento->nm_complemento_nivel_con)
+                                                                    <em>{{ $trilha->complemento->nm_complemento_nivel_con }}</em>
+                                                                @endif
+                                                            </span>
+                                                        </div>
+                                                        <span class="pa-xp-pontos">+{{ $trilha->complemento->nu_pontos_con }}</span>
+                                                    </article>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
