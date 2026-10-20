@@ -90,3 +90,26 @@ Arquivo:
 - `app/Console/Kernel.php`
 
 Lembrete: para o agendamento funcionar em produção, configure o cron do Laravel executando `php artisan schedule:run` a cada minuto.
+
+## 6) Publicação automática de stories
+
+Comando:
+
+```bash
+php artisan instagram:publicar-trilha --dry-run --ignorar-agenda
+php artisan instagram:publicar-trilha --publish --trilha=123 --ignorar-agenda
+```
+
+O story é uma imagem 1080×1920 com a foto da trilha, o nome e o endereço `trilhasemsc.com.br/ig`. A Graph API publica com `media_type=STORIES`. Ela não aceita o adesivo de link clicável.
+
+O link da bio e do perfil deve apontar para `https://trilhasemsc.com.br/ig`. Essa rota abre a trilha da última publicação. A publicação real só acontece com `INSTAGRAM_PUBLISH_ENABLED=true` ou com `--publish`.
+
+Regras padrão:
+
+- só trilhas publicadas, da categoria 1, com foto
+- no máximo 1 story por dia
+- terça, quinta e sábado, às 11:00
+- a mesma trilha só volta depois de 90 dias
+- prioridade: nunca publicada, depois a mais antiga, desempate por votos
+
+A conta precisa da permissão `instagram_content_publish`. A imagem do story é gerada neste servidor e precisa estar acessível em `INSTAGRAM_PUBLIC_BASE_URL`.

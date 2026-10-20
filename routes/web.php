@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('ig', 'InstagramBioController@redirect')->name('instagram.bio');
 Route::get('home', 'HomeController@index')->name('home');
 Route::get('novo', 'HomeController@novo')->name('novo');
 Route::get('perfil/{id}', 'HomeController@perfil')->name('perfil');

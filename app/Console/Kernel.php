@@ -39,6 +39,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('instagram:sync-media-metrics --days=60 --limit=100')
              ->dailyAt('06:20')
              ->appendOutputTo(storage_path('logs/instagram-media-metrics-sync.log'));
+
+        $schedule->command('instagram:publicar-trilha')
+             ->dailyAt('11:00')
+             ->appendOutputTo(storage_path('logs/instagram-publicacao.log'));
     }
 
     /**
