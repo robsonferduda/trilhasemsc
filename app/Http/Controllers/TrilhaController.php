@@ -381,7 +381,11 @@ class TrilhaController extends Controller
         $fileName = $trilha->id_trilha_tri . '-story-' . date('YmdHis') . '.jpg';
         $this->removerImagemStory($trilha);
 
-        \Image::make($arquivo->getRealPath())->encode('jpg', 90)->save($dir . DIRECTORY_SEPARATOR . $fileName);
+        $imagem = \Image::make($arquivo->getRealPath());
+        if (function_exists('exif_read_data')) {
+            $imagem->orientate();
+        }
+        $imagem->encode('jpg', 90)->save($dir . DIRECTORY_SEPARATOR . $fileName);
 
         $trilha->update(['ds_path_story_instagram_tri' => $fileName]);
         Flash::success('Imagem do story salva com sucesso.');
