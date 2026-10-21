@@ -130,7 +130,7 @@ class InstagramPublicadorTrilha
      */
     private function idsPublicadosRecentemente($coluna)
     {
-        $cooldown = (int) config('services.instagram.publish.cooldown_days', 90);
+        $cooldown = (int) config('services.instagram.publish.cooldown_days', 30);
 
         return InstagramPublicacao::query()
             ->where('ds_status_ipu', 'publicado')

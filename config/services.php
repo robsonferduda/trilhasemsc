@@ -57,7 +57,7 @@ return [
         'publish' => [
             'enabled' => filter_var(env('INSTAGRAM_PUBLISH_ENABLED', false), FILTER_VALIDATE_BOOLEAN),
             'public_base_url' => env('INSTAGRAM_PUBLIC_BASE_URL', 'https://trilhasemsc.com.br'),
-            'cooldown_days' => (int) env('INSTAGRAM_PUBLISH_COOLDOWN_DAYS', 90),
+            'cooldown_days' => (int) env('INSTAGRAM_PUBLISH_COOLDOWN_DAYS', 30),
             'max_per_day' => (int) env('INSTAGRAM_PUBLISH_MAX_PER_DAY', 1),
             'weekdays' => array_map('intval', array_filter(explode(',', env('INSTAGRAM_PUBLISH_WEEKDAYS', '2,4,6')), 'strlen')),
             'categoria_id' => env('INSTAGRAM_PUBLISH_CATEGORIA', 1),
