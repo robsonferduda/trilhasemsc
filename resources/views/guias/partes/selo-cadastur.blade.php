@@ -15,5 +15,7 @@
         <span class="badge badge-warning" style="font-size: .85rem;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Cadastur vencido em {{ $guia->dt_cadastur_validade_gui->format('d/m/Y') }}</span>
     </p>
 @elseif($selo === 'informado')
-    <p><strong>Cadastur</strong>: {{ $guia->nu_cadastur_gui }} <span class="small text-secondary">(informado pelo guia)</span></p>
+    <p class="mb-0">
+        <span class="badge badge-secondary" style="font-size: .85rem;"><i class="fa fa-id-card" aria-hidden="true"></i> Cadastur {{ $guia->nu_cadastur_gui }}</span>
+    </p>
 @endif

@@ -114,6 +114,25 @@ class GuiaController extends Controller
         return redirect($url);
     }
 
+    public function registrarInteracao($tipo, $identificador)
+    {
+        if (is_numeric($identificador)) {
+            $guia = Guia::where('id_guia_gui', $identificador)->first();
+        } else {
+            $guia = Guia::where('nm_instagram_gui', $identificador)->first();
+        }
+
+        $mapa = ['instagram' => 1, 'telefone' => 2];
+        if ($guia && isset($mapa[$tipo])) {
+            Interacao::create([
+                'id_tipo_interacao_tin' => $mapa[$tipo],
+                'id_guia_gui' => $guia->id_guia_gui,
+            ]);
+        }
+
+        return response('', 204);
+    }
+
     public function cadastro(Request $request)
     {
         if($request->isMethod('post')) {

@@ -72,6 +72,7 @@ Route::get('eventos/cancelamento/{id}', 'EventoController@confirmacaoCancelament
 
 Route::get('guia/{id}/ativar', 'GuiaController@ativar');
 Route::get('guia/{id}/recusar', 'GuiaController@recusar');
+Route::get('guia/perfil/interacao/{tipo}/{id}', 'GuiaController@registrarInteracao');
 Route::get('guia/perfil/{id}', 'GuiaController@perfil');
 Route::get('guia/perfil/estatistica/{tipo}/{id}', 'GuiaController@estatisticas');
 Route::match(['GET', 'POST'],'guias-e-condutores', 'GuiaController@index');

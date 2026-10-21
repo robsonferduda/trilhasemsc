@@ -303,7 +303,7 @@
             </div>
          </div>
       </nav>
-      <div class="page-header min-vh-50" style="background-image: url('{{ asset('img/bg/lagoinha-do-leste.jpg') }}');">
+      <div class="page-header @yield('headerClass', 'min-vh-50')" style="background-image: url('{{ asset('img/bg/lagoinha-do-leste.jpg') }}');">
          <span class="mask bg-gradient-dark opacity-6"></span>
          <div class="container">
             <div class="row justify-content-center">
@@ -315,7 +315,10 @@
          </div>
       </div>
      
-      @yield('content')    
+      @yield('content')
+      @hasSection('compartilhar')
+      @yield('compartilhar')
+      @else
       <div class="pt-5 mb-5 mt-3">
          <div class="container">
             <div class="row">
@@ -330,13 +333,14 @@
                   <a href="https://www.threads.com/@trilhasemsc" class="btn mb-0 me-2" target="_blank" style="background-color: #000000; color: white; border: none;">
                   <i class="fa fa-at me-1" aria-hidden="true"></i> Threads
                   </a>
-                  <a href="https://www.facebook.com/sharer/sharer.php?u=http://trilhasemsc.com.br" class="btn btn-facebook mb-0 me-2" target="_blank">
+                  <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" class="btn btn-facebook mb-0 me-2" target="_blank" rel="noopener">
                   <i class="fa fa-facebook-square me-1" aria-hidden="true"></i> Facebook
                   </a>
                </div>
             </div>
          </div>
-      </div>       
+      </div>
+      @endif
       @if(!@empty($eventoBanner))   
           <!-- Banner para mobile -->
         <div class="mobile-banner shadow mb-5 border-radius-lg">

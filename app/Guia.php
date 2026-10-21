@@ -95,4 +95,92 @@ class Guia extends Model
     {
         return $this->hasMany('App\Evento', 'id_guia_gui', 'id_guia_gui');
     }
+
+    public function trilhas()
+    {
+        return $this->belongsToMany(Trilha::class, 'guia_trilha_gut', 'id_guia_gui', 'id_trilha_tri');
+    }
+
+    /**
+     * Trilhas publicadas deste guia, primeiro as escolhidas no cadastro.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function trilhasPublicas()
+    {
+        $publicadas = function ($query) {
+            $query->where('fl_publicacao_tri', 'S')
+                ->whereNotNull('ds_url_tri')
+                ->where('ds_url_tri', '!=', '');
+        };
+
+        $escolhidas = $this->trilhas()
+            ->with(['foto', 'cidade'])
+            ->where($publicadas)
+            ->orderBy('nm_trilha_tri')
+            ->get();
+
+        $idsEvento = Evento::query()
+            ->where('id_guia_gui', $this->id_guia_gui)
+            ->where('fl_cancelado_eve', false)
+            ->whereNotNull('id_trilha_tri')
+            ->pluck('id_trilha_tri');
+
+        $dosEventos = Trilha::with(['foto', 'cidade'])
+            ->whereIn('id_trilha_tri', $idsEvento->all())
+            ->where($publicadas)
+            ->orderBy('nm_trilha_tri')
+            ->get();
+
+        return $escolhidas->concat($dosEventos)->unique('id_trilha_tri')->values();
+    }
+
+    public function urlPublica()
+    {
+        if ($this->nm_instagram_gui) {
+            return url('guia/perfil/' . $this->nm_instagram_gui);
+        }
+
+        return url('guia/perfil/' . $this->id_guia_gui);
+    }
+
+    public function telefoneNumero()
+    {
+        $fone = optional($this->fone)->nu_fone_fon ?: optional($this->whatsap)->nu_fone_fon;
+
+        return $fone ? trim($fone) : '';
+    }
+
+    public function telefoneInternacional()
+    {
+        $digitos = preg_replace('/\D+/', '', $this->telefoneNumero());
+        if ($digitos === '') {
+            return null;
+        }
+
+        if (strpos($digitos, '55') === 0 && strlen($digitos) > 11) {
+            return $digitos;
+        }
+
+        return '55' . $digitos;
+    }
+
+    public function urlWhatsapp()
+    {
+        $numero = $this->telefoneInternacional();
+        if (!$numero) {
+            return null;
+        }
+
+        $texto = 'Olá! Vi seu perfil em ' . $this->urlPublica() . ' e quero informações sobre as trilhas.';
+
+        return 'https://wa.me/' . $numero . '?text=' . rawurlencode($texto);
+    }
+
+    public function urlInstagram()
+    {
+        $usuario = ltrim((string) $this->nm_instagram_gui, '@');
+
+        return $usuario !== '' ? 'https://www.instagram.com/' . $usuario : null;
+    }
 }
