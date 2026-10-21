@@ -186,7 +186,7 @@ class TrilhaController extends Controller
             return redirect('login');
         }
 
-        $dados = $request->except(['arquivo_gpx', 'tags', '_token', 'remover_gpx', 'nu_distancia_trd']);
+        $dados = $request->except(['arquivo_gpx', 'imagem_story', 'tags', '_token', 'remover_gpx', 'remover_story', 'nu_distancia_trd']);
         $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
         $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
 
@@ -197,6 +197,7 @@ class TrilhaController extends Controller
             }
 
             $this->salvarArquivoGpx($request, $trilha);
+            $this->salvarImagemStory($request, $trilha);
             $this->salvarDetalhesTrilha($request, $trilha);
 
             return redirect('admin/listar-trilhas');
@@ -253,9 +254,14 @@ class TrilhaController extends Controller
 
         $trilha = Trilha::where('id_trilha_tri', $request->id_trilha_tri)->first();
 
-        $dados = $request->except(['arquivo_gpx', 'tags', '_token', 'remover_gpx', 'nu_distancia_trd']);
+        $dados = $request->except(['arquivo_gpx', 'imagem_story', 'tags', '_token', 'remover_gpx', 'remover_story', 'nu_distancia_trd']);
         $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
         $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
+
+        if ($request->filled('remover_story') && $request->input('remover_story') == '1') {
+            $this->removerImagemStory($trilha);
+            $dados['ds_path_story_instagram_tri'] = null;
+        }
 
         if ($request->filled('remover_gpx') && $request->input('remover_gpx') == '1') {
             $this->removerArquivoGpx($trilha);
@@ -268,6 +274,7 @@ class TrilhaController extends Controller
             }
 
             $this->salvarArquivoGpx($request, $trilha->fresh());
+            $this->salvarImagemStory($request, $trilha->fresh());
             $this->salvarDetalhesTrilha($request, $trilha->fresh());
 
             return redirect(URL::previous());
@@ -345,6 +352,51 @@ class TrilhaController extends Controller
 
         $trilha->update($update);
         Flash::success('Arquivo GPX salvo com sucesso.');
+    }
+
+    private function salvarImagemStory(Request $request, Trilha $trilha)
+    {
+        if (!$request->hasFile('imagem_story')) {
+            return;
+        }
+
+        $arquivo = $request->file('imagem_story');
+        $extensao = strtolower($arquivo->getClientOriginalExtension());
+
+        if (!in_array($extensao, ['jpg', 'jpeg', 'png', 'webp'], true)) {
+            Flash::error('A imagem do story deve ser JPG, PNG ou WEBP.');
+            return;
+        }
+
+        if ($arquivo->getSize() > 8 * 1024 * 1024) {
+            Flash::error('A imagem do story deve ter no máximo 8 MB.');
+            return;
+        }
+
+        $dir = public_path('img/instagram/stories');
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $fileName = $trilha->id_trilha_tri . '-story-' . date('YmdHis') . '.jpg';
+        $this->removerImagemStory($trilha);
+
+        \Image::make($arquivo->getRealPath())->encode('jpg', 90)->save($dir . DIRECTORY_SEPARATOR . $fileName);
+
+        $trilha->update(['ds_path_story_instagram_tri' => $fileName]);
+        Flash::success('Imagem do story salva com sucesso.');
+    }
+
+    private function removerImagemStory(Trilha $trilha)
+    {
+        if (empty($trilha->ds_path_story_instagram_tri)) {
+            return;
+        }
+
+        $caminho = public_path('img/instagram/stories/' . basename($trilha->ds_path_story_instagram_tri));
+        if (is_file($caminho)) {
+            @unlink($caminho);
+        }
     }
 
     private function removerArquivoGpx(Trilha $trilha)

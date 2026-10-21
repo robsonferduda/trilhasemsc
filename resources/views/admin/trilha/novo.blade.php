@@ -140,6 +140,13 @@
                                     </small>
                                 </div>
                                 <div class="form-group">
+                                    <label for="imagem_story">Imagem do story do Instagram</label>
+                                    <input type="file" name="imagem_story" id="imagem_story" class="form-control" accept="image/jpeg,image/png,image/webp">
+                                    <small class="form-text text-muted">
+                                        Use uma imagem vertical, de preferência 1080×1920. Só trilhas com esta imagem entram na publicação automática. JPG, PNG ou WEBP, até 8 MB.
+                                    </small>
+                                </div>
+                                <div class="form-group">
                                     <label for="url_geolocalizacao_tri">Geolocalização (Wikiloc, Strava, Relive)</label>
                                     <textarea name="url_geolocalizacao_tri" id="url_geolocalizacao_tri" rows="6" style="width: 100%;">{{ old('url_geolocalizacao_tri') }}</textarea>  
                                 </div>

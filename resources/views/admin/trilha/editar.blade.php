@@ -152,6 +152,21 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
+                                    <label for="imagem_story">Imagem do story do Instagram</label>
+                                    <input type="file" name="imagem_story" id="imagem_story" class="form-control" accept="image/jpeg,image/png,image/webp">
+                                    <small class="form-text text-muted">
+                                        Use uma imagem vertical, de preferência 1080×1920. Só trilhas com esta imagem entram na publicação automática. JPG, PNG ou WEBP, até 8 MB.
+                                    </small>
+                                    @if(!empty($trilha->ds_path_story_instagram_tri))
+                                        <div class="mt-2">
+                                            <img src="{{ asset('img/instagram/stories/'.$trilha->ds_path_story_instagram_tri) }}" alt="Story de {{ $trilha->nm_trilha_tri }}" style="max-height: 220px;">
+                                            <label class="ml-3" style="font-weight: normal;">
+                                                <input type="checkbox" name="remover_story" value="1"> Remover imagem do story
+                                            </label>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="form-group">
                                     <label for="url_geolocalizacao_tri">Geolocalização (Wikiloc, Strava, Relive)</label>
                                     <textarea name="url_geolocalizacao_tri" id="url_geolocalizacao_tri" rows="6" style="width: 100%;">{{ $trilha->url_geolocalizacao_tri }}</textarea>  
                                 </div>

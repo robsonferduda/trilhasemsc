@@ -19,8 +19,10 @@ class InstagramPublicadorTrilha
      */
     public function selecionar($trilhaId = null)
     {
-        $query = Trilha::with(['foto.tipo', 'detalhes', 'nivel', 'cidade'])
-            ->where('fl_publicacao_tri', 'S');
+        $query = Trilha::with(['detalhes', 'nivel', 'cidade'])
+            ->where('fl_publicacao_tri', 'S')
+            ->whereNotNull('ds_path_story_instagram_tri')
+            ->where('ds_path_story_instagram_tri', '!=', '');
 
         $categoria = config('services.instagram.publish.categoria_id');
         if ($categoria !== null && $categoria !== '') {
@@ -29,8 +31,7 @@ class InstagramPublicadorTrilha
 
         if ($trilhaId) {
             $trilha = $query->where('id_trilha_tri', $trilhaId)->first();
-            $foto = $trilha ? $this->resolverFoto($trilha) : null;
-            if (!$foto || !$this->caminhoLocal($foto)) {
+            if (!$trilha || !$this->arquivoStory($trilha)) {
                 return null;
             }
 
@@ -59,7 +60,6 @@ class InstagramPublicadorTrilha
         }
 
         $candidatas = $query
-            ->whereHas('foto')
             ->orderByRaw(
                 '(select max(dt_publicacao_ipu) from instagram_publicacao_ipu where instagram_publicacao_ipu.id_trilha_tri = trilha_tri.id_trilha_tri and ds_status_ipu = ?) is null desc',
                 ['publicado']
@@ -73,8 +73,7 @@ class InstagramPublicadorTrilha
             ->get();
 
         foreach ($candidatas as $trilha) {
-            $foto = $this->resolverFoto($trilha);
-            if ($foto && $this->caminhoLocal($foto)) {
+            if ($this->arquivoStory($trilha)) {
                 return $trilha;
             }
         }
@@ -99,13 +98,12 @@ class InstagramPublicadorTrilha
      */
     public function montar(Trilha $trilha)
     {
-        $foto = $this->resolverFoto($trilha);
-        if (!$foto) {
-            throw new \RuntimeException('A trilha não tem foto pública utilizável.');
+        if (!$this->arquivoStory($trilha)) {
+            throw new \RuntimeException('A trilha não tem imagem de story.');
         }
 
         $url = $this->urlTrilha($trilha);
-        $imagem = $this->urlImagem($foto, $trilha);
+        $imagem = $this->urlStory($trilha);
 
         return [
             'url' => $url,
@@ -210,13 +208,29 @@ class InstagramPublicadorTrilha
     }
 
     /**
-     * @param Foto $foto
      * @param Trilha $trilha
      * @return string
      */
-    public function urlImagem(Foto $foto, Trilha $trilha)
+    public function urlStory(Trilha $trilha)
     {
-        return $this->montarImagemStory($foto, $trilha);
+        $nome = rawurlencode(basename($trilha->ds_path_story_instagram_tri));
+
+        return $this->basePublica() . '/img/instagram/stories/' . $nome;
+    }
+
+    /**
+     * @param Trilha $trilha
+     * @return string|null
+     */
+    public function arquivoStory(Trilha $trilha)
+    {
+        if (empty($trilha->ds_path_story_instagram_tri)) {
+            return null;
+        }
+
+        $caminho = public_path('img/instagram/stories/' . basename($trilha->ds_path_story_instagram_tri));
+
+        return is_file($caminho) ? $caminho : null;
     }
 
     /**

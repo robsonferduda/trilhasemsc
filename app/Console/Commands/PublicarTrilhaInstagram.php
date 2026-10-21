@@ -49,7 +49,7 @@ class PublicarTrilhaInstagram extends Command
         $trilhaId = $this->option('trilha') ? (int) $this->option('trilha') : null;
         $trilha = $publicador->selecionar($trilhaId);
         if (!$trilha) {
-            $this->error('Nenhuma trilha publicada com foto passou nas regras.');
+            $this->error('Nenhuma trilha publicada com imagem de story passou nas regras.');
             return 1;
         }
 

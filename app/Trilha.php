@@ -25,6 +25,7 @@ class Trilha extends Model
                             'nu_latitude_tri',
                             'nu_longitude_tri',
                             'nm_arquivo_gpx_tri',
+                            'ds_path_story_instagram_tri',
                             'fl_publicacao_tri'
                           ];
 
