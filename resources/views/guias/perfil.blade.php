@@ -33,6 +33,11 @@
 .page-header.perfil-guia-header { min-height: 168px !important; }
 .page-header.perfil-guia-header h2,
 .page-header.perfil-guia-header p { display: none; }
+@media (min-width: 992px) {
+    .page-header.perfil-guia-header { min-height: 50vh !important; }
+    .page-header.perfil-guia-header h2,
+    .page-header.perfil-guia-header p { display: block; }
+}
 .perfil-guia-trilha-img { height: 160px; object-fit: cover; }
 .perfil-guia-whatsapp {
     position: fixed;
@@ -111,37 +116,6 @@
 <section class="pt-1 pb-0 mt-3 mb-5 perfil-guia-pagina">
     <div class="container">
        @php $trilhasGuia = $guia->trilhasPublicas(); @endphp
-       @if($trilhasGuia->count() > 0)
-       <div class="row mb-2 mt-4">
-          <div class="col-md-12">
-             <h2 class="text-info h3 mb-0">Trilhas de {{ $guia->nm_guia_gui }}</h2>
-          </div>
-       </div>
-       <div class="row">
-          @foreach($trilhasGuia as $trilhaGuia)
-          @php
-              $fotoTrilha = $trilhaGuia->foto->where('id_tipo_foto_tfo', 3)->first() ?: $trilhaGuia->foto->first();
-              $imgTrilha = ($fotoTrilha && $fotoTrilha->nm_path_fot) ? $fotoTrilha->nm_path_fot : 'padrao.jpg';
-          @endphp
-          <div class="col-lg-4 col-md-6 mb-4">
-             <div class="card card-blog card-plain h-100">
-                <a href="{{ url($trilhaGuia->ds_url_tri) }}" class="d-block">
-                   <img src="{{ asset('img/trilhas/detalhes-principal/'.$imgTrilha) }}" alt="{{ $trilhaGuia->nm_trilha_tri }}" class="img-fluid shadow border-radius-lg w-100 perfil-guia-trilha-img">
-                </a>
-                <div class="card-body px-1 pt-3">
-                   @if(optional($trilhaGuia->cidade)->nm_cidade_cde)
-                   <p class="text-gradient text-dark mb-2 text-sm">{{ $trilhaGuia->cidade->nm_cidade_cde }}</p>
-                   @endif
-                   <a href="{{ url($trilhaGuia->ds_url_tri) }}">
-                      <h3 class="h5">{{ $trilhaGuia->nm_trilha_tri }}</h3>
-                   </a>
-                   <a href="{{ url($trilhaGuia->ds_url_tri) }}" class="btn btn-outline-primary btn-sm">Ver trilha</a>
-                </div>
-             </div>
-          </div>
-          @endforeach
-       </div>
-       @endif
        <div class="row">
          <div class="col-md-12 mt-2">
             <h2 class="text-info h3">Sobre o guia</h2>
@@ -159,6 +133,36 @@
                 <a href="{{ $eventosUrl }}" class="text-decoration-underline">eventos de trilha</a>.
             </p>
          </div>
+
+         @if($trilhasGuia->count() > 0)
+         <div class="col-md-12 mt-4">
+            <h2 class="text-info h3 mb-3">Trilhas de {{ $guia->nm_guia_gui }}</h2>
+            <div class="row">
+               @foreach($trilhasGuia as $trilhaGuia)
+               @php
+                   $fotoTrilha = $trilhaGuia->foto->where('id_tipo_foto_tfo', 3)->first() ?: $trilhaGuia->foto->first();
+                   $imgTrilha = ($fotoTrilha && $fotoTrilha->nm_path_fot) ? $fotoTrilha->nm_path_fot : 'padrao.jpg';
+               @endphp
+               <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="card card-blog card-plain h-100">
+                     <a href="{{ url($trilhaGuia->ds_url_tri) }}" class="d-block">
+                        <img src="{{ asset('img/trilhas/detalhes-principal/'.$imgTrilha) }}" alt="{{ $trilhaGuia->nm_trilha_tri }}" class="img-fluid shadow border-radius-lg w-100 perfil-guia-trilha-img">
+                     </a>
+                     <div class="card-body px-1 pt-3">
+                        @if(optional($trilhaGuia->cidade)->nm_cidade_cde)
+                        <p class="text-gradient text-dark mb-2 text-sm">{{ $trilhaGuia->cidade->nm_cidade_cde }}</p>
+                        @endif
+                        <a href="{{ url($trilhaGuia->ds_url_tri) }}">
+                           <h3 class="h5">{{ $trilhaGuia->nm_trilha_tri }}</h3>
+                        </a>
+                        <a href="{{ url($trilhaGuia->ds_url_tri) }}" class="btn btn-outline-primary btn-sm">Ver trilha</a>
+                     </div>
+                  </div>
+               </div>
+               @endforeach
+            </div>
+         </div>
+         @endif
 
          @if(isset($eventos_futuros) && $eventos_futuros->count() > 0)
          <div class="col-md-12 mt-2 mb-2">
