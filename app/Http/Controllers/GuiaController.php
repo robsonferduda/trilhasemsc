@@ -520,5 +520,67 @@ class GuiaController extends Controller
         return view('guias/trilhas', compact('cidades', 'trilhasGuia', 'qtdGuiasPorTrilha', 'guia'));
     }
 
+    public function salvarStory(Request $request, $id)
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $guia = Guia::findOrFail($id);
+
+        if ($request->filled('remover_story') && $request->input('remover_story') == '1') {
+            $this->removerImagemStory($guia);
+            $guia->update(['ds_path_story_instagram_gui' => null]);
+            Flash::success('Imagem do story removida.');
+        }
+
+        if (!$request->hasFile('imagem_story')) {
+            return redirect()->back();
+        }
+
+        $arquivo = $request->file('imagem_story');
+        $extensao = strtolower($arquivo->getClientOriginalExtension());
+
+        if (!in_array($extensao, ['jpg', 'jpeg', 'png', 'webp'], true)) {
+            Flash::error('A imagem do story deve ser JPG, PNG ou WEBP.');
+            return redirect()->back();
+        }
+
+        if ($arquivo->getSize() > 8 * 1024 * 1024) {
+            Flash::error('A imagem do story deve ter no máximo 8 MB.');
+            return redirect()->back();
+        }
+
+        $dir = public_path('img/instagram/stories');
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $fileName = 'guia-' . $guia->id_guia_gui . '-story-' . date('YmdHis') . '.jpg';
+        $this->removerImagemStory($guia);
+
+        $imagem = \Image::make($arquivo->getRealPath());
+        if (function_exists('exif_read_data')) {
+            $imagem->orientate();
+        }
+        $imagem->encode('jpg', 90)->save($dir . DIRECTORY_SEPARATOR . $fileName);
+
+        $guia->update(['ds_path_story_instagram_gui' => $fileName]);
+        Flash::success('Imagem do story salva com sucesso.');
+
+        return redirect()->back();
+    }
+
+    private function removerImagemStory(Guia $guia)
+    {
+        if (empty($guia->ds_path_story_instagram_gui)) {
+            return;
+        }
+
+        $caminho = public_path('img/instagram/stories/' . basename($guia->ds_path_story_instagram_gui));
+        if (is_file($caminho)) {
+            @unlink($caminho);
+        }
+    }
 
 }

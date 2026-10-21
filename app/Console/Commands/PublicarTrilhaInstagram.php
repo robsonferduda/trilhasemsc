@@ -13,6 +13,7 @@ class PublicarTrilhaInstagram extends Command
      */
     protected $signature = 'instagram:publicar-trilha
         {--trilha= : Id da trilha. Sem isso, a regra escolhe a próxima}
+        {--guia= : Id do guia. Sem isso, a regra escolhe a próxima}
         {--dry-run : Monta a legenda e não publica}
         {--publish : Publica mesmo com INSTAGRAM_PUBLISH_ENABLED=false}
         {--ignorar-agenda : Publica fora dos dias configurados}
@@ -21,7 +22,7 @@ class PublicarTrilhaInstagram extends Command
     /**
      * @var string
      */
-    protected $description = 'Publica um story no Instagram com uma trilha escolhida por regras de rodízio';
+    protected $description = 'Publica um story no Instagram com uma trilha ou um guia que tenha imagem própria';
 
     /**
      * @param InstagramPublicadorTrilha $publicador
@@ -47,15 +48,21 @@ class PublicarTrilhaInstagram extends Command
         }
 
         $trilhaId = $this->option('trilha') ? (int) $this->option('trilha') : null;
-        $trilha = $publicador->selecionar($trilhaId);
-        if (!$trilha) {
-            $this->error('Nenhuma trilha publicada com imagem de story passou nas regras.');
+        $guiaId = $this->option('guia') ? (int) $this->option('guia') : null;
+        if ($trilhaId && $guiaId) {
+            $this->error('Informe apenas uma trilha ou um guia por vez.');
             return 1;
         }
 
-        $conteudo = $publicador->montar($trilha);
+        $alvo = $publicador->selecionar($trilhaId, $guiaId);
+        if (!$alvo) {
+            $this->error('Nenhuma trilha ou guia com imagem de story passou nas regras.');
+            return 1;
+        }
 
-        $this->line('Trilha: ' . $trilha->nm_trilha_tri . ' (#' . $trilha->id_trilha_tri . ')');
+        $conteudo = $publicador->montar($alvo);
+
+        $this->line($conteudo['tipo'] . ': ' . $conteudo['nome'] . ' (#' . $conteudo['id'] . ')');
         $this->line('Story: ' . $conteudo['imagem']);
         $this->line('Destino do link: ' . $conteudo['url']);
 
@@ -65,7 +72,7 @@ class PublicarTrilhaInstagram extends Command
         }
 
         try {
-            $registro = $publicador->publicar($trilha, $conteudo);
+            $registro = $publicador->publicar($alvo, $conteudo);
         } catch (\Throwable $exception) {
             $this->error('Falha ao publicar: ' . $exception->getMessage());
             return 1;

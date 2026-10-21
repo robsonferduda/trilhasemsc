@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Foto;
+use App\Guia;
 use App\InstagramPublicacao;
 use App\Trilha;
 use Carbon\Carbon;
@@ -15,9 +16,63 @@ class InstagramPublicadorTrilha
 {
     /**
      * @param int|null $trilhaId
-     * @return Trilha|null
+     * @param int|null $guiaId
+     * @return Trilha|Guia|null
      */
-    public function selecionar($trilhaId = null)
+    public function selecionar($trilhaId = null, $guiaId = null)
+    {
+        if ($trilhaId) {
+            $trilha = $this->consultaTrilhas()->where('id_trilha_tri', $trilhaId)->first();
+
+            return ($trilha && $this->arquivoStory($trilha)) ? $trilha : null;
+        }
+
+        if ($guiaId) {
+            $guia = $this->consultaGuias()->where('id_guia_gui', $guiaId)->first();
+
+            return ($guia && $this->arquivoStory($guia)) ? $guia : null;
+        }
+
+        $candidatos = [];
+
+        foreach ($this->trilhasDisponiveis() as $trilha) {
+            if ($this->arquivoStory($trilha)) {
+                $candidatos[] = $trilha;
+            }
+        }
+
+        foreach ($this->guiasDisponiveis() as $guia) {
+            if ($this->arquivoStory($guia)) {
+                $candidatos[] = $guia;
+            }
+        }
+
+        usort($candidatos, function ($primeiro, $segundo) {
+            $dataPrimeiro = $this->ultimaPublicacao($primeiro);
+            $dataSegundo = $this->ultimaPublicacao($segundo);
+
+            if ($dataPrimeiro === $dataSegundo) {
+                return 0;
+            }
+
+            if ($dataPrimeiro === null) {
+                return -1;
+            }
+
+            if ($dataSegundo === null) {
+                return 1;
+            }
+
+            return strcmp($dataPrimeiro, $dataSegundo);
+        });
+
+        return isset($candidatos[0]) ? $candidatos[0] : null;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    private function consultaTrilhas()
     {
         $query = Trilha::with(['detalhes', 'nivel', 'cidade'])
             ->where('fl_publicacao_tri', 'S')
@@ -29,56 +84,106 @@ class InstagramPublicadorTrilha
             $query->where('id_categoria_cat', $categoria);
         }
 
-        if ($trilhaId) {
-            $trilha = $query->where('id_trilha_tri', $trilhaId)->first();
-            if (!$trilha || !$this->arquivoStory($trilha)) {
-                return null;
-            }
+        return $query;
+    }
 
-            return $trilha;
-        }
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    private function consultaGuias()
+    {
+        return Guia::with('origem')
+            ->where('fl_ativo_gui', true)
+            ->where('fl_perfil_moderado_gui', true)
+            ->whereNotNull('ds_path_story_instagram_gui')
+            ->where('ds_path_story_instagram_gui', '!=', '');
+    }
 
-        $cooldown = (int) config('services.instagram.publish.cooldown_days', 90);
-        $recentes = InstagramPublicacao::query()
-            ->where('ds_status_ipu', 'publicado')
-            ->where('dt_publicacao_ipu', '>=', Carbon::now()->subDays($cooldown))
-            ->pluck('id_trilha_tri')
-            ->all();
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    private function trilhasDisponiveis()
+    {
+        $query = $this->consultaTrilhas();
+        $recentes = $this->idsPublicadosRecentemente('id_trilha_tri');
+        $emAndamento = $this->idsEmAndamento('id_trilha_tri');
 
         if (!empty($recentes)) {
             $query->whereNotIn('id_trilha_tri', $recentes);
         }
 
-        $emAndamento = InstagramPublicacao::query()
-            ->where('ds_status_ipu', 'enviando')
-            ->where('created_at', '>=', Carbon::now()->subHours(2))
-            ->pluck('id_trilha_tri')
-            ->all();
-
         if (!empty($emAndamento)) {
             $query->whereNotIn('id_trilha_tri', $emAndamento);
         }
 
-        $candidatas = $query
-            ->orderByRaw(
-                '(select max(dt_publicacao_ipu) from instagram_publicacao_ipu where instagram_publicacao_ipu.id_trilha_tri = trilha_tri.id_trilha_tri and ds_status_ipu = ?) is null desc',
-                ['publicado']
-            )
-            ->orderByRaw(
-                '(select max(dt_publicacao_ipu) from instagram_publicacao_ipu where instagram_publicacao_ipu.id_trilha_tri = trilha_tri.id_trilha_tri and ds_status_ipu = ?) asc',
-                ['publicado']
-            )
-            ->orderByDesc('total_votos_tri')
-            ->limit(40)
-            ->get();
+        return $query->limit(40)->get();
+    }
 
-        foreach ($candidatas as $trilha) {
-            if ($this->arquivoStory($trilha)) {
-                return $trilha;
-            }
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    private function guiasDisponiveis()
+    {
+        $query = $this->consultaGuias();
+        $recentes = $this->idsPublicadosRecentemente('id_guia_gui');
+        $emAndamento = $this->idsEmAndamento('id_guia_gui');
+
+        if (!empty($recentes)) {
+            $query->whereNotIn('id_guia_gui', $recentes);
         }
 
-        return null;
+        if (!empty($emAndamento)) {
+            $query->whereNotIn('id_guia_gui', $emAndamento);
+        }
+
+        return $query->limit(40)->get();
+    }
+
+    /**
+     * @param string $coluna
+     * @return array
+     */
+    private function idsPublicadosRecentemente($coluna)
+    {
+        $cooldown = (int) config('services.instagram.publish.cooldown_days', 90);
+
+        return InstagramPublicacao::query()
+            ->where('ds_status_ipu', 'publicado')
+            ->whereNotNull($coluna)
+            ->where('dt_publicacao_ipu', '>=', Carbon::now()->subDays($cooldown))
+            ->pluck($coluna)
+            ->all();
+    }
+
+    /**
+     * @param string $coluna
+     * @return array
+     */
+    private function idsEmAndamento($coluna)
+    {
+        return InstagramPublicacao::query()
+            ->where('ds_status_ipu', 'enviando')
+            ->whereNotNull($coluna)
+            ->where('created_at', '>=', Carbon::now()->subHours(2))
+            ->pluck($coluna)
+            ->all();
+    }
+
+    /**
+     * @param Trilha|Guia $modelo
+     * @return string|null
+     */
+    private function ultimaPublicacao($modelo)
+    {
+        $coluna = $modelo instanceof Guia ? 'id_guia_gui' : 'id_trilha_tri';
+        $id = $modelo instanceof Guia ? $modelo->id_guia_gui : $modelo->id_trilha_tri;
+
+        $data = InstagramPublicacao::query()
+            ->where('ds_status_ipu', 'publicado')
+            ->where($coluna, $id)
+            ->max('dt_publicacao_ipu');
+
+        return $data ? (string) $data : null;
     }
 
     /**
@@ -93,31 +198,34 @@ class InstagramPublicadorTrilha
     }
 
     /**
-     * @param Trilha $trilha
+     * @param Trilha|Guia $alvo
      * @return array
      */
-    public function montar(Trilha $trilha)
+    public function montar($alvo)
     {
-        if (!$this->arquivoStory($trilha)) {
-            throw new \RuntimeException('A trilha não tem imagem de story.');
+        if (!$this->arquivoStory($alvo)) {
+            throw new \RuntimeException('Não há imagem de story.');
         }
 
-        $url = $this->urlTrilha($trilha);
-        $imagem = $this->urlStory($trilha);
+        $guia = $alvo instanceof Guia;
+        $url = $guia ? $this->urlGuia($alvo) : $this->urlTrilha($alvo);
 
         return [
             'url' => $url,
-            'imagem' => $imagem,
-            'legenda' => $trilha->nm_trilha_tri . "\n" . $url,
+            'imagem' => $this->urlStory($alvo),
+            'legenda' => ($guia ? $alvo->nm_guia_gui : $alvo->nm_trilha_tri) . "\n" . $url,
+            'tipo' => $guia ? 'Guia' : 'Trilha',
+            'nome' => $guia ? $alvo->nm_guia_gui : $alvo->nm_trilha_tri,
+            'id' => $guia ? $alvo->id_guia_gui : $alvo->id_trilha_tri,
         ];
     }
 
     /**
-     * @param Trilha $trilha
+     * @param Trilha|Guia $alvo
      * @param array $conteudo
      * @return InstagramPublicacao
      */
-    public function publicar(Trilha $trilha, array $conteudo)
+    public function publicar($alvo, array $conteudo)
     {
         $accountId = config('services.instagram.account_id');
         $accessToken = config('services.instagram.access_token');
@@ -128,7 +236,8 @@ class InstagramPublicadorTrilha
         }
 
         $registro = InstagramPublicacao::create([
-            'id_trilha_tri' => $trilha->id_trilha_tri,
+            'id_trilha_tri' => $alvo instanceof Trilha ? $alvo->id_trilha_tri : null,
+            'id_guia_gui' => $alvo instanceof Guia ? $alvo->id_guia_gui : null,
             'ds_status_ipu' => 'enviando',
             'ds_legenda_ipu' => $conteudo['legenda'],
             'ds_imagem_ipu' => $conteudo['imagem'],
@@ -208,29 +317,61 @@ class InstagramPublicadorTrilha
     }
 
     /**
-     * @param Trilha $trilha
+     * @param Guia $guia
      * @return string
      */
-    public function urlStory(Trilha $trilha)
+    public function urlGuia(Guia $guia)
     {
-        $nome = rawurlencode(basename($trilha->ds_path_story_instagram_tri));
+        $identificador = trim((string) $guia->nm_instagram_gui) !== ''
+            ? $guia->nm_instagram_gui
+            : $guia->id_guia_gui;
+        $url = $this->basePublica() . '/guia/perfil/' . rawurlencode($identificador);
+
+        return $url . '?' . http_build_query([
+            'utm_source' => 'instagram',
+            'utm_medium' => 'story',
+            'utm_campaign' => 'guia-' . $guia->id_guia_gui,
+        ]);
+    }
+
+    /**
+     * @param Trilha|Guia $modelo
+     * @return string
+     */
+    public function urlStory($modelo)
+    {
+        $nome = rawurlencode(basename($this->nomeArquivoStory($modelo)));
 
         return $this->basePublica() . '/img/instagram/stories/' . $nome;
     }
 
     /**
-     * @param Trilha $trilha
+     * @param Trilha|Guia $modelo
      * @return string|null
      */
-    public function arquivoStory(Trilha $trilha)
+    public function arquivoStory($modelo)
     {
-        if (empty($trilha->ds_path_story_instagram_tri)) {
+        $arquivo = $this->nomeArquivoStory($modelo);
+        if ($arquivo === '') {
             return null;
         }
 
-        $caminho = public_path('img/instagram/stories/' . basename($trilha->ds_path_story_instagram_tri));
+        $caminho = public_path('img/instagram/stories/' . basename($arquivo));
 
         return is_file($caminho) ? $caminho : null;
+    }
+
+    /**
+     * @param Trilha|Guia $modelo
+     * @return string
+     */
+    private function nomeArquivoStory($modelo)
+    {
+        if ($modelo instanceof Guia) {
+            return (string) $modelo->ds_path_story_instagram_gui;
+        }
+
+        return (string) $modelo->ds_path_story_instagram_tri;
     }
 
     /**

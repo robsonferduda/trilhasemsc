@@ -100,13 +100,13 @@ php artisan instagram:publicar-trilha --dry-run --ignorar-agenda
 php artisan instagram:publicar-trilha --publish --trilha=123 --ignorar-agenda
 ```
 
-O story usa a imagem gravada em `ds_path_story_instagram_tri`. Só trilhas publicadas com esse campo preenchido entram na fila. A Graph API publica com `media_type=STORIES`. Ela não aceita o adesivo de link clicável.
+O story usa a imagem gravada na trilha ou no guia. Só entram na fila registros com esse campo preenchido. A Graph API publica com `media_type=STORIES`. Ela não aceita o adesivo de link clicável.
 
 O link da bio e do perfil deve apontar para `https://trilhasemsc.com.br/ig`. Essa rota abre a trilha da última publicação. A publicação real só acontece com `INSTAGRAM_PUBLISH_ENABLED=true` ou com `--publish`.
 
 Regras padrão:
 
-- só trilhas publicadas, com imagem de story preenchida
+- só trilhas publicadas e guias ativos, com imagem de story preenchida
 - no máximo 1 story por dia
 - terça, quinta e sábado, às 11:00
 - a mesma trilha só volta depois de 90 dias

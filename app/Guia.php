@@ -28,6 +28,7 @@ class Guia extends Model
         'nm_instagram_gui',
         'nm_site_gui',
         'nm_path_logo_gui',
+        'ds_path_story_instagram_gui',
         'dc_biografia_gui',
         'fl_perfil_completo_gui',
         'fl_ativo_gui',

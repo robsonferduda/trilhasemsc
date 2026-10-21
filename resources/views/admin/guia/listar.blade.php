@@ -44,6 +44,21 @@
                                                 <span class="text-warning">Nenhum login registrado</span>
                                             @endif
                                         </p>
+                                        <form action="{{ route('admin.guia.story', $guia->id_guia_gui) }}" method="post" enctype="multipart/form-data" class="mt-2">
+                                            @csrf
+                                            <label class="mb-1" for="imagem_story_{{ $guia->id_guia_gui }}">Imagem do story do Instagram</label>
+                                            <input type="file" name="imagem_story" id="imagem_story_{{ $guia->id_guia_gui }}" class="form-control" accept="image/jpeg,image/png,image/webp">
+                                            <small class="form-text text-muted">Vertical, de preferência 1080×1920. Só guias com esta imagem entram na publicação. JPG, PNG ou WEBP, até 8 MB.</small>
+                                            @if(!empty($guia->ds_path_story_instagram_gui))
+                                                <div class="mt-2">
+                                                    <img src="{{ asset('img/instagram/stories/'.$guia->ds_path_story_instagram_gui) }}" alt="Story de {{ $guia->nm_guia_gui }}" style="max-height: 160px;">
+                                                    <label class="ml-2" style="font-weight: normal;">
+                                                        <input type="checkbox" name="remover_story" value="1"> Remover imagem do story
+                                                    </label>
+                                                </div>
+                                            @endif
+                                            <button type="submit" class="btn btn-sm btn-success mt-2"><i class="fa fa-save"></i> Salvar story</button>
+                                        </form>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                         <div style="position: absolute; right: 0;">
