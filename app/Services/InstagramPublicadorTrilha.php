@@ -47,26 +47,11 @@ class InstagramPublicadorTrilha
             }
         }
 
-        usort($candidatos, function ($primeiro, $segundo) {
-            $dataPrimeiro = $this->ultimaPublicacao($primeiro);
-            $dataSegundo = $this->ultimaPublicacao($segundo);
+        if (empty($candidatos)) {
+            return null;
+        }
 
-            if ($dataPrimeiro === $dataSegundo) {
-                return 0;
-            }
-
-            if ($dataPrimeiro === null) {
-                return -1;
-            }
-
-            if ($dataSegundo === null) {
-                return 1;
-            }
-
-            return strcmp($dataPrimeiro, $dataSegundo);
-        });
-
-        return isset($candidatos[0]) ? $candidatos[0] : null;
+        return $candidatos[array_rand($candidatos)];
     }
 
     /**
@@ -116,7 +101,7 @@ class InstagramPublicadorTrilha
             $query->whereNotIn('id_trilha_tri', $emAndamento);
         }
 
-        return $query->limit(40)->get();
+        return $query->get();
     }
 
     /**
@@ -136,7 +121,7 @@ class InstagramPublicadorTrilha
             $query->whereNotIn('id_guia_gui', $emAndamento);
         }
 
-        return $query->limit(40)->get();
+        return $query->get();
     }
 
     /**
@@ -167,23 +152,6 @@ class InstagramPublicadorTrilha
             ->where('created_at', '>=', Carbon::now()->subHours(2))
             ->pluck($coluna)
             ->all();
-    }
-
-    /**
-     * @param Trilha|Guia $modelo
-     * @return string|null
-     */
-    private function ultimaPublicacao($modelo)
-    {
-        $coluna = $modelo instanceof Guia ? 'id_guia_gui' : 'id_trilha_tri';
-        $id = $modelo instanceof Guia ? $modelo->id_guia_gui : $modelo->id_trilha_tri;
-
-        $data = InstagramPublicacao::query()
-            ->where('ds_status_ipu', 'publicado')
-            ->where($coluna, $id)
-            ->max('dt_publicacao_ipu');
-
-        return $data ? (string) $data : null;
     }
 
     /**

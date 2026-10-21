@@ -12,8 +12,8 @@ class PublicarTrilhaInstagram extends Command
      * @var string
      */
     protected $signature = 'instagram:publicar-trilha
-        {--trilha= : Id da trilha. Sem isso, a regra escolhe a próxima}
-        {--guia= : Id do guia. Sem isso, a regra escolhe a próxima}
+        {--trilha= : Id da trilha. Sem isso, sorteia entre quem tem imagem}
+        {--guia= : Id do guia. Sem isso, sorteia entre quem tem imagem}
         {--dry-run : Monta a legenda e não publica}
         {--publish : Publica mesmo com INSTAGRAM_PUBLISH_ENABLED=false}
         {--ignorar-agenda : Publica fora dos dias configurados}

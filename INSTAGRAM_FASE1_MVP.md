@@ -109,7 +109,7 @@ Regras padrão:
 - só trilhas publicadas e guias ativos, com imagem de story preenchida
 - no máximo 1 story por dia
 - terça, quinta e sábado, às 11:00
-- a mesma trilha só volta depois de 90 dias
-- prioridade: nunca publicada, depois a mais antiga, desempate por votos
+- o mesmo registro só volta depois de 90 dias
+- entre os elegíveis, a escolha é aleatória
 
 A conta precisa da permissão `instagram_content_publish`. A imagem do story é gerada neste servidor e precisa estar acessível em `INSTAGRAM_PUBLIC_BASE_URL`.
