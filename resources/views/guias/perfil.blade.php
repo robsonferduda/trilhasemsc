@@ -135,6 +135,8 @@
             </p>
          </div>
 
+         @include('guias.partes.avaliacoes')
+
          @if($trilhasGuia->count() > 0)
          <div class="col-md-12 mt-4">
             <h2 class="text-info h3 mb-3">Trilhas de {{ $guia->nm_guia_gui }}</h2>
