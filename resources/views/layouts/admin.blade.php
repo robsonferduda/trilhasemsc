@@ -63,11 +63,14 @@
                 <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/perfil') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/perfil') }}">
                     <i class="bi bi-person"></i><span>Perfil público</span>
                 </a>
+                <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/acessos') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/acessos') }}">
+                    <i class="bi bi-bar-chart"></i><span>Acessos</span>
+                </a>
                 <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/trilhas') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/trilhas') }}">
                     <i class="bi bi-map"></i><span>Trilhas</span>
                 </a>
                 <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/estatisticas') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/estatisticas') }}">
-                    <i class="bi bi-bar-chart"></i><span>Estatísticas</span>
+                    <i class="bi bi-signpost-2"></i><span>Estatísticas</span>
                 </a>
                 <p class="pa-nav-label">Conta</p>
                 <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/atualizar-cadastro') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}">
@@ -137,8 +140,9 @@
                         <a class="pa-app" href="{{ url('guia-e-condutores/privado/painel') }}"><i class="bi bi-speedometer2"></i>Início</a>
                         <a class="pa-app" href="{{ url('guia-e-condutores/privado/eventos') }}"><i class="bi bi-calendar-event"></i>Eventos</a>
                         <a class="pa-app" href="{{ url('guia-e-condutores/privado/perfil') }}"><i class="bi bi-person"></i>Perfil</a>
+                        <a class="pa-app" href="{{ url('guia-e-condutores/privado/acessos') }}"><i class="bi bi-bar-chart"></i>Acessos</a>
                         <a class="pa-app" href="{{ url('guia-e-condutores/privado/trilhas') }}"><i class="bi bi-map"></i>Trilhas</a>
-                        <a class="pa-app" href="{{ url('guia-e-condutores/privado/estatisticas') }}"><i class="bi bi-bar-chart"></i>Estatísticas</a>
+                        <a class="pa-app" href="{{ url('guia-e-condutores/privado/estatisticas') }}"><i class="bi bi-signpost-2"></i>Estatísticas</a>
                         <a class="pa-app" href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}"><i class="bi bi-pencil"></i>Dados</a>
                         <a class="pa-app" href="{{ url('/') }}"><i class="bi bi-globe"></i>Site</a>
                     @else

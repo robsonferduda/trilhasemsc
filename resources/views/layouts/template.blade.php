@@ -325,6 +325,9 @@
                                     <a href="{{ url('guia-e-condutores/privado/perfil') }}"><i class="icon-user"></i> <span>Perfil público</span></a>
                                 </li>
                                 <li>
+                                    <a href="{{ url('guia-e-condutores/privado/acessos') }}"><i class="fa fa-bar-chart"></i> <span>Acessos ao perfil</span></a>
+                                </li>
+                                <li>
                                   <a href="{{ url('guia-e-condutores/privado/trilhas') }}"><i class="fa fa-thumb-tack"></i> <span>Trilhas</span></a>
                                 </li>
                                 <li>

@@ -58,6 +58,8 @@ class GuiaController extends Controller
             $guia = Guia::where('nm_instagram_gui', $identificador)->first();
 
         if($guia){
+            $this->registrarVisitaPerfil($guia);
+
             return view('guias/perfil', [
                 'page_name' => $page_name,
                 'guia' => $guia,
@@ -156,10 +158,12 @@ class GuiaController extends Controller
                 break;
         }
 
-        $dados = array('id_tipo_interacao_tin' => $interacao,
-                       'id_guia_gui' => $guia->id_guia_gui);
-
-        Interacao::create($dados);
+        if ($interacao && $tipo !== 'perfil') {
+            Interacao::create([
+                'id_tipo_interacao_tin' => $interacao,
+                'id_guia_gui' => $guia->id_guia_gui,
+            ]);
+        }
         
         Flash::warning('Você está sendo redirecionado...');
 
@@ -552,6 +556,90 @@ class GuiaController extends Controller
         $totais = $this->totaisPercurso($eventos_realizados);
 
         return view('guias/estatisticas', compact('guia', 'resumoAno', 'eventos_realizados', 'totais'));
+    }
+
+    public function acessos()
+    {
+        if (Auth::guest() || trim(Auth::user()->id_role) !== 'GUIA') {
+            return redirect('login');
+        }
+
+        $guia = Guia::where('id_user', Auth::id())->first();
+        if (empty($guia)) {
+            return redirect('guia-e-condutores/privado/atualizar-cadastro');
+        }
+
+        $inicio = now()->subDays(29)->startOfDay();
+        $totais = $this->contagemInteracoes($guia->id_guia_gui);
+        $recentes = $this->contagemInteracoes($guia->id_guia_gui, $inicio);
+
+        $linhas = Interacao::query()
+            ->select(DB::raw('DATE(created_at) as dia'), DB::raw('COUNT(*) as total'))
+            ->where('id_guia_gui', $guia->id_guia_gui)
+            ->where('id_tipo_interacao_tin', 3)
+            ->where('created_at', '>=', $inicio)
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->get();
+
+        $porDia = [];
+        foreach ($linhas as $linha) {
+            $porDia[substr((string) $linha->dia, 0, 10)] = (int) $linha->total;
+        }
+
+        $dias = [];
+        $maior = 1;
+        for ($i = 0; $i < 30; $i++) {
+            $data = $inicio->copy()->addDays($i);
+            $total = $porDia[$data->format('Y-m-d')] ?? 0;
+            $dias[] = ['rotulo' => $data->format('d/m'), 'total' => $total];
+            if ($total > $maior) {
+                $maior = $total;
+            }
+        }
+
+        return view('guias.acessos', [
+            'guia' => $guia,
+            'visitas' => $totais[3],
+            'visitas30' => $recentes[3],
+            'whatsapp' => $totais[2],
+            'whatsapp30' => $recentes[2],
+            'instagram' => $totais[1],
+            'instagram30' => $recentes[1],
+            'dias' => $dias,
+            'maior' => $maior,
+        ]);
+    }
+
+    private function registrarVisitaPerfil(Guia $guia)
+    {
+        if (Auth::check() && (int) Auth::id() === (int) $guia->id_user) {
+            return;
+        }
+
+        Interacao::create([
+            'id_tipo_interacao_tin' => 3,
+            'id_guia_gui' => $guia->id_guia_gui,
+        ]);
+    }
+
+    private function contagemInteracoes($idGuia, $desde = null)
+    {
+        $consulta = Interacao::query()
+            ->select('id_tipo_interacao_tin', DB::raw('COUNT(*) as total'))
+            ->where('id_guia_gui', $idGuia)
+            ->whereIn('id_tipo_interacao_tin', [1, 2, 3])
+            ->groupBy('id_tipo_interacao_tin');
+
+        if ($desde) {
+            $consulta->where('created_at', '>=', $desde);
+        }
+
+        $mapa = [1 => 0, 2 => 0, 3 => 0];
+        foreach ($consulta->get() as $linha) {
+            $mapa[(int) $linha->id_tipo_interacao_tin] = (int) $linha->total;
+        }
+
+        return $mapa;
     }
 
     public function previaPerfil()
