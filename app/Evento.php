@@ -251,6 +251,37 @@ class Evento extends Model
         return EventoTrilheiro::cabeVaga($this->vagasOcupadas(), $this->limiteVagas());
     }
 
+    public function gastos()
+    {
+        return $this->hasMany('App\EventoGasto', 'id_evento_eve', 'id_evento_eve');
+    }
+
+    public function valorEmReais()
+    {
+        return (float) EventoGasto::interpretarValor($this->valor_eve);
+    }
+
+    public function resumoFinanceiro()
+    {
+        $pagos = $this->vagasOcupadas();
+        $receita = $this->valorEmReais() * $pagos;
+        $gastos = $this->relationLoaded('gastos') ? $this->gastos : $this->gastos()->get();
+        $confirmados = (float) $gastos->where('fl_estimado_evg', false)->sum('vl_gasto_evg');
+        $estimados = (float) $gastos->where('fl_estimado_evg', true)->sum('vl_gasto_evg');
+        $rateio = (float) $gastos->where('fl_rateio_evg', true)->sum('vl_gasto_evg');
+
+        return [
+            'pagos' => $pagos,
+            'receita' => $receita,
+            'confirmados' => $confirmados,
+            'estimados' => $estimados,
+            'total' => $confirmados + $estimados,
+            'sobra' => $receita - ($confirmados + $estimados),
+            'rateio' => $rateio,
+            'rateio_pessoa' => $pagos > 0 ? $rateio / $pagos : null,
+        ];
+    }
+
     /**
      * Clona o evento atual criando uma nova cópia
      * O novo evento mantém o id_unico_eve do evento original

@@ -93,9 +93,13 @@
                                             &nbsp;|&nbsp;
                                             <strong>Visualizações</strong>: 
                                             <span class="badge badge-warning badge-visualizacoes" style="cursor:pointer;" data-id="{{ $evento->id_evento_eve }}" data-nome="{{ $evento->nm_evento_eve }}">{{ $evento->visualizacoes_count ?? 0 }}</span>
+                                            &nbsp;|&nbsp;
+                                            <strong>Resultado</strong>:
+                                            <span class="badge {{ $evento->resumoFinanceiro()['sobra'] < 0 ? 'badge-danger' : 'badge-success' }}">{{ \App\EventoGasto::reais($evento->resumoFinanceiro()['sobra']) }}</span>
                                         </p>
                                         <div class="d-flex flex-wrap gap-2 mt-3">
                                             <a href="{{ url('guia-e-condutores/privado/eventos/participantes', $evento->id_evento_eve) }}" class="btn btn-outline-danger btn-sm"><i class="fa fa-users"></i> Participantes</a>
+                                            <a href="{{ url('guia-e-condutores/privado/eventos/gastos', $evento->id_evento_eve) }}" class="btn btn-outline-success btn-sm"><i class="fa fa-money"></i> Gastos</a>
                                             <a href="{{ url('eventos/' . ($evento->slug_eve ?: $evento->id_evento_eve)) }}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye"></i> Ver</a>
                                             <a href="{{ url('guia-e-condutores/privado/evento/editar', $evento->id_evento_eve) }}" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i> Editar</a>
                                             <form id="form-clonar-{{ $evento->id_evento_eve }}" action="{{ route('evento.clonar', $evento->id_evento_eve) }}" method="POST" style="display: inline;">

@@ -9,6 +9,7 @@ use App\Trilheiro;
 use App\Cidade;
 use App\Guia;
 use App\Estatistica;
+use App\EventoGasto;
 use App\EventoTrilheiro;
 use App\Mail\NovoEventoTrilheiroNotificacao;
 use App\Mail\CancelamentoEventoTrilheiroNotificacao;
@@ -17,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class EventoController extends Controller
 {
@@ -53,13 +55,13 @@ class EventoController extends Controller
 
         if ($isAdmin) {
             $guia = null;
-            $eventos = Evento::with(['eventoTrilheiros', 'trilheiros', 'guia', 'local', 'trilha.detalhes'])
+            $eventos = Evento::with(['eventoTrilheiros', 'trilheiros', 'gastos', 'guia', 'local', 'trilha.detalhes'])
                 ->orderBy('dt_realizacao_eve','DESC')
                 ->get();
         } else {
             $guia = Guia::where('id_user', Auth::user()->id)->first();
             $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)
-                ->with(['eventoTrilheiros', 'trilheiros', 'local', 'trilha.detalhes'])
+                ->with(['eventoTrilheiros', 'trilheiros', 'gastos', 'local', 'trilha.detalhes'])
                 ->orderBy('dt_realizacao_eve')
                 ->get();
         }
@@ -87,7 +89,7 @@ class EventoController extends Controller
         ];
 
         $consulta = Evento::where('id_guia_gui', $guia->id_guia_gui)
-            ->with(['eventoTrilheiros', 'trilheiros', 'local', 'trilha.detalhes']);
+            ->with(['eventoTrilheiros', 'trilheiros', 'gastos', 'local', 'trilha.detalhes']);
 
         if ($filtros['q'] !== '') {
             $consulta->where('nm_evento_eve', 'like', '%'.$filtros['q'].'%');
@@ -493,9 +495,92 @@ class EventoController extends Controller
     public function participantes($id_evento)
     {
         $evento = $this->eventoGerenciavel($id_evento);
+        $evento->load('gastos');
         $inscricoes = $this->inscricoesOrdenadas($evento);
 
         return view('admin/eventos/participantes', compact('evento', 'inscricoes'));
+    }
+
+    public function gastos(Request $request, $id_evento)
+    {
+        $evento = $this->eventoGerenciavel($id_evento);
+        $evento->load('gastos');
+        $gasto = null;
+
+        if ($request->filled('editar')) {
+            $gasto = $this->gastoDoEvento($evento, $request->editar);
+        }
+
+        $resumo = $evento->resumoFinanceiro();
+
+        return view('admin/eventos/gastos', compact('evento', 'gasto', 'resumo'));
+    }
+
+    public function salvarGasto(Request $request, $id_evento)
+    {
+        $evento = $this->eventoGerenciavel($id_evento);
+        $gasto = $request->filled('cd_evento_gasto_evg')
+            ? $this->gastoDoEvento($evento, $request->cd_evento_gasto_evg)
+            : new EventoGasto();
+
+        $valor = EventoGasto::interpretarValor($request->vl_gasto_evg);
+        $categoria = (string) $request->ds_categoria_evg;
+        $pagador = trim((string) $request->nm_pagador_evg);
+
+        if (!isset(EventoGasto::CATEGORIAS[$categoria])) {
+            Flash::error('Escolha a categoria do gasto.');
+            return redirect()->back()->withInput();
+        }
+        if ($valor === null || $valor <= 0) {
+            Flash::error('Informe um valor maior que zero.');
+            return redirect()->back()->withInput();
+        }
+        if ($pagador === '') {
+            Flash::error('Informe quem pagou.');
+            return redirect()->back()->withInput();
+        }
+
+        if ($request->hasFile('comprovante')) {
+            $arquivo = $request->file('comprovante');
+            $extensao = strtolower($arquivo->getClientOriginalExtension());
+            if (!in_array($extensao, ['jpg', 'jpeg', 'png', 'webp', 'pdf'], true) || $arquivo->getSize() > 5 * 1024 * 1024) {
+                Flash::error('O comprovante precisa ser uma imagem ou PDF de até 5 MB.');
+                return redirect()->back()->withInput();
+            }
+            if ($gasto->ds_comprovante_evg) {
+                Storage::disk('eventos')->delete($gasto->ds_comprovante_evg);
+            }
+            $nome = 'comprovante_'.$evento->id_evento_eve.'_'.date('YmdHis').'.'.$extensao;
+            $arquivo->storeAs('', $nome, 'eventos');
+            $gasto->ds_comprovante_evg = $nome;
+        }
+
+        $gasto->id_evento_eve = $evento->id_evento_eve;
+        $gasto->ds_categoria_evg = $categoria;
+        $gasto->vl_gasto_evg = $valor;
+        $gasto->nm_pagador_evg = $pagador;
+        $gasto->ds_descricao_evg = trim((string) $request->ds_descricao_evg) ?: null;
+        $gasto->fl_rateio_evg = $request->has('fl_rateio_evg');
+        $gasto->fl_estimado_evg = $request->has('fl_estimado_evg');
+        $gasto->save();
+
+        Flash::success($request->filled('cd_evento_gasto_evg') ? 'Gasto atualizado.' : 'Gasto lançado.');
+
+        return redirect('guia-e-condutores/privado/eventos/gastos/'.$evento->id_evento_eve);
+    }
+
+    public function excluirGasto($id_evento, $id_gasto)
+    {
+        $evento = $this->eventoGerenciavel($id_evento);
+        $gasto = $this->gastoDoEvento($evento, $id_gasto);
+
+        if ($gasto->ds_comprovante_evg) {
+            Storage::disk('eventos')->delete($gasto->ds_comprovante_evg);
+        }
+        $gasto->delete();
+        Flash::success('Gasto excluído.');
+
+        return redirect('guia-e-condutores/privado/eventos/gastos/'.$evento->id_evento_eve);
     }
 
     public function aceitarInscricao($id_evento, $id_inscricao)
@@ -649,6 +734,19 @@ class EventoController extends Controller
         }
 
         return $inscricao;
+    }
+
+    private function gastoDoEvento(Evento $evento, $id_gasto)
+    {
+        $gasto = EventoGasto::where('cd_evento_gasto_evg', $id_gasto)
+            ->where('id_evento_eve', $evento->id_evento_eve)
+            ->first();
+
+        if (!$gasto) {
+            abort(404, 'Gasto não encontrado');
+        }
+
+        return $gasto;
     }
 
     private function inscricoesOrdenadas(Evento $evento)

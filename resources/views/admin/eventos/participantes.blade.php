@@ -22,7 +22,8 @@
                             <h2><i class="fa fa-tags"></i> Meus Eventos / {{ $evento->nm_evento_eve }}</h2>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-primary pull-right"><i class="fa fa-list"></i> Meus Eventos</a>
+                            <a href="{{ url('guia-e-condutores/privado/eventos/gastos', $evento->id_evento_eve) }}" class="btn btn-success pull-right mr-2"><i class="fa fa-money"></i> Gastos</a>
+                            <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-primary pull-right mr-2"><i class="fa fa-list"></i> Meus Eventos</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +64,32 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-muted">O interesse e o aceite não ocupam vaga. A vaga fecha somente quando o pagamento é confirmado.</p>
+                    @php $resumo = $evento->resumoFinanceiro(); @endphp
+                    <div class="row mb-3">
+                        <div class="col-md-4 mb-2">
+                            <div class="alert alert-success mb-0">
+                                <strong>Receita</strong><br>
+                                {{ \App\EventoGasto::reais($resumo['receita']) }}
+                                <small class="d-block">{{ $resumo['pagos'] }} {{ $resumo['pagos'] === 1 ? 'vaga paga' : 'vagas pagas' }}</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="alert alert-warning mb-0">
+                                <strong>Gastos</strong><br>
+                                {{ \App\EventoGasto::reais($resumo['total']) }}
+                                @if($resumo['estimados'] > 0)
+                                    <small class="d-block">{{ \App\EventoGasto::reais($resumo['estimados']) }} ainda estimados</small>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="alert {{ $resumo['sobra'] < 0 ? 'alert-danger' : 'alert-info' }} mb-0">
+                                <strong>Sobra</strong><br>
+                                {{ \App\EventoGasto::reais($resumo['sobra']) }}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted">O interesse e o aceite não ocupam vaga. A vaga fecha somente quando o pagamento é confirmado. A receita conta só as vagas pagas.</p>
 
                     @forelse($inscricoes as $inscricao)
                         @php $trilheiro = $inscricao->trilheiro; @endphp

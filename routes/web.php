@@ -201,6 +201,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('eventos/participantes/{id}/recusar/{inscricao}', 'EventoController@recusarInscricao')->name('evento.inscricao.recusar');
         Route::post('eventos/participantes/{id}/pagamento/{inscricao}', 'EventoController@confirmarPagamento')->name('evento.inscricao.pagamento');
         Route::post('eventos/participantes/{id}/desfazer-pagamento/{inscricao}', 'EventoController@desfazerPagamento')->name('evento.inscricao.desfazer-pagamento');
+        Route::get('eventos/gastos/{id}', 'EventoController@gastos')->name('evento.gastos');
+        Route::post('eventos/gastos/{id}', 'EventoController@salvarGasto')->name('evento.gastos.salvar');
+        Route::post('eventos/gastos/{id}/excluir/{gasto}', 'EventoController@excluirGasto')->name('evento.gastos.excluir');
         Route::get('evento/novo', 'EventoController@cadastro');
         Route::get('evento/editar/{id}', 'EventoController@editar');
         Route::post('evento/update', 'EventoController@update');
