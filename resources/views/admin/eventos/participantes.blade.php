@@ -42,7 +42,12 @@
                         <div class="col-md-4 mb-2">
                             <div class="alert alert-success mb-0">
                                 <strong>Vagas confirmadas</strong><br>
-                                {{ $vagasOcupadas }}@if($limiteVagas) de {{ $limiteVagas }}@else, sem limite@endif
+                                {{ $vagasOcupadas }}
+                                @if($limiteVagas)
+                                    de {{ $limiteVagas }}
+                                @else
+                                    (sem limite)
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">

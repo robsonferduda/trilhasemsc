@@ -153,7 +153,14 @@
                     <p class="mb-1"><strong>Data/Horário Início</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i') }}</p>
                     <p class="mb-1"><strong>Data/Horário Término</strong>: {{ \Carbon\Carbon::parse($evento->dt_termino_eve)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($evento->hora_fim_eve)->format('H:i') }}</p>
                     <p class="mb-1"><strong>Valor</strong>: {!! ($evento->valor_eve) ? "R$ ".$evento->valor_eve : '<strong class="text-success">Gratuita</strong>' !!}</p>
-                    <p class="mb-1"><strong>Vagas confirmadas</strong>: {{ $vagasOcupadas }}@if($limiteVagas) de {{ $limiteVagas }}@else, sem limite definido@endif</p>
+                    <p class="mb-1"><strong>Vagas confirmadas</strong>:
+                        {{ $vagasOcupadas }}
+                        @if($limiteVagas)
+                            de {{ $limiteVagas }}
+                        @else
+                            (sem limite definido)
+                        @endif
+                    </p>
                     <p class="small text-muted mb-1">A vaga só é confirmada depois do pagamento.</p>
                     <p class="mb-1"><strong>Contato</strong>: {{ $evento->ds_fone_contato_eve }}</p>
                     <p class="small mb-0 mt-2">
