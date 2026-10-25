@@ -208,6 +208,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('eventos/gastos/{id}', 'EventoController@gastos')->name('evento.gastos');
         Route::post('eventos/gastos/{id}', 'EventoController@salvarGasto')->name('evento.gastos.salvar');
         Route::post('eventos/gastos/{id}/excluir/{gasto}', 'EventoController@excluirGasto')->name('evento.gastos.excluir');
+        Route::post('evento/descricao-imagem', 'EventoController@imagemDescricao')->name('evento.descricao.imagem');
         Route::get('evento/novo', 'EventoController@cadastro');
         Route::get('evento/editar/{id}', 'EventoController@editar');
         Route::post('evento/update', 'EventoController@update');

@@ -270,6 +270,7 @@
                     @endphp
                     @if($descricaoEvento !== strip_tags($descricaoEvento))
                         <div class="evento-descricao">{!! $descricaoEvento !!}</div>
+                        <style>.evento-descricao img { max-width: 100%; height: auto; border-radius: 12px; }</style>
                     @else
                         {!! nl2br(e($descricaoEvento)) !!}
                     @endif

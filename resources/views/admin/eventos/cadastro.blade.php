@@ -192,11 +192,14 @@
                 versionCheck: false,
                 removePlugins: 'elementspath',
                 allowedContent: true,
+                filebrowserImageUploadUrl: "{{ route('evento.descricao.imagem') }}?_token={{ csrf_token() }}",
+                filebrowserUploadMethod: 'form',
                 toolbar: [
                     { name: 'styles', items: ['Format'] },
                     { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'RemoveFormat'] },
                     { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
                     { name: 'links', items: ['Link', 'Unlink'] },
+                    { name: 'insert', items: ['Image'] },
                     { name: 'clipboard', items: ['Undo', 'Redo'] }
                 ],
                 format_tags: 'p;h2;h3',

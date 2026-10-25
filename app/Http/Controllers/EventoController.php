@@ -948,15 +948,86 @@ class EventoController extends Controller
         }
     }
 
+    public function imagemDescricao(Request $request)
+    {
+        $funcNum = (int) $request->input('CKEditorFuncNum');
+        if (Auth::guest() || trim(Auth::user()->id_role) !== 'GUIA') {
+            return $this->respostaCkeditor($funcNum, '', 'Entre como guia para enviar a imagem.');
+        }
+
+        $guia = Guia::where('id_user', Auth::id())->first();
+        $arquivo = $request->file('upload');
+        if (!$guia || !$arquivo) {
+            return $this->respostaCkeditor($funcNum, '', 'Envie uma imagem.');
+        }
+
+        $mime = $arquivo->getMimeType();
+        $extensoes = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+        if (!isset($extensoes[$mime]) || !@getimagesize($arquivo->getRealPath())) {
+            return $this->respostaCkeditor($funcNum, '', 'Use uma imagem JPG, PNG ou WEBP.');
+        }
+        if ($arquivo->getSize() > 5 * 1024 * 1024) {
+            return $this->respostaCkeditor($funcNum, '', 'A imagem deve ter no máximo 5 MB.');
+        }
+
+        $nome = 'descricao_'.$guia->id_guia_gui.'_'.date('YmdHis').'_'.bin2hex(random_bytes(3)).'.'.$extensoes[$mime];
+        $arquivo->storeAs('', $nome, 'eventos');
+
+        return $this->respostaCkeditor($funcNum, asset('img/eventos/'.$nome), '');
+    }
+
     private function descricaoSegura($html)
     {
         $html = trim((string) $html);
         $html = preg_replace('#<(script|style|iframe|object|embed|form|link|meta)\b[^>]*>.*?</\1>#is', '', $html);
         $html = preg_replace('#<(script|style|iframe|object|embed|form|link|meta)\b[^>]*/?>#is', '', $html);
-        $html = strip_tags($html, '<p><br><strong><b><em><i><u><ul><ol><li><h1><h2><h3><h4><a><blockquote>');
+        $html = strip_tags($html, '<p><br><strong><b><em><i><u><ul><ol><li><h1><h2><h3><h4><a><blockquote><img>');
         $html = preg_replace('/\s(on\w+|style|formaction|xmlns)\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $html);
         $html = preg_replace('/href\s*=\s*([\'"])\s*(javascript:|data:)[^\'"]*\1/i', 'href="#"', $html);
+        $html = preg_replace_callback('#<img\b([^>]*)>#i', function ($encontrado) {
+            return $this->imagemDescricaoPermitida($encontrado[1]);
+        }, $html);
 
         return $html;
+    }
+
+    private function imagemDescricaoPermitida($atributos)
+    {
+        if (!preg_match('/src\s*=\s*([\'"])([^\'"]+)\1/i', $atributos, $origem)) {
+            return '';
+        }
+
+        $url = $origem[2];
+        $host = parse_url($url, PHP_URL_HOST);
+        $hosts = array_filter([
+            parse_url(config('app.url'), PHP_URL_HOST),
+            request()->getHost(),
+        ]);
+        if ($host && !in_array($host, $hosts, true)) {
+            return '';
+        }
+
+        $caminho = parse_url($url, PHP_URL_PATH);
+        if (!$caminho || !preg_match('#/img/eventos/descricao_[A-Za-z0-9._-]+$#', $caminho)) {
+            return '';
+        }
+
+        $alt = '';
+        if (preg_match('/alt\s*=\s*([\'"])([^\'"]*)\1/i', $atributos, $texto)) {
+            $alt = htmlspecialchars($texto[2], ENT_QUOTES, 'UTF-8');
+        }
+
+        return '<img src="'.htmlspecialchars($url, ENT_QUOTES, 'UTF-8').'" alt="'.$alt.'">';
+    }
+
+    private function respostaCkeditor($funcNum, $url, $mensagem)
+    {
+        $script = '<script>window.parent.CKEDITOR.tools.callFunction('
+            .(int) $funcNum.','
+            .json_encode($url).','
+            .json_encode($mensagem)
+            .');</script>';
+
+        return response($script, 200, ['Content-Type' => 'text/html; charset=utf-8']);
     }
 }
