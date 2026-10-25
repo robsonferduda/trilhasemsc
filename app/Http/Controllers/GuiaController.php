@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cidade;
+use App\Estatistica;
 use App\Evento;
 use App\EventoTrilheiro;
 use App\Exceptions\CadasturIndisponivelException;
@@ -466,6 +467,8 @@ class GuiaController extends Controller
         $interessados = 0;
         $aceitos = 0;
         $semDados = 0;
+        $eventosAtivos = 0;
+        $vagasPagas = 0;
         $receita = 0.0;
         $sobra = 0.0;
         $fila = [];
@@ -474,6 +477,10 @@ class GuiaController extends Controller
             $resumo = $evento->resumoFinanceiro();
             $receita += $resumo['receita'];
             $sobra += $resumo['sobra'];
+            $vagasPagas += $resumo['pagos'];
+            if ($evento->fl_ativo_eve) {
+                $eventosAtivos++;
+            }
 
             foreach ($evento->eventoTrilheiros as $inscricao) {
                 if ($inscricao->st_inscricao_evt === EventoTrilheiro::INTERESSADO) {
@@ -528,6 +535,45 @@ class GuiaController extends Controller
             return $a['ordem'] <=> $b['ordem'];
         });
 
+        $inicio = now()->subDays(6)->startOfDay();
+        $presenca = $this->contagemInteracoes($guia->id_guia_gui, $inicio);
+        $visitasPerfil = $this->mapaPorDia(
+            Interacao::query()
+                ->select(DB::raw('DATE(created_at) as dia'), DB::raw('COUNT(*) as total'))
+                ->where('id_guia_gui', $guia->id_guia_gui)
+                ->where('id_tipo_interacao_tin', 3)
+                ->where('created_at', '>=', $inicio)
+                ->groupBy(DB::raw('DATE(created_at)'))
+                ->get()
+        );
+
+        $idsEventos = $guia->eventos()->pluck('id_evento_eve');
+        $consultaEventos = Estatistica::query()
+            ->select(DB::raw('DATE(created_at) as dia'), DB::raw('COUNT(*) as total'))
+            ->where('cd_tipo_monitoramento_tim', 2)
+            ->where('created_at', '>=', $inicio);
+        if ($idsEventos->isEmpty()) {
+            $linhasEventos = collect();
+        } else {
+            $linhasEventos = $consultaEventos->whereIn('cd_monitoramento_esa', $idsEventos)->groupBy(DB::raw('DATE(created_at)'))->get();
+        }
+        $visitasEventos = $this->mapaPorDia($linhasEventos);
+
+        $dias = [];
+        $maior = 1;
+        for ($i = 0; $i < 7; $i++) {
+            $data = $inicio->copy()->addDays($i);
+            $chave = $data->format('Y-m-d');
+            $perfil = $visitasPerfil[$chave] ?? 0;
+            $eventos = $visitasEventos[$chave] ?? 0;
+            $dias[] = [
+                'rotulo' => $data->format('d/m'),
+                'perfil' => $perfil,
+                'eventos' => $eventos,
+            ];
+            $maior = max($maior, $perfil, $eventos);
+        }
+
         return view('guias.painel', [
             'guia' => $guia,
             'proximos' => $proximos,
@@ -535,8 +581,17 @@ class GuiaController extends Controller
             'interessados' => $interessados,
             'aceitos' => $aceitos,
             'semDados' => $semDados,
+            'eventosAtivos' => $eventosAtivos,
+            'vagasPagas' => $vagasPagas,
             'receita' => $receita,
             'sobra' => $sobra,
+            'visitas7' => array_sum($visitasPerfil) + array_sum($visitasEventos),
+            'contatos7' => $presenca[1] + $presenca[2],
+            'whatsapp7' => $presenca[2],
+            'instagram7' => $presenca[1],
+            'dias' => $dias,
+            'maior' => $maior,
+            'periodo' => $inicio->format('d/m').' – '.now()->format('d/m/Y'),
         ]);
     }
 
@@ -620,6 +675,16 @@ class GuiaController extends Controller
             'id_tipo_interacao_tin' => 3,
             'id_guia_gui' => $guia->id_guia_gui,
         ]);
+    }
+
+    private function mapaPorDia($linhas)
+    {
+        $mapa = [];
+        foreach ($linhas as $linha) {
+            $mapa[substr((string) $linha->dia, 0, 10)] = (int) $linha->total;
+        }
+
+        return $mapa;
     }
 
     private function contagemInteracoes($idGuia, $desde = null)
