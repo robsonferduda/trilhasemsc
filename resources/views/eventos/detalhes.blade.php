@@ -265,7 +265,14 @@
 
                 <div class="col-lg-12 col-md-12">
                     <h2 class="h5 text-left mb-3">Descrição da Aventura</h2>
-                    {!! nl2br($evento->descricao) !!}
+                    @php
+                        $descricaoEvento = (string) ($evento->descricao ?? '');
+                    @endphp
+                    @if($descricaoEvento !== strip_tags($descricaoEvento))
+                        <div class="evento-descricao">{!! $descricaoEvento !!}</div>
+                    @else
+                        {!! nl2br(e($descricaoEvento)) !!}
+                    @endif
                 </div>
                 <div class="col-lg-12 col-md-12">
                     @if($evento->ds_imagem_horizontal_eve)

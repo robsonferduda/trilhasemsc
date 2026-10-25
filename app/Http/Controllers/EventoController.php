@@ -818,7 +818,7 @@ class EventoController extends Controller
                         'dt_termino_eve' => $request->dt_termino_eve,
                         'valor_eve' =>  $request->valor_eve,
                         'total_participantes_eve' => $request->total_participantes_eve,
-                        'descricao' => $request->descricao,                           
+                        'descricao' => $this->descricaoSegura($request->descricao),                           
                         'fl_ativo_eve' => null,
                         'fl_privado_eve' => $request->has('fl_privado_eve') ? true : false,
                         'fl_cancelado_eve' => false,
@@ -877,7 +877,7 @@ class EventoController extends Controller
         $evento->dt_termino_eve = $request->dt_termino_eve;
         $evento->valor_eve =  $request->valor_eve;
         $evento->total_participantes_eve = $request->total_participantes_eve;
-        $evento->descricao = $request->descricao;                           
+        $evento->descricao = $this->descricaoSegura($request->descricao);                           
         $evento->fl_ativo_eve = null;
         $evento->fl_privado_eve = $request->has('fl_privado_eve') ? true : false;
         $evento->fl_cancelado_eve = $request->has('fl_cancelado_eve') ? true : false;
@@ -946,5 +946,17 @@ class EventoController extends Controller
             Flash::error("Erro ao clonar evento: " . $e->getMessage());
             return redirect("guia-e-condutores/privado/eventos");
         }
+    }
+
+    private function descricaoSegura($html)
+    {
+        $html = trim((string) $html);
+        $html = preg_replace('#<(script|style|iframe|object|embed|form|link|meta)\b[^>]*>.*?</\1>#is', '', $html);
+        $html = preg_replace('#<(script|style|iframe|object|embed|form|link|meta)\b[^>]*/?>#is', '', $html);
+        $html = strip_tags($html, '<p><br><strong><b><em><i><u><ul><ol><li><h1><h2><h3><h4><a><blockquote>');
+        $html = preg_replace('/\s(on\w+|style|formaction|xmlns)\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $html);
+        $html = preg_replace('/href\s*=\s*([\'"])\s*(javascript:|data:)[^\'"]*\1/i', 'href="#"', $html);
+
+        return $html;
     }
 }

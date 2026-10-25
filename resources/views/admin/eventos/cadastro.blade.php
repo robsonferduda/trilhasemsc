@@ -138,8 +138,9 @@
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="biografia">Descrição do Evento</label><span class="text-danger"> Obrigatório</span>
-                                    <textarea name="descricao" id="descricao" rows="10" style="width: 100%;" data-parsley-minlength="100" required>{{ ($evento) ? $evento->descricao : old('descricao') }}</textarea>
+                                    <label for="descricao-evento">Descrição do Evento</label><span class="text-danger"> Obrigatório</span>
+                                    <textarea name="descricao" id="descricao-evento" rows="10" data-parsley-minlength="100" required>{{ ($evento) ? $evento->descricao : old('descricao') }}</textarea>
+                                    <small class="form-text text-muted">Pelo menos 100 caracteres. Use negrito, listas e links quando ajudar a explicar o passeio.</small>
                                 </div>
                             </div>
                         </div>
@@ -180,9 +181,41 @@
     </div>
 @endsection
 @section('script')
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="{{ asset('js/jquery.maskMoney.js') }}"></script>
 <script>
     $(function() {
+        if (window.CKEDITOR) {
+            CKEDITOR.replace('descricao-evento', {
+                height: 320,
+                language: 'pt-br',
+                versionCheck: false,
+                removePlugins: 'elementspath',
+                allowedContent: true,
+                toolbar: [
+                    { name: 'styles', items: ['Format'] },
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'RemoveFormat'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+                    { name: 'links', items: ['Link', 'Unlink'] },
+                    { name: 'clipboard', items: ['Undo', 'Redo'] }
+                ],
+                format_tags: 'p;h2;h3',
+                enterMode: CKEDITOR.ENTER_P,
+                shiftEnterMode: CKEDITOR.ENTER_BR
+            });
+        }
+
+        $('#form-guia').on('submit', function (event) {
+            if (window.CKEDITOR && CKEDITOR.instances['descricao-evento']) {
+                CKEDITOR.instances['descricao-evento'].updateElement();
+            }
+            var texto = $('<div>').html($('#descricao-evento').val() || '').text().replace(/\s+/g, ' ').trim();
+            if (texto.length < 100) {
+                event.preventDefault();
+                window.alert('A descrição precisa ter pelo menos 100 caracteres.');
+            }
+        });
+
         $('#form-guia').parsley();
 
         $('.phone').mask('(99) 99999-9999');
