@@ -3,13 +3,16 @@
 @section('content')
  <div class="block-header">
     <div class="row">
-        <div class="col-lg-5 col-md-8 col-sm-12">                        
-            <h2 class="mb-2"><i class="fa fa-dashboard"></i> Dashboard</h2>
+        <div class="col-lg-7 col-md-8 col-sm-12">                        
+            <h2 class="mb-2"><i class="fa fa-id-card"></i> Guias</h2>
             <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}"><i class="icon-home"></i></a></li>
                 <li class="breadcrumb-item">Dashboard</li>
                 <li class="breadcrumb-item">Guias</li>
             </ul>
+        </div>
+        <div class="col-lg-5 col-md-4 col-sm-12 text-md-end">
+            <a href="{{ route('admin.guias.estatisticas') }}" class="btn btn-primary mt-2"><i class="fa fa-bar-chart"></i> Estatísticas dos guias</a>
         </div>           
     </div>
 </div>

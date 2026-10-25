@@ -945,6 +945,177 @@ class GuiaController extends Controller
         return view('admin/guia/listar', ['page_name' => $page_name, 'guias' => $guias, 'cadasturApi' => $cadasturApi]);
     }
 
+    public function estatisticasAdmin()
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {
+            return redirect('login');
+        }
+
+        $desde = now()->subDays(29)->startOfDay();
+        $limiteSumiu = now()->subDays(60)->startOfDay();
+
+        $visitas30 = $this->contagemPorGuia(3, $desde);
+        $visitasTotal = $this->contagemPorGuia(3, null);
+        $contatos30 = Interacao::query()
+            ->select('id_guia_gui', DB::raw('COUNT(*) as total'))
+            ->whereIn('id_tipo_interacao_tin', [1, 2])
+            ->where('created_at', '>=', $desde)
+            ->groupBy('id_guia_gui')
+            ->pluck('total', 'id_guia_gui');
+
+        $eventos = Evento::query()
+            ->select(
+                'id_guia_gui',
+                DB::raw('COUNT(*) as total'),
+                DB::raw('MAX(created_at) as ultimo'),
+                DB::raw('SUM(CASE WHEN (fl_cancelado_eve = 0 OR fl_cancelado_eve IS NULL) AND dt_realizacao_eve >= CURDATE() THEN 1 ELSE 0 END) as futuros')
+            )
+            ->groupBy('id_guia_gui')
+            ->get()
+            ->keyBy('id_guia_gui');
+
+        $linhas = Guia::with(['user', 'origem', 'fone', 'whatsap'])->get()->map(function ($guia) use ($visitas30, $visitasTotal, $contatos30, $eventos, $desde, $limiteSumiu) {
+            $registro = $eventos->get($guia->id_guia_gui);
+            $login = optional($guia->user)->dt_last_login;
+
+            $linha = (object) [
+                'guia' => $guia,
+                'visitas30' => (int) ($visitas30[$guia->id_guia_gui] ?? 0),
+                'visitas' => (int) ($visitasTotal[$guia->id_guia_gui] ?? 0),
+                'contatos30' => (int) ($contatos30[$guia->id_guia_gui] ?? 0),
+                'eventos' => $registro ? (int) $registro->total : 0,
+                'futuros' => $registro ? (int) $registro->futuros : 0,
+                'ultimoEvento' => $registro && $registro->ultimo ? \Carbon\Carbon::parse($registro->ultimo) : null,
+                'login' => $login ? \Carbon\Carbon::parse($login) : null,
+                'acao' => '',
+                'acaoTom' => '',
+            ];
+            $acao = $this->acaoAdministrativa($linha, $desde, $limiteSumiu);
+            $linha->acao = $acao[0];
+            $linha->acaoTom = $acao[1];
+
+            return $linha;
+        });
+
+        $porNome = function ($a, $b) {
+            return strcasecmp($a->guia->nm_guia_gui, $b->guia->nm_guia_gui);
+        };
+
+        $porAcesso = $linhas->sort(function ($a, $b) use ($porNome) {
+            if ($a->visitas30 !== $b->visitas30) {
+                return $b->visitas30 <=> $a->visitas30;
+            }
+            if ($a->visitas !== $b->visitas) {
+                return $b->visitas <=> $a->visitas;
+            }
+
+            return $porNome($a, $b);
+        })->values();
+
+        $porEvento = $linhas->filter(function ($linha) {
+            return $linha->eventos > 0;
+        })->sort(function ($a, $b) use ($porNome) {
+            $esquerda = $a->ultimoEvento ? $a->ultimoEvento->getTimestamp() : 0;
+            $direita = $b->ultimoEvento ? $b->ultimoEvento->getTimestamp() : 0;
+            if ($esquerda !== $direita) {
+                return $direita <=> $esquerda;
+            }
+
+            return $porNome($a, $b);
+        })->values();
+
+        $porLogin = $linhas->sort(function ($a, $b) use ($porNome) {
+            if ($a->login && $b->login) {
+                return $b->login->getTimestamp() <=> $a->login->getTimestamp();
+            }
+            if ($a->login) {
+                return -1;
+            }
+            if ($b->login) {
+                return 1;
+            }
+
+            return $porNome($a, $b);
+        })->values();
+
+        $convidar = $linhas->filter(function ($linha) {
+            return $linha->visitas30 > 0 && $linha->eventos === 0;
+        })->sortByDesc('visitas30')->take(6)->values();
+
+        $primeiroEvento = $linhas->filter(function ($linha) use ($desde) {
+            return $linha->eventos === 0
+                && $linha->visitas30 === 0
+                && $linha->login
+                && $linha->login->gte($desde);
+        })->sortByDesc(function ($linha) {
+            return $linha->login->getTimestamp();
+        })->take(6)->values();
+
+        $chamar = $linhas->filter(function ($linha) use ($limiteSumiu) {
+            return $linha->eventos > 0 && $linha->login && $linha->login->lt($limiteSumiu);
+        })->sortBy('login')->take(6)->values();
+
+        $painel = $linhas->filter(function ($linha) {
+            return !$linha->login && $linha->eventos > 0;
+        })->sortByDesc('visitas30')->take(6)->values();
+
+        return view('admin.guia.estatisticas', [
+            'periodo' => $desde->format('d/m').' – '.now()->format('d/m/Y'),
+            'visitasPeriodo' => $linhas->sum('visitas30'),
+            'comEvento' => $porEvento->count(),
+            'acessosPeriodo' => $linhas->filter(function ($linha) use ($desde) {
+                return $linha->login && $linha->login->gte($desde);
+            })->count(),
+            'semAcesso' => $linhas->filter(function ($linha) {
+                return !$linha->login;
+            })->count(),
+            'porAcesso' => $porAcesso,
+            'porEvento' => $porEvento,
+            'porLogin' => $porLogin,
+            'convidar' => $convidar,
+            'primeiroEvento' => $primeiroEvento,
+            'chamar' => $chamar,
+            'painel' => $painel,
+        ]);
+    }
+
+    private function contagemPorGuia($tipo, $desde)
+    {
+        $consulta = Interacao::query()
+            ->select('id_guia_gui', DB::raw('COUNT(*) as total'))
+            ->where('id_tipo_interacao_tin', $tipo)
+            ->groupBy('id_guia_gui');
+
+        if ($desde) {
+            $consulta->where('created_at', '>=', $desde);
+        }
+
+        return $consulta->pluck('total', 'id_guia_gui');
+    }
+
+    private function acaoAdministrativa($linha, $desde, $limiteSumiu)
+    {
+        $recente = $linha->login && $linha->login->gte($desde);
+
+        if ($linha->visitas30 > 0 && $linha->eventos === 0) {
+            return ['Convidar a publicar', 'aviso'];
+        }
+        if ($recente && $linha->eventos === 0) {
+            return ['Ajudar no primeiro evento', 'info'];
+        }
+        if ($linha->eventos > 0 && $linha->login && $linha->login->lt($limiteSumiu)) {
+            return ['Chamar de volta', 'alerta'];
+        }
+        if (!$linha->login) {
+            return ['Apresentar o painel', 'neutro'];
+        }
+        if ($recente && $linha->futuros > 0) {
+            return ['Ativo', 'ok'];
+        }
+
+        return ['', ''];
+    }
+
     public function ativar($guia_id)
     {
         if (Auth::guest() or trim(Auth::user()->id_role) != 'ADMIN') {

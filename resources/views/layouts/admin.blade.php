@@ -103,6 +103,9 @@
                 <a class="pa-nav-link {{ request()->is('admin/guias', 'admin/guias/listar') ? 'is-active' : '' }}" href="{{ url('admin/guias/listar') }}">
                     <i class="bi bi-person-badge"></i><span>Guias</span>
                 </a>
+                <a class="pa-nav-link {{ request()->is('admin/guias/estatisticas') ? 'is-active' : '' }}" href="{{ url('admin/guias/estatisticas') }}">
+                    <i class="bi bi-bar-chart"></i><span>Estatísticas dos guias</span>
+                </a>
                 <a class="pa-nav-link {{ request()->is('admin/guias/aprovar') ? 'is-active' : '' }}" href="{{ url('admin/guias/aprovar') }}">
                     <i class="bi bi-hourglass-split"></i><span>Guias pendentes</span>
                 </a>

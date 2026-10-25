@@ -295,6 +295,7 @@
                                     <a href="#" class="has-arrow"><i class="fa fa-id-card"></i> <span>Guias</span></a>
                                     <ul>
                                         <li><a href="{{ url('admin/guias/listar') }}">Listar</a></li>
+                                        <li><a href="{{ url('admin/guias/estatisticas') }}">Estatísticas</a></li>
                                     </ul>
                                 </li>
                                 <li>
