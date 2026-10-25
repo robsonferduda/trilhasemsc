@@ -80,7 +80,7 @@ class LoginController extends Controller
                     return redirect()->intended('admin/dashboard');
                     break;
                 case 'GUIA':
-                    return redirect('guia-e-condutores/privado/atualizar-cadastro');
+                    return redirect('guia-e-condutores/privado/painel');
                     break;
                 case 'TRILHEIRO':
                     $trilheiro = Trilheiro::where('id_user', Auth::id())->first();

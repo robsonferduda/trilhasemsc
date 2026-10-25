@@ -104,7 +104,7 @@ class Trilheiro extends Model
             case 'ADMIN':
                 return redirect('admin/dashboard');
             case 'GUIA':
-                return redirect('guia-e-condutores/privado/atualizar-cadastro');
+                return redirect('guia-e-condutores/privado/painel');
             case 'SOCIAL':
                 return redirect('cadastro/privado/escolher-perfil');
             case 'TRILHEIRO':

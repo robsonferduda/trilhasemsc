@@ -316,16 +316,22 @@
                             @endif
                             @if(trim(Auth::user()->id_role) == 'GUIA')
                                 <li>
-                                    <a href="{{ url('guia-e-condutores/privado/perfil') }}" target="_blank"><i class="icon-user"></i> <span>Perfil</span></a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> <span>Editar Dados</span></a>
+                                    <a href="{{ url('guia-e-condutores/privado/painel') }}"><i class="fa fa-dashboard"></i> <span>Painel</span></a>
                                 </li>
                                 <li>
                                   <a href="{{ url('guia-e-condutores/privado/eventos') }}"><i class="fa fa-tags"></i> <span>Eventos</span></a>
                                 </li>
                                 <li>
+                                    <a href="{{ url('guia-e-condutores/privado/perfil') }}"><i class="icon-user"></i> <span>Perfil público</span></a>
+                                </li>
+                                <li>
                                   <a href="{{ url('guia-e-condutores/privado/trilhas') }}"><i class="fa fa-thumb-tack"></i> <span>Trilhas</span></a>
+                                </li>
+                                <li>
+                                  <a href="{{ url('guia-e-condutores/privado/estatisticas') }}"><i class="fa fa-bar-chart"></i> <span>Estatísticas</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}"><i class="fa fa-edit"></i> <span>Meus dados</span></a>
                                 </li>
                             @endif
                             @if(trim(Auth::user()->id_role) == 'TRILHEIRO')

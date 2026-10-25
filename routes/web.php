@@ -193,6 +193,7 @@ Route::group(['middleware' => ['web']], function () {
     });    
     Route::prefix('guia-e-condutores/privado')->group(function () {
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'GuiaController@atualizarCadastro');
+        Route::get('painel', 'GuiaController@painel')->name('guia.painel');
         Route::get('estatisticas', 'GuiaController@minhasEstatisticas');
         Route::get('perfil', 'GuiaController@previaPerfil');
         Route::get('eventos', 'EventoController@eventos');

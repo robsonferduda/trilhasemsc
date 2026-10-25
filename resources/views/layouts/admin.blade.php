@@ -28,7 +28,7 @@
 @endphp
 
     <aside class="pa-sidebar" id="pa-sidebar">
-        <a href="{{ $papel === 'TRILHEIRO' ? url('trilheiro/privado/perfil') : url('admin/dashboard') }}" class="pa-brand">
+        <a href="{{ $papel === 'TRILHEIRO' ? url('trilheiro/privado/perfil') : ($papel === 'GUIA' ? url('guia-e-condutores/privado/painel') : url('admin/dashboard')) }}" class="pa-brand">
             <span class="pa-logo"><i class="bi bi-lightning-charge-fill"></i></span>
             <span class="pa-brand-text">Trilhas em SC</span>
         </a>
@@ -49,6 +49,29 @@
                 </a>
                 <a class="pa-nav-link {{ request()->is('trilheiro/privado/eventos*') ? 'is-active' : '' }}" href="{{ url('trilheiro/privado/eventos') }}">
                     <i class="bi bi-calendar-event"></i><span>Meus eventos</span>
+                </a>
+            @elseif($papel === 'GUIA')
+                <p class="pa-nav-label">Painel</p>
+                <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/painel') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/painel') }}">
+                    <i class="bi bi-speedometer2"></i><span>Início</span>
+                </a>
+                <p class="pa-nav-label">Eventos</p>
+                <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/evento*') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/eventos') }}">
+                    <i class="bi bi-calendar-event"></i><span>Meus eventos</span>
+                </a>
+                <p class="pa-nav-label">Presença</p>
+                <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/perfil') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/perfil') }}">
+                    <i class="bi bi-person"></i><span>Perfil público</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/trilhas') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/trilhas') }}">
+                    <i class="bi bi-map"></i><span>Trilhas</span>
+                </a>
+                <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/estatisticas') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/estatisticas') }}">
+                    <i class="bi bi-bar-chart"></i><span>Estatísticas</span>
+                </a>
+                <p class="pa-nav-label">Conta</p>
+                <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/atualizar-cadastro') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}">
+                    <i class="bi bi-pencil"></i><span>Meus dados</span>
                 </a>
             @else
                 <p class="pa-nav-label">Painel</p>
@@ -110,6 +133,14 @@
                         <a class="pa-app" href="{{ url('trilheiro/privado/trilhas') }}"><i class="bi bi-map"></i>Trilhas</a>
                         <a class="pa-app" href="{{ url('trilheiro/privado/eventos') }}"><i class="bi bi-calendar-event"></i>Eventos</a>
                         <a class="pa-app" href="{{ url('/') }}"><i class="bi bi-globe"></i>Site</a>
+                    @elseif($papel === 'GUIA')
+                        <a class="pa-app" href="{{ url('guia-e-condutores/privado/painel') }}"><i class="bi bi-speedometer2"></i>Início</a>
+                        <a class="pa-app" href="{{ url('guia-e-condutores/privado/eventos') }}"><i class="bi bi-calendar-event"></i>Eventos</a>
+                        <a class="pa-app" href="{{ url('guia-e-condutores/privado/perfil') }}"><i class="bi bi-person"></i>Perfil</a>
+                        <a class="pa-app" href="{{ url('guia-e-condutores/privado/trilhas') }}"><i class="bi bi-map"></i>Trilhas</a>
+                        <a class="pa-app" href="{{ url('guia-e-condutores/privado/estatisticas') }}"><i class="bi bi-bar-chart"></i>Estatísticas</a>
+                        <a class="pa-app" href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}"><i class="bi bi-pencil"></i>Dados</a>
+                        <a class="pa-app" href="{{ url('/') }}"><i class="bi bi-globe"></i>Site</a>
                     @else
                         <a class="pa-app" href="{{ url('admin/dashboard') }}"><i class="bi bi-grid"></i>Painel</a>
                         <a class="pa-app" href="{{ url('admin/listar-trilhas') }}"><i class="bi bi-signpost-2"></i>Trilhas</a>
@@ -122,7 +153,7 @@
             </div>
         </div>
 
-        @if($papel !== 'TRILHEIRO')
+        @if(!in_array($papel, ['TRILHEIRO', 'GUIA'], true))
         <form class="pa-search" method="GET" action="{{ url('admin/listar-trilhas') }}">
             <i class="bi bi-search"></i>
             <input type="search" name="nome" placeholder="Buscar trilha..." value="{{ request()->is('admin/listar-trilhas') ? request('nome') : '' }}" autocomplete="off">

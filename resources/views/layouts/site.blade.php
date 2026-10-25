@@ -281,7 +281,7 @@
                            <a href="{{ url('admin/dashboard') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">MEU PERFIL</a>
                         @endif
                         @if(trim(Auth::user()->id_role) == 'GUIA')
-                           <a href="{{ url('guia-e-condutores/privado/atualizar-cadastro') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">MEU PERFIL</a>
+                           <a href="{{ url('guia-e-condutores/privado/painel') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">PAINEL</a>
                         @endif
                         @if(trim(Auth::user()->id_role) == 'TRILHEIRO')
                            <a href="{{ url('trilheiro/privado/perfil') }}" class="btn btn-sm  bg-gradient-warning  btn-round mb-0 me-1">MEU PERFIL</a>

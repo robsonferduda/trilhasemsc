@@ -1,4 +1,5 @@
-@extends('layouts.template')
+@extends('layouts.admin')
+@section('pageTitle', 'Gastos | Trilhas em SC')
 
 @section('content')
     <div class="block-header">
@@ -21,7 +22,8 @@
                         <div class="col-md-8">
                             <h2>{{ $evento->nm_evento_eve }}</h2>
                         </div>
-                        <div class="col-md-4 text-right">
+                        <div class="col-md-4 d-flex justify-content-md-end gap-2">
+                            <a href="{{ url('guia-e-condutores/privado/painel') }}" class="btn btn-outline-secondary btn-sm">Painel</a>
                             <a href="{{ url('guia-e-condutores/privado/eventos/participantes', $evento->id_evento_eve) }}" class="btn btn-outline-danger btn-sm">Participantes</a>
                             <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-primary btn-sm">Meus eventos</a>
                         </div>

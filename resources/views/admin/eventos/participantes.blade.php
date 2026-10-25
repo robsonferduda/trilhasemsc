@@ -1,4 +1,5 @@
-@extends('layouts.template')
+@extends('layouts.admin')
+@section('pageTitle', 'Participantes | Trilhas em SC')
 
 @section('content')
     <div class="block-header">
@@ -21,9 +22,10 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <h2><i class="fa fa-tags"></i> Meus Eventos / {{ $evento->nm_evento_eve }}</h2>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <a href="{{ url('guia-e-condutores/privado/eventos/gastos', $evento->id_evento_eve) }}" class="btn btn-success pull-right mr-2"><i class="fa fa-money"></i> Gastos</a>
-                            <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-primary pull-right mr-2"><i class="fa fa-list"></i> Meus Eventos</a>
+                        <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-md-end gap-2">
+                            <a href="{{ url('guia-e-condutores/privado/painel') }}" class="btn btn-outline-secondary btn-sm">Painel</a>
+                            <a href="{{ url('guia-e-condutores/privado/eventos/gastos', $evento->id_evento_eve) }}" class="btn btn-success btn-sm"><i class="fa fa-money"></i> Gastos</a>
+                            <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-primary btn-sm"><i class="fa fa-list"></i> Meus Eventos</a>
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cidade;
 use App\Evento;
+use App\EventoTrilheiro;
 use App\Exceptions\CadasturIndisponivelException;
 use App\Fone;
 use App\Guia;
@@ -437,6 +438,102 @@ class GuiaController extends Controller
         //$trilhas = Trilha::with('cidade')->where('fl_publicacao_tri', 'S')->get()->sortBy('cidade.nm_cidade_cde');
 
         return view('guias/atualizar-cadastro', compact('usuario', 'cidades', 'guia', 'ucs'));
+    }
+
+    public function painel()
+    {
+        if (Auth::guest() || trim(Auth::user()->id_role) !== 'GUIA') {
+            return redirect('login');
+        }
+
+        $guia = Guia::where('id_user', Auth::id())->first();
+        if (empty($guia)) {
+            return redirect('guia-e-condutores/privado/atualizar-cadastro');
+        }
+
+        $proximos = $guia->eventos()
+            ->with(['local', 'eventoTrilheiros.trilheiro', 'gastos'])
+            ->where('fl_cancelado_eve', false)
+            ->where('dt_realizacao_eve', '>=', now()->toDateString())
+            ->orderBy('dt_realizacao_eve')
+            ->orderBy('hora_inicio_eve')
+            ->get();
+
+        $interessados = 0;
+        $aceitos = 0;
+        $semDados = 0;
+        $receita = 0.0;
+        $sobra = 0.0;
+        $fila = [];
+
+        foreach ($proximos as $evento) {
+            $resumo = $evento->resumoFinanceiro();
+            $receita += $resumo['receita'];
+            $sobra += $resumo['sobra'];
+
+            foreach ($evento->eventoTrilheiros as $inscricao) {
+                if ($inscricao->st_inscricao_evt === EventoTrilheiro::INTERESSADO) {
+                    $interessados++;
+                } elseif ($inscricao->st_inscricao_evt === EventoTrilheiro::ACEITO) {
+                    $aceitos++;
+                }
+
+                if (!$inscricao->ativa()) {
+                    continue;
+                }
+
+                $faltas = $inscricao->faltasParaConfirmar();
+                if ($faltas) {
+                    $semDados++;
+                }
+
+                $esperaDecisao = in_array($inscricao->st_inscricao_evt, [EventoTrilheiro::INTERESSADO, EventoTrilheiro::ACEITO], true);
+                if (!$esperaDecisao && !$faltas) {
+                    continue;
+                }
+
+                if ($inscricao->st_inscricao_evt === EventoTrilheiro::INTERESSADO) {
+                    $acao = 'Aceitar ou recusar';
+                    $ordem = 0;
+                } elseif ($inscricao->st_inscricao_evt === EventoTrilheiro::ACEITO) {
+                    $acao = 'Confirmar pagamento';
+                    $ordem = 1;
+                } else {
+                    $acao = 'Completar dados do seguro';
+                    $ordem = 2;
+                }
+
+                $fila[] = [
+                    'nome' => trim((string) optional($inscricao->trilheiro)->nm_trilheiro_tri) ?: 'Trilheiro',
+                    'evento' => $evento->nm_evento_eve,
+                    'quando' => $evento->dt_realizacao_eve,
+                    'acao' => $acao,
+                    'faltas' => $faltas,
+                    'ordem' => $ordem,
+                    'url' => url('guia-e-condutores/privado/eventos/participantes/'.$evento->id_evento_eve),
+                ];
+            }
+        }
+
+        usort($fila, function ($a, $b) {
+            $data = strcmp((string) $a['quando'], (string) $b['quando']);
+            if ($data !== 0) {
+                return $data;
+            }
+
+            return $a['ordem'] <=> $b['ordem'];
+        });
+
+        return view('guias.painel', [
+            'guia' => $guia,
+            'proximos' => $proximos,
+            'fila' => $fila,
+            'interessados' => $interessados,
+            'aceitos' => $aceitos,
+            'semDados' => $semDados,
+            'receita' => $receita,
+            'sobra' => $sobra,
+        ]);
     }
 
     public function minhasEstatisticas()
