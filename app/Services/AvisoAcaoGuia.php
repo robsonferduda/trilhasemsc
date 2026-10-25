@@ -11,14 +11,12 @@ use Illuminate\Support\Facades\Mail;
 class AvisoAcaoGuia
 {
     const PUBLICAR = 'publicar';
-    const PRIMEIRO = 'primeiro';
-    const VOLTAR = 'voltar';
     const PAINEL = 'painel';
     const ESPERA_DIAS = 30;
 
     public static function tipos()
     {
-        return [self::PUBLICAR, self::PRIMEIRO, self::VOLTAR, self::PAINEL];
+        return [self::PUBLICAR, self::PAINEL];
     }
 
     public static function assunto($tipo)
@@ -49,32 +47,6 @@ class AvisoAcaoGuia
                 ],
                 'botao' => 'Publicar um passeio',
                 'url' => $novo,
-            ];
-        }
-
-        if ($tipo === self::PRIMEIRO) {
-            return [
-                'assunto' => 'Seu painel está pronto para o primeiro passeio',
-                'paragrafos' => [
-                    'Olá, '.$nome.'.',
-                    'Você entrou no Trilhas em SC e ainda não cadastrou um passeio.',
-                    'Informe a data, as vagas e o valor. A vaga só é ocupada depois que o pagamento é confirmado.',
-                ],
-                'botao' => 'Cadastrar o primeiro passeio',
-                'url' => $novo,
-            ];
-        }
-
-        if ($tipo === self::VOLTAR) {
-            return [
-                'assunto' => 'Sua agenda no Trilhas em SC pode ser atualizada',
-                'paragrafos' => [
-                    'Olá, '.$nome.'.',
-                    'Faz um tempo que você não entra no painel. Seus passeios continuam no seu perfil.',
-                    'Abra a agenda e lance a próxima data. Quem favoritou você é avisado quando um passeio novo é salvo.',
-                ],
-                'botao' => 'Abrir meu painel',
-                'url' => $painel,
             ];
         }
 

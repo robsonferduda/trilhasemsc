@@ -77,7 +77,7 @@
     </div>
 </div>
 
-@if($convidar->count() || $primeiroEvento->count() || $chamar->count() || $painel->count())
+@if($convidar->count() || $painel->count())
 <div class="row clearfix">
     <div class="col-lg-12">
         <h3 class="h5 mb-3">Para agir agora</h3>
@@ -86,34 +86,10 @@
         <div class="col-lg-6 col-md-12 mb-3">
             <div class="card">
                 <div class="body">
-                    <h4 class="h6">Perfil visto, sem evento</h4>
-                    <p class="text-muted">Gente procurando o guia. O e-mail convida a publicar um passeio.</p>
+                    <h4 class="h6">Convidar a publicar</h4>
+                    <p class="text-muted">O perfil foi visto no último mês e ainda não há passeio cadastrado.</p>
                     @include('admin.guia.partes.acao', ['linhas' => $convidar, 'detalhe' => 'visitas', 'codigo' => 'publicar'])
                     @include('admin.guia.partes.envio', ['codigo' => 'publicar', 'total' => $convidarTotal, 'mostrados' => $convidar->count(), 'pendentes' => $convidarPendentes])
-                </div>
-            </div>
-        </div>
-    @endif
-    @if($primeiroEvento->count())
-        <div class="col-lg-6 col-md-12 mb-3">
-            <div class="card">
-                <div class="body">
-                    <h4 class="h6">Entrou e ainda não publicou</h4>
-                    <p class="text-muted">Já acessou o painel neste período. O e-mail ajuda no primeiro evento.</p>
-                    @include('admin.guia.partes.acao', ['linhas' => $primeiroEvento, 'detalhe' => 'login', 'codigo' => 'primeiro'])
-                    @include('admin.guia.partes.envio', ['codigo' => 'primeiro', 'total' => $primeiroTotal, 'mostrados' => $primeiroEvento->count(), 'pendentes' => $primeiroPendentes])
-                </div>
-            </div>
-        </div>
-    @endif
-    @if($chamar->count())
-        <div class="col-lg-6 col-md-12 mb-3">
-            <div class="card">
-                <div class="body">
-                    <h4 class="h6">Publicou e não volta há 60 dias</h4>
-                    <p class="text-muted">Tem evento, mas o último acesso ao painel ficou para trás. O e-mail chama de volta.</p>
-                    @include('admin.guia.partes.acao', ['linhas' => $chamar, 'detalhe' => 'login', 'codigo' => 'voltar'])
-                    @include('admin.guia.partes.envio', ['codigo' => 'voltar', 'total' => $chamarTotal, 'mostrados' => $chamar->count(), 'pendentes' => $chamarPendentes])
                 </div>
             </div>
         </div>
@@ -122,8 +98,8 @@
         <div class="col-lg-6 col-md-12 mb-3">
             <div class="card">
                 <div class="body">
-                    <h4 class="h6">Tem evento e nunca entrou no painel</h4>
-                    <p class="text-muted">O login ainda não foi registrado. O e-mail apresenta o painel.</p>
+                    <h4 class="h6">Apresentar o painel</h4>
+                    <p class="text-muted">Já cadastrou evento e o login no painel ainda não foi registrado.</p>
                     @include('admin.guia.partes.acao', ['linhas' => $painel, 'detalhe' => 'eventos', 'codigo' => 'painel'])
                     @include('admin.guia.partes.envio', ['codigo' => 'painel', 'total' => $painelTotal, 'mostrados' => $painel->count(), 'pendentes' => $painelPendentes])
                 </div>

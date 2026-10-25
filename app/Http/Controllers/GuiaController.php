@@ -954,8 +954,7 @@ class GuiaController extends Controller
         }
 
         $desde = now()->subDays(29)->startOfDay();
-        $limiteSumiu = now()->subDays(60)->startOfDay();
-        $linhas = $this->montarLinhasDeGuias($desde, $limiteSumiu);
+        $linhas = $this->montarLinhasDeGuias($desde);
 
         $porNome = function ($a, $b) {
             return strcasecmp($a->guia->nm_guia_gui, $b->guia->nm_guia_gui);
@@ -1002,18 +1001,6 @@ class GuiaController extends Controller
             return $linha->codigo === AvisoAcaoGuia::PUBLICAR;
         })->sortByDesc('visitas30')->values();
 
-        $primeiroTodos = $linhas->filter(function ($linha) {
-            return $linha->codigo === AvisoAcaoGuia::PRIMEIRO;
-        })->sortByDesc(function ($linha) {
-            return $linha->login ? $linha->login->getTimestamp() : 0;
-        })->values();
-
-        $chamarTodos = $linhas->filter(function ($linha) {
-            return $linha->codigo === AvisoAcaoGuia::VOLTAR;
-        })->sortBy(function ($linha) {
-            return $linha->login ? $linha->login->getTimestamp() : 0;
-        })->values();
-
         $painelTodos = $linhas->filter(function ($linha) {
             return $linha->codigo === AvisoAcaoGuia::PAINEL;
         })->sortByDesc('visitas30')->values();
@@ -1025,8 +1012,6 @@ class GuiaController extends Controller
         };
 
         $convidar = $convidarTodos->take(6)->values();
-        $primeiroEvento = $primeiroTodos->take(6)->values();
-        $chamar = $chamarTodos->take(6)->values();
         $painel = $painelTodos->take(6)->values();
 
         return view('admin.guia.estatisticas', [
@@ -1043,16 +1028,10 @@ class GuiaController extends Controller
             'porEvento' => $porEvento,
             'porLogin' => $porLogin,
             'convidar' => $convidar,
-            'primeiroEvento' => $primeiroEvento,
-            'chamar' => $chamar,
             'painel' => $painel,
             'convidarTotal' => $convidarTodos->count(),
-            'primeiroTotal' => $primeiroTodos->count(),
-            'chamarTotal' => $chamarTodos->count(),
             'painelTotal' => $painelTodos->count(),
             'convidarPendentes' => $pendentes($convidarTodos),
-            'primeiroPendentes' => $pendentes($primeiroTodos),
-            'chamarPendentes' => $pendentes($chamarTodos),
             'painelPendentes' => $pendentes($painelTodos),
         ]);
     }
@@ -1087,14 +1066,13 @@ class GuiaController extends Controller
     private function linhasParaAcao($tipo)
     {
         $desde = now()->subDays(29)->startOfDay();
-        $limiteSumiu = now()->subDays(60)->startOfDay();
 
-        return $this->montarLinhasDeGuias($desde, $limiteSumiu)->filter(function ($linha) use ($tipo) {
+        return $this->montarLinhasDeGuias($desde)->filter(function ($linha) use ($tipo) {
             return $linha->codigo === $tipo;
         })->values();
     }
 
-    private function montarLinhasDeGuias($desde, $limiteSumiu)
+    private function montarLinhasDeGuias($desde)
     {
         $visitas30 = $this->contagemPorGuia(3, $desde);
         $visitasTotal = $this->contagemPorGuia(3, null);
@@ -1121,7 +1099,7 @@ class GuiaController extends Controller
             $avisos[$aviso->id_guia_gui.'|'.$aviso->sg_acao_gva] = \Carbon\Carbon::parse($aviso->ultimo);
         }
 
-        return Guia::with(['user', 'origem', 'fone', 'whatsap'])->get()->map(function ($guia) use ($visitas30, $visitasTotal, $contatos30, $eventos, $desde, $limiteSumiu, $avisos) {
+        return Guia::with(['user', 'origem', 'fone', 'whatsap'])->get()->map(function ($guia) use ($visitas30, $visitasTotal, $contatos30, $eventos, $avisos) {
             $registro = $eventos->get($guia->id_guia_gui);
             $login = optional($guia->user)->dt_last_login;
 
@@ -1137,7 +1115,7 @@ class GuiaController extends Controller
                 'acao' => '',
                 'acaoTom' => '',
             ];
-            $acao = $this->acaoAdministrativa($linha, $desde, $limiteSumiu);
+            $acao = $this->acaoAdministrativa($linha);
             $linha->acao = $acao[0];
             $linha->acaoTom = $acao[1];
             $linha->codigo = $acao[2];
@@ -1193,27 +1171,13 @@ class GuiaController extends Controller
         return $consulta->pluck('total', 'id_guia_gui');
     }
 
-    private function acaoAdministrativa($linha, $desde, $limiteSumiu)
+    private function acaoAdministrativa($linha)
     {
-        $recente = $linha->login && $linha->login->gte($desde);
-
         if ($linha->visitas30 > 0 && $linha->eventos === 0) {
             return ['Convidar a publicar', 'aviso', AvisoAcaoGuia::PUBLICAR];
         }
-        if ($recente && $linha->eventos === 0) {
-            return ['Ajudar no primeiro evento', 'info', AvisoAcaoGuia::PRIMEIRO];
-        }
-        if ($linha->eventos > 0 && $linha->login && $linha->login->lt($limiteSumiu)) {
-            return ['Chamar de volta', 'alerta', AvisoAcaoGuia::VOLTAR];
-        }
         if (!$linha->login && $linha->eventos > 0) {
             return ['Apresentar o painel', 'neutro', AvisoAcaoGuia::PAINEL];
-        }
-        if (!$linha->login) {
-            return ['Apresentar o painel', 'neutro', null];
-        }
-        if ($recente && $linha->futuros > 0) {
-            return ['Ativo', 'ok', null];
         }
 
         return ['', '', null];
