@@ -17,6 +17,14 @@
     <link rel="stylesheet" href="{{ asset('vendor/dropify/css/dropify.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <link rel="stylesheet" href="{{ asset('css/admin-power.css') }}?v={{ date('YmdHis') }}">
+    <style>
+        .pa-brand-logo { height: 28px; width: auto; display: block; }
+        .pa-brand-mark { display: none; height: 34px; width: auto; }
+        @media (min-width: 992px) {
+            body.pa-collapsed .pa-brand-logo { display: none; }
+            body.pa-collapsed .pa-brand-mark { display: block; }
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="pa-admin">
@@ -29,8 +37,8 @@
 
     <aside class="pa-sidebar" id="pa-sidebar">
         <a href="{{ $papel === 'TRILHEIRO' ? url('trilheiro/privado/perfil') : ($papel === 'GUIA' ? url('guia-e-condutores/privado/painel') : url('admin/dashboard')) }}" class="pa-brand">
-            <span class="pa-logo"><i class="bi bi-lightning-charge-fill"></i></span>
-            <span class="pa-brand-text">Trilhas em SC</span>
+            <img class="pa-brand-logo" src="{{ asset('images/logo.svg') }}" alt="Trilhas em SC">
+            <img class="pa-brand-mark" src="{{ asset('images/logo-mark.svg') }}" alt="">
         </a>
         <nav class="pa-nav">
             @if($papel === 'TRILHEIRO')
