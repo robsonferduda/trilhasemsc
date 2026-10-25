@@ -170,6 +170,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('guias/aprovar', 'GuiaController@aprovar');
         Route::get('guias/listar', 'GuiaController@listar');
         Route::get('guias/estatisticas', 'GuiaController@estatisticasAdmin')->name('admin.guias.estatisticas');
+        Route::post('guias/estatisticas/email', 'GuiaController@enviarAcaoEmail')->name('admin.guias.acao-email');
         Route::post('guia/{id}/cadastur', 'GuiaController@conferirCadastur')->name('admin.guia.cadastur');
         Route::post('guia/{id}/story', 'GuiaController@salvarStory')->name('admin.guia.story');
 

@@ -30,6 +30,20 @@
                     @endif
                 </div>
             @endif
+            @if($linha->podeAvisar)
+                <form method="post" action="{{ route('admin.guias.acao-email') }}" class="mt-1" onsubmit="return confirm('Enviar este e-mail para {{ $linha->guia->nm_guia_gui }}?');">
+                    @csrf
+                    <input type="hidden" name="acao" value="{{ $codigo }}">
+                    <input type="hidden" name="guia" value="{{ $linha->guia->id_guia_gui }}">
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Enviar e-mail</button>
+                </form>
+            @elseif($linha->avisoEm)
+                <div class="text-muted" style="font-size:12px;">E-mail enviado em {{ $linha->avisoEm->format('d/m/Y') }}</div>
+            @elseif(!$linha->guia->fl_ativo_gui)
+                <div class="text-muted" style="font-size:12px;">Inativo, sem envio</div>
+            @else
+                <div class="text-muted" style="font-size:12px;">Sem e-mail no cadastro</div>
+            @endif
         </li>
     @endforeach
 </ul>

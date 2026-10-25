@@ -3,6 +3,7 @@
 @section('pageTitle', 'Estatísticas dos guias | Trilhas em SC')
 
 @section('content')
+@include('layouts.mensagens')
 @php
     $tom = [
         'aviso' => 'background:#fff4d6;color:#7a5b00;',
@@ -86,8 +87,9 @@
             <div class="card">
                 <div class="body">
                     <h4 class="h6">Perfil visto, sem evento</h4>
-                    <p class="text-muted">Gente procurando o guia. Vale convidar a publicar um passeio.</p>
-                    @include('admin.guia.partes.acao', ['linhas' => $convidar, 'detalhe' => 'visitas'])
+                    <p class="text-muted">Gente procurando o guia. O e-mail convida a publicar um passeio.</p>
+                    @include('admin.guia.partes.acao', ['linhas' => $convidar, 'detalhe' => 'visitas', 'codigo' => 'publicar'])
+                    @include('admin.guia.partes.envio', ['codigo' => 'publicar', 'total' => $convidarTotal, 'mostrados' => $convidar->count(), 'pendentes' => $convidarPendentes])
                 </div>
             </div>
         </div>
@@ -97,8 +99,9 @@
             <div class="card">
                 <div class="body">
                     <h4 class="h6">Entrou e ainda não publicou</h4>
-                    <p class="text-muted">Já acessou o painel neste período. Ajuda no primeiro evento.</p>
-                    @include('admin.guia.partes.acao', ['linhas' => $primeiroEvento, 'detalhe' => 'login'])
+                    <p class="text-muted">Já acessou o painel neste período. O e-mail ajuda no primeiro evento.</p>
+                    @include('admin.guia.partes.acao', ['linhas' => $primeiroEvento, 'detalhe' => 'login', 'codigo' => 'primeiro'])
+                    @include('admin.guia.partes.envio', ['codigo' => 'primeiro', 'total' => $primeiroTotal, 'mostrados' => $primeiroEvento->count(), 'pendentes' => $primeiroPendentes])
                 </div>
             </div>
         </div>
@@ -108,8 +111,9 @@
             <div class="card">
                 <div class="body">
                     <h4 class="h6">Publicou e não volta há 60 dias</h4>
-                    <p class="text-muted">Tem evento, mas o último acesso ao painel ficou para trás.</p>
-                    @include('admin.guia.partes.acao', ['linhas' => $chamar, 'detalhe' => 'login'])
+                    <p class="text-muted">Tem evento, mas o último acesso ao painel ficou para trás. O e-mail chama de volta.</p>
+                    @include('admin.guia.partes.acao', ['linhas' => $chamar, 'detalhe' => 'login', 'codigo' => 'voltar'])
+                    @include('admin.guia.partes.envio', ['codigo' => 'voltar', 'total' => $chamarTotal, 'mostrados' => $chamar->count(), 'pendentes' => $chamarPendentes])
                 </div>
             </div>
         </div>
@@ -119,8 +123,9 @@
             <div class="card">
                 <div class="body">
                     <h4 class="h6">Tem evento e nunca entrou no painel</h4>
-                    <p class="text-muted">O login ainda não foi registrado. Vale mostrar a área do guia.</p>
-                    @include('admin.guia.partes.acao', ['linhas' => $painel, 'detalhe' => 'eventos'])
+                    <p class="text-muted">O login ainda não foi registrado. O e-mail apresenta o painel.</p>
+                    @include('admin.guia.partes.acao', ['linhas' => $painel, 'detalhe' => 'eventos', 'codigo' => 'painel'])
+                    @include('admin.guia.partes.envio', ['codigo' => 'painel', 'total' => $painelTotal, 'mostrados' => $painel->count(), 'pendentes' => $painelPendentes])
                 </div>
             </div>
         </div>
