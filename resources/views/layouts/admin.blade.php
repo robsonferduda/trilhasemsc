@@ -18,12 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <link rel="stylesheet" href="{{ asset('css/admin-power.css') }}?v={{ date('YmdHis') }}">
     <style>
-        .pa-brand-logo { height: 36px; width: auto; display: block; }
-        .pa-brand-mark { display: none; height: 36px; width: auto; }
-        @media (min-width: 992px) {
-            body.pa-collapsed .pa-brand-logo { display: none; }
-            body.pa-collapsed .pa-brand-mark { display: block; }
-        }
+        .pa-brand-logo { height: 40px; width: 40px; object-fit: contain; display: block; }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -37,8 +32,8 @@
 
     <aside class="pa-sidebar" id="pa-sidebar">
         <a href="{{ $papel === 'TRILHEIRO' ? url('trilheiro/privado/perfil') : ($papel === 'GUIA' ? url('guia-e-condutores/privado/painel') : url('admin/dashboard')) }}" class="pa-brand">
-            <img class="pa-brand-logo" src="{{ asset('img/logo/logo_trilhas.png') }}" alt="Trilhas em SC">
-            <img class="pa-brand-mark" src="{{ asset('img/logo/logo_circular.png') }}" alt="">
+            <img class="pa-brand-logo" src="{{ asset('img/logo/logo_circular.png') }}" alt="">
+            <span class="pa-brand-text">Trilhas em SC</span>
         </a>
         <nav class="pa-nav">
             @if($papel === 'TRILHEIRO')
