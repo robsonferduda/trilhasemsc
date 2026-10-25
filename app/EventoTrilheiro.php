@@ -24,9 +24,67 @@ class EventoTrilheiro extends Model
         'fl_aceito_guia_evt',
         'fl_pago_evt',
         'st_inscricao_evt',
+        'nr_documento_evt',
     ];
 
     public $timestamps = true;
+
+    public static function nomeCompleto($nome)
+    {
+        $partes = preg_split('/\s+/', trim((string) $nome), -1, PREG_SPLIT_NO_EMPTY);
+
+        return count($partes) >= 2;
+    }
+
+    public static function cpfValido($documento)
+    {
+        $cpf = preg_replace('/\D/', '', (string) $documento);
+
+        if (strlen($cpf) !== 11 || preg_match('/^(\d)\1{10}$/', $cpf)) {
+            return false;
+        }
+
+        for ($t = 9; $t < 11; $t++) {
+            $soma = 0;
+            for ($c = 0; $c < $t; $c++) {
+                $soma += (int) $cpf[$c] * (($t + 1) - $c);
+            }
+            $digito = ((10 * $soma) % 11) % 10;
+            if ((int) $cpf[$t] !== $digito) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static function formatarCpf($documento)
+    {
+        $cpf = preg_replace('/\D/', '', (string) $documento);
+        if (strlen($cpf) !== 11) {
+            return $documento;
+        }
+
+        return substr($cpf, 0, 3).'.'.substr($cpf, 3, 3).'.'.substr($cpf, 6, 3).'-'.substr($cpf, 9, 2);
+    }
+
+    public function faltasParaConfirmar()
+    {
+        $trilheiro = $this->relationLoaded('trilheiro') ? $this->trilheiro : $this->trilheiro()->first();
+        $faltas = [];
+
+        if (!self::nomeCompleto(optional($trilheiro)->nm_trilheiro_tri)) {
+            $faltas[] = 'nome completo';
+        }
+        if (empty(optional($trilheiro)->dt_nascimento)) {
+            $faltas[] = 'data de nascimento';
+        }
+        if (!self::cpfValido($this->nr_documento_evt)) {
+            $faltas[] = 'CPF';
+        }
+
+        return $faltas;
+    }
 
     public static function cabeVaga($ocupadas, $limite)
     {

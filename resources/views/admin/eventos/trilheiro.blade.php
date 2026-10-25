@@ -53,6 +53,9 @@
                                                 <i class="fa fa-times"></i> Cancelar participação
                                             </button>
                                             @endif
+                                            @if(in_array($evento->pivot->st_inscricao_evt ?? '', [\App\EventoTrilheiro::INTERESSADO, \App\EventoTrilheiro::ACEITO], true) && !\App\EventoTrilheiro::cpfValido($evento->pivot->nr_documento_evt ?? null))
+                                                <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" class="btn btn-outline-warning btn-sm">Informar CPF</a>
+                                            @endif
                                             <span class="badge {{ \App\EventoTrilheiro::classeDoStatus($evento->pivot->st_inscricao_evt ?? null) }}">
                                                 {{ \App\EventoTrilheiro::rotuloDoStatus($evento->pivot->st_inscricao_evt ?? null) }}
                                             </span>

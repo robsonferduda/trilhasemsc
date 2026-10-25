@@ -211,7 +211,7 @@ class Evento extends Model
     public function trilheiros()
     {
         return $this->belongsToMany(Trilheiro::class, 'evento_trilheiro_evt', 'id_evento_eve', 'id_trilheiro_tri')
-            ->withPivot('cd_evento_trilheiro_evt', 'fl_aceito_guia_evt', 'fl_pago_evt', 'st_inscricao_evt')
+            ->withPivot('cd_evento_trilheiro_evt', 'fl_aceito_guia_evt', 'fl_pago_evt', 'st_inscricao_evt', 'nr_documento_evt')
             ->withTimestamps();
     }
 

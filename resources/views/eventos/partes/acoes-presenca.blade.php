@@ -1,8 +1,11 @@
 @php
     $inscricaoAtiva = $inscricao && $inscricao->ativa();
+    $faltamDados = $inscricaoAtiva && count($inscricao->faltasParaConfirmar()) > 0;
 @endphp
 @if(Auth::user() and $trilheiro)
-    @if($inscricaoAtiva)
+    @if($faltamDados)
+        <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" class="btn btn-outline-warning btn-sm">Informar dados do seguro</a>
+    @elseif($inscricaoAtiva)
         <button type="button" class="btn btn-outline-success btn-sm">
             <i class="fa fa-check"></i> {{ $inscricao->rotuloStatus() }}
         </button>

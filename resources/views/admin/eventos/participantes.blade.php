@@ -83,6 +83,12 @@
                                         </p>
                                         <p class="mb-2"><strong>Cidade de origem</strong>: {!! ($trilheiro->origem) ? $trilheiro->origem->nm_cidade_cde : '<span class="text-danger">Não informada</span>' !!}</p>
                                         <p class="mb-2"><strong>E-mail</strong>: {{ optional($trilheiro->user)->email ?: 'Não informado' }}</p>
+                                        <p class="mb-2"><strong>Nascimento</strong>: {{ $trilheiro->dt_nascimento ? \Carbon\Carbon::parse($trilheiro->dt_nascimento)->format('d/m/Y') : 'Não informado' }}</p>
+                                        <p class="mb-2"><strong>CPF</strong>: {{ $inscricao->nr_documento_evt ? \App\EventoTrilheiro::formatarCpf($inscricao->nr_documento_evt) : 'Não informado' }}</p>
+                                        @php $faltas = $inscricao->faltasParaConfirmar(); @endphp
+                                        @if(count($faltas))
+                                            <p class="mb-2 text-danger"><strong>Para confirmar a vaga, falta:</strong> {{ implode(', ', $faltas) }}</p>
+                                        @endif
                                         <p class="mb-2"><strong>Interesse em</strong>: {{ \Carbon\Carbon::parse($inscricao->created_at)->format('d/m/Y H:i') }}</p>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12">
@@ -93,10 +99,14 @@
                                             </form>
                                         @endif
                                         @if($inscricao->st_inscricao_evt === \App\EventoTrilheiro::ACEITO)
+                                            @if(count($faltas))
+                                                <button type="button" class="btn btn-primary btn-sm btn-block mb-2" disabled>{{ $eventoPago ? 'Confirmar pagamento' : 'Confirmar vaga' }}</button>
+                                            @else
                                             <form action="{{ route('evento.inscricao.pagamento', [$evento->id_evento_eve, $inscricao->cd_evento_trilheiro_evt]) }}" method="post" class="mb-2" onsubmit="return confirm('{{ $eventoPago ? 'Confirmar o pagamento e fechar a vaga?' : 'Confirmar a vaga? Em evento gratuito, esta confirmação ocupa a vaga.' }}');">
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary btn-sm btn-block">{{ $eventoPago ? 'Confirmar pagamento' : 'Confirmar vaga' }}</button>
                                             </form>
+                                            @endif
                                         @endif
                                         @if(in_array($inscricao->st_inscricao_evt, [\App\EventoTrilheiro::INTERESSADO, \App\EventoTrilheiro::ACEITO], true))
                                             <form action="{{ route('evento.inscricao.recusar', [$evento->id_evento_eve, $inscricao->cd_evento_trilheiro_evt]) }}" method="post" onsubmit="return confirm('Recusar este interesse?');">

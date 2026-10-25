@@ -208,7 +208,7 @@ class EventoController extends Controller
         ]);
     }
 
-    public function participar($id_evento)
+    public function participar(Request $request, $id_evento)
     {
         $usuario = Auth::user();
 
@@ -243,10 +243,66 @@ class EventoController extends Controller
             ->where('id_trilheiro_tri', $trilheiro->id_trilheiro_tri)
             ->first();
 
-        if ($inscricao && !$inscricao->trashed() && $inscricao->ativa()) {
+        if ($inscricao && !$inscricao->trashed() && $inscricao->ativa() && count($inscricao->faltasParaConfirmar()) === 0 && !$request->isMethod('post')) {
             Flash::info('Seu interesse neste evento já está registrado. A vaga só fecha depois do pagamento.');
             return redirect('eventos/confirmacao/'.$id_evento);
         }
+
+        $documentoAnterior = EventoTrilheiro::where('id_trilheiro_tri', $trilheiro->id_trilheiro_tri)
+            ->whereNotNull('nr_documento_evt')
+            ->orderBy('updated_at', 'desc')
+            ->value('nr_documento_evt');
+
+        if (!$request->isMethod('post')) {
+            return view('eventos/candidatura', [
+                'page_name' => 'Candidatura - '.$evento->nm_evento_eve,
+                'evento' => $evento,
+                'trilheiro' => $trilheiro,
+                'documento' => old('nr_documento', ($inscricao && !$inscricao->trashed() ? $inscricao->nr_documento_evt : null) ?: $documentoAnterior),
+                'pedeNome' => !EventoTrilheiro::nomeCompleto($trilheiro->nm_trilheiro_tri),
+                'pedeNascimento' => empty($trilheiro->dt_nascimento),
+            ]);
+        }
+
+        $documento = preg_replace('/\D/', '', (string) $request->nr_documento);
+        $erros = [];
+
+        if (!EventoTrilheiro::cpfValido($documento)) {
+            $erros[] = 'Informe um CPF válido. Ele é usado no registro da inscrição e no seguro da atividade.';
+        }
+
+        $nome = trim((string) $trilheiro->nm_trilheiro_tri);
+        if (!EventoTrilheiro::nomeCompleto($nome)) {
+            $nome = trim((string) $request->nm_trilheiro_tri);
+            if (!EventoTrilheiro::nomeCompleto($nome)) {
+                $erros[] = 'Informe o nome completo, com nome e sobrenome.';
+            }
+        }
+
+        $nascimento = $trilheiro->dt_nascimento;
+        if (empty($nascimento)) {
+            $informado = \DateTime::createFromFormat('d/m/Y', (string) $request->dt_nascimento);
+            $dataValida = $informado && $informado->format('d/m/Y') === $request->dt_nascimento;
+            if (!$dataValida || $informado->format('Y-m-d') > date('Y-m-d')) {
+                $erros[] = 'Informe a data de nascimento.';
+            } else {
+                $nascimento = $informado->format('Y-m-d');
+            }
+        }
+
+        if ($erros) {
+            Flash::error(implode(' ', $erros));
+
+            return redirect()->back()->withInput();
+        }
+
+        if ($nome !== $trilheiro->nm_trilheiro_tri || $nascimento !== $trilheiro->dt_nascimento) {
+            $trilheiro->nm_trilheiro_tri = $nome;
+            $trilheiro->dt_nascimento = $nascimento;
+            $trilheiro->save();
+        }
+
+        $nova = !$inscricao || $inscricao->trashed() || !$inscricao->ativa();
 
         if (!$inscricao) {
             $inscricao = new EventoTrilheiro();
@@ -256,10 +312,17 @@ class EventoController extends Controller
             $inscricao->restore();
         }
 
-        $inscricao->aplicarStatus(EventoTrilheiro::INTERESSADO);
+        if ($nova) {
+            $inscricao->aplicarStatus(EventoTrilheiro::INTERESSADO);
+        }
+
+        $inscricao->nr_documento_evt = $documento;
+        $inscricao->setRelation('trilheiro', $trilheiro);
         $inscricao->save();
 
-        Mail::send(new NovoEventoTrilheiroNotificacao($evento, $trilheiro, $usuario));
+        if ($nova) {
+            Mail::send(new NovoEventoTrilheiroNotificacao($evento, $trilheiro, $usuario));
+        }
 
         return redirect('eventos/confirmacao/'.$id_evento);
     }
@@ -505,6 +568,12 @@ class EventoController extends Controller
 
                 if ($inscricao->st_inscricao_evt !== EventoTrilheiro::ACEITO) {
                     throw new \RuntimeException('Confirme o pagamento só depois de aceitar o interesse.');
+                }
+
+                $inscricao->load('trilheiro');
+                $faltas = $inscricao->faltasParaConfirmar();
+                if ($faltas) {
+                    throw new \RuntimeException('A vaga só pode ser confirmada com nome completo, data de nascimento e CPF. Falta: '.implode(', ', $faltas).'.');
                 }
 
                 $ocupadas = EventoTrilheiro::where('id_evento_eve', $evento->id_evento_eve)
