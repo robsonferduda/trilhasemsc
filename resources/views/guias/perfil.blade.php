@@ -119,6 +119,7 @@
        <div class="row">
          <div class="col-md-12 mt-2">
             <h2 class="text-info h3">Sobre o guia</h2>
+            @include('guias.partes.reputacao')
             @include('guias.partes.selo-cadastur', ['guia' => $guia])
             @if(count($guia->unidadesConservacao) > 0)
                <p class="mt-3 mb-1"><strong>Unidades de Conservação</strong>: {{ implode(', ',$guia->unidadesConservacao->pluck('nome_unc')->toArray()) }}</p>

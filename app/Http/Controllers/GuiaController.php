@@ -61,13 +61,13 @@ class GuiaController extends Controller
         if($guia){
             $this->registrarVisitaPerfil($guia);
 
-            return view('guias/perfil', [
+            return view('guias/perfil', array_merge([
                 'page_name' => $page_name,
                 'guia' => $guia,
                 'titulo' => $titulo,
                 'subtitulo' => $subtitulo,
                 'eventos_futuros' => $this->eventosFuturos($guia),
-            ]);
+            ], $this->reputacaoDoGuia($guia)));
         }else{
             return view('guias/guia-not-found', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
         }        
@@ -592,6 +592,9 @@ class GuiaController extends Controller
             'dias' => $dias,
             'maior' => $maior,
             'periodo' => $inicio->format('d/m').' – '.now()->format('d/m/Y'),
+            'totalFavoritos' => $guia->favoritos()->count(),
+            'totalAvaliacoes' => $guia->avaliacoes()->count(),
+            'mediaAvaliacao' => $guia->avaliacoes()->avg('nr_nota_gav'),
         ]);
     }
 
@@ -677,6 +680,44 @@ class GuiaController extends Controller
         ]);
     }
 
+    private function reputacaoDoGuia(Guia $guia)
+    {
+        $avaliacoes = $guia->avaliacoes()->with('trilheiro')->orderBy('created_at', 'desc')->get();
+        $usuario = Auth::user();
+        $trilheiro = null;
+        if ($usuario && trim((string) $usuario->id_role) === 'TRILHEIRO') {
+            $trilheiro = Trilheiro::where('id_user', $usuario->id)->first();
+        }
+
+        $favoritou = false;
+        $minha = null;
+        $podeAvaliar = false;
+        $ehOProprio = $usuario && (int) $guia->id_user === (int) $usuario->id;
+
+        if ($trilheiro && !$ehOProprio) {
+            $favoritou = $guia->favoritos()->where('id_trilheiro_tri', $trilheiro->id_trilheiro_tri)->exists();
+            $minha = $avaliacoes->first(function ($item) use ($trilheiro) {
+                return (int) $item->id_trilheiro_tri === (int) $trilheiro->id_trilheiro_tri;
+            });
+            $podeAvaliar = EventoTrilheiro::where('id_trilheiro_tri', $trilheiro->id_trilheiro_tri)
+                ->where('st_inscricao_evt', EventoTrilheiro::PAGO)
+                ->whereIn('id_evento_eve', function ($query) use ($guia) {
+                    $query->select('id_evento_eve')->from('evento_eve')->where('id_guia_gui', $guia->id_guia_gui);
+                })
+                ->exists();
+        }
+
+        return [
+            'avaliacoes' => $avaliacoes,
+            'mediaAvaliacao' => $avaliacoes->count() ? round($avaliacoes->avg('nr_nota_gav'), 1) : null,
+            'totalFavoritos' => $guia->favoritos()->count(),
+            'favoritou' => $favoritou,
+            'minhaAvaliacao' => $minha,
+            'podeAvaliar' => $podeAvaliar,
+            'ehOProprioGuia' => $ehOProprio,
+        ];
+    }
+
     private function mapaPorDia($linhas)
     {
         $mapa = [];
@@ -725,13 +766,13 @@ class GuiaController extends Controller
             return redirect('guia-e-condutores/privado/atualizar-cadastro');
         }
 
-        return view('guias/perfil', [
+        return view('guias/perfil', array_merge([
             'page_name' => $page_name,
             'guia' => $guia,
             'titulo' => $titulo,
             'subtitulo' => $subtitulo,
             'eventos_futuros' => $this->eventosFuturos($guia),
-        ]);
+        ], $this->reputacaoDoGuia($guia)));
     }
 
     public function trilhasRealizadas($identificador)

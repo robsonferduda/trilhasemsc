@@ -50,6 +50,9 @@
                 <a class="pa-nav-link {{ request()->is('trilheiro/privado/eventos*') ? 'is-active' : '' }}" href="{{ url('trilheiro/privado/eventos') }}">
                     <i class="bi bi-calendar-event"></i><span>Meus eventos</span>
                 </a>
+                <a class="pa-nav-link {{ request()->is('trilheiro/privado/favoritos') ? 'is-active' : '' }}" href="{{ url('trilheiro/privado/favoritos') }}">
+                    <i class="bi bi-heart"></i><span>Favoritos</span>
+                </a>
             @elseif($papel === 'GUIA')
                 <p class="pa-nav-label">Painel</p>
                 <a class="pa-nav-link {{ request()->is('guia-e-condutores/privado/painel') ? 'is-active' : '' }}" href="{{ url('guia-e-condutores/privado/painel') }}">
@@ -135,6 +138,7 @@
                         <a class="pa-app" href="{{ url('trilheiro/privado/meu-nivel') }}"><i class="bi bi-speedometer2"></i>Nível</a>
                         <a class="pa-app" href="{{ url('trilheiro/privado/trilhas') }}"><i class="bi bi-map"></i>Trilhas</a>
                         <a class="pa-app" href="{{ url('trilheiro/privado/eventos') }}"><i class="bi bi-calendar-event"></i>Eventos</a>
+                        <a class="pa-app" href="{{ url('trilheiro/privado/favoritos') }}"><i class="bi bi-heart"></i>Favoritos</a>
                         <a class="pa-app" href="{{ url('/') }}"><i class="bi bi-globe"></i>Site</a>
                     @elseif($papel === 'GUIA')
                         <a class="pa-app" href="{{ url('guia-e-condutores/privado/painel') }}"><i class="bi bi-speedometer2"></i>Início</a>

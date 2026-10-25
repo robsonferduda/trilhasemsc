@@ -96,6 +96,16 @@ class Guia extends Model
         return $this->hasMany('App\Evento', 'id_guia_gui', 'id_guia_gui');
     }
 
+    public function favoritos()
+    {
+        return $this->hasMany('App\GuiaFavorito', 'id_guia_gui', 'id_guia_gui');
+    }
+
+    public function avaliacoes()
+    {
+        return $this->hasMany('App\GuiaAvaliacao', 'id_guia_gui', 'id_guia_gui');
+    }
+
     public function trilhas()
     {
         return $this->belongsToMany(Trilha::class, 'guia_trilha_gut', 'id_guia_gui', 'id_trilha_tri');

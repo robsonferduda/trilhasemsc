@@ -12,6 +12,7 @@ use App\Estatistica;
 use App\EventoGasto;
 use App\EventoTrilheiro;
 use App\Mail\NovoEventoTrilheiroNotificacao;
+use App\Services\AvisoFavoritosGuia;
 use App\Mail\CancelamentoEventoTrilheiroNotificacao;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
@@ -849,6 +850,7 @@ class EventoController extends Controller
         $evento = Evento::create($dados);
 
         if($evento){
+            AvisoFavoritosGuia::aoLancar($evento->load('local'));
             Flash::success('<i class="fa fa-check"></i> Evento cadastrado com sucesso');
             return redirect('guia-e-condutores/privado/eventos');
         }else{
@@ -907,6 +909,7 @@ class EventoController extends Controller
         }
         
         $evento->save();
+        AvisoFavoritosGuia::aoLancar($evento->load('local'));
 
         return redirect('guia-e-condutores/privado/eventos');
     }

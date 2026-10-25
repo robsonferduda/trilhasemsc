@@ -216,6 +216,9 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::prefix('trilheiro/privado')->middleware('trilheiro.perfil')->group(function () {
         Route::get('perfil', 'TrilheiroController@perfil');
+        Route::get('favoritos', 'GuiaReputacaoController@meus');
+        Route::match(['GET', 'POST'], 'favoritar/{guia}', 'GuiaReputacaoController@favoritar');
+        Route::post('avaliar/{guia}', 'GuiaReputacaoController@avaliar');
         Route::get('eventos', 'TrilheiroController@eventos');
         Route::get('meu-nivel', 'TrilheiroController@score');
         Route::match(['GET', 'POST'], 'eventos/participar/{evento}', 'EventoController@participar');

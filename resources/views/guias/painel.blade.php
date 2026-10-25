@@ -170,17 +170,17 @@
         <strong>{{ $visitas7 }}</strong>
         <small>perfil e eventos, 7 dias</small>
     </a>
-    <a class="gd-numero is-contatos" href="{{ url('guia-e-condutores/privado/acessos') }}">
+    <a class="gd-numero is-contatos" href="{{ url('guia/perfil/'.($guia->nm_instagram_gui ?: $guia->id_guia_gui)) }}#avaliacoes">
         <i class="bi bi-chat-dots"></i>
-        <span>Contatos</span>
-        <strong>{{ $contatos7 }}</strong>
-        <small>{{ $whatsapp7 }} WhatsApp · {{ $instagram7 }} Instagram</small>
+        <span>Avaliações</span>
+        <strong>{{ $mediaAvaliacao === null ? '–' : number_format((float) $mediaAvaliacao, 1, ',', '') }}</strong>
+        <small>{{ $totalAvaliacoes }} {{ $totalAvaliacoes === 1 ? 'avaliação' : 'avaliações' }}</small>
     </a>
-    <a class="gd-numero is-vagas" href="{{ url('guia-e-condutores/privado/eventos') }}">
-        <i class="bi bi-person-check"></i>
-        <span>Vagas pagas</span>
-        <strong>{{ $vagasPagas }}</strong>
-        <small>{{ $interessados }} interessados · {{ $aceitos }} sem pagamento</small>
+    <a class="gd-numero is-vagas" href="{{ url('guia/perfil/'.($guia->nm_instagram_gui ?: $guia->id_guia_gui)) }}">
+        <i class="bi bi-heart"></i>
+        <span>Favoritos</span>
+        <strong>{{ $totalFavoritos }}</strong>
+        <small>avisados quando você lançar um passeio</small>
     </a>
 </div>
 
