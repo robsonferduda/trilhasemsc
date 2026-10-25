@@ -1,14 +1,15 @@
-@extends('layouts.template')
+@extends('layouts.admin')
+@section('pageTitle', ($evento ? 'Editar evento' : 'Novo evento') . ' | Trilhas em SC')
 
 @section('content')
     <div class="block-header">
         <div class="row">
-            <div class="col-lg-5 col-md-8 col-sm-12">
-                <h2>Guias e Condutores</h2>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <h2>{{ $evento ? 'Editar evento' : 'Novo evento' }}</h2>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><i class="fa fa-id-card"></i> Guias e Condutores</li>
+                    <li class="breadcrumb-item">Guias e Condutores</li>
                     <li class="breadcrumb-item">Eventos</li>
-                    <li class="breadcrumb-item">Cadastrar Eventos</li>
+                    <li class="breadcrumb-item">{{ $evento ? 'Editar' : 'Cadastrar' }}</li>
                 </ul>
             </div>
         </div>
@@ -19,10 +20,10 @@
                 <div class="header no-padding-bottom">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <h2><i class="fa fa-tags"></i> Cadastro de Eventos</h2>
+                            <h2>{{ $evento ? $evento->nm_evento_eve : 'Cadastro de eventos' }}</h2>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-primary pull-right"><i class="fa fa-tags"></i> Meus Eventos</a>
+                        <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-md-end">
+                            <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-primary"><i class="fa fa-tags"></i> Meus eventos</a>
                         </div> 
                     </div>
                 </div>
@@ -94,22 +95,33 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <label for="total_participantes_eve">Máximo de Participantes</label><span class="text-primary"> Opcional</span>
+                                    <label for="total_participantes_eve">Máximo de vagas</label><span class="text-primary"> Opcional</span>
+                                    <small class="text-muted d-block mb-1">A vaga só é ocupada quando o pagamento é confirmado. Em branco, o evento fica sem limite.</small>
                                     <input type="text" name="total_participantes_eve" id="total_participantes_eve" value="{{ ($evento) ? $evento->total_participantes_eve : old('total_participantes_eve') }}" placeholder="" class="form-control" >
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label for="fl_privado_eve">Visibilidade</label>
-                                    <div class="fancy-checkbox mt-2">
-                                        <label>
-                                            <input type="checkbox" name="fl_privado_eve" id="fl_privado_eve" value="1" {{ ($evento and $evento->fl_privado_eve) ? 'checked' : '' }}>
-                                            <span>Evento Privado</span>
-                                        </label>
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" name="fl_privado_eve" id="fl_privado_eve" value="1" {{ ($evento and $evento->fl_privado_eve) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="fl_privado_eve">Evento privado</label>
                                     </div>
                                     <small class="form-text text-muted">Se marcado, o evento não será exibido publicamente</small>
                                 </div>
                             </div>
+                            @if($evento)
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label for="fl_cancelado_eve">Cancelamento</label>
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" name="fl_cancelado_eve" id="fl_cancelado_eve" value="1" {{ $evento->fl_cancelado_eve ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="fl_cancelado_eve">Evento cancelado</label>
+                                    </div>
+                                    <small class="form-text text-muted">Se marcado, o evento deixa de entrar nas estatísticas</small>
+                                </div>
+                            </div>
+                            @endif
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="id_trilha_tri">Trilha Vinculada</label><span class="text-primary"> Opcional</span>
@@ -148,6 +160,14 @@
                                     <input name="img_deletada_evento" id="img_deletada_evento" type="hidden" value='false' >
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="mb-0" for="img_grupo">Faça aqui o upload da imagem do grupo</label> <span class="text-primary">Opcional</span>
+                                    <p class="mt-0 mb-0 text-info">Foto com todas as pessoas que fizeram a trilha. Ela aparece na página de trilhas realizadas.</p>
+                                    <input name="img_grupo" type="file" id="img_grupo" accept="image/*" @if($evento and $evento->ds_imagem_grupo_eve) data-default-file="{{ asset('img/eventos/'.$evento->ds_imagem_grupo_eve) }}" @endif>
+                                    <input name="img_deletada_grupo" id="img_deletada_grupo" type="hidden" value="false">
+                                </div>
+                            </div>
                         </div>
                         <div style="text-align: center; margin-top:15px; ">
                             <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>
@@ -160,6 +180,7 @@
     </div>
 @endsection
 @section('script')
+<script src="{{ asset('js/jquery.maskMoney.js') }}"></script>
 <script>
     $(function() {
         $('#form-guia').parsley();
@@ -179,6 +200,12 @@
 
         drEvent.on('dropify.afterClear', function(event, element) {
             $('#img_deletada_evento').val(true);
+        });
+
+        var drGrupo = $('#img_grupo').dropify();
+
+        drGrupo.on('dropify.afterClear', function(event, element) {
+            $('#img_deletada_grupo').val(true);
         });
     });
 </script>

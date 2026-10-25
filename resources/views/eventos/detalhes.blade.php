@@ -104,6 +104,13 @@
 </script>
 @endsection
 @section('content')
+@php
+    $eventoRealizado = \Carbon\Carbon::parse($evento->dt_realizacao_eve)->toDateString() < date('Y-m-d');
+    $urlPresenca = url('trilheiro/privado/eventos/'.($eventoRealizado ? 'eu-fui' : 'participar').'/'.$evento->id_evento_eve);
+    $textoPresenca = $eventoRealizado ? 'Eu fui' : 'Tenho interesse';
+    $limiteVagas = $evento->limiteVagas();
+    $vagasOcupadas = $evento->vagasOcupadas();
+@endphp
 @include('layouts/partes/header-eventos')
 <section class="pt-1 pb-0 mt-3 mb-5">
     <div class="container">
@@ -120,16 +127,7 @@
                             <a href="{{ url('guia-e-condutores/privado/eventos') }}" type="button" class="btn btn-outline-danger btn-sm">Meus Eventos</a>
                         @endif
                     @endif
-                    @if(Auth::user() and $trilheiro)
-                        @if($trilheiro->evento->contains($evento->id_evento_eve))
-                            <button type="button" class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> Presença Confirmada</button>
-                            <button type="button" class="btn btn-outline-danger btn-sm" id="btn-cancelar-participacao" data-url="{{ url('trilheiro/privado/eventos/cancelar/'.$evento->id_evento_eve) }}"><i class="fa fa-times"></i> Cancelar Participação</button>
-                        @else
-                            <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
-                        @endif
-                    @else
-                        <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
-                    @endif
+                    @include('eventos.partes.acoes-presenca')
                     <a href="{{ url('eventos') }}" type="button" class="btn btn-outline-info btn-sm">Todos os Eventos</a>
                     <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Início</a>
                 </div>
@@ -142,12 +140,21 @@
                     @endif
                 </div>
                 <div class="col-lg-9 col-md-9">
-                    <h1 class="h4 text-danger">{{ $evento->nm_evento_eve }}</h1>
+                    <h1 class="h4 text-danger">
+                        @if($evento->urlTrilhaVinculada())
+                            <a href="{{ $evento->urlTrilhaVinculada() }}" class="text-danger" style="text-decoration:underline;">{{ $evento->nm_evento_eve }}</a>
+                        @else
+                            {{ $evento->nm_evento_eve }}
+                        @endif
+                    </h1>
                     <p class="mb-1"><strong>Responsável</strong>: <a href="{{ url("guia/perfil/estatistica/perfil", $evento->guia->nm_instagram_gui) }}">{{ $evento->guia->nm_guia_gui }}</a></p>
                     <p class="mb-1"><strong>Cidade</strong>: {{ $evento->local->nm_cidade_cde }}</p>
+                    @include('eventos.partes.percurso', ['evento' => $evento, 'classe' => 'text-muted mb-1'])
                     <p class="mb-1"><strong>Data/Horário Início</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y')}} - {{ \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i') }}</p>
                     <p class="mb-1"><strong>Data/Horário Término</strong>: {{ \Carbon\Carbon::parse($evento->dt_termino_eve)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($evento->hora_fim_eve)->format('H:i') }}</p>
                     <p class="mb-1"><strong>Valor</strong>: {!! ($evento->valor_eve) ? "R$ ".$evento->valor_eve : '<strong class="text-success">Gratuita</strong>' !!}</p>
+                    <p class="mb-1"><strong>Vagas confirmadas</strong>: {{ $vagasOcupadas }}@if($limiteVagas) de {{ $limiteVagas }}@else, sem limite definido@endif</p>
+                    <p class="small text-muted mb-1">A vaga só é confirmada depois do pagamento.</p>
                     <p class="mb-1"><strong>Contato</strong>: {{ $evento->ds_fone_contato_eve }}</p>
                     <p class="small mb-0 mt-2">
                         Explore também:
@@ -216,11 +223,17 @@
                 </div>
                 @endif
 
-                @if($evento->trilheiros && $evento->trilheiros->count() && Auth::check() && trim(Auth::user()->id_role) == 'GUIA' && $evento->guia->id_user == Auth::user()->id)
+                @php
+                    $confirmados = $evento->eventoTrilheiros->where('st_inscricao_evt', \App\EventoTrilheiro::PAGO)->filter(function ($inscricao) {
+                        return $inscricao->trilheiro;
+                    });
+                @endphp
+                @if($confirmados->count() && Auth::check() && trim(Auth::user()->id_role) == 'GUIA' && $evento->guia->id_user == Auth::user()->id)
                     <div class="col-lg-12 col-md-12 mt-3">
-                        <h5 class="text-left mb-3">Participantes ({{ $evento->trilheiros->count() }}/{{ $evento->total_participantes_eve }})</h5>
+                        <h5 class="text-left mb-3">Vagas confirmadas ({{ $confirmados->count() }}@if($limiteVagas)/{{ $limiteVagas }}@endif)</h5>
                         <div class="d-flex flex-wrap justify-content-start align-items-start">
-                            @foreach($evento->trilheiros as $participante)
+                            @foreach($confirmados as $inscricaoConfirmada)
+                                @php $participante = $inscricaoConfirmada->trilheiro; @endphp
                                 @php
                                     $fotoPerfil = $participante->nm_path_foto_tri ?: optional($participante->user)->dc_foto_perfil;
                                     $caminhoFotoPerfil = $fotoPerfil ? public_path('img/trilheiros/'.$fotoPerfil) : null;
@@ -252,6 +265,12 @@
                         <img src="{{ asset('img/eventos/'.$evento->ds_imagem_horizontal_eve) }}" alt="{{ $evento->nm_evento_eve }}" class="img-fluid shadow border-radius-lg" loading="lazy" decoding="async">
                     @endif
                 </div>
+                @if($evento->ds_imagem_grupo_eve)
+                <div class="col-lg-12 col-md-12 mt-4">
+                    <h2 class="h5 text-left mb-3">Grupo</h2>
+                    <img src="{{ asset('img/eventos/'.$evento->ds_imagem_grupo_eve) }}" alt="Grupo da trilha {{ $evento->nm_evento_eve }}" class="img-fluid shadow border-radius-lg" loading="lazy" decoding="async">
+                </div>
+                @endif
             </div>
         </div>
         <div class="col-lg-12 col-md-12 mt-4 text-center">
@@ -260,16 +279,7 @@
                     <a href="{{ url('guia-e-condutores/privado/eventos') }}" type="button" class="btn btn-outline-danger btn-sm">Meus Eventos</a>
                 @endif
             @endif
-            @if(Auth::user() and $trilheiro)
-                @if($trilheiro->evento->contains($evento->id_evento_eve))
-                    <button type="button" class="btn btn-outline-success btn-sm"><i class="fa fa-check"></i> Presença Confirmada</button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" id="btn-cancelar-participacao" data-url="{{ url('trilheiro/privado/eventos/cancelar/'.$evento->id_evento_eve) }}"><i class="fa fa-times"></i> Cancelar Participação</button>
-                @else
-                    <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
-                @endif
-            @else
-                <a href="{{ url('trilheiro/privado/eventos/participar/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Participar do Evento</a>
-            @endif
+            @include('eventos.partes.acoes-presenca')
             <a href="{{ url('eventos') }}" type="button" class="btn btn-outline-info btn-sm">Todos os Eventos</a>
             <a href="{{ url('/') }}" type="button" class="btn btn-outline-warning btn-sm">Início</a>
         </div>
@@ -280,7 +290,7 @@
 @section('script')
 <script>
     $(document).ready(function() {
-        $('#btn-cancelar-participacao').on('click', function() {
+        $('.btn-cancelar-participacao').on('click', function() {
             const url = $(this).data('url');
             
             Swal.fire({

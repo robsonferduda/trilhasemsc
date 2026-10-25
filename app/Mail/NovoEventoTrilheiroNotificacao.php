@@ -37,7 +37,7 @@ class NovoEventoTrilheiroNotificacao extends Mailable
      */
     public function build()
     {
-        $this->subject('Nova Inscrição no Evento - ' . $this->evento->nm_evento_eve);
+        $this->subject('Novo interesse no evento - ' . $this->evento->nm_evento_eve);
         $this->to('robsonferduda@gmail.com', 'Administrador');
         return $this->view('mail.novo-evento-trilheiro-notificacao', [
             'evento' => $this->evento,

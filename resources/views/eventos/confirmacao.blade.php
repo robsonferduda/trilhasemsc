@@ -6,8 +6,14 @@
        <div class="row mb-2">
           <div class="col-md-12 text-center">
              <h3 class="text-success">
-                <i class="fa fa-check-circle"></i> Inscrição Confirmada com Sucesso!
+                <i class="fa fa-check-circle"></i> Interesse registrado
              </h3>
+          </div>
+       </div>
+
+       <div class="row mb-3">
+          <div class="col-md-12">
+             @include('layouts.mensagens')
           </div>
        </div>
 
@@ -15,11 +21,11 @@
        <div class="row mb-4">
           <div class="col-md-12">
              <div class="alert text-center" role="alert" style="border: 2px solid #28a745; background-color: transparent;">
-                <h5 class="alert-heading text-success">Sua participação foi registrada!</h5>
+                <h5 class="alert-heading text-success">Seu interesse foi registrado!</h5>
                 <hr>
                 <p class="mb-0">
-                   O guia responsável entrará em contato em breve para confirmar sua participação 
-                   e fornecer detalhes sobre o pagamento e outras informações importantes sobre o evento.
+                   O guia responsável analisa os interessados e aceita quem pode ir.
+                   A vaga só fica fechada depois que o pagamento é confirmado.
                 </p>
              </div>
           </div>
@@ -68,6 +74,14 @@
 
         <!-- Botões de Ação -->
         <div class="col-lg-12 col-md-12 mt-4 text-center">
+            @if(!empty($podeReenviarEmail))
+                <form action="{{ url('eventos/confirmacao/'.$evento->id_evento_eve.'/reenviar-email') }}" method="post" class="d-inline" onsubmit="return confirm('Reenviar o e-mail de inscrição deste evento?');">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-success btn-sm">
+                        <i class="fa fa-envelope"></i> Reenviar e-mail
+                    </button>
+                </form>
+            @endif
             <a href="{{ url('eventos/detalhes/'.$evento->id_evento_eve) }}" type="button" class="btn btn-outline-primary btn-sm">
                 <i class="fa fa-info-circle"></i> Ver Detalhes Completos
             </a>

@@ -68,10 +68,12 @@ Route::get('eventos/{slugOrId}', 'EventoController@detalhes')
 // Rota antiga mantida para compatibilidade
 Route::get('eventos/detalhes/{id}', 'EventoController@detalhes')->where('id', '[0-9]+');
 Route::get('eventos/confirmacao/{id}', 'EventoController@confirmacao');
+Route::post('eventos/confirmacao/{id}/reenviar-email', 'EventoController@reenviarEmailInscricao');
 Route::get('eventos/cancelamento/{id}', 'EventoController@confirmacaoCancelamento');
 
 Route::get('guia/{id}/ativar', 'GuiaController@ativar');
 Route::get('guia/{id}/recusar', 'GuiaController@recusar');
+Route::get('guia/trilhas-realizadas/{identificador}', 'GuiaController@trilhasRealizadas');
 Route::get('guia/perfil/interacao/{tipo}/{id}', 'GuiaController@registrarInteracao');
 Route::get('guia/perfil/{id}', 'GuiaController@perfil');
 Route::get('guia/perfil/estatistica/{tipo}/{id}', 'GuiaController@estatisticas');
@@ -191,9 +193,14 @@ Route::group(['middleware' => ['web']], function () {
     });    
     Route::prefix('guia-e-condutores/privado')->group(function () {
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'GuiaController@atualizarCadastro');
+        Route::get('estatisticas', 'GuiaController@minhasEstatisticas');
         Route::get('perfil', 'GuiaController@previaPerfil');
         Route::get('eventos', 'EventoController@eventos');
         Route::get('eventos/participantes/{id}', 'EventoController@participantes');
+        Route::post('eventos/participantes/{id}/aceitar/{inscricao}', 'EventoController@aceitarInscricao')->name('evento.inscricao.aceitar');
+        Route::post('eventos/participantes/{id}/recusar/{inscricao}', 'EventoController@recusarInscricao')->name('evento.inscricao.recusar');
+        Route::post('eventos/participantes/{id}/pagamento/{inscricao}', 'EventoController@confirmarPagamento')->name('evento.inscricao.pagamento');
+        Route::post('eventos/participantes/{id}/desfazer-pagamento/{inscricao}', 'EventoController@desfazerPagamento')->name('evento.inscricao.desfazer-pagamento');
         Route::get('evento/novo', 'EventoController@cadastro');
         Route::get('evento/editar/{id}', 'EventoController@editar');
         Route::post('evento/update', 'EventoController@update');
@@ -207,10 +214,14 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('eventos', 'TrilheiroController@eventos');
         Route::get('meu-nivel', 'TrilheiroController@score');
         Route::get('eventos/participar/{evento}', 'EventoController@participar');
+        Route::get('eventos/eu-fui/{evento}', 'EventoController@euFui');
         Route::get('eventos/cancelar/{evento}', 'EventoController@cancelarParticipacao');
         Route::post('score', 'TrilheiroController@calcularScore');
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'TrilheiroController@atualizarCadastro');      
-        Route::match(['GET', 'POST'],'trilhas', 'TrilheiroController@trilhas'); 
+        Route::match(['GET', 'POST'],'trilhas', 'TrilheiroController@trilhas');
+        Route::get('retrospectiva/galeria', 'TrilheiroController@retrospectivaGaleria');
+        Route::get('retrospectiva/imagem/{slide}', 'TrilheiroController@retrospectivaImagem')->where('slide', 'capa|numeros|percurso|guia|fim|trilha-[0-9]+');
+        Route::get('retrospectiva', 'TrilheiroController@retrospectiva'); 
     });
 
     Route::prefix('cadastro/privado')->group(function () {

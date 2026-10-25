@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cidade;
+use App\Evento;
 use App\Exceptions\CadasturIndisponivelException;
 use App\Fone;
 use App\Guia;
@@ -56,17 +57,67 @@ class GuiaController extends Controller
             $guia = Guia::where('nm_instagram_gui', $identificador)->first();
 
         if($guia){
-            $eventos_futuros = $guia->eventos()
-                ->where('fl_ativo_eve', true)
-                //->where('fl_privado_eve', false)
-                ->where('dt_realizacao_eve', '>=', now()->toDateString())
-                ->orderBy('dt_realizacao_eve')
-                ->get();
-
-            return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'eventos_futuros' => $eventos_futuros]);
+            return view('guias/perfil', [
+                'page_name' => $page_name,
+                'guia' => $guia,
+                'titulo' => $titulo,
+                'subtitulo' => $subtitulo,
+                'eventos_futuros' => $this->eventosFuturos($guia),
+            ]);
         }else{
             return view('guias/guia-not-found', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
         }        
+    }
+
+    private function resumoAno(Guia $guia)
+    {
+        $eventos = Evento::with(['eventoTrilheiros.trilheiro.user'])
+            ->where('id_guia_gui', $guia->id_guia_gui)
+            ->where('fl_cancelado_eve', false)
+            ->orderBy('dt_realizacao_eve', 'DESC')
+            ->get();
+
+        $porTrilheiro = [];
+
+        foreach ($eventos as $evento) {
+            foreach ($evento->eventoTrilheiros as $participacao) {
+                if (!$participacao->ativa()) {
+                    continue;
+                }
+
+                $trilheiro = $participacao->trilheiro;
+                if (!$trilheiro) {
+                    continue;
+                }
+
+                $id = $trilheiro->id_trilheiro_tri;
+                if (!isset($porTrilheiro[$id])) {
+                    $nome = trim((string) $trilheiro->nm_trilheiro_tri) ?: 'Trilheiro';
+                    $foto = $trilheiro->nm_path_foto_tri ?: optional($trilheiro->user)->dc_foto_perfil;
+                    $caminho = $foto ? public_path('img/trilheiros/'.$foto) : null;
+                    $porTrilheiro[$id] = [
+                        'nome' => explode(' ', $nome)[0],
+                        'foto' => ($caminho && is_file($caminho)) ? asset('img/trilheiros/'.$foto) : asset('img/usuarios/perfil.png'),
+                        'eventos' => [],
+                    ];
+                }
+                $porTrilheiro[$id]['eventos'][$evento->id_evento_eve] = true;
+            }
+        }
+
+        $lista = collect($porTrilheiro)->map(function ($pessoa) {
+            $pessoa['trilhas'] = count($pessoa['eventos']);
+            unset($pessoa['eventos']);
+
+            return $pessoa;
+        })->sortByDesc('trilhas')->values();
+
+        return [
+            'pessoas' => $lista->count(),
+            'trilhas' => $eventos->count(),
+            'destaque' => $lista->first(),
+            'demais' => $lista->slice(1)->values(),
+        ];
     }
 
     public function estatisticas($tipo, $identificador)
@@ -388,6 +439,24 @@ class GuiaController extends Controller
         return view('guias/atualizar-cadastro', compact('usuario', 'cidades', 'guia', 'ucs'));
     }
 
+    public function minhasEstatisticas()
+    {
+        if (Auth::guest() or trim(Auth::user()->id_role) != 'GUIA') {
+            return redirect('login');
+        }
+
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+        if (empty($guia)) {
+            return redirect('guia-e-condutores/privado/atualizar-cadastro');
+        }
+
+        $resumoAno = $this->resumoAno($guia);
+        $eventos_realizados = $this->eventosRealizados($guia);
+        $totais = $this->totaisPercurso($eventos_realizados);
+
+        return view('guias/estatisticas', compact('guia', 'resumoAno', 'eventos_realizados', 'totais'));
+    }
+
     public function previaPerfil()
     {
         $titulo = 'Guias e Condutores';
@@ -406,7 +475,118 @@ class GuiaController extends Controller
             return redirect('guia-e-condutores/privado/atualizar-cadastro');
         }
 
-        return view('guias/perfil', ['page_name' => $page_name, 'guia' => $guia, 'titulo' => $titulo, 'subtitulo' => $subtitulo ]);
+        return view('guias/perfil', [
+            'page_name' => $page_name,
+            'guia' => $guia,
+            'titulo' => $titulo,
+            'subtitulo' => $subtitulo,
+            'eventos_futuros' => $this->eventosFuturos($guia),
+        ]);
+    }
+
+    public function trilhasRealizadas($identificador)
+    {
+        if (is_numeric($identificador)) {
+            $guia = Guia::where('id_guia_gui', $identificador)->first();
+        } else {
+            $guia = Guia::where('nm_instagram_gui', $identificador)->first();
+        }
+
+        if (!$guia) {
+            return view('guias/guia-not-found', [
+                'page_name' => 'Trilhas realizadas',
+                'guia' => null,
+                'titulo' => 'Guias e Condutores',
+                'subtitulo' => 'Trilhas realizadas',
+            ]);
+        }
+
+        $eventos_realizados = $this->eventosRealizados($guia);
+
+        $presencas = collect();
+        if (Auth::check()) {
+            $trilheiro = Trilheiro::where('id_user', Auth::id())->first();
+            if ($trilheiro) {
+                $presencas = $trilheiro->evento()->pluck('evento_eve.id_evento_eve');
+            }
+        }
+
+        return view('guias/trilhas-realizadas', [
+            'page_name' => 'Trilhas realizadas',
+            'guia' => $guia,
+            'eventos_realizados' => $eventos_realizados,
+            'presencas' => $presencas,
+        ]);
+    }
+
+    private function eventosRealizados(Guia $guia)
+    {
+        return $guia->eventos()
+            ->with(['local', 'trilha.detalhes'])
+            ->where('fl_cancelado_eve', false)
+            ->where('dt_realizacao_eve', '<', now()->toDateString())
+            ->orderBy('dt_realizacao_eve', 'desc')
+            ->get();
+    }
+
+    private function totaisPercurso($eventos)
+    {
+        $km = 0;
+        $subida = 0;
+        $comKm = 0;
+        $comSubida = 0;
+        $cidades = [];
+
+        foreach ($eventos as $evento) {
+            $cidade = trim((string) optional($evento->local)->nm_cidade_cde);
+            if ($cidade !== '') {
+                $cidades[$cidade] = true;
+            }
+
+            $detalhe = optional($evento->trilha)->detalhes;
+            if (!$detalhe) {
+                continue;
+            }
+
+            if ($detalhe->nu_distancia_trd !== null && $detalhe->nu_distancia_trd !== '' && is_numeric($detalhe->nu_distancia_trd)) {
+                $km += (float) $detalhe->nu_distancia_trd;
+                $comKm++;
+            }
+
+            if ($detalhe->nu_altitude_trd !== null && $detalhe->nu_altitude_trd !== '' && is_numeric($detalhe->nu_altitude_trd)) {
+                $subida += (float) $detalhe->nu_altitude_trd;
+                $comSubida++;
+            }
+        }
+
+        $total = $eventos->count();
+
+        return [
+            'km' => $this->formatarTotal($km),
+            'subida' => $this->formatarTotal($subida, 0),
+            'cidades' => count($cidades),
+            'parcial' => $total > 0 && ($comKm < $total || $comSubida < $total),
+        ];
+    }
+
+    private function formatarTotal($numero, $casas = null)
+    {
+        if ($casas === null) {
+            $casas = abs($numero - round($numero)) < 0.001 ? 0 : 1;
+        }
+
+        return number_format($numero, $casas, ',', '.');
+    }
+
+    private function eventosFuturos(Guia $guia)
+    {
+        return $guia->eventos()
+            ->with('trilha')
+            ->where('fl_ativo_eve', true)
+            ->where('fl_cancelado_eve', false)
+            ->where('dt_realizacao_eve', '>=', now()->toDateString())
+            ->orderBy('dt_realizacao_eve')
+            ->get();
     }
 
     public function aprovar()

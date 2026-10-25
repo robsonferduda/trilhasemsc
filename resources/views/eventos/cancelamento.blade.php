@@ -18,8 +18,8 @@
                 <h5 class="alert-heading text-danger">Sua participação foi cancelada!</h5>
                 <hr>
                 <p class="mb-0">
-                   Sua inscrição no evento foi removida do sistema. Você pode se inscrever novamente 
-                   a qualquer momento, caso mude de ideia.
+                   Sua participação foi cancelada. Se a vaga já estava confirmada, ela voltou a ficar livre.
+                   Você pode registrar interesse de novo, se mudar de ideia.
                 </p>
              </div>
           </div>

@@ -333,7 +333,7 @@
     </style>
   </head>
   <body class="">
-    <span class="preheader">Nova inscrição em evento cadastrada no sistema.</span>
+    <span class="preheader">Novo interesse em evento registrado no sistema. A vaga ainda não foi fechada.</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
@@ -349,8 +349,8 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <h1>Nova Inscrição em Evento</h1>
-                        <p>Um trilheiro se inscreveu em um evento no sistema Trilhas em SC.</p>
+                        <h1>Novo interesse em evento</h1>
+                        <p>Um trilheiro registrou interesse em um evento no Trilhas em SC. A vaga só fecha depois do pagamento.</p>
                         <hr>
                         <h3>Dados do Evento</h3>
                         <p><strong>Nome do Evento:</strong> {{ $evento->nm_evento_eve }}</p>
@@ -362,9 +362,9 @@
                         <h3>Dados do Trilheiro</h3>
                         <p><strong>Nome:</strong> {{ $usuario->name }}</p>
                         <p><strong>E-mail:</strong> {{ $usuario->email }}</p>
-                        <p><strong>Data da Inscrição:</strong> {{ now()->format('d/m/Y H:i:s') }}</p>
+                        <p><strong>Data do interesse:</strong> {{ now()->format('d/m/Y H:i:s') }}</p>
                         <hr>
-                        <p>O trilheiro está agora inscrito no evento e poderá receber atualizações sobre o mesmo.</p>
+                        <p>O trilheiro está como interessado. Aceite o pedido e confirme o pagamento para fechar a vaga.</p>
                       </td>
                     </tr>
                   </table>

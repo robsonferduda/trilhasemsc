@@ -9,12 +9,14 @@ use App\Trilheiro;
 use App\Cidade;
 use App\Guia;
 use App\Estatistica;
+use App\EventoTrilheiro;
 use App\Mail\NovoEventoTrilheiroNotificacao;
 use App\Mail\CancelamentoEventoTrilheiroNotificacao;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class EventoController extends Controller
 {
@@ -30,8 +32,9 @@ class EventoController extends Controller
     public function index()
     {
         $page_name = "Eventos e Trilhas em Santa Catarina";
-        $eventos = Evento::where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))
+        $eventos = Evento::with(['local', 'guia', 'trilha.detalhes'])->where('dt_realizacao_eve','>',date('Y-m-d H:i:s'))
             ->where('fl_ativo_eve',true)
+            ->where('fl_cancelado_eve', false)
             ->where('fl_privado_eve', false)
             ->where(function($query) {
                 $query->where('fl_privado_eve', false)
@@ -50,18 +53,70 @@ class EventoController extends Controller
 
         if ($isAdmin) {
             $guia = null;
-            $eventos = Evento::with(['eventoTrilheiros', 'trilheiros', 'guia'])
+            $eventos = Evento::with(['eventoTrilheiros', 'trilheiros', 'guia', 'local', 'trilha.detalhes'])
                 ->orderBy('dt_realizacao_eve','DESC')
                 ->get();
         } else {
             $guia = Guia::where('id_user', Auth::user()->id)->first();
             $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)
-                ->with(['eventoTrilheiros', 'trilheiros'])
+                ->with(['eventoTrilheiros', 'trilheiros', 'local', 'trilha.detalhes'])
                 ->orderBy('dt_realizacao_eve')
                 ->get();
         }
 
-        // Pré-carrega contagem de visualizações de todos os eventos de uma vez
+        $this->enriquecerEventos($eventos);
+
+        return view('admin/eventos/listar', compact('guia','eventos'));
+    }
+
+    public function eventos(Request $request)
+    {
+        if (Auth::guest() || trim(Auth::user()->id_role) !== 'GUIA') {
+            return redirect('login');
+        }
+
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+        if (!$guia) {
+            return redirect('guia-e-condutores/privado/atualizar-cadastro');
+        }
+
+        $filtros = [
+            'q' => trim((string) $request->get('q', '')),
+            'quando' => in_array($request->get('quando'), ['proximos', 'realizados', 'todos'], true) ? $request->get('quando') : 'todos',
+            'situacao' => in_array($request->get('situacao'), ['ativos', 'cancelados', 'todos'], true) ? $request->get('situacao') : 'ativos',
+        ];
+
+        $consulta = Evento::where('id_guia_gui', $guia->id_guia_gui)
+            ->with(['eventoTrilheiros', 'trilheiros', 'local', 'trilha.detalhes']);
+
+        if ($filtros['q'] !== '') {
+            $consulta->where('nm_evento_eve', 'like', '%'.$filtros['q'].'%');
+        }
+
+        if ($filtros['situacao'] === 'ativos') {
+            $consulta->where(function ($query) {
+                $query->where('fl_cancelado_eve', false)->orWhereNull('fl_cancelado_eve');
+            });
+        } elseif ($filtros['situacao'] === 'cancelados') {
+            $consulta->where('fl_cancelado_eve', true);
+        }
+
+        $hoje = now()->toDateString();
+        if ($filtros['quando'] === 'proximos') {
+            $consulta->whereDate('dt_realizacao_eve', '>=', $hoje);
+        } elseif ($filtros['quando'] === 'realizados') {
+            $consulta->whereDate('dt_realizacao_eve', '<', $hoje);
+        }
+
+        $eventos = $consulta->orderBy('dt_realizacao_eve', 'DESC')->get();
+
+        $this->enriquecerEventos($eventos);
+
+        return view('admin/eventos/listar', compact('guia','eventos','filtros'));
+    }
+
+    private function enriquecerEventos($eventos)
+    {
         $ids = $eventos->pluck('id_evento_eve');
         $visualizacoes = Estatistica::whereIn('cd_monitoramento_esa', $ids)
             ->where('cd_tipo_monitoramento_tim', 2)
@@ -71,8 +126,7 @@ class EventoController extends Controller
 
         // Adiciona contagem de participantes, vezes oferecido e visualizações para cada evento
         foreach ($eventos as $evento) {
-            // Conta participantes deste evento específico
-            $evento->participantes_count = $evento->eventoTrilheiros->count();
+            $evento->participantes_count = $evento->vagasOcupadas();
 
             // Contagem de visualizações da página do evento
             $evento->visualizacoes_count = $visualizacoes->get($evento->id_evento_eve, 0);
@@ -91,8 +145,6 @@ class EventoController extends Controller
                     ->count();
             }
         }
-
-        return view('admin/eventos/listar', compact('guia','eventos'));
     }
 
     public function visualizacoesPorDia($id)
@@ -142,15 +194,18 @@ class EventoController extends Controller
 
         Estatistica::create($estatistica);
 
-        return view('eventos/detalhes', ['page_name' => $page_name, 'evento' => $evento, 'cidades' => $cidades, 'trilheiro' => $trilheiro]);
-    }
+        $evento->load(['eventoTrilheiros.trilheiro.user']);
+        $inscricao = $trilheiro
+            ? $evento->eventoTrilheiros->firstWhere('id_trilheiro_tri', $trilheiro->id_trilheiro_tri)
+            : null;
 
-    public function eventos()
-    {
-        $guia = Guia::where('id_user', Auth::user()->id)->first();
-        $eventos = Evento::where('id_guia_gui', $guia->id_guia_gui)->orderBy('dt_realizacao_eve','DESC')->get();
-
-        return view('admin/eventos/listar', compact('guia','eventos'));
+        return view('eventos/detalhes', [
+            'page_name' => $page_name,
+            'evento' => $evento,
+            'cidades' => $cidades,
+            'trilheiro' => $trilheiro,
+            'inscricao' => $inscricao,
+        ]);
     }
 
     public function participar($id_evento)
@@ -174,20 +229,156 @@ class EventoController extends Controller
             abort(404, 'Evento não encontrado');
         }
 
-        $trilheiro->evento()->sync($id_evento);
+        if ($evento->fl_cancelado_eve) {
+            Flash::error('Este evento foi cancelado.');
+            return redirect($evento->url);
+        }
 
-        // Envia email de notificação para o administrador
+        if ($evento->dt_realizacao_eve < date('Y-m-d')) {
+            return redirect('trilheiro/privado/eventos/eu-fui/'.$id_evento);
+        }
+
+        $inscricao = EventoTrilheiro::withTrashed()
+            ->where('id_evento_eve', $evento->id_evento_eve)
+            ->where('id_trilheiro_tri', $trilheiro->id_trilheiro_tri)
+            ->first();
+
+        if ($inscricao && !$inscricao->trashed() && $inscricao->ativa()) {
+            Flash::info('Seu interesse neste evento já está registrado. A vaga só fecha depois do pagamento.');
+            return redirect('eventos/confirmacao/'.$id_evento);
+        }
+
+        if (!$inscricao) {
+            $inscricao = new EventoTrilheiro();
+            $inscricao->id_evento_eve = $evento->id_evento_eve;
+            $inscricao->id_trilheiro_tri = $trilheiro->id_trilheiro_tri;
+        } elseif ($inscricao->trashed()) {
+            $inscricao->restore();
+        }
+
+        $inscricao->aplicarStatus(EventoTrilheiro::INTERESSADO);
+        $inscricao->save();
+
         Mail::send(new NovoEventoTrilheiroNotificacao($evento, $trilheiro, $usuario));
 
         return redirect('eventos/confirmacao/'.$id_evento);
     }
 
+    public function euFui($id_evento)
+    {
+        $usuario = Auth::user();
+
+        if (trim($usuario->id_role) !== 'TRILHEIRO') {
+            Flash::error('Apenas trilheiros podem marcar presença.');
+            return redirect()->back();
+        }
+
+        $trilheiro = Trilheiro::where('id_user', $usuario->id)->first();
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+
+        if (!$trilheiro) {
+            Flash::error('Seu usuário não possui perfil de trilheiro. Complete seu cadastro para marcar presença.');
+            return redirect('cadastro/privado/escolher-perfil');
+        }
+
+        if (!$evento) {
+            abort(404, 'Evento não encontrado');
+        }
+
+        if ($evento->fl_cancelado_eve) {
+            Flash::error('Este evento foi cancelado e não entra nas estatísticas.');
+            return redirect()->back();
+        }
+
+        if ($evento->dt_realizacao_eve >= date('Y-m-d')) {
+            return redirect('trilheiro/privado/eventos/participar/'.$id_evento);
+        }
+
+        $jaFoi = EventoTrilheiro::where('id_evento_eve', $evento->id_evento_eve)
+            ->where('id_trilheiro_tri', $trilheiro->id_trilheiro_tri)
+            ->exists();
+
+        if (!$jaFoi) {
+            $trilheiro->evento()->attach($evento->id_evento_eve);
+        }
+
+        Flash::success('Presença registrada. As estatísticas do guia foram atualizadas.');
+
+        $guia = $evento->guia;
+        $destino = ($guia && $guia->nm_instagram_gui)
+            ? 'guia/trilhas-realizadas/'.$guia->nm_instagram_gui
+            : 'guia/trilhas-realizadas/'.$evento->id_guia_gui;
+
+        return redirect($destino);
+    }
+
     public function confirmacao($id_evento)
     {
         $evento = Evento::where('id_evento_eve', $id_evento)->first();
+
+        if (!$evento) {
+            abort(404, 'Evento não encontrado');
+        }
+
         $page_name = "Confirmação de Inscrição - " . $evento->nm_evento_eve;
 
-        return view('eventos/confirmacao', ['page_name' => $page_name, 'evento' => $evento]);
+        return view('eventos/confirmacao', [
+            'page_name' => $page_name,
+            'evento' => $evento,
+            'podeReenviarEmail' => $this->trilheiroInscritoNoEvento($evento) !== null,
+        ]);
+    }
+
+    public function reenviarEmailInscricao($id_evento)
+    {
+        $evento = Evento::where('id_evento_eve', $id_evento)->first();
+
+        if (!$evento) {
+            abort(404, 'Evento não encontrado');
+        }
+
+        $trilheiro = $this->trilheiroInscritoNoEvento($evento);
+
+        if (!$trilheiro) {
+            Flash::error('Só quem está inscrito neste evento pode reenviar o e-mail.');
+
+            return redirect()->back();
+        }
+
+        try {
+            Mail::send(new NovoEventoTrilheiroNotificacao($evento, $trilheiro, Auth::user()));
+            Flash::success('E-mail de inscrição reenviado.');
+        } catch (\Throwable $e) {
+            \Log::error('Erro ao reenviar e-mail de inscrição no evento', [
+                'id_evento' => $evento->id_evento_eve,
+                'id_trilheiro' => $trilheiro->id_trilheiro_tri,
+                'erro' => $e->getMessage(),
+            ]);
+            Flash::error('Não foi possível reenviar o e-mail agora. Tente novamente em instantes.');
+        }
+
+        return redirect()->back();
+    }
+
+    private function trilheiroInscritoNoEvento(Evento $evento)
+    {
+        $usuario = Auth::user();
+
+        if (!$usuario || trim($usuario->id_role) === 'GUIA') {
+            return null;
+        }
+
+        $trilheiro = Trilheiro::where('id_user', $usuario->id)->first();
+
+        if (!$trilheiro) {
+            return null;
+        }
+
+        $inscricao = EventoTrilheiro::where('id_evento_eve', $evento->id_evento_eve)
+            ->where('id_trilheiro_tri', $trilheiro->id_trilheiro_tri)
+            ->first();
+
+        return ($inscricao && $inscricao->ativa()) ? $trilheiro : null;
     }
 
     public function cancelarParticipacao($id_evento)
@@ -211,10 +402,18 @@ class EventoController extends Controller
             abort(404, 'Evento não encontrado');
         }
 
-        // Remove a participação do trilheiro no evento
-        $trilheiro->evento()->detach($id_evento);
+        $inscricao = EventoTrilheiro::where('id_evento_eve', $evento->id_evento_eve)
+            ->where('id_trilheiro_tri', $trilheiro->id_trilheiro_tri)
+            ->first();
 
-        // Envia email de notificação para o administrador
+        if (!$inscricao || !$inscricao->ativa()) {
+            Flash::error('Você não tem participação ativa neste evento.');
+            return redirect($evento->url);
+        }
+
+        $inscricao->aplicarStatus(EventoTrilheiro::CANCELADO);
+        $inscricao->save();
+
         Mail::send(new CancelamentoEventoTrilheiroNotificacao($evento, $trilheiro, $usuario));
 
         return redirect('eventos/cancelamento/'.$id_evento);
@@ -230,8 +429,180 @@ class EventoController extends Controller
 
     public function participantes($id_evento)
     {
+        $evento = $this->eventoGerenciavel($id_evento);
+        $inscricoes = $this->inscricoesOrdenadas($evento);
+
+        return view('admin/eventos/participantes', compact('evento', 'inscricoes'));
+    }
+
+    public function aceitarInscricao($id_evento, $id_inscricao)
+    {
+        $evento = $this->eventoGerenciavel($id_evento);
+        $inscricao = $this->inscricaoDoEvento($evento, $id_inscricao);
+
+        if ($evento->fl_cancelado_eve) {
+            Flash::error('Este evento está cancelado.');
+            return redirect()->back();
+        }
+
+        if ($inscricao->st_inscricao_evt !== EventoTrilheiro::INTERESSADO) {
+            Flash::error('Só dá para aceitar quem está como interessado.');
+            return redirect()->back();
+        }
+
+        $inscricao->aplicarStatus(EventoTrilheiro::ACEITO);
+        $inscricao->save();
+
+        if ($evento->temVaga()) {
+            Flash::success('Interesse aceito. A vaga fecha quando o pagamento for confirmado.');
+        } else {
+            Flash::warning('Interesse aceito. As vagas pagas já estão no limite, então o pagamento só poderá ser confirmado quando uma vaga for liberada.');
+        }
+
+        return redirect()->back();
+    }
+
+    public function recusarInscricao($id_evento, $id_inscricao)
+    {
+        $evento = $this->eventoGerenciavel($id_evento);
+        $inscricao = $this->inscricaoDoEvento($evento, $id_inscricao);
+
+        if (!in_array($inscricao->st_inscricao_evt, [EventoTrilheiro::INTERESSADO, EventoTrilheiro::ACEITO], true)) {
+            Flash::error('Quem já está com a vaga confirmada precisa ter o pagamento desfeito antes de ser recusado.');
+            return redirect()->back();
+        }
+
+        $inscricao->aplicarStatus(EventoTrilheiro::RECUSADO);
+        $inscricao->save();
+        Flash::success('Interesse recusado.');
+
+        return redirect()->back();
+    }
+
+    public function confirmarPagamento($id_evento, $id_inscricao)
+    {
+        $evento = $this->eventoGerenciavel($id_evento);
+
+        if ($evento->fl_cancelado_eve) {
+            Flash::error('Este evento está cancelado.');
+            return redirect()->back();
+        }
+
+        try {
+            DB::transaction(function () use ($evento, $id_inscricao) {
+                $inscricao = EventoTrilheiro::where('cd_evento_trilheiro_evt', $id_inscricao)
+                    ->where('id_evento_eve', $evento->id_evento_eve)
+                    ->lockForUpdate()
+                    ->first();
+
+                if (!$inscricao) {
+                    throw new \RuntimeException('Inscrição não encontrada.');
+                }
+
+                if ($inscricao->st_inscricao_evt === EventoTrilheiro::PAGO) {
+                    return;
+                }
+
+                if ($inscricao->st_inscricao_evt !== EventoTrilheiro::ACEITO) {
+                    throw new \RuntimeException('Confirme o pagamento só depois de aceitar o interesse.');
+                }
+
+                $ocupadas = EventoTrilheiro::where('id_evento_eve', $evento->id_evento_eve)
+                    ->where('st_inscricao_evt', EventoTrilheiro::PAGO)
+                    ->lockForUpdate()
+                    ->count();
+
+                if (!EventoTrilheiro::cabeVaga($ocupadas, $evento->limiteVagas())) {
+                    throw new \RuntimeException('Não há vaga livre. O limite deste evento já foi atingido pelos pagamentos confirmados.');
+                }
+
+                $inscricao->aplicarStatus(EventoTrilheiro::PAGO);
+                $inscricao->save();
+            });
+        } catch (\RuntimeException $e) {
+            Flash::error($e->getMessage());
+            return redirect()->back();
+        }
+
+        Flash::success('Pagamento confirmado. A vaga desta pessoa está fechada.');
+
+        return redirect()->back();
+    }
+
+    public function desfazerPagamento($id_evento, $id_inscricao)
+    {
+        $evento = $this->eventoGerenciavel($id_evento);
+        $inscricao = $this->inscricaoDoEvento($evento, $id_inscricao);
+
+        if ($inscricao->st_inscricao_evt !== EventoTrilheiro::PAGO) {
+            Flash::error('Esta inscrição não está com a vaga confirmada.');
+            return redirect()->back();
+        }
+
+        $inscricao->aplicarStatus(EventoTrilheiro::ACEITO);
+        $inscricao->save();
+        Flash::success('Pagamento desfeito. A vaga voltou a ficar livre e a pessoa segue aceita, aguardando pagamento.');
+
+        return redirect()->back();
+    }
+
+    private function eventoGerenciavel($id_evento)
+    {
         $evento = Evento::where('id_evento_eve', $id_evento)->first();
-        return view('admin/eventos/participantes', compact('evento'));
+
+        if (!$evento) {
+            abort(404, 'Evento não encontrado');
+        }
+
+        $papel = trim((string) Auth::user()->id_role);
+
+        if ($papel === 'ADMIN') {
+            return $evento;
+        }
+
+        $guia = Guia::where('id_user', Auth::user()->id)->first();
+
+        if ($papel !== 'GUIA' || !$guia || (int) $guia->id_guia_gui !== (int) $evento->id_guia_gui) {
+            abort(403);
+        }
+
+        return $evento;
+    }
+
+    private function inscricaoDoEvento(Evento $evento, $id_inscricao)
+    {
+        $inscricao = EventoTrilheiro::where('cd_evento_trilheiro_evt', $id_inscricao)
+            ->where('id_evento_eve', $evento->id_evento_eve)
+            ->first();
+
+        if (!$inscricao) {
+            abort(404, 'Inscrição não encontrada');
+        }
+
+        return $inscricao;
+    }
+
+    private function inscricoesOrdenadas(Evento $evento)
+    {
+        $ordem = [
+            EventoTrilheiro::INTERESSADO => 0,
+            EventoTrilheiro::ACEITO => 1,
+            EventoTrilheiro::PAGO => 2,
+            EventoTrilheiro::RECUSADO => 3,
+            EventoTrilheiro::CANCELADO => 4,
+        ];
+
+        return $evento->eventoTrilheiros()
+            ->with(['trilheiro.origem', 'trilheiro.indice', 'trilheiro.user'])
+            ->get()
+            ->sortBy(function ($inscricao) use ($ordem) {
+                return sprintf(
+                    '%d-%s',
+                    isset($ordem[$inscricao->st_inscricao_evt]) ? $ordem[$inscricao->st_inscricao_evt] : 9,
+                    $inscricao->created_at
+                );
+            })
+            ->values();
     }
 
     public function cadastro()
@@ -282,6 +653,7 @@ class EventoController extends Controller
                         'descricao' => $request->descricao,                           
                         'fl_ativo_eve' => null,
                         'fl_privado_eve' => $request->has('fl_privado_eve') ? true : false,
+                        'fl_cancelado_eve' => false,
                         'hora_inicio_eve' => $request->hora_inicio_eve,
                         'hora_fim_eve' => $request->hora_fim_eve,
                         'id_trilha_tri' => $request->id_trilha_tri ?: null);
@@ -298,6 +670,13 @@ class EventoController extends Controller
             $filename = 'evento_'.$guia->id_guia_gui.'_'.date("YmdHis").'.' . $extension;
             $imagem = $request->img_evento->storeAs('', $filename, 'eventos');
             $dados['ds_imagem_horizontal_eve'] = $filename;
+        }
+
+        if($request->hasFile('img_grupo')) {
+            $extension = $request->file('img_grupo')->getClientOriginalExtension();
+            $filename = 'grupo_'.$guia->id_guia_gui.'_'.date("YmdHis").'.' . $extension;
+            $request->img_grupo->storeAs('', $filename, 'eventos');
+            $dados['ds_imagem_grupo_eve'] = $filename;
         }
 
         $evento = Evento::create($dados);
@@ -332,6 +711,7 @@ class EventoController extends Controller
         $evento->descricao = $request->descricao;                           
         $evento->fl_ativo_eve = null;
         $evento->fl_privado_eve = $request->has('fl_privado_eve') ? true : false;
+        $evento->fl_cancelado_eve = $request->has('fl_cancelado_eve') ? true : false;
         $evento->hora_inicio_eve = $request->hora_inicio_eve;
         $evento->hora_fim_eve = $request->hora_fim_eve;
         $evento->id_trilha_tri = $request->id_trilha_tri ?: null;
@@ -348,6 +728,15 @@ class EventoController extends Controller
             $filename = 'evento_'.$guia->id_guia_gui.'_'.date("YmdHis").'.' . $extension;
             $imagem = $request->img_evento->storeAs('', $filename, 'eventos');
             $evento->ds_imagem_horizontal_eve = $filename;
+        }
+
+        if($request->hasFile('img_grupo')) {
+            $extension = $request->file('img_grupo')->getClientOriginalExtension();
+            $filename = 'grupo_'.$guia->id_guia_gui.'_'.date("YmdHis").'.' . $extension;
+            $request->img_grupo->storeAs('', $filename, 'eventos');
+            $evento->ds_imagem_grupo_eve = $filename;
+        } elseif ($request->input('img_deletada_grupo') === 'true') {
+            $evento->ds_imagem_grupo_eve = null;
         }
         
         $evento->save();

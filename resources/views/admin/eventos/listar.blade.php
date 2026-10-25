@@ -1,4 +1,5 @@
-@extends(request()->is('admin/*') ? 'layouts.admin' : 'layouts.template')
+@extends(request()->is('admin/*') || request()->is('guia-e-condutores/privado/*') ? 'layouts.admin' : 'layouts.template')
+@section('pageTitle', request()->is('admin/*') ? 'Eventos | Trilhas em SC' : 'Meus eventos | Trilhas em SC')
 
 @section('content')
     <div class="block-header">
@@ -30,23 +31,62 @@
                 <div class="body mt-0 pt-0">
                     @include('layouts.mensagens')
 
+                    @isset($filtros)
+                        <form method="get" action="{{ url('guia-e-condutores/privado/eventos') }}" class="row align-items-end mb-3">
+                            <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                                <label for="q" class="mb-1">Nome</label>
+                                <input type="text" name="q" id="q" value="{{ $filtros['q'] }}" class="form-control" placeholder="Nome do evento">
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                <label for="quando" class="mb-1">Data</label>
+                                <select name="quando" id="quando" class="form-control">
+                                    <option value="todos" {{ $filtros['quando'] === 'todos' ? 'selected' : '' }}>Qualquer data</option>
+                                    <option value="proximos" {{ $filtros['quando'] === 'proximos' ? 'selected' : '' }}>Próximos</option>
+                                    <option value="realizados" {{ $filtros['quando'] === 'realizados' ? 'selected' : '' }}>Já realizados</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                <label for="situacao" class="mb-1">Situação</label>
+                                <select name="situacao" id="situacao" class="form-control">
+                                    <option value="ativos" {{ $filtros['situacao'] === 'ativos' ? 'selected' : '' }}>Não cancelados</option>
+                                    <option value="cancelados" {{ $filtros['situacao'] === 'cancelados' ? 'selected' : '' }}>Somente cancelados</option>
+                                    <option value="todos" {{ $filtros['situacao'] === 'todos' ? 'selected' : '' }}>Todos</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 mb-2">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i> Filtrar</button>
+                                @if($filtros['q'] !== '' || $filtros['quando'] !== 'todos' || $filtros['situacao'] !== 'ativos')
+                                    <a href="{{ url('guia-e-condutores/privado/eventos') }}" class="btn btn-outline-secondary">Limpar</a>
+                                @endif
+                            </div>
+                        </form>
+                        <p class="text-muted mb-3">{{ $eventos->count() }} {{ $eventos->count() === 1 ? 'evento' : 'eventos' }}</p>
+                    @endisset
+
                     @forelse($eventos as $key => $evento)
                         <div class="card rounded shadow">
                             <div class="body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h6 class="title">{{ $evento->nm_evento_eve }} <small class="float-right text-muted">{{ \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i') }} - {{ \Carbon\Carbon::parse($evento->hora_fim_eve )->format('H:i') }} </small></h6>
+                                        <h6 class="title">@if($evento->urlTrilhaVinculada())<a href="{{ $evento->urlTrilhaVinculada() }}" target="_blank" rel="noopener">{{ $evento->nm_evento_eve }}</a>@else{{ $evento->nm_evento_eve }}@endif @if($evento->fl_cancelado_eve)<span class="badge badge-danger">Cancelado</span>@endif <small class="float-right text-muted">{{ \Carbon\Carbon::parse($evento->hora_inicio_eve)->format('H:i') }} - {{ \Carbon\Carbon::parse($evento->hora_fim_eve )->format('H:i') }} </small></h6>
                                     </div>
                                     <div class="col-12">
                                         @if(trim(Auth::user()->id_role) == 'ADMIN')
                                         <p class="mb-1"><strong>Guia</strong>: {{ $evento->guia->nm_guia_gui ?? '—' }}</p>
                                         @endif
-                                        <p class="mb-1"><strong>Local</strong>: {{ $evento->local->nm_cidade_cde }}</p>
+                                        <p class="mb-1"><strong>Local</strong>: {{ optional($evento->local)->nm_cidade_cde }}</p>
+                                        @include('eventos.partes.percurso', ['evento' => $evento, 'classe' => 'text-muted mb-1'])
                                         <p class="mb-1"><strong>Data</strong>: {{ \Carbon\Carbon::parse($evento->dt_realizacao_eve)->format('d/m/Y') }}</p>
                                         <p class="mb-1"><strong>Valor</strong>: {{ ($evento->valor_eve) ? "R$ ".$evento->valor_eve : 'Gratuita' }}</p>
                                         <p class="mb-1">
-                                            <strong>Participantes</strong>: 
-                                            <span class="badge badge-info">{{ $evento->participantes_count ?? 0 }}</span>
+                                            <strong>Vagas</strong>:
+                                            <span class="badge badge-success">{{ $evento->vagasOcupadas() }}@if($evento->limiteVagas()) / {{ $evento->limiteVagas() }}@endif</span>
+                                            &nbsp;|&nbsp;
+                                            <strong>Interessados</strong>:
+                                            <span class="badge badge-warning">{{ $evento->inscricoesCarregadas()->where('st_inscricao_evt', \App\EventoTrilheiro::INTERESSADO)->count() }}</span>
+                                            &nbsp;|&nbsp;
+                                            <strong>Aguardando pagamento</strong>:
+                                            <span class="badge badge-info">{{ $evento->inscricoesCarregadas()->where('st_inscricao_evt', \App\EventoTrilheiro::ACEITO)->count() }}</span>
                                             &nbsp;|&nbsp;
                                             <strong>Vezes oferecido</strong>: 
                                             <span class="badge badge-success">{{ $evento->vezes_oferecido ?? 1 }}x</span>
@@ -54,7 +94,7 @@
                                             <strong>Visualizações</strong>: 
                                             <span class="badge badge-warning badge-visualizacoes" style="cursor:pointer;" data-id="{{ $evento->id_evento_eve }}" data-nome="{{ $evento->nm_evento_eve }}">{{ $evento->visualizacoes_count ?? 0 }}</span>
                                         </p>
-                                        <div style="position: absolute; bottom: 1px; right: 10px;">
+                                        <div class="d-flex flex-wrap gap-2 mt-3">
                                             <a href="{{ url('guia-e-condutores/privado/eventos/participantes', $evento->id_evento_eve) }}" class="btn btn-outline-danger btn-sm"><i class="fa fa-users"></i> Participantes</a>
                                             <a href="{{ url('eventos/' . ($evento->slug_eve ?: $evento->id_evento_eve)) }}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye"></i> Ver</a>
                                             <a href="{{ url('guia-e-condutores/privado/evento/editar', $evento->id_evento_eve) }}" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit"></i> Editar</a>
@@ -73,9 +113,14 @@
                         <div class="card rounded shadow">
                             <div class="body">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <h6>Nenhum evento cadastrado</h6>
-                                        <p class="mb-1">Cadastre novos eventos na opção <a href="{{ url('guia-e-condutores/privado/evento/novo') }}"><strong>Novo Evento</strong></a> e torne-se visível para quem procura aventura</p>
+                                    <div class="col-12">
+                                        @isset($filtros)
+                                            <h6>Nenhum evento encontrado</h6>
+                                            <p class="mb-1">Não há eventos com os filtros atuais. Os cancelados ficam de fora até a situação incluir essa opção.</p>
+                                        @else
+                                            <h6>Nenhum evento cadastrado</h6>
+                                            <p class="mb-1">Cadastre novos eventos na opção <a href="{{ url('guia-e-condutores/privado/evento/novo') }}"><strong>Novo Evento</strong></a> e torne-se visível para quem procura aventura</p>
+                                        @endisset
                                     </div>
                                 </div>
                             </div>
@@ -85,25 +130,24 @@
             </div>
         </div>
     </div>
-@endsection
 
-{{-- Modal visualizações por dia --}}
-<div class="modal fade" id="modalVisualizacoes" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fa fa-eye"></i> Visualizações por dia</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <p class="text-muted mb-3" id="modal-evento-nome"></p>
-                <div id="modal-visualizacoes-body">
-                    <div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+    <div class="modal fade" id="modalVisualizacoes" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fa fa-eye"></i> Visualizações por dia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-3" id="modal-evento-nome"></p>
+                    <div id="modal-visualizacoes-body">
+                        <div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+@endsection
 
 @section('script')
     <script>

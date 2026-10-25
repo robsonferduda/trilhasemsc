@@ -25,10 +25,12 @@ class Evento extends Model
                             'descricao',
                             'ds_imagem_vertical_eve',
                             'ds_imagem_horizontal_eve',
+                            'ds_imagem_grupo_eve',
                             'fl_ativo_eve',
                             'hora_inicio_eve',
                             'hora_fim_eve',
                             'fl_privado_eve',
+                            'fl_cancelado_eve',
                             'id_trilha_tri',
                             'id_unico_eve'];
                             
@@ -133,6 +135,69 @@ class Evento extends Model
         return $this->hasOne('App\Trilha', 'id_trilha_tri', 'id_trilha_tri');
     }
 
+    /**
+     * URL pública da trilha vinculada, quando o evento tem esse vínculo.
+     *
+     * @return string|null
+     */
+    public function urlTrilhaVinculada()
+    {
+        $caminho = optional($this->trilha)->ds_url_tri;
+
+        if ($caminho === null || $caminho === '') {
+            return null;
+        }
+
+        return url($caminho);
+    }
+
+    /**
+     * Distância e ganho de elevação da trilha vinculada, quando esses dados existem.
+     *
+     * @return array|null
+     */
+    public function percursoAssociado()
+    {
+        $detalhe = optional($this->trilha)->detalhes;
+        if (!$detalhe) {
+            return null;
+        }
+
+        $distancia = $this->numeroPercurso($detalhe->nu_distancia_trd);
+        $subida = $this->numeroPercurso($detalhe->nu_altitude_trd);
+
+        if ($distancia === null && $subida === null) {
+            return null;
+        }
+
+        return [
+            'distancia' => $distancia === null ? null : $this->formatarPercurso($distancia),
+            'subida' => $subida === null ? null : $this->formatarPercurso($subida, 0),
+        ];
+    }
+
+    private function numeroPercurso($valor)
+    {
+        if ($valor === null || $valor === '') {
+            return null;
+        }
+
+        if (!is_numeric($valor)) {
+            return null;
+        }
+
+        return (float) $valor;
+    }
+
+    private function formatarPercurso($numero, $casas = null)
+    {
+        if ($casas === null) {
+            $casas = abs($numero - round($numero)) < 0.001 ? 0 : 1;
+        }
+
+        return number_format($numero, $casas, ',', '.');
+    }
+
     public function guia()
     {
         return $this->hasOne('App\Guia', 'id_guia_gui', 'id_guia_gui');
@@ -142,10 +207,48 @@ class Evento extends Model
     {
         return $this->hasMany('App\EventoTrilheiro', 'id_evento_eve', 'id_evento_eve');
     }
-    
+
     public function trilheiros()
     {
-        return $this->belongsToMany(Trilheiro::class, 'evento_trilheiro_evt', 'id_evento_eve', 'id_trilheiro_tri');
+        return $this->belongsToMany(Trilheiro::class, 'evento_trilheiro_evt', 'id_evento_eve', 'id_trilheiro_tri')
+            ->withPivot('cd_evento_trilheiro_evt', 'fl_aceito_guia_evt', 'fl_pago_evt', 'st_inscricao_evt')
+            ->withTimestamps();
+    }
+
+    /**
+     * Limite de vagas. Vazio ou zero significa sem limite.
+     * A vaga só é ocupada por inscrição com pagamento confirmado.
+     */
+    public function limiteVagas()
+    {
+        if ($this->total_participantes_eve === null || $this->total_participantes_eve === '') {
+            return null;
+        }
+
+        $total = (int) $this->total_participantes_eve;
+
+        return $total > 0 ? $total : null;
+    }
+
+    public function inscricoesCarregadas()
+    {
+        if ($this->relationLoaded('eventoTrilheiros')) {
+            return $this->eventoTrilheiros;
+        }
+
+        return $this->eventoTrilheiros()->get();
+    }
+
+    public function vagasOcupadas()
+    {
+        return $this->inscricoesCarregadas()
+            ->where('st_inscricao_evt', EventoTrilheiro::PAGO)
+            ->count();
+    }
+
+    public function temVaga()
+    {
+        return EventoTrilheiro::cabeVaga($this->vagasOcupadas(), $this->limiteVagas());
     }
 
     /**
@@ -164,6 +267,7 @@ class Evento extends Model
         // Reseta campos que não devem ser copiados
         $novoEvento->slug_eve = null; // Será gerado automaticamente
         $novoEvento->fl_ativo_eve = null; // Novo evento inicia como inativo (aguardando aprovação)
+        $novoEvento->fl_cancelado_eve = false;
         
         // Define o id_unico_eve: 
         // Se este evento já tem id_unico_eve (é um clone), usa esse valor para manter a referência ao original
