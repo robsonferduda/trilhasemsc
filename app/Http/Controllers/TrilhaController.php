@@ -27,6 +27,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class TrilhaController extends Controller
 {
@@ -90,8 +92,26 @@ class TrilhaController extends Controller
         $categorias = Categoria::all();
         $complementos = Complemento::orderBy('id_complemento_nivel_con')->get();
         $tags   = Tag::orderBy('ds_tag_tag')->get();
+        $tiposFotoObrigatorios = TipoFoto::whereIn('id_tipo_foto_tfo', [5, 7])
+            ->get()
+            ->keyBy('id_tipo_foto_tfo');
+        $fotoBusca = $trilha->foto->where('id_tipo_foto_tfo', 7)->first();
+        $fotoPrincipal = $trilha->foto->where('id_tipo_foto_tfo', 5)->first();
+        $slugArquivoFoto = $this->slugArquivoFotoTrilha($trilha);
 
-        return view('admin/trilha/editar', compact('trilha', 'niveis', 'cidades', 'complementos', 'categorias', 'usuarios', 'tags'));
+        return view('admin/trilha/editar', compact(
+            'trilha',
+            'niveis',
+            'cidades',
+            'complementos',
+            'categorias',
+            'usuarios',
+            'tags',
+            'tiposFotoObrigatorios',
+            'fotoBusca',
+            'fotoPrincipal',
+            'slugArquivoFoto'
+        ));
     }
 
     public function detalhes(Request $request, $id)
@@ -186,7 +206,7 @@ class TrilhaController extends Controller
             return redirect('login');
         }
 
-        $dados = $request->except(['arquivo_gpx', 'imagem_story', 'tags', '_token', 'remover_gpx', 'remover_story', 'nu_distancia_trd']);
+        $dados = $request->except(['arquivo_gpx', 'imagem_story', 'tags', '_token', 'remover_gpx', 'remover_story', 'nu_distancia_trd', 'nu_altitude_trd']);
         $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
         $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
 
@@ -212,37 +232,105 @@ class TrilhaController extends Controller
             return redirect('login');
         }
 
-        $tipoFoto = TipoFoto::find($request->id_tipo_foto_tfo);
-        $trilha = Trilha::find($request->id_trilha_tri);
+        $request->validate([
+            'id_trilha_tri' => 'required|integer',
+            'id_tipo_foto_tfo' => 'required|integer|in:5,7',
+            'imagem' => 'required|image|mimes:jpeg,jpg,png,webp|max:8192',
+        ], [
+            'imagem.required' => 'Selecione uma imagem para enviar.',
+            'imagem.image' => 'O arquivo precisa ser uma imagem.',
+            'imagem.mimes' => 'Use JPG, PNG ou WEBP.',
+            'imagem.max' => 'A imagem deve ter no máximo 8 MB.',
+            'id_tipo_foto_tfo.in' => 'Tipo de foto inválido para o template novo.',
+        ]);
 
-        // Categoria Trilha
-        if ($trilha->id_categoria_cat === 1) {
-            $path = $tipoFoto->dc_path_tfp;
+        $trilha = Trilha::findOrFail($request->id_trilha_tri);
+        $tipoFoto = TipoFoto::findOrFail($request->id_tipo_foto_tfo);
 
-            if (count(explode('/', $request->nm_path_fot)) > 1) {
-                $path = $path.'/'.explode('/', $request->nm_path_fot)[0];
-            }
-
-            $pathArray = explode('/', $request->nm_path_fot);
-            $fileName = end($pathArray);
-
-            $request->file('imagem')->storeAs($path, $fileName, 'trilhas');
-
-            if (!empty($request->height) && !empty($request->width)) {
-                \Image::make('public/img/trilhas/'.$path.'/'.$fileName)->resize($request->width, $request->height)->save();
-            }
-            \ImageOptimizer::optimize('public/img/trilhas/'.$path.'/'.$fileName);
+        if ((int) $trilha->id_categoria_cat !== 1) {
+            Flash::error('Upload de foto disponível apenas para trilhas.');
+            return redirect('admin/editar-trilha/'.$trilha->id_trilha_tri);
         }
 
-        // Categoria Camping
-        if ($trilha->id_categoria_cat === 2) {
-            exit;
+        $slug = $this->slugArquivoFotoTrilha($trilha);
+        $extensao = strtolower($request->file('imagem')->getClientOriginalExtension() ?: 'jpg');
+        if ($extensao === 'jpeg') {
+            $extensao = 'jpg';
         }
 
-        if (Foto::create($request->all())) {
-            return redirect('admin/editar-trilha/'.$request->id_trilha_tri);
+        $fileName = $slug.'.'.$extensao;
+        $pasta = $tipoFoto->dc_path_tfp;
+        $caminhoRelativo = $pasta.'/'.$fileName;
+        $caminhoAbsoluto = public_path('img/trilhas/'.$caminhoRelativo);
+
+        $fotoExistente = Foto::where('id_trilha_tri', $trilha->id_trilha_tri)
+            ->where('id_tipo_foto_tfo', $tipoFoto->id_tipo_foto_tfo)
+            ->first();
+
+        if ($fotoExistente && !empty($fotoExistente->nm_path_fot)) {
+            $this->removerArquivoFotoTrilha($tipoFoto, $fotoExistente->nm_path_fot, $fileName);
+        }
+
+        $request->file('imagem')->storeAs($pasta, $fileName, 'trilhas');
+
+        if (!empty($tipoFoto->width_tfo) && !empty($tipoFoto->height_tfo) && File::exists($caminhoAbsoluto)) {
+            \Image::make($caminhoAbsoluto)
+                ->fit((int) $tipoFoto->width_tfo, (int) $tipoFoto->height_tfo)
+                ->save($caminhoAbsoluto);
+        }
+
+        if (File::exists($caminhoAbsoluto)) {
+            \ImageOptimizer::optimize($caminhoAbsoluto);
+        }
+
+        $dados = [
+            'id_trilha_tri' => $trilha->id_trilha_tri,
+            'id_tipo_foto_tfo' => $tipoFoto->id_tipo_foto_tfo,
+            'nm_foto_fot' => $trilha->nm_trilha_tri,
+            'nm_path_fot' => $fileName,
+            'dc_alt_fot' => $trilha->nm_trilha_tri,
+        ];
+
+        if ($fotoExistente) {
+            $fotoExistente->update($dados);
         } else {
-            dd("Erro");
+            Foto::create($dados);
+        }
+
+        Flash::success('Foto "'.$tipoFoto->nm_tipo_foto_tfo.'" salva como '.$fileName.'.');
+        return redirect('admin/editar-trilha/'.$trilha->id_trilha_tri);
+    }
+
+    private function slugArquivoFotoTrilha(Trilha $trilha)
+    {
+        $slug = basename(trim((string) $trilha->ds_url_tri, '/'));
+        if ($slug === '' || $slug === '.' || $slug === '..') {
+            $slug = Str::slug($trilha->nm_trilha_tri);
+        }
+
+        return $slug ?: 'trilha-'.$trilha->id_trilha_tri;
+    }
+
+    private function removerArquivoFotoTrilha(TipoFoto $tipoFoto, $nmPathFot, $novoArquivo = null)
+    {
+        $nmPathFot = trim((string) $nmPathFot);
+        if ($nmPathFot === '') {
+            return;
+        }
+
+        $parts = explode('/', $nmPathFot);
+        if (count($parts) > 1) {
+            $caminho = public_path('img/trilhas/'.$tipoFoto->dc_path_tfp.'/'.$nmPathFot);
+        } else {
+            $caminho = public_path('img/trilhas/'.$tipoFoto->dc_path_tfp.'/'.$nmPathFot);
+        }
+
+        if ($novoArquivo && basename($caminho) === $novoArquivo) {
+            return;
+        }
+
+        if (File::isFile($caminho)) {
+            File::delete($caminho);
         }
     }
 
@@ -254,7 +342,7 @@ class TrilhaController extends Controller
 
         $trilha = Trilha::where('id_trilha_tri', $request->id_trilha_tri)->first();
 
-        $dados = $request->except(['arquivo_gpx', 'imagem_story', 'tags', '_token', 'remover_gpx', 'remover_story', 'nu_distancia_trd']);
+        $dados = $request->except(['arquivo_gpx', 'imagem_story', 'tags', '_token', 'remover_gpx', 'remover_story', 'nu_distancia_trd', 'nu_altitude_trd']);
         $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
         $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
 
@@ -464,6 +552,16 @@ class TrilhaController extends Controller
             }
         }
 
+        $altitudeRaw = $request->input('nu_altitude_trd');
+        $altitude = null;
+
+        if ($altitudeRaw !== null && trim((string) $altitudeRaw) !== '') {
+            $altitudeNormalizada = str_replace(',', '.', trim((string) $altitudeRaw));
+            if (is_numeric($altitudeNormalizada)) {
+                $altitude = (int) round((float) $altitudeNormalizada);
+            }
+        }
+
         $detalhe = Detalhe::withTrashed()->firstOrNew(['id_trilha_tri' => $trilha->id_trilha_tri]);
 
         if ($detalhe->trashed()) {
@@ -472,6 +570,7 @@ class TrilhaController extends Controller
 
         $detalhe->id_trilha_tri = $trilha->id_trilha_tri;
         $detalhe->nu_distancia_trd = $distancia;
+        $detalhe->nu_altitude_trd = $altitude;
         $detalhe->save();
     }
 
@@ -733,6 +832,7 @@ class TrilhaController extends Controller
         $proximosEventos = Evento::where('id_trilha_tri', $trilhaEncontrada->id_trilha_tri)
             ->where('dt_realizacao_eve', '>=', date('Y-m-d'))
             ->where('fl_ativo_eve', true)
+            ->where('fl_cancelado_eve', false)
             ->orderBy('dt_realizacao_eve', 'ASC')
             ->get();
 

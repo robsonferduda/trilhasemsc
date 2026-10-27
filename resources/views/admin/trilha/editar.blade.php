@@ -204,116 +204,83 @@
                         </div>
                     </div>
 
-                    <form action="{{ url('admin/insert-foto') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                            <h4>Dados da Foto</h4>
-                            <h6>Tipos obrigatórios para publicar: [Busca - Miniatura, Principais Aventuras - Miniatura, Principais Aventuras - Principal, Últimas Trilhas, Detalhes - Principal]</h6>
-                            <div class="row clearfix">
-                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <input type="hidden" name="id_trilha_tri" value="{{ $trilha->id_trilha_tri }}">
-                                        <label for="id_tipo_foto_tfo">Tipo</label>
-                                        <select name="id_tipo_foto_tfo" id="id_tipo_foto_tfo" class="form-control select2">
-                                            <option value="0">Selecione um tipo</option>
-                                            @foreach(\App\TipoFoto::all() as $tipo)
-                                                <option  data-height="{{ $tipo->height_tfo }}" data-width="{{ $tipo->width_tfo }}"  value="{{ $tipo->id_tipo_foto_tfo }}">{{ $tipo->nm_tipo_foto_tfo }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1 col-md-1 col-sm-12">
-                                    <div class="form-group">   
-                                        <label for="width">Width</label>                                      
-                                        <input type="text" name="width" id="width" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="col-lg-1 col-md-1 col-sm-12">
-                                    <div class="form-group">     
-                                        <label for="height">Height</label>                                  
-                                        <input type="text" name="height" id="height" class="form-control" >                
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="nm_foto_fot">Nome</label>
-                                        <input type="text" name="nm_foto_fot" id="nm_foto_fot" class="form-control" required data-parsley-error-message="Campo nome é obrigatório">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="nm_path_fot">Caminho (Ex.: trilha-de-naufragados.jpg)</label>
-                                        <input type="text" name="nm_path_fot" id="nm_path_fot" class="form-control" required data-parsley-error-message="Campo caminho é obrigatório">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="dc_alt_fot">Descrição</label>
-                                        <input type="text" name="dc_alt_fot" id="dc_alt_fot" class="form-control" required data-parsley-error-message="Campo descrição é obrigatório">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <input required type="file" name="imagem">
-                                </div>
-                            </div>
-
-                        <div style="text-align: center; margin-top:15px; ">
-                            <a href="{{ url('admin/listar-trilhas') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancelar</a>
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
-                        </div>
-                    </form>
-
-                    <div class="row clearfix">
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 20px;">
-                            <h5>Fotos da Trilha</h5>
-                            <div class="table-responsive">
-                                        <table class="table table-hover table-custo">
-                                            <thead>
-                                                <tr>
-                                                    <th>Foto</th>
-                                                    <th>Tipo</th>
-                                                    <th>Descrição</th>
-                                                    <th class="center" style="width: 10%">Detalhes</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Foto</th>
-                                                    <th>Tipo</th>
-                                                    <th>Descrição</th>
-                                                    <th class="center">Detalhes</th>
-                                                </tr>
-                                            </tfoot>
-                                            <tbody>
-                                                @forelse($trilha->foto as $foto)
-                                                    <tr>
-                                                        <td>{{ $foto->nm_foto_fot }}</td>
-                                                        <td>{{ $foto->tipo->nm_tipo_foto_tfo }}</td>
-                                                        <td>{{ $foto->dc_alt_fot }}</td>
-                                                        <td class="center">
-                                                            <button type="button" class="btn btn-default btn-view-img" data-url="{{ asset('img/trilhas/'.$foto->tipo->dc_path_tfp.'/'.$foto->nm_path_fot) }}"><i class="fa fa-image"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                @empty
-
-                                                @endforelse
-                                            </tbody>
-                                        </table>
-                            </div>           
+                    <div class="row clearfix" style="margin-top: 30px;">
+                        <div class="col-lg-12">
+                            <h4>Fotos obrigatórias</h4>
+                            <p class="text-muted mb-3">
+                                Para publicar no template novo, envie apenas estas duas imagens.
+                                Nome do arquivo gerado automaticamente: <code>{{ $slugArquivoFoto }}.jpg</code>
+                                (a extensão segue o arquivo enviado).
+                            </p>
                         </div>
                     </div>
 
+                    @php
+                        $blocosFoto = [
+                            [
+                                'tipoId' => 7,
+                                'foto' => $fotoBusca,
+                                'titulo' => 'Busca - Miniatura',
+                                'uso' => 'Aparece na listagem de trilhas',
+                                'botao' => 'Salvar miniatura',
+                            ],
+                            [
+                                'tipoId' => 5,
+                                'foto' => $fotoPrincipal,
+                                'titulo' => 'Detalhes - Principal',
+                                'uso' => 'Aparece na página de detalhes da trilha',
+                                'botao' => 'Salvar foto principal',
+                            ],
+                        ];
+                    @endphp
+
                     <div class="row clearfix">
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 20px;">
-                            <h5>Fotos para Postagem</h5>
-                                <textarea rows="10" style="width: 100%;">
-                                    @forelse($trilha->foto as $foto)
-                                        <p><img alt="{{ $foto->nm_foto_fot }}" src="https://trilhasemsc.com.br/public/img/trilhas/descricao/{{ $foto->nm_path_fot }}" /></p>
-                                    @empty
-                                        Nenhuma foto cadastrada
-                                    @endforelse
-                                </textarea>
-                            </div>           
-                        </div>
+                        @foreach($blocosFoto as $bloco)
+                            @php
+                                $tipo = $tiposFotoObrigatorios->get($bloco['tipoId']);
+                                $fotoAtual = $bloco['foto'];
+                                $urlAtual = $fotoAtual && $tipo
+                                    ? asset('img/trilhas/'.$tipo->dc_path_tfp.'/'.$fotoAtual->nm_path_fot)
+                                    : null;
+                            @endphp
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <form action="{{ url('admin/insert-foto') }}" method="post" enctype="multipart/form-data" class="mb-4">
+                                    @csrf
+                                    <input type="hidden" name="id_trilha_tri" value="{{ $trilha->id_trilha_tri }}">
+                                    <input type="hidden" name="id_tipo_foto_tfo" value="{{ $bloco['tipoId'] }}">
+
+                                    <div class="form-group">
+                                        <label class="d-block">{{ $bloco['titulo'] }}</label>
+                                        <small class="form-text text-muted mt-0 mb-2">
+                                            {{ $bloco['uso'] }}
+                                            @if($tipo && $tipo->width_tfo && $tipo->height_tfo)
+                                                · {{ $tipo->width_tfo }}×{{ $tipo->height_tfo }} px
+                                            @endif
+                                        </small>
+
+                                        @if($urlAtual)
+                                            <div class="mb-2">
+                                                <img src="{{ $urlAtual }}" alt="{{ $fotoAtual->dc_alt_fot }}" style="max-width: 100%; max-height: 180px; object-fit: cover;">
+                                                <div>
+                                                    <small class="text-muted">Arquivo atual: {{ $fotoAtual->nm_path_fot }}</small>
+                                                    <button type="button" class="btn btn-sm btn-default btn-view-img ml-2" data-url="{{ $urlAtual }}">
+                                                        <i class="fa fa-image"></i> Ampliar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="alert alert-warning py-2">Ainda não enviada</div>
+                                        @endif
+
+                                        <input type="file" name="imagem" class="form-control" accept="image/jpeg,image/png,image/webp" required>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-save"></i> {{ $bloco['botao'] }}
+                                    </button>
+                                </form>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 	    </div>
@@ -367,11 +334,6 @@
             if (window.CKEDITOR && CKEDITOR.instances['ds_trilha_tri']) {
                 CKEDITOR.instances['ds_trilha_tri'].updateElement();
             }
-        });
-
-        $('#id_tipo_foto_tfo').on('change', function() {
-            $("#height").val($(this).find(':selected').data('height'));
-            $("#width").val($(this).find(':selected').data('width'));
         });
     });
 </script>
