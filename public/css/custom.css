@@ -468,3 +468,36 @@ body {
 	  display: none; /* Oculta o banner em telas maiores */
 	}
   }
+/* Resumo de medidas na página de detalhes da trilha */
+.trilha-resumo {
+	position: sticky;
+	top: 88px;
+	z-index: 2;
+}
+
+.trilha-medidas p {
+	font-size: 0.95rem;
+	line-height: 1.35;
+}
+
+@media (max-width: 767.98px) {
+	.trilha-resumo {
+		position: static;
+		margin-top: 0.75rem;
+	}
+
+	.trilha-medidas {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.35rem 0.75rem;
+	}
+
+	.trilha-medidas p {
+		margin-bottom: 0.35rem !important;
+		font-size: 0.88rem;
+	}
+
+	.trilha-medidas p:last-child {
+		grid-column: 1 / -1;
+	}
+}
