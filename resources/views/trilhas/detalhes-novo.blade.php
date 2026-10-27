@@ -174,8 +174,11 @@
                                         <span class="trilha-guia-nome">{{ $guia->nm_guia_gui }}</span>
                                         @if(($guia->selo_cadastur ?? null) === 'valido')
                                             <span class="trilha-guia-selo"><i class="fa fa-check-circle" aria-hidden="true"></i> Cadastur</span>
+                                        @else
+                                            <span class="trilha-guia-selo trilha-guia-selo-muted">Guia / condutor</span>
                                         @endif
                                     </span>
+                                    <span class="trilha-guia-cta">Ver perfil</span>
                                 </a>
                             @endforeach
                         </div>
@@ -264,23 +267,42 @@
                      </div>
                  </div>
             </div>
-            <div class="col-md-3">            
+            <div class="col-md-3">
                 <div class="col-lg-12 mt-4">
-                    <h2 class="mt-0 h4">Busca por Cidade</h2>
-                        <label class="" style="font-size: 100%; margin: 0px;">Selecione a cidade</label>
-                        <p class="mt-0 text-danger" style="font-size: 85%;">São mostradas somente cidades que possuem alguma trilha cadastrada.</p>
-                        <select class="form-control mb-0" name="cidade" id="list-cidade">
-                           <option value="">Selecione a cidade</option>
-                           @if(isset($busca_cidade))
-                              @forelse($busca_cidade as $busca)
-                                 <option value="{{ url(stringToStringSeo($busca->cidade->nm_cidade_cde).'/trilhas/#lista') }}">{{ $busca->cidade->nm_cidade_cde }} ({{ $busca->total }})</option>
-                              @empty
-                                 <option selected value="">Nenhuma cidade disponível</option>
-                              @endforelse
-                           @endif
-                        </select>
-                        @include('layouts/partes/publicidade-aberta-vertical')
-                        @include('layouts/partes/publicidade-google')
+                    @if(isset($trilhasRelacionadas) && $trilhasRelacionadas->count())
+                        <h2 class="mt-0 h5">Mais em {{ $trilha->cidade->nm_cidade_cde }}</h2>
+                        <div class="trilha-relacionadas">
+                            @foreach($trilhasRelacionadas as $trilhaRel)
+                                @php
+                                    $fotoRel = $trilhaRel->foto->where('id_tipo_foto_tfo', 7)->first()
+                                        ?: $trilhaRel->foto->where('id_tipo_foto_tfo', 5)->first();
+                                    $imgRel = $fotoRel && $fotoRel->nm_path_fot ? $fotoRel->nm_path_fot : 'padrao.jpg';
+                                    $pastaRel = ($fotoRel && (int) $fotoRel->id_tipo_foto_tfo === 5) ? 'detalhes-principal' : 'busca';
+                                @endphp
+                                <a href="{{ url($trilhaRel->ds_url_tri) }}" class="trilha-relacionada text-decoration-none">
+                                    <img src="{{ asset('img/trilhas/'.$pastaRel.'/'.$imgRel) }}" alt="{{ $trilhaRel->nm_trilha_tri }}" loading="lazy" decoding="async">
+                                    <span>
+                                        <strong>{{ $trilhaRel->nm_trilha_tri }}</strong>
+                                        @if($trilhaRel->nivel)
+                                            <small>{{ $trilhaRel->nivel->dc_nivel_niv }}</small>
+                                        @endif
+                                    </span>
+                                </a>
+                            @endforeach
+                        </div>
+                        <p class="small mt-2 mb-3">
+                            <a href="{{ $cidadeTrilhasUrl }}" class="text-decoration-underline">Ver todas em {{ $trilha->cidade->nm_cidade_cde }}</a>
+                        </p>
+                    @endif
+
+                    <div class="trilha-sidebar-cta mb-3">
+                        <h3 class="h6 mb-2">Quer ir com guia?</h3>
+                        <p class="small text-secondary mb-2">Contrate um condutor local e faça a trilha com mais segurança.</p>
+                        <a href="{{ url('guias-e-condutores') }}" class="btn btn-sm btn-outline-success w-100">Ver guias e condutores</a>
+                    </div>
+
+                    @include('layouts/partes/publicidade-aberta-vertical')
+                    @include('layouts/partes/publicidade-google')
                 </div>
             </div>         
        </div>

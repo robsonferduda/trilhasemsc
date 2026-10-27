@@ -854,7 +854,7 @@ class TrilhaController extends Controller
         $url = $cidade.'/trilhas/'.$nivel.'/'.$trilhaSlug;
 
         // Buscar trilha e verificar se existe
-        $trilhaEncontrada = Trilha::with(['foto', 'cidade', 'user', 'nivel', 'complemento'])
+        $trilhaEncontrada = Trilha::with(['foto', 'cidade', 'user', 'nivel', 'complemento', 'detalhes', 'guias'])
             ->where('ds_url_tri', $url)
             ->first();
 
@@ -894,6 +894,15 @@ class TrilhaController extends Controller
            ->groupBy('cd_cidade_cde')
            ->get()->sortBy('cidade.nm_cidade_cde');
 
+        $trilhasRelacionadas = Trilha::with(['foto', 'nivel'])
+            ->where('fl_publicacao_tri', 'S')
+            ->where('cd_cidade_cde', $trilhaEncontrada->cd_cidade_cde)
+            ->where('id_trilha_tri', '<>', $trilhaEncontrada->id_trilha_tri)
+            ->orderByDesc('total_votos_tri')
+            ->orderBy('nm_trilha_tri')
+            ->take(4)
+            ->get();
+
         $proximosEventos = Evento::where('id_trilha_tri', $trilhaEncontrada->id_trilha_tri)
             ->where('dt_realizacao_eve', '>=', date('Y-m-d'))
             ->where('fl_ativo_eve', true)
@@ -911,7 +920,17 @@ class TrilhaController extends Controller
             : 1;
         $chamasPreenchidas = max(1, min(5, $chamasPreenchidas)); // garante entre 1 e 5
 
-        return view('trilhas/detalhes-novo', ['trilha' => $trilhaEncontrada, 'titulo' => $titulo, 'subtitulo' => $subtitulo, 'busca_cidade' => $busca_cidade, 'page_name' => $page_name, 'chamasPreenchidas' => $chamasPreenchidas, 'totalAcessosTrilha' => $acessosTrilha, 'proximosEventos' => $proximosEventos]);
+        return view('trilhas/detalhes-novo', [
+            'trilha' => $trilhaEncontrada,
+            'titulo' => $titulo,
+            'subtitulo' => $subtitulo,
+            'busca_cidade' => $busca_cidade,
+            'trilhasRelacionadas' => $trilhasRelacionadas,
+            'page_name' => $page_name,
+            'chamasPreenchidas' => $chamasPreenchidas,
+            'totalAcessosTrilha' => $acessosTrilha,
+            'proximosEventos' => $proximosEventos,
+        ]);
     }
 
 
