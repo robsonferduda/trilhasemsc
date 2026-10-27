@@ -162,25 +162,29 @@
                 </div>
                 @if(count($trilha->guias))
                     <div class="col-md-12 mt-3">
-                        <h2 class="h6 mb-3">Quem faz esta trilha?</h2>
-                        <div class="row">
+                        <div class="d-flex align-items-baseline justify-content-between flex-wrap gap-2 mb-2">
+                            <h2 class="h6 mb-0">Quem faz esta trilha?</h2>
+                            <a href="{{ url('guias-e-condutores') }}" class="small text-decoration-underline">Ver todos os guias</a>
+                        </div>
+                        <div class="trilha-guias">
                             @foreach($trilha->guias as $guia)
-                                <div class="col-4 col-sm-3 col-md-3 col-lg-2 mb-3 text-center">
-                                    <a href="{{ url('guia/perfil/estatistica/perfil', $guia->nm_instagram_gui) }}">
-                                        <img class="avatar avatar-xl shadow-lg rounded-circle mx-auto" src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="Logo Guia {{ $guia->nm_guia_gui }}" loading="lazy" decoding="async">
-                                    </a>
-                                    <p class="small mb-1 mt-2">
-                                        <a href="{{ url('guia/perfil/estatistica/perfil', $guia->nm_instagram_gui) }}" class="text-dark text-decoration-none">
-                                            {{ $guia->nm_guia_gui }}
-                                        </a>
-                                    </p>
-                                    @include('guias.partes.selo-cadastur', ['guia' => $guia, 'compacto' => true])
-                                </div>
+                                <a href="{{ url('guia/perfil/estatistica/perfil', $guia->nm_instagram_gui) }}" class="trilha-guia-chip text-decoration-none">
+                                    <img src="{{ asset('img/guias/'.$guia->nm_path_logo_gui) }}" alt="" loading="lazy" decoding="async">
+                                    <span class="trilha-guia-meta">
+                                        <span class="trilha-guia-nome">{{ $guia->nm_guia_gui }}</span>
+                                        @if(($guia->selo_cadastur ?? null) === 'valido')
+                                            <span class="trilha-guia-selo"><i class="fa fa-check-circle" aria-hidden="true"></i> Cadastur</span>
+                                        @endif
+                                    </span>
+                                </a>
                             @endforeach
                         </div>
                     </div>
                 @else
-                    <p class="h6 mt-3">Acesse <a class="text-decoration-underline" href="{{ url('guias-e-condutores') }}">aqui</a> os guias e condutores cadastrados em nossa plataforma.</p>
+                    <p class="small mt-3 mb-0">
+                        Ainda sem guia vinculado.
+                        <a class="text-decoration-underline" href="{{ url('guias-e-condutores') }}">Ver guias e condutores</a>
+                    </p>
                 @endif
 
                 @if(isset($proximosEventos) && $proximosEventos->count())
