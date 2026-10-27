@@ -15,6 +15,7 @@ class Detalhe extends Model
     protected $fillable = [
         'id_trilha_tri',
         'nu_distancia_trd',
+        'nu_altitude_trd',
         'duracao_trd',
         'ds_exposicao_trd',
         'ds_esforco_trd',

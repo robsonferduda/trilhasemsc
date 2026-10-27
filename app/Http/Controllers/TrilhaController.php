@@ -206,7 +206,7 @@ class TrilhaController extends Controller
             return redirect('login');
         }
 
-        $dados = $request->except(['arquivo_gpx', 'imagem_story', 'tags', '_token', 'remover_gpx', 'remover_story', 'nu_distancia_trd', 'nu_altitude_trd']);
+        $dados = $request->except($this->camposExcetoTrilha());
         $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
         $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
 
@@ -342,7 +342,7 @@ class TrilhaController extends Controller
 
         $trilha = Trilha::where('id_trilha_tri', $request->id_trilha_tri)->first();
 
-        $dados = $request->except(['arquivo_gpx', 'imagem_story', 'tags', '_token', 'remover_gpx', 'remover_story', 'nu_distancia_trd', 'nu_altitude_trd']);
+        $dados = $request->except($this->camposExcetoTrilha());
         $dados['nu_latitude_tri'] = $this->normalizeCoordenada($request->input('nu_latitude_tri'));
         $dados['nu_longitude_tri'] = $this->normalizeCoordenada($request->input('nu_longitude_tri'));
 
@@ -540,6 +540,24 @@ class TrilhaController extends Controller
         return ['lat' => $lat, 'lng' => $lng];
     }
 
+    private function camposExcetoTrilha()
+    {
+        return [
+            'arquivo_gpx',
+            'imagem_story',
+            'tags',
+            '_token',
+            'remover_gpx',
+            'remover_story',
+            'nu_distancia_trd',
+            'nu_altitude_trd',
+            'duracao_trd',
+            'ds_exposicao_trd',
+            'ds_esforco_trd',
+            'ds_orientacao_trd',
+        ];
+    }
+
     private function salvarDetalhesTrilha(Request $request, Trilha $trilha)
     {
         $distanciaRaw = $request->input('nu_distancia_trd');
@@ -562,6 +580,12 @@ class TrilhaController extends Controller
             }
         }
 
+        $duracao = $this->normalizeDuracaoTrilha($request->input('duracao_trd'));
+        $niveisDetalhe = ['Nível 1', 'Nível 2', 'Nível 3', 'Nível 4', 'Nível 5'];
+        $exposicao = $this->normalizeNivelDetalhe($request->input('ds_exposicao_trd'), $niveisDetalhe);
+        $esforco = $this->normalizeNivelDetalhe($request->input('ds_esforco_trd'), $niveisDetalhe);
+        $orientacao = $this->normalizeNivelDetalhe($request->input('ds_orientacao_trd'), $niveisDetalhe);
+
         $detalhe = Detalhe::withTrashed()->firstOrNew(['id_trilha_tri' => $trilha->id_trilha_tri]);
 
         if ($detalhe->trashed()) {
@@ -571,7 +595,48 @@ class TrilhaController extends Controller
         $detalhe->id_trilha_tri = $trilha->id_trilha_tri;
         $detalhe->nu_distancia_trd = $distancia;
         $detalhe->nu_altitude_trd = $altitude;
+        $detalhe->duracao_trd = $duracao;
+        $detalhe->ds_exposicao_trd = $exposicao;
+        $detalhe->ds_esforco_trd = $esforco;
+        $detalhe->ds_orientacao_trd = $orientacao;
         $detalhe->save();
+    }
+
+    private function normalizeDuracaoTrilha($valor)
+    {
+        if ($valor === null) {
+            return null;
+        }
+
+        $valor = trim((string) $valor);
+        if ($valor === '') {
+            return null;
+        }
+
+        if (!preg_match('/^(\d{1,2}):([0-5]\d)(?::([0-5]\d))?$/', $valor, $partes)) {
+            return null;
+        }
+
+        return sprintf(
+            '%02d:%02d:%02d',
+            (int) $partes[1],
+            (int) $partes[2],
+            isset($partes[3]) ? (int) $partes[3] : 0
+        );
+    }
+
+    private function normalizeNivelDetalhe($valor, array $niveisPermitidos)
+    {
+        if ($valor === null) {
+            return null;
+        }
+
+        $valor = trim((string) $valor);
+        if ($valor === '' || !in_array($valor, $niveisPermitidos, true)) {
+            return null;
+        }
+
+        return $valor;
     }
 
     public function enviarEmailTesteConvite(Request $request, $id)

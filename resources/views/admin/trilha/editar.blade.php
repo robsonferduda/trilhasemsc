@@ -129,19 +129,66 @@
                                         </div>
                                     </div>
                                 </div>
+                                @php
+                                    $niveisMedida = ['Nível 1', 'Nível 2', 'Nível 3', 'Nível 4', 'Nível 5'];
+                                    $duracaoAtual = optional($trilha->detalhes)->duracao_trd;
+                                    $duracaoValor = $duracaoAtual ? \Carbon\Carbon::parse($duracaoAtual)->format('H:i') : '';
+                                @endphp
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="nu_distancia_trd">Distância (km)</label>
-                                            <input type="number" step="0.1" min="0" name="nu_distancia_trd" id="nu_distancia_trd" class="form-control" placeholder="Ex: 5.0" value="{{ optional($trilha->detalhes)->nu_distancia_trd }}">
-                                            <small class="form-text text-muted">Aparece no mapa e na página de detalhes da trilha.</small>
+                                            <input type="number" step="0.1" min="0" name="nu_distancia_trd" id="nu_distancia_trd" class="form-control" placeholder="Ex: 6.8" value="{{ optional($trilha->detalhes)->nu_distancia_trd }}">
+                                            <small class="form-text text-muted">Aparece no mapa e nos detalhes.</small>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="nu_altitude_trd">Altitude (m)</label>
-                                            <input type="number" step="1" min="0" name="nu_altitude_trd" id="nu_altitude_trd" class="form-control" placeholder="Ex: 450" value="{{ optional($trilha->detalhes)->nu_altitude_trd }}">
-                                            <small class="form-text text-muted">Ganho de elevação, em metros de subida.</small>
+                                            <label for="nu_altitude_trd">Altitude (m de subida)</label>
+                                            <input type="number" step="1" min="0" name="nu_altitude_trd" id="nu_altitude_trd" class="form-control" placeholder="Ex: 8" value="{{ optional($trilha->detalhes)->nu_altitude_trd }}">
+                                            <small class="form-text text-muted">Ganho de elevação.</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="duracao_trd">Duração (somente ida)</label>
+                                            <input type="time" name="duracao_trd" id="duracao_trd" class="form-control" value="{{ $duracaoValor }}">
+                                            <small class="form-text text-muted">Exibida como HH:MM (somente ida).</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="ds_exposicao_trd">Exposição</label>
+                                            <select name="ds_exposicao_trd" id="ds_exposicao_trd" class="form-control select2">
+                                                <option value="">Selecione</option>
+                                                @foreach($niveisMedida as $nivelMedida)
+                                                    <option value="{{ $nivelMedida }}" {{ optional($trilha->detalhes)->ds_exposicao_trd === $nivelMedida ? 'selected' : '' }}>{{ $nivelMedida }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="ds_esforco_trd">Esforço</label>
+                                            <select name="ds_esforco_trd" id="ds_esforco_trd" class="form-control select2">
+                                                <option value="">Selecione</option>
+                                                @foreach($niveisMedida as $nivelMedida)
+                                                    <option value="{{ $nivelMedida }}" {{ optional($trilha->detalhes)->ds_esforco_trd === $nivelMedida ? 'selected' : '' }}>{{ $nivelMedida }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="ds_orientacao_trd">Orientação</label>
+                                            <select name="ds_orientacao_trd" id="ds_orientacao_trd" class="form-control select2">
+                                                <option value="">Selecione</option>
+                                                @foreach($niveisMedida as $nivelMedida)
+                                                    <option value="{{ $nivelMedida }}" {{ optional($trilha->detalhes)->ds_orientacao_trd === $nivelMedida ? 'selected' : '' }}>{{ $nivelMedida }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -192,17 +239,6 @@
                             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
                         </div>
                     </form>
-
-                    <div class="row clearfix" style="margin-top: 30px;">
-                        <div class="col-lg-12">
-                            <div class="alert alert-info mb-0">
-                                Convites por email e gráfico de acessos agora estão na tela de detalhes da trilha.
-                                <a href="{{ route('admin.trilha.detalhes', $trilha->id_trilha_tri) }}" class="btn btn-info btn-sm ml-2">
-                                    <i class="fa fa-bar-chart"></i> Ir para detalhes
-                                </a>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="row clearfix" style="margin-top: 30px;">
                         <div class="col-lg-12">
