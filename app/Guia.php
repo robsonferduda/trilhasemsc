@@ -125,7 +125,7 @@ class Guia extends Model
         };
 
         $escolhidas = $this->trilhas()
-            ->with(['foto', 'cidade'])
+            ->with(['foto', 'cidade', 'nivel'])
             ->where($publicadas)
             ->orderBy('nm_trilha_tri')
             ->get();
@@ -136,7 +136,7 @@ class Guia extends Model
             ->whereNotNull('id_trilha_tri')
             ->pluck('id_trilha_tri');
 
-        $dosEventos = Trilha::with(['foto', 'cidade'])
+        $dosEventos = Trilha::with(['foto', 'cidade', 'nivel'])
             ->whereIn('id_trilha_tri', $idsEvento->all())
             ->where($publicadas)
             ->orderBy('nm_trilha_tri')

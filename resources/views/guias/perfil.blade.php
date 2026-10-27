@@ -38,7 +38,58 @@
     .page-header.perfil-guia-header h2,
     .page-header.perfil-guia-header p { display: block; }
 }
-.perfil-guia-trilha-img { height: 160px; object-fit: cover; }
+.perfil-guia-trilhas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.7rem;
+}
+.perfil-guia-trilha {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 0.45rem;
+    border: 1px solid #e6e9ef;
+    border-radius: 0.75rem;
+    background: #fff;
+    color: #212529;
+    text-decoration: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+.perfil-guia-trilha:hover,
+.perfil-guia-trilha:focus {
+    border-color: #cfd6e4;
+    box-shadow: 0 4px 12px rgba(33, 37, 41, 0.08);
+    color: #212529;
+}
+.perfil-guia-trilha img {
+    width: 72px;
+    height: 54px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    flex: 0 0 72px;
+}
+.perfil-guia-trilha-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.2;
+}
+.perfil-guia-trilha-meta strong {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.perfil-guia-trilha-meta small {
+    margin-top: 0.2rem;
+    font-size: 0.78rem;
+    color: #6c757d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .perfil-guia-whatsapp {
     position: fixed;
     left: 0;
@@ -139,29 +190,30 @@
 
          @if($trilhasGuia->count() > 0)
          <div class="col-md-12 mt-4">
-            <h2 class="text-info h3 mb-3">Trilhas de {{ $guia->nm_guia_gui }}</h2>
-            <div class="row">
+            <div class="d-flex align-items-baseline justify-content-between flex-wrap gap-2 mb-3">
+               <h2 class="text-info h3 mb-0">Trilhas de {{ $guia->nm_guia_gui }}</h2>
+               <span class="small text-secondary">{{ $trilhasGuia->count() }} {{ $trilhasGuia->count() === 1 ? 'trilha' : 'trilhas' }}</span>
+            </div>
+            <div class="perfil-guia-trilhas">
                @foreach($trilhasGuia as $trilhaGuia)
                @php
-                   $fotoTrilha = $trilhaGuia->foto->where('id_tipo_foto_tfo', 3)->first() ?: $trilhaGuia->foto->first();
+                   $fotoTrilha = $trilhaGuia->foto->where('id_tipo_foto_tfo', 7)->first()
+                       ?: $trilhaGuia->foto->where('id_tipo_foto_tfo', 5)->first()
+                       ?: $trilhaGuia->foto->first();
                    $imgTrilha = ($fotoTrilha && $fotoTrilha->nm_path_fot) ? $fotoTrilha->nm_path_fot : 'padrao.jpg';
+                   $pastaTrilha = ($fotoTrilha && (int) $fotoTrilha->id_tipo_foto_tfo === 5) ? 'detalhes-principal' : 'busca';
+                   $nivelTrilha = optional($trilhaGuia->nivel)->dc_nivel_niv;
+                   $cidadeTrilha = optional($trilhaGuia->cidade)->nm_cidade_cde;
                @endphp
-               <div class="col-lg-4 col-md-6 mb-4">
-                  <div class="card card-blog card-plain h-100">
-                     <a href="{{ url($trilhaGuia->ds_url_tri) }}" class="d-block">
-                        <img src="{{ asset('img/trilhas/detalhes-principal/'.$imgTrilha) }}" alt="{{ $trilhaGuia->nm_trilha_tri }}" class="img-fluid shadow border-radius-lg w-100 perfil-guia-trilha-img">
-                     </a>
-                     <div class="card-body px-1 pt-3">
-                        @if(optional($trilhaGuia->cidade)->nm_cidade_cde)
-                        <p class="text-gradient text-dark mb-2 text-sm">{{ $trilhaGuia->cidade->nm_cidade_cde }}</p>
-                        @endif
-                        <a href="{{ url($trilhaGuia->ds_url_tri) }}">
-                           <h3 class="h5">{{ $trilhaGuia->nm_trilha_tri }}</h3>
-                        </a>
-                        <a href="{{ url($trilhaGuia->ds_url_tri) }}" class="btn btn-outline-primary btn-sm">Ver trilha</a>
-                     </div>
-                  </div>
-               </div>
+               <a href="{{ url($trilhaGuia->ds_url_tri) }}" class="perfil-guia-trilha">
+                  <img src="{{ asset('img/trilhas/'.$pastaTrilha.'/'.$imgTrilha) }}" alt="" loading="lazy" decoding="async">
+                  <span class="perfil-guia-trilha-meta">
+                     <strong>{{ $trilhaGuia->nm_trilha_tri }}</strong>
+                     <small>
+                        {{ collect([$cidadeTrilha, $nivelTrilha])->filter()->implode(' · ') }}
+                     </small>
+                  </span>
+               </a>
                @endforeach
             </div>
          </div>
