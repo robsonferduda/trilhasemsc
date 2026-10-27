@@ -216,16 +216,6 @@
                     </div>
                 @endif
 
-                @if(!empty($trilha->url_geolocalizacao_tri))
-                    <div class="col-md-12 mt-4 mb-3">
-                        <h2 class="text-success h5 mb-2">Como chegar / Trajeto</h2>
-                        <p class="small text-secondary mb-2">Confira o percurso no mapa antes de seguir para o relato completo.</p>
-                        <div class="geolocalizao">
-                            {!! $trilha->url_geolocalizacao_tri !!}
-                        </div>
-                    </div>
-                @endif
-
                 <div class="col-md-12 mt-2">
                     <h2 class="h6">Detalhes da Aventura</h2>
                     <div class="d-flex align-items-center mb-2">
@@ -253,6 +243,15 @@
                         </div>
                     </div>
                 </div>
+                @if(!empty($trilha->url_geolocalizacao_tri))
+                    <div class="col-md-12 mt-4 mb-3">
+                        <h2 class="text-success h5 mb-2">Como chegar / Trajeto</h2>
+                        <p class="small text-secondary mb-2">Com o relato em mente, confira o percurso no mapa.</p>
+                        <div class="geolocalizao">
+                            {!! $trilha->url_geolocalizacao_tri !!}
+                        </div>
+                    </div>
+                @endif
                 @include('layouts/partes/publicidade-google')
                 <div class="row mt-3">
                     <div class="col-lg-12 col-sm-12 mb-sm-0 mb-4">
