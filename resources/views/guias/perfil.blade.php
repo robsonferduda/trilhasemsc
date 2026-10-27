@@ -57,6 +57,9 @@
     .perfil-guia-trilhas {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+    .perfil-guia-trilhas .perfil-guia-trilha:only-child {
+        grid-column: 1 / -1;
+    }
 }
 .perfil-guia-trilha {
     display: flex;
