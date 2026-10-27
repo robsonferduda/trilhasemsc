@@ -127,10 +127,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="nu_distancia_trd">Distância (km)</label>
-                                    <input type="number" step="0.1" min="0" name="nu_distancia_trd" id="nu_distancia_trd" class="form-control" placeholder="Ex: 5.0" value="{{ old('nu_distancia_trd') }}">
-                                    <small class="form-text text-muted">Aparece no mapa e na página de detalhes da trilha.</small>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nu_distancia_trd">Distância (km)</label>
+                                            <input type="number" step="0.1" min="0" name="nu_distancia_trd" id="nu_distancia_trd" class="form-control" placeholder="Ex: 5.0" value="{{ old('nu_distancia_trd') }}">
+                                            <small class="form-text text-muted">Aparece no mapa e na página de detalhes da trilha.</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nu_altitude_trd">Altitude (m)</label>
+                                            <input type="number" step="1" min="0" name="nu_altitude_trd" id="nu_altitude_trd" class="form-control" placeholder="Ex: 450" value="{{ old('nu_altitude_trd') }}">
+                                            <small class="form-text text-muted">Ganho de elevação, em metros de subida.</small>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="arquivo_gpx">Arquivo GPX (trajeto da trilha)</label>
@@ -152,7 +163,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="ds_trilha_tri">Descrição</label>
-                                    <textarea name="ds_trilha_tri" id="ckeditor" class="ckeditor form-control" rows="15"></textarea>
+                                    <textarea name="ds_trilha_tri" id="ds_trilha_tri" class="form-control" rows="15">{{ old('ds_trilha_tri') }}</textarea>
                                 </div>                                  
                             </div> 
                         </div>
@@ -165,4 +176,40 @@
 	    </div>
 	</div>       
 </div>
+@endsection
+@section('script')
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(function () {
+        if (window.CKEDITOR) {
+            CKEDITOR.replace('ds_trilha_tri', {
+                height: 420,
+                language: 'pt-br',
+                versionCheck: false,
+                removePlugins: 'elementspath',
+                allowedContent: true,
+                extraAllowedContent: '*(*);*{*}',
+                pasteFilter: null,
+                toolbar: [
+                    { name: 'styles', items: ['Format'] },
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'RemoveFormat'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+                    { name: 'links', items: ['Link', 'Unlink'] },
+                    { name: 'insert', items: ['Image'] },
+                    { name: 'clipboard', items: ['Undo', 'Redo'] },
+                    { name: 'document', items: ['Source'] }
+                ],
+                format_tags: 'p;h1;h2;h3;h4;pre',
+                enterMode: CKEDITOR.ENTER_P,
+                shiftEnterMode: CKEDITOR.ENTER_BR
+            });
+        }
+
+        $('form').on('submit', function () {
+            if (window.CKEDITOR && CKEDITOR.instances['ds_trilha_tri']) {
+                CKEDITOR.instances['ds_trilha_tri'].updateElement();
+            }
+        });
+    });
+</script>
 @endsection
