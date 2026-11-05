@@ -48,8 +48,20 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * Exibe o login e guarda a URL de retorno (?intended=...).
+     */
+    public function showLoginForm(Request $request)
+    {
+        captureIntendedUrl($request);
+
+        return view('auth.login');
+    }
+
     public function login(Request $request)
     {
+        captureIntendedUrl($request);
+
         $this->validateLogin($request);
 
         if ($this->hasTooManyLoginAttempts($request)) {
@@ -108,11 +120,13 @@ class LoginController extends Controller
      */
     public function redirectToProvider(Request $request, string $provider)
     {
-        // Guarda a URL pretendida, se enviada por query (?intended=/algum/lugar) ou usa a anterior
-        if ($request->filled('intended')) {
-            session(['url.intended' => $request->query('intended')]);
-        } elseif (!session()->has('url.intended')) {
-            session(['url.intended' => url()->previous()]);
+        captureIntendedUrl($request);
+
+        if (!session()->has('url.intended')) {
+            $previous = sanitizeIntendedUrl(url()->previous());
+            if ($previous) {
+                session(['url.intended' => $previous]);
+            }
         }
 
         return Socialite::driver($provider)->redirect();

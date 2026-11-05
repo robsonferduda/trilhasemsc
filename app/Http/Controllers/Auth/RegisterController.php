@@ -48,10 +48,23 @@ class RegisterController extends Controller
     }
 
     /**
+     * Exibe o formulário e guarda a URL de retorno (?intended=...).
+     */
+    public function showRegistrationForm(Request $request)
+    {
+        captureIntendedUrl($request);
+
+        return view('auth.register');
+    }
+
+    /**
      * Após o registro, envia o trilheiro para completar o cadastro básico.
+     * A URL pretendida permanece na sessão para o retorno após o perfil.
      */
     protected function registered(Request $request, $user)
     {
+        captureIntendedUrl($request);
+
         Flash::success('Cadastro realizado! Complete seu perfil para continuar.');
 
         return redirect('trilheiro/privado/atualizar-cadastro');

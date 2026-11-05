@@ -4,6 +4,7 @@
 @section('description', 'Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil' )
 
 @section('content')
+@php $intendedQs = intendedQuery(); @endphp
 <div class="container">
     <div class="row justify-content-center" style="margin-top: 30px;">
         <div class="col-md-12">
@@ -40,7 +41,7 @@
         <div class="col-sm-12 col-md-6 center" style="margin-top: 50px;">
             <h3>Cadastre-se usando suas redes sociais</h3>
             <div class="sign-in-buttons">
-                <a href="{{ url('login/facebook') }}" class="facebook btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                <a href="{{ url('login/facebook'.($intendedQs ? '?'.$intendedQs : '')) }}" class="facebook btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
             </div>
         </div>
     </div>

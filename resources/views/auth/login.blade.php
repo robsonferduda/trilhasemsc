@@ -3,6 +3,7 @@
 @section('description', 'Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil' )
 
 @section('content')
+@php $intendedQs = intendedQuery(); @endphp
 <div class="row mt-n6 mb-5">
     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
         <div class="card z-index-0">
@@ -22,6 +23,7 @@
                     <div class="text-center">
                         <button type="submit" class="btn bg-gradient-dark w-40 my-4 mb-2">Login</button>
                     </div>
+                 <p class="text-sm mt-3 mb-0 text-center">Ainda não tem conta? <br/><a href="{{ url('guias-e-condutores/cadastro'.($intendedQs ? '?tipo=trilheiro&'.$intendedQs : '?tipo=trilheiro')) }}" class="text-dark font-weight-bold text-decoration-underline-hover">Cadastre-se</a></p>
                  <p class="text-sm mt-3 mb-0 text-center">Esqueceu sua senha? <br/><a href="{{ route('password.request') }}" class="text-dark font-weight-bold text-decoration-underline-hover">Clique aqui</a></p>
                 </form>
            </div>
@@ -32,7 +34,7 @@
                </p>
             </div>
             <div class="col-3 ms-auto px-1 d-flex justify-content-center">
-               <a class="btn btn-outline-light w-75 h-75 px-3" href="{{ url('login/facebook') }}" >
+               <a class="btn btn-outline-light w-75 h-75 px-3" href="{{ url('login/facebook'.($intendedQs ? '?'.$intendedQs : '')) }}" >
                   <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g id="facebook-3" transform="translate(3.000000, 3.000000)" fill-rule="nonzero">
@@ -44,7 +46,7 @@
                </a>
             </div>
             <div class="col-3 me-auto px-1 d-flex justify-content-center">
-               <a class="btn btn-outline-light w-75 h-75 px-3" href="{{ url('login/google') }}" >
+               <a class="btn btn-outline-light w-75 h-75 px-3" href="{{ url('login/google'.($intendedQs ? '?'.$intendedQs : '')) }}" >
                   <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g id="google-icon" transform="translate(3.000000, 2.000000)" fill-rule="nonzero">

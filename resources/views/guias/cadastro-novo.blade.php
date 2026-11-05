@@ -3,6 +3,10 @@
 @section('description', 'Guia de trilhas e camping em Santa Catarina, trazendo informações de localização, trajetos e grau de dificuldade para quem quer conhecer e desfrutar das praias, serras e montanhas desse belo estado do Sul do Brasil' )
 
 @section('content')
+@php
+    $tipoSelecionado = $tipoCadastro ?? old('tipo_cadastro');
+    $intendedQs = intendedQuery();
+@endphp
 <div class="row mt-n6 mb-5">
     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
         <div class="card z-index-0">
@@ -14,6 +18,11 @@
                <form action="{{ url('guias-e-condutores/cadastro') }}" method="post" >
                   @csrf                 
                   @include('layouts/mensagens-novo')
+                  @if(session('url.intended'))
+                  <div class="alert alert-info text-white text-sm mb-3" role="alert">
+                     Após concluir o cadastro e o perfil, você volta para a página que abriu.
+                  </div>
+                  @endif
                   <div class="mb-3">
                       <div class="row"> 
                         <div class="col-xl-12 col-lg-12 col-md-12">
@@ -23,7 +32,7 @@
                      <div class="row center">
                         <div class="col-xl-12 col-lg-12 col-md-12 ml-0 mr-0">
                            <label class="custom-radio-button__container w-45">
-                              <input class="tipo_cadastro" type="radio" name="tipo_cadastro" value="guia" {{ (old('tipo_cadastro') and old('tipo_cadastro') == 'guia') ? 'checked' : '' }}>
+                              <input class="tipo_cadastro" type="radio" name="tipo_cadastro" value="guia" {{ $tipoSelecionado == 'guia' ? 'checked' : '' }}>
                               <span class="custom-radio-button designer">
 
                                  <div class="svg-designer"><i class="fa fa-id-card-o" aria-hidden="true"></i></div>
@@ -33,7 +42,7 @@
                             </label>
          
                             <label class="custom-radio-button__container w-45">
-                              <input class="tipo_cadastro" type="radio" name="tipo_cadastro" value="trilheiro" {{ (old('tipo_cadastro') and old('tipo_cadastro') == 'trilheiro') ? 'checked' : '' }}>
+                              <input class="tipo_cadastro" type="radio" name="tipo_cadastro" value="trilheiro" {{ $tipoSelecionado == 'trilheiro' ? 'checked' : '' }}>
                               <span class="custom-radio-button">
                                  <div class="svg-designer"><i class="fa fa-map" aria-hidden="true"></i></div>
                                 <h5>Trilheiro</h5>
@@ -89,7 +98,7 @@
                      <div class="text-center">
                         <button type="submit" class="btn bg-gradient-dark w-40 my-4 mb-2 btn-cadastrar">Cadastrar</button>
                      </div>
-                     <p class="text-sm mt-3 mb-0 text-center">Já possui uma conta? <br/><a href="{{ url('login') }}" class="text-dark font-weight-bold text-decoration-underline-hover">Clique aqui</a></p>
+                     <p class="text-sm mt-3 mb-0 text-center">Já possui uma conta? <br/><a href="{{ url('login'.($intendedQs ? '?'.$intendedQs : '')) }}" class="text-dark font-weight-bold text-decoration-underline-hover">Clique aqui</a></p>
                      </div>
                   </div>
               </form>
@@ -101,7 +110,7 @@
                </p>
             </div>
             <div class="col-3 ms-auto px-1 d-flex justify-content-center">
-               <a class="btn btn-outline-light w-75 h-75 px-3" href="{{ url('login/facebook') }}" >
+               <a class="btn btn-outline-light w-75 h-75 px-3" href="{{ url('login/facebook'.($intendedQs ? '?'.$intendedQs : '')) }}" >
                   <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g id="facebook-3" transform="translate(3.000000, 3.000000)" fill-rule="nonzero">
@@ -113,7 +122,7 @@
                </a>
             </div>
             <div class="col-3 me-auto px-1 d-flex justify-content-center">
-               <a class="btn btn-outline-light w-75 h-75 px-3" href="{{ url('login/google') }}" >
+               <a class="btn btn-outline-light w-75 h-75 px-3" href="{{ url('login/google'.($intendedQs ? '?'.$intendedQs : '')) }}" >
                   <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g id="google-icon" transform="translate(3.000000, 2.000000)" fill-rule="nonzero">

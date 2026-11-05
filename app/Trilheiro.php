@@ -102,19 +102,19 @@ class Trilheiro extends Model
 
         switch ($role) {
             case 'ADMIN':
-                return redirect('admin/dashboard');
+                return redirect()->intended('admin/dashboard');
             case 'GUIA':
                 return redirect('guia-e-condutores/privado/painel');
             case 'SOCIAL':
                 return redirect('cadastro/privado/escolher-perfil');
             case 'TRILHEIRO':
                 $trilheiro = self::where('id_user', $user->id)->first();
-                if (!$trilheiro) {
+                if (!$trilheiro || !$trilheiro->perfilBasicoCompleto()) {
                     return redirect('trilheiro/privado/atualizar-cadastro');
                 }
-                return redirect($trilheiro->destinoOnboarding());
+                return redirect()->intended($trilheiro->destinoOnboarding());
             default:
-                return redirect('/');
+                return redirect()->intended('/');
         }
     }
 

@@ -417,6 +417,11 @@ class TrilheiroController extends Controller
                 ]);
             }
 
+            if (session()->has('url.intended')) {
+                Flash::success('Perfil atualizado! Você pode continuar de onde parou.');
+                return redirect()->intended('trilheiro/privado/perfil');
+            }
+
             if (!$trilheiro->possuiScore()) {
                 Flash::success('Perfil atualizado! Agora responda o questionário para calcular seu Índice de Experiência em Trilhas.');
                 return redirect('trilheiro/privado/meu-nivel');

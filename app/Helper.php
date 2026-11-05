@@ -12,3 +12,75 @@
 
         return strtr($string, $acentos);
     }
+
+    /**
+     * Guarda na sessão a URL de retorno (?intended=...), se for segura (mesmo site).
+     */
+    function captureIntendedUrl($request = null)
+    {
+        $request = $request ?: request();
+
+        if (!$request->filled('intended')) {
+            return;
+        }
+
+        $safe = sanitizeIntendedUrl($request->query('intended'));
+
+        if ($safe) {
+            session(['url.intended' => $safe]);
+        }
+    }
+
+    /**
+     * Aceita só caminhos relativos do app ou URLs absolutas do próprio domínio.
+     */
+    function sanitizeIntendedUrl($url)
+    {
+        if (!$url || !is_string($url)) {
+            return null;
+        }
+
+        $url = trim($url);
+
+        if ($url === '') {
+            return null;
+        }
+
+        // Caminho relativo: /eventos/...
+        if (isset($url[0]) && $url[0] === '/' && (!isset($url[1]) || $url[1] !== '/')) {
+            return $url;
+        }
+
+        $parsed = parse_url($url);
+        $parsedApp = parse_url(rtrim(config('app.url'), '/'));
+
+        if (empty($parsed['host']) || empty($parsedApp['host'])) {
+            return null;
+        }
+
+        if (strtolower($parsed['host']) !== strtolower($parsedApp['host'])) {
+            return null;
+        }
+
+        $path = isset($parsed['path']) ? $parsed['path'] : '/';
+
+        if (!empty($parsed['query'])) {
+            $path .= '?' . $parsed['query'];
+        }
+
+        return $path;
+    }
+
+    /**
+     * Query string intended=... para montar links de login/cadastro/social.
+     */
+    function intendedQuery($url = null)
+    {
+        $intended = $url ?: session('url.intended');
+
+        if (!$intended) {
+            return '';
+        }
+
+        return 'intended=' . urlencode($intended);
+    }

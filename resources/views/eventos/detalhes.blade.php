@@ -106,7 +106,11 @@
 @section('content')
 @php
     $eventoRealizado = \Carbon\Carbon::parse($evento->dt_realizacao_eve)->toDateString() < date('Y-m-d');
-    $urlPresenca = url('trilheiro/privado/eventos/'.($eventoRealizado ? 'eu-fui' : 'participar').'/'.$evento->id_evento_eve);
+    $urlPresencaLogado = url('trilheiro/privado/eventos/'.($eventoRealizado ? 'eu-fui' : 'participar').'/'.$evento->id_evento_eve);
+    $urlEventoRetorno = $evento->url ?: url()->current();
+    $urlPresenca = Auth::check()
+        ? $urlPresencaLogado
+        : url('guias-e-condutores/cadastro?tipo=trilheiro&intended='.urlencode($urlEventoRetorno));
     $textoPresenca = $eventoRealizado ? 'Eu fui' : 'Tenho interesse';
     $limiteVagas = $evento->limiteVagas();
     $vagasOcupadas = $evento->vagasOcupadas();

@@ -194,6 +194,8 @@ class GuiaController extends Controller
 
     public function cadastro(Request $request)
     {
+        captureIntendedUrl($request);
+
         if($request->isMethod('post')) {
 
             $validated= $request->validate(['tipo_cadastro' => 'required'],['tipo_cadastro.required' => 'É obrigatório selecionar uma atividade']);
@@ -330,7 +332,10 @@ class GuiaController extends Controller
             return redirect('login');
 
         }
-        return view('guias.cadastro-novo');
+
+        $tipoCadastro = $request->query('tipo') === 'trilheiro' ? 'trilheiro' : old('tipo_cadastro');
+
+        return view('guias.cadastro-novo', compact('tipoCadastro'));
     }
 
     public function atualizarCadastro(Request $request)
