@@ -216,6 +216,8 @@
                     </div>
                 @endif
 
+                @include('trilhas.partials.inteligencia-climatica')
+
                 <div class="col-md-12 mt-2">
                     <h2 class="h6">Detalhes da Aventura</h2>
                     <div class="d-flex align-items-center mb-2">
@@ -322,4 +324,88 @@
        </div>
     </div>
  </section>
+@endsection
+
+@section('script')
+@if(!empty($clima['tem_historico']))
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+(function () {
+    var canvas = document.getElementById('climaHistoricoChart');
+    var dataEl = document.getElementById('climaHistoricoChartData');
+    if (!canvas || !dataEl || typeof Chart === 'undefined') return;
+    var chartData = {};
+    try { chartData = JSON.parse(dataEl.textContent || '{}'); } catch (e) { return; }
+    new Chart(canvas.getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: chartData.labels || [],
+            datasets: [
+                {
+                    type: 'line',
+                    label: 'Temp. média (°C)',
+                    data: chartData.temp_media || [],
+                    borderColor: '#e67e22',
+                    backgroundColor: 'transparent',
+                    yAxisID: 'yTemp',
+                    tension: 0.25,
+                    pointRadius: 3
+                },
+                {
+                    type: 'line',
+                    label: 'Temp. mín (°C)',
+                    data: chartData.temp_min || [],
+                    borderColor: '#3498db',
+                    backgroundColor: 'transparent',
+                    yAxisID: 'yTemp',
+                    borderDash: [4, 4],
+                    tension: 0.25,
+                    pointRadius: 2
+                },
+                {
+                    type: 'line',
+                    label: 'Temp. máx (°C)',
+                    data: chartData.temp_max || [],
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'transparent',
+                    yAxisID: 'yTemp',
+                    borderDash: [4, 4],
+                    tension: 0.25,
+                    pointRadius: 2
+                },
+                {
+                    type: 'bar',
+                    label: 'Precipitação (mm)',
+                    data: chartData.precip || [],
+                    backgroundColor: 'rgba(52, 152, 219, 0.35)',
+                    borderColor: '#2980b9',
+                    yAxisID: 'yPrecip'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            scales: {
+                yTemp: {
+                    type: 'linear',
+                    position: 'left',
+                    title: { display: true, text: '°C' }
+                },
+                yPrecip: {
+                    type: 'linear',
+                    position: 'right',
+                    grid: { drawOnChartArea: false },
+                    title: { display: true, text: 'mm' }
+                }
+            },
+            plugins: {
+                legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
+            }
+        }
+    });
+})();
+</script>
+@endif
 @endsection

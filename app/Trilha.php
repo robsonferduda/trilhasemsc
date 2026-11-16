@@ -94,4 +94,14 @@ class Trilha extends Model
     {
         return $this->belongsToMany('App\Guia', 'guia_trilha_gut' , 'id_trilha_tri', 'id_guia_gui')->orderBy('created_at', 'DESC');
     }
+
+    /**
+     * Indica se a trilha possui coordenadas para consulta climática.
+     *
+     * @return bool
+     */
+    public function temCoordenadasClima()
+    {
+        return $this->nu_latitude_tri !== null && $this->nu_longitude_tri !== null;
+    }
 }

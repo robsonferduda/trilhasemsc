@@ -23,6 +23,7 @@ use App\TipoFoto;
 use App\Detalhe;
 use App\Mail\ConviteTrilhaGuia;
 use App\Mail\ConviteTrilhaTrilheiro;
+use App\Services\Clima\ClimaTrilhaPresenter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -920,6 +921,13 @@ class TrilhaController extends Controller
             : 1;
         $chamasPreenchidas = max(1, min(5, $chamasPreenchidas)); // garante entre 1 e 5
 
+        $clima = null;
+        try {
+            $clima = (new ClimaTrilhaPresenter())->forTrilha($trilhaEncontrada);
+        } catch (\Exception $e) {
+            \Log::warning('Erro ao carregar clima da trilha: ' . $e->getMessage());
+        }
+
         return view('trilhas/detalhes-novo', [
             'trilha' => $trilhaEncontrada,
             'titulo' => $titulo,
@@ -930,6 +938,7 @@ class TrilhaController extends Controller
             'chamasPreenchidas' => $chamasPreenchidas,
             'totalAcessosTrilha' => $acessosTrilha,
             'proximosEventos' => $proximosEventos,
+            'clima' => $clima,
         ]);
     }
 

@@ -43,6 +43,14 @@ class Kernel extends ConsoleKernel
         $schedule->command('instagram:publicar-trilha')
              ->dailyAt('11:00')
              ->appendOutputTo(storage_path('logs/instagram-publicacao.log'));
+
+        $schedule->command('clima:sync-previsao')
+             ->cron('0 */6 * * *')
+             ->appendOutputTo(storage_path('logs/clima-previsao.log'));
+
+        $schedule->command('clima:sync-historico')
+             ->monthlyOn(1, '03:00')
+             ->appendOutputTo(storage_path('logs/clima-historico.log'));
     }
 
     /**
