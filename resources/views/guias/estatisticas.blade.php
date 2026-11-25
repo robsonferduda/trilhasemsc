@@ -78,7 +78,7 @@
     </div>
 
     @php $urlPresencas = url('guia/trilhas-realizadas/'.($guia->nm_instagram_gui ?: $guia->id_guia_gui)); @endphp
-    <p class="text-muted mb-3">Para atualizar os totais, envie este endereço aos trilheiros. Nele eles marcam <strong>Eu fui</strong> nos eventos que já passaram: <a href="{{ $urlPresencas }}">{{ $urlPresencas }}</a></p>
+    <p class="text-muted mb-3">Os totais de pessoas contam trilheiros aceitos e trilheiros com pagamento confirmado. A lista de trilhas realizadas continua em <a href="{{ $urlPresencas }}">{{ $urlPresencas }}</a>.</p>
 
     @if($resumoAno['trilhas'] > 0)
         <div class="pa-ano">
@@ -136,7 +136,7 @@
             @else
                 <section class="pa-ano-card">
                     <h3>Nenhum participante ainda</h3>
-                    <div class="text-muted">As trilhas desta lista ainda não têm trilheiros inscritos.</div>
+                    <div class="text-muted">As trilhas desta lista ainda não têm trilheiros aceitos ou com pagamento confirmado.</div>
                 </section>
             @endif
 
@@ -148,7 +148,7 @@
     @else
         <section class="pa-ano-card">
             <h3>Nenhuma trilha cadastrada</h3>
-            <div class="text-muted">Quando houver eventos em Meus eventos, as pessoas inscritas aparecem aqui. O destaque fica com quem participar de mais trilhas.</div>
+            <div class="text-muted">Quando houver eventos em Meus eventos, os trilheiros aceitos e os pagos aparecem aqui. O destaque fica com quem participar de mais trilhas.</div>
         </section>
     @endif
 @endsection

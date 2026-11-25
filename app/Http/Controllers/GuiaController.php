@@ -87,7 +87,7 @@ class GuiaController extends Controller
 
         foreach ($eventos as $evento) {
             foreach ($evento->eventoTrilheiros as $participacao) {
-                if (!$participacao->ativa()) {
+                if (!in_array($participacao->st_inscricao_evt, [EventoTrilheiro::ACEITO, EventoTrilheiro::PAGO], true)) {
                     continue;
                 }
 
