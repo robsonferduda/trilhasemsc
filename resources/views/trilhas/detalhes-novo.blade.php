@@ -19,39 +19,11 @@
 @section('description', $descricaoSeo)
 @section('canonical', url()->current())
 @section('metaImage', $metaImageUrl)
-@section('ogType', 'article')
 @section('keywords', 'trilha, aventura, ' . ($cidadeSeo ? strtolower($cidadeSeo) . ', ' : '') . 'santa catarina, trilhas em sc')
 @section('headExtra')
 <link rel="preload" as="image" href="{{ $metaImageUrl }}" fetchpriority="high">
 @endsection
 @section('structuredData')
-<script type="application/ld+json">
-{!! json_encode([
-    '@context' => 'https://schema.org',
-    '@type' => 'Article',
-    'headline' => $trilha->nm_trilha_tri,
-    'description' => $descricaoSeo,
-    'datePublished' => optional($trilha->created_at)->toAtomString(),
-    'dateModified' => optional($trilha->updated_at)->toAtomString(),
-    'mainEntityOfPage' => [
-        '@type' => 'WebPage',
-        '@id' => url()->current(),
-    ],
-    'image' => [$metaImageUrl],
-    'author' => [
-        '@type' => 'Person',
-        'name' => optional($trilha->user)->name ?: 'Trilhas em Santa Catarina',
-    ],
-    'publisher' => [
-        '@type' => 'Organization',
-        'name' => 'Trilhas em Santa Catarina',
-        'logo' => [
-            '@type' => 'ImageObject',
-            'url' => asset('img/apple-icon.png'),
-        ],
-    ],
-], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
-</script>
 <script type="application/ld+json">
 {!! json_encode([
     '@context' => 'https://schema.org',
@@ -143,14 +115,6 @@
                     <p class="h6 d-flex align-items-center flex-wrap gap-2 mb-0">
                         <span><i class="ni ni-pin-3 text-danger"></i> {{ $trilha->cidade->nm_cidade_cde }}</span>
                         <span><a href="https://www.instagram.com/trilhasemsc/?hl=pt-br" target="_blank" rel="noopener noreferrer" style="color: #e73177;"><i class="fa fa-instagram" aria-hidden="true"></i> trilhasemsc</a></span>
-                        <time datetime="{{ \Carbon\Carbon::parse($trilha->created_at)->toDateString() }}" itemprop="datePublished" class="text-black" style="font-weight: 500;">
-                            - Publicada em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}
-                        </time>
-                        @if(\Carbon\Carbon::parse($trilha->updated_at)->toDateString() !== \Carbon\Carbon::parse($trilha->created_at)->toDateString())
-                            <time datetime="{{ \Carbon\Carbon::parse($trilha->updated_at)->toDateString() }}" itemprop="dateModified" class="text-black" style="font-weight: 500;">
-                                · Atualizada em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}
-                            </time>
-                        @endif
                     </p>
                     <p class="small mb-0 mt-2">
                         Explore também:
@@ -222,14 +186,15 @@
                     <h2 class="h6">Detalhes da Aventura</h2>
                     <div class="d-flex align-items-center mb-2">
                         <img src="{{ asset('img/trilheiros/' . ($trilha->user->dc_foto_perfil ?? 'perfil.png')) }}" alt="Foto do usuário {{ $trilha->user->name ?? '' }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;" width="40" height="40" loading="lazy" decoding="async">
-                        <span class="text-secondary">Trilha registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }} em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}, com última atualização em {{ \Carbon\Carbon::parse($trilha->updated_at)->format('d/m/Y') }}</span>
+                        <span class="text-secondary">Trilha registrada por {{ $trilha->user->name ?? 'Usuário desconhecido' }}</span>
                     </div>
-                    <p class="mb-1 text-danger" style="font-size: 85%;">
-                        Fique sempre atento à data de atualização dos textos. Eles são feitos com base em nossas trilhas e podem estar desatualizados em razão do tempo da última visita.
-                    </p>
                     <div class="mt-0 conteudo">
                         {!! $trilha->ds_trilha_tri !!}
                     </div>
+                    <p class="small text-secondary mt-3 mb-1">Relato registrado em {{ \Carbon\Carbon::parse($trilha->created_at)->format('d/m/Y') }}.</p>
+                    <p class="mb-1 text-danger" style="font-size: 85%;">
+                        Fique sempre atento à data do relato. O texto é feito com base na visita e pode estar desatualizado.
+                    </p>
                 </div>
                 <div class="col-md-12 mt-3">
                     <div class="row">
