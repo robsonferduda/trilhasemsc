@@ -134,9 +134,15 @@
                 <section class="pa-ano-card">
                     <p>{{ $totais['parcial'] ? 'Pelo menos, neste ano' : 'Neste ano' }}</p>
                     <h3>
-                        @if($totais['kmValor'] > 0)Você guiou {{ $totais['km'] }} km@endif
-                        @if($totais['kmValor'] > 0 && $totais['subidaValor'] > 0) e @endif
-                        @if($totais['subidaValor'] > 0)subiu {{ $totais['subida'] }} m@endif
+                        @if($totais['kmValor'] > 0)
+                            Você guiou {{ $totais['km'] }} km
+                        @endif
+                        @if($totais['kmValor'] > 0 && $totais['subidaValor'] > 0)
+                            e
+                        @endif
+                        @if($totais['subidaValor'] > 0)
+                            subiu {{ $totais['subida'] }} m
+                        @endif
                     </h3>
                     @if($totais['parcial'])
                         <span>Soma só as trilhas vinculadas com distância e altitude cadastradas.</span>
