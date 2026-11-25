@@ -75,11 +75,12 @@ class GuiaController extends Controller
         }        
     }
 
-    private function resumoAno(Guia $guia)
+    private function resumoAno(Guia $guia, $ano)
     {
         $eventos = Evento::with(['eventoTrilheiros.trilheiro.user'])
             ->where('id_guia_gui', $guia->id_guia_gui)
             ->where('fl_cancelado_eve', false)
+            ->whereYear('dt_realizacao_eve', $ano)
             ->orderBy('dt_realizacao_eve', 'DESC')
             ->get();
 
@@ -119,11 +120,30 @@ class GuiaController extends Controller
         })->sortByDesc('trilhas')->values();
 
         return [
+            'ano' => (int) $ano,
             'pessoas' => $lista->count(),
             'trilhas' => $eventos->count(),
             'destaque' => $lista->first(),
             'demais' => $lista->slice(1)->values(),
         ];
+    }
+
+    private function anosEstatisticas(Guia $guia, $anoAtual)
+    {
+        return $guia->eventos()
+            ->where('fl_cancelado_eve', false)
+            ->pluck('dt_realizacao_eve')
+            ->map(function ($data) {
+                return (int) date('Y', strtotime($data));
+            })
+            ->filter(function ($ano) {
+                return $ano >= 2000;
+            })
+            ->push((int) $anoAtual)
+            ->unique()
+            ->sort()
+            ->reverse()
+            ->values();
     }
 
     public function estatisticas($tipo, $identificador)
@@ -605,7 +625,7 @@ class GuiaController extends Controller
         ]);
     }
 
-    public function minhasEstatisticas()
+    public function minhasEstatisticas(Request $request)
     {
         if (Auth::guest() or trim(Auth::user()->id_role) != 'GUIA') {
             return redirect('login');
@@ -616,11 +636,18 @@ class GuiaController extends Controller
             return redirect('guia-e-condutores/privado/atualizar-cadastro');
         }
 
-        $resumoAno = $this->resumoAno($guia);
-        $eventos_realizados = $this->eventosRealizados($guia);
+        $anoAtual = (int) date('Y');
+        $ano = (int) $request->input('ano', $anoAtual);
+        if ($ano < 2000 || $ano > $anoAtual) {
+            $ano = $anoAtual;
+        }
+
+        $anos = $this->anosEstatisticas($guia, $anoAtual);
+        $resumoAno = $this->resumoAno($guia, $ano);
+        $eventos_realizados = $this->eventosRealizados($guia, $ano);
         $totais = $this->totaisPercurso($eventos_realizados);
 
-        return view('guias/estatisticas', compact('guia', 'resumoAno', 'eventos_realizados', 'totais'));
+        return view('guias/estatisticas', compact('guia', 'resumoAno', 'eventos_realizados', 'totais', 'ano', 'anos'));
     }
 
     public function acessos()
@@ -817,14 +844,19 @@ class GuiaController extends Controller
         ]);
     }
 
-    private function eventosRealizados(Guia $guia)
+    private function eventosRealizados(Guia $guia, $ano = null)
     {
-        return $guia->eventos()
+        $consulta = $guia->eventos()
             ->with(['local', 'trilha.detalhes'])
             ->where('fl_cancelado_eve', false)
             ->where('dt_realizacao_eve', '<', now()->toDateString())
-            ->orderBy('dt_realizacao_eve', 'desc')
-            ->get();
+            ->orderBy('dt_realizacao_eve', 'desc');
+
+        if ($ano !== null) {
+            $consulta->whereYear('dt_realizacao_eve', $ano);
+        }
+
+        return $consulta->get();
     }
 
     private function totaisPercurso($eventos)
@@ -862,7 +894,10 @@ class GuiaController extends Controller
         return [
             'km' => $this->formatarTotal($km),
             'subida' => $this->formatarTotal($subida, 0),
+            'kmValor' => $km,
+            'subidaValor' => $subida,
             'cidades' => count($cidades),
+            'temPercurso' => $km > 0 || $subida > 0,
             'parcial' => $total > 0 && ($comKm < $total || $comSubida < $total),
         ];
     }

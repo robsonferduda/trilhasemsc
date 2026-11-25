@@ -80,8 +80,26 @@
     @php $urlPresencas = url('guia/trilhas-realizadas/'.($guia->nm_instagram_gui ?: $guia->id_guia_gui)); @endphp
     <p class="text-muted mb-3">Os totais de pessoas contam trilheiros aceitos e trilheiros com pagamento confirmado. A lista de trilhas realizadas continua em <a href="{{ $urlPresencas }}">{{ $urlPresencas }}</a>.</p>
 
-    @if($resumoAno['trilhas'] > 0)
-        <div class="pa-ano">
+    <div class="pa-ano">
+        @if($anos->count() > 1)
+            <div class="pa-ano-nav">
+                @foreach($anos as $opcao)
+                    <a href="{{ url('guia-e-condutores/privado/estatisticas?ano='.$opcao) }}" class="{{ (int) $opcao === (int) $ano ? 'is-active' : '' }}">{{ $opcao }}</a>
+                @endforeach
+            </div>
+        @endif
+
+        <section class="pa-ano-capa">
+            <p>Suas trilhas guiadas</p>
+            <h2>{{ $ano }}</h2>
+            @if($resumoAno['trilhas'] > 0)
+                <span>{{ $resumoAno['trilhas'] }} {{ $resumoAno['trilhas'] === 1 ? 'trilha no ano' : 'trilhas no ano' }}</span>
+            @else
+                <span>Nenhuma trilha cadastrada neste ano, por enquanto.</span>
+            @endif
+        </section>
+
+        @if($resumoAno['trilhas'] > 0)
             <section class="pa-ano-numeros {{ $eventos_realizados->isNotEmpty() ? 'is-linha' : 'is-dois' }}">
                 <article class="pa-numero pa-numero-pessoas">
                     <i class="bi bi-people" aria-hidden="true"></i>
@@ -111,9 +129,23 @@
                     </article>
                 @endif
             </section>
-            @if($eventos_realizados->isNotEmpty() && $totais['parcial'])
-                <p class="text-muted mb-3">Quilômetros e metros de subida somam as trilhas que têm esses dados. Cidades contam os locais diferentes dos eventos já realizados.</p>
+
+            @if($eventos_realizados->isNotEmpty() && $totais['temPercurso'])
+                <section class="pa-ano-card">
+                    <p>{{ $totais['parcial'] ? 'Pelo menos, neste ano' : 'Neste ano' }}</p>
+                    <h3>
+                        @if($totais['kmValor'] > 0)Você guiou {{ $totais['km'] }} km@endif
+                        @if($totais['kmValor'] > 0 && $totais['subidaValor'] > 0) e @endif
+                        @if($totais['subidaValor'] > 0)subiu {{ $totais['subida'] }} m@endif
+                    </h3>
+                    @if($totais['parcial'])
+                        <span>Soma só as trilhas vinculadas com distância e altitude cadastradas.</span>
+                    @endif
+                </section>
+            @elseif($eventos_realizados->isNotEmpty() && $totais['parcial'])
+                <p class="text-muted mb-3">Quilômetros e metros de subida somam as trilhas vinculadas que têm esses dados. Vincule a trilha no evento e preencha distância e altitude no cadastro dela.</p>
             @endif
+
             @if($resumoAno['destaque'])
                 <section class="pa-ano-card pa-ano-destaque">
                     <p>Quem mais caminhou</p>
@@ -141,14 +173,15 @@
             @endif
 
             @if($eventos_realizados->isNotEmpty())
-                <h3 class="h5 mt-4 mb-3">Trilhas realizadas</h3>
+                <h3 class="h5 mt-4 mb-3">Trilhas realizadas em {{ $ano }}</h3>
+                <p class="text-muted mb-3">Em cada trilha aparecem a distância e a altitude quando a trilha do catálogo está vinculada ao evento.</p>
                 @include('guias.partes.trilhas-realizadas-lista')
             @endif
-        </div>
-    @else
-        <section class="pa-ano-card">
-            <h3>Nenhuma trilha cadastrada</h3>
-            <div class="text-muted">Quando houver eventos em Meus eventos, os trilheiros aceitos e os pagos aparecem aqui. O destaque fica com quem participar de mais trilhas.</div>
-        </section>
-    @endif
+        @else
+            <section class="pa-ano-card">
+                <h3>Nenhuma trilha em {{ $ano }}</h3>
+                <div class="text-muted">Quando houver eventos em Meus eventos neste ano, os trilheiros aceitos e os pagos aparecem aqui, junto com o percurso acumulado.</div>
+            </section>
+        @endif
+    </div>
 @endsection
