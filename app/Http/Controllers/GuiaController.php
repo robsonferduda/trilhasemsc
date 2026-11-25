@@ -646,8 +646,9 @@ class GuiaController extends Controller
         $resumoAno = $this->resumoAno($guia, $ano);
         $eventos_realizados = $this->eventosRealizados($guia, $ano);
         $totais = $this->totaisPercurso($eventos_realizados);
+        $percursosAcumulados = $this->percursosAcumulados($eventos_realizados);
 
-        return view('guias/estatisticas', compact('guia', 'resumoAno', 'eventos_realizados', 'totais', 'ano', 'anos'));
+        return view('guias/estatisticas', compact('guia', 'resumoAno', 'eventos_realizados', 'totais', 'ano', 'anos', 'percursosAcumulados'));
     }
 
     public function acessos()
@@ -873,18 +874,13 @@ class GuiaController extends Controller
                 $cidades[$cidade] = true;
             }
 
-            $detalhe = optional($evento->trilha)->detalhes;
-            if (!$detalhe) {
-                continue;
-            }
-
-            if ($detalhe->nu_distancia_trd !== null && $detalhe->nu_distancia_trd !== '' && is_numeric($detalhe->nu_distancia_trd)) {
-                $km += (float) $detalhe->nu_distancia_trd;
+            $valores = $this->valoresPercursoEvento($evento);
+            if ($valores['km'] !== null) {
+                $km += $valores['km'];
                 $comKm++;
             }
-
-            if ($detalhe->nu_altitude_trd !== null && $detalhe->nu_altitude_trd !== '' && is_numeric($detalhe->nu_altitude_trd)) {
-                $subida += (float) $detalhe->nu_altitude_trd;
+            if ($valores['subida'] !== null) {
+                $subida += $valores['subida'];
                 $comSubida++;
             }
         }
@@ -900,6 +896,62 @@ class GuiaController extends Controller
             'temPercurso' => $km > 0 || $subida > 0,
             'parcial' => $total > 0 && ($comKm < $total || $comSubida < $total),
         ];
+    }
+
+    private function percursosAcumulados($eventos)
+    {
+        $acumulados = [];
+        $kmAcum = 0;
+        $subidaAcum = 0;
+
+        foreach ($eventos->sortBy('dt_realizacao_eve')->values() as $evento) {
+            $valores = $this->valoresPercursoEvento($evento);
+            $item = [
+                'distancia' => null,
+                'distanciaAcum' => null,
+                'subida' => null,
+                'subidaAcum' => null,
+            ];
+
+            if ($valores['km'] !== null) {
+                $kmAcum += $valores['km'];
+                $item['distancia'] = $this->formatarTotal($valores['km']);
+                $item['distanciaAcum'] = $this->formatarTotal($kmAcum);
+            }
+
+            if ($valores['subida'] !== null) {
+                $subidaAcum += $valores['subida'];
+                $item['subida'] = $this->formatarTotal($valores['subida'], 0);
+                $item['subidaAcum'] = $this->formatarTotal($subidaAcum, 0);
+            }
+
+            if ($item['distancia'] !== null || $item['subida'] !== null) {
+                $acumulados[$evento->id_evento_eve] = $item;
+            }
+        }
+
+        return $acumulados;
+    }
+
+    private function valoresPercursoEvento($evento)
+    {
+        $detalhe = optional($evento->trilha)->detalhes;
+        if (!$detalhe) {
+            return ['km' => null, 'subida' => null];
+        }
+
+        $km = null;
+        $subida = null;
+
+        if ($detalhe->nu_distancia_trd !== null && $detalhe->nu_distancia_trd !== '' && is_numeric($detalhe->nu_distancia_trd)) {
+            $km = (float) $detalhe->nu_distancia_trd;
+        }
+
+        if ($detalhe->nu_altitude_trd !== null && $detalhe->nu_altitude_trd !== '' && is_numeric($detalhe->nu_altitude_trd)) {
+            $subida = (float) $detalhe->nu_altitude_trd;
+        }
+
+        return ['km' => $km, 'subida' => $subida];
     }
 
     private function formatarTotal($numero, $casas = null)

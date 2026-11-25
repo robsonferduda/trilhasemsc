@@ -1,16 +1,23 @@
 @php
-    $percurso = $evento->percursoAssociado();
+    $acum = isset($percursosAcumulados) ? ($percursosAcumulados[$evento->id_evento_eve] ?? null) : null;
+    $percurso = $acum ?: $evento->percursoAssociado();
 @endphp
 @if($percurso)
     <div class="{{ $classe ?? '' }}" style="font-size:.85rem;">
-        @if($percurso['distancia'] !== null)
-            <span><i class="fa fa-road" aria-hidden="true"></i> {{ $percurso['distancia'] }} km</span>
+        @if(!empty($percurso['distancia']))
+            <span>
+                <i class="fa fa-road" aria-hidden="true"></i>
+                {{ $percurso['distancia'] }} km{{ !empty($percurso['distanciaAcum']) ? '/'.$percurso['distanciaAcum'].' km' : '' }}
+            </span>
         @endif
-        @if($percurso['distancia'] !== null && $percurso['subida'] !== null)
+        @if(!empty($percurso['distancia']) && !empty($percurso['subida']))
             <span aria-hidden="true"> · </span>
         @endif
-        @if($percurso['subida'] !== null)
-            <span><i class="fa fa-arrow-up" aria-hidden="true"></i> {{ $percurso['subida'] }} m de subida</span>
+        @if(!empty($percurso['subida']))
+            <span>
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                {{ $percurso['subida'] }} m{{ !empty($percurso['subidaAcum']) ? '/'.$percurso['subidaAcum'].' m' : '' }} de subida
+            </span>
         @endif
     </div>
 @endif
