@@ -230,9 +230,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('score', 'TrilheiroController@calcularScore');
         Route::match(['GET', 'POST'], 'atualizar-cadastro', 'TrilheiroController@atualizarCadastro');      
         Route::match(['GET', 'POST'],'trilhas', 'TrilheiroController@trilhas');
-        Route::get('retrospectiva/galeria', 'TrilheiroController@retrospectivaGaleria');
-        Route::get('retrospectiva/imagem/{slide}', 'TrilheiroController@retrospectivaImagem')->where('slide', 'capa|numeros|percurso|guia|fim|trilha-[0-9]+');
-        Route::get('retrospectiva', 'TrilheiroController@retrospectiva'); 
+        Route::get('retrospectiva/galeria', 'TrilheiroController@retrospectivaGaleria')->name('trilheiro.retrospectiva.galeria');
+        Route::get('retrospectiva/imagem/{slide}', 'TrilheiroController@retrospectivaImagem')->where('slide', 'capa|numeros|percurso|guia|fim|trilha-[0-9]+')->name('trilheiro.retrospectiva.imagem');
+        Route::get('retrospectiva', 'TrilheiroController@retrospectiva')->name('trilheiro.retrospectiva'); 
     });
 
     Route::prefix('cadastro/privado')->group(function () {

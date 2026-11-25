@@ -21,6 +21,7 @@ use App\Mail\BoasVindasTrilheiro;
 use App\TrilheiroTrilha;
 use App\Indice;
 use App\User;
+use App\Services\RetrospectivaTrilheiro;
 use Auth;
 use Storage;
 use Illuminate\Http\Request;
@@ -807,5 +808,58 @@ class TrilheiroController extends Controller
         }
         
         return redirect()->back();
+    }
+
+    public function retrospectiva()
+    {
+        $trilheiro = $this->trilheiroDaSessao();
+        $historia = app(RetrospectivaTrilheiro::class)->apresentar($trilheiro);
+
+        return view('trilheiro.retrospectiva', compact('trilheiro', 'historia'));
+    }
+
+    public function retrospectivaGaleria()
+    {
+        $trilheiro = $this->trilheiroDaSessao();
+        $historia = app(RetrospectivaTrilheiro::class)->apresentar($trilheiro);
+
+        return view('trilheiro.retrospectiva-galeria', compact('trilheiro', 'historia'));
+    }
+
+    public function retrospectivaImagem($slide)
+    {
+        $trilheiro = $this->trilheiroDaSessao();
+        $imagem = app(RetrospectivaTrilheiro::class)->imagem($trilheiro, $slide);
+
+        if (!$imagem) {
+            abort(404);
+        }
+
+        $nome = 'retrospectiva-'.date('Y').'-'.$slide.'.jpg';
+        $cabecalhos = [
+            'Content-Type' => 'image/jpeg',
+            'Cache-Control' => 'private, no-cache',
+        ];
+
+        if (request()->query('download')) {
+            $cabecalhos['Content-Disposition'] = 'attachment; filename="'.$nome.'"';
+        }
+
+        return response((string) $imagem, 200, $cabecalhos);
+    }
+
+    private function trilheiroDaSessao()
+    {
+        if (Auth::guest() || trim(Auth::user()->id_role) !== 'TRILHEIRO') {
+            abort(403);
+        }
+
+        $trilheiro = Trilheiro::where('id_user', Auth::user()->id)->first();
+
+        if (!$trilheiro) {
+            abort(404);
+        }
+
+        return $trilheiro;
     }
 }

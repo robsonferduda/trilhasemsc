@@ -357,6 +357,9 @@
                                 <li>
                                   <a href="{{ url('trilheiro/privado/favoritos') }}"><i class="fa fa-heart"></i> <span>Favoritos</span></a>
                                 </li>
+                                <li>
+                                  <a href="{{ route('trilheiro.retrospectiva') }}"><i class="fa fa-star"></i> <span>Retrospectiva</span></a>
+                                </li>
                             @endif
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
